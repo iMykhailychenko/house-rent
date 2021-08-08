@@ -36,10 +36,6 @@
         "usePrettierrc": true
       }
     ],
-    "brace-style": [
-      "error",
-      "stroustrup"
-    ],
     "no-unused-vars": "warn",
     "no-var": "error",
     "one-var": "error",
