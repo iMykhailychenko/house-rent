@@ -1,9 +1,9 @@
 import express from 'express';
+import { joinController, loginController } from './auth.model';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('hello world');
-});
+router.get('/login', loginController);
+router.get('/join', joinController);
 
 export default router;

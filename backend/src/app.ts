@@ -1,27 +1,17 @@
 import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-
-import auth from './api/auth/auth.router';
 
 import config from './config/app.config';
-import database from './database';
 
-const app = express();
+import connectToDb from './database';
+import appRoutes from './api/routes';
+import appMiddlewares from './middlewares';
 
 const bootstrap = async (): Promise<void> => {
     try {
-        console.log('Connecting to database ...');
-        await database.connect();
-        console.log('Connected');
-
-        app.use(morgan('common'));
-        app.use(cors());
-        app.use(express.urlencoded({ extended: true }));
-        app.use(express.json());
-
-        // routes
-        app.use('/auth', auth);
+        const app = express();
+        await connectToDb();
+        await appMiddlewares(app);
+        await appRoutes(app);
 
         // run server
         app.listen(config.port, config.host, () => {

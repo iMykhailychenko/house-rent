@@ -1,43 +1,41 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "dev": "react-scripts start",
-    "start": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next build && next start",
+        "type-check": "tsc --pretty --noEmit",
+        "test": "jest -u",
+        "lint": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,json}\" --config ./.prettierrc && eslint --fix ./",
+        "test-all": "yarn lint && yarn type-check && jest"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^1.6.1",
+        "axios": "^0.21.1",
+        "clsx": "^1.1.1",
+        "nanoid": "^3.1.23",
+        "next": "11.0.1",
+        "react": "17.0.2",
+        "react-dom": "17.0.2"
+    },
+    "devDependencies": {
+        "@types/react": "17.0.16",
+        "@typescript-eslint/eslint-plugin": "^4.23.0",
+        "@typescript-eslint/parser": "^4.23.0",
+        "eslint": "7.32.0",
+        "eslint-config-airbnb": "^18.2.0",
+        "eslint-config-next": "11.0.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-react": "^7.23.2",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "prettier": "^2.3.0",
+        "redux-devtools-extension": "^2.13.8",
+        "typescript": "4.3.5"
+    }
 }
