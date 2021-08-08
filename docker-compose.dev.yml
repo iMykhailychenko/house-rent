@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  backend:
+    command: yarn run dev
+    volumes:
+      - ./backend/src:/app/backend/src
+
+  frontend:
+    command: yarn run dev
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - ./frontend/src:/app/frontend/src
