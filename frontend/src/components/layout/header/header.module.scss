@@ -1,3 +1,15 @@
 .header {
+    position: relative;
+    z-index: 1;
+    height: var(--header-height);
+    background: var(--primary);
     color: var(--white);
+    box-shadow: var(--box-shadow-3);
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }

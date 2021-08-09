@@ -1,8 +1,5 @@
-import '../styles/theme.css';
-import '../styles/styles.css';
-import 'antd/dist/antd.css';
+import '../styles/root.css';
 
-import Layout from 'antd/lib/layout/layout';
 import axios from 'axios';
 import type { AppProps } from 'next/app';
 import App from 'next/app';
@@ -10,8 +7,7 @@ import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
 import { ReactElement } from 'react';
 
-import AppFooter from '../components/layout/footer/footer';
-import AppHeader from '../components/layout/header/header';
+import RootLayout from '../components/layout/root-layout/root-layout';
 import RootProvider from '../context/root-provider';
 import ReduxProvider from '../core/redux-provider';
 import { Themes } from '../interfaces';
@@ -29,11 +25,9 @@ const HouseRentApp = ({ Component, pageProps, auth, theme, width }: AppProps & I
     return (
         <ReduxProvider>
             <RootProvider serverProps={{ auth, theme, width }}>
-                <Layout>
-                    <AppHeader />
+                <RootLayout>
                     <Component {...pageProps} />
-                    <AppFooter />
-                </Layout>
+                </RootLayout>
             </RootProvider>
         </ReduxProvider>
     );

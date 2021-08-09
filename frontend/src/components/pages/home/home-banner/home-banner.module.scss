@@ -1,0 +1,9 @@
+.root {
+    min-height: calc(100vh - var(--header-height));
+    background: var(--primary);
+    color: var(--white);
+}
+
+.inner {
+    padding: 40rem 0;
+}

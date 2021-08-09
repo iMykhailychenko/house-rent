@@ -1,17 +1,17 @@
 import React, { ReactElement } from 'react';
 
-import Container from '../container/container';
-import css from './footer.module.scss';
+import Container from '../../../layout/container/container';
+import css from './home-banner.module.scss';
 
-const AppFooter = (): ReactElement => {
+const HomeBanner = (): ReactElement => {
     return (
-        <footer className={css.footer}>
-            <Container>
+        <Container className={css.root}>
+            <div className={css.inner}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis
                 odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
-            </Container>
-        </footer>
+            </div>
+        </Container>
     );
 };
 
-export default AppFooter;
+export default HomeBanner;
