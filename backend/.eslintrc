@@ -36,8 +36,6 @@
       }
     ],
     "no-unused-vars": "warn",
-    "no-var": "error",
-    "one-var": "error",
     "no-console": "off",
     "comma-dangle": "off",
     "no-underscore-dangle": "off",
