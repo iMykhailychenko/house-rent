@@ -22,7 +22,6 @@
   },
   "extends": [
     "prettier",
-    "airbnb-base",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -41,9 +40,6 @@
     "one-var": "error",
     "no-console": "off",
     "comma-dangle": "off",
-    "import/prefer-default-export": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
     "no-underscore-dangle": "off",
     "import/no-extraneous-dependencies": "off",
     "class-methods-use-this": "off",

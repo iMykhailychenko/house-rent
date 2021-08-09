@@ -16,6 +16,8 @@ services:
 
   frontend:
     build: ./frontend
+    stdin_open: true
+    tty: true
     ports:
       - "3000:3000"
     env_file:

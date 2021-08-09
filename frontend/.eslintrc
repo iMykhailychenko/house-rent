@@ -24,7 +24,6 @@
   },
   "extends": [
     "prettier",
-    "airbnb-base",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -40,8 +39,10 @@
         "usePrettierrc": true
       }
     ],
+    "no-console": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "no-underscore-dangle": "off",
     "@typescript-eslint/no-var-requires": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
