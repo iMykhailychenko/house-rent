@@ -12,6 +12,8 @@
         "test-all": "yarn lint && yarn type-check && jest"
     },
     "dependencies": {
+        "@material-ui/core": "^4.12.3",
+        "@material-ui/icons": "^4.11.2",
         "@reduxjs/toolkit": "^1.6.1",
         "antd": "^4.16.11",
         "axios": "^0.21.1",

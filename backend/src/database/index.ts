@@ -1,12 +1,14 @@
-import { Client } from 'pg';
+import { ConnectionManager } from 'typeorm';
 import dbConfig from '../config/db.config';
 
-const database = new Client(dbConfig),
-    connectToDb = async (): Promise<void> => {
-        console.log('Connecting to database ...');
-        await database.connect();
+const connectToDb = async (): Promise<void> => {
+    const connectionManager = new ConnectionManager();
+    const connection = connectionManager.create(dbConfig);
 
-        console.log('Connected');
-    };
+    console.log('Connecting to database ...');
+    await connection.connect();
+
+    console.log('Connected');
+};
 
 export default connectToDb;

@@ -3,7 +3,7 @@
     z-index: 1;
     height: var(--header-height);
     background: var(--primary);
-    color: var(--white);
+    color: var(--true-white);
     box-shadow: var(--box-shadow-3);
 }
 
@@ -12,4 +12,8 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+}
+
+.theme {
+    font-size: 2rem;
 }

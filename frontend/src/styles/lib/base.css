@@ -102,7 +102,11 @@ a {
     text-decoration: none;
 }
 
-svg {
+body .MuiSvgIcon-root {
+    font-size: inherit;
+}
+
+.MuiSvgIcon-root svg {
     height: 1em;
     width: 1em;
     min-height: 1em;

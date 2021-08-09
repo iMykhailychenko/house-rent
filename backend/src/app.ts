@@ -4,11 +4,12 @@ import config from './config/app.config';
 
 import connectToDb from './database';
 import appRoutes from './api/routes';
-import appMiddlewares from './middlewares';
+import appMiddlewares from './middleware/root.middleware';
+
+export const app = express();
 
 const bootstrap = async (): Promise<void> => {
     try {
-        const app = express();
         await connectToDb();
         await appMiddlewares(app);
         await appRoutes(app);
