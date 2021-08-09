@@ -1,0 +1,9 @@
+.white {
+    --white: #fff;
+    --black: #000;
+}
+
+.black {
+    --white: #000;
+    --black: #fff;
+}

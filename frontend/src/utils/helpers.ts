@@ -14,3 +14,8 @@ export const parseCookie = <T>({ value = '', key, isJson = false, defaultValue }
         return defaultValue;
     }
 };
+
+export const addMonthToDate = (amount = 1): Date => {
+    const today = new Date();
+    return new Date(today.setMonth(today.getMonth() + amount));
+};
