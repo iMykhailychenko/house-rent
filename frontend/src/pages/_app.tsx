@@ -8,23 +8,25 @@ import { Router } from 'next/router';
 import { ReactElement } from 'react';
 
 import RootLayout from '../components/layout/root-layout/root-layout';
+import siteConfig from '../config/site.config';
 import RootProvider from '../context/root-provider';
 import ReduxProvider from '../core/redux-provider';
-import { Themes } from '../interfaces';
+import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
 import { IAuthInitialState } from '../state/entities/auth/auth.interface';
 import { parseCookie } from '../utils/helpers';
 
 interface IProps {
-    theme: Themes;
+    theme: THEME_ENUM;
     auth: IAuthInitialState;
     width: number;
+    config: IConfig;
 }
 
-const HouseRentApp = ({ Component, pageProps, auth, theme, width }: AppProps & IProps): ReactElement => {
+const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppProps & IProps): ReactElement => {
     return (
         <ReduxProvider>
-            <RootProvider serverProps={{ auth, theme, width }}>
+            <RootProvider serverProps={{ auth, theme, width, config }}>
                 <RootLayout>
                     <Component {...pageProps} />
                 </RootLayout>
@@ -40,15 +42,23 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
         /mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i;
     const isMobile = toMatch.test(appContext?.ctx?.req?.headers?.['user-agent'] || '');
 
-    // // site theme
-    const theme = parseCookie<Themes>({
+    // site config
+    const config = parseCookie<IConfig>({
         value: appContext?.ctx?.req?.headers?.cookie,
-        key: 'house_rent_theme',
-        defaultValue: 'white',
+        key: 'house_rent_config',
+        defaultValue: siteConfig,
         isJson: true,
     });
 
-    // auth-form
+    // site theme
+    const theme = parseCookie<THEME_ENUM>({
+        value: appContext?.ctx?.req?.headers?.cookie,
+        key: 'house_rent_theme',
+        defaultValue: THEME_ENUM.WHITE,
+        isJson: true,
+    });
+
+    // auth
     const auth = parseCookie<IAuthInitialState>({
         key: 'house_rent_auth',
         value: appContext?.ctx?.req?.headers?.cookie,
@@ -56,7 +66,7 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
     });
     if (auth.accessToken) axios.defaults.headers.common.Authorization = `Bearer ${auth.accessToken}`;
 
-    return { ...props, auth, theme, width: isMobile ? 450 : 1300 };
+    return { ...props, auth, theme, config, width: isMobile ? 450 : 1300 };
 };
 
 export default HouseRentApp;

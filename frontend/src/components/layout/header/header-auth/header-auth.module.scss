@@ -1,0 +1,22 @@
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 3rem;
+    padding-left: 2rem;
+    border-left: 0.1rem solid var(--black);
+    color: inherit;
+}
+
+.button {
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    &:focus {
+        text-decoration: underline;
+    }
+}

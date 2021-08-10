@@ -22,6 +22,8 @@ body {
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
+    font-size: 1.4rem;
+    background: var(--white);
 }
 
 ul,
@@ -104,6 +106,15 @@ a {
 
 body .MuiSvgIcon-root {
     font-size: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
 }
 
 .MuiSvgIcon-root svg {

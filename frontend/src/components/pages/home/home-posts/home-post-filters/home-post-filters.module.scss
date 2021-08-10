@@ -1,0 +1,11 @@
+.root {
+    position: relative;
+    width: var(--filters-sidebar-width);
+    padding-left: 2rem;
+}
+
+.sticky {
+    position: sticky;
+    top: 5rem;
+    left: 0;
+}

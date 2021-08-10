@@ -1,0 +1,32 @@
+.root {
+    padding: 8rem 4rem;
+    border-top: 0.1rem solid var(--gray-5);
+
+    &:nth-last-of-type(1) {
+        border-bottom: 0.1rem solid var(--gray-5);
+    }
+}
+
+.link {
+    font-weight: 600;
+
+    h3 {
+        font-size: 2rem;
+        line-height: 1.2;
+        color: var(--black);
+
+        &:hover {
+            text-decoration: underline;
+        }
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        margin-top: 2rem;
+        text-align: left;
+        font-size: 1.5rem;
+        color: var(--gray-6);
+    }
+}

@@ -2,9 +2,7 @@
     position: relative;
     z-index: 1;
     height: var(--header-height);
-    background: var(--primary);
-    color: var(--true-white);
-    box-shadow: var(--box-shadow-3);
+    color: var(--black);
 }
 
 .inner {
@@ -12,8 +10,31 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    background: var(--gray-4);
 }
 
-.theme {
+:global(.black) {
+    .subheader {
+        background: var(--gray-2);
+    }
+    .inner {
+        background: var(--gray-1);
+    }
+}
+
+.text {
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.menu {
     font-size: 2rem;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
 }

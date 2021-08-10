@@ -1,9 +1,20 @@
 .root {
     min-height: calc(100vh - var(--header-height));
-    background: var(--primary);
-    color: var(--white);
+    background: var(--white);
+    color: var(--black);
 }
 
-.inner {
-    padding: 40rem 0;
+.img {
+    margin: 0 auto;
+    max-height: 65rem;
+    max-width: 55rem;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 0;
+    font-size: 3.5rem;
+    font-weight: 700;
 }

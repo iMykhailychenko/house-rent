@@ -1,4 +1,21 @@
-.container {
-    height: 100%;
+.root {
     padding: 0 4rem;
+}
+
+.lg {
+    @media (min-width: 1600px) {
+        padding: 0 calc((100% - 155rem) / 2);
+    }
+}
+
+.md {
+    @media (min-width: 900px) {
+        padding: 0 calc((100% - 100rem) / 2);
+    }
+}
+
+.sm {
+    @media (min-width: 600px) {
+        padding: 0 calc((100% - 70rem) / 2);
+    }
 }

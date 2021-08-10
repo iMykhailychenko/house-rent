@@ -1,0 +1,29 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 3rem;
+    color: var(--black);
+
+    &:nth-of-type(1) {
+        font-size: 3.2rem;
+    }
+}
+
+.active {
+    color: var(--primary);
+}
+
+.separator {
+    display: block;
+    height: 2.5rem;
+    width: 0.1rem;
+    background: var(--gray-5);
+}

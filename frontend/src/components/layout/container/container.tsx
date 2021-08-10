@@ -6,12 +6,13 @@ import css from './container.module.scss';
 interface IProps {
     id?: string;
     className?: string;
+    size?: 'sm' | 'md' | 'lg';
     children: ReactElement[] | ReactElement | string;
 }
 
-const Container = ({ id, className, children }: IProps): ReactElement => {
+const Container = ({ id, className, size = 'lg', children }: IProps): ReactElement => {
     return (
-        <div id={id} className={clsx(css.container, className)}>
+        <div id={id} className={clsx(className, css[size], css.root)}>
             {children}
         </div>
     );

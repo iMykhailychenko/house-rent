@@ -1,18 +1,18 @@
 import Cookies from 'js-cookie';
 import React, { createContext, ReactElement, useEffect, useState } from 'react';
 
-import { Themes } from '../../interfaces';
+import { THEME_ENUM } from '../../interfaces';
 import { addMonthToDate } from '../../utils/helpers';
 
-export const Theme = createContext<[theme: Themes, setTheme: (v: Themes) => void]>(['white', () => undefined]);
+export const Theme = createContext<[theme: THEME_ENUM, setTheme: (v: THEME_ENUM) => void]>([THEME_ENUM.WHITE, () => undefined]);
 
 interface IProps {
-    serverTheme?: Themes;
+    serverTheme?: THEME_ENUM;
     children: ReactElement;
 }
 
-const ThemeProvider = ({ children, serverTheme = 'white' }: IProps): ReactElement => {
-    const [theme, setTheme] = useState<Themes>(serverTheme || 'white');
+const ThemeProvider = ({ children, serverTheme = THEME_ENUM.WHITE }: IProps): ReactElement => {
+    const [theme, setTheme] = useState<THEME_ENUM>(serverTheme || 'white');
 
     useEffect(() => {
         if (process.browser && document.querySelector('html')) {
@@ -20,7 +20,7 @@ const ThemeProvider = ({ children, serverTheme = 'white' }: IProps): ReactElemen
         }
     }, [theme]);
 
-    const handleTheme = (value: Themes): void => {
+    const handleTheme = (value: THEME_ENUM): void => {
         try {
             Cookies.set('house_rent_theme', value, { expires: addMonthToDate(1) });
             if (document.querySelector('html')) {

@@ -1,0 +1,18 @@
+.root {
+    margin-left: 2rem;
+}
+
+.button {
+    margin: 0 1rem 0.7rem;
+    color: inherit;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.5;
+    line-height: 1;
+}
+
+.active {
+    opacity: 1;
+    font-weight: 600;
+}

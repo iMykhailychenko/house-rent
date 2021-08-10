@@ -1,0 +1,41 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    padding: 0 1rem;
+    color: var(--gray-6);
+    border: 0.1rem solid var(--gray-5);
+    border-radius: 0.5rem;
+
+    &:hover {
+        color: var(--primary);
+    }
+
+    svg {
+        margin-top: 0.2rem;
+        margin-right: 0.4rem;
+
+        &:hover {
+            color: var(--hover);
+        }
+    }
+}
+
+.active {
+    color: var(--primary);
+    border-color: var(--primary);
+
+    svg {
+        color: var(--hover);
+    }
+}
+
+.text {
+    color: inherit;
+}

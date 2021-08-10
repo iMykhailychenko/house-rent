@@ -1,15 +1,24 @@
 import React, { ReactElement } from 'react';
 
+import MenuIcon from '../../common/menu-icon/menu-icon';
 import SwitchTheme from '../../common/switch-theme/switch-theme';
 import Container from '../container/container';
 import css from './header.module.scss';
+import HeaderAuth from './header-auth/header-auth';
+import HeaderLanguage from './header-language/header-language';
 
 const AppHeader = (): ReactElement => {
     return (
         <header className={css.header}>
-            <Container>
-                <div className={css.inner}>
-                    <SwitchTheme className={css.theme} />
+            <Container className={css.inner} size="md">
+                <div className={css.item}>
+                    <MenuIcon className={css.menu} />
+                    <HeaderLanguage />
+                </div>
+
+                <div className={css.item}>
+                    <SwitchTheme />
+                    <HeaderAuth />
                 </div>
             </Container>
         </header>

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
 import { Theme } from '../context/theme/theme';
-import { Themes } from '../interfaces';
+import { THEME_ENUM } from '../interfaces';
 
-const useTheme = (): [theme: Themes, setTheme: (value: Themes) => void] => useContext(Theme);
+const useTheme = (): [theme: THEME_ENUM, setTheme: (value: THEME_ENUM) => void] => useContext(Theme);
 
 export default useTheme;
