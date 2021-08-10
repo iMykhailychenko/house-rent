@@ -12,7 +12,7 @@ const PostCard = (): ReactElement => {
         lg: <PostCardLg />,
     };
 
-    return postCardMap[config.cardSize];
+    return postCardMap[config.cardSize || 'sm'];
 };
 
 export default PostCard;

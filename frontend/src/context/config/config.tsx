@@ -17,7 +17,7 @@ const ConfigProvider = ({ children, value = siteConfig }: IProps): ReactElement 
     const [config, setConfig] = useState<IConfig>(value);
     const handleConfig = (data: IConfig): void => {
         try {
-            Cookies.set('phoqer_config', JSON.stringify(data), { expires: addMonthToDate(1) });
+            Cookies.set('house_rent_config', JSON.stringify(data), { expires: addMonthToDate(1) });
             setConfig(data);
         } catch (error) {
             setConfig(siteConfig);

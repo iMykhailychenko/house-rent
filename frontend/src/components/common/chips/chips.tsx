@@ -27,7 +27,7 @@ const ChipsItem = ({ chip, onChange }: IChipsItemProps): ReactElement => {
 
     useEffect(() => {
         if (ref.current && chip.hover) {
-            ref.current.style.setProperty('hover', chip.hover);
+            ref.current.style.setProperty('--hover', chip.hover);
         }
     }, [ref, chip.hover]);
 

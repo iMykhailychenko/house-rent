@@ -47,7 +47,6 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
         value: appContext?.ctx?.req?.headers?.cookie,
         key: 'house_rent_config',
         defaultValue: siteConfig,
-        isJson: true,
     });
 
     // site theme
