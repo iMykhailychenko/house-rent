@@ -1,29 +1,30 @@
-import Cookies from 'js-cookie';
 import React, { createContext, ReactElement, useState } from 'react';
 
-import { IConfig } from '../../interfaces';
-import { addMonthToDate } from '../../utils/helpers';
-import { IConfigValue } from '../config/config';
+import { getAllChipsFilters } from '../../config/filters.config';
+import { ISearchFilters } from '../../interfaces';
 
-export const Filters = createContext<IConfigValue>([{}, () => undefined]);
+type IContextFilterValue = [value: ISearchFilters, setValue: (value: ISearchFilters) => void];
+
+const defaultValue = getAllChipsFilters();
+export const Filters = createContext<IContextFilterValue>([defaultValue, () => undefined]);
 
 interface IProps {
-    value?: IConfig;
+    value?: ISearchFilters;
     children: JSX.Element | JSX.Element[] | ReactElement;
 }
 
-const FiltersProvider = ({ children, value = siteFilters }: IProps): ReactElement => {
-    const [config, setConfig] = useState<IConfig>(value);
-    const handleConfig = (data: IConfig): void => {
+const FiltersProvider = ({ children, value = defaultValue }: IProps): ReactElement => {
+    const [appFilters, setAppFilters] = useState<ISearchFilters>(value);
+
+    const handleConfig = (filters: ISearchFilters): void => {
         try {
-            Cookies.set('house_rent_config', JSON.stringify(data), { expires: addMonthToDate(1) });
-            setConfig(data);
+            console.log(filters);
+            setAppFilters(filters);
         } catch (error) {
-            setConfig(siteConfig);
             console.dir(error);
         }
     };
-    return <Filters.Provider value={[config, handleConfig]}>{children}</Filters.Provider>;
+    return <Filters.Provider value={[appFilters, handleConfig]}>{children}</Filters.Provider>;
 };
 
 export default FiltersProvider;

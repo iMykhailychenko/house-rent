@@ -2,6 +2,7 @@ import { Apartment, HomeWork, Weekend, Whatshot } from '@material-ui/icons';
 import React from 'react';
 
 import { IChipsMap } from '../components/common/chips/chips';
+import { ISearchFilters, SEARCH_FILTERS } from '../interfaces';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {
@@ -82,4 +83,14 @@ export const priceFilters = (init: string[] = []): IChipsMap => ({
         name: 'price_seven',
         active: init.includes('price_seven'),
     },
+});
+
+type IParams = {
+    [key in SEARCH_FILTERS]?: string[];
+};
+export const getAllChipsFilters = (params?: IParams): ISearchFilters => ({
+    [SEARCH_FILTERS.GENERAL]: generalFilters(params?.[SEARCH_FILTERS.GENERAL]),
+    [SEARCH_FILTERS.PRICE]: priceFilters(params?.[SEARCH_FILTERS.PRICE]),
+    [SEARCH_FILTERS.ROOMS]: roomsFilters(params?.[SEARCH_FILTERS.ROOMS]),
+    [SEARCH_FILTERS.HOUSE_TYPES]: houseTypeFilters(params?.[SEARCH_FILTERS.HOUSE_TYPES]),
 });
