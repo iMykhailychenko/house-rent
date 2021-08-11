@@ -1,7 +1,8 @@
 import React, { ReactElement, useState } from 'react';
 
-import useTrans from '../../../../../../context/trans/trans';
-import Chips, { IChips, IChipsMap } from '../../../../../common/chips/chips';
+import useTrans from '../../../../../../hooks/trans.hook';
+import { IChips, IChipsMap } from '../../../../../../interfaces';
+import Chips from '../../../../../common/chips/chips';
 import { generalFilters, houseTypeFilters, priceFilters, roomsFilters } from './home-post-chips.config';
 import css from './home-post-chips.module.scss';
 

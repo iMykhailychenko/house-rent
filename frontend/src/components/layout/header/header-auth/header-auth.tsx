@@ -1,7 +1,7 @@
 import { Person } from '@material-ui/icons';
 import React, { ReactElement } from 'react';
 
-import useTrans from '../../../../context/trans/trans';
+import useTrans from '../../../../hooks/trans.hook';
 import css from './header-auth.module.scss';
 
 const HeaderAuth = (): ReactElement => {

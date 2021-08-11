@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import useTrans from '../../../../context/trans/trans';
 import useConfig from '../../../../hooks/config.hook';
+import useTrans from '../../../../hooks/trans.hook';
 import CardSizeSwitcher from '../../../common/card-size-switcher/card-size-switcher';
 import PostCard from '../../../common/post-card/post-card';
 import Container from '../../../layout/container/container';

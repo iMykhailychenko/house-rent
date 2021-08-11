@@ -1,7 +1,7 @@
 import RcScrollParallax from 'rc-scroll-anim/lib/ScrollParallax';
 import React, { ReactElement } from 'react';
 
-import useTrans from '../../../../context/trans/trans';
+import useTrans from '../../../../hooks/trans.hook';
 import routes from '../../../../utils/routes';
 import ArrowLink from '../../../common/arrow-link/arrow-link';
 import Container from '../../../layout/container/container';

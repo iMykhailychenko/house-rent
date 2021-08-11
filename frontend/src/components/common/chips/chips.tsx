@@ -1,19 +1,9 @@
 import clsx from 'clsx';
 import React, { ReactElement, useEffect, useRef } from 'react';
 
-import useTrans from '../../../context/trans/trans';
+import useTrans from '../../../hooks/trans.hook';
+import { IChips, IChipsMap } from '../../../interfaces';
 import css from './chips.module.scss';
-
-export interface IChips {
-    name: string;
-    active: boolean;
-    icon?: ReactElement;
-    hover?: string;
-}
-
-export interface IChipsMap {
-    [key: string]: IChips;
-}
 
 interface IChipsItemProps {
     chip: IChips;

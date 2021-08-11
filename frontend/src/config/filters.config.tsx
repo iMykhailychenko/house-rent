@@ -1,6 +1,7 @@
 import { Apartment, HomeWork, Weekend, Whatshot } from '@material-ui/icons';
+import React from 'react';
 
-import { IChipsMap } from '../../../../../common/chips/chips';
+import { IChipsMap } from '../components/common/chips/chips';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {

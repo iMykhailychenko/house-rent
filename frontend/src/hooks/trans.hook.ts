@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import locales from '../../assets/translations';
-import { LANGUAGE_ENUM } from '../../interfaces';
+import locales from '../assets/translations';
+import { LANGUAGE_ENUM } from '../interfaces';
 
 interface IContent {
     [key: string]: string;
