@@ -27,7 +27,7 @@ const HomeBanner = (): ReactElement => {
                 </RcScrollParallax>
                 <RcScrollParallax
                     className={css.add}
-                    animation={{ y: 0, opacity: 1 }}
+                    animation={{ y: 0, opacity: 1, playScale: [0, 0.8] }}
                     style={{ transform: 'translateY(100%)', opacity: 0 }}
                 >
                     <ArrowLink className={css.link} href={routes.posts.new}>
