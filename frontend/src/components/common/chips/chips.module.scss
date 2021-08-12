@@ -44,3 +44,16 @@
 .text {
     color: inherit;
 }
+
+.readOnly {
+    pointer-events: none;
+
+    .active {
+        color: var(--gray-6);
+        border-color: var(--gray-5);
+
+        svg {
+            color: var(--gray-6);
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
 
 import useTrans from '../../../hooks/trans.hook';
 import { IChips, IChipsMap } from '../../../interfaces';
@@ -31,15 +31,31 @@ const ChipsItem = ({ chip, onChange }: IChipsItemProps): ReactElement => {
 
 interface IProps {
     chips: IChipsMap;
-    onChange: (value: IChips) => void;
+    onChange?: (value: string[]) => void;
 }
 
-const Chips = ({ chips, onChange }: IProps): ReactElement => (
-    <div className={css.flex}>
-        {Object.values(chips).map<ReactElement>(chip => (
-            <ChipsItem key={chip.name} chip={chip} onChange={onChange} />
-        ))}
-    </div>
-);
+const Chips = ({ chips, onChange }: IProps): ReactElement => {
+    const handleChange = (value: IChips): void =>
+        onChange &&
+        onChange(
+            Object.values({ ...chips, [value.name]: value }).reduce<string[]>((acc, item) => {
+                if (item.active) acc.push(item.name);
+                return acc;
+            }, []),
+        );
+
+    const list = useMemo(
+        () => (onChange ? Object.values(chips) : Object.values(chips).filter(item => item.active)),
+        [chips, onChange],
+    );
+
+    return (
+        <div className={clsx(css.flex, !onChange && css.readOnly)}>
+            {list.map<ReactElement>(chip => (
+                <ChipsItem key={chip.name} chip={chip} onChange={handleChange} />
+            ))}
+        </div>
+    );
+};
 
 export default Chips;

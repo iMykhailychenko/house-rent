@@ -1,8 +1,18 @@
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
 
+import { SEARCH_FILTERS } from '../../../../interfaces';
 import routes from '../../../../utils/routes';
+import PostCardChips from '../post-cart-chips/post-cart-chips';
 import css from './post-cart-sm.module.scss';
+
+const mockFilters = {
+    [SEARCH_FILTERS.GENERAL]: ['hot'],
+    [SEARCH_FILTERS.ROOM]: ['two', 'three'],
+    [SEARCH_FILTERS.HOUSE_TYPE]: ['new'],
+    [SEARCH_FILTERS.PRICE]: ['price_two', 'price_three'],
+    [SEARCH_FILTERS.CITY]: ['kyiv'],
+};
 
 const PostCardSm = (): ReactElement => {
     return (
@@ -17,6 +27,7 @@ const PostCardSm = (): ReactElement => {
                     </p>
                 </a>
             </Link>
+            <PostCardChips value={mockFilters} />
         </div>
     );
 };

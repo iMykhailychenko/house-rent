@@ -27,9 +27,10 @@ export interface IConfig {
 
 export enum SEARCH_FILTERS {
     GENERAL = 'general',
-    ROOMS = 'rooms',
-    HOUSE_TYPES = 'houseTypes',
+    ROOM = 'room',
+    HOUSE_TYPE = 'house_type',
     PRICE = 'price',
+    CITY = 'city',
 }
 
 export type ISearchFilters = {

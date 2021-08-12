@@ -15,10 +15,10 @@ const HomeBanner = (): ReactElement => {
         <Section>
             <Container className={css.root} size="md">
                 <img className={css.img} src="/room.png" alt="" />
-                <RcScrollParallax animation={{ y: 0, opacity: 1 }} style={{ transform: 'translateY(100%)', opacity: 0 }}>
+                <RcScrollParallax animation={{ y: 0, opacity: 1 }} style={{ transform: 'translateY(30%)', opacity: 0 }}>
                     <h2 className="title-1">{trans('Досить платити ріелторам просто так! Змусь їх працювати на себе.')}</h2>
                 </RcScrollParallax>
-                <RcScrollParallax animation={{ y: 0, opacity: 1 }} style={{ transform: 'translateY(100%)', opacity: 0 }}>
+                <RcScrollParallax animation={{ y: 0, opacity: 1 }} style={{ transform: 'translateY(30%)', opacity: 0 }}>
                     <p className="subtitle-1">
                         {trans(
                             'Набридло годинаму шукати квартиру, знаходити підходящій варінт, а в результаті дізнаватися що ця квартира вже здана? Ми перевернули все з ніг на голову. Тепер ви публікуєте оголошення, а рієлтори та власники пропонують вам житло',
@@ -27,8 +27,8 @@ const HomeBanner = (): ReactElement => {
                 </RcScrollParallax>
                 <RcScrollParallax
                     className={css.add}
-                    animation={{ y: 0, opacity: 1, playScale: [0, 0.8] }}
-                    style={{ transform: 'translateY(100%)', opacity: 0 }}
+                    animation={{ y: 0, opacity: 1 }}
+                    style={{ transform: 'translateY(30%)', opacity: 0 }}
                 >
                     <ArrowLink className={css.link} href={routes.posts.new}>
                         {trans('Подати оголошення')}

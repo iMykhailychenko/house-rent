@@ -1,43 +1,55 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
 
 import useTrans from '../../../../../../hooks/trans.hook';
-import { IChips, IChipsMap } from '../../../../../../interfaces';
+import { SEARCH_FILTERS } from '../../../../../../interfaces';
+import {
+    changeCityFiltersAction,
+    changeGeneralFiltersAction,
+    changeHouseTypeFiltersAction,
+    changePriceFiltersAction,
+    changeRoomFiltersAction,
+} from '../../../../../../state/entities/filters/filters.reducer';
+import { useAllFiltersSelector } from '../../../../../../state/entities/filters/filters.selector';
 import Chips from '../../../../../common/chips/chips';
-import { generalFilters, houseTypeFilters, priceFilters, roomsFilters } from './home-post-chips.config';
 import css from './home-post-chips.module.scss';
 
 const HomePostChips = (): ReactElement => {
     const trans = useTrans();
-    const [generalChips, setGeneralChips] = useState<IChipsMap>(generalFilters(['hot']));
-    const [roomsChips, setRoomsChips] = useState<IChipsMap>(roomsFilters([]));
-    const [houseTypeChips, setHouseTypeChips] = useState<IChipsMap>(houseTypeFilters([]));
-    const [priceChips, setPriceChips] = useState<IChipsMap>(priceFilters([]));
+    const dispatch = useDispatch();
+    const filters = useAllFiltersSelector();
 
-    const handleGeneralChips = (value: IChips): void => {
-        setGeneralChips(prev => ({ ...prev, [value.name]: value }));
+    const handleChangeGeneral = (value: string[]): void => {
+        dispatch(changeGeneralFiltersAction(value));
     };
-    const handleRoomsChips = (value: IChips): void => {
-        setRoomsChips(prev => ({ ...prev, [value.name]: value }));
+    const handleChangeRoom = (value: string[]): void => {
+        dispatch(changeRoomFiltersAction(value));
     };
-    const handleHouseTypeChips = (value: IChips): void => {
-        setHouseTypeChips(prev => ({ ...prev, [value.name]: value }));
+    const handleChangeHouseType = (value: string[]): void => {
+        dispatch(changeHouseTypeFiltersAction(value));
     };
-    const handlePriceChips = (value: IChips): void => {
-        setPriceChips(prev => ({ ...prev, [value.name]: value }));
+    const handleChangePrice = (value: string[]): void => {
+        dispatch(changePriceFiltersAction(value));
+    };
+    const handleChangeCity = (value: string[]): void => {
+        dispatch(changeCityFiltersAction(value));
     };
 
     return (
         <div className={css.root}>
-            <Chips onChange={handleGeneralChips} chips={generalChips} />
+            <Chips onChange={handleChangeGeneral} chips={filters[SEARCH_FILTERS.GENERAL]} />
 
             <h4 className={css.title}>{trans('Кількість кімнат')}</h4>
-            <Chips onChange={handleRoomsChips} chips={roomsChips} />
+            <Chips onChange={handleChangeRoom} chips={filters[SEARCH_FILTERS.ROOM]} />
 
             <h4 className={css.title}>{trans('Тип будинку')}</h4>
-            <Chips onChange={handleHouseTypeChips} chips={houseTypeChips} />
+            <Chips onChange={handleChangeHouseType} chips={filters[SEARCH_FILTERS.HOUSE_TYPE]} />
 
             <h4 className={css.title}>{trans('Цінова категорія')}</h4>
-            <Chips onChange={handlePriceChips} chips={priceChips} />
+            <Chips onChange={handleChangePrice} chips={filters[SEARCH_FILTERS.PRICE]} />
+
+            <h4 className={css.title}>{trans('Оберіть місто')}</h4>
+            <Chips onChange={handleChangeCity} chips={filters[SEARCH_FILTERS.CITY]} />
         </div>
     );
 };

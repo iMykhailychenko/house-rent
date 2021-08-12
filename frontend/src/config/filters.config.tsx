@@ -1,43 +1,42 @@
-import { Apartment, HomeWork, Weekend, Whatshot } from '@material-ui/icons';
 import React from 'react';
 
-import { IChipsMap } from '../components/common/chips/chips';
-import { ISearchFilters, SEARCH_FILTERS } from '../interfaces';
+import { IChipsMap } from '../interfaces';
+import filtersIconsMap from '../map/filters-icons.map';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {
         name: 'hot',
         active: init.includes('hot'),
-        icon: <Whatshot />,
+        icon: filtersIconsMap.hot,
         hover: '#cf1322',
     },
 });
 
-export const roomsFilters = (init: string[] = []): IChipsMap => ({
+export const roomFilters = (init: string[] = []): IChipsMap => ({
     one: {
         name: 'one',
         active: init.includes('one'),
-        icon: <Weekend />,
+        icon: filtersIconsMap.rooms,
     },
     two: {
         name: 'two',
         active: init.includes('two'),
-        icon: <Weekend />,
+        icon: filtersIconsMap.rooms,
     },
     three: {
         name: 'three',
         active: init.includes('three'),
-        icon: <Weekend />,
+        icon: filtersIconsMap.rooms,
     },
     four: {
         name: 'four',
         active: init.includes('four'),
-        icon: <Weekend />,
+        icon: filtersIconsMap.rooms,
     },
     more: {
         name: 'more',
         active: init.includes('more'),
-        icon: <Weekend />,
+        icon: filtersIconsMap.rooms,
     },
 });
 
@@ -45,12 +44,12 @@ export const houseTypeFilters = (init: string[] = []): IChipsMap => ({
     old: {
         name: 'old',
         active: init.includes('old'),
-        icon: <HomeWork />,
+        icon: filtersIconsMap.old_house,
     },
     new: {
         name: 'new',
         active: init.includes('new'),
-        icon: <Apartment />,
+        icon: filtersIconsMap.new_house,
     },
 });
 
@@ -85,12 +84,21 @@ export const priceFilters = (init: string[] = []): IChipsMap => ({
     },
 });
 
-type IParams = {
-    [key in SEARCH_FILTERS]?: string[];
-};
-export const getAllChipsFilters = (params?: IParams): ISearchFilters => ({
-    [SEARCH_FILTERS.GENERAL]: generalFilters(params?.[SEARCH_FILTERS.GENERAL]),
-    [SEARCH_FILTERS.PRICE]: priceFilters(params?.[SEARCH_FILTERS.PRICE]),
-    [SEARCH_FILTERS.ROOMS]: roomsFilters(params?.[SEARCH_FILTERS.ROOMS]),
-    [SEARCH_FILTERS.HOUSE_TYPES]: houseTypeFilters(params?.[SEARCH_FILTERS.HOUSE_TYPES]),
+export const cityFilters = (init: string[] = []): IChipsMap => ({
+    kyiv: {
+        name: 'kyiv',
+        active: init.includes('kyiv'),
+    },
+    lviv: {
+        name: 'lviv',
+        active: init.includes('lviv'),
+    },
+    kharkiv: {
+        name: 'kharkiv',
+        active: init.includes('kharkiv'),
+    },
+    odesa: {
+        name: 'odesa',
+        active: init.includes('odesa'),
+    },
 });
