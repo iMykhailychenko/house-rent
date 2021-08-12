@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
 
 import useTrans from '../../../hooks/trans.hook';
 import { IChips, IChipsMap } from '../../../interfaces';
+import filtersIconsMap from '../../../map/filters-icons.map';
 import css from './chips.module.scss';
 
 interface IChipsItemProps {
@@ -23,7 +24,7 @@ const ChipsItem = ({ chip, onChange }: IChipsItemProps): ReactElement => {
 
     return (
         <button ref={ref} type="button" onClick={handleClick} className={clsx(css.chip, chip.active && css.active)}>
-            {chip.icon}
+            {chip.icon && filtersIconsMap[chip.icon]}
             <span className={css.text}>{trans(chip.name)}</span>
         </button>
     );

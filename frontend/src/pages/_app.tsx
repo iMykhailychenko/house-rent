@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 
 import RootLayout from '../components/layout/root-layout/root-layout';
 import siteConfig from '../config/site.config';
@@ -24,6 +24,12 @@ interface IProps {
 }
 
 const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppProps & IProps): ReactElement => {
+    useEffect(() => {
+        const resize = (): void => document.body.style.setProperty('--100vh', window.innerHeight + 'px');
+        window.addEventListener('resize', resize);
+        return () => window.removeEventListener('resize', resize);
+    }, []);
+
     return (
         <ReduxProvider>
             <RootProvider serverProps={{ auth, theme, width, config }}>

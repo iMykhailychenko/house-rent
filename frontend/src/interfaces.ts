@@ -1,9 +1,7 @@
-import { ReactElement } from 'react';
-
 export interface IChips {
     name: string;
     active: boolean;
-    icon?: ReactElement;
+    icon?: string;
     hover?: string;
 }
 

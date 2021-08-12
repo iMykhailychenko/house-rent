@@ -1,13 +1,10 @@
-import React from 'react';
-
 import { IChipsMap } from '../interfaces';
-import filtersIconsMap from '../map/filters-icons.map';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {
         name: 'hot',
         active: init.includes('hot'),
-        icon: filtersIconsMap.hot,
+        icon: 'hot',
         hover: '#cf1322',
     },
 });
@@ -16,27 +13,27 @@ export const roomFilters = (init: string[] = []): IChipsMap => ({
     one: {
         name: 'one',
         active: init.includes('one'),
-        icon: filtersIconsMap.rooms,
+        icon: 'rooms',
     },
     two: {
         name: 'two',
         active: init.includes('two'),
-        icon: filtersIconsMap.rooms,
+        icon: 'rooms',
     },
     three: {
         name: 'three',
         active: init.includes('three'),
-        icon: filtersIconsMap.rooms,
+        icon: 'rooms',
     },
     four: {
         name: 'four',
         active: init.includes('four'),
-        icon: filtersIconsMap.rooms,
+        icon: 'rooms',
     },
     more: {
         name: 'more',
         active: init.includes('more'),
-        icon: filtersIconsMap.rooms,
+        icon: 'rooms',
     },
 });
 
@@ -44,12 +41,12 @@ export const houseTypeFilters = (init: string[] = []): IChipsMap => ({
     old: {
         name: 'old',
         active: init.includes('old'),
-        icon: filtersIconsMap.old_house,
+        icon: 'old_house',
     },
     new: {
         name: 'new',
         active: init.includes('new'),
-        icon: filtersIconsMap.new_house,
+        icon: 'new_house',
     },
 });
 

@@ -8,8 +8,10 @@ const HomePostFilters = (): ReactElement => {
     return (
         <aside className={css.root}>
             <div className={css.sticky}>
-                <CardSizeSwitcher />
-                <HomePostChips />
+                <div className={css.scrollBox}>
+                    <CardSizeSwitcher />
+                    <HomePostChips />
+                </div>
             </div>
         </aside>
     );
