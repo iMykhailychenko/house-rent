@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.list {
+    display: flex;
+    width: max-content;
+    border: 0.1rem solid var(--primary);
+    border-radius: 0.5rem;
+}
+
+.item {
+    &:not(:nth-of-type(1)) {
+        border-left: 0.1rem solid var(--primary);
+    }
+
+    button {
+        height: 4rem;
+        padding: 0 1rem;
+        white-space: nowrap;
+    }
+}
+
+.active button {
+    background: var(--primary);
+    color: var(--true-white);
+}

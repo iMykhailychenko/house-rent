@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
-import Zoom from 'react-medium-image-zoom';
 
 import { SEARCH_FILTERS } from '../../../../interfaces';
 import routes from '../../../../utils/routes';
@@ -18,9 +17,6 @@ const mockFilters = {
 const PostCardSm = (): ReactElement => {
     return (
         <div className={css.root}>
-            <Zoom overlayBgColorStart="transparent" overlayBgColorEnd="transparent">
-                <img height="200" width="200" className={css.img} src="/mock.jpeg" alt="" />
-            </Zoom>
             <div className={css.content}>
                 <Link href={routes.posts.single(1)}>
                     <a className={css.link}>

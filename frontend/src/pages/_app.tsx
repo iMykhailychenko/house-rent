@@ -1,5 +1,4 @@
 import '../styles/root.css';
-import 'react-medium-image-zoom/dist/styles.css';
 
 import axios from 'axios';
 import type { AppProps } from 'next/app';

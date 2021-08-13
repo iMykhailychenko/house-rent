@@ -1,0 +1,26 @@
+.root {
+    :global(.appear) {
+        position: relative;
+        top: 20rem;
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+    }
+
+    :global(.appear-done) {
+        position: relative;
+        top: 0;
+        opacity: 1;
+        transition: 0.3s ease-in-out;
+    }
+}
+
+.img {
+    max-height: 30rem;
+    max-width: 26rem;
+    margin: 0 auto;
+}
+
+.link {
+    margin: 0 auto;
+    font-size: 2rem;
+}
