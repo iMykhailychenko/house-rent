@@ -1,26 +1,38 @@
+$imgWidth: 20rem;
+
 .root {
+    display: flex;
+    justify-content: space-between;
     padding: 8rem 4rem;
     border-top: 0.1rem solid var(--gray-5);
-
     &:nth-last-of-type(1) {
         border-bottom: 0.1rem solid var(--gray-5);
+    }
+
+    .img {
+        width: $imgWidth;
+        height: $imgWidth;
+    }
+
+    .content {
+        width: calc(100% - #{$imgWidth} - 2rem);
     }
 }
 
 .link {
     font-weight: 600;
 
+    &:hover,
+    &:focus {
+        h3 {
+            text-decoration: underline;
+        }
+    }
+
     h3 {
         font-size: 2rem;
         line-height: 1.2;
         color: var(--black);
-
-        &:hover {
-            text-decoration: underline;
-        }
-        &:focus {
-            text-decoration: underline;
-        }
     }
 
     p {

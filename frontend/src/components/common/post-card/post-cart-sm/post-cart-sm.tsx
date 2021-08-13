@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
+import Zoom from 'react-medium-image-zoom';
 
 import { SEARCH_FILTERS } from '../../../../interfaces';
 import routes from '../../../../utils/routes';
@@ -17,17 +18,22 @@ const mockFilters = {
 const PostCardSm = (): ReactElement => {
     return (
         <div className={css.root}>
-            <Link href={routes.posts.single(1)}>
-                <a className={css.link}>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id
-                        illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta,
-                        tempora, totam veniam!
-                    </p>
-                </a>
-            </Link>
-            <PostCardChips value={mockFilters} />
+            <Zoom overlayBgColorStart="transparent" overlayBgColorEnd="transparent">
+                <img height="200" width="200" className={css.img} src="/mock.jpeg" alt="" />
+            </Zoom>
+            <div className={css.content}>
+                <Link href={routes.posts.single(1)}>
+                    <a className={css.link}>
+                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum
+                            id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit
+                            soluta, tempora, totam veniam!
+                        </p>
+                    </a>
+                </Link>
+                <PostCardChips value={mockFilters} />
+            </div>
         </div>
     );
 };
