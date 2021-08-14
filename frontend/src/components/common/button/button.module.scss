@@ -1,0 +1,54 @@
+.button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    padding: 0 1.8rem;
+    background: var(--white);
+    border-radius: 3rem;
+    line-height: 1;
+    color: inherit;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+
+    &:hover,
+    &:focus {
+        opacity: 0.6;
+    }
+}
+
+.loading {
+    cursor: unset;
+    pointer-events: none;
+
+    opacity: 0.5;
+    .children {
+        opacity: 0;
+    }
+}
+
+.primary {
+    background: var(--primary);
+    color: var(--true-white);
+}
+
+.secondary {
+    background: var(--gray-3);
+    color: var(--gray-10);
+}
+
+.children {
+    position: relative;
+    z-index: 1;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 2rem;
+    width: 2rem;
+    z-index: 2;
+}

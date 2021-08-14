@@ -15,16 +15,12 @@ const HomePosts = (): ReactElement => {
     const [config] = useConfig();
 
     return (
-        <Section>
-            <Container size="lg">
+        <Section id="home-posts">
+            <Container size="md">
                 <div className={css.root}>
-                    <Container size="sm">
-                        <h2 className="title-2">
-                            {trans(
-                                'Якщо ви рієлтори чи власник квартири, то в першу чергу зверніть увагу на термінові оголошення',
-                            )}
-                        </h2>
-                    </Container>
+                    <h2 className="title-2">
+                        {trans('Якщо ви рієлтори чи власник квартири, то в першу чергу зверніть увагу на термінові оголошення')}
+                    </h2>
 
                     <div className={css.flex}>
                         <div className={css[config.cardSize]}>

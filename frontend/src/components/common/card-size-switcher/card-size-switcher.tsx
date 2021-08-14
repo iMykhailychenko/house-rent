@@ -18,11 +18,11 @@ const CardSizeSwitcher = (): ReactElement => {
 
     return (
         <div className={css.flex}>
-            <button className={clsx(css.button, config.cardSize === 'sm' && css.active)} onClick={handleSmallCard} type="button">
+            <button className={clsx(css.button, config.cardSize === 'lg' && css.active)} onClick={handleLargeCard} type="button">
                 <ViewHeadline />
             </button>
             <span className={css.separator} />
-            <button className={clsx(css.button, config.cardSize === 'lg' && css.active)} onClick={handleLargeCard} type="button">
+            <button className={clsx(css.button, config.cardSize === 'sm' && css.active)} onClick={handleSmallCard} type="button">
                 <Apps />
             </button>
         </div>

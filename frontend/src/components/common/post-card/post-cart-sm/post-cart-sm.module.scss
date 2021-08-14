@@ -2,8 +2,8 @@ $imgWidth: 20rem;
 
 .root {
     display: flex;
-    justify-content: space-between;
-    padding: 8rem 4rem;
+    flex-direction: column;
+    padding: 4rem 0 2rem;
     border-top: 0.1rem solid var(--gray-5);
     &:nth-last-of-type(1) {
         border-bottom: 0.1rem solid var(--gray-5);
@@ -15,6 +15,7 @@ $imgWidth: 20rem;
     }
 
     .content {
+        margin-top: 2rem;
         width: calc(100% - #{$imgWidth} - 2rem);
     }
 }

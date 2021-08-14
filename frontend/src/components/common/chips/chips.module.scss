@@ -12,9 +12,10 @@
     padding: 0 1rem;
     color: var(--gray-6);
     border: 0.1rem solid var(--gray-5);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--primary);
 
         svg {
@@ -26,7 +27,8 @@
         margin-top: 0.2rem;
         margin-right: 0.4rem;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: var(--hover);
         }
     }

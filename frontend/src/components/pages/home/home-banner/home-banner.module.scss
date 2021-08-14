@@ -1,28 +1,79 @@
+:global(.black) {
+    .root {
+        opacity: 0.8;
+    }
+
+    .switch span {
+        color: var(--true-black);
+
+        &:global(.active) {
+            color: var(--true-white);
+        }
+    }
+}
+
+.section {
+    margin: 4rem 0 6rem;
+    min-height: unset;
+}
+
+.owner {
+    --secondary: #f2e8e1;
+}
+.tenant {
+    --secondary: #dcecf5;
+}
+
 .root {
-    padding-top: 3rem;
-    background: var(--white);
-    color: var(--black);
+    position: relative;
+    min-height: 60rem;
+    padding: 6rem;
+    border-radius: 4.5rem;
+    transition: 0.6s ease-in-out;
+    background: var(--secondary);
+    color: var(--true-black);
+    overflow: hidden;
 }
 
-.topTitle {
-    margin-bottom: 2rem;
-    text-align: center;
+.inner {
+    position: relative;
+    z-index: 2;
 }
 
-.add {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 2rem 0;
-    font-size: 3.5rem;
-    font-weight: 700;
+.img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    height: 100%;
+    width: auto;
+    opacity: 0;
+    transition: 0.6s ease-in-out;
+
+    &:global(.enter-done) {
+        opacity: 1;
+    }
 }
 
-.segmented {
-    margin-bottom: 3rem;
+.animation {
+    margin-top: 4rem;
+    width: 60rem;
 
-    ul li button {
-        min-width: 15rem;
-        font-size: 1.2rem;
+    :global(.appear) {
+        position: relative;
+        top: 20rem;
+        opacity: 0;
+        transition: 0.6s ease-in-out;
+    }
+
+    :global(.appear-done) {
+        position: relative;
+        top: 0;
+        opacity: 1;
+        transition: 0.6s ease-in-out;
+    }
+
+    .button {
+        margin-top: 6rem;
     }
 }

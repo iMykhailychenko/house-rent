@@ -1,34 +1,50 @@
-﻿import React, { ReactElement, useState } from 'react';
+﻿import clsx from 'clsx';
+import React, { ReactElement, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
-import useTrans from '../../../../hooks/trans.hook';
-import SegmentedControl from '../../../common/segmented-control/segmented-control';
+import Switch from '../../../common/switch/switch';
 import Container from '../../../layout/container/container';
 import Section from '../../../layout/section/section';
+import Owner from './components/owner';
+import Tenant from './components/tenant';
 import css from './home-banner.module.scss';
-import Owner from './owner/owner';
-import Tenant from './tenant/tenant';
 
 const USER_ROLE = [
     { id: 'tenant', name: 'Орендар' },
     { id: 'owner', name: 'Власник / рієлтор' },
 ];
 
-const contentMap: { [key: string]: ReactElement } = {
-    tenant: <Tenant />,
-    owner: <Owner />,
-};
-
 const HomeBanner = (): ReactElement => {
-    const trans = useTrans();
     const [userRole, setUserRole] = useState(USER_ROLE[0].id);
 
-    return (
-        <Section>
-            <Container className={css.root} size="md">
-                <h3 className={css.topTitle}>{trans('Хто вы?')}</h3>
-                <SegmentedControl className={css.segmented} active={userRole} onChange={setUserRole} value={USER_ROLE} />
+    const handleChange = (value: boolean): void => {
+        setUserRole(value ? 'tenant' : 'owner');
+    };
 
-                {contentMap[userRole]}
+    return (
+        <Section className={css.section}>
+            <Container size="md">
+                <div className={clsx(css.root, css[userRole])}>
+                    <div className={css.inner}>
+                        <Switch
+                            size="lg"
+                            width={19}
+                            className={css.switch}
+                            onChange={handleChange}
+                            value={userRole === 'tenant'}
+                            labels={['Орендарям', 'Власникам / рієлторам']}
+                        />
+                        {userRole === 'tenant' ? <Tenant /> : <Owner />}
+                    </div>
+
+                    <CSSTransition className={css.img} in={userRole === 'tenant'} timeout={10} appear unmountOnExit>
+                        <img src="/tenant.svg" alt="" draggable="false" />
+                    </CSSTransition>
+
+                    <CSSTransition className={css.img} in={userRole === 'owner'} timeout={10} appear unmountOnExit>
+                        <img src="/owner.svg" alt="" draggable="false" />
+                    </CSSTransition>
+                </div>
             </Container>
         </Section>
     );

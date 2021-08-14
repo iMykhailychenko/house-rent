@@ -1,0 +1,65 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 0 2rem;
+    border-top: 0.1rem solid var(--gray-5);
+    &:nth-last-of-type(1) {
+        border-bottom: 0.1rem solid var(--gray-5);
+    }
+
+    .content {
+        margin-top: 2rem;
+        width: 100%;
+    }
+}
+
+.link {
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+        h3 {
+            text-decoration: underline;
+        }
+    }
+
+    h3 {
+        font-size: 2rem;
+        line-height: 1.2;
+        color: var(--black);
+    }
+
+    p {
+        margin-top: 2rem;
+        text-align: left;
+        font-size: 1.5rem;
+        color: var(--gray-6);
+    }
+}
+
+.info {
+    display: flex;
+    align-items: center;
+
+    button {
+        margin-right: 1rem;
+
+        &:hover,
+        &:focus {
+            color: var(--primary);
+        }
+    }
+
+    .visibility {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--gray-6);
+
+        span {
+            margin-left: 1rem;
+            font-size: 1.4rem;
+        }
+    }
+}

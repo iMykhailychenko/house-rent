@@ -1,0 +1,40 @@
+.root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 6rem;
+    padding: 1rem;
+    border-radius: 1.8rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0.6rem;
+        top: 0.6rem;
+        width: calc(50% - 0.6rem);
+        height: calc(100% - 1.2rem);
+        background: var(--white);
+        border-radius: 1.6rem;
+        z-index: 1;
+        box-shadow: var(--box-shadow-1);
+        transition: 0.3s ease-in-out;
+    }
+
+    &:hover::before,
+    &:focus::before {
+        box-shadow: var(--box-shadow-2);
+    }
+
+    span {
+        position: relative;
+        display: block;
+        z-index: 2;
+        color: var(--black);
+    }
+}
+
+.right {
+    &::before {
+        transform: translateX(100%);
+    }
+}

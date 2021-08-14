@@ -1,0 +1,15 @@
+.root {
+    display: flex;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+        h4 {
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        color: var(--gray-6);
+    }
+}

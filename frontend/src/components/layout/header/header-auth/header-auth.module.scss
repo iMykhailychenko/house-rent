@@ -13,9 +13,7 @@
     font-size: 1.2rem;
     color: inherit;
 
-    &:hover {
-        text-decoration: underline;
-    }
+    &:hover,
     &:focus {
         text-decoration: underline;
     }
