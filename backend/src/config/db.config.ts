@@ -9,6 +9,7 @@ const dbConfig: PostgresConnectionOptions = {
     password: process.env.POSTGRES_PASSWORD,
     logging: true,
     synchronize: true,
+    entities: ['dist/**/*.entity.js'],
 };
 
 export default dbConfig;

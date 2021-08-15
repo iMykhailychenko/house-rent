@@ -3,31 +3,32 @@ version: '3.9'
 services:
   backend:
     build: ./backend
-    ports:
-      - "8000:8000"
-    container_name: backend
-    env_file:
-      - ./backend/.env
     restart: unless-stopped
     command: yarn run start
+    container_name: backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
     depends_on:
       - db
       - pgadmin
 
   frontend:
     build: ./frontend
+    container_name: frontend
+    command: yarn run start
     stdin_open: true
     tty: true
     ports:
       - "3000:3000"
     env_file:
       - frontend/.env
-    container_name: frontend
-    command: yarn run start
 
   db:
     container_name: db
     image: postgres:13.3-alpine
+    restart: unless-stopped
     env_file:
       - ./backend/.env
     volumes:
@@ -38,13 +39,13 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
+    restart: unless-stopped
     volumes:
       - pgadmin:/root/.pgadmin
     ports:
-      - "5050:80"
+      - "5050:5050"
     env_file:
       - ./.env
-    restart: unless-stopped
 
 volumes:
   postgres:

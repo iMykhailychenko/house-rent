@@ -11,7 +11,7 @@ export const joinController = async (req: Request, res: Response): Promise<void>
     credentials.password = req.body.password;
 
     validate(credentials).then(errors => {
-        if (errors) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
+        if (errors) throw new ErrorNormalize(400, Object.values(errors[0]?.constraints)?.[0]);
     });
 
     res.status(204);

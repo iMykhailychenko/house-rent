@@ -1,14 +1,29 @@
-import { ConnectionManager } from 'typeorm';
+import { Connection, ConnectionManager } from 'typeorm';
 import dbConfig from '../config/db.config';
 
-const connectToDb = async (): Promise<void> => {
-    const connectionManager = new ConnectionManager();
-    const connection = connectionManager.create(dbConfig);
+class Database {
+    static _instance: Database = null;
 
-    console.log('Connecting to database ...');
-    await connection.connect();
+    public connectionManager: ConnectionManager;
+    public connection: Connection;
 
-    console.log('Connected');
-};
+    constructor() {
+        if (Database._instance) return Database._instance;
+        this.connectionManager = new ConnectionManager();
+        this.connection = this.connectionManager.create(dbConfig);
+    }
 
-export default connectToDb;
+    async connect(): Promise<void> {
+        console.log('Connecting to database ...');
+        await this.connection.connect();
+        console.log('Connected');
+    }
+
+    async disconnect(): Promise<void> {
+        console.log('Disconnecting from database ...');
+        await this.connection.close();
+        console.log('Disconnected');
+    }
+}
+
+export default new Database();

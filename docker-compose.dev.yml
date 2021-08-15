@@ -3,6 +3,8 @@ version: '3.9'
 services:
   backend:
     command: yarn run dev
+    env_file:
+      - ./backend/.env.dev
     volumes:
       - ./backend/src:/app/backend/src
 
@@ -11,3 +13,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./frontend/src:/app/frontend/src
+
+  db:
+    env_file:
+      - ./backend/.env.dev
