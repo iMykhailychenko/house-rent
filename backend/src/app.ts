@@ -26,8 +26,8 @@ class App {
             this.instance = app;
             return app;
         } catch (error) {
-            await database.disconnect();
             console.log(`Server error: ${error}`);
+            await database.disconnect();
         }
     };
 }

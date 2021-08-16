@@ -1,4 +1,4 @@
-import { IsEmail, Length } from 'class-validator';
+import { IsEmail, IsString, Length } from 'class-validator';
 
 export class AuthJoin {
     @Length(1, 40)
@@ -12,4 +12,7 @@ export class AuthJoin {
 
     @Length(6, 40)
     password: string;
+
+    @IsString()
+    role: string;
 }

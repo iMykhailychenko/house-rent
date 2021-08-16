@@ -2,14 +2,13 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 const dbConfig: PostgresConnectionOptions = {
     type: 'postgres',
-    database: process.env.POSTGRES_DB,
-    host: process.env.DATABASE_HOST,
-    port: +process.env.POSTGRES_PORT,
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.POSTGRES_HOST || 'localhost',
+    database: process.env.POSTGRES_DB || 'house_rent',
+    port: +process.env.POSTGRES_PORT || 5432,
+    username: process.env.POSTGRES_USER || 'house_rent',
+    password: process.env.POSTGRES_PASSWORD || 'H0use_rent@rent',
     logging: true,
     synchronize: true,
-    entities: ['dist/**/*.entity.js'],
 };
 
 export default dbConfig;

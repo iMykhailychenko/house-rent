@@ -33,47 +33,58 @@ describe('Test auth service', () => {
     //     });
     // });
 
-    it('Join success', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email: 'fff@mail.ru',
-            password: 'P@ssw0rd!',
-            role: UserRole.USER,
+    describe('Join', () => {
+        it('Join success', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email: 'fff@mail.ru',
+                password: 'P@ssw0rd!',
+                role: UserRole.USER,
+            });
+            expect(res.statusCode).toEqual(204);
         });
-        expect(res.statusCode).toEqual(204);
-    });
 
-    it('Invalid firstName', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 1,
-            lastName: 'LastName',
-            email: 'fff@mail.ru',
-            password: 'P@ssw0rd!',
-        });
-        console.dir(res);
-        expect(res.statusCode).toEqual(400);
-    });
+        it('Invalid firstName', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 1,
+                lastName: 'LastName',
+                email: 'fff@mail.ru',
+                password: 'P@ssw0rd!',
+            });
 
-    it('Invalid property', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email_email: 'fff@mail.ru',
-            password: 'P@ssw0rd!',
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'firstName must be longer than or equal to 1 and shorter than or equal to 40 characters',
+            });
         });
-        console.dir(res);
-        expect(res.statusCode).toEqual(400);
-    });
 
-    it('Invalid password', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email: 'fff@mail.ru',
-            password: 'P',
+        it('Invalid property', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email_email: 'fff@mail.ru',
+                password: 'P@ssw0rd!',
+            });
+
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'email must be an email',
+            });
         });
-        console.dir(res);
-        expect(res.statusCode).toEqual(400);
+
+        it('Invalid password', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email: 'fff@mail.ru',
+                password: 'P',
+            });
+
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'password must be longer than or equal to 6 characters',
+            });
+        });
     });
 });

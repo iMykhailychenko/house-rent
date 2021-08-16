@@ -11,11 +11,11 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ default: new Date() })
+    @Column({ type: 'timestamp', default: new Date() })
     @IsDate()
-    createDate: Date;
+    creationDate: Date;
 
-    @Column({ default: new Date() })
+    @Column({ type: 'timestamp', default: new Date() })
     @IsDate()
     lastActivity: Date;
 
@@ -31,7 +31,7 @@ export class User {
     @IsEmail()
     email: string;
 
-    @Column()
+    @Column('varchar', { length: 50 })
     @IsString()
     password: string;
 
