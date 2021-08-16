@@ -16,4 +16,4 @@ services:
 
   db:
     env_file:
-      - ./backend/.env.dev
+      - ./.env.dev

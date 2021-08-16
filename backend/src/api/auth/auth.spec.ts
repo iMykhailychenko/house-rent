@@ -12,26 +12,26 @@ describe('Test auth service', () => {
         api = request(app);
     });
 
-    // describe('Login', () => {
-    //     it('Login success', async () => {
-    //         const res = await api.post('/auth/login').send({
-    //             email: 'fff@mail.ru',
-    //             password: 'P@ssw0rd!',
-    //         });
-    //         expect(res.statusCode).toEqual(201);
-    //         expect(res.body).toHaveProperty('accessToken');
-    //     });
-    //
-    //     it('Login error - invalid credentials', async () => {
-    //         const res = await api.post('/auth/login').send({
-    //             useName: 'fff@mail.ru',
-    //             password: null,
-    //         });
-    //         console.dir(res);
-    //         expect(res.statusCode).toEqual(400);
-    //         expect(res.body).not.toHaveProperty('accessToken');
-    //     });
-    // });
+    describe('Login', () => {
+        it('Login success', async () => {
+            const res = await api.post('/auth/login').send({
+                email: 'fff@mail.ru',
+                password: 'P@ssw0rd!',
+            });
+            expect(res.statusCode).toEqual(201);
+            expect(res.body).toHaveProperty('accessToken');
+        });
+
+        it('Login error - invalid credentials', async () => {
+            const res = await api.post('/auth/login').send({
+                useName: 'fff@mail.ru',
+                password: null,
+            });
+            console.dir(res);
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).not.toHaveProperty('accessToken');
+        });
+    });
 
     describe('Join', () => {
         it('Join success', async () => {
