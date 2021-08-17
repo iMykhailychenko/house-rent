@@ -20,6 +20,7 @@ class Database {
     }
 
     async disconnect(): Promise<void> {
+        if (!this.connection) return;
         console.log('Disconnecting from database ...');
         await this.connection.close();
         console.log('Disconnected');

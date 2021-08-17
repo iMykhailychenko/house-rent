@@ -5,6 +5,8 @@
     "license": "MIT",
     "scripts": {
         "clean": "rm -rf dist/*",
+        "migration:create": "typeorm migration:create -n HouseRent",
+        "migration:run": "typeorm migration:run",
         "lint": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\" --config ./.prettierrc && eslint --fix ./ && tslint -c tslint.json -p tsconfig.json --fix",
         "start": "yarn run clean && yarn run tsc && node dist/app.js",
         "dev": "nodemon --watch src --exec yarn run start",

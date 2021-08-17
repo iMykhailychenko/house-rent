@@ -4,16 +4,22 @@ services:
   backend:
     command: yarn run dev
     env_file:
-      - ./backend/.env.dev
+      - ./.env.dev
     volumes:
       - ./backend/src:/app/backend/src
 
   frontend:
     command: yarn run dev
-    restart: unless-stopped
+    env_file:
+      - ./.env.dev
     volumes:
       - ./frontend/src:/app/frontend/src
 
   db:
     env_file:
       - ./.env.dev
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_test_data:

@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  pgadmin:
+    container_name: pgadmin_dev
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
+    volumes:
+      - pgadmin:/root/.pgadmin
+    env_file:
+      - ./.env.dev
+
+  db_dev:
+    container_name: db_dev
+    image: postgres:13.4-alpine
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+    env_file:
+      - ./.env.dev
+
+volumes:
+  postgres_dev:
+  pgadmin:

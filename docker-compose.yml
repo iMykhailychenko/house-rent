@@ -7,32 +7,32 @@ services:
     command: yarn run start
     container_name: backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     env_file:
       - ./.env
-      - ./backend/.env
     depends_on:
       - db
 
   frontend:
     build: ./frontend
     container_name: frontend
-    command: yarn run start
+    restart: unless-stopped
+    command: yarn run start:build
     stdin_open: true
     tty: true
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     env_file:
-      - ./frontend/.env
+      - ./.env
 
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
     restart: unless-stopped
-    volumes:
-      - pgadmin:/root/.pgadmin
     ports:
       - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
+    volumes:
+      - pgadmin:/root/.pgadmin
     env_file:
       - ./.env
 
@@ -40,12 +40,12 @@ services:
     container_name: db
     image: postgres:13.4-alpine
     restart: unless-stopped
-    env_file:
-      - ./.env
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
 
 volumes:
   postgres_data:

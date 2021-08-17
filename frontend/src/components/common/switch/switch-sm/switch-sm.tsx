@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const SwitchSm = ({ value, onChange }: IProps): ReactElement => {
+    console.log({ value, onChange });
     return (
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis

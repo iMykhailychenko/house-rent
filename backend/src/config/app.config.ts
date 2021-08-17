@@ -1,6 +1,6 @@
 const config = {
-    port: +process.env.PORT || 8000,
-    host: process.env.HOST || '0.0.0.0',
+    port: +process.env.BACKEND_PORT || 8000,
+    host: process.env.BACKEND_HOST || '0.0.0.0',
 };
 
 export default config;
