@@ -4,6 +4,6 @@ export class AuthLogin {
     @IsEmail()
     email: string;
 
-    @Length(6, 40)
+    @Length(6, 30)
     password: string;
 }

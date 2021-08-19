@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IsDate, IsEmail, IsString, Length } from 'class-validator';
+import { IsDate, IsEmail, IsOptional, IsString, Length } from 'class-validator';
 
 export enum UserRole {
     USER = 'user',
@@ -13,31 +13,32 @@ export class User {
 
     @Column({ type: 'timestamp', default: new Date() })
     @IsDate()
+    @IsOptional()
     creationDate: Date;
 
     @Column({ type: 'timestamp', default: new Date() })
     @IsDate()
+    @IsOptional()
     lastActivity: Date;
 
-    @Column('varchar', { length: 50 })
+    @Column({ type: 'varchar', length: 50 })
     @Length(1, 50)
     firstName: string;
 
-    @Column('varchar', { length: 100 })
+    @Column({ type: 'varchar', length: 100 })
     @Length(1, 100)
     lastName: string;
 
-    @Column('varchar', { length: 50 })
+    @Column({ type: 'varchar', length: 50, unique: true })
     @IsEmail()
     email: string;
 
-    @Column('varchar', { length: 50 })
+    @Column({ type: 'varchar' })
     @IsString()
     password: string;
 
     @Column({
-        type: 'set',
-        enum: UserRole,
+        type: 'simple-array',
         default: [UserRole.USER],
     })
     role: UserRole[];
