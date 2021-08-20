@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { IsDate, IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { Post } from '../../posts/entity/posts.entity';
 
 export enum UserRole {
     USER = 'user',
@@ -36,6 +37,9 @@ export class User {
     @Column({ type: 'varchar' })
     @IsString()
     password: string;
+
+    @OneToMany(() => Post, posts => posts.user)
+    posts: Post[];
 
     @Column({
         type: 'simple-array',

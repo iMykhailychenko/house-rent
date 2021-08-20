@@ -10,7 +10,7 @@
         "lint": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\" --config ./.prettierrc && eslint --fix ./ && tslint -c tslint.json -p tsconfig.json --fix",
         "start": "yarn run clean && yarn run tsc && node dist/app.js",
         "dev": "nodemon --watch src --exec yarn run start",
-        "test": "jest src/* --testTimeout=20000"
+        "test": "jest src/* --testTimeout=20000 --runInBand"
     },
     "jest": {
         "testEnvironment": "node",

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { validate } from 'class-validator';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorWrapper from '../../utils/errorWrapper';
@@ -48,5 +49,7 @@ export const loginController = errorWrapper(async (req: Request, res: Response):
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
     if (!isPasswordValid) throw new ErrorNormalize(400, 'wrong email or password');
 
-    res.status(201).json({ accessToken: 'accessToken' });
+    const oneMonthInMS = 30 * 24 * 60 * 60 * 1000;
+    const accessToken = jwt.sign({ id: user.id, exp: Date.now() + oneMonthInMS }, authConfig.accessKey);
+    res.status(201).json({ accessToken });
 });

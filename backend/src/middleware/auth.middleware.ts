@@ -1,32 +1,32 @@
 import errorWrapper from '../utils/errorWrapper';
 import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import ErrorNormalize from '../utils/errorNormalize';
 import authConfig from '../config/auth.config';
+import { User } from '../api/users/entity/users.entity';
+import database from '../database';
 
-const auth = errorWrapper(async (req: Request, _: Response, next: NextFunction) => {
+const auth = errorWrapper(async (req: Request & { user: User }, _: Response, next: NextFunction) => {
     const token = req.get('Authorization') && req.get('Authorization').replace('Bearer ', '');
-    if (!token) throw new ErrorNormalize(401, 'No token provided');
+    if (!token) throw new ErrorNormalize(401, 'no token provided');
 
-    const data = await jwt.verify(token, authConfig.accessKey);
-    if (!data) throw new ErrorNormalize(401, 'Not authorized');
+    let decoded: JwtPayload;
+    try {
+        decoded = jwt.verify(token, authConfig.accessKey) as JwtPayload;
+    } catch (error) {
+        throw new ErrorNormalize(401, 'invalid token provided');
+    }
+    if (!decoded?.id) throw new ErrorNormalize(401, 'invalid token provided');
+    if (+decoded.exp < Date.now()) throw new ErrorNormalize(401, 'token is outdated');
 
-    // const user = await UserModel.findById(id);
-    // if (!user) throw newError('Not authorized', 401);
-    //
-    // const currentToken = user.tokens.find(data => data.token === token);
-    // if (!currentToken) throw newError('Not authorized', 401);
-    //
-    // if (new Date() > new Date(currentToken.expires)) {
-    //     user.tokens = user.tokens.filter(data => data.token !== token);
-    //     await user.save();
-    //
-    //     throw newError('Token expired', 403);
-    // }
+    const repository = database.connection.getRepository(User);
+    const user = await repository.findOne({ id: decoded.id }).catch(() => {
+        throw new ErrorNormalize(401, 'not authorized');
+    });
+    if (!user) throw new ErrorNormalize(401, 'not authorized');
 
-    // req.user = user;
-    // req.token = token;
+    req.user = user;
     return next();
 });
 
