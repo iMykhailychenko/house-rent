@@ -18,125 +18,129 @@ describe('Test auth service', () => {
         await deleteTestUser();
     });
 
-    it('Join success', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
-            role: UserRole.USER,
-        });
-        expect(res.statusCode).toEqual(204);
-    });
-
-    it('Join success duplicate', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
-            role: UserRole.USER,
-        });
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.massage.includes('duplicate key value violates unique constraint')).toBeTruthy();
-    });
-
-    it('Invalid firstName', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 1,
-            lastName: 'LastName',
-            email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
+    describe('Join', () => {
+        it('Join success', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+                role: UserRole.USER,
+            });
+            expect(res.statusCode).toEqual(204);
         });
 
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).toStrictEqual({
-            massage: 'firstName must be longer than or equal to 1 and shorter than or equal to 50 characters',
-        });
-    });
-
-    it('Invalid property', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email_email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
+        it('Join success duplicate', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+                role: UserRole.USER,
+            });
+            expect(res.statusCode).toEqual(400);
+            expect(res.body.massage.includes('duplicate key value violates unique constraint')).toBeTruthy();
         });
 
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).toStrictEqual({
-            massage: 'email must be an email',
-        });
-    });
+        it('Invalid firstName', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 1,
+                lastName: 'LastName',
+                email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+            });
 
-    it('Invalid password', async () => {
-        const res = await api.post('/auth/join').send({
-            firstName: 'Name',
-            lastName: 'LastName',
-            email: 'test@mail.ru',
-            password: 'P',
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'firstName must be longer than or equal to 1 and shorter than or equal to 50 characters',
+            });
         });
 
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).toStrictEqual({
-            massage: 'password must be longer than or equal to 6 and shorter than or equal to 30 characters',
-        });
-    });
+        it('Invalid property', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email_email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+            });
 
-    it('Login success', async () => {
-        const res = await api.post('/auth/login').send({
-            email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'email must be an email',
+            });
         });
-        expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('accessToken');
-    });
 
-    it('Login error - wrong password', async () => {
-        const res = await api.post('/auth/login').send({
-            email: 'test@mail.ru',
-            password: 'wrong_password',
-        });
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).not.toHaveProperty('accessToken');
-        expect(res.body).toStrictEqual({
-            massage: 'wrong email or password',
+        it('Invalid password', async () => {
+            const res = await api.post('/auth/join').send({
+                firstName: 'Name',
+                lastName: 'LastName',
+                email: 'test@mail.ru',
+                password: 'P',
+            });
+
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).toStrictEqual({
+                massage: 'password must be longer than or equal to 6 and shorter than or equal to 30 characters',
+            });
         });
     });
 
-    it('Login error - wrong email', async () => {
-        const res = await api.post('/auth/login').send({
-            email: 'wrong_test@mail.ru',
-            password: 'P@ssw0rd!',
+    describe('Login', () => {
+        it('Login success', async () => {
+            const res = await api.post('/auth/login').send({
+                email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+            });
+            expect(res.statusCode).toEqual(201);
+            expect(res.body).toHaveProperty('accessToken');
         });
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).not.toHaveProperty('accessToken');
-        expect(res.body).toStrictEqual({
-            massage: 'wrong email or password',
-        });
-    });
 
-    it('Login error - invalid credentials', async () => {
-        const res = await api.post('/auth/login').send({
-            email: 'test@mail.ru',
-            password: null,
+        it('Login error - wrong password', async () => {
+            const res = await api.post('/auth/login').send({
+                email: 'test@mail.ru',
+                password: 'wrong_password',
+            });
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).not.toHaveProperty('accessToken');
+            expect(res.body).toStrictEqual({
+                massage: 'wrong email or password',
+            });
         });
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).not.toHaveProperty('accessToken');
-        expect(res.body).toStrictEqual({
-            massage: 'password must be longer than or equal to 6 characters',
-        });
-    });
 
-    it('Login error - invalid credentials', async () => {
-        const res = await api.post('/auth/login').send({
-            test_email: 'test@mail.ru',
-            password: 'P@ssw0rd!',
+        it('Login error - wrong email', async () => {
+            const res = await api.post('/auth/login').send({
+                email: 'wrong_test@mail.ru',
+                password: 'P@ssw0rd!',
+            });
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).not.toHaveProperty('accessToken');
+            expect(res.body).toStrictEqual({
+                massage: 'wrong email or password',
+            });
         });
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).not.toHaveProperty('accessToken');
-        expect(res.body).toStrictEqual({
-            massage: 'email must be an email',
+
+        it('Login error - invalid credentials', async () => {
+            const res = await api.post('/auth/login').send({
+                email: 'test@mail.ru',
+                password: null,
+            });
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).not.toHaveProperty('accessToken');
+            expect(res.body).toStrictEqual({
+                massage: 'password must be longer than or equal to 6 characters',
+            });
+        });
+
+        it('Login error - invalid credentials', async () => {
+            const res = await api.post('/auth/login').send({
+                test_email: 'test@mail.ru',
+                password: 'P@ssw0rd!',
+            });
+            expect(res.statusCode).toEqual(400);
+            expect(res.body).not.toHaveProperty('accessToken');
+            expect(res.body).toStrictEqual({
+                massage: 'email must be an email',
+            });
         });
     });
 });

@@ -22,6 +22,11 @@ export class User {
     @IsOptional()
     lastActivity: Date;
 
+    @Column({ type: 'varchar', default: null, nullable: true })
+    @IsString()
+    @IsOptional()
+    avatar: string;
+
     @Column({ type: 'varchar', length: 50 })
     @Length(1, 50)
     firstName: string;
@@ -34,7 +39,7 @@ export class User {
     @IsEmail()
     email: string;
 
-    @Column({ type: 'varchar' })
+    @Column({ type: 'varchar', select: false })
     @IsString()
     password: string;
 

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import { validate } from 'class-validator';
 
 import errorWrapper from '../../utils/errorWrapper';
 import database from '../../database';
 import { Post } from './entity/posts.entity';
-import { User } from '../users/entity/users.entity';
-import { validate } from 'class-validator';
+import { User, UserRole } from '../users/entity/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 
 export const postsListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
@@ -13,14 +13,13 @@ export const postsListController = errorWrapper(async (req: Request, res: Respon
 
     const repository = database.connection.getRepository(Post);
     const [result, total] = await repository.findAndCount({
-        select: ['id', 'creationDate', 'title', 'description'],
         relations: ['user'],
         take: limit,
         skip: limit * (page - 1),
     });
 
     res.json({
-        totalUsers: total,
+        totalPosts: total,
         totalPages: Math.ceil(total / limit) - 1,
         currentPage: +page,
         data: result,
@@ -35,6 +34,7 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
 
     const errors = await validate(post);
     if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
+    if (!req.user.role.includes(UserRole.USER)) throw new ErrorNormalize(400, 'to create a post user role should be "USER"');
 
     const repository = database.connection.getRepository(Post);
     await repository.save(post);

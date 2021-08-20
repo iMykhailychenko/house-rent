@@ -43,7 +43,7 @@ export const loginController = errorWrapper(async (req: Request, res: Response):
     const errors = await validate(loginCredentials);
     if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
 
-    const user = await repository.findOne({ email: req.body.email });
+    const user = await repository.findOne({ email: req.body.email }, { select: ['id', 'password'] });
     if (!user) throw new ErrorNormalize(400, 'wrong email or password');
 
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password);

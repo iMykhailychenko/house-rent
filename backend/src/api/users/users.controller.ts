@@ -10,7 +10,6 @@ export const usersListController = errorWrapper(async (req: Request, res: Respon
 
     const repository = database.connection.getRepository(User);
     const [result, total] = await repository.findAndCount({
-        select: ['id', 'creationDate', 'lastActivity', 'firstName', 'lastName', 'email', 'role'],
         take: limit,
         skip: limit * (page - 1),
     });
