@@ -1,7 +1,7 @@
 import { IConfig } from '../interfaces';
 
-const siteConfig: IConfig = {
+const appConfig: IConfig = {
     cardSize: 'lg',
 };
 
-export default siteConfig;
+export default appConfig;

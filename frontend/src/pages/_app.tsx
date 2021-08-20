@@ -8,7 +8,7 @@ import { Router } from 'next/router';
 import { ReactElement, useEffect } from 'react';
 
 import RootLayout from '../components/layout/root-layout/root-layout';
-import siteConfig from '../config/site.config';
+import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
 import ReduxProvider from '../core/redux-provider';
 import { IConfig, THEME_ENUM } from '../interfaces';
@@ -52,7 +52,7 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
     const config = parseCookie<IConfig>({
         value: appContext?.ctx?.req?.headers?.cookie,
         key: 'house_rent_config',
-        defaultValue: siteConfig,
+        defaultValue: appConfig,
     });
 
     // site theme

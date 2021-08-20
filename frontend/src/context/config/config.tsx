@@ -1,26 +1,26 @@
 import Cookies from 'js-cookie';
 import React, { createContext, ReactElement, useState } from 'react';
 
-import siteConfig from '../../config/site.config';
+import appConfig from '../../config/app.config';
 import { IConfig } from '../../interfaces';
 import { addMonthToDate } from '../../utils/helpers';
 
 export type IConfigValue = [config: IConfig, setConfig: (value: IConfig) => void];
-export const Config = createContext<IConfigValue>([siteConfig, () => undefined]);
+export const Config = createContext<IConfigValue>([appConfig, () => undefined]);
 
 interface IProps {
     value?: IConfig;
     children: JSX.Element | JSX.Element[] | ReactElement;
 }
 
-const ConfigProvider = ({ children, value = siteConfig }: IProps): ReactElement => {
+const ConfigProvider = ({ children, value = appConfig }: IProps): ReactElement => {
     const [config, setConfig] = useState<IConfig>(value);
     const handleConfig = (data: IConfig): void => {
         try {
             Cookies.set('house_rent_config', JSON.stringify(data), { expires: addMonthToDate(1) });
             setConfig(data);
         } catch (error) {
-            setConfig(siteConfig);
+            setConfig(appConfig);
             console.dir(error);
         }
     };
