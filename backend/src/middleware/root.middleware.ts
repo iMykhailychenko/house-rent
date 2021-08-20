@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 const appMiddlewares = async (app: Application): Promise<void> => {
-    app.use(morgan('common'));
+    if (process.env.NODE_ENV !== 'test') app.use(morgan('common'));
     app.use(cors());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());

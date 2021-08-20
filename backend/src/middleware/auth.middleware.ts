@@ -26,7 +26,9 @@ const auth = errorWrapper(async (req: Request & { user: User }, _: Response, nex
     });
     if (!user) throw new ErrorNormalize(401, 'not authorized');
     user.lastActivity = new Date();
-    await repository.save(user);
+    await repository.save(user).catch(error => {
+        throw new ErrorNormalize(400, error);
+    });
 
     req.user = user;
     return next();

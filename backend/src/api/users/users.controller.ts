@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import database from '../../database';
 import { User } from './entity/users.entity';
 import errorWrapper from '../../utils/errorWrapper';
+import ErrorNormalize from '../../utils/errorNormalize';
 
 export const usersListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
@@ -20,4 +21,19 @@ export const usersListController = errorWrapper(async (req: Request, res: Respon
         currentPage: +page,
         data: result,
     });
+});
+
+export const userProfileController = errorWrapper(async (req: Request & { user: User }, res: Response) => {
+    res.json(req.user);
+});
+
+export const singleUserController = errorWrapper(async (req: Request, res: Response) => {
+    const repository = database.connection.getRepository(User);
+    const user = await repository.findOne({ id: +req.params.userId }).catch(error => {
+        throw new ErrorNormalize(404, error);
+    });
+
+    if (!user) throw new ErrorNormalize(404, 'user with this id do not exist');
+
+    res.json(user);
 });

@@ -26,6 +26,17 @@ export const postsListController = errorWrapper(async (req: Request, res: Respon
     });
 });
 
+export const singlePostController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
+    const repository = database.connection.getRepository(Post);
+    const post = await repository.findOne({ id: +req.params.postId }, { relations: ['user'] }).catch(error => {
+        throw new ErrorNormalize(404, error);
+    });
+
+    if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
+
+    res.json(post);
+});
+
 export const createPostController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
     const post = new Post();
     post.title = req.body.title;
@@ -37,7 +48,9 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     if (!req.user.role.includes(UserRole.USER)) throw new ErrorNormalize(400, 'to create a post user role should be "USER"');
 
     const repository = database.connection.getRepository(Post);
-    await repository.save(post);
+    await repository.save(post).catch(error => {
+        throw new ErrorNormalize(400, error);
+    });
 
-    res.status(204).send();
+    res.json(post);
 });

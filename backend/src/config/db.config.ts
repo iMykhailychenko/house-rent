@@ -9,7 +9,7 @@ const dbConfig: PostgresConnectionOptions = {
     port: +process.env.POSTGRES_PORT || 5432,
     username: process.env.POSTGRES_USER || 'house_rent_dev',
     password: process.env.POSTGRES_PASSWORD || 'house_rent_dev',
-    logging: true,
+    logging: process.env.NODE_ENV !== 'test',
     synchronize: true,
     entities: [User, Post],
 };

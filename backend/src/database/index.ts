@@ -14,16 +14,14 @@ class Database {
     }
 
     async connect(): Promise<void> {
-        console.log('Connecting to database ...');
+        if (process.env.NODE_ENV !== 'test') console.log('Connecting to database ...');
         await this.connection.connect();
-        console.log('Connected');
     }
 
     async disconnect(): Promise<void> {
         if (!this.connection) return;
-        console.log('Disconnecting from database ...');
+        if (process.env.NODE_ENV !== 'test') console.log('Disconnecting from database ...');
         await this.connection.close();
-        console.log('Disconnected');
     }
 }
 
