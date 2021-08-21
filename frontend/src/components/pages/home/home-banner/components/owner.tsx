@@ -1,4 +1,5 @@
 ﻿import React, { ReactElement } from 'react';
+
 import { CSSTransition } from 'react-transition-group';
 
 import useTrans from '../../../../../hooks/trans.hook';

@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import React, { ReactElement } from 'react';
+
+import clsx from 'clsx';
 
 import css from './switch-lg.module.scss';
 

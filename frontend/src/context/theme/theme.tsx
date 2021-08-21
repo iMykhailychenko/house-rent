@@ -1,5 +1,6 @@
-import Cookies from 'js-cookie';
 import React, { createContext, ReactElement, useEffect, useState } from 'react';
+
+import Cookies from 'js-cookie';
 
 import { THEME_ENUM } from '../../interfaces';
 import { addMonthToDate } from '../../utils/helpers';

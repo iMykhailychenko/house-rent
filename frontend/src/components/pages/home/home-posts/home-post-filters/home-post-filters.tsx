@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import CardSizeSwitcher from '../../../../common/card-size-switcher/card-size-switcher';
+
 import HomePostChips from './home-post-chips/home-post-chips';
 import css from './home-post-filters.module.scss';
 

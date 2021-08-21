@@ -1,12 +1,14 @@
 import '../styles/root.css';
 
+import { ReactElement, useEffect } from 'react';
+
 import axios from 'axios';
 import type { AppProps } from 'next/app';
 import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
-import { ReactElement, useEffect } from 'react';
 
+import ModalComponent from '../components/common/modal/modal';
 import RootLayout from '../components/layout/root-layout/root-layout';
 import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
@@ -35,6 +37,7 @@ const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppP
             <RootProvider serverProps={{ auth, theme, width, config }}>
                 <RootLayout>
                     <Component {...pageProps} />
+                    <ModalComponent />
                 </RootLayout>
             </RootProvider>
         </ReduxProvider>

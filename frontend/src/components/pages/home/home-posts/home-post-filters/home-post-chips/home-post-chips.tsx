@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+
 import { useDispatch } from 'react-redux';
 
 import useTrans from '../../../../../../hooks/trans.hook';
@@ -12,6 +13,7 @@ import {
 } from '../../../../../../state/entities/filters/filters.reducer';
 import { useAllFiltersSelector } from '../../../../../../state/entities/filters/filters.selector';
 import Chips from '../../../../../common/chips/chips';
+
 import css from './home-post-chips.module.scss';
 
 const HomePostChips = (): ReactElement => {

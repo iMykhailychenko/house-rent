@@ -1,5 +1,6 @@
-import { Apartment, HomeWork, Weekend, Whatshot } from '@material-ui/icons';
 import { ReactElement } from 'react';
+
+import { Apartment, HomeWork, Weekend, Whatshot } from '@material-ui/icons';
 
 const filtersIconsMap: { [key: string]: ReactElement } = {
     hot: <Whatshot />,

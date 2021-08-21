@@ -1,12 +1,14 @@
+import React, { ReactElement } from 'react';
+
 import { Bookmark, Share, Visibility } from '@material-ui/icons';
 import Link from 'next/link';
-import React, { ReactElement } from 'react';
 
 import { SEARCH_FILTERS } from '../../../../interfaces';
 import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import UserCard from '../../user-card/user-card';
 import PostCardChips from '../post-cart-chips/post-cart-chips';
+
 import css from './post-cart-lg.module.scss';
 
 const mockFilters = {

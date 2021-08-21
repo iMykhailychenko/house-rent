@@ -1,12 +1,16 @@
-﻿import clsx from 'clsx';
-import React, { ReactElement, useState } from 'react';
+﻿import React, { ReactElement, useState } from 'react';
+
+import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 
 import Switch from '../../../common/switch/switch';
 import Container from '../../../layout/container/container';
 import Section from '../../../layout/section/section';
+
 import Owner from './components/owner';
+import OwnerSvg from './components/owner-svg';
 import Tenant from './components/tenant';
+import TenantSvg from './components/tenant-svg';
 import css from './home-banner.module.scss';
 
 const USER_ROLE = [
@@ -37,12 +41,12 @@ const HomeBanner = (): ReactElement => {
                         {userRole === 'tenant' ? <Tenant /> : <Owner />}
                     </div>
 
-                    <CSSTransition className={css.img} in={userRole === 'tenant'} timeout={10} appear unmountOnExit>
-                        <img src="/tenant.svg" alt="" draggable="false" />
+                    <CSSTransition in={userRole === 'tenant'} timeout={10} appear unmountOnExit>
+                        <TenantSvg />
                     </CSSTransition>
 
-                    <CSSTransition className={css.img} in={userRole === 'owner'} timeout={10} appear unmountOnExit>
-                        <img src="/owner.svg" alt="" draggable="false" />
+                    <CSSTransition in={userRole === 'owner'} timeout={10} appear unmountOnExit>
+                        <OwnerSvg />
                     </CSSTransition>
                 </div>
             </Container>

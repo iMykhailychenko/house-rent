@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { cityFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
 import { ISearchFilters, SEARCH_FILTERS } from '../../../interfaces';
+
 import filtersInitialState from './filters.initial-state';
 
 const filtersSlice = createSlice({

@@ -1,10 +1,12 @@
+import React, { ReactElement } from 'react';
+
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { ReactElement } from 'react';
 
 import { IUser } from '../../../interfaces';
 import routes from '../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
+
 import css from './user-card.module.scss';
 
 interface IProps {

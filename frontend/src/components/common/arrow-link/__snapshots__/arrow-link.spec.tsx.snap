@@ -2,94 +2,6 @@
 
 exports[`Home page matches snapshot 1`] = `
 <DocumentFragment>
-  <header
-    class="header"
-  >
-    <div
-      class="inner md root"
-    >
-      <div
-        class="item"
-      >
-        <button
-          class="button menu"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-            />
-          </svg>
-        </button>
-        <div
-          class="root"
-        >
-          <button
-            class="button active"
-            type="button"
-          >
-            ua
-          </button>
-          <button
-            class="button"
-            type="button"
-          >
-            ru
-          </button>
-        </div>
-      </div>
-      <div
-        class="item"
-      >
-        <button
-          class="root"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
-            />
-          </svg>
-        </button>
-        <div
-          class="root"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-            />
-          </svg>
-          <button
-            class="button"
-            type="button"
-          >
-            увійти
-          </button>
-          <button
-            class="button"
-            type="button"
-          >
-            зареєструватися
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
   <a
     class="link"
     href="/test"
@@ -108,108 +20,11 @@ exports[`Home page matches snapshot 1`] = `
       />
     </svg>
   </a>
-  <footer
-    class="footer"
-  >
-    <div
-      class="lg root"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
-    </div>
-  </footer>
 </DocumentFragment>
 `;
 
 exports[`Home page matches snapshot with props 1`] = `
 <DocumentFragment>
-  <header
-    class="header"
-  >
-    <div
-      class="inner md root"
-    >
-      <div
-        class="item"
-      >
-        <button
-          class="button menu"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-            />
-          </svg>
-        </button>
-        <div
-          class="root"
-        >
-          <button
-            class="button active"
-            type="button"
-          >
-            ua
-          </button>
-          <button
-            class="button"
-            type="button"
-          >
-            ru
-          </button>
-        </div>
-      </div>
-      <div
-        class="item"
-      >
-        <button
-          class="root"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
-            />
-          </svg>
-        </button>
-        <div
-          class="root"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-            />
-          </svg>
-          <button
-            class="button"
-            type="button"
-          >
-            увійти
-          </button>
-          <button
-            class="button"
-            type="button"
-          >
-            зареєструватися
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
   <a
     class="link test"
     href="/test"
@@ -228,14 +43,5 @@ exports[`Home page matches snapshot with props 1`] = `
       />
     </svg>
   </a>
-  <footer
-    class="footer"
-  >
-    <div
-      class="lg root"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
-    </div>
-  </footer>
 </DocumentFragment>
 `;

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SegmentedControl component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <ul
+      class="list"
+    >
+      <li
+        class="item active"
+        title="test"
+      >
+        <button
+          type="button"
+        >
+          test
+        </button>
+      </li>
+      <li
+        class="item"
+        title="test1"
+      >
+        <button
+          type="button"
+        >
+          test1
+        </button>
+      </li>
+      <li
+        class="item"
+        title="test2"
+      >
+        <button
+          type="button"
+        >
+          test2
+        </button>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

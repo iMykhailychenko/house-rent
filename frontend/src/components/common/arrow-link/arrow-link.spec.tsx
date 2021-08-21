@@ -1,4 +1,5 @@
-import { render } from '../../../tests/tests.utils';
+import { render } from '@testing-library/react';
+
 import ArrowLink from './arrow-link';
 
 describe('Home page', () => {

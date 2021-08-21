@@ -1,0 +1,56 @@
+.root {
+    width: 100%;
+    margin: 1rem 0;
+    color: inherit;
+
+    .label {
+        display: block;
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        color: inherit;
+    }
+
+    .inner {
+        width: 100%;
+        position: relative;
+        color: inherit;
+
+        .input {
+            display: block;
+            height: 4.1rem;
+            padding: 0 1.5rem;
+            width: 100%;
+            background: transparent;
+            border: 0.1rem solid var(--gray-5);
+            border-radius: 1.9rem;
+            color: inherit;
+
+            &::placeholder {
+                color: var(--gray-5);
+            }
+        }
+
+        .error {
+            color: var(--error);
+            border-color: var(--error);
+
+            &::placeholder {
+                color: var(--error);
+                opacity: 0.5;
+            }
+        }
+
+        .password {
+            padding-right: 6rem;
+        }
+
+        .button {
+            position: absolute;
+            top: 0.3rem;
+            right: 0.3rem;
+            color: inherit;
+            z-index: 10;
+        }
+    }
+}

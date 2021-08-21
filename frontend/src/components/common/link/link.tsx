@@ -1,6 +1,7 @@
+import React, { ReactElement } from 'react';
+
 import clsx from 'clsx';
 import NextLink from 'next/link';
-import React, { ReactElement } from 'react';
 
 import css from './link.module.scss';
 

@@ -1,5 +1,6 @@
-import { AnyAction, configureStore, Store } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
+
+import { AnyAction, configureStore, Store } from '@reduxjs/toolkit';
 
 import rootInitialState from './initial-state';
 import { IState } from './interfaces';

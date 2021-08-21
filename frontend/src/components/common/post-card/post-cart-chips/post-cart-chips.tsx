@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { cityFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../../config/filters.config';
 import { SEARCH_FILTERS } from '../../../../interfaces';
 import Chips from '../../chips/chips';
+
 import css from './post-cart-chips.module.scss';
 
 type ActiveChips = { [key in SEARCH_FILTERS]: string[] };

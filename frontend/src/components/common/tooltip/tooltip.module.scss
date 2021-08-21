@@ -1,0 +1,88 @@
+.wrp {
+    position: relative;
+    z-index: 2;
+
+    &:focus,
+    &:hover {
+        z-index: 10;
+
+        :global(.tooltip) {
+            opacity: 1;
+            display: block;
+            visibility: visible;
+            z-index: 10;
+        }
+    }
+}
+
+.tooltip {
+    position: absolute;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--gray-10);
+    color: var(--white);
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.2rem;
+    font-weight: 400;
+    pointer-events: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        background: var(--gray-10);
+        z-index: 1;
+    }
+}
+
+.top_left {
+    top: -1rem;
+    right: 0;
+    transform: translate(0%, -100%);
+
+    &::before {
+        bottom: -0.5rem;
+        right: 1.5rem;
+        transform: translate(-50%, 0) rotate(45deg);
+    }
+}
+
+.top_right {
+    top: -1rem;
+    left: 0;
+    transform: translate(0%, -100%);
+
+    &::before {
+        bottom: -0.5rem;
+        left: 1.5rem;
+        transform: translate(-50%, 0) rotate(45deg);
+    }
+}
+
+.bottom_left {
+    bottom: -1rem;
+    right: 0;
+    transform: translate(0%, 100%);
+
+    &::before {
+        top: -0.5rem;
+        right: 1.5rem;
+        transform: translate(-50%, 0) rotate(45deg);
+    }
+}
+
+.bottom_right {
+    bottom: -1rem;
+    left: 0;
+    transform: translate(0%, 100%);
+
+    &::before {
+        top: -0.5rem;
+        left: 1.5rem;
+        transform: translate(-50%, 0) rotate(45deg);
+    }
+}

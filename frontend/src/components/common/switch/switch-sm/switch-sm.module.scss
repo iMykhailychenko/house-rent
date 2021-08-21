@@ -1,0 +1,29 @@
+.root {
+    position: relative;
+    width: 5rem;
+    height: 2.5rem;
+    background: var(--gray-2);
+    border-radius: 3rem;
+
+    &:hover {
+        .indicator {
+            box-shadow: var(--box-shadow-1);
+        }
+    }
+}
+
+.right .indicator {
+    transform: translateX(2.5rem);
+}
+
+.indicator {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    display: block;
+    height: 1.9rem;
+    width: 1.9rem;
+    border-radius: 3rem;
+    background: var(--primary);
+    transition: 0.3s ease-in-out;
+}

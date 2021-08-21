@@ -4,7 +4,7 @@ import AppFooter from '../footer/footer';
 import AppHeader from '../header/header';
 
 interface IProps {
-    children: ReactElement;
+    children: ReactElement[] | ReactElement;
 }
 
 const RootLayout = ({ children }: IProps): ReactElement => {

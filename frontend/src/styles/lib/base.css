@@ -124,3 +124,5 @@ h6 {
     min-height: 1em;
     min-width: 1em;
 }
+
+:-webkit-autofill { color: var(--black) !important; }

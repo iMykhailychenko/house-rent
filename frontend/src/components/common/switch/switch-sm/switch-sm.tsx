@@ -1,19 +1,23 @@
 import React, { ReactElement } from 'react';
 
+import clsx from 'clsx';
+
+import css from './switch-sm.module.scss';
+
 interface IProps {
     value: boolean;
     onChange?: (value: boolean) => void;
     className?: string;
-    width?: number;
 }
 
-const SwitchSm = ({ value, onChange }: IProps): ReactElement => {
-    console.log({ value, onChange });
+const SwitchSm = ({ value, onChange, className }: IProps): ReactElement => {
+    const handleClick = (): void => {
+        if (onChange) onChange(!value);
+    };
     return (
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis
-            odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
-        </div>
+        <button className={clsx(css.root, !value && css.right, className)} type="button" onClick={handleClick}>
+            <span className={css.indicator} />
+        </button>
     );
 };
 

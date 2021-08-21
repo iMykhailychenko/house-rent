@@ -1,4 +1,5 @@
 import { ISearchFilters } from '../interfaces';
+
 import { IAuthInitialState } from './entities/auth/auth.interface';
 
 export type ThunkStatuses = 'idle' | 'loading' | 'success' | 'error';

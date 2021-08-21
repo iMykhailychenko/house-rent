@@ -1,6 +1,8 @@
 {
   "plugins": [
-    "simple-import-sort",
+    "import",
+    "@typescript-eslint",
+    "eslint-plugin-jest",
     "react-hooks"
   ],
   "root": true,
@@ -23,13 +25,13 @@
     "node": true
   },
   "extends": [
-    "prettier",
     "eslint:recommended",
+    "prettier",
+    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:prettier/recommended"
+    "plugin:jsx-a11y/recommended"
   ],
   "rules": {
     "prettier/prettier": [
@@ -39,15 +41,33 @@
         "usePrettierrc": true
       }
     ],
-    "no-console": "off",
+    "import/first": "warn",
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": false },
+        "groups": ["external", "builtin", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before",
+            "newlines-between": "never"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always"
+      }
+    ],
+    "import/newline-after-import": "warn",
+    "import/no-duplicates": "warn",
+    "import/no-mutable-exports": "warn",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-underscore-dangle": "off",
     "@typescript-eslint/no-var-requires": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "simple-import-sort/imports": "error",
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",

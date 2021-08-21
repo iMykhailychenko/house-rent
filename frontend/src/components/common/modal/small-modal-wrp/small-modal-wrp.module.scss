@@ -1,0 +1,27 @@
+@import '../../../../styles/helpers/mixin.scss';
+
+.root {
+    position: relative;
+    width: 96%;
+    max-width: 40rem;
+    padding: 6rem 2rem 2rem;
+    border-radius: 1rem;
+    background: var(--white);
+
+    .btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        padding: 0 1.1rem;
+    }
+
+    .title {
+        position: absolute;
+        top: 1.7rem;
+        left: 2.2rem;
+        width: calc(100% - 10rem);
+        font-size: 2rem;
+        font-weight: 400;
+        @include cutString;
+    }
+}

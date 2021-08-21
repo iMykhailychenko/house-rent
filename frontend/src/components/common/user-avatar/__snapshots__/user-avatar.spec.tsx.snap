@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAvatar component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="img name"
+    style="height: 4rem; width: 4rem;"
+  >
+    fl
+  </div>
+</DocumentFragment>
+`;

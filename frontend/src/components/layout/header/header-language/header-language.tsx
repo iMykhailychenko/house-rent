@@ -1,8 +1,10 @@
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+
 import { LANGUAGE_ENUM } from '../../../../interfaces';
+
 import css from './header-language.module.scss';
 
 const locales: LANGUAGE_ENUM[] = [LANGUAGE_ENUM.UA, LANGUAGE_ENUM.RU];

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { IConfig, THEME_ENUM } from '../interfaces';
 import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+
 import AuthProvider from './auth/auth.context';
 import ConfigProvider from './config/config';
 import MediaProvider from './media/media';

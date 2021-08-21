@@ -5,7 +5,7 @@
     justify-content: center;
     height: 3.5rem;
     padding: 0 1.8rem;
-    background: var(--white);
+    background: transparent;
     border-radius: 3rem;
     line-height: 1;
     color: inherit;
@@ -14,7 +14,7 @@
 
     &:hover,
     &:focus {
-        opacity: 0.6;
+        background: var(--gray-2);
     }
 }
 
@@ -31,11 +31,23 @@
 .primary {
     background: var(--primary);
     color: var(--true-white);
+
+    &:hover,
+    &:focus {
+        background: var(--primary);
+        opacity: 0.5;
+    }
 }
 
 .secondary {
     background: var(--gray-3);
     color: var(--gray-10);
+
+    &:hover,
+    &:focus {
+        background: var(--gray-4);
+        opacity: 0.5;
+    }
 }
 
 .children {

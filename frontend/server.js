@@ -1,6 +1,7 @@
+const next = require('next');
+
 const { createServer } = require('http');
 const { parse } = require('url');
-const next = require('next');
 
 const PORT = process.env.FRONTEND_PORT || 4000;
 const HOST = process.env.FRONTEND_HOST || '0.0.0.0';

@@ -1,7 +1,7 @@
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 
-import RootLayout from '../components/layout/root-layout/root-layout';
+import { render, RenderOptions, RenderResult } from '@testing-library/react';
+
 import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
 import ReduxProvider from '../core/redux-provider';
@@ -31,7 +31,7 @@ const customRender = (ui: ReactElement, props?: ProvidersProps | null, options?:
                     config: props?.config || appConfig,
                 }}
             >
-                <RootLayout>{children}</RootLayout>
+                {children}
             </RootProvider>
         </ReduxProvider>
     );

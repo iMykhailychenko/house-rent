@@ -14,7 +14,7 @@ interface IProps {
 
 const Switch = ({ value, onChange, labels, size = 'sm', className, width }: IProps): ReactElement => {
     return size === 'sm' ? (
-        <SwitchSm value={value} onChange={onChange} className={className} width={width} />
+        <SwitchSm value={value} onChange={onChange} className={className} />
     ) : (
         <SwitchLg value={value} onChange={onChange} labels={labels} className={className} width={width} />
     );

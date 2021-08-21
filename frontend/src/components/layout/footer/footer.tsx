@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import Container from '../container/container';
+
 import css from './footer.module.scss';
 
 const AppFooter = (): ReactElement => {

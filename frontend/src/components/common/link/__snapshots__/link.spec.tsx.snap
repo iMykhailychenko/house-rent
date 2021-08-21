@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link component matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="link"
+    href="/test"
+  >
+    test
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Link component matches snapshot props 1`] = `
+<DocumentFragment>
+  <a
+    class="test link primary"
+    href="/test"
+    title="test"
+  >
+    test
+  </a>
+</DocumentFragment>
+`;

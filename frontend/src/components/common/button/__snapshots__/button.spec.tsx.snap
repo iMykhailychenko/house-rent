@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="button"
+    type="button"
+  >
+    <span
+      class="children"
+    >
+      test button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button matches snapshot props 1`] = `
+<DocumentFragment>
+  <button
+    class="button test primary"
+    type="submit"
+  >
+    <span
+      class="children"
+    >
+      test button
+    </span>
+  </button>
+</DocumentFragment>
+`;

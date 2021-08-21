@@ -1,8 +1,10 @@
-import { Apps, ViewHeadline } from '@material-ui/icons';
-import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 
+import { Apps, ViewHeadline } from '@material-ui/icons';
+import clsx from 'clsx';
+
 import useConfig from '../../../hooks/config.hook';
+
 import css from './card-size-switcher.module.scss';
 
 const CardSizeSwitcher = (): ReactElement => {
@@ -18,11 +20,21 @@ const CardSizeSwitcher = (): ReactElement => {
 
     return (
         <div className={css.flex}>
-            <button className={clsx(css.button, config.cardSize === 'lg' && css.active)} onClick={handleLargeCard} type="button">
+            <button
+                className={clsx(css.button, config.cardSize === 'lg' && css.active)}
+                onClick={handleLargeCard}
+                title="large cards"
+                type="button"
+            >
                 <ViewHeadline />
             </button>
             <span className={css.separator} />
-            <button className={clsx(css.button, config.cardSize === 'sm' && css.active)} onClick={handleSmallCard} type="button">
+            <button
+                className={clsx(css.button, config.cardSize === 'sm' && css.active)}
+                onClick={handleSmallCard}
+                title="small cards"
+                type="button"
+            >
                 <Apps />
             </button>
         </div>

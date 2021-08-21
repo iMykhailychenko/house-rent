@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch component Switch large matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="root right test"
+    type="button"
+  >
+    <span
+      class=""
+      style="min-width: 10rem;"
+    >
+      test-left
+    </span>
+    <span
+      class="active"
+      style="min-width: 10rem;"
+    >
+      test-right
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Switch component Switch small matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="root right test"
+    type="button"
+  >
+    <span
+      class="indicator"
+    />
+  </button>
+</DocumentFragment>
+`;

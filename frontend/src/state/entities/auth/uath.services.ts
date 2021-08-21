@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import endpoints from '../../../config/endpoints';
 import authInterceptor from '../../../interceptors/interceptors';
+
 import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
 
 const authServices = {

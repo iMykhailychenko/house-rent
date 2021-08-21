@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import React, { ReactElement } from 'react';
+
+import clsx from 'clsx';
 
 import css from './segmented-control.module.scss';
 
@@ -15,7 +16,7 @@ const SegmentedControlItem = ({ active, value, onChange }: SegmentedControlItemP
     };
 
     return (
-        <li className={clsx(css.item, active === value.id && css.active)}>
+        <li className={clsx(css.item, active === value.id && css.active)} title={value.name}>
             <button onClick={handleClick} type="button">
                 {value.name}
             </button>

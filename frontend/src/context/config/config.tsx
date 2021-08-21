@@ -1,5 +1,6 @@
-import Cookies from 'js-cookie';
 import React, { createContext, ReactElement, useState } from 'react';
+
+import Cookies from 'js-cookie';
 
 import appConfig from '../../config/app.config';
 import { IConfig } from '../../interfaces';

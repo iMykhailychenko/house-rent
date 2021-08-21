@@ -1,8 +1,10 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+
 import useTrans from '../../hooks/trans.hook';
+
 import css from './meta.module.scss';
 
 interface IProps {

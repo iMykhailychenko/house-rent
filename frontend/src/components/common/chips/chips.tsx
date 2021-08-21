@@ -1,9 +1,11 @@
+import React, { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
+
 import clsx from 'clsx';
-import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
 
 import useTrans from '../../../hooks/trans.hook';
 import { IChips, IChipsMap } from '../../../interfaces';
 import filtersIconsMap from '../../../map/filters-icons.map';
+
 import css from './chips.module.scss';
 
 interface IChipsItemProps {
@@ -23,7 +25,13 @@ const ChipsItem = ({ chip, onChange }: IChipsItemProps): ReactElement => {
     }, [ref, chip.hover]);
 
     return (
-        <button ref={ref} type="button" onClick={handleClick} className={clsx(css.chip, chip.active && css.active)}>
+        <button
+            ref={ref}
+            type="button"
+            onClick={handleClick}
+            className={clsx(css.chip, chip.active && css.active)}
+            title={trans(chip.name)}
+        >
             {chip.icon && filtersIconsMap[chip.icon]}
             <span className={css.text}>{trans(chip.name)}</span>
         </button>
@@ -36,14 +44,18 @@ interface IProps {
 }
 
 const Chips = ({ chips, onChange }: IProps): ReactElement => {
-    const handleChange = (value: IChips): void =>
-        onChange &&
-        onChange(
-            Object.values({ ...chips, [value.name]: value }).reduce<string[]>((acc, item) => {
-                if (item.active) acc.push(item.name);
-                return acc;
-            }, []),
-        );
+    const handleChange = useCallback(
+        (value: IChips): void => {
+            onChange &&
+                onChange(
+                    Object.values({ ...chips, [value.name]: value }).reduce<string[]>((acc, item) => {
+                        if (item.active) acc.push(item.name);
+                        return acc;
+                    }, []),
+                );
+        },
+        [chips, onChange],
+    );
 
     const list = useMemo(
         () => (onChange ? Object.values(chips) : Object.values(chips).filter(item => item.active)),
