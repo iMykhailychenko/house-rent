@@ -1,11 +1,16 @@
 import React, { ReactElement } from 'react';
 
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import useTrans from '../../../../hooks/trans.hook';
+import { useAuthSelector } from '../../../../state/entities/auth/auth.selector';
+import { authLoginThunk } from '../../../../state/entities/auth/auth.thunk';
+import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import Input from '../../input/input';
+import Link from '../../link/link';
 import { modal } from '../../modal/modal';
 import SmallModalWrp from '../../modal/small-modal-wrp/small-modal-wrp';
 import JoinForm from '../join-form/join-form';
@@ -20,6 +25,8 @@ const LoginSchema = Yup.object().shape({
 
 const LoginForm = (): ReactElement => {
     const trans = useTrans();
+    const dispatch = useDispatch();
+    const authState = useAuthSelector();
 
     const formik = useFormik({
         initialValues: {
@@ -28,7 +35,7 @@ const LoginForm = (): ReactElement => {
         },
         validationSchema: LoginSchema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            dispatch(authLoginThunk(values));
         },
     });
 
@@ -61,11 +68,15 @@ const LoginForm = (): ReactElement => {
                 label="password"
             />
 
+            <Link primary className={css.reset} href={routes.auth.reset}>
+                {trans('Забули пароль?')}
+            </Link>
+
             <div className={css.flex}>
                 <Button className={css.btn} secondary onClick={join}>
                     {trans('Зареєструватися')}
                 </Button>
-                <Button className={css.btn} type="submit" primary>
+                <Button loading={authState.loginStatus === 'loading'} className={css.btn} type="submit" primary>
                     {trans('Увійти')}
                 </Button>
             </div>

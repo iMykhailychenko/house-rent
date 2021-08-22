@@ -3,7 +3,8 @@ const routes = {
     auth: {
         login: '/auth/login',
         join: '/auth/join',
-        success: '/auth/join/success',
+        success: '/auth/success',
+        reset: '/auth/reset',
     },
     posts: {
         search: '/posts',

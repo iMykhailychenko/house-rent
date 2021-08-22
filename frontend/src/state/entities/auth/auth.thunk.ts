@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 import { modal } from '../../../components/common/modal/modal';
+import { addMonthToDate } from '../../../utils/helpers';
 import routes from '../../../utils/routes';
 
 import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
@@ -10,6 +12,8 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>('AU
     try {
         const { data, status } = await authServices.login(payload);
         if (status < 200 || status >= 300) throw new Error();
+
+        Cookies.set('house_rent_auth', JSON.stringify(data), { expires: addMonthToDate(1) });
         modal.close();
         return data;
     } catch (error) {

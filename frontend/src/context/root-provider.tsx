@@ -9,7 +9,7 @@ import MediaProvider from './media/media';
 import ThemeProvider from './theme/theme';
 
 interface IProps {
-    children: ReactElement;
+    children: ReactElement[] | ReactElement;
     serverProps: {
         auth: IAuthInitialState;
         theme: THEME_ENUM;

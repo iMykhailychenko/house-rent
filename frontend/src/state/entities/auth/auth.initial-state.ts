@@ -2,7 +2,8 @@ import { IAuthInitialState } from './auth.interface';
 
 const authInitialState: IAuthInitialState = {
     accessToken: null,
-    status: 'idle',
+    loginStatus: 'idle',
+    joinStatus: 'idle',
 };
 
 export default authInitialState;

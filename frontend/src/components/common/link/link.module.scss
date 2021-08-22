@@ -39,7 +39,8 @@
     }
 
     &.primary {
-        color: var(--true-white);
+        font-weight: 700;
+        color: var(--primary);
     }
 
     &.secondary {

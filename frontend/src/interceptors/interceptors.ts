@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const authInterceptor = axios.create();
+
 authInterceptor.interceptors.request.use(
     config => config,
     error => {

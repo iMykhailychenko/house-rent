@@ -8,8 +8,7 @@ import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
 
-import ModalComponent from '../components/common/modal/modal';
-import RootLayout from '../components/layout/root-layout/root-layout';
+import ModalComponent, { modal } from '../components/common/modal/modal';
 import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
 import ReduxProvider from '../core/redux-provider';
@@ -32,13 +31,22 @@ const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppP
         return () => window.removeEventListener('resize', resize);
     }, []);
 
+    useEffect(() => {
+        const handleClear = () => {
+            modal.close();
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        };
+        Router.events.on('routeChangeStart', handleClear);
+        return () => {
+            Router.events.off('routeChangeStart', handleClear);
+        };
+    }, []);
+
     return (
         <ReduxProvider>
             <RootProvider serverProps={{ auth, theme, width, config }}>
-                <RootLayout>
-                    <Component {...pageProps} />
-                    <ModalComponent />
-                </RootLayout>
+                <Component {...pageProps} />
+                <ModalComponent />
             </RootProvider>
         </ReduxProvider>
     );

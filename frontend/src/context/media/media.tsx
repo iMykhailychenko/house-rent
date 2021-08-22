@@ -4,7 +4,7 @@ export const Media = createContext<[media: number, setMedia: ((value: number) =>
 
 interface IProps {
     width?: number;
-    children: ReactElement;
+    children: ReactElement[] | ReactElement;
 }
 
 const MediaProvider = ({ children, width = 768 }: IProps): ReactElement => {

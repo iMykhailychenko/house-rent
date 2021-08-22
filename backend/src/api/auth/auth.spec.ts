@@ -92,12 +92,27 @@ describe('Test auth service', () => {
             expect(res.body).toHaveProperty('accessToken');
         });
 
+        it('Login - already authorized', async () => {
+            const res = await api
+                .post('/auth/login')
+                .send({
+                    email: 'test@mail.ru',
+                    password: 'P@ssw0rd!',
+                })
+                .set('Authorization', 'test');
+            expect(res.statusCode).toEqual(401);
+            expect(res.body).not.toHaveProperty('accessToken');
+            expect(res.body).toStrictEqual({
+                massage: 'user already authorized',
+            });
+        });
+
         it('Login error - wrong password', async () => {
             const res = await api.post('/auth/login').send({
                 email: 'test@mail.ru',
-                password: 'wrong_password',
+                password: 'P@ssw0rd!',
             });
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
             expect(res.body).toStrictEqual({
                 massage: 'wrong email or password',

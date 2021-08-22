@@ -33,8 +33,10 @@ export const joinController = errorWrapper(async (req: Request, res: Response): 
 });
 
 export const loginController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
-    const repository = database.connection.getRepository(User);
+    const token = req.get('Authorization');
+    if (token) throw new ErrorNormalize(400, 'user already authorized');
 
+    const repository = database.connection.getRepository(User);
     const loginCredentials = new AuthLogin();
     loginCredentials.email = req.body.email;
     loginCredentials.password = req.body.password;
