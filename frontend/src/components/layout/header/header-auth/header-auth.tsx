@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { Person } from '@material-ui/icons';
 
 import useTrans from '../../../../hooks/trans.hook';
+import JoinForm from '../../../common/auth/join-form/join-form';
 import LoginForm from '../../../common/auth/login-form/login-form';
 import { modal } from '../../../common/modal/modal';
 import SmallModalWrp from '../../../common/modal/small-modal-wrp/small-modal-wrp';
@@ -19,13 +20,20 @@ const HeaderAuth = (): ReactElement => {
             </SmallModalWrp>,
         );
 
+    const join = (): void =>
+        modal.open(
+            <SmallModalWrp title="Зареєструватися">
+                <JoinForm />
+            </SmallModalWrp>,
+        );
+
     return (
         <div className={css.root}>
             <Person />
             <button className={css.button} type="button" onClick={login}>
                 {trans('login')}
             </button>
-            <button className={css.button} type="button">
+            <button className={css.button} type="button" onClick={join}>
                 {trans('join')}
             </button>
         </div>

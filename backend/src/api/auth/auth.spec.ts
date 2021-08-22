@@ -2,7 +2,6 @@ import { Application } from 'express';
 import request, { SuperTest, Test } from 'supertest';
 
 import houseRentApp from '../../app';
-import { UserRole } from '../users/entity/users.entity';
 import { deleteTestUser } from '../../tests/utils';
 
 describe('Test auth service', () => {
@@ -25,7 +24,6 @@ describe('Test auth service', () => {
                 lastName: 'LastName',
                 email: 'test@mail.ru',
                 password: 'P@ssw0rd!',
-                role: UserRole.USER,
             });
             expect(res.statusCode).toEqual(204);
         });
@@ -36,7 +34,6 @@ describe('Test auth service', () => {
                 lastName: 'LastName',
                 email: 'test@mail.ru',
                 password: 'P@ssw0rd!',
-                role: UserRole.USER,
             });
             expect(res.statusCode).toEqual(400);
             expect(res.body.massage.includes('duplicate key value violates unique constraint')).toBeTruthy();

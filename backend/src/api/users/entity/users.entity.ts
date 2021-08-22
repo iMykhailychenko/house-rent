@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { IsDate, IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { IsBoolean, IsDate, IsEmail, IsOptional, IsString, Length } from 'class-validator';
 import { Post } from '../../posts/entity/posts.entity';
 
 export enum UserRole {
@@ -22,7 +22,7 @@ export class User {
     @IsOptional()
     lastActivity: Date;
 
-    @Column({ type: 'varchar', default: null, nullable: true })
+    @Column({ type: 'varchar', nullable: true })
     @IsString()
     @IsOptional()
     avatar: string;
@@ -34,6 +34,11 @@ export class User {
     @Column({ type: 'varchar', length: 100 })
     @Length(1, 100)
     lastName: string;
+
+    @Column({ type: 'boolean', default: false })
+    @IsBoolean()
+    @IsOptional()
+    isEmailVerified: boolean;
 
     @Column({ type: 'varchar', length: 50, unique: true })
     @IsEmail()
@@ -48,7 +53,8 @@ export class User {
 
     @Column({
         type: 'simple-array',
-        default: [UserRole.USER],
+        nullable: true
     })
+    @IsOptional()
     role: UserRole[];
 }

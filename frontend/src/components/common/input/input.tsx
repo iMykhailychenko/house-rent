@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement, useState } from 'react';
 
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { HelpOutline, Visibility, VisibilityOff } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import useTrans from '../../../hooks/trans.hook';
@@ -26,6 +26,7 @@ interface IProps {
     min?: string;
     max?: string;
     label?: string;
+    info?: ReactElement | string;
 }
 
 const Input = ({
@@ -45,6 +46,7 @@ const Input = ({
     min,
     max,
     label,
+    info,
 }: IProps): ReactElement => {
     const trans = useTrans();
     const [show, setShow] = useState<string>(type);
@@ -57,7 +59,12 @@ const Input = ({
         <div className={css.root}>
             {label && (
                 <label className={css.label} htmlFor={id}>
-                    {label}
+                    <span>{label}</span>
+                    {info && (
+                        <Tooltip content={info}>
+                            <HelpOutline />
+                        </Tooltip>
+                    )}
                 </label>
             )}
             <div className={css.inner}>

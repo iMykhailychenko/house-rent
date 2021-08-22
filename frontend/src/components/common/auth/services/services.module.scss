@@ -1,0 +1,24 @@
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socials {
+    height: 5rem;
+    width: 5rem;
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.facebook {
+    background: #385c8e;
+    fill: var(--black);
+}
+
+.google {
+    background: var(--gray-3);
+    fill: var(--black);
+}

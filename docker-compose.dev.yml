@@ -2,24 +2,55 @@ version: '3.9'
 
 services:
   backend:
-    command: yarn run dev
+    build: ./backend
+    restart: unless-stopped
+    command: yarn run start
+    container_name: backend
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     env_file:
       - ./.env.dev
     volumes:
       - ./backend/src:/app/backend/src
+    depends_on:
+      - db_dev
 
   frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
     command: yarn run dev
+    stdin_open: true
+    tty: true
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     env_file:
       - ./.env.dev
     volumes:
       - ./frontend/src:/app/frontend/src
 
-  db:
+  pgadmin_dev:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
     env_file:
       - ./.env.dev
     volumes:
-      - postgres_test_data:/var/lib/postgresql/data
+      - pgadmin_dev:/root/.pgadmin
+
+  db_dev:
+    container_name: db_dev
+    image: postgres:13.4-alpine
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    env_file:
+      - ./.env.dev
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
 
 volumes:
-  postgres_test_data:
+  postgres_dev:
+  pgadmin_dev:

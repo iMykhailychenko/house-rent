@@ -7,7 +7,7 @@ import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
 
 const authServices = {
     login: (body: ILoginPayload): Promise<AxiosResponse<IAuthResponse>> => authInterceptor.post(endpoints.auth.login, body),
-    join: (body: IJoinPayload): Promise<AxiosResponse<IAuthResponse>> => authInterceptor.post(endpoints.auth.join, body),
+    join: (body: IJoinPayload): Promise<AxiosResponse<void>> => authInterceptor.post(endpoints.auth.join, body),
 };
 
 export default authServices;

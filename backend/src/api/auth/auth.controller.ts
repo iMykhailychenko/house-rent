@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validate } from 'class-validator';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorWrapper from '../../utils/errorWrapper';
@@ -18,7 +18,6 @@ export const joinController = errorWrapper(async (req: Request, res: Response): 
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
     user.email = req.body.email;
-    user.role = req.body.role;
     user.password = await bcrypt.hash(req.body.password, authConfig.saltRounds);
 
     const errors = await validate(user);

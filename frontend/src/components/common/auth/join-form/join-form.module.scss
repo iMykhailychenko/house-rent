@@ -1,0 +1,46 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    margin: 2rem 0.5rem 0;
+}
+
+.or {
+    margin: 3rem 0 1rem;
+    text-align: center;
+}
+
+.list {
+    min-width: 20rem;
+    margin: 0.5rem 0 1rem;
+    font-size: 1.4rem;
+}
+
+.red {
+    position: relative;
+    padding: 0 2rem 0 1rem;
+    color: var(--gray-2);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 60%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 0.6rem;
+        width: 0.6rem;
+        background: var(--error);
+        border-radius: 0.5rem;
+    }
+}
+
+.green {
+    color: var(--white);
+
+    &::before {
+        background: var(--success);
+    }
+}

@@ -21,8 +21,8 @@
 .loading {
     cursor: unset;
     pointer-events: none;
+    opacity: 0.9;
 
-    opacity: 0.5;
     .children {
         opacity: 0;
     }
