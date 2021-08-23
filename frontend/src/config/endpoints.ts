@@ -1,50 +1,39 @@
 const endpointsMap = {
-    production: {
-        ssr: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
+    development() {
+        return {
+            ssr: {
+                auth: {
+                    join: 'http://backend:8000/auth/join',
+                    login: 'http://backend:8000/auth/login',
+                },
+                profile: {
+                    getUserInfo: 'http://backend:8000/users/profile',
+                },
             },
-        },
-        browser: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
+            browser: {
+                auth: {
+                    join: 'http://localhost:8000/auth/join',
+                    login: 'http://localhost:8000/auth/login',
+                },
+                profile: {
+                    getUserInfo: 'http://localhost:8000/users/profile',
+                },
             },
-        },
+        };
     },
 
-    development: {
-        ssr: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
-            },
-        },
-        browser: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
-            },
-        },
+    production() {
+        return this.development();
     },
 
-    test: {
-        ssr: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
-            },
-        },
-        browser: {
-            auth: {
-                join: 'http://localhost:8000/auth/join',
-                login: 'http://localhost:8000/auth/login',
-            },
-        },
+    test() {
+        return this.development();
     },
 };
 
-const endpoints = process.env.browser ? endpointsMap[process.env.NODE_ENV].browser : endpointsMap[process.env.NODE_ENV].ssr;
+endpointsMap.test = endpointsMap.development;
+
+const endpoints =
+    typeof window !== 'undefined' ? endpointsMap[process.env.NODE_ENV]().browser : endpointsMap[process.env.NODE_ENV]().ssr;
 
 export default endpoints;

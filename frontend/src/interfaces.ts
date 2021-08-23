@@ -35,7 +35,7 @@ export type ISearchFilters = {
     [key in SEARCH_FILTERS]: IChipsMap;
 };
 
-export interface IUser {
-    firstName: string;
-    lastName: string;
+export enum UserRole {
+    USER = 'user',
+    REALTOR = 'realtor',
 }

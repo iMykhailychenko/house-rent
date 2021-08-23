@@ -1,12 +1,19 @@
 import { render } from '@testing-library/react';
 
-import { IUser } from '../../../interfaces';
+import { IUser } from '../../../state/entities/profile/profile.interface';
 
 import UserCard from './user-card';
 
 const mockUser: IUser = {
+    id: 1,
+    creationDate: '1-1-1991',
+    lastActivity: '1-1-1991',
+    avatar: null,
+    isEmailVerified: false,
+    email: 'eee@ee.com',
     firstName: 'firstName',
     lastName: 'lastName',
+    role: null,
 };
 
 describe('UserCard component', () => {

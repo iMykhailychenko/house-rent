@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import css from './user-avatar.module.scss';
 
 interface IProps {
-    src?: string;
+    src?: string | null;
     firstName?: string;
     lastName?: string;
     className?: string;

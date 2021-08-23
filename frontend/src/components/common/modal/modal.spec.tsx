@@ -39,10 +39,9 @@ describe('Modal component', () => {
         const { getByText, queryByText, container } = render(<ModalComponent />);
         modal.open(<p data-testid="test">open modal</p>);
         expect(getByText('open modal')).toBeInTheDocument();
-
         expect(container.querySelector('#backdrop')).toBeInTheDocument();
 
-        fireEvent.click(container.querySelector('#backdrop') || new Element());
+        fireEvent.touchStart(container.querySelector('#backdrop') || new Element());
         expect(queryByText('open modal')).not.toBeInTheDocument();
     });
 
@@ -53,7 +52,7 @@ describe('Modal component', () => {
 
         expect(container.querySelector('#scroll')).toBeInTheDocument();
 
-        fireEvent.click(container.querySelector('#scroll') || new Element());
+        fireEvent.touchStart(container.querySelector('#scroll') || new Element());
         expect(queryByText('open modal')).not.toBeInTheDocument();
     });
 });

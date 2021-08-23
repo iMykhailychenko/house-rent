@@ -53,7 +53,7 @@ export class User {
 
     @Column({
         type: 'simple-array',
-        nullable: true
+        nullable: true,
     })
     @IsOptional()
     role: UserRole[];

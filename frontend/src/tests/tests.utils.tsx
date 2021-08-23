@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
 
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
 import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
-import ReduxProvider from '../core/redux-provider';
 import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
 import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { initializeStore } from '../state/store';
 
 interface IProps {
     children: ReactElement;
@@ -22,7 +23,7 @@ interface ProvidersProps {
 
 const customRender = (ui: ReactElement, props?: ProvidersProps | null, options?: RenderOptions): RenderResult => {
     const AppProviders = ({ children }: IProps): ReactElement => (
-        <ReduxProvider>
+        <Provider store={initializeStore()}>
             <RootProvider
                 serverProps={{
                     auth: props?.auth || authInitialState,
@@ -33,7 +34,7 @@ const customRender = (ui: ReactElement, props?: ProvidersProps | null, options?:
             >
                 {children}
             </RootProvider>
-        </ReduxProvider>
+        </Provider>
     );
 
     return render(ui, {
@@ -42,8 +43,6 @@ const customRender = (ui: ReactElement, props?: ProvidersProps | null, options?:
     } as RenderOptions);
 };
 
-// re-export everything
 export * from '@testing-library/react';
 
-// override render method
 export { customRender as render };

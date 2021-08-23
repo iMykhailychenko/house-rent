@@ -1,0 +1,19 @@
+.flex {
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+}
+
+.inner {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.title {
+    color: var(--black);
+}
+
+.text {
+    color: var(--gray-6);
+}

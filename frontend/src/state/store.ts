@@ -1,14 +1,13 @@
-import { useMemo } from 'react';
-
-import { AnyAction, configureStore, Store } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 
 import rootInitialState from './initial-state';
-import { IState } from './interfaces';
-import rootReducer from './reducer';
+import rootReducer, { RootState } from './reducer';
 
-let store: Store<IState, AnyAction> | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let store: Store<RootState, any> | null = null;
 
-const initStore = (state: IState = rootInitialState) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const initStore = (state: RootState = rootInitialState): Store<RootState, any> => {
     return configureStore({
         reducer: rootReducer,
         devTools: process.env.NODE_ENV !== 'production',
@@ -16,17 +15,15 @@ const initStore = (state: IState = rootInitialState) => {
     });
 };
 
-export const initializeStore = (state: IState = rootInitialState): Store<IState, AnyAction> => {
-    let _store: Store<IState, AnyAction> = store ?? initStore(state);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const initializeStore = (state: RootState = rootInitialState): Store<RootState, any> => {
+    let _store = store ?? initStore(state);
     if (state && store) {
         _store = initStore({ ...store.getState(), ...state });
         store = null;
     }
 
-    if (!process.env.browser) return _store;
+    if (typeof window === 'undefined') return _store;
     if (!store) store = _store;
     return _store;
 };
-
-export const useStore = (state: IState = rootInitialState): Store<IState, AnyAction> =>
-    useMemo(() => initializeStore(state), [state]);

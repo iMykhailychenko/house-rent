@@ -7,14 +7,16 @@ import type { AppProps } from 'next/app';
 import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
+import { Provider } from 'react-redux';
 
 import ModalComponent, { modal } from '../components/common/modal/modal';
 import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
-import ReduxProvider from '../core/redux-provider';
+import interceptor from '../interceptors/interceptors';
 import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
 import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { initializeStore } from '../state/store';
 import { parseCookie } from '../utils/helpers';
 
 interface IProps {
@@ -25,6 +27,9 @@ interface IProps {
 }
 
 const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppProps & IProps): ReactElement => {
+    const store = initializeStore(pageProps.state);
+    interceptor(store.dispatch);
+
     useEffect(() => {
         const resize = (): void => document.body.style.setProperty('--100vh', window.innerHeight + 'px');
         window.addEventListener('resize', resize);
@@ -43,12 +48,12 @@ const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppP
     }, []);
 
     return (
-        <ReduxProvider>
+        <Provider store={store}>
             <RootProvider serverProps={{ auth, theme, width, config }}>
                 <Component {...pageProps} />
                 <ModalComponent />
             </RootProvider>
-        </ReduxProvider>
+        </Provider>
     );
 };
 
@@ -80,7 +85,7 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
         value: appContext?.ctx?.req?.headers?.cookie,
         defaultValue: authInitialState,
     });
-    if (auth.accessToken) axios.defaults.headers.common.Authorization = `Bearer ${auth.accessToken}`;
+    axios.defaults.headers.common.Authorization = auth.accessToken ? `Bearer ${auth.accessToken}` : null;
 
     return { ...props, auth, theme, config, width: isMobile ? 450 : 1300 };
 };

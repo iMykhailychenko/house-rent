@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent, ReactElement, TouchEvent } from 'react';
+import React, { Component, MouseEvent, ReactElement, TouchEvent, useState } from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -92,8 +92,20 @@ export default class ModalComponent extends Component<unknown, IState> {
         const { dom } = this.state;
         return (
             <CSSTransition timeout={200} unmountOnExit in={!!dom}>
-                <div id="backdrop" className={css.backdrop} onClick={this.handleClickClose} aria-hidden="true">
-                    <div id="scroll" className={css.scroll} onClick={this.handleClickClose} aria-hidden="true">
+                <div
+                    id="backdrop"
+                    className={css.backdrop}
+                    onMouseDown={this.handleClickClose}
+                    onTouchStart={this.handleClickClose}
+                    aria-hidden="true"
+                >
+                    <div
+                        id="scroll"
+                        className={css.scroll}
+                        onMouseDown={this.handleClickClose}
+                        onTouchStart={this.handleClickClose}
+                        aria-hidden="true"
+                    >
                         {dom}
                     </div>
                 </div>

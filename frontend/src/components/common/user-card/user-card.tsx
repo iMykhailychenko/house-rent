@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { IUser } from '../../../interfaces';
+import { IUser } from '../../../state/entities/profile/profile.interface';
 import routes from '../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
 
