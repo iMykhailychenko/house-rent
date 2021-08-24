@@ -82,7 +82,7 @@ export const priceFilters = (init: string[] = []): IChipsMap => ({
     },
 });
 
-export const districtFilters = (city: City, district: string[]): IChipsMap => {
+export const districtFilters = (city: City = 'kyiv', district: string[] = []): IChipsMap => {
     const districtMap = {
         kyiv: {
             darnytsia: {
@@ -126,7 +126,32 @@ export const districtFilters = (city: City, district: string[]): IChipsMap => {
                 active: district.includes('sviatoshynskyi'),
             },
         },
-        lviv: {},
+        lviv: {
+            halych: {
+                name: 'halych',
+                active: district.includes('halych'),
+            },
+            railway: {
+                name: 'railway',
+                active: district.includes('railway'),
+            },
+            lychakiv: {
+                name: 'lychakiv',
+                active: district.includes('lychakiv'),
+            },
+            sykhiv: {
+                name: 'sykhiv',
+                active: district.includes('sykhiv'),
+            },
+            franko: {
+                name: 'franko',
+                active: district.includes('franko'),
+            },
+            shevchenko: {
+                name: 'shevchenko',
+                active: district.includes('shevchenko'),
+            },
+        },
     };
 
     return districtMap[city];

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
+import { districtFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
 
 import filtersInitialState from './filters.initial-state';
 import { City, IFiltersState, SEARCH_FILTERS } from './filters.interface';
@@ -23,6 +23,10 @@ const filtersSlice = createSlice({
         },
         changeCityFiltersAction(state: IFiltersState, action: PayloadAction<City>) {
             state[SEARCH_FILTERS.CITY] = action.payload;
+            state[SEARCH_FILTERS.DISTRICT] = districtFilters(action.payload);
+        },
+        changeDistrictFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+            state[SEARCH_FILTERS.DISTRICT] = districtFilters(state[SEARCH_FILTERS.CITY], action.payload);
         },
     },
 });
@@ -33,6 +37,7 @@ export const {
     changePriceFiltersAction,
     changeHouseTypeFiltersAction,
     changeCityFiltersAction,
+    changeDistrictFiltersAction,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

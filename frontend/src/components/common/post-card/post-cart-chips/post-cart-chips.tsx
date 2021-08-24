@@ -22,6 +22,8 @@ const PostCardChips = ({ value }: IProps): ReactElement => {
             <Chips chips={houseTypeFilters(value[SEARCH_FILTERS.HOUSE_TYPE])} />
 
             <Chips chips={priceFilters(value[SEARCH_FILTERS.PRICE])} />
+
+            <Chips chips={priceFilters(value[SEARCH_FILTERS.DISTRICT])} />
         </div>
     );
 };

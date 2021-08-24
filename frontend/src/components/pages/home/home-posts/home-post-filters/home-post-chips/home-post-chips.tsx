@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import useTrans from '../../../../../../hooks/trans.hook';
 import { SEARCH_FILTERS } from '../../../../../../state/entities/filters/filters.interface';
 import {
+    changeDistrictFiltersAction,
     changeGeneralFiltersAction,
     changeHouseTypeFiltersAction,
     changePriceFiltersAction,
@@ -12,9 +13,9 @@ import {
 } from '../../../../../../state/entities/filters/filters.reducer';
 import { useAllFiltersSelector } from '../../../../../../state/entities/filters/filters.selector';
 import Chips from '../../../../../common/chips/chips';
+import CitySelect from '../../../../../common/city-select/city-select';
 
 import css from './home-post-chips.module.scss';
-import CitySelect from '../../../../../common/city-select/city-select';
 
 const HomePostChips = (): ReactElement => {
     const trans = useTrans();
@@ -33,10 +34,19 @@ const HomePostChips = (): ReactElement => {
     const handleChangePrice = (value: string[]): void => {
         dispatch(changePriceFiltersAction(value));
     };
+    const handleChangeDistrict = (value: string[]): void => {
+        dispatch(changeDistrictFiltersAction(value));
+    };
 
     return (
         <div className={css.root}>
             <Chips onChange={handleChangeGeneral} chips={filters[SEARCH_FILTERS.GENERAL]} />
+
+            <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
+            <CitySelect />
+
+            <h4 className={css.title}>{trans('Оберіть район')}</h4>
+            <Chips onChange={handleChangeDistrict} chips={filters[SEARCH_FILTERS.DISTRICT]} />
 
             <h4 className={css.title}>{trans('Кількість кімнат')}</h4>
             <Chips onChange={handleChangeRoom} chips={filters[SEARCH_FILTERS.ROOM]} />
@@ -46,9 +56,6 @@ const HomePostChips = (): ReactElement => {
 
             <h4 className={css.title}>{trans('Цінова категорія')}</h4>
             <Chips onChange={handleChangePrice} chips={filters[SEARCH_FILTERS.PRICE]} />
-
-            <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
-            <CitySelect />
         </div>
     );
 };

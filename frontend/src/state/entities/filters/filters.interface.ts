@@ -15,7 +15,7 @@ export type IFiltersState = {
     [SEARCH_FILTERS.HOUSE_TYPE]: IChipsMap;
     [SEARCH_FILTERS.ROOM]: IChipsMap;
     [SEARCH_FILTERS.CITY]: City;
-    [SEARCH_FILTERS.DISTRICT]: City;
+    [SEARCH_FILTERS.DISTRICT]: IChipsMap;
 };
 
 export type City = 'kyiv' | 'lviv';
