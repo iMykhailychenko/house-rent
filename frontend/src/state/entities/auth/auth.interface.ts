@@ -1,6 +1,6 @@
 import { ThunkStatuses } from '../../interfaces';
 
-export interface IAuthInitialState {
+export interface IAuthState {
     accessToken: string | null;
     loginStatus: ThunkStatuses;
     joinStatus: ThunkStatuses;

@@ -1,0 +1,102 @@
+@import '../../../styles/helpers/mixin';
+
+.root {
+    position: relative;
+    width: 100%;
+
+    .input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 4rem;
+        padding: 0 4.5rem 0 1.5rem;
+        border: 0.1rem solid var(--gray-4);
+        transition: 0.2s ease-in-out;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        &:hover {
+            border: 0.1rem solid var(--gray-6);
+        }
+    }
+
+    .text {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.2rem;
+        text-align: left;
+        @include cutString;
+    }
+
+    .placeholder {
+        color: var(--gray-5);
+    }
+
+    .icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4rem;
+        height: 4rem;
+        background: var(--gray-3);
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-left: 0.5rem solid transparent;
+            border-right: 0.5rem solid transparent;
+
+            border-top: 0.5rem solid var(--gray-9);
+        }
+    }
+
+    .list {
+        position: absolute;
+        bottom: -0.5rem;
+        left: -0.1rem;
+        transform: translateY(70%);
+        width: calc(100% + 0.2rem);
+        padding: 1rem 0;
+        border-radius: 1rem;
+        background: var(--white);
+        border: 0.1rem solid var(--gray-5);
+        opacity: 0;
+        transition: 0.2s ease-in-out;
+
+        .item {
+            padding: 1rem 2rem;
+            font-size: 1.4rem;
+        }
+
+        &:global(.enter-done) {
+            transform: translateY(100%);
+            opacity: 1;
+        }
+    }
+}
+
+.open {
+    .input {
+        background: var(--gray-1);
+        border: 0.1rem solid var(--primary);
+        transition: 0.02s ease-in-out;
+
+        &:hover {
+            border: 0.1rem solid var(--primary);
+        }
+
+        .icon {
+            &::before {
+                border-left: 0.5rem solid transparent;
+                border-right: 0.5rem solid transparent;
+
+                border-top: unset;
+                border-bottom: 0.5rem solid var(--primary);
+            }
+        }
+    }
+}

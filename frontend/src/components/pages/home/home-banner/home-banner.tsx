@@ -27,7 +27,7 @@ const HomeBanner = (): ReactElement => {
 
     return (
         <Section className={css.section}>
-            <Container size="md">
+            <Container size="lg">
                 <div className={clsx(css.root, css[userRole])}>
                     <div className={css.inner}>
                         <Switch

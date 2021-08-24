@@ -7,7 +7,7 @@ import appConfig from '../config/app.config';
 import RootProvider from '../context/root-provider';
 import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
-import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { IAuthState } from '../state/entities/auth/auth.interface';
 import { initializeStore } from '../state/store';
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 interface ProvidersProps {
-    auth: IAuthInitialState;
+    auth: IAuthState;
     theme: THEME_ENUM;
     width: number;
     config: IConfig;

@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import clsx from 'clsx';
-
-import css from './switch-sm.module.scss';
+import { Switch } from '@material-ui/core';
 
 interface IProps {
     value: boolean;
@@ -14,10 +12,16 @@ const SwitchSm = ({ value, onChange, className }: IProps): ReactElement => {
     const handleClick = (): void => {
         if (onChange) onChange(!value);
     };
+
     return (
-        <button className={clsx(css.root, !value && css.right, className)} type="button" onClick={handleClick}>
-            <span className={css.indicator} />
-        </button>
+        <Switch
+            className={className}
+            checked={value}
+            onChange={handleClick}
+            color="primary"
+            name="checkedB"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
     );
 };
 

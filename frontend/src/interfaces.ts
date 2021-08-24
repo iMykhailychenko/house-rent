@@ -1,3 +1,6 @@
+import { City, SEARCH_FILTERS } from './state/entities/filters/filters.interface';
+import { generalFilters, houseTypeFilters, priceFilters, roomFilters } from './config/filters.config';
+
 export interface IChips {
     name: string;
     active: boolean;
@@ -23,19 +26,14 @@ export interface IConfig {
     cardSize: 'sm' | 'lg';
 }
 
-export enum SEARCH_FILTERS {
-    GENERAL = 'general',
-    ROOM = 'room',
-    HOUSE_TYPE = 'house_type',
-    PRICE = 'price',
-    CITY = 'city',
-}
-
-export type ISearchFilters = {
-    [key in SEARCH_FILTERS]: IChipsMap;
-};
-
 export enum UserRole {
     USER = 'user',
     REALTOR = 'realtor',
 }
+
+export interface SelectValue {
+    id: string;
+    value: string;
+}
+
+export type SelectList = SelectValue[];

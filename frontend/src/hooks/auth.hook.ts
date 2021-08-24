@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
 import { Auth } from '../context/auth/auth.context';
-import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { IAuthState } from '../state/entities/auth/auth.interface';
 
-const useAuth = (): IAuthInitialState | null => {
+const useAuth = (): IAuthState | null => {
     const [value] = useContext(Auth);
     return value;
 };

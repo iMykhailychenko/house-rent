@@ -1,11 +1,13 @@
 import { shallowEqual } from 'react-redux';
 
 import { useAppSelector } from '../../../hooks/redux.hook';
-import { IChipsMap, ISearchFilters, SEARCH_FILTERS } from '../../../interfaces';
+import { IChipsMap } from '../../../interfaces';
 import { RootState } from '../../reducer';
 
-export const useAllFiltersSelector = (): ISearchFilters =>
-    useAppSelector<ISearchFilters>(({ filters }: RootState) => filters, shallowEqual);
+import { City, IFiltersState, SEARCH_FILTERS } from './filters.interface';
+
+export const useAllFiltersSelector = (): IFiltersState =>
+    useAppSelector<IFiltersState>(({ filters }: RootState) => filters, shallowEqual);
 
 export const useGeneralFiltersSelector = (): IChipsMap =>
     useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.GENERAL], shallowEqual);
@@ -19,5 +21,5 @@ export const usePriceFiltersSelector = (): IChipsMap =>
 export const useHouseTypeFiltersSelector = (): IChipsMap =>
     useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.HOUSE_TYPE], shallowEqual);
 
-export const useCityFiltersSelector = (): IChipsMap =>
-    useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.CITY], shallowEqual);
+export const useCityFiltersSelector = (): City =>
+    useAppSelector<City>(({ filters }: RootState) => filters[SEARCH_FILTERS.CITY], shallowEqual);

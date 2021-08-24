@@ -3,9 +3,8 @@ import React, { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useTrans from '../../../../../../hooks/trans.hook';
-import { SEARCH_FILTERS } from '../../../../../../interfaces';
+import { SEARCH_FILTERS } from '../../../../../../state/entities/filters/filters.interface';
 import {
-    changeCityFiltersAction,
     changeGeneralFiltersAction,
     changeHouseTypeFiltersAction,
     changePriceFiltersAction,
@@ -15,6 +14,7 @@ import { useAllFiltersSelector } from '../../../../../../state/entities/filters/
 import Chips from '../../../../../common/chips/chips';
 
 import css from './home-post-chips.module.scss';
+import CitySelect from '../../../../../common/city-select/city-select';
 
 const HomePostChips = (): ReactElement => {
     const trans = useTrans();
@@ -33,9 +33,6 @@ const HomePostChips = (): ReactElement => {
     const handleChangePrice = (value: string[]): void => {
         dispatch(changePriceFiltersAction(value));
     };
-    const handleChangeCity = (value: string[]): void => {
-        dispatch(changeCityFiltersAction(value));
-    };
 
     return (
         <div className={css.root}>
@@ -50,8 +47,8 @@ const HomePostChips = (): ReactElement => {
             <h4 className={css.title}>{trans('Цінова категорія')}</h4>
             <Chips onChange={handleChangePrice} chips={filters[SEARCH_FILTERS.PRICE]} />
 
-            <h4 className={css.title}>{trans('Оберіть місто')}</h4>
-            <Chips onChange={handleChangeCity} chips={filters[SEARCH_FILTERS.CITY]} />
+            <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
+            <CitySelect />
         </div>
     );
 };

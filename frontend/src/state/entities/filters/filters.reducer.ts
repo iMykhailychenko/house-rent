@@ -1,28 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { cityFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
-import { ISearchFilters, SEARCH_FILTERS } from '../../../interfaces';
+import { generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
 
 import filtersInitialState from './filters.initial-state';
+import { City, IFiltersState, SEARCH_FILTERS } from './filters.interface';
 
 const filtersSlice = createSlice({
     name: 'FILTERS',
     initialState: filtersInitialState,
     reducers: {
-        changeGeneralFiltersAction(state: ISearchFilters, action: PayloadAction<string[]>) {
+        changeGeneralFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.GENERAL] = generalFilters(action.payload);
         },
-        changeRoomFiltersAction(state: ISearchFilters, action: PayloadAction<string[]>) {
+        changeRoomFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.ROOM] = roomFilters(action.payload);
         },
-        changePriceFiltersAction(state: ISearchFilters, action: PayloadAction<string[]>) {
+        changePriceFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.PRICE] = priceFilters(action.payload);
         },
-        changeCityFiltersAction(state: ISearchFilters, action: PayloadAction<string[]>) {
-            state[SEARCH_FILTERS.CITY] = cityFilters(action.payload);
-        },
-        changeHouseTypeFiltersAction(state: ISearchFilters, action: PayloadAction<string[]>) {
+        changeHouseTypeFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.HOUSE_TYPE] = houseTypeFilters(action.payload);
+        },
+        changeCityFiltersAction(state: IFiltersState, action: PayloadAction<City>) {
+            state[SEARCH_FILTERS.CITY] = action.payload;
         },
     },
 });
@@ -31,8 +31,8 @@ export const {
     changeGeneralFiltersAction,
     changeRoomFiltersAction,
     changePriceFiltersAction,
-    changeCityFiltersAction,
     changeHouseTypeFiltersAction,
+    changeCityFiltersAction,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

@@ -1,4 +1,5 @@
 import { IChipsMap } from '../interfaces';
+import { City } from '../state/entities/filters/filters.interface';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {
@@ -81,21 +82,52 @@ export const priceFilters = (init: string[] = []): IChipsMap => ({
     },
 });
 
-export const cityFilters = (init: string[] = []): IChipsMap => ({
-    kyiv: {
-        name: 'kyiv',
-        active: init.includes('kyiv'),
-    },
-    lviv: {
-        name: 'lviv',
-        active: init.includes('lviv'),
-    },
-    kharkiv: {
-        name: 'kharkiv',
-        active: init.includes('kharkiv'),
-    },
-    odesa: {
-        name: 'odesa',
-        active: init.includes('odesa'),
-    },
-});
+export const districtFilters = (city: City, district: string[]): IChipsMap => {
+    const districtMap = {
+        kyiv: {
+            darnytsia: {
+                name: 'darnytsia',
+                active: district.includes('darnytsia'),
+            },
+            desnianskyi: {
+                name: 'desnianskyi',
+                active: district.includes('desnianskyi'),
+            },
+            dniprovskyi: {
+                name: 'dniprovskyi',
+                active: district.includes('dniprovskyi'),
+            },
+            holosiiv: {
+                name: 'holosiiv',
+                active: district.includes('holosiiv'),
+            },
+            obolonskyi: {
+                name: 'obolonskyi',
+                active: district.includes('obolonskyi'),
+            },
+            pecherskyi: {
+                name: 'pecherskyi',
+                active: district.includes('pecherskyi'),
+            },
+            podil: {
+                name: 'podil',
+                active: district.includes('podil'),
+            },
+            shevchenkivskyi: {
+                name: 'shevchenkivskyi',
+                active: district.includes('shevchenkivskyi'),
+            },
+            solomianskyi: {
+                name: 'solomianskyi',
+                active: district.includes('solomianskyi'),
+            },
+            sviatoshynskyi: {
+                name: 'sviatoshynskyi',
+                active: district.includes('sviatoshynskyi'),
+            },
+        },
+        lviv: {},
+    };
+
+    return districtMap[city];
+};

@@ -12,12 +12,14 @@ interface IProps {
     children: ReactElement[] | ReactElement | string;
 }
 
-const MiddleModalWrp = ({ children, title }: IProps): ReactElement => (
+const MiddleModalWrp = ({ children = '', title }: IProps): ReactElement => (
     <div className={css.root}>
-        {title && <h2 className={css.title}>{title}</h2>}
-        <Button className={css.btn} secondary onClick={modal.close}>
-            <Close />
-        </Button>
+        <header className={css.header}>
+            <h2 className={css.title}>{title}</h2>
+            <Button className={css.btn} secondary onClick={modal.close}>
+                <Close />
+            </Button>
+        </header>
         {children}
     </div>
 );

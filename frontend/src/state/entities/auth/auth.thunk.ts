@@ -23,7 +23,8 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
 
             return data;
         } catch (error) {
-            console.dir(error?.response?.data?.message);
+            console.dir(error.response || error);
+            delete axios.defaults.headers.common.Authorization;
             return { accessToken: null } as IAuthResponse;
         } finally {
             modal.close();

@@ -10,8 +10,7 @@ export const profileInfoThunk = createAsyncThunk<IUser | null>('PROFILE/INFO', a
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
-        delete error.request;
-        console.dir(error);
+        console.dir(error.response || error);
         return profileInitialState.data;
     }
 });

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { IConfig, THEME_ENUM } from '../interfaces';
-import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { IAuthState } from '../state/entities/auth/auth.interface';
 
 import AuthProvider from './auth/auth.context';
 import ConfigProvider from './config/config';
@@ -11,7 +11,7 @@ import ThemeProvider from './theme/theme';
 interface IProps {
     children: ReactElement[] | ReactElement;
     serverProps: {
-        auth: IAuthInitialState;
+        auth: IAuthState;
         theme: THEME_ENUM;
         width: number;
         config: IConfig;

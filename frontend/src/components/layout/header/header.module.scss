@@ -16,6 +16,7 @@
     .subheader {
         background: var(--gray-2);
     }
+
     .inner {
         background: var(--gray-1);
     }
@@ -36,4 +37,9 @@
     align-items: center;
     justify-content: space-between;
     font-size: 1.5rem;
+}
+
+.home {
+    margin-right: 1.5rem;
+    font-size: 2rem;
 }

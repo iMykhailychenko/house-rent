@@ -15,13 +15,13 @@ import RootProvider from '../context/root-provider';
 import interceptor from '../interceptors/interceptors';
 import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
-import { IAuthInitialState } from '../state/entities/auth/auth.interface';
+import { IAuthState } from '../state/entities/auth/auth.interface';
 import { initializeStore } from '../state/store';
 import { parseCookie } from '../utils/helpers';
 
 interface IProps {
     theme: THEME_ENUM;
-    auth: IAuthInitialState;
+    auth: IAuthState;
     width: number;
     config: IConfig;
 }
@@ -80,7 +80,7 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
     });
 
     // auth
-    const auth = parseCookie<IAuthInitialState>({
+    const auth = parseCookie<IAuthState>({
         key: 'house_rent_auth',
         value: appContext?.ctx?.req?.headers?.cookie,
         defaultValue: authInitialState,

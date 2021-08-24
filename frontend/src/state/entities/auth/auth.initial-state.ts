@@ -1,6 +1,6 @@
-import { IAuthInitialState } from './auth.interface';
+import { IAuthState } from './auth.interface';
 
-const authInitialState: IAuthInitialState = {
+const authInitialState: IAuthState = {
     accessToken: null,
     loginStatus: 'idle',
     joinStatus: 'idle',

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { cityFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../../config/filters.config';
-import { SEARCH_FILTERS } from '../../../../interfaces';
+import { generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../../config/filters.config';
+import { SEARCH_FILTERS } from '../../../../state/entities/filters/filters.interface';
 import Chips from '../../chips/chips';
 
 import css from './post-cart-chips.module.scss';
@@ -22,8 +22,6 @@ const PostCardChips = ({ value }: IProps): ReactElement => {
             <Chips chips={houseTypeFilters(value[SEARCH_FILTERS.HOUSE_TYPE])} />
 
             <Chips chips={priceFilters(value[SEARCH_FILTERS.PRICE])} />
-
-            <Chips chips={cityFilters(value[SEARCH_FILTERS.CITY])} />
         </div>
     );
 };

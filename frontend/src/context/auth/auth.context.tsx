@@ -1,21 +1,18 @@
 import React, { createContext, ReactElement, useEffect, useState } from 'react';
 
 import authInitialState from '../../state/entities/auth/auth.initial-state';
-import { IAuthInitialState } from '../../state/entities/auth/auth.interface';
+import { IAuthState } from '../../state/entities/auth/auth.interface';
 import { useAuthSelector } from '../../state/entities/auth/auth.selector';
 
-export const Auth = createContext<[value: IAuthInitialState, setValue: ((value: IAuthInitialState) => void) | null]>([
-    authInitialState,
-    null,
-]);
+export const Auth = createContext<[value: IAuthState, setValue: ((value: IAuthState) => void) | null]>([authInitialState, null]);
 
 interface IProps {
-    authServer?: IAuthInitialState;
+    authServer?: IAuthState;
     children: ReactElement;
 }
 
 const AuthProvider = ({ authServer = authInitialState, children }: IProps): ReactElement => {
-    const [value, setValue] = useState<IAuthInitialState>(authInitialState);
+    const [value, setValue] = useState<IAuthState>(authInitialState);
     const auth = useAuthSelector();
 
     useEffect(() => {

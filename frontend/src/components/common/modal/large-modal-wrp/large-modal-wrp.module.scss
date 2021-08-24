@@ -2,24 +2,25 @@
 
 .root {
     width: 96%;
-    padding: 2rem;
+    padding: 1.5rem 2rem 2rem;
     border-radius: 1rem;
     background: var(--white);
 
-    .btn {
-        position: absolute;
-        top: 1.5rem;
-        right: 2rem;
-        padding: 0 1.1rem;
-    }
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3rem;
 
-    .title {
-        position: absolute;
-        top: 1.7rem;
-        left: 2.2rem;
-        width: calc(100% - 10rem);
-        font-size: 2rem;
-        font-weight: 400;
-        @include cutString;
+        .btn {
+            padding: 0 1.1rem;
+        }
+
+        .title {
+            width: calc(100% - 3rem);
+            font-size: 2rem;
+            font-weight: 400;
+            @include cutString;
+        }
     }
 }

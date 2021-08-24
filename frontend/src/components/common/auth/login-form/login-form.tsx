@@ -30,8 +30,8 @@ const LoginForm = (): ReactElement => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'user@email.com',
+            password: 'Asdf1234!',
         },
         validationSchema: LoginSchema,
         onSubmit: values => {

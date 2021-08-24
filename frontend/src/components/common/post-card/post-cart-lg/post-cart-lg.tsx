@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { Bookmark, Share, Visibility } from '@material-ui/icons';
 import Link from 'next/link';
 
-import { SEARCH_FILTERS } from '../../../../interfaces';
+import { SEARCH_FILTERS } from '../../../../state/entities/filters/filters.interface';
 import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import UserCard from '../../user-card/user-card';
@@ -16,13 +16,12 @@ const mockFilters = {
     [SEARCH_FILTERS.ROOM]: ['two', 'three'],
     [SEARCH_FILTERS.HOUSE_TYPE]: ['new'],
     [SEARCH_FILTERS.PRICE]: ['price_two', 'price_three'],
-    [SEARCH_FILTERS.CITY]: ['kyiv'],
 };
 
 const PostCardLg = (): ReactElement => {
     return (
         <div className={css.root}>
-            <UserCard user={{ firstName: 'User', lastName: 'Userovich' }} date="19:01 March 09 2022" />
+            <UserCard user={{ avatar: null, firstName: 'User', lastName: 'Userovich' }} date="19:01 March 09 2022" />
 
             <div className={css.content}>
                 <Link href={routes.posts.single(1)}>

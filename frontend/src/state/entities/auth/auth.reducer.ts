@@ -1,41 +1,46 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import authInitialState from './auth.initial-state';
-import { IAuthInitialState, IAuthResponse } from './auth.interface';
+import { IAuthResponse, IAuthState } from './auth.interface';
 import { authJoinThunk, authLoginThunk } from './auth.thunk';
 
 const authSlice = createSlice({
     name: 'AUTH',
     initialState: authInitialState,
     reducers: {
-        cookiesTokenAction(state: IAuthInitialState, action: PayloadAction<string>) {
+        cookiesTokenAction(state: IAuthState, action: PayloadAction<string>) {
             state.accessToken = action.payload;
             state.loginStatus = 'success';
         },
-        logoutAction(state: IAuthInitialState) {
+        logoutAction(state: IAuthState) {
+            delete axios.defaults.headers.common.Authorization;
+            Cookies.remove('house_rent_auth');
+
             state.accessToken = null;
             state.loginStatus = 'idle';
         },
     },
     extraReducers: builder => {
-        builder.addCase(authJoinThunk.pending, (state: IAuthInitialState) => {
+        builder.addCase(authJoinThunk.pending, (state: IAuthState) => {
             state.joinStatus = 'loading';
         });
-        builder.addCase(authJoinThunk.fulfilled, (state: IAuthInitialState) => {
+        builder.addCase(authJoinThunk.fulfilled, (state: IAuthState) => {
             state.joinStatus = 'success';
         });
-        builder.addCase(authJoinThunk.rejected, (state: IAuthInitialState) => {
+        builder.addCase(authJoinThunk.rejected, (state: IAuthState) => {
             state.joinStatus = 'error';
         });
 
-        builder.addCase(authLoginThunk.pending, (state: IAuthInitialState) => {
+        builder.addCase(authLoginThunk.pending, (state: IAuthState) => {
             state.loginStatus = 'loading';
         });
-        builder.addCase(authLoginThunk.fulfilled, (state: IAuthInitialState, action: PayloadAction<IAuthResponse>) => {
+        builder.addCase(authLoginThunk.fulfilled, (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
             state.loginStatus = 'success';
             state.accessToken = action.payload.accessToken;
         });
-        builder.addCase(authLoginThunk.rejected, (state: IAuthInitialState) => {
+        builder.addCase(authLoginThunk.rejected, (state: IAuthState) => {
             state.loginStatus = 'error';
         });
     },
