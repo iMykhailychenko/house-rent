@@ -10,12 +10,14 @@ import {
     changeHouseTypeFiltersAction,
     changePriceFiltersAction,
     changeRoomFiltersAction,
+    clearAllFiltersAction,
 } from '../../../../../../state/entities/filters/filters.reducer';
 import { useAllFiltersSelector } from '../../../../../../state/entities/filters/filters.selector';
 import Chips from '../../../../../common/chips/chips';
 import CitySelect from '../../../../../common/city-select/city-select';
 
 import css from './home-post-chips.module.scss';
+import Button from '../../../../../common/button/button';
 
 const HomePostChips = (): ReactElement => {
     const trans = useTrans();
@@ -37,6 +39,9 @@ const HomePostChips = (): ReactElement => {
     const handleChangeDistrict = (value: string[]): void => {
         dispatch(changeDistrictFiltersAction(value));
     };
+    const handleClearAll = (): void => {
+        dispatch(clearAllFiltersAction());
+    };
 
     return (
         <div className={css.root}>
@@ -56,6 +61,13 @@ const HomePostChips = (): ReactElement => {
 
             <h4 className={css.title}>{trans('Цінова категорія')}</h4>
             <Chips onChange={handleChangePrice} chips={filters[SEARCH_FILTERS.PRICE]} />
+
+            <div className={css.flex}>
+                <Button onClick={handleClearAll} secondary>
+                    {trans('Очистити')}
+                </Button>
+                <Button primary>{trans('Пошук')}</Button>
+            </div>
         </div>
     );
 };

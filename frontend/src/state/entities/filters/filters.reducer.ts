@@ -28,6 +28,14 @@ const filtersSlice = createSlice({
         changeDistrictFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.DISTRICT] = districtFilters(state[SEARCH_FILTERS.CITY], action.payload);
         },
+        clearAllFiltersAction(state: IFiltersState) {
+            state[SEARCH_FILTERS.GENERAL] = generalFilters();
+            state[SEARCH_FILTERS.ROOM] = roomFilters();
+            state[SEARCH_FILTERS.PRICE] = priceFilters();
+            state[SEARCH_FILTERS.HOUSE_TYPE] = houseTypeFilters();
+            state[SEARCH_FILTERS.CITY] = 'kyiv';
+            state[SEARCH_FILTERS.DISTRICT] = districtFilters();
+        },
     },
 });
 
@@ -38,6 +46,7 @@ export const {
     changeHouseTypeFiltersAction,
     changeCityFiltersAction,
     changeDistrictFiltersAction,
+    clearAllFiltersAction,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

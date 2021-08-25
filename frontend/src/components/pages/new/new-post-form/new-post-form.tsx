@@ -29,10 +29,10 @@ const NewPostForm = (): ReactElement => {
         <Container size="sm">
             <h2 className={css.title}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error</h2>
 
-            <div className={css.inner}>
+            <form action="#" method="post" className={css.inner}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius impedit neque nihil pariatur praesentium, qui rerum
                 sunt temporibus totam ullam unde ut, voluptatum! Atque cumque dolores dolorum est neque officiis.
-            </div>
+            </form>
         </Container>
     );
 };
