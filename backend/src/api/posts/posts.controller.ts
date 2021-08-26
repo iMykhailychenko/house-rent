@@ -41,11 +41,17 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     const post = new Post();
     post.title = req.body.title;
     post.description = req.body.description;
+    post.generalFilters = req.body.generalFilters;
+    post.roomFilters = req.body.roomFilters;
+    post.houseTypeFilters = req.body.houseTypeFilters;
+    post.priceFilters = req.body.priceFilters;
+    post.cityFilters = req.body.cityFilters;
+    post.districtFilters = req.body.districtFilters;
     post.user = req.user;
 
     const errors = await validate(post);
     if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
-    if (!req.user.role.includes(UserRole.USER)) throw new ErrorNormalize(400, 'to create a post user role should be "USER"');
+    if (!req.user?.role?.includes(UserRole.USER)) throw new ErrorNormalize(403, 'to create a post user role should be "USER"');
 
     const repository = database.connection.getRepository(Post);
     await repository.save(post).catch(error => {

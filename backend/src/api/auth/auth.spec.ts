@@ -110,7 +110,7 @@ describe('Test auth service', () => {
         it('Login error - wrong password', async () => {
             const res = await api.post('/auth/login').send({
                 email: 'test@mail.ru',
-                password: 'P@ssw0rd!',
+                password: 'wrong_password',
             });
             expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
@@ -124,7 +124,7 @@ describe('Test auth service', () => {
                 email: 'wrong_test@mail.ru',
                 password: 'P@ssw0rd!',
             });
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
             expect(res.body).toStrictEqual({
                 massage: 'wrong email or password',
@@ -136,7 +136,7 @@ describe('Test auth service', () => {
                 email: 'test@mail.ru',
                 password: null,
             });
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
             expect(res.body).toStrictEqual({
                 massage: 'password must be longer than or equal to 6 characters',
@@ -148,7 +148,7 @@ describe('Test auth service', () => {
                 test_email: 'test@mail.ru',
                 password: 'P@ssw0rd!',
             });
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
             expect(res.body).toStrictEqual({
                 massage: 'email must be an email',

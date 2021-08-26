@@ -1,25 +1,13 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsOptional, IsString, Length } from 'class-validator';
+import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
 import { User } from '../../users/entity/users.entity';
-import {
-    City,
-    GENERAL_FILTERS,
-    HOUSE_TYPE_FILTERS,
-    KYIV_DISTRICT_FILTERS,
-    LVIV_DISTRICT_FILTERS,
-    PRICE_FILTERS,
-    ROOM_FILTERS,
-} from '../posts.interface';
+import { City, DISTRICT_FILTERS, GENERAL_FILTERS, HOUSE_TYPE_FILTERS, PRICE_FILTERS, ROOM_FILTERS } from '../posts.interface';
+import { DistrictValidator } from '../posts.validate';
 
 @Entity()
 export class Post {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column({ type: 'timestamp', default: new Date() })
-    @IsDate()
-    @IsOptional()
-    creationDate: Date;
 
     @Column({ type: 'varchar', length: 100 })
     @Length(1, 100)
@@ -29,9 +17,20 @@ export class Post {
     @IsString()
     description: string;
 
+    @Column({ type: 'timestamp', default: new Date() })
+    @IsDate()
+    @IsOptional()
+    creationDate: Date;
+
+    @Column({ type: 'int', default: 0 })
+    @IsNumber()
+    @IsOptional()
+    views: number;
+
     @Column({ type: 'simple-array' })
     @IsArray()
     @IsEnum(GENERAL_FILTERS, { each: true })
+    @IsOptional()
     generalFilters: GENERAL_FILTERS[];
 
     @Column({ type: 'simple-array' })
@@ -55,8 +54,8 @@ export class Post {
 
     @Column({ type: 'simple-array' })
     @IsArray()
-    // @IsEnum((KYIV_DISTRICT_FILTERS | LVIV_DISTRICT_FILTERS), { each: true })
-    districtFilters: (KYIV_DISTRICT_FILTERS | LVIV_DISTRICT_FILTERS)[];
+    @Validate(DistrictValidator)
+    districtFilters: DISTRICT_FILTERS[];
 
     @ManyToOne(() => User, user => user.posts)
     user: User;

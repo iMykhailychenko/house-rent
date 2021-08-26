@@ -34,7 +34,7 @@ export const joinController = errorWrapper(async (req: Request, res: Response): 
 
 export const loginController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
     const token = req.get('Authorization');
-    if (token) throw new ErrorNormalize(400, 'user already authorized');
+    if (token) throw new ErrorNormalize(401, 'user already authorized');
 
     const repository = database.connection.getRepository(User);
     const loginCredentials = new AuthLogin();
@@ -42,13 +42,13 @@ export const loginController = errorWrapper(async (req: Request, res: Response):
     loginCredentials.password = req.body.password;
 
     const errors = await validate(loginCredentials);
-    if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
+    if (errors.length) throw new ErrorNormalize(401, Object.values(errors[0].constraints)[0]);
 
     const user = await repository.findOne({ email: req.body.email }, { select: ['id', 'password'] });
-    if (!user) throw new ErrorNormalize(400, 'wrong email or password');
+    if (!user) throw new ErrorNormalize(401, 'wrong email or password');
 
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-    if (!isPasswordValid) throw new ErrorNormalize(400, 'wrong email or password');
+    if (!isPasswordValid) throw new ErrorNormalize(401, 'wrong email or password');
 
     const oneMonthInMS = 30 * 24 * 60 * 60 * 1000;
     const accessToken = jwt.sign({ id: user.id, exp: Date.now() + oneMonthInMS }, authConfig.accessKey);

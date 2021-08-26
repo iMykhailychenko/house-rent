@@ -48,3 +48,5 @@ export enum LVIV_DISTRICT_FILTERS {
     FRANKO = 'franko',
     SHEVCHENKO = 'shevchenko',
 }
+
+export type DISTRICT_FILTERS = KYIV_DISTRICT_FILTERS | LVIV_DISTRICT_FILTERS;

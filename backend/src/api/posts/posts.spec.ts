@@ -1,19 +1,23 @@
 import { Application } from 'express';
 import request, { SuperTest, Test } from 'supertest';
 import houseRentApp from '../../app';
-import { deleteTestPost, deleteTestUser, loginTestUser, registerTestUser } from '../../tests/utils';
+import { deleteTestPost, deleteTestUser, getInfoTestUser, loginTestUser, registerTestUser } from '../../tests/utils';
+import { User } from '../users/entity/users.entity';
 
 describe('Test post service', () => {
     let app: Application;
     let api: SuperTest<Test>;
     let token: string;
     let postId: number;
+    let user: User;
 
     beforeAll(async () => {
         app = await houseRentApp.run();
         api = request(app);
+
         await registerTestUser(api);
         token = await loginTestUser(api);
+        user = await getInfoTestUser(api, token);
     });
 
     afterAll(async () => {
@@ -22,18 +26,68 @@ describe('Test post service', () => {
     });
 
     describe('create', () => {
-        it('create post success', async () => {
+        it('create post forbidden 403', async () => {
             const res = await api
                 .post('/posts')
                 .send({
                     title: 'test',
                     description: 'test description',
+                    generalFilters: ['hot'],
+                    roomFilters: ['one', 'two'],
+                    houseTypeFilters: ['new'],
+                    priceFilters: ['price_one', 'price_two'],
+                    cityFilters: 'kyiv',
+                    districtFilters: ['obolonskyi'],
                 })
                 .set('Authorization', 'Bearer ' + token);
+
+            expect(res.statusCode).toEqual(403);
+            expect(res.body.massage).toEqual('to create a post user role should be "USER"');
+        });
+
+        it('create post success', async () => {
+            await api.post(`/users/${user.id}/role`).send({ role: 'user' });
+
+            const res = await api
+                .post('/posts')
+                .send({
+                    title: 'test',
+                    description: 'test description',
+                    generalFilters: ['hot'],
+                    roomFilters: ['one', 'two'],
+                    houseTypeFilters: ['new'],
+                    priceFilters: ['price_one', 'price_two'],
+                    cityFilters: 'kyiv',
+                    districtFilters: ['obolonskyi'],
+                })
+                .set('Authorization', 'Bearer ' + token);
+
             postId = res.body.id;
             expect(res.statusCode).toEqual(200);
+            expect(res.body.id).toBeTruthy();
             expect(res.body.title).toEqual('test');
             expect(res.body.description).toEqual('test description');
+        });
+
+        it('invalid district', async () => {
+            await api.post(`/users/${user.id}/role`).send({ role: 'user' });
+
+            const res = await api
+                .post('/posts')
+                .send({
+                    title: 'test',
+                    description: 'test description',
+                    generalFilters: ['hot'],
+                    roomFilters: ['one', 'two'],
+                    houseTypeFilters: ['new'],
+                    priceFilters: ['price_one', 'price_two'],
+                    cityFilters: 'lviv',
+                    districtFilters: ['obolonskyi'], // 'obolonskyi' district does not exist in 'lviv'
+                })
+                .set('Authorization', 'Bearer ' + token);
+
+            expect(res.statusCode).toEqual(400);
+            expect(res.body.massage).toEqual('invalid district values');
         });
 
         it('create post not auth', async () => {

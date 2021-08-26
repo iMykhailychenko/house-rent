@@ -18,8 +18,12 @@ export const loginTestUser = async (api: SuperTest<Test>): Promise<string> => {
         email: 'test@mail.ru',
         password: 'P@ssw0rd!',
     });
-
     return res.body.accessToken;
+};
+
+export const getInfoTestUser = async (api: SuperTest<Test>, token: string): Promise<User> => {
+    const res = await api.get('/users/profile').set('Authorization', token);
+    return res.body;
 };
 
 export const deleteTestUser = async (): Promise<void> => {
