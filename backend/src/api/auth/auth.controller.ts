@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorWrapper from '../../utils/errorWrapper';
-import { User } from '../users/entity/users.entity';
+import { User, UserRole } from '../users/entity/users.entity';
 import authConfig from '../../config/auth.config';
 import database from '../../database';
 import { passwordValidate } from './auth.validate';
@@ -19,6 +19,7 @@ export const joinController = errorWrapper(async (req: Request, res: Response): 
     user.lastName = req.body.lastName;
     user.email = req.body.email;
     user.password = await bcrypt.hash(req.body.password, authConfig.saltRounds);
+    user.role = [UserRole.USER];
 
     const errors = await validate(user);
     if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);

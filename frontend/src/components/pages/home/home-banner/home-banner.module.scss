@@ -1,113 +1,78 @@
 :global(.black) {
     .owner {
         --secondary: #1c1b1b;
-        --c-1: #1e475f;
-        --c-2: #193952;
-        --c-3: #504b47;
-        --c-4: #1f1310;
-        --c-5: #666768;
-        --c-6: #4f4f52;
-        --c-7: #68696a;
-        --c-8: #767879;
-        --c-9: #606263;
     }
 
     .tenant {
         --secondary: #1c1c1d;
-        --c-1: #4b5e79;
-        --c-2: #324166;
-        --c-3: #5d6a79;
-        --c-4: #27502f;
-        --c-5: #1e4220;
-        --c-6: #323232;
-        --c-7: #1a445c;
-        --c-8: #4b4b4b;
-        --c-9: #42535e;
-        --c-10: #656565;
     }
 }
 
 .owner {
     --secondary: #f2e8e1;
-    --c-1: #51b9f9;
-    --c-2: #4baef8;
-    --c-3: #cec3b9;
-    --c-4: #794e40;
-    --c-5: #f3f7f9;
-    --c-6: #e6e8ec;
-    --c-7: #f6fafc;
-    --c-8: #fcfeff;
-    --c-9: #f2f7f9;
 }
 
 .tenant {
     --secondary: #dcecf5;
-    --c-1: #99b2d7;
-    --c-2: #6d85c2;
-    --c-3: #b7ceec;
-    --c-4: #61bf76;
-    --c-5: #52a756;
-    --c-6: #7d7d7d;
-    --c-7: #3ea4dd;
-    --c-8: #ffffff;
-    --c-9: #b0dff9;
-    --c-10: #ffffff;
 }
 
 .section {
     margin: 4rem 0 6rem;
     min-height: unset;
-}
 
-.root {
-    position: relative;
-    min-height: 60rem;
-    padding: 6rem;
-    border-radius: 2rem;
-    transition: 0.6s ease-in-out;
-    background: var(--secondary);
-    color: var(--black);
-    overflow: hidden;
-}
-
-.inner {
-    position: relative;
-    z-index: 2;
-}
-
-.img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    height: 100%;
-    width: auto;
-    opacity: 0;
-    transition: 0.6s ease-in-out;
-
-    &:global(.enter-done) {
-        opacity: 1;
-    }
-}
-
-.animation {
-    margin-top: 4rem;
-    width: 60rem;
-
-    :global(.appear) {
+    .root {
         position: relative;
-        top: 20rem;
-        opacity: 0;
-    }
-
-    :global(.appear-done) {
-        position: relative;
-        top: 0;
-        opacity: 1;
+        min-height: 60rem;
+        padding: 6rem;
+        border-radius: 2rem;
         transition: 0.6s ease-in-out;
-    }
+        background: var(--secondary);
+        color: var(--black);
+        overflow: hidden;
 
-    .button {
-        margin-top: 6rem;
+        .inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .img {
+            position: absolute;
+            top: 50%;
+            right: 8rem;
+            z-index: 1;
+            width: auto;
+            height: auto;
+            max-height: 80%;
+            max-width: 40%;
+            opacity: 0;
+            transform: translateY(-50%);
+            transition: 0.6s ease-in-out;
+
+            &:global(.enter-done) {
+                opacity: 1;
+            }
+        }
+
+        .animation {
+            margin-top: 4rem;
+            width: 60rem;
+
+            :global(.appear) {
+                position: relative;
+                top: 20rem;
+                opacity: 0;
+            }
+
+            :global(.appear-done) {
+                position: relative;
+                top: 0;
+                opacity: 1;
+                transition: 0.6s ease-in-out;
+            }
+
+            .button {
+                margin-top: 6rem;
+            }
+        }
     }
 }

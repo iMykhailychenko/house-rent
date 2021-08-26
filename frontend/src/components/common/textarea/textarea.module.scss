@@ -1,0 +1,68 @@
+:global(.white) {
+    .textarea {
+        border: 0.1rem solid var(--border-white, #bfbfbf);
+
+        &::placeholder {
+            color: var(--placeholder-white, #bfbfbf);
+        }
+    }
+}
+
+:global(.black) {
+    .textarea {
+        border: 0.1rem solid var(--border-black, #8c8c8c);
+
+        &::placeholder {
+            color: var(--placeholder-black, #8c8c8c);
+        }
+    }
+}
+
+.root {
+    width: 100%;
+    margin: 1rem 0;
+    color: inherit;
+
+    .label {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        color: inherit;
+
+        svg {
+            margin-left: 0.5rem;
+            margin-bottom: 0.2rem;
+            font-size: 1.6rem;
+            color: inherit;
+            opacity: 0.5;
+        }
+    }
+
+    .inner {
+        width: 100%;
+        position: relative;
+        color: inherit;
+
+        .textarea {
+            display: block;
+            min-height: 8rem;
+            padding: 0 1.5rem;
+            width: 100%;
+            background: transparent;
+            border-radius: 2rem;
+            color: inherit;
+        }
+
+        .error {
+            color: var(--error);
+            border-color: var(--error);
+
+            &::placeholder {
+                color: var(--error);
+                opacity: 0.5;
+            }
+        }
+    }
+}

@@ -8,9 +8,7 @@ import Container from '../../../layout/container/container';
 import Section from '../../../layout/section/section';
 
 import Owner from './components/owner';
-import OwnerSvg from './components/owner-svg';
 import Tenant from './components/tenant';
-import TenantSvg from './components/tenant-svg';
 import css from './home-banner.module.scss';
 
 const USER_ROLE = [
@@ -42,11 +40,13 @@ const HomeBanner = (): ReactElement => {
                     </div>
 
                     <CSSTransition in={userRole === 'tenant'} timeout={10} appear unmountOnExit>
-                        <TenantSvg />
+                        {/*<TenantSvg />*/}
+                        <img className={css.img} src="/pages/home/tenant.png" alt="" />
                     </CSSTransition>
 
                     <CSSTransition in={userRole === 'owner'} timeout={10} appear unmountOnExit>
-                        <OwnerSvg />
+                        <img className={css.img} src="/pages/home/owner.png" alt="" />
+                        {/*<OwnerSvg />*/}
                     </CSSTransition>
                 </div>
             </Container>

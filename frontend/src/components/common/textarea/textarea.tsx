@@ -1,33 +1,32 @@
-import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement, useState } from 'react';
+import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement } from 'react';
 
-import { HelpOutline, Visibility, VisibilityOff } from '@material-ui/icons';
+import { HelpOutline } from '@material-ui/icons';
 import clsx from 'clsx';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import useTrans from '../../../hooks/trans.hook';
-import Button from '../button/button';
 import Tooltip from '../tooltip/tooltip';
 
-import css from './input.module.scss';
+import css from './textarea.module.scss';
 
 interface IProps {
     value: string | number;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
-    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+    onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    onBlur?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    onFocus?: (event: FocusEvent<HTMLTextAreaElement>) => void;
+    onKeyDown?: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
     id?: string;
+    title?: string;
     className?: string;
     name?: string;
-    type?: string;
     placeholder?: string;
     error?: string | boolean;
     readOnly?: boolean;
-    autoComplete?: string;
     label?: string;
     info?: ReactElement | string;
 }
 
-const Input = ({
+const Textarea = ({
     value,
     onChange,
     onBlur,
@@ -36,20 +35,14 @@ const Input = ({
     id,
     className,
     name,
-    type = 'text',
     placeholder = '',
+    title,
     error,
     readOnly,
-    autoComplete,
     label,
     info,
 }: IProps): ReactElement => {
     const trans = useTrans();
-    const [show, setShow] = useState<string>(type);
-
-    const handleClick = (): void => {
-        setShow(value => (value === 'password' ? 'text' : 'password'));
-    };
 
     return (
         <div className={css.root}>
@@ -65,32 +58,26 @@ const Input = ({
             )}
             <div className={css.inner}>
                 <Tooltip content={error} withMobile>
-                    <input
+                    <TextareaAutosize
                         id={id}
                         value={value}
                         onChange={onChange}
                         onBlur={onBlur}
                         onFocus={onFocus}
                         onKeyDown={onKeyDown}
-                        className={clsx(css.input, className, {
-                            [css.password]: type === 'password',
+                        className={clsx(css.textarea, className, {
                             [css.error]: error,
                         })}
                         placeholder={trans(placeholder)}
                         name={name}
-                        type={show}
                         readOnly={readOnly}
-                        autoComplete={autoComplete}
+                        wrap="soft"
+                        title={title}
                     />
                 </Tooltip>
-                {type === 'password' && (
-                    <Button className={css.button} secondary onClick={handleClick}>
-                        {show === 'password' ? <VisibilityOff /> : <Visibility />}
-                    </Button>
-                )}
             </div>
         </div>
     );
 };
 
-export default Input;
+export default Textarea;
