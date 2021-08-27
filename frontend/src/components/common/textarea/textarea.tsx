@@ -18,6 +18,7 @@ interface IProps {
     id?: string;
     title?: string;
     className?: string;
+    rootClassName?: string;
     name?: string;
     placeholder?: string;
     error?: string | boolean;
@@ -34,6 +35,7 @@ const Textarea = ({
     onKeyDown,
     id,
     className,
+    rootClassName,
     name,
     placeholder = '',
     title,
@@ -45,7 +47,7 @@ const Textarea = ({
     const trans = useTrans();
 
     return (
-        <div className={css.root}>
+        <div className={clsx(css.root, rootClassName)}>
             {label && (
                 <label className={css.label} htmlFor={id}>
                     <span>{label}</span>

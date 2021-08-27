@@ -6,7 +6,21 @@
 }
 
 .form {
-    padding: 4rem 15%;
-    border-radius: 2rem;
-    background: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 4rem;
+    border-radius: 1.5rem;
+    background: var(--gray-1);
+
+    .inputWrp {
+        margin: 0;
+    }
+
+    .input {
+        width: 100%;
+        background: var(--white);
+        border-radius: 0.6rem;
+    }
 }

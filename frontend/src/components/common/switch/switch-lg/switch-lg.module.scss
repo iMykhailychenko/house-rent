@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     height: 5rem;
-    padding: 1rem;
+    padding: 0;
 
     &::before {
         content: '';
@@ -28,6 +28,7 @@
         position: relative;
         display: block;
         z-index: 2;
+        line-height: 1;
         color: var(--black);
     }
 }

@@ -1,0 +1,17 @@
+.root {
+    display: flex;
+    width: 100%;
+    margin: 2rem 0;
+    --aside: 15rem;
+
+    .label {
+        display: block;
+        width: var(--aside);
+        margin: 0.5rem 0;
+        padding-right: 2rem;
+    }
+
+    .inner {
+        width: calc(100% - var(--aside));
+    }
+}

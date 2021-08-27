@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Textarea component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root"
+  >
+    <div
+      class="inner"
+    >
+      <div
+        class="wrp"
+      >
+        <div
+          class="tooltip bottom_right tooltip"
+        >
+          error
+        </div>
+        <textarea
+          class="textarea test error"
+          id="test"
+          name="test"
+          placeholder="test"
+          wrap="soft"
+        >
+          test
+        </textarea>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

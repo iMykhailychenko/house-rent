@@ -30,7 +30,7 @@ const HomeBanner = (): ReactElement => {
                     <div className={css.inner}>
                         <Switch
                             size="lg"
-                            width={19}
+                            width={21}
                             className={css.switch}
                             onChange={handleChange}
                             value={userRole === 'tenant'}
@@ -40,13 +40,11 @@ const HomeBanner = (): ReactElement => {
                     </div>
 
                     <CSSTransition in={userRole === 'tenant'} timeout={10} appear unmountOnExit>
-                        {/*<TenantSvg />*/}
                         <img className={css.img} src="/pages/home/tenant.png" alt="" />
                     </CSSTransition>
 
                     <CSSTransition in={userRole === 'owner'} timeout={10} appear unmountOnExit>
                         <img className={css.img} src="/pages/home/owner.png" alt="" />
-                        {/*<OwnerSvg />*/}
                     </CSSTransition>
                 </div>
             </Container>

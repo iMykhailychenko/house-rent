@@ -1,0 +1,49 @@
+:global(.black) {
+    .root {
+        --secondary: #13132b;
+
+        :global(.MuiCheckbox-root) {
+            color: var(--gray-6);
+        }
+
+        :global(.MuiCheckbox-colorPrimary.Mui-checked) {
+            color: var(--primary);
+        }
+    }
+}
+
+.root {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    height: 10rem;
+    width: 15rem;
+    margin: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.6rem;
+    border: 0.1rem solid var(--gray-5);
+    overflow: hidden;
+    text-align: left;
+    color: var(--black);
+
+    .text {
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 2.5rem);
+    }
+}
+
+.active {
+    background: var(--secondary);
+    border-color: var(--primary);
+}
+
+.checkbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.icon {
+    font-size: 2rem !important;
+}

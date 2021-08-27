@@ -17,6 +17,7 @@ interface IProps {
     onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
     id?: string;
     className?: string;
+    rootClassName?: string;
     name?: string;
     type?: string;
     placeholder?: string;
@@ -35,6 +36,7 @@ const Input = ({
     onKeyDown,
     id,
     className,
+    rootClassName,
     name,
     type = 'text',
     placeholder = '',
@@ -52,7 +54,7 @@ const Input = ({
     };
 
     return (
-        <div className={css.root}>
+        <div className={clsx(css.root, rootClassName)}>
             {label && (
                 <label className={css.label} htmlFor={id}>
                     <span>{label}</span>

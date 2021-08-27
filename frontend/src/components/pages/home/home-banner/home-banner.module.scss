@@ -6,6 +6,10 @@
     .tenant {
         --secondary: #1c1c1d;
     }
+
+    .section .root .img:global(.enter-done) {
+        opacity: 0.6;
+    }
 }
 
 .owner {
