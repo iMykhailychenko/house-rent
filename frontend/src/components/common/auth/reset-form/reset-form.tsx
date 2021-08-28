@@ -29,7 +29,7 @@ const ResetForm = (): ReactElement => {
     });
 
     return (
-        <form action="#" method="post" onSubmit={formik.handleSubmit}>
+        <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
                 id="reset_email"
                 value={formik.values.email}

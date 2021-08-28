@@ -4,6 +4,7 @@ import CheckboxLg from './checkbox-lg/checkbox-lg';
 import CheckboxSm from './checkbox-sm/checkbox-sm';
 
 interface IProps {
+    error?: boolean;
     size?: 'sm' | 'lg';
     name?: string;
     title: string;
@@ -11,10 +12,10 @@ interface IProps {
     onChange: (value: boolean) => void;
 }
 
-const Checkbox = ({ size = 'sm', name, title, value, onChange }: IProps): ReactElement => {
+const Checkbox = ({ error = false, size = 'sm', name, title, value, onChange }: IProps): ReactElement => {
     const map = {
-        sm: <CheckboxSm title={title} value={value} onChange={onChange} name={name} />,
-        lg: <CheckboxLg title={title} value={value} onChange={onChange} name={name} />,
+        sm: <CheckboxSm error={error} title={title} value={value} onChange={onChange} name={name} />,
+        lg: <CheckboxLg error={error} title={title} value={value} onChange={onChange} name={name} />,
     };
 
     return map[size];

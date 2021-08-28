@@ -47,7 +47,7 @@ const LoginForm = (): ReactElement => {
         );
 
     return (
-        <form action="#" method="post" onSubmit={formik.handleSubmit}>
+        <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
                 id="login_email"
                 value={formik.values.email}

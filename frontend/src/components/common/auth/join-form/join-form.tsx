@@ -71,7 +71,7 @@ const JoinForm = (): ReactElement => {
         );
 
     return (
-        <form action="#" method="post" onSubmit={formik.handleSubmit}>
+        <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
                 id="first_name_email"
                 value={formik.values.firstName}

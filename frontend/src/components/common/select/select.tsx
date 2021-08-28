@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
+import { MenuItem } from '@material-ui/core';
 import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 
@@ -7,7 +8,6 @@ import useTrans from '../../../hooks/trans.hook';
 import { SelectList, SelectValue } from '../../../interfaces';
 
 import css from './select.module.scss';
-import { MenuItem } from '@material-ui/core';
 
 interface SelectItemProps {
     children: string;
@@ -30,6 +30,7 @@ const SelectItem = ({ children, value, onClose, onChange }: SelectItemProps): Re
 };
 
 interface IProps {
+    error?: boolean;
     className?: string;
     placeholder?: string;
     list: SelectList;
@@ -37,7 +38,7 @@ interface IProps {
     onChange: (value: SelectValue) => void;
 }
 
-const Select = ({ className, placeholder = '', list, value, onChange }: IProps): ReactElement => {
+const Select = ({ error = false, className, placeholder = '', list, value, onChange }: IProps): ReactElement => {
     const trans = useTrans();
 
     const [open, setOpen] = useState(false);
@@ -50,7 +51,7 @@ const Select = ({ className, placeholder = '', list, value, onChange }: IProps):
 
     return (
         <button className={clsx(css.root, className, open && css.open)} type="button" onBlur={handleClose}>
-            <p className={css.input} onClick={handleToggle} aria-hidden="true">
+            <p className={clsx(css.input, error && css.error)} onClick={handleToggle} aria-hidden="true">
                 <span className={clsx(css.text, { [css.placeholder]: !value?.value && placeholder })}>
                     {value?.value || placeholder}
                 </span>

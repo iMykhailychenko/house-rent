@@ -33,6 +33,19 @@
     }
 }
 
+.error {
+    color: var(--error);
+    border-color: var(--error);
+
+    :global(.MuiCheckbox-root) {
+        color: var(--error) !important;
+    }
+
+    :global(.MuiCheckbox-colorPrimary.Mui-checked) {
+        color: var(--error) !important;
+    }
+}
+
 .active {
     background: var(--secondary);
     border-color: var(--primary);

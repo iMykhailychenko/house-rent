@@ -2,76 +2,136 @@ import React, { ReactElement } from 'react';
 
 import { useFormik } from 'formik';
 
+import { SelectValue } from '../../../../interfaces';
+import Button from '../../../common/button/button';
 import Input from '../../../common/input/input';
+import Select from '../../../common/select/select';
 import Textarea from '../../../common/textarea/textarea';
-import Container from '../../../layout/container/container';
 
 import Filters from './filters/filters';
 import FormSegment from './from-segment/from-segment';
-import { houseType, price, rooms } from './new-post-form.config';
+import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
 import css from './new-post-form.module.scss';
+import NewPostSchema from './new-post-form.validation';
 
 const NewPostForm = (): ReactElement => {
     const formik = useFormik({
         initialValues: {
             title: '',
             description: '',
-            house_type: ['new'],
-            rooms: ['one'],
+            house_type: [],
+            rooms: [],
             price: [],
-            city: [],
+            city: 'kyiv',
             district: [],
         },
-        // validationSchema: LoginSchema,
+        validationSchema: NewPostSchema,
         onSubmit: values => {
             console.log(values);
         },
     });
 
+    const handleSelectCity = (value: SelectValue): void => {
+        formik.setFieldValue('city', value.id);
+        formik.setFieldValue('district', []);
+    };
+
+    const resetForm = () => formik.resetForm();
+    const submitForm = () => formik.submitForm();
+
     return (
-        <Container size="sm">
-            <h2 className={css.title}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error</h2>
+        <form action="#" method="post" className={css.form}>
+            <FormSegment label="title" id="login_title" error={formik.touched.title && formik.errors.title}>
+                <Input
+                    id="new_post_title"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    error={formik.touched.title && formik.errors.title}
+                    placeholder="title"
+                    name="title"
+                />
+            </FormSegment>
 
-            <form action="#" method="post" className={css.form}>
-                <FormSegment label="title" id="login_title">
-                    <Input
-                        id="new_post_title"
-                        className={css.input}
-                        rootClassName={css.inputWrp}
-                        value={formik.values.title}
-                        onChange={formik.handleChange}
-                        error={formik.touched.title && formik.errors.title}
-                        placeholder="title"
-                        name="title"
-                    />
-                </FormSegment>
+            <FormSegment
+                label="description"
+                id="new_post_description"
+                error={formik.touched.description && formik.errors.description}
+            >
+                <Textarea
+                    id="new_post_description"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    error={formik.touched.description && formik.errors.description}
+                    placeholder="description"
+                    name="description"
+                />
+            </FormSegment>
 
-                <FormSegment label="description" id="new_post_description">
-                    <Textarea
-                        id="new_post_description"
-                        className={css.input}
-                        rootClassName={css.inputWrp}
-                        value={formik.values.description}
-                        onChange={formik.handleChange}
-                        error={formik.touched.description && formik.errors.description}
-                        placeholder="description"
-                        name="description"
-                    />
-                </FormSegment>
+            <FormSegment label="house_type" error={formik.touched.house_type && formik.errors.house_type}>
+                <Filters
+                    all={houseType}
+                    name="house_type"
+                    value={formik.values.house_type}
+                    onChange={formik.setFieldValue}
+                    error={formik.touched.house_type && !!formik.errors.house_type}
+                />
+            </FormSegment>
 
-                <FormSegment label="house_type">
-                    <Filters all={houseType} name="house_type" value={formik.values.house_type} onChange={formik.setFieldValue} />
-                </FormSegment>
+            <FormSegment label="rooms" error={formik.touched.rooms && formik.errors.rooms}>
+                <Filters
+                    size="lg"
+                    all={rooms}
+                    name="rooms"
+                    value={formik.values.rooms}
+                    onChange={formik.setFieldValue}
+                    error={formik.touched.rooms && !!formik.errors.rooms}
+                />
+            </FormSegment>
 
-                <FormSegment label="rooms">
-                    <Filters size="lg" all={rooms} name="rooms" value={formik.values.rooms} onChange={formik.setFieldValue} />
-                </FormSegment>
+            <FormSegment label="price" error={formik.touched.price && formik.errors.price}>
+                <Filters
+                    size="sm"
+                    all={price}
+                    name="price"
+                    value={formik.values.price}
+                    onChange={formik.setFieldValue}
+                    error={formik.touched.price && !!formik.errors.price}
+                />
+            </FormSegment>
 
-                <FormSegment label="price">
-                    <Filters size="lg" all={price} name="price" value={formik.values.price} onChange={formik.setFieldValue} />
-                </FormSegment>
-            </form>
-        </Container>
+            <FormSegment label="city" error={formik.touched.city && formik.errors.city}>
+                <Select
+                    list={cities}
+                    value={formatSelectValue(formik.values.city)}
+                    onChange={handleSelectCity}
+                    error={formik.touched.city && !!formik.errors.city}
+                />
+            </FormSegment>
+
+            <FormSegment label="district" error={formik.touched.district && formik.errors.district}>
+                <Filters
+                    size="lg"
+                    name="district"
+                    value={formik.values.district}
+                    onChange={formik.setFieldValue}
+                    all={formik.values.city === 'kyiv' ? districtKyiv : districtLviv}
+                    error={formik.touched.district && !!formik.errors.district}
+                />
+            </FormSegment>
+
+            <div className={css.flex}>
+                <Button onClick={resetForm} secondary>
+                    Очистичи
+                </Button>
+                <Button onClick={submitForm} primary>
+                    Далі
+                </Button>
+            </div>
+        </form>
     );
 };
 

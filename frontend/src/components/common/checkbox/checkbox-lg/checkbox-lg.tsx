@@ -6,19 +6,18 @@ import clsx from 'clsx';
 import css from './checkbox-lg.module.scss';
 
 interface IProps {
+    error?: boolean;
     name?: string;
     title: string;
     value: boolean;
     onChange: (value: boolean) => void;
 }
 
-const CheckboxLg = ({ name, title, value, onChange }: IProps): ReactElement => {
-    const handleClick = (): void => {
-        onChange(!value);
-    };
+const CheckboxLg = ({ error = false, name, title, value, onChange }: IProps): ReactElement => {
+    const handleClick = (): void => onChange(!value);
 
     return (
-        <button className={clsx(css.root, value && css.active)} onClick={handleClick} type="button">
+        <button className={clsx(css.root, error && css.error, value && css.active)} onClick={handleClick} type="button">
             <div className={css.checkbox}>
                 <Checkbox className={css.icon} checked={value} color="primary" inputProps={{ 'aria-label': title }} name={name} />
             </div>

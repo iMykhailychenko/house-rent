@@ -1,18 +1,5 @@
-.title {
-    margin: 2rem 0 3rem;
-    font-size: 3rem;
-    font-weight: 700;
-    text-align: center;
-}
-
 .form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 4rem;
-    border-radius: 1.5rem;
-    background: var(--gray-1);
+    display: block;
 
     .inputWrp {
         margin: 0;
@@ -22,5 +9,17 @@
         width: 100%;
         background: var(--white);
         border-radius: 0.6rem;
+    }
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    width: 100%;
+
+    button {
+        margin-right: 1rem;
     }
 }

@@ -7,6 +7,7 @@
         :global(.MuiCheckbox-colorPrimary.Mui-checked) {
             color: var(--primary);
         }
+
     }
 }
 
@@ -23,5 +24,18 @@
 
     .checkbox {
         font-size: 2.5rem !important;
+    }
+}
+
+.error {
+    color: var(--error);
+    border-color: var(--error);
+
+    :global(.MuiCheckbox-root) {
+        color: var(--error) !important;
+    }
+
+    :global(.MuiCheckbox-colorPrimary.Mui-checked) {
+        color: var(--error) !important;
     }
 }

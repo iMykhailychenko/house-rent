@@ -1,0 +1,30 @@
+:global(.black) {
+    .form {
+        background: var(--gray-1);
+    }
+}
+
+.root {
+    padding-bottom: 10rem;
+
+    .title {
+        margin: 2rem 0 3rem;
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 4rem;
+        border-radius: 1.5rem;
+        background: var(--white);
+    }
+
+    .notAuth {
+        padding: 4rem 17rem;
+    }
+}

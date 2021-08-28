@@ -7,6 +7,7 @@ import Checkbox from '../../../../common/checkbox/checkbox';
 import css from './filters.module.scss';
 
 interface IProps {
+    error?: boolean;
     size?: 'sm' | 'lg';
     all: string[];
     name: string;
@@ -14,7 +15,7 @@ interface IProps {
     onChange: (name: string, value: string[]) => void;
 }
 
-const Filters = ({ size = 'sm', all, name, value, onChange }: IProps): ReactElement => {
+const Filters = ({ error = false, size = 'sm', all, name, value, onChange }: IProps): ReactElement => {
     const handleChange = (item: string) => (active: boolean) => {
         onChange(name, active ? [...value, item] : value.filter(element => element !== item));
     };
@@ -22,7 +23,14 @@ const Filters = ({ size = 'sm', all, name, value, onChange }: IProps): ReactElem
     return (
         <div className={clsx({ [css.flex]: size === 'lg', [css.list]: size === 'sm' })}>
             {all.map(item => (
-                <Checkbox size={size} key={item} title={item} value={value.includes(item)} onChange={handleChange(item)} />
+                <Checkbox
+                    key={item}
+                    size={size}
+                    title={item}
+                    error={error}
+                    value={value.includes(item)}
+                    onChange={handleChange(item)}
+                />
             ))}
         </div>
     );

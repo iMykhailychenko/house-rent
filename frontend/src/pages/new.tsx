@@ -1,15 +1,18 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { GetServerSideProps } from 'next';
 
 import RootLayout from '../components/layout/root-layout/root-layout';
-import NewPostForm from '../components/pages/new/new-post-form/new-post-form';
 import { withStore } from '../utils/ssr';
 
 const NewPostPage = (): ReactElement => {
+    useEffect(() => {
+        document.body.classList.add('new-post-page');
+    }, []);
+
     return (
         <RootLayout>
-            <NewPostForm />
+            <NewPostPage />
         </RootLayout>
     );
 };
