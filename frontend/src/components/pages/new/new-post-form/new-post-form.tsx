@@ -1,8 +1,11 @@
 import React, { ReactElement } from 'react';
 
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import { SelectValue } from '../../../../interfaces';
+import { INewPostPayload } from '../../../../state/entities/posts/posts.interface';
+import { newPostThunk } from '../../../../state/entities/posts/posts.thunk';
 import Button from '../../../common/button/button';
 import Input from '../../../common/input/input';
 import Select from '../../../common/select/select';
@@ -15,7 +18,9 @@ import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
 
 const NewPostForm = (): ReactElement => {
-    const formik = useFormik({
+    const dispatch = useDispatch();
+
+    const formik = useFormik<INewPostPayload>({
         initialValues: {
             title: '',
             description: '',
@@ -27,7 +32,7 @@ const NewPostForm = (): ReactElement => {
         },
         validationSchema: NewPostSchema,
         onSubmit: values => {
-            console.log(values);
+            dispatch(newPostThunk(values));
         },
     });
 

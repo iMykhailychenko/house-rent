@@ -26,6 +26,10 @@
     text-align: left;
     color: var(--black);
 
+    &:hover {
+        border-color: var(--gray-8);
+    }
+
     .text {
         display: block;
         width: 100%;

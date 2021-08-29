@@ -7,9 +7,9 @@ import JoinForm from '../../../common/auth/join-form/join-form';
 import Container from '../../../layout/container/container';
 import NewPostForm from '../new-post-form/new-post-form';
 
-import css from './new-post-page-container.module.scss';
+import css from './new-post-container.module.scss';
 
-const NewPostPage = (): ReactElement => {
+const NewPostContainer = (): ReactElement => {
     const token = useAuth();
 
     return (
@@ -22,4 +22,4 @@ const NewPostPage = (): ReactElement => {
     );
 };
 
-export default NewPostPage;
+export default NewPostContainer;
