@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 const NewPostImg = (): ReactElement => {
     return (
         <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis
-            odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolores ea eligendi, est fugiat harum illum ipsa
+            laboriosam molestiae obcaecati placeat quis, tempore vero voluptatibus, voluptatum. Consequuntur esse ipsum numquam!
         </div>
     );
 };

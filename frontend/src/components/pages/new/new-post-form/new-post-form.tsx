@@ -16,9 +16,11 @@ import FormSegment from './from-segment/from-segment';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
 import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
+import { useNewPostSelector } from '../../../../state/entities/posts/posts.selector';
 
 const NewPostForm = (): ReactElement => {
     const dispatch = useDispatch();
+    const newPostState = useNewPostSelector();
 
     const formik = useFormik<INewPostPayload>({
         initialValues: {
@@ -132,7 +134,7 @@ const NewPostForm = (): ReactElement => {
                 <Button onClick={resetForm} secondary>
                     Очистичи
                 </Button>
-                <Button onClick={submitForm} primary>
+                <Button loading={newPostState.postStatus === 'loading'} onClick={submitForm} primary>
                     Далі
                 </Button>
             </div>
