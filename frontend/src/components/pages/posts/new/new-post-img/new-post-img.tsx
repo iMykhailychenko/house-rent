@@ -1,5 +1,9 @@
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
 
+import { DeleteOutline, Sync } from '@material-ui/icons';
+
+import Button from '../../../../common/button/button';
+
 import css from './new-post-img.module.scss';
 
 const NewPostImg = (): ReactElement => {
@@ -19,17 +23,34 @@ const NewPostImg = (): ReactElement => {
         }
     };
 
+    const deleteFile = (): void => {
+        setFile(null);
+    };
+
     return (
         <div className={css.root}>
-            {file && <img className={css.img} src="" alt="" />}
             <form className={css.form} action="#" method="post">
-                <label className={css.label}>
-                    <h2 className={css.title}>Upload product images:</h2>
-                    <input ref={ref} onChange={change} className={css.input} type="file" accept=".jpg, .jpeg, .png" />
-                    <button className={css.btn} onClick={click} type="button">
-                        Click to upload
-                    </button>
-                </label>
+                {file ? (
+                    <img className={css.file} src={window.URL.createObjectURL(file)} alt="" />
+                ) : (
+                    <div className={css.img}>
+                        <img src="/icons/upload.png" alt="" draggable="false" />
+                    </div>
+                )}
+
+                <input ref={ref} onChange={change} className={css.input} type="file" accept=".jpg, .jpeg, .png" />
+
+                <div className={css.flex}>
+                    {file && (
+                        <Button className={css.btn} onClick={deleteFile} secondary>
+                            <DeleteOutline />
+                        </Button>
+                    )}
+                    <Button className={css.btn} onClick={click} secondary>
+                        <Sync />
+                        <span>{file ? 'Click here to change photo' : 'Click here to upload photo'}</span>
+                    </Button>
+                </div>
             </form>
         </div>
     );
