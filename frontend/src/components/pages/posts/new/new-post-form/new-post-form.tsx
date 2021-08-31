@@ -3,20 +3,20 @@ import React, { ReactElement } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 
-import { SelectValue } from '../../../../interfaces';
-import { INewPostPayload } from '../../../../state/entities/posts/posts.interface';
-import { newPostThunk } from '../../../../state/entities/posts/posts.thunk';
-import Button from '../../../common/button/button';
-import Input from '../../../common/input/input';
-import Select from '../../../common/select/select';
-import Textarea from '../../../common/textarea/textarea';
+import { SelectValue } from '../../../../../interfaces';
+import { INewPostPayload } from '../../../../../state/entities/posts/posts.interface';
+import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
+import { newPostThunk } from '../../../../../state/entities/posts/posts.thunk';
+import Button from '../../../../common/button/button';
+import Input from '../../../../common/input/input';
+import Select from '../../../../common/select/select';
+import Textarea from '../../../../common/textarea/textarea';
 
 import Filters from './filters/filters';
 import FormSegment from './from-segment/from-segment';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
 import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
-import { useNewPostSelector } from '../../../../state/entities/posts/posts.selector';
 
 const NewPostForm = (): ReactElement => {
     const dispatch = useDispatch();

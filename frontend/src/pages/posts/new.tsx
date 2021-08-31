@@ -2,9 +2,9 @@ import React, { ReactElement, useEffect } from 'react';
 
 import { GetServerSideProps } from 'next';
 
-import RootLayout from '../components/layout/root-layout/root-layout';
-import NewPostContainer from '../components/pages/new/new-post-container/new-post-container';
-import { withStore } from '../utils/ssr';
+import RootLayout from '../../components/layout/root-layout/root-layout';
+import NewPostContainer from '../../components/pages/posts/new/new-post-container/new-post-container';
+import { withStore } from '../../utils/ssr';
 
 const NewPostPage = (): ReactElement => {
     useEffect(() => {

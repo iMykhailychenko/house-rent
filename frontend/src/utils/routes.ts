@@ -7,8 +7,8 @@ const routes = {
         reset: '/auth/reset',
     },
     posts: {
-        search: '/posts',
-        new: '/new',
+        list: '/posts',
+        new: '/posts/new',
         single: (id: string | number): string => `/posts/${id}`,
     },
 };

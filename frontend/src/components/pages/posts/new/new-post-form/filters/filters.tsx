@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import clsx from 'clsx';
 
-import Checkbox from '../../../../common/checkbox/checkbox';
+import Checkbox from '../../../../../common/checkbox/checkbox';
 
 import css from './filters.module.scss';
 

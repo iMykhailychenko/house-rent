@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     command: yarn run start
     container_name: backend
+    volumes:
+      - media_volume:/app/backend/uploads
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     env_file:
@@ -50,3 +52,4 @@ services:
 volumes:
   postgres_data:
   pgadmin:
+  media_volume:

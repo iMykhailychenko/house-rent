@@ -1,4 +1,4 @@
-import { SelectValue } from '../../../../interfaces';
+import { SelectValue } from '../../../../../interfaces';
 
 export const rooms: string[] = ['one', 'two', 'three', 'four', 'five', 'six'];
 
