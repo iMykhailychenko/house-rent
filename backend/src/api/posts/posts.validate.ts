@@ -12,7 +12,7 @@ export class DistrictValidator implements ValidatorConstraintInterface {
     validate(district: string[], args: ValidationArguments): boolean {
         const city = (args.object as Post).cityFilters || 'kyiv';
         const districts = Object.values(enumMap[city]);
-        return district.every(item => districts.includes(item));
+        return district?.every(item => districts.includes(item));
     }
 
     defaultMessage(): string {

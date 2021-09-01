@@ -12,10 +12,10 @@ import NewPostImg from '../new-post-img/new-post-img';
 import css from './new-post-container.module.scss';
 
 const NewPostContainer = (): ReactElement => {
-    const token = useAuth();
+    const [token] = useAuth();
     const newPostState = useNewPostSelector();
-    // const isImgUpload = newPostState.postStatus === 'success' && newPostState.imgStatus !== 'success';
-    const isImgUpload = true;
+    const isImgUpload = newPostState.postStatus === 'success' && newPostState.imgStatus !== 'success';
+    // const isImgUpload = true;
     const renderPostForm = (): ReactElement => (isImgUpload ? <NewPostImg /> : <NewPostForm />);
 
     return (

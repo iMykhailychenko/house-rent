@@ -4,11 +4,11 @@ import { City } from '../filters/filters.interface';
 export interface INewPostPayload {
     title: string;
     description: string;
-    house_type: string[];
-    rooms: string[];
-    price: string[];
-    city: City;
-    district: string[];
+    houseTypeFilters: string[];
+    roomFilters: string[];
+    priceFilters: string[];
+    cityFilters: City;
+    districtFilters: string[];
 }
 
 export interface INewPostState {

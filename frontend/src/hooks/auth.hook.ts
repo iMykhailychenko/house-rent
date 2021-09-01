@@ -1,11 +1,7 @@
 import { useContext } from 'react';
 
-import { Auth } from '../context/auth/auth.context';
-import { IAuthState } from '../state/entities/auth/auth.interface';
+import { Auth, AuthHook } from '../context/auth/auth.context';
 
-const useAuth = (): IAuthState | null => {
-    const [value] = useContext(Auth);
-    return value;
-};
+const useAuth = (): AuthHook => useContext(Auth);
 
 export default useAuth;

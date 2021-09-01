@@ -1,22 +1,32 @@
 import React, { createContext, ReactElement, useEffect, useState } from 'react';
 
+import axios from 'axios';
+
 import authInitialState from '../../state/entities/auth/auth.initial-state';
 import { IAuthState } from '../../state/entities/auth/auth.interface';
 import { useAuthSelector } from '../../state/entities/auth/auth.selector';
 
-export const Auth = createContext<[value: IAuthState, setValue: ((value: IAuthState) => void) | null]>([authInitialState, null]);
+export type AuthHook = [value: IAuthState | null, setAuth: (value: IAuthState | null) => void];
+export const Auth = createContext<AuthHook>([authInitialState, () => undefined]);
 
 interface IProps {
-    authServer?: IAuthState;
+    authServer?: IAuthState | null;
     children: ReactElement;
 }
 
 const AuthProvider = ({ authServer = authInitialState, children }: IProps): ReactElement => {
-    const [value, setValue] = useState<IAuthState>(authInitialState);
+    const [value, setValue] = useState<IAuthState | null>(authInitialState);
     const auth = useAuthSelector();
 
     useEffect(() => {
-        setValue(auth.accessToken ? auth : authServer);
+        if (auth.accessToken) {
+            setValue(auth);
+            axios.defaults.headers.common.Authorization = auth.accessToken.includes('Bearer')
+                ? auth.accessToken
+                : `Bearer ${auth.accessToken}`;
+        } else {
+            setValue(authServer);
+        }
     }, [auth, authServer]);
 
     return <Auth.Provider value={[value, setValue]}>{children}</Auth.Provider>;

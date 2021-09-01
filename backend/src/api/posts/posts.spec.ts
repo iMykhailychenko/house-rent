@@ -32,7 +32,6 @@ describe('Test post service', () => {
                 .send({
                     title: 'test',
                     description: 'test description',
-                    generalFilters: ['hot'],
                     roomFilters: ['one', 'two'],
                     houseTypeFilters: ['new'],
                     priceFilters: ['price_one', 'price_two'],
@@ -53,7 +52,6 @@ describe('Test post service', () => {
                 .send({
                     title: 'test',
                     description: 'test description',
-                    generalFilters: ['hot'],
                     roomFilters: ['one', 'two'],
                     houseTypeFilters: ['new'],
                     priceFilters: ['price_one', 'price_two'],
@@ -63,7 +61,7 @@ describe('Test post service', () => {
                 .set('Authorization', 'Bearer ' + token);
 
             postId = res.body.id;
-            expect(res.statusCode).toEqual(200);
+            expect(res.statusCode).toEqual(201);
             expect(res.body.id).toBeTruthy();
             expect(res.body.title).toEqual('test');
             expect(res.body.description).toEqual('test description');
@@ -77,7 +75,6 @@ describe('Test post service', () => {
                 .send({
                     title: 'test',
                     description: 'test description',
-                    generalFilters: ['hot'],
                     roomFilters: ['one', 'two'],
                     houseTypeFilters: ['new'],
                     priceFilters: ['price_one', 'price_two'],

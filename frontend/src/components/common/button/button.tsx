@@ -9,17 +9,28 @@ interface IProps {
     className?: string;
     primary?: boolean;
     secondary?: boolean;
+    disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactElement[] | ReactElement | string;
 }
 
-const Button = ({ type = 'button', className, loading, onClick, children, primary, secondary }: IProps): ReactElement => (
+const Button = ({
+    type = 'button',
+    className,
+    loading,
+    onClick,
+    children,
+    primary,
+    secondary,
+    disabled = false,
+}: IProps): ReactElement => (
     <button
         className={clsx(css.button, className, {
             [css.loading]: loading,
-            [css.primary]: primary,
-            [css.secondary]: secondary,
+            [css.primary]: primary && !disabled,
+            [css.secondary]: secondary && !disabled,
+            [css.disabled]: disabled,
         })}
         type={type}
         onClick={onClick}

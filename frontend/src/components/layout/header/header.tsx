@@ -16,7 +16,7 @@ import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
 
 const AppHeader = (): ReactElement => {
-    const token = useAuth();
+    const [token] = useAuth();
     const [drawer, setDrawer] = useState(false);
 
     const handleClose = (): void => setDrawer(false);

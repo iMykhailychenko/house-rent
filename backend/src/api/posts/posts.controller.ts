@@ -41,7 +41,6 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     const post = new Post();
     post.title = req.body.title;
     post.description = req.body.description;
-    post.generalFilters = req.body.generalFilters;
     post.roomFilters = req.body.roomFilters;
     post.houseTypeFilters = req.body.houseTypeFilters;
     post.priceFilters = req.body.priceFilters;
@@ -58,5 +57,5 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
         throw new ErrorNormalize(400, error);
     });
 
-    res.json(post);
+    res.status(201).json(post);
 });

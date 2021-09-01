@@ -27,7 +27,7 @@ export class Post {
     @IsOptional()
     views: number;
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', default: [], nullable: true })
     @IsArray()
     @IsEnum(GENERAL_FILTERS, { each: true })
     @IsOptional()

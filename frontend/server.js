@@ -4,7 +4,6 @@ const { createServer } = require('http');
 const { parse } = require('url');
 
 const PORT = process.env.FRONTEND_PORT || 3000;
-const HOST = process.env.FRONTEND_HOST || '0.0.0.0';
 
 const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = app.getRequestHandler();
@@ -19,12 +18,12 @@ app.prepare()
             process.on('SIGILL', signal => {
                 console.log(`Frontend server error: ${signal}`);
             });
-        }).listen(PORT, HOST, error => {
+        }).listen(PORT, error => {
             if (error) {
                 console.log(`Frontend server error: ${error}`);
                 return;
             }
-            console.log(`Front-end is run on port: ${PORT}, end host: ${HOST}`);
+            console.log(`Front-end is run on port: ${PORT}`);
         });
     })
     .catch(error => {

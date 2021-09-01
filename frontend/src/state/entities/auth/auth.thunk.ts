@@ -8,7 +8,7 @@ import routes from '../../../utils/routes';
 import { profileInfoThunk } from '../profile/profile.thunk';
 
 import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
-import authServices from './uath.services';
+import authServices from './auth.services';
 
 export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
     'AUTH/LOGIN',
@@ -26,6 +26,7 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
             console.dir(error.response || error);
             delete axios.defaults.headers.common.Authorization;
             return { accessToken: null } as IAuthResponse;
+            throw new Error();
         } finally {
             modal.close();
         }
@@ -33,11 +34,7 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
 );
 
 export const authJoinThunk = createAsyncThunk<void, IJoinPayload>('AUTH/JOIN', async (payload: IJoinPayload) => {
-    try {
-        const { status } = await authServices.join(payload);
-        if (status < 200 || status >= 300) throw new Error();
-        window.location.href = routes.auth.success;
-    } catch (error) {
-        console.dir(error?.response?.data?.message);
-    }
+    const { status } = await authServices.join(payload);
+    if (status < 200 || status >= 300) throw new Error();
+    window.location.href = routes.auth.success;
 });

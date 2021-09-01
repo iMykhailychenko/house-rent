@@ -45,8 +45,20 @@
 
     &:hover,
     &:focus {
-        background: var(--gray-4);
-        opacity: 0.5;
+        background: var(--gray-2);
+        color: var(--primary);
+    }
+}
+
+.disabled {
+    background: var(--gray-3);
+    color: var(--gray-5);
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+        background: var(--gray-3);
+        opacity: 1;
     }
 }
 

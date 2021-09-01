@@ -2,7 +2,7 @@ const endpointsMap = {
     development() {
         return {
             ssr: (path = ''): string => 'http://backend:8000' + path,
-            browser: (path = ''): string => 'http://backend:8000' + path,
+            browser: (path = ''): string => 'http://localhost:8000' + path,
         };
     },
 

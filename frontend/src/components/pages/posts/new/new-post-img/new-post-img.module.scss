@@ -17,29 +17,11 @@
     width: 20rem;
     border-radius: 50%;
     background: var(--secondary);
+    cursor: pointer;
 
     img {
         height: 10rem;
         width: 10rem;
-    }
-}
-
-.title {
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-.input {
-    display: none;
-}
-
-.flex {
-    display: flex;
-    margin-top: 2rem;
-
-    button {
-        margin: 0 1rem;
     }
 }
 
@@ -48,6 +30,35 @@
     height: 40rem;
     object-fit: cover;
     border-radius: 1rem;
+    cursor: pointer;
+}
+
+.title {
+    max-width: 30rem;
+    margin: 0 auto 3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.text {
+    max-width: 30rem;
+    margin: 0 auto 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.input {
+    display: none;
+}
+
+.flex {
+    display: flex;
+    margin-top: 4rem;
+
+    button {
+        margin: 0 0.5rem;
+    }
 }
 
 .btn {
@@ -63,4 +74,9 @@
             margin: 0.3rem 0 0 0.6rem;
         }
     }
+}
+
+.progress {
+    margin: 4rem auto 0;
+    width: 30rem;
 }

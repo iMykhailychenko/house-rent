@@ -26,11 +26,11 @@ const NewPostForm = (): ReactElement => {
         initialValues: {
             title: '',
             description: '',
-            house_type: [],
-            rooms: [],
-            price: [],
-            city: 'kyiv',
-            district: [],
+            houseTypeFilters: [],
+            roomFilters: [],
+            priceFilters: [],
+            cityFilters: 'kyiv',
+            districtFilters: [],
         },
         validationSchema: NewPostSchema,
         onSubmit: values => {
@@ -39,8 +39,8 @@ const NewPostForm = (): ReactElement => {
     });
 
     const handleSelectCity = (value: SelectValue): void => {
-        formik.setFieldValue('city', value.id);
-        formik.setFieldValue('district', []);
+        formik.setFieldValue('cityFilters', value.id);
+        formik.setFieldValue('districtFilters', []);
     };
 
     const resetForm = () => formik.resetForm();
@@ -78,55 +78,55 @@ const NewPostForm = (): ReactElement => {
                 />
             </FormSegment>
 
-            <FormSegment label="house_type" error={formik.touched.house_type && formik.errors.house_type}>
+            <FormSegment label="house_type" error={formik.touched.houseTypeFilters && formik.errors.houseTypeFilters}>
                 <Filters
                     all={houseType}
-                    name="house_type"
-                    value={formik.values.house_type}
+                    name="houseTypeFilters"
+                    value={formik.values.houseTypeFilters}
                     onChange={formik.setFieldValue}
-                    error={formik.touched.house_type && !!formik.errors.house_type}
+                    error={formik.touched.houseTypeFilters && !!formik.errors.houseTypeFilters}
                 />
             </FormSegment>
 
-            <FormSegment label="rooms" error={formik.touched.rooms && formik.errors.rooms}>
+            <FormSegment label="rooms" error={formik.touched.roomFilters && formik.errors.roomFilters}>
                 <Filters
                     size="lg"
                     all={rooms}
-                    name="rooms"
-                    value={formik.values.rooms}
+                    name="roomFilters"
+                    value={formik.values.roomFilters}
                     onChange={formik.setFieldValue}
-                    error={formik.touched.rooms && !!formik.errors.rooms}
+                    error={formik.touched.roomFilters && !!formik.errors.roomFilters}
                 />
             </FormSegment>
 
-            <FormSegment label="price" error={formik.touched.price && formik.errors.price}>
+            <FormSegment label="price" error={formik.touched.priceFilters && formik.errors.priceFilters}>
                 <Filters
                     size="sm"
                     all={price}
-                    name="price"
-                    value={formik.values.price}
+                    name="priceFilters"
+                    value={formik.values.priceFilters}
                     onChange={formik.setFieldValue}
-                    error={formik.touched.price && !!formik.errors.price}
+                    error={formik.touched.priceFilters && !!formik.errors.priceFilters}
                 />
             </FormSegment>
 
-            <FormSegment label="city" error={formik.touched.city && formik.errors.city}>
+            <FormSegment label="city" error={formik.touched.cityFilters && formik.errors.cityFilters}>
                 <Select
                     list={cities}
-                    value={formatSelectValue(formik.values.city)}
+                    value={formatSelectValue(formik.values.cityFilters)}
                     onChange={handleSelectCity}
-                    error={formik.touched.city && !!formik.errors.city}
+                    error={formik.touched.cityFilters && !!formik.errors.cityFilters}
                 />
             </FormSegment>
 
-            <FormSegment label="district" error={formik.touched.district && formik.errors.district}>
+            <FormSegment label="district" error={formik.touched.districtFilters && formik.errors.districtFilters}>
                 <Filters
                     size="lg"
-                    name="district"
-                    value={formik.values.district}
+                    name="districtFilters"
+                    value={formik.values.districtFilters}
                     onChange={formik.setFieldValue}
-                    all={formik.values.city === 'kyiv' ? districtKyiv : districtLviv}
-                    error={formik.touched.district && !!formik.errors.district}
+                    all={formik.values.cityFilters === 'kyiv' ? districtKyiv : districtLviv}
+                    error={formik.touched.districtFilters && !!formik.errors.districtFilters}
                 />
             </FormSegment>
 
