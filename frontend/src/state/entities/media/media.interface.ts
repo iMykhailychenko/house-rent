@@ -6,3 +6,6 @@ export interface IMediaState {
     url: string | null;
 }
 
+export interface IMediaResponse {
+    url: string;
+}

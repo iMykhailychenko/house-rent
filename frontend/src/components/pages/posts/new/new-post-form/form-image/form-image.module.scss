@@ -1,0 +1,22 @@
+.img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20rem;
+        width: 20rem;
+        margin-bottom: 4rem;
+        border-radius: 50%;
+        background: var(--secondary);
+    }
+
+    img {
+        height: 10rem;
+        width: 10rem;
+        object-fit: contain;
+    }
+}

@@ -17,6 +17,8 @@ import FormSegment from './from-segment/from-segment';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
 import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
+import FormSeparator from './form-separator/form-separator';
+import FormImage from './form-image/form-image';
 
 const NewPostForm = (): ReactElement => {
     const dispatch = useDispatch();
@@ -48,6 +50,7 @@ const NewPostForm = (): ReactElement => {
 
     return (
         <form action="#" method="post" className={css.form}>
+            <FormImage />
             <FormSegment label="title" id="login_title" error={formik.touched.title && formik.errors.title}>
                 <Input
                     id="new_post_title"
@@ -77,7 +80,7 @@ const NewPostForm = (): ReactElement => {
                     name="description"
                 />
             </FormSegment>
-
+            <FormSeparator />
             <FormSegment label="house_type" error={formik.touched.houseTypeFilters && formik.errors.houseTypeFilters}>
                 <Filters
                     all={houseType}
@@ -98,7 +101,7 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.roomFilters && !!formik.errors.roomFilters}
                 />
             </FormSegment>
-
+            <FormSeparator />
             <FormSegment label="price" error={formik.touched.priceFilters && formik.errors.priceFilters}>
                 <Filters
                     size="sm"
@@ -109,7 +112,7 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.priceFilters && !!formik.errors.priceFilters}
                 />
             </FormSegment>
-
+            <FormSeparator />
             <FormSegment label="city" error={formik.touched.cityFilters && formik.errors.cityFilters}>
                 <Select
                     list={cities}

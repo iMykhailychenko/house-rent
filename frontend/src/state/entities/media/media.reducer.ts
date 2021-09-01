@@ -1,7 +1,22 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { mediaInitialState } from './media.initial-state';
-import { IMediaState } from './media.interface';
+import { IMediaResponse, IMediaState } from './media.interface';
+import { mediaServices } from './media.services';
+
+export const mediaThunk = createAsyncThunk<IMediaResponse, File>('MEDIA/UPLOAD', async (payload: File, { dispatch }) => {
+    const form = new FormData();
+    form.append('image', payload);
+
+    const { data, status } = await mediaServices.upload(form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (event: ProgressEvent): void => {
+            dispatch(updateProgress(Math.round((100 * event.loaded) / event.total)));
+        },
+    });
+    if (status < 200 || status >= 300) throw new Error();
+    return data;
+});
 
 const mediaSlice = createSlice({
     name: 'MEDIA',
@@ -11,8 +26,20 @@ const mediaSlice = createSlice({
             state.progress = action.payload;
         },
     },
+    extraReducers: builder => {
+        builder.addCase(mediaThunk.pending, (state: IMediaState) => {
+            state.status = 'loading';
+        });
+        builder.addCase(mediaThunk.fulfilled, (state: IMediaState, action: PayloadAction<IMediaResponse>) => {
+            state.status = 'success';
+            state.url = action.payload.url;
+        });
+        builder.addCase(mediaThunk.rejected, (state: IMediaState) => {
+            state.status = 'error';
+        });
+    },
 });
 
-export const {} = mediaSlice.actions;
+export const { updateProgress } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

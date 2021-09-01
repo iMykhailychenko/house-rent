@@ -27,7 +27,12 @@ export class Post {
     @IsOptional()
     views: number;
 
-    @Column({ type: 'simple-array', default: [], nullable: true })
+    @Column({ type: 'varchar', default: null, nullable: true })
+    @IsString()
+    @IsOptional()
+    image: string;
+
+    @Column({ type: 'simple-array', default: null, nullable: true })
     @IsArray()
     @IsEnum(GENERAL_FILTERS, { each: true })
     @IsOptional()

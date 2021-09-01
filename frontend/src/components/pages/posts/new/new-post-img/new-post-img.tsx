@@ -1,7 +1,10 @@
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
 
 import { DeleteOutline } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
 
+import { mediaThunk } from '../../../../../state/entities/media/media.reducer';
+import { useUploadMediaSelector } from '../../../../../state/entities/media/media.selector';
 import Button from '../../../../common/button/button';
 import Progress from '../../../../common/progress/progress';
 
@@ -10,6 +13,9 @@ import css from './new-post-img.module.scss';
 const NewPostImg = (): ReactElement => {
     const ref = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
+
+    const dispatch = useDispatch();
+    const uploadState = useUploadMediaSelector();
 
     const click = (): void => {
         if (ref.current) {
@@ -26,6 +32,10 @@ const NewPostImg = (): ReactElement => {
 
     const deleteFile = (): void => {
         setFile(null);
+    };
+
+    const upload = (): void => {
+        if (file) dispatch(mediaThunk(file));
     };
 
     return (
@@ -45,22 +55,24 @@ const NewPostImg = (): ReactElement => {
 
                 <input ref={ref} onChange={change} className={css.input} type="file" accept=".jpg, .jpeg, .png" />
 
-                <div className={css.progress}>
-                    <Progress number={10} />
-                </div>
-
-                {file && (
-                    <div className={css.flex}>
-                        <Button className={css.btn} onClick={deleteFile} secondary>
-                            <DeleteOutline />
-                        </Button>
+                {uploadState.status === 'loading' || uploadState.status === 'success' ? (
+                    <div className={css.progress}>
+                        <Progress number={uploadState.progress} />
                     </div>
+                ) : (
+                    file && (
+                        <div className={css.flex}>
+                            <Button className={css.btn} onClick={deleteFile} secondary>
+                                <DeleteOutline />
+                            </Button>
+                        </div>
+                    )
                 )}
 
                 <div className={css.flex}>
                     <Button secondary>Публікувати без фото</Button>
-                    <Button primary disabled={!file}>
-                        Далі
+                    <Button primary disabled={!file} onClick={upload}>
+                        Продовжити
                     </Button>
                 </div>
             </form>
