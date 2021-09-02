@@ -13,12 +13,12 @@ import Select from '../../../../common/select/select';
 import Textarea from '../../../../common/textarea/textarea';
 
 import Filters from './filters/filters';
+import FormImage from './form-image/form-image';
+import FormSeparator from './form-separator/form-separator';
 import FormSegment from './from-segment/from-segment';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
 import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
-import FormSeparator from './form-separator/form-separator';
-import FormImage from './form-image/form-image';
 
 const NewPostForm = (): ReactElement => {
     const dispatch = useDispatch();
@@ -51,6 +51,7 @@ const NewPostForm = (): ReactElement => {
     return (
         <form action="#" method="post" className={css.form}>
             <FormImage />
+            <FormSeparator />
             <FormSegment label="title" id="login_title" error={formik.touched.title && formik.errors.title}>
                 <Input
                     id="new_post_title"
@@ -63,7 +64,6 @@ const NewPostForm = (): ReactElement => {
                     name="title"
                 />
             </FormSegment>
-
             <FormSegment
                 label="description"
                 id="new_post_description"
@@ -90,7 +90,6 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.houseTypeFilters && !!formik.errors.houseTypeFilters}
                 />
             </FormSegment>
-
             <FormSegment label="rooms" error={formik.touched.roomFilters && formik.errors.roomFilters}>
                 <Filters
                     size="lg"
@@ -121,7 +120,6 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.cityFilters && !!formik.errors.cityFilters}
                 />
             </FormSegment>
-
             <FormSegment label="district" error={formik.touched.districtFilters && formik.errors.districtFilters}>
                 <Filters
                     size="lg"
@@ -132,7 +130,7 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.districtFilters && !!formik.errors.districtFilters}
                 />
             </FormSegment>
-
+            <FormSeparator />
             <div className={css.flex}>
                 <Button onClick={resetForm} secondary>
                     Очистичи

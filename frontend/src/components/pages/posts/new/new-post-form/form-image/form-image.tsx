@@ -5,7 +5,7 @@ import css from './form-image.module.scss';
 const FormImage = (): ReactElement => (
     <div className={css.img}>
         <div className={css.inner}>
-            <img src="/icons/victory.png" alt="" draggable="false" />
+            <img src="/icons/form.png" alt="" draggable="false" />
         </div>
     </div>
 );

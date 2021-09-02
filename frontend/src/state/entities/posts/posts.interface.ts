@@ -24,6 +24,7 @@ export interface INewPostResponse {
     houseTypeFilters: string[];
     priceFilters: string[];
     roomFilters: string[];
+    isActive: boolean;
     user: IUser;
 }
 

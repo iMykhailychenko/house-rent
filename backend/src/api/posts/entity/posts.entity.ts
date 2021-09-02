@@ -1,5 +1,16 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
+import {
+    IsArray,
+    IsBoolean,
+    IsDate,
+    IsEnum,
+    IsNumber,
+    IsOptional,
+    IsString,
+    IsUrl,
+    Length,
+    Validate
+} from 'class-validator';
 import { User } from '../../users/entity/users.entity';
 import { City, DISTRICT_FILTERS, GENERAL_FILTERS, HOUSE_TYPE_FILTERS, PRICE_FILTERS, ROOM_FILTERS } from '../posts.interface';
 import { DistrictValidator } from '../posts.validate';
@@ -8,6 +19,11 @@ import { DistrictValidator } from '../posts.validate';
 export class Post {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({ type: 'boolean', default: false, nullable: true })
+    @IsBoolean()
+    @IsOptional()
+    isActive: boolean;
 
     @Column({ type: 'varchar', length: 100 })
     @Length(1, 100)
@@ -28,7 +44,7 @@ export class Post {
     views: number;
 
     @Column({ type: 'varchar', default: null, nullable: true })
-    @IsString()
+    @IsUrl()
     @IsOptional()
     image: string;
 

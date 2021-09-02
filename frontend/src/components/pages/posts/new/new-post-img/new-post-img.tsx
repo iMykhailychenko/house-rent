@@ -5,7 +5,10 @@ import { useDispatch } from 'react-redux';
 
 import { mediaThunk } from '../../../../../state/entities/media/media.reducer';
 import { useUploadMediaSelector } from '../../../../../state/entities/media/media.selector';
+import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
+import routes from '../../../../../utils/routes';
 import Button from '../../../../common/button/button';
+import Link from '../../../../common/link/link';
 import Progress from '../../../../common/progress/progress';
 
 import css from './new-post-img.module.scss';
@@ -16,6 +19,7 @@ const NewPostImg = (): ReactElement => {
 
     const dispatch = useDispatch();
     const uploadState = useUploadMediaSelector();
+    const newPost = useNewPostSelector();
 
     const click = (): void => {
         if (ref.current) {
@@ -69,12 +73,16 @@ const NewPostImg = (): ReactElement => {
                     )
                 )}
 
-                <div className={css.flex}>
-                    <Button secondary>Публікувати без фото</Button>
-                    <Button primary disabled={!file} onClick={upload}>
-                        Продовжити
-                    </Button>
-                </div>
+                {newPost.data?.id && (
+                    <div className={css.flex}>
+                        <Link href={routes.posts.single(newPost.data?.id)} type="button" secondary>
+                            Продовжити без фото
+                        </Link>
+                        <Button primary disabled={!file} onClick={upload}>
+                            Далі
+                        </Button>
+                    </div>
+                )}
             </form>
         </div>
     );

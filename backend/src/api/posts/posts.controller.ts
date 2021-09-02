@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validate } from 'class-validator';
+import { isURL, validate } from 'class-validator';
 
 import errorWrapper from '../../utils/errorWrapper';
 import database from '../../database';
@@ -58,4 +58,27 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     });
 
     res.status(201).json(post);
+});
+
+export const updatePostController = errorWrapper(async (req, res) => {
+    const repository = database.connection.getRepository(Post);
+    const post = await repository.findOne({ id: +req.params.postId }).catch(error => {
+        throw new ErrorNormalize(400, error);
+    });
+    if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
+
+    const bodyArr: [key: string, value: never][] = Object.entries(req.body);
+    for (const item of bodyArr) {
+        if (['isActive', 'views', 'user', 'creationDate'].includes(item[0])) continue;
+        post[item[0] as keyof Post] = item[1];
+    }
+
+    const errors = await validate(post);
+    if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
+
+    await repository.save(post).catch(error => {
+        throw new ErrorNormalize(400, error);
+    });
+
+    res.json(post);
 });

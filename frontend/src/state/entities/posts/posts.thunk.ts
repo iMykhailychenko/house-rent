@@ -8,3 +8,9 @@ export const newPostThunk = createAsyncThunk<INewPostResponse, INewPostPayload>(
     if (status < 200 || status >= 300) throw new Error();
     return data;
 });
+
+// export const editPostImg = createAsyncThunk<INewPostResponse, string>('POSTS/NEW', async (payload: string) => {
+//     const { data, status } = await postsServices.newPost(payload);
+//     if (status < 200 || status >= 300) throw new Error();
+//     return data;
+// });

@@ -15,7 +15,6 @@ const NewPostContainer = (): ReactElement => {
     const [token] = useAuth();
     const newPostState = useNewPostSelector();
     const isImgUpload = newPostState.postStatus === 'success' && newPostState.imgStatus !== 'success';
-    // const isImgUpload = true;
     const renderPostForm = (): ReactElement => (isImgUpload ? <NewPostImg /> : <NewPostForm />);
 
     return (
