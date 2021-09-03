@@ -2,8 +2,8 @@ import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'r
 
 import { DeleteOutline } from '@material-ui/icons';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { mediaThunk, resetUploads } from '../../../../../state/entities/media/media.reducer';
 import { useUploadMediaSelector } from '../../../../../state/entities/media/media.selector';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
@@ -19,12 +19,10 @@ const NewPostImg = (): ReactElement => {
     const ref = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
 
-    const dispatch = useDispatch();
+    const history = useRouter();
+    const dispatch = useAppDispatch();
     const newPost = useNewPostSelector();
     const uploadState = useUploadMediaSelector();
-
-    const history = useRouter();
-    const postId = +String(history.query.postId);
 
     const click = (): void => {
         if (ref.current) {
@@ -43,9 +41,15 @@ const NewPostImg = (): ReactElement => {
         setFile(null);
     };
 
-    const upload = (): void => {
-        if (file) {
-            dispatch(mediaThunk(file));
+    const upload = async (): Promise<void> => {
+        if (file && newPost.data?.id) {
+            try {
+                const image = await dispatch(mediaThunk(file)).unwrap();
+                await dispatch(editPost({ id: newPost.data.id, body: { image: image.url } }));
+                history.push(routes.posts.single(newPost.data.id));
+            } catch (error) {
+                console.log(error?.response || error);
+            }
         }
     };
 
@@ -53,17 +57,9 @@ const NewPostImg = (): ReactElement => {
         dispatch(resetUploads());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (uploadState.status === 'success' && uploadState.url) {
-            dispatch(editPost({ id: postId, body: { image: uploadState.url } }));
-        }
-    }, [uploadState, postId, dispatch]);
-
     return (
         <div className={css.root}>
-            <h3 className={css.title}>
-                Libero magnam nesciunt nihil perspiciatis porro quis repellendus sunt tempora vitae voluptatem voluptatibus.
-            </h3>
+            <h3 className={css.title}>Libero magnam nesciunt nihil perspiciatis porro.</h3>
             <form className={css.form} action="#" method="post">
                 <p className={css.text}>{file ? 'Click to change photo' : 'Click to upload photo'}</p>
                 {file ? (

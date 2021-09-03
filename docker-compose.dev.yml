@@ -5,7 +5,7 @@ services:
     container_name: backend
     build: ./backend
     restart: unless-stopped
-    command: yarn run start
+    command: yarn run dev
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     env_file:

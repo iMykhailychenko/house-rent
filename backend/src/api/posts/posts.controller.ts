@@ -62,11 +62,11 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
 
 export const updatePostController = errorWrapper(async (req: Request & { user: User }, res) => {
     const repository = database.connection.getRepository(Post);
-    const post = await repository.findOne({ id: +req.params.postId }).catch(error => {
+    const post = await repository.findOne({ id: +req.params.postId }, { relations: ['user'] }).catch(error => {
         throw new ErrorNormalize(400, error);
     });
     if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
-    if (post.user.id !== req.user.id) throw new ErrorNormalize(403, 'this user does not have permissions to edit the post');
+    if (post.user?.id !== req.user?.id) throw new ErrorNormalize(403, 'this user does not have permissions to edit the post');
 
     const bodyArr: [key: string, value: never][] = Object.entries(req.body);
     for (const item of bodyArr) {
