@@ -7,4 +7,8 @@ export const postsInitialState: IPostState = {
         data: null,
         error: null,
     },
+    edit: {
+        status: 'idle',
+        error: null,
+    },
 };

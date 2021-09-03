@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { postsInitialState } from './posts.initial-state';
 import { INewPostResponse, IPostState } from './posts.interface';
-import { newPostThunk } from './posts.thunk';
+import { editPost, newPostThunk } from './posts.thunk';
 
 const postsSlice = createSlice({
     name: 'POSTS',
@@ -18,6 +18,17 @@ const postsSlice = createSlice({
         });
         builder.addCase(newPostThunk.rejected, (state: IPostState) => {
             state.new.postStatus = 'error';
+        });
+
+        builder.addCase(editPost.pending, (state: IPostState) => {
+            state.edit.status = 'loading';
+        });
+        builder.addCase(editPost.fulfilled, (state: IPostState) => {
+            state.edit.status = 'success';
+        });
+        builder.addCase(editPost.rejected, (state: IPostState) => {
+            state.edit.status = 'error';
+            state.edit.error = 'error';
         });
     },
 });

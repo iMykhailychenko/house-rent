@@ -1,11 +1,13 @@
-import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
+import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'react';
 
 import { DeleteOutline } from '@material-ui/icons';
+import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
-import { mediaThunk } from '../../../../../state/entities/media/media.reducer';
+import { mediaThunk, resetUploads } from '../../../../../state/entities/media/media.reducer';
 import { useUploadMediaSelector } from '../../../../../state/entities/media/media.selector';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
+import { editPost } from '../../../../../state/entities/posts/posts.thunk';
 import routes from '../../../../../utils/routes';
 import Button from '../../../../common/button/button';
 import Link from '../../../../common/link/link';
@@ -18,8 +20,11 @@ const NewPostImg = (): ReactElement => {
     const [file, setFile] = useState<File | null>(null);
 
     const dispatch = useDispatch();
-    const uploadState = useUploadMediaSelector();
     const newPost = useNewPostSelector();
+    const uploadState = useUploadMediaSelector();
+
+    const history = useRouter();
+    const postId = +String(history.query.postId);
 
     const click = (): void => {
         if (ref.current) {
@@ -39,8 +44,20 @@ const NewPostImg = (): ReactElement => {
     };
 
     const upload = (): void => {
-        if (file) dispatch(mediaThunk(file));
+        if (file) {
+            dispatch(mediaThunk(file));
+        }
     };
+
+    useEffect(() => {
+        dispatch(resetUploads());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (uploadState.status === 'success' && uploadState.url) {
+            dispatch(editPost({ id: postId, body: { image: uploadState.url } }));
+        }
+    }, [uploadState, postId, dispatch]);
 
     return (
         <div className={css.root}>

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { isURL, validate } from 'class-validator';
+import { validate } from 'class-validator';
 
 import errorWrapper from '../../utils/errorWrapper';
 import database from '../../database';
@@ -60,12 +60,13 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     res.status(201).json(post);
 });
 
-export const updatePostController = errorWrapper(async (req, res) => {
+export const updatePostController = errorWrapper(async (req: Request & { user: User }, res) => {
     const repository = database.connection.getRepository(Post);
     const post = await repository.findOne({ id: +req.params.postId }).catch(error => {
         throw new ErrorNormalize(400, error);
     });
     if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
+    if (post.user.id !== req.user.id) throw new ErrorNormalize(403, 'this user does not have permissions to edit the post');
 
     const bodyArr: [key: string, value: never][] = Object.entries(req.body);
     for (const item of bodyArr) {

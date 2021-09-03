@@ -25,6 +25,11 @@ const mediaSlice = createSlice({
         updateProgress(state: IMediaState, action: PayloadAction<number>) {
             state.progress = action.payload;
         },
+        resetUploads(state: IMediaState) {
+            state.status = 'idle';
+            state.progress = 0;
+            state.url = null;
+        },
     },
     extraReducers: builder => {
         builder.addCase(mediaThunk.pending, (state: IMediaState) => {
@@ -40,6 +45,6 @@ const mediaSlice = createSlice({
     },
 });
 
-export const { updateProgress } = mediaSlice.actions;
+export const { updateProgress, resetUploads } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

@@ -12,6 +12,11 @@ export interface INewPostPayload {
     districtFilters: string[];
 }
 
+export interface IEditPostPayload {
+    id: number;
+    body: Partial<INewPostResponse>;
+}
+
 export interface INewPostResponse {
     id: number;
     title: string;
@@ -35,6 +40,12 @@ export interface INewPostState {
     error: string | null;
 }
 
+export interface IEditPostState {
+    status: ThunkStatuses;
+    error: string | null;
+}
+
 export interface IPostState {
     new: INewPostState;
+    edit: IEditPostState;
 }
