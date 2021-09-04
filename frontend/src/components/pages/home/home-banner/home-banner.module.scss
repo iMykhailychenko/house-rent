@@ -59,7 +59,8 @@
 
         .animation {
             margin-top: 4rem;
-            width: 60rem;
+            width: 45%;
+            max-width: 60rem;
 
             :global(.appear) {
                 position: relative;
