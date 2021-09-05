@@ -1,11 +1,21 @@
 import React, { ReactElement } from 'react';
 
-import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
-const SinglePost = (): ReactElement => {
-    const router = useRouter();
+import RootLayout from '../../components/layout/root-layout/root-layout';
+import SinglePostComponent from '../../components/pages/posts/single/single';
+import { singlePostThunk } from '../../state/entities/posts/posts.thunk';
+import { withStore } from '../../utils/ssr';
 
-    return <div>{router.query.postId}</div>;
-};
+const SinglePost = (): ReactElement => (
+    <RootLayout>
+        <SinglePostComponent />
+    </RootLayout>
+);
+
+export const getServerSideProps: GetServerSideProps = withStore<null>(async ctx => {
+    const postId = +String(ctx.params?.postId || 0);
+    await ctx.store?.dispatch(singlePostThunk(postId));
+});
 
 export default SinglePost;

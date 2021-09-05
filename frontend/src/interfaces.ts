@@ -1,6 +1,3 @@
-import { City, SEARCH_FILTERS } from './state/entities/filters/filters.interface';
-import { generalFilters, houseTypeFilters, priceFilters, roomFilters } from './config/filters.config';
-
 export interface IChips {
     name: string;
     active: boolean;

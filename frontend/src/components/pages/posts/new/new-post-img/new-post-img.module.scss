@@ -37,12 +37,40 @@
     cursor: pointer;
     transition: 0.3s ease-in-out;
 
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 3;
+        transform: translate(-50%, -50%);
+        height: 0;
+        width: 0;
+        border-radius: 50%;
+        background: var(--secondary);
+        transition: 0.3s ease-in-out;
+        pointer-events: none;
+    }
+
     &:hover {
-        background: var(--primary);
-        box-shadow: 0 0 0 12rem var(--secondary);
+        &::before {
+            z-index: 2;
+            width: 180vh;
+            height: 180vh;
+            border-radius: 0;
+        }
+
+        &::after {
+            width: 25rem;
+            height: 25rem;
+            background: var(--primary);
+        }
     }
 
     img {
+        position: relative;
+        z-index: 4;
         height: 10rem;
         width: 10rem;
     }

@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { mediaThunk, resetUploads } from '../../../../../state/entities/media/media.reducer';
 import { useUploadMediaSelector } from '../../../../../state/entities/media/media.selector';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
-import { editPost } from '../../../../../state/entities/posts/posts.thunk';
+import { editPostThunk } from '../../../../../state/entities/posts/posts.thunk';
 import routes from '../../../../../utils/routes';
 import Button from '../../../../common/button/button';
 import Link from '../../../../common/link/link';
@@ -37,16 +37,14 @@ const NewPostImg = (): ReactElement => {
         }
     };
 
-    const deleteFile = (): void => {
-        setFile(null);
-    };
+    const deleteFile = (): void => setFile(null);
 
     const upload = async (): Promise<void> => {
         if (file && newPost.data?.id) {
             try {
                 const image = await dispatch(mediaThunk(file)).unwrap();
-                await dispatch(editPost({ id: newPost.data.id, body: { image: image.url } }));
-                history.push(routes.posts.single(newPost.data.id));
+                await dispatch(editPostThunk({ id: newPost.data.id, body: { image: image.url } }));
+                history.push(routes.posts.single(newPost.data.id), undefined, { shallow: true });
             } catch (error) {
                 console.log(error?.response || error);
             }

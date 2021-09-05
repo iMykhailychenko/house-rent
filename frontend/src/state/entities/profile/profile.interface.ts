@@ -15,5 +15,5 @@ export interface IUser {
 
 export interface IProfileInfoState {
     status: ThunkStatuses;
-    data: IUser | null;
+    data: IUser;
 }

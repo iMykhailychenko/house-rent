@@ -2,6 +2,117 @@
 
 exports[`Home page matches snapshot 1`] = `
 <DocumentFragment>
+  <header
+    class="header"
+  >
+    <div
+      class="inner md root"
+    >
+      <div
+        class="item"
+      >
+        <a
+          class="home button secondary"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+            />
+          </svg>
+        </a>
+        <button
+          class="button button menu"
+          type="button"
+        >
+          <span
+            class="children"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+        </button>
+        <div
+          class="root"
+        >
+          <button
+            class="button active"
+            type="button"
+          >
+            ua
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            ru
+          </button>
+        </div>
+      </div>
+      <div
+        class="item"
+      >
+        <button
+          class="button root"
+          type="button"
+        >
+          <span
+            class="children"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
+              />
+            </svg>
+          </span>
+        </button>
+        <div
+          class="root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+          <button
+            class="button"
+            type="button"
+          >
+            увійти
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            зареєструватися
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
   <h1
     class="title"
   >
@@ -11,7 +122,7 @@ exports[`Home page matches snapshot 1`] = `
     class="root section"
   >
     <div
-      class="md root"
+      class="lg root"
     >
       <div
         class="root tenant"
@@ -25,13 +136,13 @@ exports[`Home page matches snapshot 1`] = `
           >
             <span
               class="active"
-              style="min-width: 19rem;"
+              style="min-width: 21rem;"
             >
               Орендарям
             </span>
             <span
               class=""
-              style="min-width: 19rem;"
+              style="min-width: 21rem;"
             >
               Власникам / рієлторам
             </span>
@@ -51,124 +162,17 @@ exports[`Home page matches snapshot 1`] = `
             </p>
             <a
               class="button primary appear appear-active"
-              href="/new"
+              href="/posts/new"
             >
               Створити оголошення
             </a>
           </div>
         </div>
-        <svg
+        <img
+          alt=""
           class="img appear appear-active"
-          fill="none"
-          height="590"
-          viewBox="0 0 645 590"
-          width="645"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g
-            clip-path="url(#clip0)"
-          >
-            <path
-              d="M593.748 142.733H591.798V191.273H593.748V142.733Z"
-              fill="var(--c-6)"
-            />
-            <path
-              d="M631.296 111H619.373V567H631.296V111Z"
-              fill="var(--c-6)"
-            />
-            <path
-              d="M676.817 151H545.183C543.739 151 542.312 150.702 540.996 150.126C539.679 149.55 538.505 148.708 537.549 147.658C536.593 146.607 535.879 145.371 535.453 144.032C535.027 142.693 534.9 141.281 535.079 139.89L551.851 9.65791C552.162 7.26885 553.36 5.0718 555.22 3.47812C557.08 1.88443 559.475 1.00341 561.956 1H660.044C662.525 1.00341 664.92 1.88443 666.78 3.47812C668.64 5.0718 669.838 7.26885 670.149 9.65791L686.921 139.89C687.1 141.281 686.973 142.693 686.547 144.032C686.121 145.371 685.407 146.607 684.451 147.658C683.495 148.708 682.321 149.55 681.004 150.126C679.688 150.702 678.261 151 676.817 151V151Z"
-              fill="var(--c-7)"
-            />
-            <path
-              d="M593 197C596.866 197 600 193.866 600 190C600 186.134 596.866 183 593 183C589.134 183 586 186.134 586 190C586 193.866 589.134 197 593 197Z"
-              fill="var(--c-6)"
-            />
-            <path
-              d="M184.014 460.982C178.255 481.771 161.441 496.323 143.902 508.685C141.453 510.411 139.003 512.098 136.553 513.744C136.536 513.752 136.519 513.768 136.502 513.776C136.384 513.855 136.266 513.934 136.156 514.013C135.651 514.352 135.145 514.692 134.643 515.027L134.919 515.156C134.919 515.156 135.189 515.306 134.893 515.18C134.805 515.142 134.713 515.107 134.625 515.069C124.436 510.792 114.066 506.201 106.257 498.19C98.1571 489.871 93.4234 476.823 97.8095 465.894C98.386 464.463 99.1143 463.102 99.9807 461.839C100.336 461.309 100.72 460.802 101.119 460.304C103.538 457.232 106.7 454.885 110.28 453.505C113.86 452.126 117.728 451.764 121.488 452.456C125.247 453.148 128.761 454.869 131.668 457.443C134.576 460.017 136.773 463.35 138.032 467.101C139.321 454.616 129.428 444.158 119.908 436.442C110.383 428.729 99.5604 420.33 97.7191 407.915C96.6908 401.007 98.9991 394.312 103.204 388.939C103.334 388.775 103.464 388.612 103.598 388.453C108.717 382.194 115.916 378.175 123.759 377.199C138.363 375.619 152.549 383.664 163.159 394.231C180.236 411.232 190.56 437.346 184.014 460.982Z"
-              fill="var(--c-4)"
-            />
-            <path
-              d="M156.563 433.791C159.366 438.329 161.518 443.268 162.951 448.453C164.163 453.087 164.702 457.883 164.551 462.682C164.16 472.559 161.496 482.193 156.782 490.775C153.231 497.286 148.903 503.303 143.902 508.685C141.454 510.411 139.004 512.098 136.553 513.744C136.537 513.752 136.52 513.768 136.503 513.776C136.385 513.855 136.267 513.934 136.157 514.013C135.651 514.352 135.145 514.692 134.644 515.027C134.644 515.027 135.19 515.306 134.894 515.18C134.806 515.142 134.713 515.107 134.625 515.069C135.539 507.277 134.644 499.372 132.017 492.014C129.389 484.657 125.105 478.062 119.524 472.783C113.929 467.583 107.233 463.834 99.9812 461.839C100.337 461.309 100.72 460.802 101.119 460.304C103.92 461.122 106.646 462.195 109.265 463.512C118.628 468.191 126.294 475.882 131.129 485.448C135.468 494.133 137.335 503.927 136.512 513.679C136.93 513.284 137.349 512.881 137.756 512.481C145.499 504.969 152.376 496.347 157.03 486.396C161.067 477.969 163.052 468.638 162.808 459.225C162.429 448.961 158.499 439.454 152.809 431.178C146.573 422.348 139.206 414.447 130.912 407.695C122.555 400.729 113.409 394.853 103.68 390.199C103.46 390.092 103.289 389.902 103.2 389.668C103.112 389.433 103.113 389.172 103.205 388.939C103.27 388.729 103.411 388.555 103.599 388.453C103.696 388.41 103.8 388.39 103.905 388.395C104.01 388.399 104.113 388.429 104.206 388.48C105.407 389.056 106.6 389.639 107.783 390.248C117.64 395.317 126.852 401.641 135.21 409.074C143.283 416.237 150.884 424.42 156.563 433.791Z"
-              fill="var(--c-5)"
-            />
-            <path
-              d="M100.882 513.332H163.986C164.678 513.332 165.363 513.486 165.994 513.782C166.625 514.078 167.188 514.51 167.646 515.05C168.104 515.59 168.447 516.226 168.651 516.914C168.855 517.602 168.916 518.328 168.83 519.043L160.79 585.98C160.64 587.208 160.066 588.337 159.175 589.156C158.283 589.975 157.135 590.428 155.946 590.43H108.922C107.733 590.428 106.585 589.975 105.693 589.156C104.802 588.337 104.227 587.208 104.078 585.98L96.0377 519.043C95.9518 518.328 96.013 517.602 96.2172 516.914C96.4214 516.226 96.7639 515.59 97.222 515.05C97.6801 514.51 98.2433 514.078 98.8743 513.782C99.5053 513.486 100.19 513.332 100.882 513.332V513.332Z"
-              fill="var(--c-3)"
-            />
-            <path
-              d="M279.28 592.891C284.75 592.891 289.184 588.451 289.184 582.973C289.184 577.496 284.75 573.055 279.28 573.055C273.81 573.055 269.376 577.496 269.376 582.973C269.376 588.451 273.81 592.891 279.28 592.891Z"
-              fill="var(--c-6)"
-            />
-            <path
-              d="M456.703 442.338H301.544C294.323 442.33 287.4 439.454 282.295 434.341C277.189 429.228 274.317 422.295 274.308 415.064V309.274C274.317 302.043 277.189 295.11 282.295 289.997C287.4 284.884 294.323 282.008 301.544 282H456.703C463.924 282.008 470.847 284.884 475.953 289.997C481.059 295.11 483.931 302.043 483.939 309.274V415.064C483.931 422.295 481.058 429.228 475.953 434.341C470.847 439.454 463.924 442.33 456.703 442.338V442.338Z"
-              fill="var(--c-1)"
-            />
-            <path
-              d="M665.716 443H510.284C503.05 442.992 496.115 440.122 491 435.019C485.885 429.917 483.008 422.999 483 415.783V310.217C483.008 303.001 485.885 296.083 491 290.981C496.115 285.878 503.05 283.008 510.284 283H665.716C672.95 283.008 679.885 285.878 685 290.981C690.115 296.083 692.992 303.001 693 310.217V415.784C692.992 422.999 690.115 429.917 685 435.019C679.885 440.122 672.95 442.992 665.716 443Z"
-              fill="var(--c-1)"
-            />
-            <path
-              d="M653 437H250V580H653V437Z"
-              fill="var(--c-1)"
-            />
-            <path
-              d="M275.134 580.362H245.423C230.405 580.362 218.187 566.47 218.187 549.394V400.188H275.134V580.362Z"
-              fill="var(--c-1)"
-            />
-            <path
-              d="M484.764 466.306H275.134V421.676C345.011 381.536 414.888 381.536 484.764 421.676V466.306Z"
-              fill="var(--c-2)"
-            />
-            <path
-              d="M693.569 466.133H483.938V421.503C553.815 381.363 623.692 381.363 693.569 421.503V466.133Z"
-              fill="var(--c-2)"
-            />
-            <path
-              d="M234.694 438.206C261.586 438.206 283.387 416.374 283.387 389.443C283.387 362.512 261.586 340.681 234.694 340.681C207.801 340.681 186 362.512 186 389.443C186 416.374 207.801 438.206 234.694 438.206Z"
-              fill="var(--c-2)"
-            />
-            <path
-              d="M425.595 182.994H313.03C310.371 182.991 307.822 181.886 305.941 179.922C304.061 177.958 303.003 175.295 303 172.518V71.2485C303.003 68.4711 304.061 65.8083 305.941 63.8443C307.822 61.8803 310.371 60.7756 313.03 60.7724H425.595C428.254 60.7756 430.804 61.8803 432.684 63.8443C434.565 65.8083 435.622 68.4711 435.625 71.2485V172.518C435.622 175.295 434.565 177.958 432.684 179.922C430.804 181.886 428.254 182.991 425.595 182.994V182.994ZM313.03 63.1004C310.962 63.1029 308.979 63.9621 307.517 65.4896C306.054 67.0172 305.231 69.0883 305.229 71.2485V172.518C305.231 174.678 306.054 176.749 307.517 178.277C308.979 179.804 310.962 180.664 313.03 180.666H425.595C427.663 180.664 429.646 179.804 431.109 178.277C432.571 176.749 433.394 174.678 433.396 172.518V71.2485C433.394 69.0883 432.571 67.0172 431.109 65.4896C429.646 63.9621 427.663 63.1029 425.595 63.1004H313.03Z"
-              fill="var(--c-8)"
-            />
-            <path
-              d="M409.137 167.28H329.488C326.977 167.277 324.569 166.234 322.793 164.379C321.017 162.524 320.018 160.009 320.015 157.386V86.3808C320.018 83.7576 321.017 81.2427 322.793 79.3878C324.569 77.533 326.977 76.4896 329.488 76.4866H409.137C411.649 76.4896 414.056 77.533 415.832 79.3878C417.608 81.2427 418.607 83.7576 418.61 86.3808V157.386C418.607 160.009 417.608 162.524 415.832 164.379C414.056 166.234 411.649 167.277 409.137 167.28V167.28Z"
-              fill="var(--c-9)"
-            />
-            <path
-              d="M369.87 45.6402C372.947 45.6402 375.442 43.0344 375.442 39.8201C375.442 36.6057 372.947 34 369.87 34C366.792 34 364.297 36.6057 364.297 39.8201C364.297 43.0344 366.792 45.6402 369.87 45.6402Z"
-              fill="var(--c-8)"
-            />
-            <path
-              d="M381.586 62.5347L369.873 42.0911L358.226 62.5312L356.31 61.3416L369.867 37.5491L383.498 61.3381L381.586 62.5347Z"
-              fill="var(--c-8)"
-            />
-            <path
-              d="M382.687 113.735C382.684 111.973 382.499 110.217 382.134 108.497H365.412C364.23 108.497 363.096 108.988 362.26 109.861C361.424 110.734 360.954 111.918 360.954 113.153V138.091C366.854 137.654 372.376 134.898 376.409 130.379C380.441 125.86 382.684 119.913 382.687 113.735V113.735Z"
-              fill="var(--c-7)"
-            />
-            <path
-              d="M359.282 139.344C354.658 139.345 350.127 137.981 346.213 135.408C342.299 132.835 339.162 129.159 337.163 124.803C335.164 120.448 334.385 115.591 334.917 110.793C335.448 105.995 337.268 101.451 340.166 97.6874C343.064 93.9234 346.922 91.0921 351.295 89.5205C355.668 87.9488 360.377 87.7008 364.879 88.8051C369.381 89.9093 373.493 92.3209 376.738 95.7614C379.984 99.2018 382.232 103.531 383.223 108.249L383.519 109.661H365.412C364.525 109.662 363.676 110.03 363.049 110.685C362.422 111.34 362.069 112.227 362.068 113.153V139.176L360.839 139.267C360.323 139.306 359.807 139.344 359.282 139.344ZM359.282 90.4548C353.37 90.4548 347.701 92.9076 343.521 97.2735C339.341 101.639 336.992 107.561 336.992 113.735C336.992 119.909 339.341 125.831 343.521 130.197C347.701 134.563 353.37 137.015 359.282 137.015C359.469 137.015 359.655 137.01 359.839 137.001V113.153C359.841 111.61 360.429 110.131 361.473 109.04C362.518 107.949 363.934 107.335 365.412 107.333H380.705C379.355 102.483 376.539 98.2185 372.678 95.1767C368.817 92.1348 364.118 90.4785 359.282 90.4548Z"
-              fill="var(--c-10)"
-            />
-            <path
-              d="M392.16 146.91H365.412C363.935 146.908 362.518 146.294 361.473 145.203C360.429 144.112 359.841 142.633 359.839 141.09V137.007L360.875 136.93C364.066 136.7 367.172 135.754 369.98 134.155C372.788 132.557 375.233 130.344 377.148 127.669C379.063 124.993 380.403 121.918 381.075 118.652C381.748 115.386 381.738 112.007 381.046 108.746L380.75 107.333H392.16C393.637 107.335 395.054 107.949 396.098 109.04C397.143 110.131 397.731 111.61 397.732 113.153V141.09C397.731 142.633 397.143 144.112 396.098 145.203C395.054 146.294 393.637 146.908 392.16 146.91V146.91ZM362.068 139.153V141.09C362.069 142.015 362.422 142.903 363.049 143.558C363.676 144.212 364.526 144.581 365.412 144.582H392.16C393.046 144.581 393.896 144.212 394.523 143.558C395.15 142.903 395.502 142.015 395.503 141.09V113.153C395.502 112.227 395.15 111.34 394.523 110.685C393.896 110.03 393.046 109.662 392.16 109.661H383.481C383.692 111.008 383.8 112.37 383.801 113.735C383.781 120.014 381.558 126.068 377.553 130.752C373.549 135.435 368.04 138.424 362.068 139.153Z"
-              fill="var(--c-10)"
-            />
-          </g>
-          <defs>
-            <clippath
-              id="clip0"
-            >
-              <rect
-                fill="white"
-                height="590"
-                width="645"
-              />
-            </clippath>
-          </defs>
-        </svg>
+          src="/pages/home/tenant.png"
+        />
       </div>
     </div>
   </section>
@@ -232,16 +236,14 @@ exports[`Home page matches snapshot 1`] = `
                   </p>
                 </a>
                 <div
-                  class="root"
+                  class="info"
                 >
-                  <div
-                    class="flex readOnly"
+                  <button
+                    class="button secondary"
+                    type="button"
                   >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
+                    <span
+                      class="children"
                     >
                       <svg
                         aria-hidden="true"
@@ -250,23 +252,17 @@ exports[`Home page matches snapshot 1`] = `
                         viewBox="0 0 24 24"
                       >
                         <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
+                          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
                         />
                       </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
+                    </span>
+                  </button>
+                  <button
+                    class="button secondary"
+                    type="button"
                   >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
+                    <span
+                      class="children"
                     >
                       <svg
                         aria-hidden="true"
@@ -275,104 +271,69 @@ exports[`Home page matches snapshot 1`] = `
                         viewBox="0 0 24 24"
                       >
                         <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
+                          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
                         />
                       </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
+                    </span>
+                  </button>
                   <div
-                    class="flex readOnly"
+                    class="visibility"
                   >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
+                      <path
+                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                      />
+                    </svg>
+                    <span>
+                      10
+                    </span>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div
+              class="root"
+            >
+              <a
+                class="root"
+                href="/posts/1"
+              >
+                <div
+                  class="img name"
+                  style="height: 4rem; width: 4rem;"
+                >
+                  UU
+                </div>
+                <div
+                  class="info"
+                >
+                  <h4>
+                    User Userovich
+                  </h4>
+                  <p>
+                    19:01 March 09 2022
+                  </p>
+                </div>
+              </a>
+              <div
+                class="content"
+              >
+                <a
+                  class="link"
+                  href="/posts/1"
+                >
+                  <h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure
+                  </h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam veniam!
+                  </p>
+                </a>
                 <div
                   class="info"
                 >
@@ -473,16 +434,14 @@ exports[`Home page matches snapshot 1`] = `
                   </p>
                 </a>
                 <div
-                  class="root"
+                  class="info"
                 >
-                  <div
-                    class="flex readOnly"
+                  <button
+                    class="button secondary"
+                    type="button"
                   >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
+                    <span
+                      class="children"
                     >
                       <svg
                         aria-hidden="true"
@@ -491,23 +450,17 @@ exports[`Home page matches snapshot 1`] = `
                         viewBox="0 0 24 24"
                       >
                         <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
+                          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
                         />
                       </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
+                    </span>
+                  </button>
+                  <button
+                    class="button secondary"
+                    type="button"
                   >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
+                    <span
+                      class="children"
                     >
                       <svg
                         aria-hidden="true"
@@ -516,104 +469,69 @@ exports[`Home page matches snapshot 1`] = `
                         viewBox="0 0 24 24"
                       >
                         <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
+                          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
                         />
                       </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
+                    </span>
+                  </button>
                   <div
-                    class="flex readOnly"
+                    class="visibility"
                   >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
+                      <path
+                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                      />
+                    </svg>
+                    <span>
+                      10
+                    </span>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div
+              class="root"
+            >
+              <a
+                class="root"
+                href="/posts/1"
+              >
+                <div
+                  class="img name"
+                  style="height: 4rem; width: 4rem;"
+                >
+                  UU
+                </div>
+                <div
+                  class="info"
+                >
+                  <h4>
+                    User Userovich
+                  </h4>
+                  <p>
+                    19:01 March 09 2022
+                  </p>
+                </div>
+              </a>
+              <div
+                class="content"
+              >
+                <a
+                  class="link"
+                  href="/posts/1"
+                >
+                  <h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure
+                  </h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam veniam!
+                  </p>
+                </a>
                 <div
                   class="info"
                 >
@@ -714,148 +632,6 @@ exports[`Home page matches snapshot 1`] = `
                   </p>
                 </a>
                 <div
-                  class="root"
-                >
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div
                   class="info"
                 >
                   <button
@@ -955,148 +731,6 @@ exports[`Home page matches snapshot 1`] = `
                   </p>
                 </a>
                 <div
-                  class="root"
-                >
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div
                   class="info"
                 >
                   <button
@@ -1195,630 +829,6 @@ exports[`Home page matches snapshot 1`] = `
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam veniam!
                   </p>
                 </a>
-                <div
-                  class="root"
-                >
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="info"
-                >
-                  <button
-                    class="button secondary"
-                    type="button"
-                  >
-                    <span
-                      class="children"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <button
-                    class="button secondary"
-                    type="button"
-                  >
-                    <span
-                      class="children"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="visibility"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-                      />
-                    </svg>
-                    <span>
-                      10
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="root"
-            >
-              <a
-                class="root"
-                href="/posts/1"
-              >
-                <div
-                  class="img name"
-                  style="height: 4rem; width: 4rem;"
-                >
-                  UU
-                </div>
-                <div
-                  class="info"
-                >
-                  <h4>
-                    User Userovich
-                  </h4>
-                  <p>
-                    19:01 March 09 2022
-                  </p>
-                </div>
-              </a>
-              <div
-                class="content"
-              >
-                <a
-                  class="link"
-                  href="/posts/1"
-                >
-                  <h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure
-                  </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam veniam!
-                  </p>
-                </a>
-                <div
-                  class="root"
-                >
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="info"
-                >
-                  <button
-                    class="button secondary"
-                    type="button"
-                  >
-                    <span
-                      class="children"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <button
-                    class="button secondary"
-                    type="button"
-                  >
-                    <span
-                      class="children"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="visibility"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-                      />
-                    </svg>
-                    <span>
-                      10
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="root"
-            >
-              <a
-                class="root"
-                href="/posts/1"
-              >
-                <div
-                  class="img name"
-                  style="height: 4rem; width: 4rem;"
-                >
-                  UU
-                </div>
-                <div
-                  class="info"
-                >
-                  <h4>
-                    User Userovich
-                  </h4>
-                  <p>
-                    19:01 March 09 2022
-                  </p>
-                </div>
-              </a>
-              <div
-                class="content"
-              >
-                <a
-                  class="link"
-                  href="/posts/1"
-                >
-                  <h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure
-                  </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam veniam!
-                  </p>
-                </a>
-                <div
-                  class="root"
-                >
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      style="--hover: #cf1322;"
-                      title="hot"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        hot
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="two"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="three"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.89-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-5H6c-1.1 0-2 .9-2 2v2.15c1.16.41 2 1.52 2 2.81V14h12v-2.03c0-1.3.84-2.4 2-2.81V7c0-1.1-.9-2-2-2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="new"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-                        />
-                      </svg>
-                      <span
-                        class="text"
-                      >
-                        new
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="price_two"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_two
-                      </span>
-                    </button>
-                    <button
-                      class="chip active"
-                      title="price_three"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        price_three
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    class="flex readOnly"
-                  >
-                    <button
-                      class="chip active"
-                      title="kyiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kyiv
-                      </span>
-                    </button>
-                  </div>
-                </div>
                 <div
                   class="info"
                 >
@@ -1955,6 +965,159 @@ exports[`Home page matches snapshot 1`] = `
                         class="text"
                       >
                         hot
+                      </span>
+                    </button>
+                  </div>
+                  <h4
+                    class="title"
+                  >
+                    Оберіть ваше місто
+                  </h4>
+                  <button
+                    class="root"
+                    type="button"
+                  >
+                    <p
+                      aria-hidden="true"
+                      class="input"
+                    >
+                      <span
+                        class="text"
+                      >
+                        kyiv
+                      </span>
+                      <span
+                        class="icon"
+                      />
+                    </p>
+                  </button>
+                  <h4
+                    class="title"
+                  >
+                    Оберіть район
+                  </h4>
+                  <div
+                    class="flex"
+                  >
+                    <button
+                      class="chip"
+                      title="darnytsia"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        darnytsia
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="desnianskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        desnianskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="dniprovskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        dniprovskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="holosiiv"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        holosiiv
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="obolonskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        obolonskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="pecherskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        pecherskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="podil"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        podil
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="shevchenkivskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        shevchenkivskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="solomianskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        solomianskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="sviatoshynskyi"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        sviatoshynskyi
+                      </span>
+                    </button>
+                    <button
+                      class="chip"
+                      title="none"
+                      type="button"
+                    >
+                      <span
+                        class="text"
+                      >
+                        none
                       </span>
                     </button>
                   </div>
@@ -2212,56 +1375,27 @@ exports[`Home page matches snapshot 1`] = `
                       </span>
                     </button>
                   </div>
-                  <h4
-                    class="title"
-                  >
-                    Оберіть місто
-                  </h4>
                   <div
                     class="flex"
                   >
                     <button
-                      class="chip"
-                      title="kyiv"
+                      class="button secondary"
                       type="button"
                     >
                       <span
-                        class="text"
+                        class="children"
                       >
-                        kyiv
+                        Очистити
                       </span>
                     </button>
                     <button
-                      class="chip"
-                      title="lviv"
+                      class="button primary"
                       type="button"
                     >
                       <span
-                        class="text"
+                        class="children"
                       >
-                        lviv
-                      </span>
-                    </button>
-                    <button
-                      class="chip"
-                      title="kharkiv"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        kharkiv
-                      </span>
-                    </button>
-                    <button
-                      class="chip"
-                      title="odesa"
-                      type="button"
-                    >
-                      <span
-                        class="text"
-                      >
-                        odesa
+                        Пошук
                       </span>
                     </button>
                   </div>
@@ -2273,5 +1407,14 @@ exports[`Home page matches snapshot 1`] = `
       </div>
     </div>
   </section>
+  <footer
+    class="footer"
+  >
+    <div
+      class="lg root"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
+    </div>
+  </footer>
 </DocumentFragment>
 `;

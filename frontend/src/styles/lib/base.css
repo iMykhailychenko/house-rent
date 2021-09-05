@@ -125,4 +125,6 @@ h6 {
     min-width: 1em;
 }
 
-:-webkit-autofill { color: var(--black) !important; }
+:-webkit-autofill {
+    color: var(--black) !important;
+}

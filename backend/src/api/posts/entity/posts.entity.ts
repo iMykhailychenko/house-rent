@@ -17,7 +17,7 @@ export class Post {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', default: POST_STATUS.INITIAL })
+    @Column({ type: 'varchar', default: POST_STATUS.IDLE })
     @IsEnum(POST_STATUS)
     @IsOptional()
     status: string;

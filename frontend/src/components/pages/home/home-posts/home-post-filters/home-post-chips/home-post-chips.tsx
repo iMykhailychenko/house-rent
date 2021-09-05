@@ -13,11 +13,11 @@ import {
     clearAllFiltersAction,
 } from '../../../../../../state/entities/filters/filters.reducer';
 import { useAllFiltersSelector } from '../../../../../../state/entities/filters/filters.selector';
+import Button from '../../../../../common/button/button';
 import Chips from '../../../../../common/chips/chips';
 import CitySelect from '../../../../../common/city-select/city-select';
 
 import css from './home-post-chips.module.scss';
-import Button from '../../../../../common/button/button';
 
 const HomePostChips = (): ReactElement => {
     const trans = useTrans();

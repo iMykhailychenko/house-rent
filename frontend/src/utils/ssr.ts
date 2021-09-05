@@ -1,6 +1,6 @@
 import { Store } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext, Redirect } from 'next';
 
 import { cookiesTokenAction } from '../state/entities/auth/auth.reducer';
 import { profileInfoThunk } from '../state/entities/profile/profile.thunk';
@@ -10,17 +10,14 @@ import { initializeStore } from '../state/store';
 
 import routes from './routes';
 
-interface ExtendState {
-    state: RootState;
-}
+type ReturnCallback<T> = { props: T | { state: RootState } };
+type SSRCallback<T> = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    context: GetServerSidePropsContext & { store?: Store<RootState, any> },
+) => Promise<ReturnCallback<T> | void>;
 
-export type SSRContext = GetServerSidePropsContext & { store: Store };
-
-type ServerSideCallback<T extends ExtendState> = (context: SSRContext) => Promise<{ props: T }>;
-type WithStore = <T extends ExtendState>(callback?: ServerSideCallback<T>) => GetServerSideProps;
-
-export const withStore: WithStore = <T extends ExtendState>(callback?: ServerSideCallback<T>): GetServerSideProps => {
-    return async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<T>> => {
+export const withStore = <T>(callback?: SSRCallback<T>): GetServerSideProps => {
+    return async (context: GetServerSidePropsContext): Promise<ReturnCallback<T>> => {
         const store = initializeStore(rootInitialState);
 
         const token = axios.defaults.headers.common.Authorization;
@@ -31,17 +28,16 @@ export const withStore: WithStore = <T extends ExtendState>(callback?: ServerSid
 
         if (callback) {
             const result = await callback({ ...context, store });
-            return { props: { ...result.props, state: store.getState() } };
+            return { props: { ...(result?.props || {}), state: store.getState() } };
         }
 
-        return { props: { state: store.getState() } } as GetServerSidePropsResult<T>;
+        return { props: { state: store.getState() } };
     };
 };
 
-type WithAuthRedirect = <T extends ExtendState>(callback: ServerSideCallback<T> | null, reverse?: boolean) => GetServerSideProps;
-export const withAuthRedirect: WithAuthRedirect =
-    <T extends ExtendState>(callback: ServerSideCallback<T> | null, reverse = false): GetServerSideProps =>
-    async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<T>> => {
+export const withAuthRedirect =
+    <T>(callback: SSRCallback<T> | null, reverse = false): GetServerSideProps =>
+    async (context: GetServerSidePropsContext): Promise<ReturnCallback<T> | { redirect: Redirect }> => {
         const token = axios.defaults.headers.common.Authorization;
         if (reverse ? token : !token) {
             return {
@@ -56,8 +52,8 @@ export const withAuthRedirect: WithAuthRedirect =
 
         if (callback) {
             const result = await callback({ ...context, store });
-            return { props: { ...result.props, state: store.getState() } };
+            return { props: { ...(result?.props || {}), state: store.getState() } };
         }
 
-        return { props: { state: store.getState() } } as GetServerSidePropsResult<T>;
+        return { props: { state: store.getState() } };
     };

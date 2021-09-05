@@ -1,0 +1,18 @@
+.root {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    min-height: calc(100vh - var(--footer-height) - var(--header-height));
+}
+
+.inner {
+    padding: 6rem;
+    font-size: 1.4rem;
+    background: var(--gray-1);
+    border-radius: 2rem;
+    text-align: center;
+
+    p {
+        margin: 4rem 0 2rem;
+        font-size: 1.4rem;
+    }
+}

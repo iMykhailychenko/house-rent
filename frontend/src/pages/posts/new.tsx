@@ -9,6 +9,7 @@ import { withStore } from '../../utils/ssr';
 const NewPostPage = (): ReactElement => {
     useEffect(() => {
         document.body.classList.add('new-post-page');
+        return () => document.body.classList.remove('new-post-page');
     }, []);
 
     return (

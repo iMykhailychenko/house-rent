@@ -24,13 +24,34 @@ exports[`Switch component Switch large matches snapshot 1`] = `
 
 exports[`Switch component Switch small matches snapshot 1`] = `
 <DocumentFragment>
-  <button
-    class="root right test"
-    type="button"
+  <span
+    class="MuiSwitch-root test"
   >
     <span
-      class="indicator"
+      aria-disabled="false"
+      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-1 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+    >
+      <span
+        class="MuiIconButton-label"
+      >
+        <input
+          aria-label="primary checkbox"
+          class="PrivateSwitchBase-input-4 MuiSwitch-input"
+          name="checkedB"
+          type="checkbox"
+          value=""
+        />
+        <span
+          class="MuiSwitch-thumb"
+        />
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </span>
+    <span
+      class="MuiSwitch-track"
     />
-  </button>
+  </span>
 </DocumentFragment>
 `;

@@ -12,7 +12,7 @@ const profileSlice = createSlice({
         builder.addCase(profileInfoThunk.pending, (state: IProfileInfoState) => {
             state.status = 'loading';
         });
-        builder.addCase(profileInfoThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser | null>) => {
+        builder.addCase(profileInfoThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser>) => {
             state.status = 'success';
             state.data = action.payload;
         });

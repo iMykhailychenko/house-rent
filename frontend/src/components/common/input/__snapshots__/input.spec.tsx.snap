@@ -3,22 +3,31 @@
 exports[`Input component matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="wrp"
+    class="root"
   >
     <div
       class="inner"
     >
-      <input
-        autocomplete="name"
-        class="input test password error"
-        id="test"
-        name="test"
-        placeholder="test"
-        type="password"
-        value="test"
-      />
+      <div
+        class="wrp"
+      >
+        <div
+          class="tooltip bottom_right tooltip"
+        >
+          error
+        </div>
+        <input
+          autocomplete="name"
+          class="input test password error"
+          id="test"
+          name="test"
+          placeholder="test"
+          type="password"
+          value="test"
+        />
+      </div>
       <button
-        class="button icon"
+        class="button button secondary"
         type="button"
       >
         <span
@@ -37,11 +46,6 @@ exports[`Input component matches snapshot 1`] = `
         </span>
       </button>
     </div>
-    <small
-      class="errorsText"
-    >
-      error
-    </small>
   </div>
 </DocumentFragment>
 `;

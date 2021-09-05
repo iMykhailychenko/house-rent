@@ -2,13 +2,12 @@ import React, { createContext, ReactElement, useEffect, useState } from 'react';
 
 import axios from 'axios';
 
+import { useAppDispatch } from '../../hooks/redux.hook';
 import authInitialState from '../../state/entities/auth/auth.initial-state';
 import { IAuthState } from '../../state/entities/auth/auth.interface';
+import { logoutAction } from '../../state/entities/auth/auth.reducer';
 import { useAuthSelector } from '../../state/entities/auth/auth.selector';
 import { useProfileInfoSelector } from '../../state/entities/profile/profile.selector';
-import { dispatch } from 'jest-circus/build/state';
-import { logoutAction } from '../../state/entities/auth/auth.reducer';
-import { useAppDispatch } from '../../hooks/redux.hook';
 
 export type AuthHook = [value: IAuthState | null, setAuth: (value: IAuthState | null) => void];
 export const Auth = createContext<AuthHook>([authInitialState, () => undefined]);
@@ -45,4 +44,4 @@ const AuthProvider = ({ authServer = authInitialState, children }: IProps): Reac
     return <Auth.Provider value={[value, setValue]}>{children}</Auth.Provider>;
 };
 
-export default React.memo(AuthProvider);
+export default AuthProvider;

@@ -1,33 +1,44 @@
 import React, { ReactElement } from 'react';
 
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { SelectValue } from '../../../../../interfaces';
 import { INewPostPayload } from '../../../../../state/entities/posts/posts.interface';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
 import { newPostThunk } from '../../../../../state/entities/posts/posts.thunk';
 import Button from '../../../../common/button/button';
+import ImageWrp from '../../../../common/image-wrp/image-wrp';
 import Input from '../../../../common/input/input';
 import Select from '../../../../common/select/select';
 import Textarea from '../../../../common/textarea/textarea';
 
 import Filters from './filters/filters';
-import FormImage from './form-image/form-image';
 import FormSeparator from './form-separator/form-separator';
 import FormSegment from './from-segment/from-segment';
-import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from './new-post-form.config';
+import {
+    cities,
+    districtKyiv,
+    districtLviv,
+    formatSelectValue,
+    houseType,
+    price,
+    residentsAmount,
+    rooms,
+} from './new-post-form.config';
 import css from './new-post-form.module.scss';
 import NewPostSchema from './new-post-form.validation';
 
 const NewPostForm = (): ReactElement => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const newPostState = useNewPostSelector();
 
     const formik = useFormik<INewPostPayload>({
         initialValues: {
             title: '',
             description: '',
+            residentsAmount: [],
+            children: '',
             houseTypeFilters: [],
             roomFilters: [],
             priceFilters: [],
@@ -36,7 +47,7 @@ const NewPostForm = (): ReactElement => {
         },
         validationSchema: NewPostSchema,
         onSubmit: values => {
-            dispatch(newPostThunk(values));
+            dispatch(newPostThunk(values)).then(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
         },
     });
 
@@ -45,14 +56,19 @@ const NewPostForm = (): ReactElement => {
         formik.setFieldValue('districtFilters', []);
     };
 
-    const resetForm = () => formik.resetForm();
+    const resetForm = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        formik.resetForm();
+    };
     const submitForm = () => formik.submitForm();
 
     return (
         <form action="#" method="post" className={css.form}>
-            <FormImage />
-            <FormSeparator />
-            <FormSegment label="title" id="login_title" error={formik.touched.title && formik.errors.title}>
+            <ImageWrp name="form" />
+            <FormSeparator>
+                Загальна інформація про вас. Власникам квартир важливо розуміти кому вони здаватимуть житло
+            </FormSeparator>
+            <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
                 <Input
                     id="new_post_title"
                     className={css.input}
@@ -80,7 +96,34 @@ const NewPostForm = (): ReactElement => {
                     name="description"
                 />
             </FormSegment>
-            <FormSeparator />
+            <FormSegment label="residents_amount" error={formik.touched.residentsAmount && formik.errors.residentsAmount}>
+                <Filters
+                    size="lg"
+                    all={residentsAmount}
+                    name="residentsAmount"
+                    value={formik.values.residentsAmount}
+                    onChange={formik.setFieldValue}
+                    error={formik.touched.residentsAmount && !!formik.errors.residentsAmount}
+                />
+            </FormSegment>
+            <FormSegment
+                id="children"
+                label="children"
+                required={false}
+                error={formik.touched.children && formik.errors.children}
+            >
+                <Input
+                    id="children"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
+                    value={formik.values.children}
+                    onChange={formik.handleChange}
+                    placeholder="children"
+                    name="children"
+                />
+            </FormSegment>
+
+            <FormSeparator>Укажіть інформацію про квартиру, яку ви шукаєте</FormSeparator>
             <FormSegment label="house_type" error={formik.touched.houseTypeFilters && formik.errors.houseTypeFilters}>
                 <Filters
                     all={houseType}
@@ -100,10 +143,9 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.roomFilters && !!formik.errors.roomFilters}
                 />
             </FormSegment>
-            <FormSeparator />
             <FormSegment label="price" error={formik.touched.priceFilters && formik.errors.priceFilters}>
                 <Filters
-                    size="sm"
+                    size="lg"
                     all={price}
                     name="priceFilters"
                     value={formik.values.priceFilters}
@@ -111,7 +153,6 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.priceFilters && !!formik.errors.priceFilters}
                 />
             </FormSegment>
-            <FormSeparator />
             <FormSegment label="city" error={formik.touched.cityFilters && formik.errors.cityFilters}>
                 <Select
                     list={cities}
@@ -122,7 +163,7 @@ const NewPostForm = (): ReactElement => {
             </FormSegment>
             <FormSegment label="district" error={formik.touched.districtFilters && formik.errors.districtFilters}>
                 <Filters
-                    size="lg"
+                    size="sm"
                     name="districtFilters"
                     value={formik.values.districtFilters}
                     onChange={formik.setFieldValue}
@@ -130,7 +171,8 @@ const NewPostForm = (): ReactElement => {
                     error={formik.touched.districtFilters && !!formik.errors.districtFilters}
                 />
             </FormSegment>
-            <FormSeparator />
+
+            <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
             <div className={css.flex}>
                 <Button onClick={resetForm} secondary>
                     Очистичи

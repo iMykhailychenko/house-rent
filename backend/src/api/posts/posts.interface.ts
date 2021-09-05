@@ -52,7 +52,8 @@ export enum LVIV_DISTRICT_FILTERS {
 export type DISTRICT_FILTERS = KYIV_DISTRICT_FILTERS | LVIV_DISTRICT_FILTERS;
 
 export enum POST_STATUS {
-    INITIAL = 'initial',
+    IDLE = 'idle',
+    DRAFT = 'draft',
     ACTIVE = 'active',
     ARCHIVE = 'archive',
 }

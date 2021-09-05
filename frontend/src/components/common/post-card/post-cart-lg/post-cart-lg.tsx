@@ -3,20 +3,18 @@ import React, { ReactElement } from 'react';
 import { Bookmark, Share, Visibility } from '@material-ui/icons';
 import Link from 'next/link';
 
-import { SEARCH_FILTERS } from '../../../../state/entities/filters/filters.interface';
 import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import UserCard from '../../user-card/user-card';
-import PostCardChips from '../post-cart-chips/post-cart-chips';
 
 import css from './post-cart-lg.module.scss';
 
-const mockFilters = {
-    [SEARCH_FILTERS.GENERAL]: ['hot'],
-    [SEARCH_FILTERS.ROOM]: ['two', 'three'],
-    [SEARCH_FILTERS.HOUSE_TYPE]: ['new'],
-    [SEARCH_FILTERS.PRICE]: ['price_two', 'price_three'],
-};
+// const mockFilters = {
+//     [SEARCH_FILTERS.GENERAL]: ['hot'],
+//     [SEARCH_FILTERS.ROOM]: ['two', 'three'],
+//     [SEARCH_FILTERS.HOUSE_TYPE]: ['new'],
+//     [SEARCH_FILTERS.PRICE]: ['price_two', 'price_three'],
+// };
 
 const PostCardLg = (): ReactElement => {
     return (
@@ -35,7 +33,7 @@ const PostCardLg = (): ReactElement => {
                     </a>
                 </Link>
 
-                <PostCardChips value={mockFilters} />
+                {/*<PostCardChips value={mockFilters} />*/}
 
                 <div className={css.info}>
                     <Button secondary>

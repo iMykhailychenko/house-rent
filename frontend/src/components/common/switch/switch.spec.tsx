@@ -11,8 +11,8 @@ describe('Switch component', () => {
 
         it('toggle small', () => {
             const handleChange = jest.fn();
-            const { getByRole } = render(<Switch size="sm" value={false} onChange={handleChange} />);
-            fireEvent.click(getByRole('button'));
+            const { container } = render(<Switch size="sm" value={false} onChange={handleChange} />);
+            fireEvent.click(container.querySelector('input') as HTMLElement);
             expect(handleChange).toHaveBeenCalledWith(true);
             expect(handleChange).toHaveBeenCalledTimes(1);
         });
