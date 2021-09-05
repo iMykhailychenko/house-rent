@@ -4,7 +4,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import ErrorNormalize from '../utils/errorNormalize';
 import authConfig from '../config/auth.config';
-import { User } from '../api/users/entity/users.entity';
+import { User } from '../api/users/users.entity';
 import database from '../database';
 
 const auth = errorWrapper(async (req: Request & { user: User }, _: Response, next: NextFunction) => {

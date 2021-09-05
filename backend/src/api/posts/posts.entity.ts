@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
-import { User } from '../../users/entity/users.entity';
+import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
+import { User } from '../users/users.entity';
 import {
     City,
     DISTRICT_FILTERS,
@@ -9,8 +9,8 @@ import {
     POST_STATUS,
     PRICE_FILTERS,
     ROOM_FILTERS,
-} from '../posts.interface';
-import { DistrictValidator } from '../posts.validate';
+} from './posts.interface';
+import { DistrictValidator } from './posts.validate';
 
 @Entity()
 export class Post {
@@ -51,28 +51,33 @@ export class Post {
     @IsOptional()
     generalFilters: GENERAL_FILTERS[];
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', default: null, nullable: true })
     @IsArray()
     @IsEnum(ROOM_FILTERS, { each: true })
+    @IsOptional()
     roomFilters: ROOM_FILTERS[];
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', default: null, nullable: true })
     @IsArray()
     @IsEnum(HOUSE_TYPE_FILTERS, { each: true })
+    @IsOptional()
     houseTypeFilters: HOUSE_TYPE_FILTERS[];
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', default: null, nullable: true })
     @IsArray()
     @IsEnum(PRICE_FILTERS, { each: true })
+    @IsOptional()
     priceFilters: PRICE_FILTERS[];
 
-    @Column({ type: 'varchar' })
+    @Column({ type: 'varchar', default: null, nullable: true })
     @IsString()
+    @IsOptional()
     cityFilters: City;
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', default: null, nullable: true })
     @IsArray()
     @Validate(DistrictValidator)
+    @IsOptional()
     districtFilters: DISTRICT_FILTERS[];
 
     @ManyToOne(() => User, user => user.posts)

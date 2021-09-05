@@ -2,7 +2,7 @@ import { Application } from 'express';
 import request, { SuperTest, Test } from 'supertest';
 import houseRentApp from '../../app';
 import { deleteTestPost, deleteTestUser, getInfoTestUser, loginTestUser, registerTestUser } from '../../tests/utils';
-import { User } from '../users/entity/users.entity';
+import { User } from '../users/users.entity';
 
 describe('Test post service', () => {
     let app: Application;

@@ -3,8 +3,8 @@ import { validate } from 'class-validator';
 
 import errorWrapper from '../../utils/errorWrapper';
 import database from '../../database';
-import { Post } from './entity/posts.entity';
-import { User, UserRole } from '../users/entity/users.entity';
+import { Post } from './posts.entity';
+import { User, UserRole } from '../users/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 
 export const postsListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {

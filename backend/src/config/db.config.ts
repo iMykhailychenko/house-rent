@@ -1,6 +1,6 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { User } from '../api/users/entity/users.entity';
-import { Post } from '../api/posts/entity/posts.entity';
+import { User } from '../api/users/users.entity';
+import { Post } from '../api/posts/posts.entity';
 
 const dbConfig: PostgresConnectionOptions = {
     type: 'postgres',

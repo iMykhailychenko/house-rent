@@ -1,6 +1,6 @@
 import { userInitValue } from '../profile/profile.initial-state';
 
-import { IPost, IPostState, POST_STATUS } from './posts.interface';
+import { FORM_TYPE, IPost, IPostState, POST_STATUS } from './posts.interface';
 
 export const singlePostsInitialState: IPost = {
     id: 0,
@@ -20,12 +20,12 @@ export const singlePostsInitialState: IPost = {
 
 export const postsInitialState: IPostState = {
     new: {
-        postStatus: 'idle',
-        imgStatus: 'idle',
+        formType: FORM_TYPE.ONE,
+        status: 'idle',
         data: null,
         error: null,
     },
-    edit: {
+    update: {
         status: 'idle',
         error: null,
     },

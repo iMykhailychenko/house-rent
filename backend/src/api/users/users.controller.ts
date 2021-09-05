@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import database from '../../database';
-import { User, UserRole } from './entity/users.entity';
+import { User, UserRole } from './users.entity';
 import errorWrapper from '../../utils/errorWrapper';
 import ErrorNormalize from '../../utils/errorNormalize';
 

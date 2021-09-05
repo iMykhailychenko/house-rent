@@ -24,11 +24,15 @@ export interface IPost {
     user: IUser;
 }
 
-export interface INewPostPayload {
+export interface IStepOne {
     title: string;
     description: string;
     residentsAmount: string[];
     children: string;
+    pets: string;
+}
+
+export interface IStepTwo {
     houseTypeFilters: string[];
     roomFilters: string[];
     priceFilters: string[];
@@ -36,19 +40,28 @@ export interface INewPostPayload {
     districtFilters: string[];
 }
 
+export type INewPostPayload = IStepOne & IStepTwo & { image?: string | null };
+
 export interface IEditPostPayload {
     id: number;
     body: Partial<IPost>;
 }
 
+export enum FORM_TYPE {
+    ONE = 'one',
+    TWO = 'two',
+    THREE = 'three',
+    DONE = 'done',
+}
+
 export interface INewPostState {
-    postStatus: ThunkStatuses;
-    imgStatus: ThunkStatuses;
+    formType: FORM_TYPE;
+    status: ThunkStatuses;
     data: IPost | null;
     error: string | null;
 }
 
-export interface IEditPostState {
+export interface IUpdatePostState {
     status: ThunkStatuses;
     error: string | null;
 }
@@ -61,6 +74,6 @@ export interface ISinglePostState {
 
 export interface IPostState {
     new: INewPostState;
-    edit: IEditPostState;
+    update: IUpdatePostState;
     single: ISinglePostState;
 }

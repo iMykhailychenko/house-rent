@@ -9,8 +9,8 @@ export const newPostThunk = createAsyncThunk<IPost, INewPostPayload>('POSTS/NEW'
     return data;
 });
 
-export const editPostThunk = createAsyncThunk<IPost, IEditPostPayload>('POSTS/EDIT', async (payload: IEditPostPayload) => {
-    const { data, status } = await postsServices.editPost(payload);
+export const updatePostThunk = createAsyncThunk<IPost, IEditPostPayload>('POSTS/EDIT', async (payload: IEditPostPayload) => {
+    const { data, status } = await postsServices.updatePost(payload);
     if (status < 200 || status >= 300) throw new Error();
     return data;
 });

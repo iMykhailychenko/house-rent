@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorWrapper from '../../utils/errorWrapper';
-import { User, UserRole } from '../users/entity/users.entity';
+import { User, UserRole } from '../users/users.entity';
 import authConfig from '../../config/auth.config';
 import database from '../../database';
 import { passwordValidate } from './auth.validate';

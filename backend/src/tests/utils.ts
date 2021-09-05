@@ -1,5 +1,5 @@
-import { User, UserRole } from '../api/users/entity/users.entity';
-import { Post } from '../api/posts/entity/posts.entity';
+import { User, UserRole } from '../api/users/users.entity';
+import { Post } from '../api/posts/posts.entity';
 import { SuperTest, Test } from 'supertest';
 import database from '../database';
 
