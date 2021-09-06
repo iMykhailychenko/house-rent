@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
+import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Max, Min, Validate } from 'class-validator';
 import { User } from '../users/users.entity';
 import {
     City,
@@ -22,14 +22,6 @@ export class Post {
     @IsOptional()
     status: string;
 
-    @Column({ type: 'varchar', length: 100 })
-    @Length(1, 100)
-    title: string;
-
-    @Column({ type: 'varchar' })
-    @IsString()
-    description: string;
-
     @Column({ type: 'timestamp', default: new Date() })
     @IsDate()
     @IsOptional()
@@ -39,6 +31,30 @@ export class Post {
     @IsNumber()
     @IsOptional()
     views: number;
+
+    @Column({ type: 'varchar', length: 100 })
+    @Length(1, 100)
+    title: string;
+
+    @Column({ type: 'varchar' })
+    @IsString()
+    description: string;
+
+    @Column({ type: 'int' })
+    @IsNumber({ allowNaN: false })
+    @Max(15)
+    @Min(1)
+    residentsAmount: number;
+
+    @Column({ type: 'varchar', default: null, nullable: true })
+    @IsString()
+    @IsOptional()
+    children: string;
+
+    @Column({ type: 'varchar', default: null, nullable: true })
+    @IsString()
+    @IsOptional()
+    pets: string;
 
     @Column({ type: 'varchar', default: null, nullable: true })
     @IsString()

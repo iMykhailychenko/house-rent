@@ -11,7 +11,7 @@ import FormTypeTwo from './form-type/form-type-two';
 const formOneInitialState: IStepOne = {
     title: '',
     description: '',
-    residentsAmount: [],
+    residentsAmount: '',
     children: '',
     pets: '',
 };

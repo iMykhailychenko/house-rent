@@ -41,11 +41,15 @@ export const createPostController = errorWrapper(async (req: Request & { user: U
     const post = new Post();
     post.title = req.body.title;
     post.description = req.body.description;
+    post.residentsAmount = req.body.residentsAmount;
+    post.children = req.body.children || null;
+    post.pets = req.body.pets || null;
     post.roomFilters = req.body.roomFilters;
     post.houseTypeFilters = req.body.houseTypeFilters;
     post.priceFilters = req.body.priceFilters;
     post.cityFilters = req.body.cityFilters;
     post.districtFilters = req.body.districtFilters;
+    post.image = req.body.image;
     post.user = req.user;
 
     const errors = await validate(post);

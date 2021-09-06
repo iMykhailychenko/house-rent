@@ -27,7 +27,7 @@ export interface IPost {
 export interface IStepOne {
     title: string;
     description: string;
-    residentsAmount: string[];
+    residentsAmount: number | string;
     children: string;
     pets: string;
 }

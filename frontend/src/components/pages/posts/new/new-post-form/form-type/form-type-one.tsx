@@ -9,10 +9,8 @@ import Button from '../../../../../common/button/button';
 import ImageWrp from '../../../../../common/image-wrp/image-wrp';
 import Input from '../../../../../common/input/input';
 import Textarea from '../../../../../common/textarea/textarea';
-import Filters from '../filters/filters';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
-import { residentsAmount } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormOneSchema } from '../new-post-form.validation';
 
@@ -33,6 +31,13 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
+
+    const validateNumber = (): void => {
+        const residentsAmount = formik.values.residentsAmount;
+        if (!+residentsAmount || (residentsAmount as string).includes('.')) {
+            formik.setFieldValue('residentsAmount', '');
+        }
+    };
 
     const resetForm = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,14 +79,21 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
                     name="description"
                 />
             </FormSegment>
-            <FormSegment label="residents_amount" error={formik.touched.residentsAmount && formik.errors.residentsAmount}>
-                <Filters
-                    size="lg"
-                    all={residentsAmount}
-                    name="residentsAmount"
+            <FormSegment
+                label="residents_amount"
+                id="residents_amount"
+                error={formik.touched.residentsAmount && formik.errors.residentsAmount}
+            >
+                <Input
+                    id="residents_amount"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
                     value={formik.values.residentsAmount}
-                    onChange={formik.setFieldValue}
-                    error={formik.touched.residentsAmount && !!formik.errors.residentsAmount}
+                    onChange={formik.handleChange}
+                    onBlur={validateNumber}
+                    error={formik.touched.residentsAmount && formik.errors.residentsAmount}
+                    placeholder="residentsAmount"
+                    name="residentsAmount"
                 />
             </FormSegment>
             <FormSegment
@@ -92,7 +104,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
             >
                 <>
                     <small>Залиште це поле порожнім якщо у вас немає дітей</small>
-                    <Input
+                    <Textarea
                         id="children"
                         className={css.input}
                         rootClassName={css.inputWrp}
@@ -106,7 +118,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
             <FormSegment id="pets" label="pets" required={false} error={formik.touched.pets && formik.errors.pets}>
                 <>
                     <small>Залиште це поле порожнім якщо у вас немає домашніх тварин</small>
-                    <Input
+                    <Textarea
                         id="pets"
                         className={css.input}
                         rootClassName={css.inputWrp}

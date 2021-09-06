@@ -18,9 +18,9 @@ const SinglePostComponent = (): ReactElement => {
                 </Container>
 
                 {postData.image && (
-                    <Container size="lg">
+                    <div className={css.img}>
                         <img src={postData.image} alt={postData.title} />
-                    </Container>
+                    </div>
                 )}
 
                 <Container className={css.description} size="sm">

@@ -116,7 +116,12 @@ const JoinForm = (): ReactElement => {
                 <Button className={css.btn} secondary onClick={login}>
                     {trans('Увійти')}
                 </Button>
-                <Button loading={authState.joinStatus === 'loading'} className={css.btn} type="submit" primary>
+                <Button
+                    loading={authState.joinStatus === 'loading' || authState.joinStatus === 'success'}
+                    className={css.btn}
+                    type="submit"
+                    primary
+                >
                     {trans('Зареєструватися')}
                 </Button>
             </div>

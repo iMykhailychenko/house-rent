@@ -1,7 +1,5 @@
 import { SelectValue } from '../../../../../interfaces';
 
-export const residentsAmount: string[] = ['one', 'two', 'three', 'four', 'more'];
-
 export const rooms: string[] = ['one', 'two', 'three', 'four', 'more'];
 
 export const houseType: string[] = ['new', 'old'];

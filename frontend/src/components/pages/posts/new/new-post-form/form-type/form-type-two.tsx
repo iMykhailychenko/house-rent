@@ -48,6 +48,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): ReactElement => {
     };
     const goBack = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        onSubmit(formik.values);
         dispatch(updateFormType(FORM_TYPE.ONE));
     };
     const submitForm = (): Promise<void> => formik.submitForm();

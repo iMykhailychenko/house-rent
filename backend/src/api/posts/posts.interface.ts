@@ -57,3 +57,11 @@ export enum POST_STATUS {
     ACTIVE = 'active',
     ARCHIVE = 'archive',
 }
+
+export enum RESIDENTS_AMOUNT {
+    ONE = 'one',
+    TWO = 'two',
+    THREE = 'three',
+    FOUR = 'four',
+    MORE = 'more',
+}
