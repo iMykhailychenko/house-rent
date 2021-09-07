@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsNumber, IsOptional, IsString, Length, Max, Min, Validate } from 'class-validator';
+import { IsArray, IsDate, IsEnum, IsInt, Max, Min, IsOptional, IsString, Length, Validate } from 'class-validator';
 import { User } from '../users/users.entity';
 import {
     City,
@@ -28,7 +28,7 @@ export class Post {
     creationDate: Date;
 
     @Column({ type: 'int', default: 0 })
-    @IsNumber()
+    @IsInt()
     @IsOptional()
     views: number;
 
@@ -41,9 +41,9 @@ export class Post {
     description: string;
 
     @Column({ type: 'int' })
-    @IsNumber({ allowNaN: false })
+    @IsInt()
+    @Min(0)
     @Max(15)
-    @Min(1)
     residentsAmount: number;
 
     @Column({ type: 'varchar', default: null, nullable: true })

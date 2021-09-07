@@ -9,6 +9,7 @@ import { FORM_TYPE, IStepTwo } from '../../../../../../state/entities/posts/post
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import { useNewPostSelector } from '../../../../../../state/entities/posts/posts.selector';
 import Button from '../../../../../common/button/button';
+import ImageWrp from '../../../../../common/image-wrp/image-wrp';
 import Select from '../../../../../common/select/select';
 import Filters from '../filters/filters';
 import FormSeparator from '../form-separator/form-separator';
@@ -16,7 +17,6 @@ import FormSegment from '../from-segment/from-segment';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormTwoSchema } from '../new-post-form.validation';
-import ImageWrp from '../../../../../common/image-wrp/image-wrp';
 
 interface IProps {
     initialValues: IStepTwo;

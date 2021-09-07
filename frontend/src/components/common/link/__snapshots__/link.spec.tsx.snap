@@ -6,7 +6,11 @@ exports[`Link component matches snapshot 1`] = `
     class="link"
     href="/test"
   >
-    test
+    <span
+      class="children"
+    >
+      test
+    </span>
   </a>
 </DocumentFragment>
 `;
@@ -18,7 +22,11 @@ exports[`Link component matches snapshot props 1`] = `
     href="/test"
     title="test"
   >
-    test
+    <span
+      class="children"
+    >
+      test
+    </span>
   </a>
 </DocumentFragment>
 `;

@@ -49,7 +49,8 @@ const FormTypeTree = ({ value }: IProps): ReactElement => {
 
     const uploadWithoutPhoto = async (): Promise<void> => {
         try {
-            await dispatch(newPostThunk(value));
+            const data = await dispatch(newPostThunk(value)).unwrap();
+            if (!data?.id) throw new Error();
             dispatch(updateFormType(FORM_TYPE.DONE));
         } catch (error) {
             console.log(error?.response || error);

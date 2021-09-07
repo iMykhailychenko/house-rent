@@ -15,16 +15,20 @@ exports[`Home page matches snapshot 1`] = `
           class="home button secondary"
           href="/"
         >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
+          <span
+            class="children"
           >
-            <path
-              d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+              />
+            </svg>
+          </span>
         </a>
         <button
           class="button button menu"
@@ -164,7 +168,11 @@ exports[`Home page matches snapshot 1`] = `
               class="button primary appear appear-active"
               href="/posts/new"
             >
-              Створити оголошення
+              <span
+                class="children"
+              >
+                Створити оголошення
+              </span>
             </a>
           </div>
         </div>

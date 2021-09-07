@@ -10,22 +10,25 @@ interface IProps {
     className?: string;
     primary?: boolean;
     secondary?: boolean;
+    loading?: boolean;
     type?: 'link' | 'button';
     title?: string;
     children: ReactElement[] | ReactElement | string;
 }
 
-const Link = ({ type = 'link', href, className, children, primary, secondary, title }: IProps): ReactElement => {
+const Link = ({ type = 'link', href, className, children, loading, primary, secondary, title }: IProps): ReactElement => {
     return (
         <NextLink href={href} passHref>
             <a
                 title={title}
                 className={clsx(className, type === 'link' ? css.link : css.button, {
+                    [css.loading]: loading,
                     [css.primary]: primary,
                     [css.secondary]: secondary,
                 })}
             >
-                {children}
+                {loading && <img className={css.spinner} src="/spinner.gif" alt="loading" />}
+                <span className={css.children}>{children}</span>
             </a>
         </NextLink>
     );

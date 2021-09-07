@@ -151,3 +151,20 @@
         width: 30rem;
     }
 }
+
+.done {
+    .mb {
+        margin-bottom: 4rem;
+    }
+
+    .text {
+        margin: 4rem;
+        font-size: 1.4rem;
+        text-align: center;
+
+        .line {
+            display: block;
+            margin: 1rem;
+        }
+    }
+}
