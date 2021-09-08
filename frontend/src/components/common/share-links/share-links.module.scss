@@ -1,0 +1,30 @@
+.list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.link,
+.hover {
+    display: block;
+    color: inherit;
+}
+
+.link svg,
+.hover svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.hover svg:hover {
+    fill: var(--primary) !important;
+}
+
+@media (max-width: 1000px) {
+    .list {
+        width: 100%;
+        min-width: unset;
+    }
+}

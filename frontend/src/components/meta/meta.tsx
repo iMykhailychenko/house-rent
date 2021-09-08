@@ -17,7 +17,7 @@ interface IProps {
 
 const color = '#0492ff';
 const siteName = 'House Rent';
-const host = process.env.HOST || '0.0.0.0';
+const host = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
 const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): ReactElement => {
     const trans = useTrans();

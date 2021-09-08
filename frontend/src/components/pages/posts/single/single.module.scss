@@ -1,5 +1,5 @@
 .title {
-    margin: 6rem 0;
+    margin: 6rem 0 4rem;
     font-size: 4rem;
     text-align: center;
 }
@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 80vh;
+    height: 80rem;
     background: var(--gray-2);
 
     img {
@@ -19,7 +19,64 @@
     }
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+
+    .inner {
+        width: 30%;
+
+        & > ul {
+            margin-top: -0.5rem;
+            margin-left: -1rem;
+        }
+
+        .date {
+            height: 3.6rem;
+        }
+    }
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .visibility {
+        display: flex;
+        align-items: center;
+        margin-left: 2rem;
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--gray-6);
+
+        span {
+            margin-left: 1rem;
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.subtitle {
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gray-9);
+}
+
+.small {
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-7);
+}
+
 .description {
     margin: 6rem 0;
     font-size: 2rem;
+    font-weight: 300;
 }
