@@ -9,7 +9,7 @@ interface IProps {
     hover?: boolean;
 }
 
-const Socials = ({ title, fill = 'var(--gray-5)', link = '', hover = true }: IProps): ReactElement => {
+const Socials = ({ title, fill = 'var(--gray-6)', link = '', hover = true }: IProps): ReactElement => {
     const host = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
     return (
