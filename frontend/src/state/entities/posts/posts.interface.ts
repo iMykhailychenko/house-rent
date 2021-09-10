@@ -14,6 +14,9 @@ export interface IPost {
     description: string;
     image: string | null;
     cityFilters: string;
+    residentsAmount: number;
+    children: string;
+    pets: string;
     creationDate: string;
     districtFilters: string[];
     generalFilters: string[] | null;

@@ -62,7 +62,6 @@
 }
 
 .subtitle {
-    margin-right: 2rem;
     margin-bottom: 1rem;
     font-size: 1.6rem;
     font-weight: 600;
@@ -77,8 +76,41 @@
     color: var(--gray-7);
 }
 
-.description {
+.wrap {
     margin: 6rem 0;
+}
+
+.text {
     font-size: 2rem;
     font-weight: 300;
+}
+
+.table {
+    width: 100%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border-top: 0.1rem solid var(--gray-5);
+    font-size: 1.4rem;
+
+    .left {
+        width: 20rem;
+    }
+
+    tr {
+        border-bottom: 0.1rem solid var(--gray-5);
+    }
+
+    td {
+        padding: 1.6rem 1.6rem 1.6rem 0;
+
+        .rowWithIcon {
+            display: flex;
+            align-items: center;
+        }
+
+        svg {
+            margin-right: 1rem;
+            font-size: 1.6rem;
+        }
+    }
 }
