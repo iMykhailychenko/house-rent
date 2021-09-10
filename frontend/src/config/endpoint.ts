@@ -1,8 +1,10 @@
+const prefix = '/api/v1';
+
 const endpointsMap = {
     development() {
         return {
-            ssr: (path = ''): string => 'http://backend:8000' + path,
-            browser: (path = ''): string => 'http://localhost:8000' + path,
+            ssr: (path = ''): string => 'http://backend:8000' + prefix + path,
+            browser: (path = ''): string => 'http://house-rent.com' + prefix + path,
         };
     },
 

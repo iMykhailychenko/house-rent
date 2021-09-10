@@ -58,59 +58,63 @@ const SinglePostComponent = (): ReactElement => {
                         <div className={css.wrap}>
                             <h3 className={css.subtitle}>{'about_author'}</h3>
                             <table className={css.table}>
-                                <tr>
-                                    <td className={css.left}>residentsAmount</td>
-                                    <td>
-                                        <div className={css.rowWithIcon}>
-                                            <People />
-                                            <span>{postData.residentsAmount}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>children</td>
-                                    <td>
-                                        <div className={css.rowWithIcon}>
-                                            <ChildFriendly />
-                                            <span>{postData.children || '-'}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>pets</td>
-                                    <td>
-                                        <div className={css.rowWithIcon}>
-                                            <Pets />
-                                            <span>{postData.pets || '-'}</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className={css.left}>residentsAmount</td>
+                                        <td>
+                                            <div className={css.rowWithIcon}>
+                                                <People />
+                                                <span>{postData.residentsAmount}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>children</td>
+                                        <td>
+                                            <div className={css.rowWithIcon}>
+                                                <ChildFriendly />
+                                                <span>{postData.children || '-'}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>pets</td>
+                                        <td>
+                                            <div className={css.rowWithIcon}>
+                                                <Pets />
+                                                <span>{postData.pets || '-'}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
 
                         <div className={css.wrap}>
                             <h3 className={css.subtitle}>{'about_flat'}</h3>
                             <table className={css.table}>
-                                <tr>
-                                    <td className={css.left}>houseTypeFilters</td>
-                                    <td>{postData.houseTypeFilters.join(', ')}</td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>roomFilters</td>
-                                    <td>{postData.roomFilters.join(', ')}</td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>priceFilters</td>
-                                    <td>{postData.priceFilters.join(', ')}</td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>cityFilters</td>
-                                    <td>{postData.cityFilters}</td>
-                                </tr>
-                                <tr>
-                                    <td className={css.left}>priceFilters</td>
-                                    <td>{postData.districtFilters.join(', ')}</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className={css.left}>houseTypeFilters</td>
+                                        <td>{postData.houseTypeFilters.join(', ')}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>roomFilters</td>
+                                        <td>{postData.roomFilters.join(', ')}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>priceFilters</td>
+                                        <td>{postData.priceFilters.join(', ')}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>cityFilters</td>
+                                        <td>{postData.cityFilters}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={css.left}>priceFilters</td>
+                                        <td>{postData.districtFilters.join(', ')}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </>
