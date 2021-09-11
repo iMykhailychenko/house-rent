@@ -108,8 +108,8 @@
             align-items: center;
         }
 
-        svg {
-            margin-right: 1rem;
+        .svg {
+            min-width: 4rem;
             font-size: 1.6rem;
         }
     }

@@ -13,7 +13,7 @@ const SinglePost = (): ReactElement => (
     </RootLayout>
 );
 
-export const getServerSideProps: GetServerSideProps = withStore<null>(async ctx => {
+export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
     const postId = +String(ctx.params?.postId || 0);
     await ctx.store?.dispatch(singlePostThunk(postId));
 });

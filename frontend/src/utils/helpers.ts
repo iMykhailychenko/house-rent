@@ -19,3 +19,5 @@ export const addMonthToDate = (amount = 1): Date => {
     const today = new Date();
     return new Date(today.setMonth(today.getMonth() + amount));
 };
+
+export const cutString = (str: string, len: number): string => (str.length < len ? str : str.slice(0, len - 3) + '...');

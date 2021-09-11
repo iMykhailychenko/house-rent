@@ -14,8 +14,7 @@
     border: 0.1rem solid var(--gray-5);
     border-radius: 2rem;
 
-    &:hover,
-    &:focus {
+    &:hover {
         color: var(--primary);
 
         svg {
@@ -25,11 +24,19 @@
 
     svg {
         margin-right: 0.4rem;
+        margin-top: 0.1rem;
 
-        &:hover,
-        &:focus {
+        &:hover {
             color: var(--hover);
         }
+    }
+}
+
+:global(.black) {
+    .active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--black);
     }
 }
 
@@ -45,7 +52,6 @@
 
 .text {
     display: block;
-    margin-bottom: 0.3rem;
     color: inherit;
     line-height: 1;
 }

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import useConfig from '../../../../hooks/config.hook';
 import useTrans from '../../../../hooks/trans.hook';
+import { usePostListSelector } from '../../../../state/entities/posts/posts.selector';
 import PostCard from '../../../common/post-card/post-card';
 import Container from '../../../layout/container/container';
 import Section from '../../../layout/section/section';
@@ -9,11 +10,11 @@ import Section from '../../../layout/section/section';
 import HomePostFilters from './home-post-filters/home-post-filters';
 import css from './home-posts.module.scss';
 
-const mock = [0, 1, 2, 3, 4, 5, 6];
 
 const HomePosts = (): ReactElement => {
     const trans = useTrans();
     const [config] = useConfig();
+    const postsState = usePostListSelector();
 
     return (
         <Section id="home-posts">
@@ -25,8 +26,8 @@ const HomePosts = (): ReactElement => {
 
                     <div className={css.flex}>
                         <div className={css[config.cardSize]}>
-                            {mock.map(item => (
-                                <PostCard key={item} />
+                            {postsState.data.map(item => (
+                                <PostCard key={item.id} post={item} />
                             ))}
                         </div>
                         <HomePostFilters />

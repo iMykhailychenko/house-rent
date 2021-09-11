@@ -16,7 +16,7 @@ export const usersListController = errorWrapper(async (req: Request, res: Respon
     });
 
     res.json({
-        totalUsers: total,
+        totalItems: total,
         totalPages: Math.ceil(total / limit) - 1,
         currentPage: +page,
         data: result,

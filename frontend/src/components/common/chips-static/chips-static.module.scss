@@ -1,0 +1,46 @@
+.chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: max-content;
+    margin: 0 0.5rem 0.5rem 0;
+    padding: 0 1rem;
+    border-radius: 3rem;
+    background: var(--gray-3);
+    border: 0.1rem solid var(--gray-5);
+    color: var(--gray-6);
+
+    .tooltip {
+        width: 20rem;
+    }
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            line-height: 1;
+        }
+
+        svg {
+            font-size: 1.6rem;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+:global(.black) {
+    .active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--black);
+    }
+}
+
+.active {
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+}

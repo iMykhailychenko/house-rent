@@ -19,8 +19,8 @@ export const postsListController = errorWrapper(async (req: Request, res: Respon
     });
 
     res.json({
-        totalPosts: total,
-        totalPages: Math.ceil(total / limit) - 1,
+        totalItems: total,
+        totalPages: Math.ceil(total / limit),
         currentPage: +page,
         data: result,
     });

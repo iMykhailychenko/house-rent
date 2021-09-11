@@ -102,8 +102,8 @@ describe('Test post service', () => {
             const res = await api.get('/posts');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(1);
-            expect(res.body.totalPages).toEqual(0);
-            expect(res.body.totalPosts).toEqual(1);
+            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalItems).toEqual(1);
             expect(res.body.data[0].title).toEqual('test');
             expect(res.body.data[0].description).toEqual('test description');
             expect(res.body.data[0].user.firstName).toEqual('Name');
@@ -115,8 +115,8 @@ describe('Test post service', () => {
             const res = await api.get('/posts?page=10000');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(10000);
-            expect(res.body.totalPages).toEqual(0);
-            expect(res.body.totalPosts).toEqual(1);
+            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalItems).toEqual(1);
             expect(res.body.data.length).toEqual(0);
         });
     });

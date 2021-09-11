@@ -7,6 +7,9 @@ export const singlePostsInitialState: IPost = {
     title: 'loading...',
     description: 'loading...',
     image: null,
+    residentsAmount: 0,
+    children: 'loading...',
+    pets: 'loading...',
     cityFilters: 'loading...',
     creationDate: 'loading...',
     districtFilters: ['loading...'],
@@ -33,5 +36,13 @@ export const postsInitialState: IPostState = {
         error: null,
         status: 'idle',
         data: singlePostsInitialState,
+    },
+    list: {
+        error: null,
+        status: 'idle',
+        totalItems: 0,
+        totalPages: 0,
+        currentPage: 0,
+        data: [],
     },
 };

@@ -26,8 +26,8 @@ describe('Test user service', () => {
             const res = await api.get('/users');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(1);
-            expect(res.body.totalPages).toEqual(0);
-            expect(res.body.totalUsers).toEqual(1);
+            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalItems).toEqual(1);
             expect(res.body.data[0].firstName).toEqual('Name');
             expect(res.body.data[0].lastName).toEqual('LastName');
             expect(res.body.data[0].email).toEqual('test@mail.ru');
@@ -37,8 +37,8 @@ describe('Test user service', () => {
             const res = await api.get('/users?page=10000');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(10000);
-            expect(res.body.totalPages).toEqual(0);
-            expect(res.body.totalUsers).toEqual(1);
+            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalItems).toEqual(1);
             expect(res.body.data.length).toEqual(0);
         });
     });

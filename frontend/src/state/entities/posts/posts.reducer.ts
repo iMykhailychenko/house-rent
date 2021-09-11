@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Pagination } from '../../../interfaces';
+
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPost, IPostState } from './posts.interface';
-import { newPostThunk, singlePostThunk, updatePostThunk } from './posts.thunk';
+import { newPostThunk, postListThunk, singlePostThunk, updatePostThunk } from './posts.thunk';
 
 const postsSlice = createSlice({
     name: 'POSTS',
@@ -13,6 +15,7 @@ const postsSlice = createSlice({
         },
     },
     extraReducers: builder => {
+        // NEW POST THUNK
         builder.addCase(newPostThunk.pending, (state: IPostState) => {
             state.new.status = 'loading';
         });
@@ -26,6 +29,7 @@ const postsSlice = createSlice({
             state.new.error = 'error';
         });
 
+        // UPDATE POST THUNK
         builder.addCase(updatePostThunk.pending, (state: IPostState) => {
             state.update.status = 'loading';
         });
@@ -37,6 +41,7 @@ const postsSlice = createSlice({
             state.update.error = 'error';
         });
 
+        // SINGLE POST THUNK
         builder.addCase(singlePostThunk.pending, (state: IPostState) => {
             state.single.status = 'loading';
         });
@@ -47,6 +52,22 @@ const postsSlice = createSlice({
         builder.addCase(singlePostThunk.rejected, (state: IPostState) => {
             state.single.status = 'error';
             state.single.error = 'error';
+        });
+
+        // SINGLE POST THUNK
+        builder.addCase(postListThunk.pending, (state: IPostState) => {
+            state.list.status = 'loading';
+        });
+        builder.addCase(postListThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
+            state.list.status = 'success';
+            state.list.totalItems = action.payload.totalItems;
+            state.list.totalPages = action.payload.totalPages;
+            state.list.currentPage = action.payload.currentPage;
+            state.list.data = action.payload.data;
+        });
+        builder.addCase(postListThunk.rejected, (state: IPostState) => {
+            state.list.status = 'error';
+            state.list.error = 'error';
         });
     },
 });

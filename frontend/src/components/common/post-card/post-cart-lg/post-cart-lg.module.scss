@@ -1,8 +1,10 @@
 .root {
     display: flex;
     flex-direction: column;
-    padding: 4rem 0 2rem;
+    width: 100%;
+    padding: 3rem 0;
     border-top: 0.1rem solid var(--gray-5);
+
     &:nth-last-of-type(1) {
         border-bottom: 0.1rem solid var(--gray-5);
     }
@@ -24,13 +26,14 @@
     }
 
     h3 {
+        margin-left: 0.5rem;
         font-size: 2rem;
         line-height: 1.2;
         color: var(--black);
     }
 
     p {
-        margin-top: 2rem;
+        margin: 1rem 0 2rem 0.5rem;
         text-align: left;
         font-size: 1.5rem;
         color: var(--gray-6);

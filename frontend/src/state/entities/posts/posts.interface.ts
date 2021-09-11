@@ -13,10 +13,11 @@ export interface IPost {
     title: string;
     description: string;
     image: string | null;
-    cityFilters: string;
     residentsAmount: number;
     children: string;
     pets: string;
+    views: number;
+    cityFilters: string;
     creationDate: string;
     districtFilters: string[];
     generalFilters: string[] | null;
@@ -75,8 +76,18 @@ export interface ISinglePostState {
     data: IPost;
 }
 
+export interface IPostListState {
+    error: string | null;
+    status: ThunkStatuses;
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    data: IPost[];
+}
+
 export interface IPostState {
     new: INewPostState;
     update: IUpdatePostState;
     single: ISinglePostState;
+    list: IPostListState;
 }

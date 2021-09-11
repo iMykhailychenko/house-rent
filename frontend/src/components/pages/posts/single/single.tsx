@@ -63,7 +63,9 @@ const SinglePostComponent = (): ReactElement => {
                                         <td className={css.left}>residentsAmount</td>
                                         <td>
                                             <div className={css.rowWithIcon}>
-                                                <People />
+                                                <div className={css.svg}>
+                                                    <People />
+                                                </div>
                                                 <span>{postData.residentsAmount}</span>
                                             </div>
                                         </td>
@@ -72,7 +74,9 @@ const SinglePostComponent = (): ReactElement => {
                                         <td className={css.left}>children</td>
                                         <td>
                                             <div className={css.rowWithIcon}>
-                                                <ChildFriendly />
+                                                <div className={css.svg}>
+                                                    <ChildFriendly />
+                                                </div>
                                                 <span>{postData.children || '-'}</span>
                                             </div>
                                         </td>
@@ -81,7 +85,9 @@ const SinglePostComponent = (): ReactElement => {
                                         <td className={css.left}>pets</td>
                                         <td>
                                             <div className={css.rowWithIcon}>
-                                                <Pets />
+                                                <div className={css.svg}>
+                                                    <Pets />
+                                                </div>
                                                 <span>{postData.pets || '-'}</span>
                                             </div>
                                         </td>
