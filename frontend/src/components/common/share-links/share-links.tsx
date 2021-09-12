@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
 
+import env from '../../../config/env.config';
+
 import css from './share-links.module.scss';
 
 interface IProps {
@@ -10,7 +12,7 @@ interface IProps {
 }
 
 const Socials = ({ title, fill = 'var(--gray-6)', link = '', hover = true }: IProps): ReactElement => {
-    const host = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+    const host = env.host || 'http://localhost:3000';
 
     return (
         <ul className={css.list}>

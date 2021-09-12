@@ -1,8 +1,10 @@
+@import '../../../../styles/helpers/mixin.scss';
+
 .root {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 3rem 0;
+    padding: 10rem 0;
     border-top: 0.1rem solid var(--gray-5);
 
     &:nth-last-of-type(1) {
@@ -12,52 +14,71 @@
     .content {
         margin-top: 2rem;
         width: 100%;
+        --img-width: 12rem;
     }
-}
 
-.link {
-    font-weight: 600;
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
 
-    &:hover,
-    &:focus {
+    .img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(var(--img-width) - 2rem);
+        width: var(--img-width);
+        object-fit: cover;
+        background: var(--gray-2);
+        border-radius: 1rem;
+    }
+
+    .link {
+        width: calc(100% - var(--img-width) - 2rem);
+        font-weight: 600;
+
+        &:hover,
+        &:focus {
+            h3 {
+                text-decoration: underline;
+            }
+        }
+
         h3 {
-            text-decoration: underline;
+            margin-left: 0.5rem;
+            font-size: 2rem;
+            line-height: 1.2;
+            color: var(--black);
+            @include cutString;
+        }
+
+        p {
+            margin: 1rem 0 2rem 0.5rem;
+            text-align: left;
+            font-size: 1.5rem;
+            color: var(--gray-6);
         }
     }
 
-    h3 {
-        margin-left: 0.5rem;
-        font-size: 2rem;
-        line-height: 1.2;
-        color: var(--black);
-    }
-
-    p {
-        margin: 1rem 0 2rem 0.5rem;
-        text-align: left;
-        font-size: 1.5rem;
-        color: var(--gray-6);
-    }
-}
-
-.info {
-    display: flex;
-    align-items: center;
-
-    button {
-        margin-right: 1rem;
-    }
-
-    .visibility {
+    .info {
         display: flex;
         align-items: center;
-        font-size: 1.8rem;
-        font-weight: 300;
-        color: var(--gray-6);
 
-        span {
-            margin-left: 1rem;
-            font-size: 1.4rem;
+        button {
+            margin-right: 1rem;
+        }
+
+        .visibility {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--gray-6);
+
+            span {
+                margin-left: 1rem;
+                font-size: 1.4rem;
+            }
         }
     }
 }

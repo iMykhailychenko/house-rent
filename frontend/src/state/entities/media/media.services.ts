@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import endpoint from '../../../config/endpoint';
+import endpointConfig from '../../../config/endpoint.config';
 
 import { IMediaResponse } from './media.interface';
 
 export const mediaServices = {
     upload: (body: FormData, requestConfig: AxiosRequestConfig): Promise<AxiosResponse<IMediaResponse>> =>
-        axios.post(endpoint('/media'), body, requestConfig),
+        axios.post(endpointConfig('/media'), body, requestConfig),
 };

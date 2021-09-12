@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import env from '../../config/env.config';
 import useTrans from '../../hooks/trans.hook';
 
 import css from './meta.module.scss';
@@ -17,7 +18,7 @@ interface IProps {
 
 const color = '#0492ff';
 const siteName = 'House Rent';
-const host = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+const host = env.host || 'http://localhost:3000';
 
 const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): ReactElement => {
     const trans = useTrans();

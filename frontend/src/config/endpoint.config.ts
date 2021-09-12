@@ -1,10 +1,12 @@
+import env from './env.config';
+
 const prefix = '/api/v1';
 
 const endpointsMap = {
     development() {
         return {
-            ssr: (path = ''): string => 'http://backend:8000' + prefix + path,
-            browser: (path = ''): string => 'http://house-rent.com' + prefix + path,
+            ssr: (path = ''): string => env.backand + prefix + path,
+            browser: (path = ''): string => env.host + prefix + path,
         };
     },
 

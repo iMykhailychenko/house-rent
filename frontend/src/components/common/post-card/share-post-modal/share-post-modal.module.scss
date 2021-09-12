@@ -1,0 +1,62 @@
+@import '../../../../styles/helpers/mixin.scss';
+
+.postTitle {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 0 0.4rem 1rem;
+}
+
+.postText {
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin: 0 0.4rem 1rem;
+}
+
+.postImg {
+    margin: 0 0.4rem 3rem;
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    background: var(--gray-3);
+    border-radius: 1rem;
+    transition: 0.3s ease-in-out;
+
+    p {
+        width: calc(100% - 5rem);
+        text-align: left;
+        @include cutString;
+    }
+
+    svg {
+        font-size: 2rem;
+    }
+}
+
+.done {
+    background: var(--success);
+    color: var(--true-white);
+}
+
+.error {
+    background: var(--error);
+    color: var(--true-white);
+}
+
+.socials {
+    margin-top: 2rem;
+
+    ul {
+        margin-left: -0.5rem;
+    }
+}

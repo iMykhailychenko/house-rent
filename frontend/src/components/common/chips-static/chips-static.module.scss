@@ -10,6 +10,7 @@
     background: var(--gray-3);
     border: 0.1rem solid var(--gray-5);
     color: var(--gray-6);
+    user-select: none;
 
     .tooltip {
         width: 20rem;
@@ -33,7 +34,6 @@
 
 :global(.black) {
     .active {
-        background: var(--primary);
         border-color: var(--primary);
         color: var(--black);
     }
