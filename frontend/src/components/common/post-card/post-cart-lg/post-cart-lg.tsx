@@ -23,7 +23,7 @@ interface IProps {
 const PostCardLg = ({ post }: IProps): ReactElement => {
     const openSharePostModal = (): void => {
         modal.open(
-            <StickyModal title="Поділитись посиланням">
+            <StickyModal>
                 <SharePostModal post={post} />
             </StickyModal>,
         );
