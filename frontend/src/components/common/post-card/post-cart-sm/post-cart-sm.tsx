@@ -6,11 +6,9 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
 import UserCard from '../../user-card/user-card';
+import PostCardFooter from '../post-card-footer/post-card-footer';
 
 import css from './post-cart-sm.module.scss';
-import Button from "../../button/button";
-import {Bookmark, Share, Visibility} from "@material-ui/icons";
-import PostCardFooter from "../post-card-footer/post-card-footer";
 
 interface IProps {
     post: IPost;
@@ -32,7 +30,7 @@ const PostCardSm = ({ post }: IProps): ReactElement => {
                     </a>
                 </Link>
 
-                <PostCardFooter post={post} />
+                <PostCardFooter size="sm" post={post} />
             </div>
         </div>
     );

@@ -14,12 +14,11 @@ const authSlice = createSlice({
             state.accessToken = action.payload;
             state.loginStatus = 'success';
         },
-        logoutAction(state: IAuthState) {
+        logoutAction() {
             delete axios.defaults.headers.common.Authorization;
             Cookies.remove('house_rent_auth');
 
-            state.accessToken = null;
-            state.loginStatus = 'idle';
+            return authInitialState;
         },
     },
     extraReducers: builder => {

@@ -12,6 +12,13 @@
     font-weight: 700;
     transition: 0.2s ease-in-out;
 
+    &.small {
+        height: 2.8rem;
+        padding: 0 1.2rem;
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+
     &:hover,
     &:focus {
         background: var(--gray-2);

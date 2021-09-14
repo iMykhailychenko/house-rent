@@ -11,10 +11,11 @@ import SharePostModal from '../share-post-modal/share-post-modal';
 import css from './post-card-footer.module.scss';
 
 interface IProps {
+    size?: 'sm' | 'md';
     post: IPost;
 }
 
-const PostCardFooter = ({ post }: IProps): ReactElement => {
+const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     const openSharePostModal = (): void => {
         modal.open(
             <StickyModal>
@@ -26,10 +27,10 @@ const PostCardFooter = ({ post }: IProps): ReactElement => {
     return (
         <div className={css.flex}>
             <div className={css.info}>
-                <Button secondary onClick={openSharePostModal}>
+                <Button size={size} secondary onClick={openSharePostModal}>
                     <Share />
                 </Button>
-                <Button secondary>
+                <Button size={size} secondary>
                     <Bookmark />
                 </Button>
                 <div className={css.visibility}>
@@ -39,7 +40,9 @@ const PostCardFooter = ({ post }: IProps): ReactElement => {
             </div>
 
             <div className={css.info}>
-                <Button primary>Відповісти</Button>
+                <Button size={size} primary>
+                    Відповісти
+                </Button>
             </div>
         </div>
     );

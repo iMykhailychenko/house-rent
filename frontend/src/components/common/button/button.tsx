@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import css from './button.module.scss';
 
 interface IProps {
+    size?: 'sm' | 'md';
     loading?: boolean;
     className?: string;
     primary?: boolean;
@@ -16,6 +17,7 @@ interface IProps {
 }
 
 const Button = ({
+    size = 'md',
     type = 'button',
     className,
     loading,
@@ -27,6 +29,7 @@ const Button = ({
 }: IProps): ReactElement => (
     <button
         className={clsx(css.button, className, {
+            [css.small]: size === 'sm',
             [css.loading]: loading,
             [css.primary]: primary && !disabled,
             [css.secondary]: secondary && !disabled,

@@ -24,15 +24,20 @@ const AuthProvider = ({ authServer = authInitialState, children }: IProps): Reac
     const profile = useProfileInfoSelector();
 
     useEffect(() => {
-        if (auth.accessToken) {
-            setValue(auth);
-            axios.defaults.headers.common.Authorization = auth.accessToken.includes('Bearer')
-                ? auth.accessToken
-                : `Bearer ${auth.accessToken}`;
+        if (process.browser) {
+            if (auth?.accessToken) {
+                setValue(auth);
+                axios.defaults.headers.common.Authorization = auth.accessToken.includes('Bearer')
+                    ? auth.accessToken
+                    : `Bearer ${auth.accessToken}`;
+            } else {
+                setValue(authInitialState);
+                dispatch(logoutAction());
+            }
         } else {
             setValue(authServer);
         }
-    }, [auth, authServer]);
+    }, [auth, authServer, dispatch]);
 
     useEffect(() => {
         if (profile.status === 'error') {

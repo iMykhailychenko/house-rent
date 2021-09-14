@@ -9,6 +9,9 @@ const profileSlice = createSlice({
     initialState: profileInitialState,
     reducers: {},
     extraReducers: builder => {
+        builder.addCase('AUTH/logoutAction', () => profileInitialState);
+
+        // thunk
         builder.addCase(profileInfoThunk.pending, (state: IProfileInfoState) => {
             state.status = 'loading';
         });
