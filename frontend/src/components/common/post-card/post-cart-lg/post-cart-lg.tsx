@@ -1,33 +1,22 @@
 import React, { ReactElement } from 'react';
 
-import { Bookmark, Share, Visibility } from '@material-ui/icons';
 import Link from 'next/link';
 
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
-import Button from '../../button/button';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
-import { modal } from '../../modal/modal';
-import StickyModal from '../../modal/sticky-modal/sticky-modal';
 import UserCard from '../../user-card/user-card';
-import PostInfoBlock from '../post-info-block/post-info-block';
-import SharePostModal from '../share-post-modal/share-post-modal';
+import PostCardFooter from '../post-card-footer/post-card-footer';
 
 import css from './post-cart-lg.module.scss';
+import PostInfoBlock from './post-info-block/post-info-block';
 
 interface IProps {
     post: IPost;
 }
 
 const PostCardLg = ({ post }: IProps): ReactElement => {
-    const openSharePostModal = (): void => {
-        modal.open(
-            <StickyModal>
-                <SharePostModal post={post} />
-            </StickyModal>,
-        );
-    };
     return (
         <div className={css.root}>
             <UserCard
@@ -49,25 +38,7 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
 
                 <PostInfoBlock post={post} />
 
-                <div className={css.flex}>
-                    <div className={css.info}>
-                        <Button secondary onClick={openSharePostModal}>
-                            <Share />
-                        </Button>
-                        <Button secondary>
-                            <Bookmark />
-                        </Button>
-                        <div className={css.visibility}>
-                            <Visibility />
-                            <span>{post.views}</span>
-                        </div>
-                    </div>
-
-                    <div className={css.info}>
-                        <Button secondary>Відкрити чат</Button>
-                        <Button primary>Запропонувати квартиру</Button>
-                    </div>
-                </div>
+                <PostCardFooter post={post} />
             </div>
         </div>
     );

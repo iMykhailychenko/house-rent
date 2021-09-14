@@ -1,0 +1,26 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+
+    button {
+        margin-right: 1rem;
+    }
+
+    .visibility {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--gray-6);
+
+        span {
+            margin-left: 1rem;
+            font-size: 1.4rem;
+        }
+    }
+}

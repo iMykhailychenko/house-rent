@@ -15,7 +15,7 @@
 .postImg {
     margin: 0 0.4rem 3rem;
     width: 100%;
-    height: 15rem;
+    height: 20rem;
     object-fit: cover;
     border-radius: 1rem;
 }
@@ -28,6 +28,7 @@
     padding: 1rem 2rem;
     font-size: 1.8rem;
     font-weight: 400;
+    color: var(--primary);
     background: var(--gray-3);
     border-radius: 1rem;
     transition: 0.3s ease-in-out;

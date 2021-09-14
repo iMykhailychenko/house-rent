@@ -1,16 +1,39 @@
 import React, { ReactElement } from 'react';
 
-import css from './post-cart-sm.module.scss';
+import Link from 'next/link';
 
-const PostCardSm = (): ReactElement => {
+import { IPost } from '../../../../state/entities/posts/posts.interface';
+import { cutString } from '../../../../utils/helpers';
+import routes from '../../../../utils/routes';
+import UserCard from '../../user-card/user-card';
+
+import css from './post-cart-sm.module.scss';
+import Button from "../../button/button";
+import {Bookmark, Share, Visibility} from "@material-ui/icons";
+import PostCardFooter from "../post-card-footer/post-card-footer";
+
+interface IProps {
+    post: IPost;
+}
+
+const PostCardSm = ({ post }: IProps): ReactElement => {
     return (
         <div className={css.root}>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur consequatur culpa harum id illum
-                iure maiores mollitia necessitatibus odio placeat quaerat quo reiciendis repudiandae sit soluta, tempora, totam
-                veniam!
-            </p>
+            <UserCard
+                user={{ avatar: post.user.avatar, firstName: post.user.firstName, lastName: post.user.lastName }}
+                date={post.creationDate}
+            />
+
+            <div className={css.content}>
+                <Link href={routes.posts.single(post.id)}>
+                    <a className={css.link}>
+                        <h3>{post.title}</h3>
+                        <p>{cutString(post.description, 100)}</p>
+                    </a>
+                </Link>
+
+                <PostCardFooter post={post} />
+            </div>
         </div>
     );
 };

@@ -15,14 +15,17 @@
 }
 
 .sm {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 5rem;
     width: calc(100% - var(--filters-sidebar-width));
 }
 
 .lg {
-    margin-top: 5rem;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 5rem;
     width: calc(100% - var(--filters-sidebar-width));
 }

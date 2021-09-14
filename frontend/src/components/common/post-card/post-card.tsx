@@ -14,7 +14,7 @@ const PostCard = ({ post }: IProps): ReactElement => {
     const [config] = useConfig();
 
     const postCardMap = {
-        sm: <PostCardSm />,
+        sm: <PostCardSm post={post} />,
         lg: <PostCardLg post={post} />,
     };
 
