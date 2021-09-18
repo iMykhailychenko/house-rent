@@ -23,14 +23,34 @@
     }
 
     .img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
         height: calc(var(--img-width) - 2rem);
         width: var(--img-width);
         object-fit: cover;
-        background: var(--gray-2);
         border-radius: 1rem;
+    }
+
+    .noImg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: calc(var(--img-width) - 2rem);
+        width: var(--img-width);
+        padding: 2rem;
+        border-radius: 1rem;
+        background: var(--gray-1);
+
+        --image-wrp-diameter: calc(var(--img-width) - 8rem);
+
+        p {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--gray-5);
+            line-height: 1.2;
+            text-align: center;
+        }
     }
 
     .link {

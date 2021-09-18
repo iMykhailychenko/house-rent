@@ -6,6 +6,7 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
+import ImageWrp from '../../image-wrp/image-wrp';
 import UserCard from '../../user-card/user-card';
 import PostCardFooter from '../post-card-footer/post-card-footer';
 
@@ -18,7 +19,14 @@ interface IProps {
 const PostCardSm = ({ post }: IProps): ReactElement => {
     return (
         <div className={css.root}>
-            {post.image ? <FullScreenImg className={css.img} src={post.image} /> : <p className={css.img}>Без фото</p>}
+            {post.image ? (
+                <FullScreenImg className={css.img} src={post.image} />
+            ) : (
+                <div className={css.noImg}>
+                    <ImageWrp name="puzzle" />
+                    <p>Фото відсутнє</p>
+                </div>
+            )}
 
             <div className={css.content}>
                 <Link href={routes.posts.single(post.id)}>

@@ -11,6 +11,7 @@ import PostCardFooter from '../post-card-footer/post-card-footer';
 
 import css from './post-cart-lg.module.scss';
 import PostInfoBlock from './post-info-block/post-info-block';
+import ImageWrp from '../../image-wrp/image-wrp';
 
 interface IProps {
     post: IPost;
@@ -26,7 +27,14 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
 
             <div className={css.content}>
                 <div className={css.flex}>
-                    {post.image ? <FullScreenImg className={css.img} src={post.image} /> : <p className={css.img}>Без фото</p>}
+                    {post.image ? (
+                        <FullScreenImg className={css.img} src={post.image} />
+                    ) : (
+                        <div className={css.noImg}>
+                            <ImageWrp name="puzzle" />
+                            <p>Фото відсутнє</p>
+                        </div>
+                    )}
 
                     <Link href={routes.posts.single(post.id)}>
                         <a className={css.link}>
