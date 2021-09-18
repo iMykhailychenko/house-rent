@@ -6,6 +6,7 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import Button from '../../button/button';
 import { modal } from '../../modal/modal';
 import StickyModal from '../../modal/sticky-modal/sticky-modal';
+import Tooltip from '../../tooltip/tooltip';
 import SharePostModal from '../share-post-modal/share-post-modal';
 
 import css from './post-card-footer.module.scss';
@@ -27,12 +28,21 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     return (
         <div className={css.flex}>
             <div className={css.info}>
-                <Button size={size} secondary onClick={openSharePostModal}>
-                    <Share />
-                </Button>
-                <Button size={size} secondary>
-                    <Bookmark />
-                </Button>
+                <Tooltip content="Поділитись оголошенням">
+                    <Button size={size} secondary onClick={openSharePostModal}>
+                        <Share />
+                    </Button>
+                </Tooltip>
+
+                <Tooltip
+                    className={css.tooltip}
+                    content="Додати оголошення в обрані. Натисніть якщо бажаете повернутись до цього оголошення пізніше"
+                >
+                    <Button size={size} secondary>
+                        <Bookmark />
+                    </Button>
+                </Tooltip>
+
                 <div className={css.visibility}>
                     <Visibility />
                     <span>{post.views}</span>
@@ -40,9 +50,11 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
             </div>
 
             <div className={css.info}>
-                <Button size={size} primary>
-                    Відповісти
-                </Button>
+                <Tooltip className={css.tooltip} content="Натисніть щоб розпочати чат з автором оголошення">
+                    <Button size={size} primary>
+                        Відповісти
+                    </Button>
+                </Tooltip>
             </div>
         </div>
     );

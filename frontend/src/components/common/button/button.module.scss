@@ -19,9 +19,9 @@
         font-size: 1.3rem;
     }
 
-    &:hover,
-    &:focus {
+    &:hover {
         background: var(--gray-2);
+        box-shadow: 0 0 0 0.2rem var(--primary);
     }
 }
 
@@ -39,10 +39,9 @@
     background: var(--primary);
     color: var(--true-white);
 
-    &:hover,
-    &:focus {
+    &:hover {
         background: var(--primary);
-        opacity: 0.5;
+        box-shadow: 0 0 0 0.2rem var(--primary-hover);
     }
 }
 
@@ -50,8 +49,7 @@
     background: var(--gray-3);
     color: var(--gray-10);
 
-    &:hover,
-    &:focus {
+    &:hover {
         background: var(--gray-2);
         color: var(--primary);
     }
@@ -62,8 +60,7 @@
     color: var(--gray-4);
     cursor: not-allowed;
 
-    &:hover,
-    &:focus {
+    &:hover {
         background: var(--gray-3);
         opacity: 1;
     }

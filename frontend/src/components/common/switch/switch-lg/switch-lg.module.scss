@@ -13,15 +13,13 @@
         width: 50%;
         height: 100%;
         background: var(--white);
-        border-radius: 3rem;
+        border-radius: 1.5rem;
         z-index: 1;
-        box-shadow: var(--box-shadow-1);
         transition: 0.3s ease-in-out;
     }
 
-    &:hover::before,
-    &:focus::before {
-        box-shadow: var(--box-shadow-2);
+    &:hover::before {
+        box-shadow: 0 0 0 0.2rem var(--primary);
     }
 
     span {

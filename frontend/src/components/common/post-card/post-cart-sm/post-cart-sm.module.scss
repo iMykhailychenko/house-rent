@@ -4,12 +4,23 @@
     display: flex;
     flex-direction: column;
     width: 47%;
-    padding: 3rem 0;
-    border-top: 0.1rem solid var(--gray-5);
+    padding: 3rem 0 8rem;
 
-    &:nth-last-of-type(1),
-    &:nth-last-of-type(2) {
-        border-bottom: 0.1rem solid var(--gray-5);
+    .img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20rem;
+        min-height: 20rem;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+        background: var(--gray-3);
+    }
+
+    .zoom {
+        width: 100%;
+        cursor: zoom-in;
     }
 
     .content {
@@ -20,31 +31,44 @@
         margin-top: 2rem;
     }
 
+    .card {
+        margin-bottom: 2rem;
+    }
+
     .link {
         flex-grow: 2;
         width: 100%;
+        margin-bottom: 2rem;
+        padding-bottom: 0.2rem;
         font-weight: 600;
+        transition: 0.3s ease-in-out;
 
         &:hover,
         &:focus {
+            border-radius: 0.5rem;
+            background: var(--gray-2);
+            box-shadow: 0 0 0 1rem var(--gray-2);
+            z-index: 10;
+            color: var(--primary);
+
             h3 {
-                text-decoration: underline;
+                color: var(--primary);
             }
         }
 
         h3 {
             margin-left: 0.5rem;
-            font-size: 2rem;
+            font-size: 1.6rem;
             line-height: 1.2;
             color: var(--black);
             @include cutString;
         }
 
         p {
-            margin: 1rem 0 2rem 0.5rem;
+            margin: 1rem 0 0 0.5rem;
             text-align: left;
-            font-size: 1.5rem;
-            color: var(--gray-6);
+            font-size: 1.4rem;
+            font-weight: 400;
         }
     }
 }

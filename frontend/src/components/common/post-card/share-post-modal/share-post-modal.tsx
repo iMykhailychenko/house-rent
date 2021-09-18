@@ -9,6 +9,7 @@ import routes from '../../../../utils/routes';
 import Socials from '../../share-links/share-links';
 
 import css from './share-post-modal.module.scss';
+import Tooltip from '../../tooltip/tooltip';
 
 interface IProps {
     post: IPost;
@@ -40,10 +41,12 @@ const SharePostModal = ({ post }: IProps): ReactElement => {
             <p className={css.postText}>{cutString(post.description, 100)}</p>
             {post.image && <img className={css.postImg} src={post.image} alt="" />}
 
-            <button className={clsx(css.link, done && css.done, error && css.error)} type="button" onClick={copy}>
-                <p>{error ? 'Виникла помилка' : done ? 'Посиляння скопійовано' : url}</p>
-                <FileCopy />
-            </button>
+            <Tooltip content="Натисніть щоб скопійовано посилання">
+                <button className={clsx(css.link, done && css.done, error && css.error)} type="button" onClick={copy}>
+                    <p>{error ? 'Виникла помилка' : done ? 'Посиляння скопійовано' : url}</p>
+                    <FileCopy />
+                </button>
+            </Tooltip>
 
             <div className={css.socials}>
                 <Socials title={post.title} />

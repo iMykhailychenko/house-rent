@@ -13,19 +13,22 @@
     font-weight: 700;
     transition: 0.3s ease-in-out;
 
-    &:hover,
-    &:focus {
-        opacity: 0.6;
+    &:hover {
+        box-shadow: 0 0 0 0.2rem var(--primary);
     }
 
     &.primary {
         background: var(--primary);
         color: var(--true-white);
+
+        &:hover {
+            background: var(--primary-hover);
+        }
     }
 
     &.secondary {
         background: var(--gray-3);
-        color: var(--gray-10);
+        color: var(--primary);
     }
 }
 
@@ -35,8 +38,7 @@
     font-weight: inherit;
     transition: 0.3s ease-in-out;
 
-    &:hover,
-    &:focus {
+    &:hover {
         text-decoration: underline;
     }
 
