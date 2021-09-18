@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
+import { Close } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import css from './full-screen-img.module.scss';
@@ -20,6 +21,9 @@ const FullScreenImg = ({ className, src, height, width, alt }: IProps): ReactEle
         <>
             {fullscreen && (
                 <div className={css.open}>
+                    <button className={css.close} type="button">
+                        <Close />
+                    </button>
                     <img src={src} alt={alt} onClick={close} aria-hidden="true" />
                 </div>
             )}

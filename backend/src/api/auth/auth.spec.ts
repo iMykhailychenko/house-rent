@@ -19,7 +19,7 @@ describe('Test auth service', () => {
 
     describe('Join', () => {
         it('Join success', async () => {
-            const res = await api.post('/auth/join').send({
+            const res = await api.post('/api/v1/auth/join').send({
                 firstName: 'Name',
                 lastName: 'LastName',
                 email: 'test@mail.ru',
@@ -29,7 +29,7 @@ describe('Test auth service', () => {
         });
 
         it('Join success duplicate', async () => {
-            const res = await api.post('/auth/join').send({
+            const res = await api.post('/api/v1/auth/join').send({
                 firstName: 'Name',
                 lastName: 'LastName',
                 email: 'test@mail.ru',
@@ -40,7 +40,7 @@ describe('Test auth service', () => {
         });
 
         it('Invalid firstName', async () => {
-            const res = await api.post('/auth/join').send({
+            const res = await api.post('/api/v1/auth/join').send({
                 firstName: 1,
                 lastName: 'LastName',
                 email: 'test@mail.ru',
@@ -54,7 +54,7 @@ describe('Test auth service', () => {
         });
 
         it('Invalid property', async () => {
-            const res = await api.post('/auth/join').send({
+            const res = await api.post('/api/v1/auth/join').send({
                 firstName: 'Name',
                 lastName: 'LastName',
                 email_email: 'test@mail.ru',
@@ -68,7 +68,7 @@ describe('Test auth service', () => {
         });
 
         it('Invalid password', async () => {
-            const res = await api.post('/auth/join').send({
+            const res = await api.post('/api/v1/auth/join').send({
                 firstName: 'Name',
                 lastName: 'LastName',
                 email: 'test@mail.ru',
@@ -84,7 +84,7 @@ describe('Test auth service', () => {
 
     describe('Login', () => {
         it('Login success', async () => {
-            const res = await api.post('/auth/login').send({
+            const res = await api.post('/api/v1/auth/login').send({
                 email: 'test@mail.ru',
                 password: 'P@ssw0rd!',
             });
@@ -94,7 +94,7 @@ describe('Test auth service', () => {
 
         it('Login - already authorized', async () => {
             const res = await api
-                .post('/auth/login')
+                .post('/api/v1/auth/login')
                 .send({
                     email: 'test@mail.ru',
                     password: 'P@ssw0rd!',
@@ -108,7 +108,7 @@ describe('Test auth service', () => {
         });
 
         it('Login error - wrong password', async () => {
-            const res = await api.post('/auth/login').send({
+            const res = await api.post('/api/v1/auth/login').send({
                 email: 'test@mail.ru',
                 password: 'wrong_password',
             });
@@ -120,7 +120,7 @@ describe('Test auth service', () => {
         });
 
         it('Login error - wrong email', async () => {
-            const res = await api.post('/auth/login').send({
+            const res = await api.post('/api/v1/auth/login').send({
                 email: 'wrong_test@mail.ru',
                 password: 'P@ssw0rd!',
             });
@@ -132,7 +132,7 @@ describe('Test auth service', () => {
         });
 
         it('Login error - invalid credentials', async () => {
-            const res = await api.post('/auth/login').send({
+            const res = await api.post('/api/v1/auth/login').send({
                 email: 'test@mail.ru',
                 password: null,
             });
@@ -144,7 +144,7 @@ describe('Test auth service', () => {
         });
 
         it('Login error - invalid credentials', async () => {
-            const res = await api.post('/auth/login').send({
+            const res = await api.post('/api/v1/auth/login').send({
                 test_email: 'test@mail.ru',
                 password: 'P@ssw0rd!',
             });

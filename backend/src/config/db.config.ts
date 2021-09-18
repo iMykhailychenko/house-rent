@@ -1,6 +1,7 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { User } from '../api/users/users.entity';
 import { Post } from '../api/posts/posts.entity';
+import { Chat } from '../api/chat/chat.entity';
 
 const dbConfig: PostgresConnectionOptions = {
     type: 'postgres',
@@ -11,7 +12,7 @@ const dbConfig: PostgresConnectionOptions = {
     password: process.env.POSTGRES_PASSWORD || 'house_rent_test',
     logging: false,
     synchronize: true,
-    entities: [User, Post],
+    entities: [User, Post, Chat],
 };
 
 export default dbConfig;

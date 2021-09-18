@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import { IsArray, IsDate, IsEnum, IsInt, Max, Min, IsOptional, IsString, Length, Validate } from 'class-validator';
 import { User } from '../users/users.entity';
 import {
@@ -11,6 +11,7 @@ import {
     ROOM_FILTERS,
 } from './posts.interface';
 import { DistrictValidator } from './posts.validate';
+import { Chat } from '../chat/chat.entity';
 
 @Entity()
 export class Post {
@@ -98,4 +99,7 @@ export class Post {
 
     @ManyToOne(() => User, user => user.posts)
     user: User;
+
+    @OneToMany(() => Chat, chats => chats.post)
+    chats: Chat[];
 }

@@ -4,7 +4,7 @@ import { SuperTest, Test } from 'supertest';
 import database from '../database';
 
 export const registerTestUser = async (api: SuperTest<Test>): Promise<void> => {
-    await api.post('/auth/join').send({
+    await api.post('/api/v1/auth/join').send({
         firstName: 'Name',
         lastName: 'LastName',
         email: 'test@mail.ru',
@@ -14,7 +14,7 @@ export const registerTestUser = async (api: SuperTest<Test>): Promise<void> => {
 };
 
 export const loginTestUser = async (api: SuperTest<Test>): Promise<string> => {
-    const res = await api.post('/auth/login').send({
+    const res = await api.post('/api/v1/auth/login').send({
         email: 'test@mail.ru',
         password: 'P@ssw0rd!',
     });
@@ -22,7 +22,7 @@ export const loginTestUser = async (api: SuperTest<Test>): Promise<string> => {
 };
 
 export const getInfoTestUser = async (api: SuperTest<Test>, token: string): Promise<User> => {
-    const res = await api.get('/users/profile').set('Authorization', token);
+    const res = await api.get('/api/v1/users/profile').set('Authorization', token);
     return res.body;
 };
 

@@ -16,6 +16,24 @@
         object-fit: contain;
         cursor: zoom-out;
     }
+
+    .close {
+        position: fixed;
+        top: 5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        background: var(--true-white);
+        color: var(--true-black);
+        font-size: 2rem;
+        pointer-events: none;
+    }
 }
 
 .base {

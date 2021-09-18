@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Bookmark, Share, Visibility } from '@material-ui/icons';
+import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons';
 
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import Button from '../../button/button';
@@ -43,19 +43,26 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                     </Button>
                 </Tooltip>
 
-                <div className={css.visibility}>
-                    <Visibility />
-                    <span>{post.views}</span>
-                </div>
-            </div>
+                <Tooltip content="Кількість переглядів">
+                    <div className={css.icon}>
+                        <Visibility />
+                        <span>{post.views}</span>
+                    </div>
+                </Tooltip>
 
-            <div className={css.info}>
-                <Tooltip className={css.tooltip} content="Натисніть щоб розпочати чат з автором оголошення">
-                    <Button size={size} primary>
-                        Відповісти
-                    </Button>
+                <Tooltip content="Кількість відгуків">
+                    <div className={css.icon}>
+                        <QuestionAnswer />
+                        <span>{post.views}</span>
+                    </div>
                 </Tooltip>
             </div>
+
+            <Tooltip className={css.tooltip} content="Натисніть щоб розпочати чат з автором оголошення">
+                <Button size={size} primary>
+                    Відповісти
+                </Button>
+            </Tooltip>
         </div>
     );
 };

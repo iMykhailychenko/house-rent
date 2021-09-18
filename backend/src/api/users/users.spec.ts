@@ -23,10 +23,10 @@ describe('Test user service', () => {
 
     describe('get all users', () => {
         it('get all users with pagination', async () => {
-            const res = await api.get('/users');
+            const res = await api.get('/api/v1/users');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(1);
-            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalPages).toEqual(0);
             expect(res.body.totalItems).toEqual(1);
             expect(res.body.data[0].firstName).toEqual('Name');
             expect(res.body.data[0].lastName).toEqual('LastName');
@@ -34,10 +34,10 @@ describe('Test user service', () => {
         });
 
         it('get all users with pagination params', async () => {
-            const res = await api.get('/users?page=10000');
+            const res = await api.get('/api/v1/users?page=10000');
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(10000);
-            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalPages).toEqual(0);
             expect(res.body.totalItems).toEqual(1);
             expect(res.body.data.length).toEqual(0);
         });
@@ -45,7 +45,7 @@ describe('Test user service', () => {
 
     describe('get profile info', () => {
         it('success', async () => {
-            const res = await api.get('/users/profile').set('Authorization', 'Bearer ' + token);
+            const res = await api.get('/api/v1/users/profile').set('Authorization', 'Bearer ' + token);
             userId = res.body.id;
             expect(res.statusCode).toEqual(200);
             expect(res.body.firstName).toEqual('Name');
@@ -54,7 +54,7 @@ describe('Test user service', () => {
         });
 
         it('not authorized', async () => {
-            const res = await api.get('/users/profile');
+            const res = await api.get('/api/v1/users/profile');
             expect(res.statusCode).toEqual(401);
             expect(res.body.massage).toEqual('no token provided');
         });
@@ -62,7 +62,7 @@ describe('Test user service', () => {
 
     describe('get user by id', () => {
         it('success', async () => {
-            const res = await api.get(`/users/${userId}`);
+            const res = await api.get(`/api/v1/users/${userId}`);
             expect(res.statusCode).toEqual(200);
             expect(res.body.firstName).toEqual('Name');
             expect(res.body.lastName).toEqual('LastName');
@@ -70,7 +70,7 @@ describe('Test user service', () => {
         });
 
         it('not authorized', async () => {
-            const res = await api.get('/users/100500');
+            const res = await api.get('/api/v1/users/100500');
             expect(res.statusCode).toEqual(404);
             expect(res.body.massage).toEqual('user with this id do not exist');
         });
