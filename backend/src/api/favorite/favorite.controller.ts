@@ -5,13 +5,12 @@ import { User } from '../users/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 import { Favorite } from './favorite.entity';
 import { Request, Response } from 'express';
+import errorCatch from '../../utils/errorCatch';
 
 export const addToFavorite = errorWrapper(async (req: Request & { user: User }, res: Response) => {
     const postRepository = database.connection.getRepository(Post);
 
-    const post = await postRepository.findOne({ id: +req.params.postId }).catch(error => {
-        throw new ErrorNormalize(404, error);
-    });
+    const post = await postRepository.findOne({ id: +req.params.postId }).catch(errorCatch(404));
     if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
 
     const favorite = new Favorite();
@@ -19,9 +18,7 @@ export const addToFavorite = errorWrapper(async (req: Request & { user: User }, 
     favorite.user = req.user;
 
     const favoriteRepository = database.connection.getRepository(Favorite);
-    await favoriteRepository.save(post).catch(error => {
-        throw new ErrorNormalize(400, error);
-    });
+    await favoriteRepository.save(post).catch(errorCatch(400));
 
     res.status(204).send();
 });

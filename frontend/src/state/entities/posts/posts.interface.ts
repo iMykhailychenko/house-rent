@@ -26,6 +26,9 @@ export interface IPost {
     roomFilters: string[];
     status: POST_STATUS;
     user: IUser;
+    isFavorite: boolean;
+    favorite: number;
+    chats: number;
 }
 
 export interface IStepOne {

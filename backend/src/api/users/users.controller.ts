@@ -4,6 +4,7 @@ import database from '../../database';
 import { User, UserRole } from './users.entity';
 import errorWrapper from '../../utils/errorWrapper';
 import ErrorNormalize from '../../utils/errorNormalize';
+import errorCatch from '../../utils/errorCatch';
 
 export const usersListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
@@ -29,9 +30,7 @@ export const userProfileController = errorWrapper(async (req: Request & { user: 
 
 export const singleUserController = errorWrapper(async (req: Request, res: Response) => {
     const repository = database.connection.getRepository(User);
-    const user = await repository.findOne({ id: +req.params.userId }).catch(error => {
-        throw new ErrorNormalize(400, error);
-    });
+    const user = await repository.findOne({ id: +req.params.userId }).catch(errorCatch(400));
 
     if (!user) throw new ErrorNormalize(404, 'user with this id do not exist');
 
@@ -49,9 +48,7 @@ export const userRoleController = errorWrapper(async (req: Request, res: Respons
         throw new ErrorNormalize(400, 'invalid user role');
 
     user.role = req.body.role;
-    await repository.save(user).catch(error => {
-        throw new ErrorNormalize(400, error);
-    });
+    await repository.save(user).catch(errorCatch(400));
 
     res.status(204).send();
 });

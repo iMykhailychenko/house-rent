@@ -10,6 +10,7 @@ import authConfig from '../../config/auth.config';
 import database from '../../database';
 import { passwordValidate } from './auth.validate';
 import { AuthLogin } from './dto/login.dto';
+import errorCatch from '../../utils/errorCatch';
 
 export const joinController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
     const repository = database.connection.getRepository(User);
@@ -27,9 +28,7 @@ export const joinController = errorWrapper(async (req: Request, res: Response): 
     const passwordError = passwordValidate(req.body.password);
     if (passwordError) throw new ErrorNormalize(400, passwordError);
 
-    await repository.save(user).catch(error => {
-        throw new ErrorNormalize(400, error);
-    });
+    await repository.save(user).catch(errorCatch(400, 'duplicate key value violates unique constraint'));
     res.status(204).send();
 });
 

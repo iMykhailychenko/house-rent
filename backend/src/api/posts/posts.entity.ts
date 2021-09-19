@@ -105,5 +105,5 @@ export class Post {
     chats: Chat[];
 
     @OneToMany(() => Favorite, favorite => favorite.post)
-    favorite: Favorite[];
+    favorite: Favorite;
 }
