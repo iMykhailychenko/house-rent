@@ -20,8 +20,8 @@ describe('Test media', () => {
     });
 
     afterAll(async () => {
-        await deleteTestUser();
         await deleteTestPost();
+        await deleteTestUser();
     });
 
     it('Add post to favorite', async () => {

@@ -12,11 +12,15 @@ export const postsListController = errorWrapper(async (req: Request, res: Respon
     const limit = +req.query.limit || 20;
 
     const repository = database.connection.getRepository(Post);
-    const [result, total] = await repository.findAndCount({
-        relations: ['user'],
-        take: limit,
-        skip: limit * (page - 1),
-    });
+    const [result, total] = await repository
+        .findAndCount({
+            relations: ['user'],
+            take: limit,
+            skip: limit * (page - 1),
+        })
+        .catch(error => {
+            throw new ErrorNormalize(404, error);
+        });
 
     res.json({
         totalItems: total,

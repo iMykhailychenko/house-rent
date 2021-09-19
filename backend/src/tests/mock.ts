@@ -10,3 +10,15 @@ export const mockNewPostBody = {
     cityFilters: 'kyiv',
     districtFilters: [KYIV_DISTRICT_FILTERS.DESNIANSKYI, KYIV_DISTRICT_FILTERS.DARNYTSIA, KYIV_DISTRICT_FILTERS.PODIL],
 };
+
+export const joinMock = {
+    firstName: 'Name',
+    lastName: 'LastName',
+    email: 'test@mail.ru',
+    password: 'P@ssw0rd!',
+};
+
+export const loginMock = {
+    email: 'test@mail.ru',
+    password: 'P@ssw0rd!',
+};

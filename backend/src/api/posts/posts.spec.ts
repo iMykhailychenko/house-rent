@@ -79,6 +79,9 @@ describe('Test post service', () => {
     describe('get all posts', () => {
         it('get all posts with pagination', async () => {
             const res = await api.get('/api/v1/posts');
+
+            // console.log(res.body);
+
             expect(res.statusCode).toEqual(200);
             expect(res.body.currentPage).toEqual(1);
             expect(res.body.totalPages).toEqual(1);

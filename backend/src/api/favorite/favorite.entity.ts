@@ -1,4 +1,4 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Post } from '../posts/posts.entity';
 import { User } from '../users/users.entity';
 
@@ -7,9 +7,9 @@ export class Favorite {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToMany(() => Post, post => post.favorite)
+    @ManyToOne(() => Post, post => post.favorite)
     post: Post;
 
-    @OneToMany(() => User, user => user.favorite)
+    @ManyToOne(() => User, user => user.favorite)
     user: User;
 }

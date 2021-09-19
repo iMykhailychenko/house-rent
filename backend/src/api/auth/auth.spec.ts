@@ -3,6 +3,7 @@ import request, { SuperTest, Test } from 'supertest';
 
 import houseRentApp from '../../app';
 import { deleteTestUser } from '../../tests/utils';
+import { joinMock, loginMock } from '../../tests/mock';
 
 describe('Test auth service', () => {
     let app: Application;
@@ -19,32 +20,20 @@ describe('Test auth service', () => {
 
     describe('Join', () => {
         it('Join success', async () => {
-            const res = await api.post('/api/v1/auth/join').send({
-                firstName: 'Name',
-                lastName: 'LastName',
-                email: 'test@mail.ru',
-                password: 'P@ssw0rd!',
-            });
+            const res = await api.post('/api/v1/auth/join').send(joinMock);
             expect(res.statusCode).toEqual(204);
         });
 
         it('Join success duplicate', async () => {
-            const res = await api.post('/api/v1/auth/join').send({
-                firstName: 'Name',
-                lastName: 'LastName',
-                email: 'test@mail.ru',
-                password: 'P@ssw0rd!',
-            });
+            const res = await api.post('/api/v1/auth/join').send(joinMock);
             expect(res.statusCode).toEqual(400);
             expect(res.body.massage.includes('duplicate key value violates unique constraint')).toBeTruthy();
         });
 
         it('Invalid firstName', async () => {
             const res = await api.post('/api/v1/auth/join').send({
+                ...joinMock,
                 firstName: 1,
-                lastName: 'LastName',
-                email: 'test@mail.ru',
-                password: 'P@ssw0rd!',
             });
 
             expect(res.statusCode).toEqual(400);
@@ -69,9 +58,7 @@ describe('Test auth service', () => {
 
         it('Invalid password', async () => {
             const res = await api.post('/api/v1/auth/join').send({
-                firstName: 'Name',
-                lastName: 'LastName',
-                email: 'test@mail.ru',
+                ...joinMock,
                 password: 'P',
             });
 
@@ -84,22 +71,13 @@ describe('Test auth service', () => {
 
     describe('Login', () => {
         it('Login success', async () => {
-            const res = await api.post('/api/v1/auth/login').send({
-                email: 'test@mail.ru',
-                password: 'P@ssw0rd!',
-            });
+            const res = await api.post('/api/v1/auth/login').send(loginMock);
             expect(res.statusCode).toEqual(201);
             expect(res.body).toHaveProperty('accessToken');
         });
 
         it('Login - already authorized', async () => {
-            const res = await api
-                .post('/api/v1/auth/login')
-                .send({
-                    email: 'test@mail.ru',
-                    password: 'P@ssw0rd!',
-                })
-                .set('Authorization', 'test');
+            const res = await api.post('/api/v1/auth/login').send(loginMock).set('Authorization', 'test');
             expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
             expect(res.body).toStrictEqual({
@@ -109,7 +87,7 @@ describe('Test auth service', () => {
 
         it('Login error - wrong password', async () => {
             const res = await api.post('/api/v1/auth/login').send({
-                email: 'test@mail.ru',
+                ...loginMock,
                 password: 'wrong_password',
             });
             expect(res.statusCode).toEqual(401);
@@ -121,8 +99,8 @@ describe('Test auth service', () => {
 
         it('Login error - wrong email', async () => {
             const res = await api.post('/api/v1/auth/login').send({
+                ...loginMock,
                 email: 'wrong_test@mail.ru',
-                password: 'P@ssw0rd!',
             });
             expect(res.statusCode).toEqual(401);
             expect(res.body).not.toHaveProperty('accessToken');
@@ -133,7 +111,7 @@ describe('Test auth service', () => {
 
         it('Login error - invalid credentials', async () => {
             const res = await api.post('/api/v1/auth/login').send({
-                email: 'test@mail.ru',
+                ...loginMock,
                 password: null,
             });
             expect(res.statusCode).toEqual(401);
