@@ -1,5 +1,5 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsInt, Max, Min, IsOptional, IsString, Length, Validate } from 'class-validator';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { IsArray, IsDate, IsEnum, IsInt, IsOptional, IsString, Length, Max, Min, Validate } from 'class-validator';
 import { User } from '../users/users.entity';
 import {
     City,
@@ -12,6 +12,7 @@ import {
 } from './posts.interface';
 import { DistrictValidator } from './posts.validate';
 import { Chat } from '../chat/chat.entity';
+import { Favorite } from '../favorite/favorite.entity';
 
 @Entity()
 export class Post {
@@ -102,4 +103,7 @@ export class Post {
 
     @OneToMany(() => Chat, chats => chats.post)
     chats: Chat[];
+
+    @OneToMany(() => Favorite, favorite => favorite.post)
+    favorite: Favorite[];
 }

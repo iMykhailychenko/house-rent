@@ -25,16 +25,8 @@ describe('Test media', () => {
 
     afterAll(async () => {
         await deleteTestUser();
-
-        fs.unlink(path.join(mediaFilesDir, uploadedFileName), err => {
-            if (err) return console.log(err);
-            console.log('file deleted successfully');
-        });
-
-        fs.unlink(filePath, err => {
-            if (err) return console.log(err);
-            console.log('file deleted successfully');
-        });
+        await fs.promises.unlink(path.join(mediaFilesDir, uploadedFileName));
+        await fs.promises.unlink(filePath);
     });
 
     it('Upload file', async () => {

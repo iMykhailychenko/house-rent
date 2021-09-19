@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IsBoolean, IsDate, IsEmail, IsOptional, IsString, Length } from 'class-validator';
 import { Post } from '../posts/posts.entity';
 import { Chat } from '../chat/chat.entity';
+import { Favorite } from '../favorite/favorite.entity';
 
 export enum UserRole {
     USER = 'user',
@@ -57,6 +58,9 @@ export class User {
 
     @OneToMany(() => Chat, chats => chats.companion)
     chatsCompanion: Chat[];
+
+    @OneToMany(() => Favorite, favorite => favorite.user)
+    favorite: Favorite[];
 
     @Column({
         type: 'simple-array',

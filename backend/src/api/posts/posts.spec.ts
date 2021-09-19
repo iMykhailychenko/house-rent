@@ -3,18 +3,7 @@ import request, { SuperTest, Test } from 'supertest';
 import houseRentApp from '../../app';
 import { deleteTestPost, deleteTestUser, getInfoTestUser, loginTestUser, registerTestUser } from '../../tests/utils';
 import { User, UserRole } from '../users/users.entity';
-import { HOUSE_TYPE_FILTERS, KYIV_DISTRICT_FILTERS, PRICE_FILTERS, ROOM_FILTERS } from './posts.interface';
-
-const mockValidBody = {
-    title: 'test',
-    description: 'test description',
-    residentsAmount: 1,
-    roomFilters: [ROOM_FILTERS.ONE, ROOM_FILTERS.TWO, ROOM_FILTERS.THREE, ROOM_FILTERS.FOUR, ROOM_FILTERS.MORE],
-    houseTypeFilters: [HOUSE_TYPE_FILTERS.NEW, HOUSE_TYPE_FILTERS.OLD],
-    priceFilters: [PRICE_FILTERS.PRICE_ONE, PRICE_FILTERS.PRICE_TWO, PRICE_FILTERS.PRICE_THREE, PRICE_FILTERS.PRICE_FOUR],
-    cityFilters: 'kyiv',
-    districtFilters: [KYIV_DISTRICT_FILTERS.DESNIANSKYI, KYIV_DISTRICT_FILTERS.DARNYTSIA, KYIV_DISTRICT_FILTERS.PODIL],
-};
+import { mockNewPostBody } from '../../tests/mock';
 
 describe('Test post service', () => {
     let app: Application;
@@ -42,7 +31,7 @@ describe('Test post service', () => {
             await api.post(`/api/v1/users/${user.id}/role`).send({ role: UserRole.REALTOR });
             const res = await api
                 .post('/api/v1/posts')
-                .send(mockValidBody)
+                .send(mockNewPostBody)
                 .set('Authorization', 'Bearer ' + token);
 
             expect(res.statusCode).toEqual(403);
@@ -54,7 +43,7 @@ describe('Test post service', () => {
 
             const res = await api
                 .post('/api/v1/posts')
-                .send(mockValidBody)
+                .send(mockNewPostBody)
                 .set('Authorization', 'Bearer ' + token);
 
             postId = res.body.id;
@@ -70,7 +59,7 @@ describe('Test post service', () => {
             const res = await api
                 .post('/api/v1/posts')
                 .send({
-                    ...mockValidBody,
+                    ...mockNewPostBody,
                     cityFilters: 'lviv',
                     districtFilters: ['obolonskyi'], // 'obolonskyi' district does not exist in 'lviv'
                 })
@@ -81,7 +70,7 @@ describe('Test post service', () => {
         });
 
         it('create post not auth', async () => {
-            const res = await api.post('/api/v1/posts').send(mockValidBody);
+            const res = await api.post('/api/v1/posts').send(mockNewPostBody);
             expect(res.statusCode).toEqual(401);
             expect(res.body.massage).toEqual('no token provided');
         });
