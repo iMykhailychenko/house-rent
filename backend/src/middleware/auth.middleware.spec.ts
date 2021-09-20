@@ -42,7 +42,7 @@ describe('Test post service', () => {
     });
 
     it('token is outdated', async () => {
-        const outdatedToken = jwt.sign({ id: 'test', exp: Date.now() - 10 }, authConfig.accessKey);
+        const outdatedToken = jwt.sign({ id: 1, exp: Date.now() - 10 }, authConfig.accessKey);
         const res = await api.get('/test').set('Authorization', 'Bearer ' + outdatedToken);
         expect(res.statusCode).toEqual(401);
         expect(res.body.massage).toEqual('token is outdated');
@@ -55,8 +55,8 @@ describe('Test post service', () => {
     });
 
     it('invalid user id in token provided', async () => {
-        const outdatedToken = jwt.sign({ id: 'test', exp: Date.now() + 100000 }, authConfig.accessKey);
-        const res = await api.get('/test').set('Authorization', 'Bearer ' + outdatedToken);
+        const invalidToken = jwt.sign({ id: 'test', exp: Date.now() + 100000 }, authConfig.accessKey);
+        const res = await api.get('/test').set('Authorization', 'Bearer ' + invalidToken);
         expect(res.statusCode).toEqual(401);
         expect(res.body.massage).toEqual('not authorized');
     });

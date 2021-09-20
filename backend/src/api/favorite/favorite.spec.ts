@@ -28,4 +28,9 @@ describe('Test media', () => {
         const res = await api.post(`/api/v1/favorite/${post.id}`).set('Authorization', 'Bearer ' + token);
         expect(res.statusCode).toEqual(204);
     });
+
+    it('Delete post to favorite', async () => {
+        const res = await api.delete(`/api/v1/favorite/${post.id}`).set('Authorization', 'Bearer ' + token);
+        expect(res.statusCode).toEqual(204);
+    });
 });

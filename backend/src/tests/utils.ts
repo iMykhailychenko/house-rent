@@ -26,6 +26,14 @@ export const createTestPost = async (api: SuperTest<Test>, token: string): Promi
     return res.body;
 };
 
+export const addToFavorite = async (api: SuperTest<Test>, token: string, postId: number): Promise<void> => {
+    await api.post(`/api/v1/favorite/${postId}`).set('Authorization', 'Bearer ' + token);
+};
+
+export const deleteFromFavorite = async (api: SuperTest<Test>, token: string, postId: number): Promise<void> => {
+    await api.delete(`/api/v1/favorite/${postId}`).set('Authorization', 'Bearer ' + token);
+};
+
 export const deleteTestUser = async (): Promise<void> => {
     const repository = database.connection.getRepository(User);
     const user = await repository.findOne({ email: 'test@mail.ru' });

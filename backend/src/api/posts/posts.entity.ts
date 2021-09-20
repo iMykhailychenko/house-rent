@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { IsArray, IsDate, IsEnum, IsInt, IsOptional, IsString, Length, Max, Min, Validate } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsEnum, IsInt, IsOptional, IsString, Length, Max, Min, Validate } from 'class-validator';
 import { User } from '../users/users.entity';
 import {
     City,
@@ -104,6 +104,10 @@ export class Post {
     @OneToMany(() => Chat, chats => chats.post)
     chats: Chat[];
 
+    @IsBoolean()
+    @IsOptional()
+    isFavorite: boolean;
+
     @OneToMany(() => Favorite, favorite => favorite.post)
-    favorite: Favorite;
+    favorite: Favorite[];
 }

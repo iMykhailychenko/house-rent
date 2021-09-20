@@ -34,7 +34,7 @@ const auth = errorWrapper(async (req: Request & { user: User }, _: Response, nex
 
 export const checkAuth = errorWrapper(async (req: Request & { user: User }, _: Response, next: NextFunction) => {
     const token = req.get('Authorization') && req.get('Authorization').replace('Bearer ', '');
-    if (!token) throw new ErrorNormalize(401, 'no token provided');
+    if (!token) return next();
 
     let decoded: JwtPayload;
     try {

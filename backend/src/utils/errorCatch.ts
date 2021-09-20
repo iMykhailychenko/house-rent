@@ -1,15 +1,15 @@
 import ErrorNormalize from './errorNormalize';
 
 const errorsMap: { [key: string]: string } = {
-    400: 'Bad Request',
-    403: 'Forbidden',
-    404: 'Not Found',
+    400: 'bad request',
+    403: 'forbidden',
+    404: 'not found',
 };
 
 const errorCatch =
     (code?: number, message?: string): ((error: Error) => void) =>
-    (error: Error): void => {
-        if (process.env.NODE_ENV !== 'test') console.log(error.message);
+    (error: Error): Error => {
+        // console.log(error.message);
         throw new ErrorNormalize(code, message || errorsMap[code] || error.message);
     };
 

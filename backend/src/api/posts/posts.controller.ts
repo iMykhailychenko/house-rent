@@ -7,8 +7,16 @@ import { Post } from './posts.entity';
 import { User, UserRole } from '../users/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorCatch from '../../utils/errorCatch';
+import { Favorite } from '../favorite/favorite.entity';
 
-export const postsListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
+const isPostInFavorite = async (post: Post, user: User): Promise<boolean> => {
+    if (!user) return false;
+    const repository = database.connection.getRepository(Favorite);
+    const favorite = await repository.findOne({ where: { post: post.id, user: user.id } });
+    return !!favorite;
+};
+
+export const postsListController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
     const limit = +req.query.limit || 20;
 
@@ -24,6 +32,10 @@ export const postsListController = errorWrapper(async (req: Request, res: Respon
         .loadRelationCountAndMap('post.chats', 'post.chats')
         .getMany()
         .catch(errorCatch(404));
+
+    for await (const post of result || []) {
+        post.isFavorite = await isPostInFavorite(post, req.user);
+    }
 
     res.json({
         totalItems: total,
@@ -45,7 +57,7 @@ export const singlePostController = errorWrapper(async (req: Request & { user: U
         .catch(errorCatch(404));
 
     if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
-    res.json(post);
+    res.json({ ...post, isFavorite: await isPostInFavorite(post, req.user) });
 });
 
 export const createPostController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {

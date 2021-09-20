@@ -1,7 +1,15 @@
 import { Application } from 'express';
 import request, { SuperTest, Test } from 'supertest';
 import houseRentApp from '../../app';
-import { deleteTestPost, deleteTestUser, getInfoTestUser, loginTestUser, registerTestUser } from '../../tests/utils';
+import {
+    addToFavorite,
+    deleteFromFavorite,
+    deleteTestPost,
+    deleteTestUser,
+    getInfoTestUser,
+    loginTestUser,
+    registerTestUser,
+} from '../../tests/utils';
 import { User, UserRole } from '../users/users.entity';
 import { mockNewPostBody } from '../../tests/mock';
 
@@ -22,6 +30,7 @@ describe('Test post service', () => {
     });
 
     afterAll(async () => {
+        await deleteFromFavorite(api, token, postId);
         await deleteTestPost();
         await deleteTestUser();
     });
@@ -87,6 +96,7 @@ describe('Test post service', () => {
             expect(res.body.data[0].title).toEqual('test');
             expect(res.body.data[0].description).toEqual('test description');
             expect(res.body.data[0].favorite).toEqual(0);
+            expect(res.body.data[0].isFavorite).toEqual(false);
             expect(res.body.data[0].chats).toEqual(0);
             expect(res.body.data[0].views).toEqual(0);
             expect(res.body.data[0].user.firstName).toEqual('Name');
@@ -106,11 +116,14 @@ describe('Test post service', () => {
 
     describe('get single post', () => {
         it('get post success', async () => {
-            const res = await api.get(`/api/v1/posts/${postId}`);
+            await addToFavorite(api, token, postId);
+            const res = await api.get(`/api/v1/posts/${postId}`).set('Authorization', 'Bearer ' + token);
+
             expect(res.statusCode).toEqual(200);
             expect(res.body.title).toEqual('test');
             expect(res.body.description).toEqual('test description');
-            expect(res.body.favorite).toEqual(0);
+            expect(res.body.favorite).toEqual(1);
+            expect(res.body.isFavorite).toEqual(true);
             expect(res.body.chats).toEqual(0);
             expect(res.body.user.firstName).toEqual('Name');
             expect(res.body.user.lastName).toEqual('LastName');
