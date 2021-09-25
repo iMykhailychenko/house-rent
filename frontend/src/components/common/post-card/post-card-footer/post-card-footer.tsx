@@ -2,11 +2,14 @@ import React, { ReactElement } from 'react';
 
 import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons';
 
+import useAuth from '../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { addPostToFavoriteThunk, deletePostFromFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
+import LoginForm from '../../auth/login-form/login-form';
 import Button from '../../button/button';
 import { modal } from '../../modal/modal';
+import SmallModalWrp from '../../modal/small-modal-wrp/small-modal-wrp';
 import StickyModal from '../../modal/sticky-modal/sticky-modal';
 import Tooltip from '../../tooltip/tooltip';
 import SharePostModal from '../share-post-modal/share-post-modal';
@@ -20,6 +23,15 @@ interface IProps {
 
 const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     const dispatch = useAppDispatch();
+    const [auth] = useAuth();
+
+    const loginForm = (): void => {
+        modal.open(
+            <SmallModalWrp>
+                <LoginForm />
+            </SmallModalWrp>,
+        );
+    };
 
     const openSharePostModal = (): void => {
         modal.open(
@@ -30,7 +42,13 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     };
 
     const handleFavorite = (): void => {
+        if (!auth?.accessToken) return loginForm();
         post.isFavorite ? dispatch(deletePostFromFavoriteThunk(post.id)) : dispatch(addPostToFavoriteThunk(post.id));
+    };
+
+    const openChat = () => {
+        if (!auth?.accessToken) return loginForm();
+        console.log('openChat');
     };
 
     return (
@@ -78,7 +96,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
             </div>
 
             <Tooltip className={css.tooltip} content="Натисніть щоб розпочати чат з автором оголошення">
-                <Button size={size} primary>
+                <Button size={size} primary onClick={openChat}>
                     Відповісти
                 </Button>
             </Tooltip>

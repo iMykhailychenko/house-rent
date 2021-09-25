@@ -81,6 +81,11 @@ const postsSlice = createSlice({
         builder.addCase(
             addPostToFavoriteThunk.fulfilled,
             (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
+                state.single.data = {
+                    ...state.single.data,
+                    isFavorite: true,
+                    favorite: state.single.data.favorite + 1,
+                };
                 state.list.data = state.list.data.map<IPost>(post =>
                     post.id === action.meta.arg
                         ? {
@@ -95,6 +100,11 @@ const postsSlice = createSlice({
         builder.addCase(
             deletePostFromFavoriteThunk.fulfilled,
             (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
+                state.single.data = {
+                    ...state.single.data,
+                    isFavorite: false,
+                    favorite: state.single.data.favorite - 1,
+                };
                 state.list.data = state.list.data.map<IPost>(post =>
                     post.id === action.meta.arg
                         ? {

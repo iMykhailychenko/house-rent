@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 
-import { Bookmark, ChildFriendly, People, Pets, Visibility } from '@material-ui/icons';
+import { ChildFriendly, People, Pets } from '@material-ui/icons';
 
 import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
-import Button from '../../../common/button/button';
+import { formatDate } from '../../../../utils/helpers';
 import FullScreenImg from '../../../common/full-screen-img/full-screen-img';
 import NotFoundPost from '../../../common/not-found/not-found-post/not-found-post';
+import PostCardFooter from '../../../common/post-card/post-card-footer/post-card-footer';
 import Socials from '../../../common/share-links/share-links';
 import Container from '../../../layout/container/container';
 
@@ -18,16 +19,17 @@ const SinglePostComponent = (): ReactElement => {
     return (
         <NotFoundPost error={!postData.id}>
             <>
-                <Container size="sm">
+                <Container size="md">
                     <>
-                        <h2 className={css.title}>{postData.title}</h2>
-
                         {postData.image && (
                             <div className={css.img}>
                                 <FullScreenImg className={css.imgTag} src={postData.image} alt={postData.title} />
                             </div>
                         )}
-
+                    </>
+                </Container>
+                <Container size="sm">
+                    <>
                         <div className={css.header}>
                             <div className={css.inner}>
                                 <p className={css.small}>Поділитись цим постом:</p>
@@ -36,24 +38,16 @@ const SinglePostComponent = (): ReactElement => {
 
                             <div className={css.inner}>
                                 <p className={css.small}>Створено:</p>
-                                <p className={css.date}>{postData.creationDate}</p>
-                            </div>
-                        </div>
-
-                        <div className={css.action}>
-                            <Button secondary>
-                                <Bookmark />
-                            </Button>
-                            <div className={css.visibility}>
-                                <Visibility />
-                                <span>10</span>
+                                <p className={css.date}>{formatDate(postData.creationDate)}</p>
                             </div>
                         </div>
 
                         <div className={css.wrap}>
-                            <h3 className={css.subtitle}>{'description'}</h3>
+                            <h2 className={css.title}>{postData.title}</h2>
                             <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description }} />
                         </div>
+
+                        <PostCardFooter size="sm" post={postData} />
 
                         <div className={css.wrap}>
                             <h3 className={css.subtitle}>{'about_author'}</h3>

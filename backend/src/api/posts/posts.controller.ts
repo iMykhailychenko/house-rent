@@ -66,7 +66,7 @@ export const singlePostController = errorWrapper(async (req: Request & { user: U
         .execute()
         .catch(errorCatch(400));
 
-    res.json({ ...post, isFavorite: await isPostInFavorite(post, req.user) });
+    res.json({ ...post, views: post.views + 1, isFavorite: await isPostInFavorite(post, req.user) });
 });
 
 export const createPostController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {

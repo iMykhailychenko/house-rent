@@ -31,7 +31,7 @@ const month: string[] = [
 
 export const formatDate = (value: string | Date | number): string => {
     const date = validateDate(value);
-    return `${addZero(date.getHours())}:${addZero(date.getMinutes())} / ${month[date.getMonth()]} ${addZero(
+    return `${addZero(date.getHours())}:${addZero(date.getMinutes())} ${month[date.getMonth()]} ${addZero(
         date.getDate(),
     )} ${date.getFullYear()}`;
 };
