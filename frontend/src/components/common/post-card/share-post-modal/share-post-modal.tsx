@@ -7,9 +7,9 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { copyText, cutString } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
 import Socials from '../../share-links/share-links';
+import Tooltip from '../../tooltip/tooltip';
 
 import css from './share-post-modal.module.scss';
-import Tooltip from '../../tooltip/tooltip';
 
 interface IProps {
     post: IPost;

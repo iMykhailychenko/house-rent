@@ -19,7 +19,7 @@ exports[`UserCard component matches snapshot 1`] = `
         firstName lastName
       </h4>
       <p>
-        date
+        NaN:NaN / undefined NaN NaN
       </p>
     </div>
   </a>

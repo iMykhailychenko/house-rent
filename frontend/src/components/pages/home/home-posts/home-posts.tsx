@@ -10,7 +10,6 @@ import Section from '../../../layout/section/section';
 import HomePostFilters from './home-post-filters/home-post-filters';
 import css from './home-posts.module.scss';
 
-
 const HomePosts = (): ReactElement => {
     const trans = useTrans();
     const [config] = useConfig();
