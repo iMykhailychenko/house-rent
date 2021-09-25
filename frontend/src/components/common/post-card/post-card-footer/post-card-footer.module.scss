@@ -4,7 +4,8 @@
 }
 
 .tooltip {
-    min-width: 20rem;
+    width: max-content;
+    max-width: 20rem;
 }
 
 .info {

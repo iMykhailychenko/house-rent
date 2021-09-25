@@ -38,8 +38,13 @@ const PostCardSm = ({ post }: IProps): ReactElement => {
 
                 <UserCard
                     className={css.card}
-                    user={{ avatar: post.user.avatar, firstName: post.user.firstName, lastName: post.user.lastName }}
                     date={post.creationDate}
+                    user={{
+                        id: post.user.id,
+                        avatar: post.user.avatar,
+                        firstName: post.user.firstName,
+                        lastName: post.user.lastName,
+                    }}
                 />
 
                 <PostCardFooter size="sm" post={post} />

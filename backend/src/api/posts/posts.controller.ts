@@ -57,6 +57,15 @@ export const singlePostController = errorWrapper(async (req: Request & { user: U
         .catch(errorCatch(404));
 
     if (!post) throw new ErrorNormalize(404, 'post with this id do not exist');
+
+    await repository
+        .createQueryBuilder('post')
+        .update(Post)
+        .set({ views: () => 'views + 1' })
+        .where({ id: +req.params.postId })
+        .execute()
+        .catch(errorCatch(400));
+
     res.json({ ...post, isFavorite: await isPostInFavorite(post, req.user) });
 });
 

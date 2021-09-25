@@ -6,12 +6,12 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
+import ImageWrp from '../../image-wrp/image-wrp';
 import UserCard from '../../user-card/user-card';
 import PostCardFooter from '../post-card-footer/post-card-footer';
 
 import css from './post-cart-lg.module.scss';
 import PostInfoBlock from './post-info-block/post-info-block';
-import ImageWrp from '../../image-wrp/image-wrp';
 
 interface IProps {
     post: IPost;
@@ -21,8 +21,13 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
     return (
         <div className={css.root}>
             <UserCard
-                user={{ avatar: post.user.avatar, firstName: post.user.firstName, lastName: post.user.lastName }}
                 date={post.creationDate}
+                user={{
+                    id: post.user.id,
+                    avatar: post.user.avatar,
+                    firstName: post.user.firstName,
+                    lastName: post.user.lastName,
+                }}
             />
 
             <div className={css.content}>

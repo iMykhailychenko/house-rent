@@ -4,7 +4,14 @@ import { Pagination } from '../../../interfaces';
 
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPost, IPostState } from './posts.interface';
-import { newPostThunk, postListThunk, singlePostThunk, updatePostThunk } from './posts.thunk';
+import {
+    addPostToFavoriteThunk,
+    deletePostFromFavoriteThunk,
+    newPostThunk,
+    postListThunk,
+    singlePostThunk,
+    updatePostThunk,
+} from './posts.thunk';
 
 const postsSlice = createSlice({
     name: 'POSTS',
@@ -69,6 +76,36 @@ const postsSlice = createSlice({
             state.list.status = 'error';
             state.list.error = 'error';
         });
+
+        // HANDLE FAVORITE
+        builder.addCase(
+            addPostToFavoriteThunk.fulfilled,
+            (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
+                state.list.data = state.list.data.map<IPost>(post =>
+                    post.id === action.meta.arg
+                        ? {
+                              ...post,
+                              isFavorite: true,
+                              favorite: post.favorite + 1,
+                          }
+                        : post,
+                );
+            },
+        );
+        builder.addCase(
+            deletePostFromFavoriteThunk.fulfilled,
+            (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
+                state.list.data = state.list.data.map<IPost>(post =>
+                    post.id === action.meta.arg
+                        ? {
+                              ...post,
+                              isFavorite: false,
+                              favorite: post.favorite - 1,
+                          }
+                        : post,
+                );
+            },
+        );
     },
 });
 

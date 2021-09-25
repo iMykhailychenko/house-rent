@@ -2,7 +2,9 @@ import React, { ReactElement } from 'react';
 
 import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons';
 
+import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
+import { addPostToFavoriteThunk, deletePostFromFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
 import Button from '../../button/button';
 import { modal } from '../../modal/modal';
 import StickyModal from '../../modal/sticky-modal/sticky-modal';
@@ -17,12 +19,18 @@ interface IProps {
 }
 
 const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
+    const dispatch = useAppDispatch();
+
     const openSharePostModal = (): void => {
         modal.open(
             <StickyModal>
                 <SharePostModal post={post} />
             </StickyModal>,
         );
+    };
+
+    const handleFavorite = (): void => {
+        post.isFavorite ? dispatch(deletePostFromFavoriteThunk(post.id)) : dispatch(addPostToFavoriteThunk(post.id));
     };
 
     return (
@@ -36,9 +44,13 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
 
                 <Tooltip
                     className={css.tooltip}
-                    content="Додати оголошення в обрані. Натисніть якщо бажаете повернутись до цього оголошення пізніше"
+                    content={
+                        post.isFavorite
+                            ? 'Натисніть щоб видалити оголошення з обраних'
+                            : 'Додати оголошення в обрані. Натисніть якщо бажаете повернутись до цього оголошення пізніше'
+                    }
                 >
-                    <Button size={size} secondary>
+                    <Button size={size} primary={post.isFavorite} secondary={!post.isFavorite} onClick={handleFavorite}>
                         <Bookmark />
                     </Button>
                 </Tooltip>
@@ -53,7 +65,14 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 <Tooltip content="Кількість відгуків">
                     <div className={css.icon}>
                         <QuestionAnswer />
-                        <span>{post.views}</span>
+                        <span>{post.chats}</span>
+                    </div>
+                </Tooltip>
+
+                <Tooltip className={css.tooltip} content="Додано в обрані">
+                    <div className={css.icon}>
+                        <Bookmark />
+                        <span>{post.favorite}</span>
                     </div>
                 </Tooltip>
             </div>
