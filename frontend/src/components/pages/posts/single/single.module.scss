@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem 0;
+    margin: 2rem 0 4rem;
 
     .inner {
         width: 30%;
@@ -41,11 +41,18 @@
     }
 }
 
-.title {
+.title,
+.subtitle {
     margin: 1rem 0;
     font-size: 2rem;
     line-height: 1.1;
     font-weight: 400;
+}
+
+.subtitle {
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1.6rem;
 }
 
 .small {
@@ -56,12 +63,13 @@
 }
 
 .text {
+    margin-bottom: 4rem;
     font-size: 1.6rem;
     font-weight: 300;
 }
 
 .wrap {
-    margin: 4rem 0 2rem;
+    margin: 8rem 0;
 }
 
 .row {
@@ -74,9 +82,20 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    
+
+    &.gray {
+        & > div div {
+            background: var(--gray-1);
+        }
+
+        img {
+            opacity: 0.35;
+        }
+    }
+
     p {
         margin: 2rem;
+        font-weight: 300;
         text-align: center;
     }
 }

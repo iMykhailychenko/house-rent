@@ -4,12 +4,13 @@ import useTrans from '../../../../hooks/trans.hook';
 import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
 import { formatDate } from '../../../../utils/helpers';
 import FullScreenImg from '../../../common/full-screen-img/full-screen-img';
-import ImageWrp from '../../../common/image-wrp/image-wrp';
 import NotFoundPost from '../../../common/not-found/not-found-post/not-found-post';
 import PostCardFooter from '../../../common/post-card/post-card-footer/post-card-footer';
 import Socials from '../../../common/share-links/share-links';
 import Container from '../../../layout/container/container';
 
+import AboutApartment from './about-apartment/about-apartment';
+import AboutAuthor from './about-author/about-author';
 import css from './single.module.scss';
 
 const SinglePostComponent = (): ReactElement => {
@@ -33,38 +34,27 @@ const SinglePostComponent = (): ReactElement => {
                     <>
                         <div className={css.header}>
                             <div className={css.inner}>
-                                <p className={css.small}>Поділитись цим постом:</p>
+                                <p className={css.small}>{trans('Поділитись цим постом')}:</p>
                                 <Socials title={postData.title} />
                             </div>
 
                             <div className={css.inner}>
-                                <p className={css.small}>Створено:</p>
+                                <p className={css.small}>{trans('Створено')}:</p>
                                 <p className={css.date}>{formatDate(postData.creationDate)}</p>
                             </div>
                         </div>
-                        <div className={css.wrap}>
-                            <h2 className={css.title}>{postData.title}</h2>
-                            <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description }} />
-                        </div>
+
+                        <h2 className={css.title}>{postData.title}</h2>
+                        <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description }} />
+
                         <PostCardFooter post={postData} />
 
-                        <div className={css.row}>
-                            <div className={css.cell}>
-                                <ImageWrp name="user" />
-                                <p>
-                                    {trans('residentsAmount')}: {postData.residentsAmount}
-                                </p>
-                            </div>
+                        <AboutAuthor post={postData} />
 
-                            <div className={css.cell}>
-                                <ImageWrp name="bird" />
-                                <p>{postData.children || 'Без дітей'}</p>
-                            </div>
+                        <AboutApartment post={postData} />
 
-                            <div className={css.cell}>
-                                <ImageWrp name="bird" />
-                                <p>{postData.pets || 'Без тварин'}</p>
-                            </div>
+                        <div className={css.wrap}>
+                            <PostCardFooter post={postData} />
                         </div>
                     </>
                 </Container>
