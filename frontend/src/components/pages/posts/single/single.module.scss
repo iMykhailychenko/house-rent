@@ -4,7 +4,7 @@
     justify-content: center;
     margin-top: 3rem;
     width: 100%;
-    height: 50rem;
+    height: 70rem;
     background: var(--gray-2);
     border-radius: 1.5rem;
 
@@ -23,7 +23,7 @@
 
     .inner {
         width: 30%;
-        
+
         &:nth-of-type(2) {
             text-align: right;
         }
@@ -48,13 +48,6 @@
     font-weight: 400;
 }
 
-.subtitle {
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--primary);
-}
-
 .small {
     margin-bottom: 1rem;
     font-size: 1.2rem;
@@ -62,41 +55,28 @@
     color: var(--gray-7);
 }
 
-.wrap {
-    margin: 4rem 0 2rem;
-}
-
 .text {
     font-size: 1.6rem;
     font-weight: 300;
 }
 
-.table {
-    width: 100%;
-    margin-top: 2rem;
-    border-collapse: collapse;
-    border-top: 0.1rem solid var(--gray-5);
-    font-size: 1.4rem;
+.wrap {
+    margin: 4rem 0 2rem;
+}
 
-    .left {
-        width: 20rem;
-    }
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0 2rem;
+}
 
-    tr {
-        border-bottom: 0.1rem solid var(--gray-5);
-    }
-
-    td {
-        padding: 1.6rem 1.6rem 1.6rem 0;
-
-        .rowWithIcon {
-            display: flex;
-            align-items: center;
-        }
-
-        .svg {
-            min-width: 4rem;
-            font-size: 1.6rem;
-        }
+.cell {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    
+    p {
+        margin: 2rem;
+        text-align: center;
     }
 }
