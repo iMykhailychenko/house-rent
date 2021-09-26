@@ -50,20 +50,20 @@ const SinglePostComponent = (): ReactElement => {
 
                         <div className={css.row}>
                             <div className={css.cell}>
-                                <ImageWrp name="bird" />
+                                <ImageWrp name="user" />
                                 <p>
                                     {trans('residentsAmount')}: {postData.residentsAmount}
                                 </p>
                             </div>
 
                             <div className={css.cell}>
-                                <ImageWrp name="coffee" />
-                                <p>{postData.children}</p>
+                                <ImageWrp name="bird" />
+                                <p>{postData.children || 'Без дітей'}</p>
                             </div>
 
                             <div className={css.cell}>
-                                <ImageWrp name="coffee" />
-                                <p>{postData.pets}</p>
+                                <ImageWrp name="bird" />
+                                <p>{postData.pets || 'Без тварин'}</p>
                             </div>
                         </div>
                     </>
