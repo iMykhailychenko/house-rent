@@ -54,12 +54,6 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     return (
         <div className={css.flex}>
             <div className={css.info}>
-                <Tooltip content="Поділитись оголошенням">
-                    <Button size={size} secondary onClick={openSharePostModal}>
-                        <Share />
-                    </Button>
-                </Tooltip>
-
                 <Tooltip
                     className={css.tooltip}
                     content={
@@ -70,6 +64,12 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 >
                     <Button size={size} primary={post.isFavorite} secondary={!post.isFavorite} onClick={handleFavorite}>
                         <Bookmark />
+                    </Button>
+                </Tooltip>
+
+                <Tooltip content="Поділитись оголошенням">
+                    <Button size={size} secondary onClick={openSharePostModal}>
+                        <Share />
                     </Button>
                 </Tooltip>
 

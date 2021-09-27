@@ -45,7 +45,7 @@ const SinglePostComponent = (): ReactElement => {
                         </div>
 
                         <h2 className={css.title}>{postData.title}</h2>
-                        <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description }} />
+                        <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description.replace('\n', '<br/><br/>') }} />
 
                         <PostCardFooter post={postData} />
 

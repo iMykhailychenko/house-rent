@@ -82,6 +82,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    max-width: min-content;
 
     &.gray {
         & > div div {
@@ -94,8 +95,20 @@
     }
 
     p {
-        margin: 2rem;
+        height: 100%;
+        margin: 2rem 0;
         font-weight: 300;
         text-align: center;
     }
+
+    .link {
+        text-decoration: underline;
+        color: var(--primary);
+        font-weight: 500;
+    }
+}
+
+.center {
+    margin: 4rem;
+    text-align: center;
 }
