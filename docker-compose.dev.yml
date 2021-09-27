@@ -5,7 +5,7 @@ services:
     container_name: backend
     build: ./backend
     restart: unless-stopped
-    command: yarn run dev
+    command: yarn dev
     env_file:
       - ./.env.dev
     volumes:
@@ -18,7 +18,7 @@ services:
     container_name: frontend
     build: ./frontend
     restart: unless-stopped
-    command: yarn run dev
+    command: yarn dev
     stdin_open: true
     tty: true
     env_file:
@@ -45,6 +45,30 @@ services:
     volumes:
       - postgres_dev:/var/lib/postgresql/data
 
+  admin_client_dev:
+    container_name: admin_client_dev
+    build: ./admin/client
+    restart: unless-stopped
+    command: yarn start
+    stdin_open: true
+    tty: true
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./admin/client/src:/app/admin/client/src
+      - ./admin/client/public:/app/admin/client/public
+
+  admin_translations_dev:
+    container_name: admin_translations_dev
+    build: ./admin/translations
+    restart: unless-stopped
+    command: yarn dev
+    env_file:
+      - ./.env.dev
+    volumes:
+      - translations_dev:/app/admin/translations/media
+      - ./admin/translations/src:/app/admin/translations/src
+
   nginx_dev:
     image: nginx:stable-alpine
     container_name: nginx_dev
@@ -53,13 +77,17 @@ services:
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/nginx.conf
       - media_volume:/app/backend/uploads
+      - translations_dev:/app/admin/translations/media
     depends_on:
       - frontend
       - backend
       - db_dev
       - pgadmin_dev
+      - admin_translations_dev
+      - admin_client_dev
 
 volumes:
   postgres_dev:
   pgadmin_dev:
   media_volume:
+  translations_dev:

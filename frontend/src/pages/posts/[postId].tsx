@@ -7,11 +7,13 @@ import SinglePostComponent from '../../components/pages/posts/single/single';
 import { singlePostThunk } from '../../state/entities/posts/posts.thunk';
 import { withStore } from '../../utils/ssr';
 
-const SinglePost = (): ReactElement => (
-    <RootLayout>
-        <SinglePostComponent />
-    </RootLayout>
-);
+const SinglePost = (): ReactElement => {
+    return (
+        <RootLayout>
+            <SinglePostComponent />
+        </RootLayout>
+    );
+};
 
 export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
     const postId = +String(ctx.params?.postId || 0);

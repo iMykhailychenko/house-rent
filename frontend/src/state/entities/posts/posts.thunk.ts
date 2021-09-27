@@ -29,12 +29,7 @@ export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefi
     return data;
 });
 
-export const addPostToFavoriteThunk = createAsyncThunk<void, number>('POSTS/ADD_TO_FAVORITE', async payload => {
-    const { status } = await postsServices.addToFavorite(payload);
-    if (status < 200 || status >= 300) throw new Error();
-});
-
-export const deletePostFromFavoriteThunk = createAsyncThunk<void, number>('POSTS/DELETE_FROM_FAVORITE', async payload => {
-    const { status } = await postsServices.deleteFromFavorite(payload);
+export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {
+    const { status } = await postsServices.toggleFavorite(payload);
     if (status < 200 || status >= 300) throw new Error();
 });

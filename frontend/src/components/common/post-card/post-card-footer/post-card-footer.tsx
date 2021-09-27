@@ -5,7 +5,7 @@ import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons'
 import useAuth from '../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
-import { addPostToFavoriteThunk, deletePostFromFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
+import { togglePostFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
 import LoginForm from '../../auth/login-form/login-form';
 import Button from '../../button/button';
 import { modal } from '../../modal/modal';
@@ -41,9 +41,9 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
         );
     };
 
-    const handleFavorite = (): void => {
+    const toggleFavorite = (): void => {
         if (!auth?.accessToken) return loginForm();
-        post.isFavorite ? dispatch(deletePostFromFavoriteThunk(post.id)) : dispatch(addPostToFavoriteThunk(post.id));
+        dispatch(togglePostFavoriteThunk(post.id));
     };
 
     const openChat = () => {
@@ -62,7 +62,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                             : 'Додати оголошення в обрані. Натисніть якщо бажаете повернутись до цього оголошення пізніше'
                     }
                 >
-                    <Button size={size} primary={post.isFavorite} secondary={!post.isFavorite} onClick={handleFavorite}>
+                    <Button size={size} primary={post.isFavorite} secondary={!post.isFavorite} onClick={toggleFavorite}>
                         <Bookmark />
                     </Button>
                 </Tooltip>

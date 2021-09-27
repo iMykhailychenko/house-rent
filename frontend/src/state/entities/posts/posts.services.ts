@@ -11,8 +11,7 @@ const postsServices = {
         axios.put(endpointConfig(`/posts/${id}`), body),
     singlePost: (id: number): Promise<AxiosResponse<IPost>> => axios.get(endpointConfig(`/posts/${id}`)),
     postsList: (page: number): Promise<AxiosResponse<Pagination<IPost>>> => axios.get(endpointConfig(`/posts/?page=${page}`)),
-    addToFavorite: (id: number): Promise<AxiosResponse<void>> => axios.post(endpointConfig(`/favorite/${id}`)),
-    deleteFromFavorite: (id: number): Promise<AxiosResponse<void>> => axios.delete(endpointConfig(`/favorite/${id}`)),
+    toggleFavorite: (id: number): Promise<AxiosResponse<void>> => axios.put(endpointConfig(`/favorite/${id}`)),
 };
 
 export default postsServices;

@@ -17,7 +17,6 @@ const authSlice = createSlice({
         logoutAction() {
             delete axios.defaults.headers.common.Authorization;
             Cookies.remove('house_rent_auth');
-
             return authInitialState;
         },
     },
@@ -38,6 +37,7 @@ const authSlice = createSlice({
         builder.addCase(authLoginThunk.fulfilled, (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
             state.loginStatus = 'success';
             state.accessToken = action.payload.accessToken;
+            window.location.reload();
         });
         builder.addCase(authLoginThunk.rejected, (state: IAuthState) => {
             state.loginStatus = 'error';

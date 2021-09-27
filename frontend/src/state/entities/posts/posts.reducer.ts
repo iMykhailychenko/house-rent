@@ -4,14 +4,7 @@ import { Pagination } from '../../../interfaces';
 
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPost, IPostState } from './posts.interface';
-import {
-    addPostToFavoriteThunk,
-    deletePostFromFavoriteThunk,
-    newPostThunk,
-    postListThunk,
-    singlePostThunk,
-    updatePostThunk,
-} from './posts.thunk';
+import { newPostThunk, postListThunk, singlePostThunk, togglePostFavoriteThunk, updatePostThunk } from './posts.thunk';
 
 const postsSlice = createSlice({
     name: 'POSTS',
@@ -79,38 +72,19 @@ const postsSlice = createSlice({
 
         // HANDLE FAVORITE
         builder.addCase(
-            addPostToFavoriteThunk.fulfilled,
+            togglePostFavoriteThunk.fulfilled,
             (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
                 state.single.data = {
                     ...state.single.data,
-                    isFavorite: true,
-                    favorite: state.single.data.favorite + 1,
+                    isFavorite: !state.single.data.isFavorite,
+                    favorite: state.single.data.isFavorite ? state.single.data.favorite - 1 : state.single.data.favorite + 1,
                 };
                 state.list.data = state.list.data.map<IPost>(post =>
                     post.id === action.meta.arg
                         ? {
                               ...post,
-                              isFavorite: true,
-                              favorite: post.favorite + 1,
-                          }
-                        : post,
-                );
-            },
-        );
-        builder.addCase(
-            deletePostFromFavoriteThunk.fulfilled,
-            (state: IPostState, action: PayloadAction<void, string, { arg: number }>) => {
-                state.single.data = {
-                    ...state.single.data,
-                    isFavorite: false,
-                    favorite: state.single.data.favorite - 1,
-                };
-                state.list.data = state.list.data.map<IPost>(post =>
-                    post.id === action.meta.arg
-                        ? {
-                              ...post,
-                              isFavorite: false,
-                              favorite: post.favorite - 1,
+                              isFavorite: !post.isFavorite,
+                              favorite: post.isFavorite ? post.favorite - 1 : post.favorite + 1,
                           }
                         : post,
                 );

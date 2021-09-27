@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { logoutAction } from '../../../../../state/entities/auth/auth.reducer';
-import { modal } from '../../../../common/modal/modal';
 
 import css from './header-user-nav.module.scss';
 
@@ -15,7 +14,7 @@ const HeaderUserNav = (): ReactElement => {
 
     const logout = (): void => {
         dispatch(logoutAction());
-        modal.close();
+        window.location.reload();
     };
 
     return (
