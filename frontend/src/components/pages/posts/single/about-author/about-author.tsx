@@ -5,8 +5,6 @@ import clsx from 'clsx';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import ImageWrp from '../../../../common/image-wrp/image-wrp';
-import { modal } from '../../../../common/modal/modal';
-import StickyModal from '../../../../common/modal/sticky-modal/sticky-modal';
 import ReadMoreText from '../read-more-text/read-more-text';
 import css from '../single.module.scss';
 
@@ -16,17 +14,6 @@ interface IProps {
 
 const AboutAuthor = ({ post }: IProps): ReactElement => {
     const trans = useTrans();
-
-    const readMore =
-        (img: string, title: string, text: string): (() => void) =>
-        (): void => {
-            modal.open(
-                <StickyModal title={title}>
-                    <ImageWrp name={img} />
-                    <p className={css.center}>{trans(text)}</p>
-                </StickyModal>,
-            );
-        };
 
     return (
         <div className={css.wrap}>

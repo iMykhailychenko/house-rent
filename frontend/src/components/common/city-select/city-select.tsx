@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { SelectValue } from '../../../interfaces';
 import { City } from '../../../state/entities/filters/filters.interface';
-import { changeCityFiltersAction } from '../../../state/entities/filters/filters.reducer';
+import { changeCityFilterAction } from '../../../state/entities/filters/filters.reducer';
 import { useCityFiltersSelector } from '../../../state/entities/filters/filters.selector';
 import Select from '../select/select';
 
@@ -18,7 +18,7 @@ const CitySelect = (): ReactElement => {
     const city = useCityFiltersSelector();
 
     const handleChange = (value: SelectValue): void => {
-        dispatch(changeCityFiltersAction(value.id as City));
+        dispatch(changeCityFilterAction(value.id as City));
     };
 
     return <Select placeholder="test" value={{ id: city, value: city }} list={list} onChange={handleChange} />;

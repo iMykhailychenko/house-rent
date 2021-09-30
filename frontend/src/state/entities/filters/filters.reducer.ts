@@ -9,26 +9,30 @@ const filtersSlice = createSlice({
     name: 'FILTERS',
     initialState: filtersInitialState,
     reducers: {
-        changeGeneralFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+        changeInputFilterAction(state: IFiltersState, action: PayloadAction<string>) {
+            state[SEARCH_FILTERS.INPUT] = action.payload;
+        },
+        changeGeneralFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.GENERAL] = generalFilters(action.payload);
         },
-        changeRoomFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+        changeRoomFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.ROOM] = roomFilters(action.payload);
         },
-        changePriceFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+        changePriceFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.PRICE] = priceFilters(action.payload);
         },
-        changeHouseTypeFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+        changeHouseTypeFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.HOUSE_TYPE] = houseTypeFilters(action.payload);
         },
-        changeCityFiltersAction(state: IFiltersState, action: PayloadAction<City>) {
+        changeCityFilterAction(state: IFiltersState, action: PayloadAction<City>) {
             state[SEARCH_FILTERS.CITY] = action.payload;
             state[SEARCH_FILTERS.DISTRICT] = districtFilters(action.payload);
         },
-        changeDistrictFiltersAction(state: IFiltersState, action: PayloadAction<string[]>) {
+        changeDistrictFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.DISTRICT] = districtFilters(state[SEARCH_FILTERS.CITY], action.payload);
         },
-        clearAllFiltersAction(state: IFiltersState) {
+        clearAllFilterAction(state: IFiltersState) {
+            state[SEARCH_FILTERS.INPUT] = '';
             state[SEARCH_FILTERS.GENERAL] = generalFilters();
             state[SEARCH_FILTERS.ROOM] = roomFilters();
             state[SEARCH_FILTERS.PRICE] = priceFilters();
@@ -40,13 +44,14 @@ const filtersSlice = createSlice({
 });
 
 export const {
-    changeGeneralFiltersAction,
-    changeRoomFiltersAction,
-    changePriceFiltersAction,
-    changeHouseTypeFiltersAction,
-    changeCityFiltersAction,
-    changeDistrictFiltersAction,
-    clearAllFiltersAction,
+    changeInputFilterAction,
+    changeGeneralFilterAction,
+    changeRoomFilterAction,
+    changePriceFilterAction,
+    changeHouseTypeFilterAction,
+    changeCityFilterAction,
+    changeDistrictFilterAction,
+    clearAllFilterAction,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

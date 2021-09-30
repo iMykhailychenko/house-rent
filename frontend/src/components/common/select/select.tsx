@@ -53,7 +53,7 @@ const Select = ({ error = false, className, placeholder = '', list, value, onCha
         <button className={clsx(css.root, className, open && css.open)} type="button" onBlur={handleClose}>
             <p className={clsx(css.input, error && css.error)} onClick={handleToggle} aria-hidden="true">
                 <span className={clsx(css.text, { [css.placeholder]: !value?.value && placeholder })}>
-                    {value?.value || placeholder}
+                    {trans(value?.value || placeholder)}
                 </span>
                 <span className={css.icon} />
             </p>

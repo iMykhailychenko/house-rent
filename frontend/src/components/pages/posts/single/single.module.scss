@@ -99,16 +99,24 @@
         margin: 2rem 0;
         font-weight: 300;
         text-align: center;
+
+        strong {
+            font-weight: 500;
+        }
     }
 
     .link {
         text-decoration: underline;
         color: var(--primary);
-        font-weight: 500;
+        font-weight: 400;
     }
 }
 
 .center {
     margin: 4rem;
     text-align: center;
+
+    strong {
+        font-weight: 400;
+    }
 }

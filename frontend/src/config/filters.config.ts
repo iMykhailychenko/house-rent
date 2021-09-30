@@ -125,10 +125,6 @@ export const districtFilters = (city: City = 'kyiv', district: string[] = []): I
                 name: 'sviatoshynskyi',
                 active: district.includes('sviatoshynskyi'),
             },
-            none: {
-                name: 'none',
-                active: district.includes('none'),
-            },
         },
         lviv: {
             halych: {
@@ -154,10 +150,6 @@ export const districtFilters = (city: City = 'kyiv', district: string[] = []): I
             shevchenko: {
                 name: 'shevchenko',
                 active: district.includes('shevchenko'),
-            },
-            none: {
-                name: 'none',
-                active: district.includes('none'),
             },
         },
     };

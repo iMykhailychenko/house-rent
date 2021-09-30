@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import ImageWrp from '../../../../common/image-wrp/image-wrp';
-import css from '../single.module.scss';
 import ReadMoreText from '../read-more-text/read-more-text';
+import css from '../single.module.scss';
 
 interface IProps {
     post: IPost;
@@ -21,14 +21,14 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                     <div className={css.cell}>
                         <ImageWrp name="building" />
                         <p>
-                            {trans('houseType')}: {post.houseTypeFilters.map(trans).join(', ')}
+                            <strong>{trans('houseType')}</strong>: {post.houseTypeFilters.map(trans).join(', ')}
                         </p>
                     </div>
 
                     <div className={css.cell}>
                         <ImageWrp name="chair" />
                         <p>
-                            {trans('room')}: {post.roomFilters.map(trans).join(', ')}
+                            <strong>{trans('rooms')}</strong>: {post.roomFilters.map(trans).join(', ')}
                         </p>
                     </div>
 
@@ -37,7 +37,8 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                         <ReadMoreText
                             img="cash"
                             title="cash"
-                            text={trans('price') + ': ' + post.priceFilters.map(trans).join(', ')}
+                            label={trans('price')}
+                            text={post.priceFilters.map(trans).join(', ')}
                         />
                     </div>
                 </div>
@@ -45,7 +46,7 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                     <div className={css.cell}>
                         <ImageWrp name="location" />
                         <p>
-                            {trans('city')}: {trans(post.cityFilters)}
+                            <strong>{trans('city')}</strong>: {trans(post.cityFilters)}
                         </p>
                     </div>
                     <div className={css.cell}>
@@ -53,7 +54,8 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                         <ReadMoreText
                             img="target"
                             title="district"
-                            text={trans('district') + ': ' + post.districtFilters.map(trans).join(', ')}
+                            label={trans('district')}
+                            text={post.districtFilters.map(trans).join(', ')}
                         />
                     </div>
                     <div style={{ width: '20rem' }} />
