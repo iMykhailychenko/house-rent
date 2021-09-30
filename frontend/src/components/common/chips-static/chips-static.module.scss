@@ -13,7 +13,8 @@
     user-select: none;
 
     .tooltip {
-        width: 20rem;
+        width: max-content;
+        max-width: 20rem;
     }
 
     .inner {

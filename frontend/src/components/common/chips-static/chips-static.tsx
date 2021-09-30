@@ -16,7 +16,7 @@ interface IProps {
 const ChipsStatic = ({ children, active = false, chip, tooltip }: IProps): ReactElement => {
     return (
         <div className={clsx(css.chip, { [css.active]: active })}>
-            <Tooltip className={clsx(tooltip.length > 25 && css.tooltip)} content={tooltip}>
+            <Tooltip className={css.tooltip} content={tooltip}>
                 <div className={css.inner}>
                     {children}
                     <p>{chip}</p>

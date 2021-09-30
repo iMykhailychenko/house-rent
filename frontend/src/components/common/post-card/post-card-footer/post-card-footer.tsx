@@ -4,6 +4,7 @@ import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons'
 
 import useAuth from '../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
+import useTrans from '../../../../hooks/trans.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { togglePostFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
 import LoginForm from '../../auth/login-form/login-form';
@@ -24,6 +25,7 @@ interface IProps {
 const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     const dispatch = useAppDispatch();
     const [auth] = useAuth();
+    const trans = useTrans();
 
     const loginForm = (): void => {
         modal.open(
@@ -56,38 +58,34 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
             <div className={css.info}>
                 <Tooltip
                     className={css.tooltip}
-                    content={
-                        post.isFavorite
-                            ? 'Натисніть щоб видалити оголошення з обраних'
-                            : 'Додати оголошення в обрані. Натисніть якщо бажаете повернутись до цього оголошення пізніше'
-                    }
+                    content={post.isFavorite ? 'remove_post_from_favorites' : 'add_post_to_favorites'}
                 >
                     <Button size={size} primary={post.isFavorite} secondary={!post.isFavorite} onClick={toggleFavorite}>
                         <Bookmark />
                     </Button>
                 </Tooltip>
 
-                <Tooltip content="Поділитись оголошенням">
+                <Tooltip content="share_this_post">
                     <Button size={size} secondary onClick={openSharePostModal}>
                         <Share />
                     </Button>
                 </Tooltip>
 
-                <Tooltip content="Кількість переглядів">
+                <Tooltip content="views">
                     <div className={css.icon}>
                         <Visibility />
                         <span>{post.views}</span>
                     </div>
                 </Tooltip>
 
-                <Tooltip content="Кількість відгуків">
+                <Tooltip content="reviews">
                     <div className={css.icon}>
                         <QuestionAnswer />
                         <span>{post.chats}</span>
                     </div>
                 </Tooltip>
 
-                <Tooltip className={css.tooltip} content="Додано в обрані">
+                <Tooltip className={css.tooltip} content="added_to_favorites">
                     <div className={css.icon}>
                         <Bookmark />
                         <span>{post.favorite}</span>
@@ -95,9 +93,9 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 </Tooltip>
             </div>
 
-            <Tooltip className={css.tooltip} content="Натисніть щоб розпочати чат з автором оголошення">
+            <Tooltip className={css.tooltip} content="click_to_start_chat">
                 <Button size={size} primary onClick={openChat}>
-                    Відповісти
+                    {trans('answer')}
                 </Button>
             </Tooltip>
         </div>

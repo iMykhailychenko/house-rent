@@ -21,14 +21,14 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                     <div className={css.cell}>
                         <ImageWrp name="building" />
                         <p>
-                            {trans('houseType')}: {post.houseTypeFilters.map(text => trans(text)).join(', ')}
+                            {trans('houseType')}: {post.houseTypeFilters.map(trans).join(', ')}
                         </p>
                     </div>
 
                     <div className={css.cell}>
                         <ImageWrp name="chair" />
                         <p>
-                            {trans('room')}: {post.roomFilters.map(text => trans(text)).join(', ')}
+                            {trans('room')}: {post.roomFilters.map(trans).join(', ')}
                         </p>
                     </div>
 
@@ -37,7 +37,7 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                         <ReadMoreText
                             img="cash"
                             title="cash"
-                            text={trans('price') + ': ' + post.priceFilters.map(text => trans(text)).join(', ')}
+                            text={trans('price') + ': ' + post.priceFilters.map(trans).join(', ')}
                         />
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                         <ReadMoreText
                             img="target"
                             title="district"
-                            text={trans('district') + ': ' + post.districtFilters.map(text => trans(text)).join(', ')}
+                            text={trans('district') + ': ' + post.districtFilters.map(trans).join(', ')}
                         />
                     </div>
                     <div style={{ width: '20rem' }} />

@@ -34,18 +34,21 @@ const SinglePostComponent = (): ReactElement => {
                     <>
                         <div className={css.header}>
                             <div className={css.inner}>
-                                <p className={css.small}>{trans('Поділитись цим постом')}:</p>
+                                <p className={css.small}>{trans('share_this_post')}:</p>
                                 <Socials title={postData.title} />
                             </div>
 
                             <div className={css.inner}>
-                                <p className={css.small}>{trans('Створено')}:</p>
+                                <p className={css.small}>{trans('created')}:</p>
                                 <p className={css.date}>{formatDate(postData.creationDate)}</p>
                             </div>
                         </div>
 
                         <h2 className={css.title}>{postData.title}</h2>
-                        <p className={css.text} dangerouslySetInnerHTML={{ __html: postData.description.replace('\n', '<br/><br/>') }} />
+                        <p
+                            className={css.text}
+                            dangerouslySetInnerHTML={{ __html: postData.description.replace('\n', '<br/><br/>') }}
+                        />
 
                         <PostCardFooter post={postData} />
 
