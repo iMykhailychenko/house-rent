@@ -53,8 +53,6 @@ const HomePostChips = (): ReactElement => {
 
     return (
         <div className={css.root}>
-            <Chips onChange={handleChangeGeneral} chips={filters[SEARCH_FILTERS.GENERAL]} />
-
             <h4 className={css.title}>{trans('Шукати оголошення')}</h4>
             <SearchInput
                 value={filters[SEARCH_FILTERS.INPUT]}
@@ -64,6 +62,9 @@ const HomePostChips = (): ReactElement => {
 
             <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
             <CitySelect />
+
+            <h4 className={css.title}>{trans('Терміново потрібна квартира')}</h4>
+            <Chips onChange={handleChangeGeneral} chips={filters[SEARCH_FILTERS.GENERAL]} />
 
             <h4 className={css.title}>{trans('Цінова категорія')}</h4>
             <Chips onChange={handleChangePrice} chips={filters[SEARCH_FILTERS.PRICE]} />

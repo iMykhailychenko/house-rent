@@ -57,7 +57,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): ReactElement => {
         <form action="#" method="post" className={css.form}>
             <ImageWrp name="form" />
             <FormSeparator>Укажіть інформацію про квартиру, яку ви шукаєте</FormSeparator>
-            <FormSegment label="house_type" error={formik.touched.houseTypeFilters && formik.errors.houseTypeFilters}>
+            <FormSegment label="houseType" error={formik.touched.houseTypeFilters && formik.errors.houseTypeFilters}>
                 <Filters
                     all={houseType}
                     name="houseTypeFilters"

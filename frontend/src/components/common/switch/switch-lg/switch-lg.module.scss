@@ -16,6 +16,7 @@
         border-radius: 2.5rem;
         z-index: 1;
         transition: 0.3s ease-in-out;
+        border: 0.1rem solid var(--gray-4);
     }
 
     &:hover::before {

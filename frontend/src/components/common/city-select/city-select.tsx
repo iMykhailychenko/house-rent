@@ -21,7 +21,7 @@ const CitySelect = (): ReactElement => {
         dispatch(changeCityFilterAction(value.id as City));
     };
 
-    return <Select placeholder="test" value={{ id: city, value: city }} list={list} onChange={handleChange} />;
+    return <Select value={{ id: city, value: city }} list={list} onChange={handleChange} />;
 };
 
 export default CitySelect;

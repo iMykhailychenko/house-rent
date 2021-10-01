@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ReactElement } from 'react';
 
-import { Search } from '@material-ui/icons';
+import { Close, Search } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import useTrans from '../../../hooks/trans.hook';
@@ -12,9 +12,9 @@ interface IProps {
     value: string | number;
     placeholder?: string;
     onChange?: (value: string) => void;
+    onSubmit?: (value: string | number) => void;
     onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onSubmit?: (value: string | number) => void;
     error?: boolean;
     disabled?: boolean;
     loading?: boolean;
@@ -25,6 +25,7 @@ const SearchInput = ({
     onBlur,
     onFocus,
     onChange,
+    onSubmit,
     className,
     error = false,
     loading = false,
@@ -36,6 +37,16 @@ const SearchInput = ({
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         if (!onChange) return;
         onChange(event.target.value);
+    };
+
+    const reset = (): void => {
+        if (!onChange) return;
+        onChange('');
+    };
+
+    const submit = (): void => {
+        if (!onSubmit) return;
+        onSubmit(value);
     };
 
     return (
@@ -51,11 +62,11 @@ const SearchInput = ({
                 placeholder={trans(placeholder)}
             />
 
-            <button className={css.reset} type="button">
-                {loading ? <img className={css.spinner} src="/spinner.gif" alt="loading" /> : <Search />}
+            <button onClick={reset} className={clsx(css.reset, String(value).length < 2 && css.hidden)} type="button">
+                <Close />
             </button>
 
-            <button className={css.btn} type="button">
+            <button onClick={submit} className={css.btn} type="button">
                 {loading ? <img className={css.spinner} src="/spinner.gif" alt="loading" /> : <Search />}
             </button>
         </div>

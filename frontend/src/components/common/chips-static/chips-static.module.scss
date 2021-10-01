@@ -4,7 +4,7 @@
     justify-content: center;
     height: 3rem;
     width: max-content;
-    margin: 0 0.5rem 0.5rem 0;
+    margin: 0 0.5rem 0.8rem 0;
     padding: 0 1rem;
     border-radius: 3rem;
     background: var(--gray-3);
@@ -28,7 +28,7 @@
         }
 
         svg {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin-right: 0.5rem;
         }
     }
@@ -43,6 +43,6 @@
 
 .active {
     background: var(--secondary);
-    border-color: var(--primary);
+    border-color: var(--secondary);
     color: var(--primary);
 }
