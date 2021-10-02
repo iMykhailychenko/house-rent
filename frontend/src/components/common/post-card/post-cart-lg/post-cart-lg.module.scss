@@ -54,6 +54,11 @@
     }
 
     .link {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
         width: calc(100% - var(--img-width) - 2rem);
         font-weight: 600;
 
@@ -65,6 +70,7 @@
         }
 
         h3 {
+            width: 100%;
             margin-left: 0.5rem;
             font-size: 2rem;
             line-height: 1.2;
@@ -73,7 +79,8 @@
         }
 
         p {
-            margin: 1rem 0 2rem 0.5rem;
+            width: 100%;
+            margin: 1rem 0 0 0.5rem;
             text-align: left;
             font-size: 1.5rem;
             color: var(--gray-6);

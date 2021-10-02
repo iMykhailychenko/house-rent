@@ -4,7 +4,14 @@ import { Pagination } from '../../../interfaces';
 
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPost, IPostState } from './posts.interface';
-import { newPostThunk, postListThunk, singlePostThunk, togglePostFavoriteThunk, updatePostThunk } from './posts.thunk';
+import {
+    newPostThunk,
+    postListPaginationThunk,
+    postListThunk,
+    singlePostThunk,
+    togglePostFavoriteThunk,
+    updatePostThunk,
+} from './posts.thunk';
 
 const postsSlice = createSlice({
     name: 'POSTS',
@@ -54,7 +61,7 @@ const postsSlice = createSlice({
             state.single.error = 'error';
         });
 
-        // SINGLE POST THUNK
+        // POSTS LIST THUNK
         builder.addCase(postListThunk.pending, (state: IPostState) => {
             state.list.status = 'loading';
         });
@@ -66,6 +73,19 @@ const postsSlice = createSlice({
             state.list.data = action.payload.data;
         });
         builder.addCase(postListThunk.rejected, (state: IPostState) => {
+            state.list.status = 'error';
+            state.list.error = 'error';
+        });
+
+        // POST PAGINATION THUNK
+        builder.addCase(postListPaginationThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
+            state.list.status = 'success';
+            state.list.totalItems = action.payload.totalItems;
+            state.list.totalPages = action.payload.totalPages;
+            state.list.currentPage = action.payload.currentPage;
+            state.list.data = [...state.list.data, ...action.payload.data];
+        });
+        builder.addCase(postListPaginationThunk.rejected, (state: IPostState) => {
             state.list.status = 'error';
             state.list.error = 'error';
         });

@@ -1,0 +1,61 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    :global(.disabled) {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    .prev,
+    .next,
+    .page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3.5rem;
+        width: 3.5rem;
+        margin: 0.3rem;
+        cursor: pointer;
+        border: 0.1rem solid var(--gray-3);
+        border-radius: 0.5rem;
+        user-select: none;
+        transition: 0.1s ease-in-out;
+
+        &:hover {
+            border: 0.1rem solid var(--primary);
+        }
+    }
+
+    .active {
+        background: var(--primary);
+        color: var(--true-white);
+    }
+
+    .prev,
+    .next {
+        font-size: 1.6rem;
+        background: var(--gray-3);
+    }
+
+    .prev {
+        transform: rotate(180deg);
+    }
+}
+
+.more {
+    display: flex;
+    align-items: center;
+    margin: 3rem auto 0;
+    line-height: 1;
+
+    & > span {
+        margin-top: 0.4rem;
+    }
+
+    svg {
+        margin-bottom: 0.15rem;
+        margin-right: 0.5rem;
+        font-size: 2rem;
+    }
+}

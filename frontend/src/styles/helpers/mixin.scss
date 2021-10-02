@@ -1,5 +1,20 @@
 @mixin cutString() {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@mixin skeleton {
+    @keyframes skeleton {
+        0% {
+            background-position: 0 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    background: linear-gradient(90deg, var(--gray-2), var(--gray-4), var(--gray-1));
+    background-size: 400% 400%;
+    animation: skeleton 2s ease infinite;
 }

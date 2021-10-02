@@ -53,5 +53,6 @@
     "price_six": "35-40k грн",
     "price_seven": "Більше 40k грн",
     "price": "Ціна",
-    "district": "Район"
+    "district": "Район",
+    "load_more": "Завантажити більше"
 }

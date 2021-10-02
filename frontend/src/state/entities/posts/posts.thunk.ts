@@ -29,6 +29,15 @@ export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefi
     return data;
 });
 
+export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, number | undefined>(
+    'POSTS/LIST_PAGINATION',
+    async (payload = 1) => {
+        const { data, status } = await postsServices.postsList(payload);
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    },
+);
+
 export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {
     const { status } = await postsServices.toggleFavorite(payload);
     if (status < 200 || status >= 300) throw new Error();

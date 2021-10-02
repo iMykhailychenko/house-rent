@@ -14,7 +14,7 @@
     margin: 2rem 0.5rem 4rem;
     color: var(--primary);
     font-size: 1.6rem;
-    
+
     &:hover {
         text-decoration: underline;
     }
@@ -25,11 +25,11 @@
     }
 }
 
-
 .flex {
     display: flex;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 0;
+    padding-bottom: 6rem;
 
     button {
         margin-right: 1rem;

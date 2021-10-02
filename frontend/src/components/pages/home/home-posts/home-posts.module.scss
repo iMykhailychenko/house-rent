@@ -14,18 +14,17 @@
     padding: 0 0 3rem;
 }
 
-.sm {
+.inner {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 5rem;
+    margin: 5rem 0;
+}
+
+.sm {
     width: calc(100% - var(--filters-sidebar-width));
 }
 
 .lg {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 5rem;
     width: calc(100% - var(--filters-sidebar-width));
 }
