@@ -1,5 +1,5 @@
-import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { KYIV_DISTRICT_FILTERS, LVIV_DISTRICT_FILTERS } from './posts.interface';
+import { isEnum, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { ALL_STATUSES, KYIV_DISTRICT_FILTERS, LVIV_DISTRICT_FILTERS, POST_STATUS } from './posts.interface';
 import { Post } from './posts.entity';
 
 const enumMap = {
@@ -19,3 +19,13 @@ export class DistrictValidator implements ValidatorConstraintInterface {
         return 'invalid district values';
     }
 }
+
+export const validateStatus = (status: unknown): POST_STATUS[] => {
+    if (typeof status === 'string') {
+        const statusList = status.split(',');
+        const hasError = !statusList.every(item => isEnum(item, POST_STATUS));
+        return hasError ? ALL_STATUSES : (statusList as POST_STATUS[]);
+    }
+
+    return ALL_STATUSES;
+};

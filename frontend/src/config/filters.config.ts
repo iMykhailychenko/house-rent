@@ -1,5 +1,6 @@
 import { IChipsMap } from '../interfaces';
 import { City } from '../state/entities/filters/filters.interface';
+import { ALL_STATUSES, POST_STATUS } from '../state/entities/posts/posts.interface';
 
 export const generalFilters = (init: string[] = []): IChipsMap => ({
     hot: {
@@ -156,3 +157,22 @@ export const districtFilters = (city: City = 'kyiv', district: string[] = []): I
 
     return districtMap[city];
 };
+
+export const statusFilter = (init: string[] = ALL_STATUSES): IChipsMap => ({
+    [POST_STATUS.IDLE]: {
+        name: POST_STATUS.IDLE,
+        active: init.includes(POST_STATUS.IDLE),
+    },
+    [POST_STATUS.ACTIVE]: {
+        name: POST_STATUS.ACTIVE,
+        active: init.includes(POST_STATUS.ACTIVE),
+    },
+    [POST_STATUS.ARCHIVE]: {
+        name: POST_STATUS.ARCHIVE,
+        active: init.includes(POST_STATUS.ARCHIVE),
+    },
+    [POST_STATUS.DRAFT]: {
+        name: POST_STATUS.DRAFT,
+        active: init.includes(POST_STATUS.DRAFT),
+    },
+});

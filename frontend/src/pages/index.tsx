@@ -1,20 +1,29 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { GetServerSideProps } from 'next';
 
+import PostsList from '../components/layout/posts-list/posts-list';
 import RootLayout from '../components/layout/root-layout/root-layout';
+import Section from '../components/layout/section/section';
 import Meta from '../components/meta/meta';
 import HomeBanner from '../components/pages/home/home-banner/home-banner';
-import HomePosts from '../components/pages/home/home-posts/home-posts';
+import HomePostFilters from '../components/pages/home/home-post-filters/home-post-filters';
+import { usePostListSelector } from '../state/entities/posts/posts.selector';
 import { postListThunk } from '../state/entities/posts/posts.thunk';
 import { withStore } from '../utils/ssr';
 
 const HomePage = (): ReactElement => {
+    const postsState = usePostListSelector();
+
     return (
         <RootLayout>
             <Meta />
             <HomeBanner />
-            <HomePosts />
+            <Section id="home-posts">
+                <PostsList posts={postsState}>
+                    <HomePostFilters />
+                </PostsList>
+            </Section>
         </RootLayout>
     );
 };

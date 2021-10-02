@@ -1,9 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { districtFilters, generalFilters, houseTypeFilters, priceFilters, roomFilters } from '../../../config/filters.config';
+import {
+    districtFilters,
+    generalFilters,
+    houseTypeFilters,
+    priceFilters,
+    roomFilters,
+    statusFilter,
+} from '../../../config/filters.config';
 
 import filtersInitialState from './filters.initial-state';
-import { City, IFiltersState, SEARCH_FILTERS } from './filters.interface';
+import { City, IFiltersState, SEARCH_FILTERS, USER_POSTS_FILTERS } from './filters.interface';
 
 const filtersSlice = createSlice({
     name: 'FILTERS',
@@ -40,6 +47,9 @@ const filtersSlice = createSlice({
             state[SEARCH_FILTERS.CITY] = 'kyiv';
             state[SEARCH_FILTERS.DISTRICT] = districtFilters();
         },
+        changePostStatusFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
+            state[USER_POSTS_FILTERS.STATUS] = statusFilter(action.payload);
+        },
     },
 });
 
@@ -52,6 +62,7 @@ export const {
     changeCityFilterAction,
     changeDistrictFilterAction,
     clearAllFilterAction,
+    changePostStatusFilterAction,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

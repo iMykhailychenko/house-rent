@@ -5,6 +5,7 @@ import { Pagination } from '../../../interfaces';
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPost, IPostState } from './posts.interface';
 import {
+    getUserPostsList,
     newPostThunk,
     postListPaginationThunk,
     postListThunk,
@@ -86,6 +87,22 @@ const postsSlice = createSlice({
             state.list.data = [...state.list.data, ...action.payload.data];
         });
         builder.addCase(postListPaginationThunk.rejected, (state: IPostState) => {
+            state.list.status = 'error';
+            state.list.error = 'error';
+        });
+
+        // USER POSTS PAGINATION THUNK
+        builder.addCase(getUserPostsList.pending, (state: IPostState) => {
+            state.list.status = 'loading';
+        });
+        builder.addCase(getUserPostsList.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
+            state.list.status = 'success';
+            state.list.totalItems = action.payload.totalItems;
+            state.list.totalPages = action.payload.totalPages;
+            state.list.currentPage = action.payload.currentPage;
+            state.list.data = [...state.list.data, ...action.payload.data];
+        });
+        builder.addCase(getUserPostsList.rejected, (state: IPostState) => {
             state.list.status = 'error';
             state.list.error = 'error';
         });

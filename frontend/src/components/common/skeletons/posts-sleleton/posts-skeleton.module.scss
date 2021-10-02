@@ -25,12 +25,12 @@
     }
 
     .img {
-        width: 12rem;
-        height: 10rem;
+        width: 28rem;
+        height: 16rem;
     }
 
     .wrp {
-        width: calc(100% - 14rem);
+        width: calc(100% - 30rem);
 
         .title {
             margin-top: 0;
@@ -48,6 +48,7 @@
         height: 3rem;
         width: 10rem;
         margin: 0 0.5rem 0.8rem 0;
+        border-radius: 2rem;
     }
 
     .chipLong {

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
 
-import { IEditPostPayload, INewPostPayload, IPost } from './posts.interface';
+import { IEditPostPayload, INewPostPayload, IPost, IUserPostsListPayload } from './posts.interface';
 import postsServices from './posts.services';
 
 export const newPostThunk = createAsyncThunk<IPost, INewPostPayload>('POSTS/NEW', async (payload: INewPostPayload) => {
@@ -37,6 +37,12 @@ export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, numbe
         return data;
     },
 );
+
+export const getUserPostsList = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload>('POSTS/USER_POSTS', async payload => {
+    const { data, status } = await postsServices.getUserPostsList(payload);
+    if (status < 200 || status >= 300) throw new Error();
+    return data;
+});
 
 export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {
     const { status } = await postsServices.toggleFavorite(payload);

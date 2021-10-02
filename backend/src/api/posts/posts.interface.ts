@@ -58,6 +58,8 @@ export enum POST_STATUS {
     ARCHIVE = 'archive',
 }
 
+export const ALL_STATUSES = [POST_STATUS.IDLE, POST_STATUS.DRAFT, POST_STATUS.ACTIVE, POST_STATUS.ARCHIVE];
+
 export enum RESIDENTS_AMOUNT {
     ONE = 'one',
     TWO = 'two',

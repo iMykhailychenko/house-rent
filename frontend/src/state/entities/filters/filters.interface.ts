@@ -1,5 +1,7 @@
 import { IChipsMap } from '../../../interfaces';
 
+export type City = 'kyiv' | 'lviv';
+
 export enum SEARCH_FILTERS {
     INPUT = 'input',
     GENERAL = 'general',
@@ -10,7 +12,9 @@ export enum SEARCH_FILTERS {
     DISTRICT = 'district',
 }
 
-export type City = 'kyiv' | 'lviv';
+export enum USER_POSTS_FILTERS {
+    STATUS = 'status',
+}
 
 export type IFiltersState = {
     [SEARCH_FILTERS.INPUT]: string;
@@ -20,4 +24,5 @@ export type IFiltersState = {
     [SEARCH_FILTERS.ROOM]: IChipsMap;
     [SEARCH_FILTERS.CITY]: City;
     [SEARCH_FILTERS.DISTRICT]: IChipsMap;
+    [USER_POSTS_FILTERS.STATUS]: IChipsMap;
 };

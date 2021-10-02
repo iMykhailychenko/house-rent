@@ -114,6 +114,26 @@ describe('Test post service', () => {
         });
     });
 
+    describe('get user posts', () => {
+        it('get all posts with pagination', async () => {
+            const res = await api.get('/api/v1/posts/users/' + user.id + '?status=idle,draft');
+
+            expect(res.statusCode).toEqual(200);
+            expect(res.body.currentPage).toEqual(1);
+            expect(res.body.totalPages).toEqual(1);
+            expect(res.body.totalItems).toEqual(1);
+            expect(res.body.data[0].title).toEqual('test');
+            expect(res.body.data[0].description).toEqual('test description');
+            expect(res.body.data[0].favorite).toEqual(0);
+            expect(res.body.data[0].isFavorite).toEqual(false);
+            expect(res.body.data[0].chats).toEqual(0);
+            expect(res.body.data[0].views).toEqual(0);
+            expect(res.body.data[0].user.firstName).toEqual('Name');
+            expect(res.body.data[0].user.lastName).toEqual('LastName');
+            expect(res.body.data[0].user.email).toEqual('test@mail.ru');
+        });
+    });
+
     describe('get single post', () => {
         it('get post success', async () => {
             await addToFavorite(api, token, postId);
@@ -122,8 +142,8 @@ describe('Test post service', () => {
             expect(res.statusCode).toEqual(200);
             expect(res.body.title).toEqual('test');
             expect(res.body.description).toEqual('test description');
-            expect(res.body.favorite).toEqual(1);
-            expect(res.body.isFavorite).toEqual(true);
+            expect(res.body.favorite).toEqual(0);
+            expect(res.body.isFavorite).toEqual(false);
             expect(res.body.chats).toEqual(0);
             expect(res.body.user.firstName).toEqual('Name');
             expect(res.body.user.lastName).toEqual('LastName');

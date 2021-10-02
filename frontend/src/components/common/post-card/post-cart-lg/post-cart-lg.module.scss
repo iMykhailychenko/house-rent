@@ -14,7 +14,7 @@
     .content {
         margin-top: 2rem;
         width: 100%;
-        --img-width: 12rem;
+        --img-width: 28rem;
     }
 
     .flex {
@@ -24,10 +24,10 @@
 
     .img {
         display: block;
-        height: calc(var(--img-width) - 2rem);
+        height: calc(var(--img-width) - 12rem);
         width: var(--img-width);
         object-fit: cover;
-        border-radius: 1rem;
+        border-radius: 0.6rem;
     }
 
     .noImg {
@@ -35,13 +35,13 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        height: calc(var(--img-width) - 2rem);
+        height: calc(var(--img-width) - 12rem);
         width: var(--img-width);
         padding: 2rem;
-        border-radius: 1rem;
+        border-radius: 0.6rem;
         background: var(--gray-1);
 
-        --image-wrp-diameter: calc(var(--img-width) - 8rem);
+        --image-wrp-diameter: calc(var(--img-width) - 18rem);
 
         p {
             margin-top: 0.5rem;

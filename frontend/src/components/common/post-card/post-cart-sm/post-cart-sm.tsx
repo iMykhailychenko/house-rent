@@ -23,7 +23,7 @@ const PostCardSm = ({ post }: IProps): ReactElement => {
                 <FullScreenImg className={css.img} src={post.image} />
             ) : (
                 <div className={css.noImg}>
-                    <ImageWrp name="puzzle" />
+                    <ImageWrp name="error" />
                     <p>Фото відсутнє</p>
                 </div>
             )}

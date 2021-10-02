@@ -6,6 +6,9 @@ const routes = {
         success: '/auth/success',
         reset: '/auth/reset',
     },
+    users: {
+        profile: (id: string | number): string => `/users/${id}`,
+    },
     posts: {
         list: '/posts',
         new: '/posts/new',

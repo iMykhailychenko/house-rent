@@ -17,7 +17,7 @@ interface IProps {
 
 const UserCard = ({ user, className, date }: IProps): ReactElement => {
     return (
-        <Link href={routes.posts.single(user.id)}>
+        <Link href={routes.users.profile(user.id)}>
             <a className={clsx(css.root, className)}>
                 <UserAvatar src={user.avatar} firstName={user.firstName} lastName={user.lastName} />
                 <div className={css.info}>

@@ -17,6 +17,7 @@
     .input {
         display: block;
         height: 100%;
+        background: none;
         width: calc(100% - var(--btn-width) - var(--reset-width));
         padding-left: 1.5rem;
         border: none;
@@ -30,6 +31,7 @@
 
     .reset {
         width: var(--reset-width);
+        color: var(--black);
         font-size: 1.6rem;
         transition: 0.3s ease-in-out;
     }

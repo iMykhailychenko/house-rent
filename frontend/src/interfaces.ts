@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 export interface IChips {
     name: string;
     active: boolean;
@@ -41,3 +43,5 @@ export type Pagination<T> = {
     currentPage: number;
     data: T[];
 };
+
+export type Response<T> = Promise<AxiosResponse<T>>;

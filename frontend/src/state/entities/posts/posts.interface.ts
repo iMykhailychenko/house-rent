@@ -3,10 +3,13 @@ import { City } from '../filters/filters.interface';
 import { IUser } from '../profile/profile.interface';
 
 export enum POST_STATUS {
-    INITIAL = 'initial',
+    IDLE = 'idle',
+    DRAFT = 'draft',
     ACTIVE = 'active',
     ARCHIVE = 'archive',
 }
+
+export const ALL_STATUSES = [POST_STATUS.IDLE, POST_STATUS.DRAFT, POST_STATUS.ACTIVE, POST_STATUS.ARCHIVE];
 
 export interface IPost {
     id: number;
@@ -52,6 +55,17 @@ export type INewPostPayload = IStepOne & IStepTwo & { image?: string | null };
 export interface IEditPostPayload {
     id: number;
     body: Partial<IPost>;
+}
+
+export interface UserPostsListParams {
+    limit?: number;
+    page?: number;
+    status?: POST_STATUS[];
+}
+
+export interface IUserPostsListPayload {
+    userId: number;
+    params: UserPostsListParams;
 }
 
 export enum FORM_TYPE {

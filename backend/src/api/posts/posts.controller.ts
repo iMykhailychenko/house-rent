@@ -8,6 +8,7 @@ import { User, UserRole } from '../users/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorCatch from '../../utils/errorCatch';
 import { Favorite } from '../favorite/favorite.entity';
+import { validateStatus } from './posts.validate';
 
 const isPostInFavorite = async (post: Post, user: User): Promise<boolean> => {
     if (!user) return false;
@@ -43,6 +44,41 @@ export const postsListController = errorWrapper(async (req: Request & { user: Us
         currentPage: +page,
         data: result,
     });
+});
+
+export const postsListForUserController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 20;
+    const status = validateStatus(req.query.status);
+
+    const repository = database.connection.getRepository(Post);
+
+    const total = await repository.count();
+    const result = await repository
+        .createQueryBuilder('post')
+        .orderBy('post.creationDate', 'DESC')
+        .offset(limit * (page - 1))
+        .limit(limit)
+        .where('post.user.id = :id', { id: +req.params.userId })
+        .andWhere('post.status IN (:...status)', { status })
+        .leftJoinAndSelect('post.user', 'user')
+        .loadRelationCountAndMap('post.favorite', 'post.favorite')
+        .loadRelationCountAndMap('post.chats', 'post.chats')
+        .getMany()
+        .catch(errorCatch(404));
+
+    for await (const post of result || []) {
+        post.isFavorite = await isPostInFavorite(post, req.user);
+    }
+
+    res.json({
+        totalItems: total,
+        totalPages: Math.ceil(total / limit),
+        currentPage: +page,
+        data: result,
+    });
+
+    res.send();
 });
 
 export const singlePostController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {

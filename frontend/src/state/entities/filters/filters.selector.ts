@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../hooks/redux.hook';
 import { IChipsMap } from '../../../interfaces';
 import { RootState } from '../../reducer';
 
-import { City, IFiltersState, SEARCH_FILTERS } from './filters.interface';
+import { City, IFiltersState, SEARCH_FILTERS, USER_POSTS_FILTERS } from './filters.interface';
 
 export const useAllFiltersSelector = (): IFiltersState =>
     useAppSelector<IFiltersState>(({ filters }: RootState) => filters, shallowEqual);
@@ -17,6 +17,9 @@ export const useRoomFiltersSelector = (): IChipsMap =>
 
 export const usePriceFiltersSelector = (): IChipsMap =>
     useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.PRICE], shallowEqual);
+
+export const usePostStatusFiltersSelector = (): IChipsMap =>
+    useAppSelector<IChipsMap>(({ filters }: RootState) => filters[USER_POSTS_FILTERS.STATUS], shallowEqual);
 
 export const useHouseTypeFiltersSelector = (): IChipsMap =>
     useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.HOUSE_TYPE], shallowEqual);
