@@ -17,7 +17,7 @@ const filtersSlice = createSlice({
     initialState: filtersInitialState,
     reducers: {
         changeInputFilterAction(state: IFiltersState, action: PayloadAction<string>) {
-            state[SEARCH_FILTERS.INPUT] = action.payload;
+            state[SEARCH_FILTERS.QUERY] = action.payload;
         },
         changeGeneralFilterAction(state: IFiltersState, action: PayloadAction<string[]>) {
             state[SEARCH_FILTERS.GENERAL] = generalFilters(action.payload);
@@ -39,7 +39,7 @@ const filtersSlice = createSlice({
             state[SEARCH_FILTERS.DISTRICT] = districtFilters(state[SEARCH_FILTERS.CITY], action.payload);
         },
         clearAllFilterAction(state: IFiltersState) {
-            state[SEARCH_FILTERS.INPUT] = '';
+            state[SEARCH_FILTERS.QUERY] = '';
             state[SEARCH_FILTERS.GENERAL] = generalFilters();
             state[SEARCH_FILTERS.ROOM] = roomFilters();
             state[SEARCH_FILTERS.PRICE] = priceFilters();

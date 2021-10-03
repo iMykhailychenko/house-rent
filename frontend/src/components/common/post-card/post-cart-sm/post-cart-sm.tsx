@@ -32,7 +32,7 @@ const PostCardSm = ({ post }: IProps): ReactElement => {
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
                         <h3>{post.title}</h3>
-                        <p>{cutString(post.description, 100)}</p>
+                        <p>{cutString(post.description, 80)}</p>
                     </a>
                 </Link>
 

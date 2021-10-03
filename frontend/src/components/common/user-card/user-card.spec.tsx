@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { IUser } from '../../../state/entities/profile/profile.interface';
+import { IUser } from '../../../interfaces';
 
 import UserCard from './user-card';
 

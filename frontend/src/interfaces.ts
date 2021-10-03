@@ -1,5 +1,17 @@
 import { AxiosResponse } from 'axios';
 
+export interface IUser {
+    id: number;
+    creationDate: string;
+    lastActivity: string;
+    avatar: string | null;
+    firstName: string;
+    lastName: string;
+    isEmailVerified: boolean;
+    email: string;
+    role: UserRole[] | null;
+}
+
 export interface IChips {
     name: string;
     active: boolean;
@@ -45,3 +57,7 @@ export type Pagination<T> = {
 };
 
 export type Response<T> = Promise<AxiosResponse<T>>;
+
+export interface Params {
+    [key: string]: unknown;
+}

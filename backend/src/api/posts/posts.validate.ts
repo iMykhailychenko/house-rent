@@ -1,6 +1,17 @@
-import { isEnum, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { ALL_STATUSES, KYIV_DISTRICT_FILTERS, LVIV_DISTRICT_FILTERS, POST_STATUS } from './posts.interface';
+import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import {
+    City,
+    DISTRICT_FILTERS,
+    GENERAL_FILTERS,
+    HOUSE_TYPE_FILTERS,
+    KYIV_DISTRICT_FILTERS,
+    LVIV_DISTRICT_FILTERS,
+    POST_STATUS,
+    PRICE_FILTERS,
+    ROOM_FILTERS,
+} from './posts.interface';
 import { Post } from './posts.entity';
+import { SearchPostDto } from './dto/search.dto';
 
 const enumMap = {
     kyiv: KYIV_DISTRICT_FILTERS,
@@ -20,12 +31,40 @@ export class DistrictValidator implements ValidatorConstraintInterface {
     }
 }
 
-export const validateStatus = (status: unknown): POST_STATUS[] => {
-    if (typeof status === 'string') {
-        const statusList = status.split(',');
-        const hasError = !statusList.every(item => isEnum(item, POST_STATUS));
-        return hasError ? ALL_STATUSES : (statusList as POST_STATUS[]);
+export const getSearchFilters = (query: { [key: string]: unknown }): SearchPostDto => {
+    const searchFilters = new SearchPostDto();
+
+    if (query.query) {
+        searchFilters.query = query.query as string;
     }
 
-    return ALL_STATUSES;
+    if (typeof query.status === 'string') {
+        searchFilters.status = query.status.split(',') as POST_STATUS[];
+    }
+
+    if (typeof query.general === 'string') {
+        searchFilters.general = query.general.split(',') as GENERAL_FILTERS[];
+    }
+
+    if (typeof query.room === 'string') {
+        searchFilters.room = query.room.split(',') as ROOM_FILTERS[];
+    }
+
+    if (typeof query.houseType === 'string') {
+        searchFilters.houseType = query.houseType.split(',') as HOUSE_TYPE_FILTERS[];
+    }
+
+    if (typeof query.price === 'string') {
+        searchFilters.price = query.price.split(',') as PRICE_FILTERS[];
+    }
+
+    if (typeof query.city === 'string') {
+        searchFilters.city = query.city as City;
+    }
+
+    if (typeof query.district === 'string') {
+        searchFilters.district = query.district.split(',') as DISTRICT_FILTERS[];
+    }
+
+    return searchFilters;
 };

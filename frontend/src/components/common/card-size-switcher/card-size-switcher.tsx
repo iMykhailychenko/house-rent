@@ -28,7 +28,6 @@ const CardSizeSwitcher = (): ReactElement => {
             >
                 <ViewHeadline />
             </button>
-            <span className={css.separator} />
             <button
                 className={clsx(css.button, config.cardSize === 'sm' && css.active)}
                 onClick={handleSmallCard}

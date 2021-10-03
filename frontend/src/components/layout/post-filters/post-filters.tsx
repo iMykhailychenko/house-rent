@@ -2,9 +2,9 @@ import React, { ReactElement, useState } from 'react';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
-import { useAppDispatch } from '../../../../hooks/redux.hook';
-import useTrans from '../../../../hooks/trans.hook';
-import { SEARCH_FILTERS } from '../../../../state/entities/filters/filters.interface';
+import { useAppDispatch } from '../../../hooks/redux.hook';
+import useTrans from '../../../hooks/trans.hook';
+import { SEARCH_FILTERS } from '../../../state/entities/filters/filters.interface';
 import {
     changeDistrictFilterAction,
     changeGeneralFilterAction,
@@ -13,17 +13,21 @@ import {
     changePriceFilterAction,
     changeRoomFilterAction,
     clearAllFilterAction,
-} from '../../../../state/entities/filters/filters.reducer';
-import { useAllFiltersSelector } from '../../../../state/entities/filters/filters.selector';
-import Button from '../../../common/button/button';
-import CardSizeSwitcher from '../../../common/card-size-switcher/card-size-switcher';
-import Chips from '../../../common/chips/chips';
-import CitySelect from '../../../common/city-select/city-select';
-import SearchInput from '../../../common/search-input/search-input';
+} from '../../../state/entities/filters/filters.reducer';
+import { useAllFiltersSelector } from '../../../state/entities/filters/filters.selector';
+import Button from '../../common/button/button';
+import CardSizeSwitcher from '../../common/card-size-switcher/card-size-switcher';
+import Chips from '../../common/chips/chips';
+import CitySelect from '../../common/city-select/city-select';
+import SearchInput from '../../common/search-input/search-input';
 
-import css from './home-post-filters.module.scss';
+import css from './post-filters.module.scss';
 
-const HomePostFilters = (): ReactElement => {
+interface IProps {
+    onSubmit: () => void;
+}
+
+const PostFilters = ({ onSubmit }: IProps): ReactElement => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
     const filters = useAllFiltersSelector();
@@ -50,6 +54,10 @@ const HomePostFilters = (): ReactElement => {
     };
     const handleClearAll = (): void => {
         dispatch(clearAllFilterAction());
+        onSubmit();
+    };
+    const submit = (): void => {
+        onSubmit();
     };
 
     return (
@@ -59,9 +67,10 @@ const HomePostFilters = (): ReactElement => {
             <div className={css.root}>
                 <h4 className={css.title}>{trans('Шукати оголошення')}</h4>
                 <SearchInput
-                    value={filters[SEARCH_FILTERS.INPUT]}
-                    onChange={handleChangeInput}
+                    value={filters[SEARCH_FILTERS.QUERY]}
                     placeholder="Введіть пошуковий запит"
+                    onChange={handleChangeInput}
+                    onSubmit={submit}
                 />
 
                 <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
@@ -95,11 +104,13 @@ const HomePostFilters = (): ReactElement => {
                     <Button onClick={handleClearAll} secondary>
                         {trans('Очистити')}
                     </Button>
-                    <Button primary>{trans('Пошук')}</Button>
+                    <Button onClick={submit} primary>
+                        {trans('Пошук')}
+                    </Button>
                 </div>
             </div>
         </>
     );
 };
 
-export default HomePostFilters;
+export default PostFilters;

@@ -1,6 +1,6 @@
+import { IUser } from '../../../interfaces';
 import { ThunkStatuses } from '../../interfaces';
 import { City } from '../filters/filters.interface';
-import { IUser } from '../profile/profile.interface';
 
 export enum POST_STATUS {
     IDLE = 'idle',
@@ -57,15 +57,9 @@ export interface IEditPostPayload {
     body: Partial<IPost>;
 }
 
-export interface UserPostsListParams {
-    limit?: number;
-    page?: number;
-    status?: POST_STATUS[];
-}
-
 export interface IUserPostsListPayload {
     userId: number;
-    params: UserPostsListParams;
+    page: number;
 }
 
 export enum FORM_TYPE {

@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { IUser } from '../../../interfaces';
+
 import { profileInitialState } from './profile.initial-state';
-import { IProfileInfoState, IUser } from './profile.interface';
+import { IProfileInfoState } from './profile.interface';
 import { profileInfoThunk } from './profile.thunk';
 
 const profileSlice = createSlice({

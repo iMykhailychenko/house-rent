@@ -10,7 +10,7 @@ import {
 import { IFiltersState, SEARCH_FILTERS, USER_POSTS_FILTERS } from './filters.interface';
 
 const filtersInitialState: IFiltersState = {
-    [SEARCH_FILTERS.INPUT]: '',
+    [SEARCH_FILTERS.QUERY]: '',
     [SEARCH_FILTERS.GENERAL]: generalFilters(),
     [SEARCH_FILTERS.PRICE]: priceFilters(),
     [SEARCH_FILTERS.HOUSE_TYPE]: houseTypeFilters(),

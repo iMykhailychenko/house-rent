@@ -8,7 +8,8 @@ import { User, UserRole } from '../users/users.entity';
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorCatch from '../../utils/errorCatch';
 import { Favorite } from '../favorite/favorite.entity';
-import { validateStatus } from './posts.validate';
+import { getSearchFilters } from './posts.validate';
+import { POST_STATUS } from './posts.interface';
 
 const isPostInFavorite = async (post: Post, user: User): Promise<boolean> => {
     if (!user) return false;
@@ -20,17 +21,32 @@ const isPostInFavorite = async (post: Post, user: User): Promise<boolean> => {
 export const postsListController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
     const limit = +req.query.limit || 20;
+    const searchFilters = getSearchFilters(req.query);
+    const { query, general, room, houseType, price, city, district } = searchFilters;
 
     const repository = database.connection.getRepository(Post);
-    const total = await repository.count();
-    const result = await repository
+    const sqlQuery = repository
         .createQueryBuilder('post')
-        .orderBy('post.creationDate', 'DESC')
-        .offset(limit * (page - 1))
-        .limit(limit)
         .leftJoinAndSelect('post.user', 'user')
         .loadRelationCountAndMap('post.favorite', 'post.favorite')
         .loadRelationCountAndMap('post.chats', 'post.chats')
+        .where('post.status = :status', { status: POST_STATUS.IDLE })
+        .andWhere('((:general)::text[] IS NULL OR (post.generalFilters)::text[] @> (:general)::text[])', { general })
+        .andWhere('((:room)::text[] IS NULL OR (post.roomFilters)::text[] @> (:room)::text[])', { room })
+        .andWhere('((:houseType)::text[] IS NULL OR (post.houseTypeFilters)::text[] @> (:houseType)::text[])', { houseType })
+        .andWhere('((:city)::varchar IS NULL OR post.cityFilters = :city)', { city })
+        .andWhere('((:district)::text[] IS NULL OR (post.districtFilters)::text[] @> (:district)::text[])', { district })
+        .andWhere('((:price)::text[] IS NULL OR (post.priceFilters)::text[] @> (:price)::text[])', { price })
+        .andWhere(
+            '(((:query)::varchar IS NULL OR LOWER(post.title) like LOWER(:query)) OR ((:query)::varchar IS NULL OR LOWER(post.description) like LOWER(:query)))',
+            { query: query ? `%${query}%` : null },
+        )
+        .orderBy('post.creationDate', 'DESC');
+
+    const total = await sqlQuery.getCount();
+    const result = await sqlQuery
+        .offset(limit * (page - 1))
+        .limit(limit)
         .getMany()
         .catch(errorCatch(404));
 
@@ -49,21 +65,33 @@ export const postsListController = errorWrapper(async (req: Request & { user: Us
 export const postsListForUserController = errorWrapper(async (req: Request & { user: User }, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
     const limit = +req.query.limit || 20;
-    const status = validateStatus(req.query.status);
+    const userId = +req.params.userId;
+    const searchFilters = getSearchFilters(req.query);
+    const { query, general, room, houseType, price, city, district } = searchFilters;
 
     const repository = database.connection.getRepository(Post);
-
-    const total = await repository.count();
-    const result = await repository
+    const sqlQuery = repository
         .createQueryBuilder('post')
-        .orderBy('post.creationDate', 'DESC')
-        .offset(limit * (page - 1))
-        .limit(limit)
-        .where('post.user.id = :id', { id: +req.params.userId })
-        .andWhere('post.status IN (:...status)', { status })
         .leftJoinAndSelect('post.user', 'user')
         .loadRelationCountAndMap('post.favorite', 'post.favorite')
         .loadRelationCountAndMap('post.chats', 'post.chats')
+        .where('post.user.id = :userId', { userId })
+        .andWhere('((:general)::text[] IS NULL OR (post.generalFilters)::text[] @> (:general)::text[])', { general })
+        .andWhere('((:room)::text[] IS NULL OR (post.roomFilters)::text[] @> (:room)::text[])', { room })
+        .andWhere('((:houseType)::text[] IS NULL OR (post.houseTypeFilters)::text[] @> (:houseType)::text[])', { houseType })
+        .andWhere('((:city)::varchar IS NULL OR post.cityFilters = :city)', { city })
+        .andWhere('((:district)::text[] IS NULL OR (post.districtFilters)::text[] @> (:district)::text[])', { district })
+        .andWhere('((:price)::text[] IS NULL OR (post.priceFilters)::text[] @> (:price)::text[])', { price })
+        .andWhere(
+            '(((:query)::varchar IS NULL OR LOWER(post.title) like LOWER(:query)) OR ((:query)::varchar IS NULL OR LOWER(post.description) like LOWER(:query)))',
+            { query: query ? `%${query}%` : null },
+        )
+        .orderBy('post.creationDate', 'DESC');
+
+    const total = await sqlQuery.getCount();
+    const result = await sqlQuery
+        .offset(limit * (page - 1))
+        .limit(limit)
         .getMany()
         .catch(errorCatch(404));
 

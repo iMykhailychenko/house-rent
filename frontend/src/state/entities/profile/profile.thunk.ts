@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { IUser } from './profile.interface';
+import { IUser } from '../../../interfaces';
+
 import profileServices from './profile.services';
 
 export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async () => {

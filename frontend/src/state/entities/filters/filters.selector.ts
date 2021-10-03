@@ -29,3 +29,6 @@ export const useCityFiltersSelector = (): City =>
 
 export const useDistrictFiltersSelector = (): IChipsMap =>
     useAppSelector<IChipsMap>(({ filters }: RootState) => filters[SEARCH_FILTERS.DISTRICT], shallowEqual);
+
+export const useSearchFiltersSelector = (): string =>
+    useAppSelector<string>(({ filters }: RootState) => filters[SEARCH_FILTERS.QUERY], shallowEqual);

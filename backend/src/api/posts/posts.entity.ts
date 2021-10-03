@@ -63,36 +63,36 @@ export class Post {
     @IsOptional()
     image: string;
 
-    @Column({ type: 'simple-array', default: null, nullable: true })
+    @Column('text', { array: true, nullable: true })
     @IsArray()
     @IsEnum(GENERAL_FILTERS, { each: true })
     @IsOptional()
     generalFilters: GENERAL_FILTERS[];
 
-    @Column({ type: 'simple-array', default: null, nullable: true })
+    @Column('text', { array: true, nullable: true })
     @IsArray()
     @IsEnum(ROOM_FILTERS, { each: true })
     @IsOptional()
     roomFilters: ROOM_FILTERS[];
 
-    @Column({ type: 'simple-array', default: null, nullable: true })
+    @Column('text', { array: true, nullable: true })
     @IsArray()
     @IsEnum(HOUSE_TYPE_FILTERS, { each: true })
     @IsOptional()
     houseTypeFilters: HOUSE_TYPE_FILTERS[];
 
-    @Column({ type: 'simple-array', default: null, nullable: true })
+    @Column('text', { array: true, nullable: true })
     @IsArray()
     @IsEnum(PRICE_FILTERS, { each: true })
     @IsOptional()
     priceFilters: PRICE_FILTERS[];
 
-    @Column({ type: 'varchar', default: null, nullable: true })
+    @Column({ type: 'varchar', nullable: true })
     @IsString()
     @IsOptional()
     cityFilters: City;
 
-    @Column({ type: 'simple-array', default: null, nullable: true })
+    @Column('text', { array: true, nullable: true })
     @IsArray()
     @Validate(DistrictValidator)
     @IsOptional()

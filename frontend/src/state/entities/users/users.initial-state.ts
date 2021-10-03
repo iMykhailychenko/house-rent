@@ -1,8 +1,8 @@
 import { IUser, UserRole } from '../../../interfaces';
 
-import { IProfileInfoState } from './profile.interface';
+import { IUserState } from './users.interface';
 
-export const userInitValue: IUser = {
+export const usersInitValue: IUser = {
     id: 0,
     creationDate: '01-01-2021',
     lastActivity: '01-01-2021',
@@ -14,7 +14,7 @@ export const userInitValue: IUser = {
     role: [UserRole.USER],
 };
 
-export const profileInitialState: IProfileInfoState = {
+export const usersInitialState: IUserState = {
     status: 'idle',
-    data: userInitValue,
+    data: usersInitValue,
 };

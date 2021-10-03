@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement } from 'react';
+import React, { ChangeEvent, KeyboardEvent, ReactElement } from 'react';
 
 import { Close, Search } from '@material-ui/icons';
 import clsx from 'clsx';
@@ -49,6 +49,12 @@ const SearchInput = ({
         onSubmit(value);
     };
 
+    const keypress = (event: KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === 'Enter') {
+            submit();
+        }
+    };
+
     return (
         <div className={clsx(css.root, className, { [css.error]: error, [css.disabled]: disabled || loading || !onChange })}>
             <input
@@ -58,6 +64,7 @@ const SearchInput = ({
                 autoComplete="on"
                 onFocus={onFocus}
                 onChange={handleChange}
+                onKeyPress={keypress}
                 className={css.input}
                 placeholder={trans(placeholder)}
             />

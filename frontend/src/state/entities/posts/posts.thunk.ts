@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
+import { searchFiltersToArray } from '../../../utils/helpers/filters.util';
+import { AsyncThunkConfig } from '../../interfaces';
 
 import { IEditPostPayload, INewPostPayload, IPost, IUserPostsListPayload } from './posts.interface';
 import postsServices from './posts.services';
@@ -23,26 +25,35 @@ export const singlePostThunk = createAsyncThunk<IPost, number>('POSTS/SINGLE', a
     return data;
 });
 
-export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefined>('POSTS/LIST', async (payload = 1) => {
-    const { data, status } = await postsServices.postsList(payload);
-    if (status < 200 || status >= 300) throw new Error();
-    return data;
-});
-
-export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, number | undefined>(
-    'POSTS/LIST_PAGINATION',
-    async (payload = 1) => {
-        const { data, status } = await postsServices.postsList(payload);
+export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefined, AsyncThunkConfig>(
+    'POSTS/LIST',
+    async (payload = 1, { getState }) => {
+        const state = getState();
+        const { data, status } = await postsServices.postsList(payload, searchFiltersToArray(state.filters));
         if (status < 200 || status >= 300) throw new Error();
         return data;
     },
 );
 
-export const getUserPostsList = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload>('POSTS/USER_POSTS', async payload => {
-    const { data, status } = await postsServices.getUserPostsList(payload);
-    if (status < 200 || status >= 300) throw new Error();
-    return data;
-});
+export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, number | undefined, AsyncThunkConfig>(
+    'POSTS/LIST_PAGINATION',
+    async (payload = 1, { getState }) => {
+        const state = getState();
+        const { data, status } = await postsServices.postsList(payload, searchFiltersToArray(state.filters));
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    },
+);
+
+export const getUserPostsList = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload, AsyncThunkConfig>(
+    'POSTS/USER_POSTS',
+    async (payload, { getState }) => {
+        const state = getState();
+        const { data, status } = await postsServices.getUserPostsList(payload, searchFiltersToArray(state.filters));
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    },
+);
 
 export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {
     const { status } = await postsServices.toggleFavorite(payload);

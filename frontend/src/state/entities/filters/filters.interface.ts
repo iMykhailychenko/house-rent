@@ -3,7 +3,7 @@ import { IChipsMap } from '../../../interfaces';
 export type City = 'kyiv' | 'lviv';
 
 export enum SEARCH_FILTERS {
-    INPUT = 'input',
+    QUERY = 'query',
     GENERAL = 'general',
     ROOM = 'room',
     HOUSE_TYPE = 'house_type',
@@ -17,7 +17,7 @@ export enum USER_POSTS_FILTERS {
 }
 
 export type IFiltersState = {
-    [SEARCH_FILTERS.INPUT]: string;
+    [SEARCH_FILTERS.QUERY]: string;
     [SEARCH_FILTERS.GENERAL]: IChipsMap;
     [SEARCH_FILTERS.PRICE]: IChipsMap;
     [SEARCH_FILTERS.HOUSE_TYPE]: IChipsMap;
