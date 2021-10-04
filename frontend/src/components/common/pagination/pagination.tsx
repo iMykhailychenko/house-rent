@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 
-import useTrans from '../../../../../../hooks/trans.hook';
-import { paginationEmitter } from '../../../../../../utils/helpers/pagination.helper';
-import Button from '../../../../../common/button/button';
+import useTrans from '../../../hooks/trans.hook';
+import { paginationEmitter } from '../../../utils/helpers/pagination.helper';
+import Button from '../button/button';
 
 import css from './pagination.module.scss';
 

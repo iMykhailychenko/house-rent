@@ -5,9 +5,10 @@ import useConfig from '../../../hooks/config.hook';
 import useTrans from '../../../hooks/trans.hook';
 import { IPostListState } from '../../../state/entities/posts/posts.interface';
 import { usePostListSelector } from '../../../state/entities/posts/posts.selector';
+import EmptyPostsList from '../../common/nothing-to-show/emprty-posts-list/emprty-posts-list';
+import Pagination from '../../common/pagination/pagination';
 import PostCard from '../../common/post-card/post-card';
 import PostsSkeleton from '../../common/skeletons/posts-sleleton/posts-skeleton';
-import Pagination from '../../pages/posts/new/new-post-form/pagination/pagination';
 import Container from '../container/container';
 
 import css from './posts-list.module.scss';
@@ -54,7 +55,7 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
                             ) : posts.data.length ? (
                                 posts.data.map(item => <PostCard key={item.id} post={item} />)
                             ) : (
-                                <p>Nothing to show</p>
+                                <EmptyPostsList />
                             )}
                             {loadingMore && <PostsSkeleton amount={uiConfig.postsPerPage / 2} />}
                         </div>
@@ -65,11 +66,7 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
                             onMore={loadMore}
                         />
                     </div>
-                    <aside className={css.aside}>
-                        <div className={css.sticky}>
-                            <div className={css.scrollBox}>{children}</div>
-                        </div>
-                    </aside>
+                    <aside className={css.aside}>{children}</aside>
                 </div>
             </div>
         </Container>

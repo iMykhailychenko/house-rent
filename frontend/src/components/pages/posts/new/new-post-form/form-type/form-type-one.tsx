@@ -8,7 +8,6 @@ import { FORM_TYPE, IStepOne } from '../../../../../../state/entities/posts/post
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import Button from '../../../../../common/button/button';
 import ImageWrp from '../../../../../common/image-wrp/image-wrp';
-import Input from '../../../../../common/input/input';
 import Select from '../../../../../common/select/select';
 import Textarea from '../../../../../common/textarea/textarea';
 import FormSeparator from '../form-separator/form-separator';
@@ -51,34 +50,6 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
             <FormSeparator>
                 Загальна інформація про вас. Власникам квартир важливо розуміти кому вони здаватимуть житло
             </FormSeparator>
-            <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
-                <Input
-                    id="new_post_title"
-                    className={css.input}
-                    rootClassName={css.inputWrp}
-                    value={formik.values.title}
-                    onChange={formik.handleChange}
-                    error={formik.touched.title && formik.errors.title}
-                    placeholder="title"
-                    name="title"
-                />
-            </FormSegment>
-            <FormSegment
-                label="description"
-                id="new_post_description"
-                error={formik.touched.description && formik.errors.description}
-            >
-                <Textarea
-                    id="new_post_description"
-                    className={css.input}
-                    rootClassName={css.inputWrp}
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    error={formik.touched.description && formik.errors.description}
-                    placeholder="description"
-                    name="description"
-                />
-            </FormSegment>
             <FormSegment
                 label="residentsAmount"
                 id="residents_amount"

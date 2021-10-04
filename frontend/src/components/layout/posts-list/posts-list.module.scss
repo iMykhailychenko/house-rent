@@ -26,24 +26,12 @@
 }
 
 .lg {
+    margin-top: 3rem;
     width: calc(100% - var(--filters-sidebar-width));
 }
 
 .aside {
-    position: relative;
     width: var(--filters-sidebar-width);
+    padding-top: 8rem;
     padding-left: 8rem;
-}
-
-.sticky {
-    position: sticky;
-    top: 0;
-    left: 0;
-    max-height: var(--100vh, 100vh);
-    overflow: auto;
-}
-
-.scrollBox {
-    padding: 5rem 0.5rem 0;
-    height: max-content;
 }

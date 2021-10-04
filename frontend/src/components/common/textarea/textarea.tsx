@@ -11,6 +11,7 @@ import css from './textarea.module.scss';
 
 interface IProps {
     value: string | number;
+    defaultValue?: string | number;
     onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
     onBlur?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
     onFocus?: (event: FocusEvent<HTMLTextAreaElement>) => void;
@@ -29,6 +30,7 @@ interface IProps {
 
 const Textarea = ({
     value,
+    defaultValue,
     onChange,
     onBlur,
     onFocus,
@@ -63,6 +65,7 @@ const Textarea = ({
                     <TextareaAutosize
                         id={id}
                         value={value}
+                        defaultValue={defaultValue}
                         onChange={onChange}
                         onBlur={onBlur}
                         onFocus={onFocus}

@@ -1,10 +1,15 @@
 import React, { ReactElement } from 'react';
 
+import css from './emprty-posts-list.module.scss';
+
 const EmptyPostsList = (): ReactElement => {
     return (
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis
-            odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
+        <div className={css.root}>
+            <img className={css.img} src="/icons/form.png" alt="" />
+            <p className={css.text}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis
+                odit, pariatur reiciendis rem sit, unde velit? Earum labore magnam quas quos voluptas!
+            </p>
         </div>
     );
 };

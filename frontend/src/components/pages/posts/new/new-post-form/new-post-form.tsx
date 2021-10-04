@@ -1,16 +1,16 @@
 import React, { ReactElement, useState } from 'react';
 
-import { FORM_TYPE, IStepOne, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
+import { FORM_TYPE, IStepOne, IStepThree, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
 
 import FormTypeDone from './form-type/form-type-done';
+import FormTypeFour from './form-type/form-type-four';
 import FormTypeOne from './form-type/form-type-one';
-import FormTypeTree from './form-type/form-type-three';
+import FormTypeThree from './form-type/form-type-three';
 import FormTypeTwo from './form-type/form-type-two';
+import { descriptionTemplates, titleTemplates } from './new-post-form.utils';
 
 const formOneInitialState: IStepOne = {
-    title: '',
-    description: '',
     residentsAmount: '',
     children: '',
     pets: '',
@@ -24,16 +24,28 @@ const formTwoInitialState: IStepTwo = {
     districtFilters: [],
 };
 
+const formThreeInitialState: IStepThree = {
+    title: '',
+    description: '',
+};
+
 const NewPostForm = (): ReactElement => {
     const newPostState = useNewPostSelector();
 
     const [formOneState, setFormOneState] = useState<IStepOne>(formOneInitialState);
     const [formTwoState, setFormTwoState] = useState<IStepTwo>(formTwoInitialState);
+    const [formThreeState, setFormThreeState] = useState<IStepThree>(formThreeInitialState);
+
+    const submitSecondForm = (value: IStepTwo): void => {
+        setFormTwoState(value);
+        setFormThreeState({ title: titleTemplates[0], description: descriptionTemplates[0] });
+    };
 
     const formTypeMap = {
         [FORM_TYPE.ONE]: <FormTypeOne initialValues={formOneState} onSubmit={setFormOneState} />,
-        [FORM_TYPE.TWO]: <FormTypeTwo initialValues={formTwoState} onSubmit={setFormTwoState} />,
-        [FORM_TYPE.THREE]: <FormTypeTree value={{ ...formOneState, ...formTwoState }} />,
+        [FORM_TYPE.TWO]: <FormTypeTwo initialValues={formTwoState} onSubmit={submitSecondForm} />,
+        [FORM_TYPE.THREE]: <FormTypeThree initialValues={formThreeState} onSubmit={setFormThreeState} />,
+        [FORM_TYPE.FOUR]: <FormTypeFour value={{ ...formOneState, ...formTwoState, ...formThreeState }} />,
         [FORM_TYPE.DONE]: <FormTypeDone />,
     };
 

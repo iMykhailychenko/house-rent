@@ -11,6 +11,7 @@ import css from './input.module.scss';
 
 interface IProps {
     value: string | number;
+    defaultValue?: string | number;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
@@ -30,6 +31,7 @@ interface IProps {
 
 const Input = ({
     value,
+    defaultValue,
     onChange,
     onBlur,
     onFocus,
@@ -71,6 +73,7 @@ const Input = ({
                         id={id}
                         value={value}
                         onChange={onChange}
+                        defaultValue={defaultValue}
                         onBlur={onBlur}
                         onFocus={onFocus}
                         onKeyDown={onKeyDown}

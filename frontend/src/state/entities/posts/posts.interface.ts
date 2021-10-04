@@ -35,8 +35,6 @@ export interface IPost {
 }
 
 export interface IStepOne {
-    title: string;
-    description: string;
     residentsAmount: number | string;
     children: string;
     pets: string;
@@ -50,7 +48,12 @@ export interface IStepTwo {
     districtFilters: string[];
 }
 
-export type INewPostPayload = IStepOne & IStepTwo & { image?: string | null };
+export interface IStepThree {
+    title: string;
+    description: string;
+}
+
+export type INewPostPayload = IStepOne & IStepTwo & IStepThree & { image?: string | null };
 
 export interface IEditPostPayload {
     id: number;
@@ -66,6 +69,7 @@ export enum FORM_TYPE {
     ONE = 'one',
     TWO = 'two',
     THREE = 'three',
+    FOUR = 'four',
     DONE = 'done',
 }
 

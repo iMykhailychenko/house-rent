@@ -1,126 +1,98 @@
-import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement } from 'react';
 
-import { ArrowBack, DeleteOutline } from '@material-ui/icons';
-import clsx from 'clsx';
+import { ArrowBack } from '@material-ui/icons';
+import { useFormik } from 'formik';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
-import { mediaThunk, resetUploads } from '../../../../../../state/entities/media/media.reducer';
-import { useUploadMediaSelector } from '../../../../../../state/entities/media/media.selector';
-import { FORM_TYPE, INewPostPayload } from '../../../../../../state/entities/posts/posts.interface';
+import { FORM_TYPE, IStepThree } from '../../../../../../state/entities/posts/posts.interface';
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
-import { useNewPostSelector } from '../../../../../../state/entities/posts/posts.selector';
-import { newPostThunk } from '../../../../../../state/entities/posts/posts.thunk';
 import Button from '../../../../../common/button/button';
-import Progress from '../../../../../common/progress/progress';
+import ImageWrp from '../../../../../common/image-wrp/image-wrp';
+import Input from '../../../../../common/input/input';
+import Textarea from '../../../../../common/textarea/textarea';
+import FormSeparator from '../form-separator/form-separator';
+import FormSegment from '../from-segment/from-segment';
 import css from '../new-post-form.module.scss';
+import { FormThreeSchema } from '../new-post-form.validation';
 
 interface IProps {
-    value: INewPostPayload;
+    initialValues: IStepThree;
+    onSubmit: (value: IStepThree) => void;
 }
 
-const FormTypeTree = ({ value }: IProps): ReactElement => {
-    const ref = useRef<HTMLInputElement>(null);
-    const [file, setFile] = useState<File | null>(null);
-
+const FormTypeThree = ({ initialValues, onSubmit }: IProps): ReactElement => {
     const dispatch = useAppDispatch();
-    const newPostState = useNewPostSelector();
-    const uploadState = useUploadMediaSelector();
-    const loading = newPostState.status === 'loading' || uploadState.status === 'loading';
 
-    const click = (): void => {
-        if (ref.current) {
-            ref.current.form?.reset();
-            ref.current.click();
-        }
-    };
-
-    const change = (event: ChangeEvent<HTMLInputElement>): void => {
-        if (event.target.files?.[0]) {
-            setFile(event.target.files?.[0]);
-        }
-    };
-
-    const deleteFile = (): void => setFile(null);
+    const formik = useFormik<IStepThree>({
+        initialValues,
+        validationSchema: FormThreeSchema,
+        onSubmit: values => {
+            onSubmit(values);
+            dispatch(updateFormType(FORM_TYPE.FOUR));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+    });
 
     const goBack = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        onSubmit(formik.values);
         dispatch(updateFormType(FORM_TYPE.TWO));
     };
-
-    const uploadWithoutPhoto = async (): Promise<void> => {
-        try {
-            const data = await dispatch(newPostThunk(value)).unwrap();
-            if (!data?.id) throw new Error();
-            dispatch(updateFormType(FORM_TYPE.DONE));
-        } catch (error) {
-            console.log(error?.response || error);
-        }
+    const resetForm = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        formik.resetForm();
     };
-
-    const uploadWithPhoto = async (): Promise<void> => {
-        if (file) {
-            try {
-                const image = await dispatch(mediaThunk(file)).unwrap();
-                await dispatch(newPostThunk({ ...value, image: image.url }));
-                dispatch(updateFormType(FORM_TYPE.DONE));
-            } catch (error) {
-                console.log(error?.response || error);
-            }
-        }
-    };
-
-    useEffect(() => {
-        dispatch(resetUploads());
-    }, [dispatch]);
+    const submitForm = () => formik.submitForm();
 
     return (
-        <div className={css.upload}>
-            <h3 className={css.title}>Libero magnam nesciunt nihil perspiciatis porro.</h3>
-            <form className={css.inner} action="#" method="post">
-                <p className={css.text}>{file ? 'Click to change photo' : 'Click to upload photo'}</p>
-                <div className={clsx(css.img, file && css.imgUploaded)} onClick={click} aria-hidden="true">
-                    {file ? (
-                        <img src={window.URL.createObjectURL(file)} alt="" aria-hidden="true" />
-                    ) : (
-                        <img src="/icons/upload.png" alt="" draggable="false" />
-                    )}
-                </div>
+        <form action="#" method="post" className={css.form}>
+            <ImageWrp name="life" />
+            <FormSeparator>
+                Загальна інформація про вас. Власникам квартир важливо розуміти кому вони здаватимуть житло
+            </FormSeparator>
+            <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
+                <Input
+                    id="new_post_title"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    error={formik.touched.title && formik.errors.title}
+                    placeholder="title"
+                    name="title"
+                />
+            </FormSegment>
+            <FormSegment
+                label="description"
+                id="new_post_description"
+                error={formik.touched.description && formik.errors.description}
+            >
+                <Textarea
+                    id="new_post_description"
+                    className={css.input}
+                    rootClassName={css.inputWrp}
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    error={formik.touched.description && formik.errors.description}
+                    placeholder="description"
+                    name="description"
+                />
+            </FormSegment>
 
-                <input ref={ref} onChange={change} className={css.input} type="file" accept=".jpg, .jpeg, .png" />
-
-                {uploadState.status === 'loading' || uploadState.status === 'success' ? (
-                    <div className={css.progress}>
-                        <Progress number={uploadState.progress} />
-                    </div>
-                ) : (
-                    file && (
-                        <div className={css.flex}>
-                            <Button className={css.arrow} onClick={goBack} secondary>
-                                <ArrowBack />
-                            </Button>
-                            <Button className={css.btn} onClick={deleteFile} secondary>
-                                <DeleteOutline />
-                            </Button>
-                        </div>
-                    )
-                )}
-
-                <div className={css.flex}>
-                    {!file && (
-                        <Button className={css.arrow} onClick={goBack} secondary loading={loading}>
-                            <ArrowBack />
-                        </Button>
-                    )}
-                    <Button type="button" secondary onClick={uploadWithoutPhoto} loading={loading}>
-                        Продовжити без фото
-                    </Button>
-                    <Button primary disabled={!file} onClick={uploadWithPhoto} loading={loading}>
-                        Далі
-                    </Button>
-                </div>
-            </form>
-        </div>
+            <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
+            <div className={css.flex}>
+                <Button className={css.arrow} onClick={goBack} secondary>
+                    <ArrowBack />
+                </Button>
+                <Button onClick={resetForm} secondary>
+                    Очистичи
+                </Button>
+                <Button onClick={submitForm} primary>
+                    Далі
+                </Button>
+            </div>
+        </form>
     );
 };
 
-export default FormTypeTree;
+export default FormTypeThree;
