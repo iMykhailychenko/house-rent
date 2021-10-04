@@ -2,11 +2,9 @@ import React, { ReactElement, useRef, useState } from 'react';
 
 import uiConfig from '../../../config/ui.config';
 import useConfig from '../../../hooks/config.hook';
-import { useAppDispatch } from '../../../hooks/redux.hook';
 import useTrans from '../../../hooks/trans.hook';
 import { IPostListState } from '../../../state/entities/posts/posts.interface';
 import { usePostListSelector } from '../../../state/entities/posts/posts.selector';
-import { postListPaginationThunk, postListThunk } from '../../../state/entities/posts/posts.thunk';
 import PostCard from '../../common/post-card/post-card';
 import PostsSkeleton from '../../common/skeletons/posts-sleleton/posts-skeleton';
 import Pagination from '../../pages/posts/new/new-post-form/pagination/pagination';
@@ -18,13 +16,14 @@ interface IProps {
     title?: string;
     posts: IPostListState;
     children: ReactElement;
+    onPage: (page: number) => Promise<void>;
+    onMore: (page: number) => Promise<void>;
 }
 
-const PostsList = ({ title, posts, children }: IProps): ReactElement => {
+const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactElement => {
     const trans = useTrans();
     const [config] = useConfig();
     const postsState = usePostListSelector();
-    const dispatch = useAppDispatch();
     const loading = postsState.status === 'loading';
     const ref = useRef<HTMLDivElement>(null);
 
@@ -33,15 +32,13 @@ const PostsList = ({ title, posts, children }: IProps): ReactElement => {
     const openPage = (page: number): void => {
         const top = ref.current?.offsetTop || 0;
         window.scrollTo({ top: top - 150, behavior: 'smooth' });
-        dispatch(postListThunk(page));
+        onPage(page).catch(console.log);
     };
     const loadMore = (page: number): void => {
         const top = (ref.current?.offsetTop || 0) + (ref.current?.offsetHeight || 0) - 300;
         window.scrollTo({ top, behavior: 'smooth' });
         setLoadingMore(true);
-        dispatch(postListPaginationThunk(page))
-            .unwrap()
-            .finally(() => setLoadingMore(false));
+        onMore(page).finally(() => setLoadingMore(false));
     };
 
     return (
@@ -54,8 +51,10 @@ const PostsList = ({ title, posts, children }: IProps): ReactElement => {
                         <div ref={ref} className={css.inner}>
                             {loading ? (
                                 <PostsSkeleton amount={uiConfig.postsPerPage} />
-                            ) : (
+                            ) : posts.data.length ? (
                                 posts.data.map(item => <PostCard key={item.id} post={item} />)
+                            ) : (
+                                <p>Nothing to show</p>
                             )}
                             {loadingMore && <PostsSkeleton amount={uiConfig.postsPerPage / 2} />}
                         </div>

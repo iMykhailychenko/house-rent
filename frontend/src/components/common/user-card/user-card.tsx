@@ -22,7 +22,7 @@ const UserCard = ({ user, className, date }: IProps): ReactElement => {
                 <UserAvatar src={user.avatar} firstName={user.firstName} lastName={user.lastName} />
                 <div className={css.info}>
                     <h4>{`${user.firstName} ${user.lastName}`}</h4>
-                    {date && <p>{formatDate(date)}</p>}
+                    <p>{formatDate(date)}</p>
                 </div>
             </a>
         </Link>

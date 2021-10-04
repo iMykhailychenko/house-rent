@@ -5,8 +5,8 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 
-import useShallowRouter from '../../../../../../hooks/shallow-router.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
+import { paginationEmitter } from '../../../../../../utils/helpers/pagination.helper';
 import Button from '../../../../../common/button/button';
 
 import css from './pagination.module.scss';
@@ -22,27 +22,27 @@ interface IProps {
 const Pagination = ({ className, loading, total, onPage, onMore }: IProps): ReactElement => {
     const trans = useTrans();
     const history = useRouter();
-    const shallow = useShallowRouter();
     const init = +(history.query?.page || 1);
     const [page, setPage] = useState<number>(init < total ? init : total);
+
+    useEffect(() => {
+        paginationEmitter.onPaginate(setPage);
+    }, []);
 
     useEffect(() => {
         setPage(+String(history.query?.page || 1));
     }, [history.query]);
 
-    const pushRouter = (page: number) => {
-        setPage(page);
-        shallow({ ...history.query, page });
-    };
-
     const handlePagination = ({ selected }: { selected: number }): void => {
-        pushRouter(selected + 1);
-        onPage(selected + 1);
+        const value = selected + 1;
+        setPage(value);
+        onPage(value);
     };
 
     const handleMore = (): void => {
-        pushRouter(page < total ? page + 1 : total);
-        onMore(page < total ? page + 1 : total);
+        const value = page < total ? page + 1 : total;
+        setPage(value);
+        onMore(value);
     };
 
     return (

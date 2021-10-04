@@ -29,7 +29,7 @@ const month: string[] = [
     'Грудень',
 ];
 
-export const formatDate = (value: string | Date | number): string => {
+export const formatDate = (value: string | Date | number = new Date()): string => {
     const date = validateDate(value);
     return `${addZero(date.getHours())}:${addZero(date.getMinutes())} ${month[date.getMonth()]} ${addZero(
         date.getDate(),

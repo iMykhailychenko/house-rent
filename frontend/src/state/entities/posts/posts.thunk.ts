@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
 import { searchFiltersToArray } from '../../../utils/helpers/filters.util';
+import { paginationEmitter } from '../../../utils/helpers/pagination.helper';
 import { AsyncThunkConfig } from '../../interfaces';
 
 import { IEditPostPayload, INewPostPayload, IPost, IUserPostsListPayload } from './posts.interface';
@@ -28,6 +29,7 @@ export const singlePostThunk = createAsyncThunk<IPost, number>('POSTS/SINGLE', a
 export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefined, AsyncThunkConfig>(
     'POSTS/LIST',
     async (payload = 1, { getState }) => {
+        paginationEmitter.update(payload);
         const state = getState();
         const { data, status } = await postsServices.postsList(payload, searchFiltersToArray(state.filters));
         if (status < 200 || status >= 300) throw new Error();
@@ -38,6 +40,7 @@ export const postListThunk = createAsyncThunk<Pagination<IPost>, number | undefi
 export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, number | undefined, AsyncThunkConfig>(
     'POSTS/LIST_PAGINATION',
     async (payload = 1, { getState }) => {
+        paginationEmitter.update(payload);
         const state = getState();
         const { data, status } = await postsServices.postsList(payload, searchFiltersToArray(state.filters));
         if (status < 200 || status >= 300) throw new Error();
@@ -45,9 +48,21 @@ export const postListPaginationThunk = createAsyncThunk<Pagination<IPost>, numbe
     },
 );
 
-export const getUserPostsList = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload, AsyncThunkConfig>(
+export const getUserPostsListThunk = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload, AsyncThunkConfig>(
     'POSTS/USER_POSTS',
     async (payload, { getState }) => {
+        paginationEmitter.update(payload.page);
+        const state = getState();
+        const { data, status } = await postsServices.getUserPostsList(payload, searchFiltersToArray(state.filters));
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    },
+);
+
+export const getUserPostsListPaginationThunk = createAsyncThunk<Pagination<IPost>, IUserPostsListPayload, AsyncThunkConfig>(
+    'POSTS/USER_POSTS_PAGINATION',
+    async (payload, { getState }) => {
+        paginationEmitter.update(payload.page);
         const state = getState();
         const { data, status } = await postsServices.getUserPostsList(payload, searchFiltersToArray(state.filters));
         if (status < 200 || status >= 300) throw new Error();

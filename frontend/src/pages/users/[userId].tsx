@@ -9,7 +9,7 @@ import RootLayout from '../../components/layout/root-layout/root-layout';
 import Section from '../../components/layout/section/section';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { usePostListSelector } from '../../state/entities/posts/posts.selector';
-import { getUserPostsList } from '../../state/entities/posts/posts.thunk';
+import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../state/entities/posts/posts.thunk';
 import { withStore } from '../../utils/ssr';
 
 const UserProfile = (): ReactElement => {
@@ -20,13 +20,19 @@ const UserProfile = (): ReactElement => {
     const userId = +String(router.query.userId);
 
     const submit = (): void => {
-        dispatch(getUserPostsList({ userId, page: 1 }));
+        dispatch(getUserPostsListThunk({ userId, page: 1 }));
+    };
+    const openPage = async (page: number): Promise<void> => {
+        await dispatch(getUserPostsListThunk({ userId, page })).unwrap();
+    };
+    const loadMore = async (page: number): Promise<void> => {
+        await dispatch(getUserPostsListPaginationThunk({ userId, page })).unwrap();
     };
 
     return (
         <RootLayout>
             <Section id="home-posts">
-                <PostsList posts={postsState}>
+                <PostsList posts={postsState} onPage={openPage} onMore={loadMore}>
                     <PostFilters onSubmit={submit} />
                 </PostsList>
             </Section>
@@ -35,11 +41,11 @@ const UserProfile = (): ReactElement => {
 };
 
 export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
-    const page = +String(ctx.params?.page || 1);
+    const page = +String(ctx.query?.page || 1);
     const userId = +String(ctx.params?.userId || 0);
 
     if (!userId) return;
-    await ctx.store?.dispatch(getUserPostsList({ userId, page }));
+    await ctx.store?.dispatch(getUserPostsListThunk({ userId, page }));
 });
 
 export default UserProfile;

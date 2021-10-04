@@ -43,7 +43,7 @@ export const postsListController = errorWrapper(async (req: Request & { user: Us
         )
         .orderBy('post.creationDate', 'DESC');
 
-    const total = await sqlQuery.getCount();
+    const total = (await sqlQuery.getCount().catch(errorCatch(404))) || 0;
     const result = await sqlQuery
         .offset(limit * (page - 1))
         .limit(limit)
@@ -75,7 +75,7 @@ export const postsListForUserController = errorWrapper(async (req: Request & { u
         .leftJoinAndSelect('post.user', 'user')
         .loadRelationCountAndMap('post.favorite', 'post.favorite')
         .loadRelationCountAndMap('post.chats', 'post.chats')
-        .where('post.user.id = :userId', { userId })
+        .where('user.id = :userId', { userId })
         .andWhere('((:general)::text[] IS NULL OR (post.generalFilters)::text[] @> (:general)::text[])', { general })
         .andWhere('((:room)::text[] IS NULL OR (post.roomFilters)::text[] @> (:room)::text[])', { room })
         .andWhere('((:houseType)::text[] IS NULL OR (post.houseTypeFilters)::text[] @> (:houseType)::text[])', { houseType })
@@ -88,7 +88,7 @@ export const postsListForUserController = errorWrapper(async (req: Request & { u
         )
         .orderBy('post.creationDate', 'DESC');
 
-    const total = await sqlQuery.getCount();
+    const total = (await sqlQuery.getCount().catch(errorCatch(404))) || 0;
     const result = await sqlQuery
         .offset(limit * (page - 1))
         .limit(limit)
