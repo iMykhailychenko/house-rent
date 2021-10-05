@@ -8,7 +8,7 @@ import FormTypeFour from './form-type/form-type-four';
 import FormTypeOne from './form-type/form-type-one';
 import FormTypeThree from './form-type/form-type-three';
 import FormTypeTwo from './form-type/form-type-two';
-import { descriptionTemplates, titleTemplates } from './new-post-form.utils';
+import { getDescriptionTemplate, getTitleTemplate } from './new-post-form.utils';
 
 const formOneInitialState: IStepOne = {
     residentsAmount: '',
@@ -38,7 +38,10 @@ const NewPostForm = (): ReactElement => {
 
     const submitSecondForm = (value: IStepTwo): void => {
         setFormTwoState(value);
-        setFormThreeState({ title: titleTemplates[0], description: descriptionTemplates[0] });
+        setFormThreeState({
+            title: getTitleTemplate({ ...formOneState, ...formTwoState }),
+            description: getDescriptionTemplate({ ...formOneState, ...formTwoState }),
+        });
     };
 
     const formTypeMap = {
