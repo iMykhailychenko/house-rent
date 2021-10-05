@@ -8,7 +8,6 @@ import { FORM_TYPE, IStepThree } from '../../../../../../state/entities/posts/po
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import Button from '../../../../../common/button/button';
 import ImageWrp from '../../../../../common/image-wrp/image-wrp';
-import Input from '../../../../../common/input/input';
 import Textarea from '../../../../../common/textarea/textarea';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
@@ -51,7 +50,7 @@ const FormTypeThree = ({ initialValues, onSubmit }: IProps): ReactElement => {
                 Загальна інформація про вас. Власникам квартир важливо розуміти кому вони здаватимуть житло
             </FormSeparator>
             <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
-                <Input
+                <Textarea
                     id="new_post_title"
                     className={css.input}
                     rootClassName={css.inputWrp}

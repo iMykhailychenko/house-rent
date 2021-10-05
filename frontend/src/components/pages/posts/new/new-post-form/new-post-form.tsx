@@ -1,7 +1,9 @@
 import React, { ReactElement, useState } from 'react';
 
+import useTrans from '../../../../../hooks/trans.hook';
 import { FORM_TYPE, IStepOne, IStepThree, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
+import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 
 import FormTypeDone from './form-type/form-type-done';
 import FormTypeFour from './form-type/form-type-four';
@@ -30,7 +32,9 @@ const formThreeInitialState: IStepThree = {
 };
 
 const NewPostForm = (): ReactElement => {
+    const trans = useTrans();
     const newPostState = useNewPostSelector();
+    const profileData = useProfileInfoSelector();
 
     const [formOneState, setFormOneState] = useState<IStepOne>(formOneInitialState);
     const [formTwoState, setFormTwoState] = useState<IStepTwo>(formTwoInitialState);
@@ -39,8 +43,8 @@ const NewPostForm = (): ReactElement => {
     const submitSecondForm = (value: IStepTwo): void => {
         setFormTwoState(value);
         setFormThreeState({
-            title: getTitleTemplate({ ...formOneState, ...formTwoState }),
-            description: getDescriptionTemplate({ ...formOneState, ...formTwoState }),
+            title: getTitleTemplate({ ...formOneState, ...value, ...profileData, ...profileData.data }, trans),
+            description: getDescriptionTemplate({ ...formOneState, ...value, ...profileData.data }, trans),
         });
     };
 
