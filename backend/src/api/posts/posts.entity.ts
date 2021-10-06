@@ -34,8 +34,8 @@ export class Post {
     @IsOptional()
     views: number;
 
-    @Column({ type: 'varchar', length: 100 })
-    @Length(1, 100)
+    @Column({ type: 'varchar', length: 300 })
+    @Length(1, 300)
     title: string;
 
     @Column({ type: 'varchar' })

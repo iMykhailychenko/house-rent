@@ -46,7 +46,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
 
     return (
         <form action="#" method="post" className={css.form}>
-            <ImageWrp name="life" />
+            <ImageWrp name="target" />
             <FormSeparator>
                 Загальна інформація про вас. Власникам квартир важливо розуміти кому вони здаватимуть житло
             </FormSeparator>

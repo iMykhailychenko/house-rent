@@ -98,7 +98,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): ReactElement => {
             </FormSegment>
             <FormSegment label="district" error={formik.touched.districtFilters && formik.errors.districtFilters}>
                 <Filters
-                    size="sm"
+                    size="lg"
                     name="districtFilters"
                     value={formik.values.districtFilters}
                     onChange={formik.setFieldValue}

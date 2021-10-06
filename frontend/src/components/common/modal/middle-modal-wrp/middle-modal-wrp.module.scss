@@ -3,6 +3,8 @@
 .root {
     width: 96%;
     max-width: 80rem;
+    height: max-content;
+    margin: 2rem 0;
     padding: 1.5rem 2rem 2rem;
     border-radius: 1rem;
     background: var(--white);

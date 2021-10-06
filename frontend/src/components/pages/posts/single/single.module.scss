@@ -44,9 +44,13 @@
 .title,
 .subtitle {
     margin: 2rem 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     line-height: 1.1;
     font-weight: 400;
+}
+
+.title {
+    line-height: 1.6;
 }
 
 .subtitle {

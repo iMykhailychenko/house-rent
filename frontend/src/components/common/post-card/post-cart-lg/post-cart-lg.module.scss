@@ -4,17 +4,21 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 6rem 0;
+    padding: 2rem 0;
     border-top: 0.1rem solid var(--gray-5);
 
     &:nth-last-of-type(1) {
         border-bottom: 0.1rem solid var(--gray-5);
     }
 
+    .tooltip {
+        min-width: 15rem;
+    }
+
     .content {
         margin-top: 2rem;
         width: 100%;
-        --img-width: 28rem;
+        --img-width: 24rem;
     }
 
     .flex {
@@ -60,7 +64,11 @@
         justify-content: center;
         flex-wrap: wrap;
         width: calc(100% - var(--img-width) - 2rem);
-        font-weight: 600;
+        font-weight: 400;
+
+        .tooltip {
+            width: 100%;
+        }
 
         &:hover,
         &:focus {
@@ -83,6 +91,10 @@
             margin: 1rem 0 0 0.5rem;
             text-align: left;
             font-size: 1.5rem;
+            color: var(--gray-9);
+        }
+
+        .date {
             color: var(--gray-6);
         }
     }

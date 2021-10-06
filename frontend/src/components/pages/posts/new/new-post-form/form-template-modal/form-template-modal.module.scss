@@ -1,0 +1,18 @@
+.link {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 3rem;
+    border-radius: 0.8rem;
+    text-align: left;
+    background: var(--gray-1);
+
+    &:hover {
+        background: var(--secondary);
+    }
+}
+
+.text {
+    margin: 0.5rem 1rem;
+    font-weight: 500;
+}

@@ -1,0 +1,27 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 6rem;
+    border-radius: 2rem;
+    background: var(--secondary);
+}
+
+.avatar {
+    font-size: 6rem;
+    pointer-events: none;
+}
+
+.text,
+.title {
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.text {
+    font-size: 1.6rem;
+    color: var(--gray-8);
+}

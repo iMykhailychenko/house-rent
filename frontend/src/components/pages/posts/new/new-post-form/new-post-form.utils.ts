@@ -1,5 +1,6 @@
-import { IUser } from '../../../../../interfaces';
-import { IStepOne, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
+import { TransFn } from '../../../../../interfaces';
+
+import { TemplateDataType } from './new-post-form';
 
 interface NormalizedFilters {
     user: string;
@@ -23,13 +24,13 @@ const roomMap: { [key: string]: string } = {
 };
 
 const priceMapMin: { [key: string]: string } = {
-    price_one: '0',
-    price_two: '5.000',
-    price_three: '10.000',
-    price_four: '15.000',
-    price_five: '20.000',
-    price_six: '35.000',
-    price_seven: '40.000+',
+    price_one: 'до ',
+    price_two: '5.000 - ',
+    price_three: '10.000 - ',
+    price_four: '15.000 - ',
+    price_five: '20.000 - ',
+    price_six: '35.000 - ',
+    price_seven: '40.000+ - ',
 };
 
 const priceMapMax: { [key: string]: string } = {
@@ -42,7 +43,20 @@ const priceMapMax: { [key: string]: string } = {
     price_seven: '40.000+ грн',
 };
 
-type TemplateDataType = IStepOne & IStepTwo & IUser;
+const sortingMap: { [key: string]: number } = {
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    more: 5,
+    price_one: 1,
+    price_two: 2,
+    price_three: 3,
+    price_four: 4,
+    price_five: 5,
+    price_six: 6,
+    price_seven: 7,
+};
 
 const normalizeFilters = (
     {
@@ -56,16 +70,19 @@ const normalizeFilters = (
         residentsAmount,
         houseTypeFilters,
     }: TemplateDataType,
-    trans: (value: string) => string,
+    trans: TransFn,
 ): NormalizedFilters => {
+    const sortedRooms = roomFilters.sort((a, b) => sortingMap[a] - sortingMap[b]);
+    const sortedPrice = priceFilters.sort((a, b) => sortingMap[a] - sortingMap[b]);
+
     const room =
-        roomFilters.length === 1
-            ? roomMap[roomFilters[0]]
-            : roomMap[roomFilters[0]] + '-' + roomMap[roomFilters[roomFilters.length - 1]];
+        sortedRooms.length === 1
+            ? roomMap[sortedRooms[0]]
+            : roomMap[sortedRooms[0]] + '-' + roomMap[sortedRooms[sortedRooms.length - 1]];
     const price =
-        priceFilters.length === 1
-            ? trans(priceFilters[0])
-            : priceMapMin[priceFilters[0]] + '-' + priceMapMax[priceFilters[priceFilters.length - 1]];
+        sortedPrice.length === 1
+            ? trans(sortedPrice[0])
+            : priceMapMin[sortedPrice[0]] + priceMapMax[sortedPrice[sortedPrice.length - 1]];
 
     return {
         room,
@@ -94,14 +111,20 @@ const replacer = (value: string, data: NormalizedFilters): string =>
         .replace(/\$residents/i, data.residents)
         .replace(/\$district/i, data.district);
 
-export const getTitleTemplate = (data: TemplateDataType, trans: (value: string) => string, index = 0): string => {
+export const getTitleTemplate = (data: TemplateDataType, trans: TransFn, index = 0): string => {
     const normalizedFilters = normalizeFilters(data, trans);
-    const templates = ['title_template_1'];
+    const templates = ['title_template_1', 'title_template_2', 'title_template_3', 'title_template_4', 'title_template_5'];
     return replacer(trans(templates[index]), normalizedFilters);
 };
 
-export const getDescriptionTemplate = (data: TemplateDataType, trans: (value: string) => string, index = 0): string => {
+export const getDescriptionTemplate = (data: TemplateDataType, trans: TransFn, index = 0): string => {
     const normalizedFilters = normalizeFilters(data, trans);
-    const templates = ['description_template_1'];
+    const templates = [
+        'description_template_1',
+        'description_template_2',
+        'description_template_3',
+        'description_template_4',
+        'description_template_5',
+    ];
     return replacer(trans(templates[index]), normalizedFilters);
 };

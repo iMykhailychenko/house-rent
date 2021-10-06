@@ -1,14 +1,20 @@
 import React, { ReactElement } from 'react';
 
+import { Launch } from '@material-ui/icons';
 import Link from 'next/link';
 
+import useTrans from '../../../../hooks/trans.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
-import { cutString } from '../../../../utils/helpers';
+import { cutString, formatDate } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
+import Button from '../../button/button';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
 import ImageWrp from '../../image-wrp/image-wrp';
+import { modal } from '../../modal/modal';
+import Tooltip from '../../tooltip/tooltip';
 import UserCard from '../../user-card/user-card';
 import PostCardFooter from '../post-card-footer/post-card-footer';
+import PostPreviewModal from '../post-preview-modal/post-preview-modal';
 
 import css from './post-cart-sm.module.scss';
 
@@ -17,6 +23,12 @@ interface IProps {
 }
 
 const PostCardSm = ({ post }: IProps): ReactElement => {
+    const trans = useTrans();
+
+    const openPostPreview = (): void => {
+        modal.open(<PostPreviewModal postId={post.id} />);
+    };
+
     return (
         <div className={css.root}>
             {post.image ? (
@@ -31,21 +43,22 @@ const PostCardSm = ({ post }: IProps): ReactElement => {
             <div className={css.content}>
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
-                        <h3>{post.title}</h3>
+                        <Tooltip classNameWrp={css.tooltip} content={post.title}>
+                            <h3>{post.title}</h3>
+                        </Tooltip>
                         <p>{cutString(post.description, 80)}</p>
+                        <p className={css.date}>Дата створення: {formatDate(post.creationDate, trans)}</p>
                     </a>
                 </Link>
 
-                <UserCard
-                    className={css.card}
-                    date={post.creationDate}
-                    user={{
-                        id: post.user.id,
-                        avatar: post.user.avatar,
-                        firstName: post.user.firstName,
-                        lastName: post.user.lastName,
-                    }}
-                />
+                <div className={css.flex}>
+                    <UserCard user={post.user} />
+                    <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
+                        <Button size="sm" secondary onClick={openPostPreview}>
+                            <Launch />
+                        </Button>
+                    </Tooltip>
+                </div>
 
                 <PostCardFooter size="sm" post={post} />
             </div>

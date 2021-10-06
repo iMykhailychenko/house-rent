@@ -3,26 +3,28 @@ import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { formatDate } from '../../../utils/helpers';
+import useTrans from '../../../hooks/trans.hook';
+import { IUser } from '../../../interfaces';
+import { onlineStatus } from '../../../utils/helpers';
 import routes from '../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
 
 import css from './user-card.module.scss';
 
 interface IProps {
-    user: { id: number; avatar: string | null; firstName: string; lastName: string };
-    date?: string;
+    user: IUser;
     className?: string;
 }
 
-const UserCard = ({ user, className, date }: IProps): ReactElement => {
+const UserCard = ({ user, className }: IProps): ReactElement => {
+    const trans = useTrans();
     return (
         <Link href={routes.users.profile(user.id)}>
             <a className={clsx(css.root, className)}>
                 <UserAvatar src={user.avatar} firstName={user.firstName} lastName={user.lastName} />
                 <div className={css.info}>
                     <h4>{`${user.firstName} ${user.lastName}`}</h4>
-                    <p>{formatDate(date)}</p>
+                    <p>{onlineStatus(user.lastActivity, trans)}</p>
                 </div>
             </a>
         </Link>

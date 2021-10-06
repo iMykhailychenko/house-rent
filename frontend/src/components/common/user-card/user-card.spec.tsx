@@ -18,7 +18,7 @@ const mockUser: IUser = {
 
 describe('UserCard component', () => {
     it('matches snapshot', () => {
-        const { asFragment } = render(<UserCard user={mockUser} className="test" date="date" />);
+        const { asFragment } = render(<UserCard user={mockUser} className="test" />);
         expect(asFragment()).toMatchSnapshot();
     });
 });

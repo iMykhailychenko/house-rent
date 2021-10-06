@@ -1,3 +1,5 @@
+import { TransFn } from '../../interfaces';
+
 import { addZero } from './number.helper';
 
 export const addMonthToDate = (amount = 1): Date => {
@@ -5,7 +7,7 @@ export const addMonthToDate = (amount = 1): Date => {
     return new Date(today.setMonth(today.getMonth() + amount));
 };
 
-const validateDate = (value: string | Date | number): Date => {
+export const validateDate = (value: string | Date | number): Date => {
     try {
         if (value instanceof Date) return value;
         return new Date(value);
@@ -29,9 +31,17 @@ const month: string[] = [
     'Грудень',
 ];
 
-export const formatDate = (value: string | Date | number = new Date()): string => {
+export const formatDate = (value: string | Date | number = new Date(), trans: TransFn): string => {
     const date = validateDate(value);
-    return `${addZero(date.getHours())}:${addZero(date.getMinutes())} ${month[date.getMonth()]} ${addZero(
+    return `${addZero(date.getHours())}:${addZero(date.getMinutes())} ${trans(month[date.getMonth()])} ${addZero(
         date.getDate(),
     )} ${date.getFullYear()}`;
+};
+
+const FIVE_MINUTES_IN_MS = 300_000;
+
+export const onlineStatus = (value: string | number | Date = new Date(), trans: TransFn): string => {
+    const date = validateDate(value);
+    const isOnline = Date.now() - +date < FIVE_MINUTES_IN_MS;
+    return isOnline ? 'online' : formatDate(value, trans);
 };

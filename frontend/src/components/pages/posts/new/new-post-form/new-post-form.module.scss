@@ -14,6 +14,19 @@
     .select p {
         height: 4.1rem;
     }
+
+    .link {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+        text-align: right;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .flex {

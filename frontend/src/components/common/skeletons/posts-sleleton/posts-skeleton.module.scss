@@ -13,7 +13,7 @@
 
 .lg {
     width: 100%;
-    padding: 6rem 0;
+    padding: 2rem 0;
     border-top: 0.1rem solid var(--gray-5);
 
     .user {
@@ -22,15 +22,20 @@
 
     .flex {
         margin: 2rem 0;
+
+        .actions,
+        .submit {
+            height: 3em;
+        }
     }
 
     .img {
-        width: 28rem;
-        height: 16rem;
+        width: 24rem;
+        height: 12rem;
     }
 
     .wrp {
-        width: calc(100% - 30rem);
+        width: calc(100% - 26rem);
 
         .title {
             margin-top: 0;
@@ -40,7 +45,7 @@
     .cell {
         display: flex;
         width: 47%;
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
 
     .chipLong,
@@ -48,7 +53,7 @@
         height: 3rem;
         width: 10rem;
         margin: 0 0.5rem 0.8rem 0;
-        border-radius: 2rem;
+        border-radius: 0.6rem;
     }
 
     .chipLong {
@@ -72,13 +77,15 @@
     flex-wrap: wrap;
 
     .actions {
-        height: 2em;
-        width: calc(100% - 12rem);
+        height: 3rem;
+        width: calc(100% - 16rem);
         max-width: 30rem;
+        border-radius: 3rem;
     }
 
     .submit {
-        height: 2em;
-        width: 8rem;
+        height: 3rem;
+        width: 12rem;
+        border-radius: 3rem;
     }
 }

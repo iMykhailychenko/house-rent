@@ -1,5 +1,7 @@
 import { AxiosResponse } from 'axios';
 
+export type TransFn = (value: string) => string;
+
 export interface IUser {
     id: number;
     creationDate: string;

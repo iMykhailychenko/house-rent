@@ -1,3 +1,7 @@
 .white .new-post-page {
-    background: var(--gray-2);
+    background: var(--secondary);
+
+    --gray-1: #fff;
+    --gray-2: #fff;
+    --gray-3: #fff;
 }

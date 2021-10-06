@@ -44,14 +44,15 @@ const FormTypeFour = ({ value }: IProps): ReactElement => {
 
     const goBack = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        dispatch(updateFormType(FORM_TYPE.TWO));
+        dispatch(updateFormType(FORM_TYPE.THREE));
     };
 
     const uploadWithoutPhoto = async (): Promise<void> => {
         try {
             const data = await dispatch(newPostThunk(value)).unwrap();
-            if (!data?.id) throw new Error();
-            dispatch(updateFormType(FORM_TYPE.DONE));
+            if (data?.id) dispatch(updateFormType(FORM_TYPE.DONE));
+
+            new Error();
         } catch (error) {
             console.log(error?.response || error);
         }

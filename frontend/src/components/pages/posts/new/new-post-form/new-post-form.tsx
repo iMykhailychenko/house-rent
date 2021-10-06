@@ -1,6 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useMemo, useState } from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
+import { IUser } from '../../../../../interfaces';
 import { FORM_TYPE, IStepOne, IStepThree, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
@@ -31,6 +32,8 @@ const formThreeInitialState: IStepThree = {
     description: '',
 };
 
+export type TemplateDataType = IStepOne & IStepTwo & IUser;
+
 const NewPostForm = (): ReactElement => {
     const trans = useTrans();
     const newPostState = useNewPostSelector();
@@ -39,6 +42,11 @@ const NewPostForm = (): ReactElement => {
     const [formOneState, setFormOneState] = useState<IStepOne>(formOneInitialState);
     const [formTwoState, setFormTwoState] = useState<IStepTwo>(formTwoInitialState);
     const [formThreeState, setFormThreeState] = useState<IStepThree>(formThreeInitialState);
+
+    const templateData = useMemo(
+        () => ({ ...formOneState, ...formTwoState, ...profileData, ...profileData.data }),
+        [formOneState, formTwoState, profileData],
+    );
 
     const submitSecondForm = (value: IStepTwo): void => {
         setFormTwoState(value);
@@ -51,7 +59,7 @@ const NewPostForm = (): ReactElement => {
     const formTypeMap = {
         [FORM_TYPE.ONE]: <FormTypeOne initialValues={formOneState} onSubmit={setFormOneState} />,
         [FORM_TYPE.TWO]: <FormTypeTwo initialValues={formTwoState} onSubmit={submitSecondForm} />,
-        [FORM_TYPE.THREE]: <FormTypeThree initialValues={formThreeState} onSubmit={setFormThreeState} />,
+        [FORM_TYPE.THREE]: <FormTypeThree initialValues={formThreeState} onSubmit={setFormThreeState} allData={templateData} />,
         [FORM_TYPE.FOUR]: <FormTypeFour value={{ ...formOneState, ...formTwoState, ...formThreeState }} />,
         [FORM_TYPE.DONE]: <FormTypeDone />,
     };

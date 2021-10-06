@@ -18,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 5rem 0;
+    margin: 2rem 0;
 }
 
 .sm {
@@ -26,12 +26,11 @@
 }
 
 .lg {
-    margin-top: 3rem;
     width: calc(100% - var(--filters-sidebar-width));
 }
 
 .aside {
     width: var(--filters-sidebar-width);
-    padding-top: 8rem;
-    padding-left: 8rem;
+    padding-top: 2rem;
+    padding-left: 6rem;
 }
