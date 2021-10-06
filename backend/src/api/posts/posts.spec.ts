@@ -37,7 +37,7 @@ describe('Test post service', () => {
 
     describe('create', () => {
         it('create post forbidden 403', async () => {
-            await api.post(`/api/v1/users/${user.id}/role`).send({ role: UserRole.REALTOR });
+            await api.put(`/api/v1/users/${user.id}/role`).send({ role: UserRole.REALTOR });
             const res = await api
                 .post('/api/v1/posts')
                 .send(mockNewPostBody)
@@ -48,7 +48,7 @@ describe('Test post service', () => {
         });
 
         it('create post success', async () => {
-            await api.post(`/api/v1/users/${user.id}/role`).send({ role: UserRole.USER });
+            await api.put(`/api/v1/users/${user.id}/role`).send({ role: UserRole.USER });
 
             const res = await api
                 .post('/api/v1/posts')
@@ -63,7 +63,7 @@ describe('Test post service', () => {
         });
 
         it('invalid district', async () => {
-            await api.post(`/api/v1/users/${user.id}/role`).send({ role: 'user' });
+            await api.put(`/api/v1/users/${user.id}/role`).send({ role: 'user' });
 
             const res = await api
                 .post('/api/v1/posts')

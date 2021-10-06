@@ -3,16 +3,16 @@ import React, { ReactElement } from 'react';
 import { Launch } from '@material-ui/icons';
 import Link from 'next/link';
 
-import useTrans from '../../../../hooks/trans.hook';
-import { IPost } from '../../../../state/entities/posts/posts.interface';
-import { cutString, formatDate } from '../../../../utils/helpers';
-import routes from '../../../../utils/routes';
-import Button from '../../button/button';
-import FullScreenImg from '../../full-screen-img/full-screen-img';
-import ImageWrp from '../../image-wrp/image-wrp';
-import { modal } from '../../modal/modal';
-import Tooltip from '../../tooltip/tooltip';
-import UserCard from '../../user-card/user-card';
+import useTrans from '../../../../../hooks/trans.hook';
+import { IPost } from '../../../../../state/entities/posts/posts.interface';
+import { cutString, formatDate } from '../../../../../utils/helpers';
+import routes from '../../../../../utils/routes';
+import Button from '../../../button/button';
+import FullScreenImg from '../../../full-screen-img/full-screen-img';
+import ImageWrp from '../../../image-wrp/image-wrp';
+import { modal } from '../../../modal/modal';
+import Tooltip from '../../../tooltip/tooltip';
+import UserCard from '../../../user/user-card/user-card';
 import PostCardFooter from '../post-card-footer/post-card-footer';
 import PostPreviewModal from '../post-preview-modal/post-preview-modal';
 

@@ -7,7 +7,7 @@ import Badge from '../../../common/badge/badge';
 import Button from '../../../common/button/button';
 import { modal } from '../../../common/modal/modal';
 import StickyModal from '../../../common/modal/sticky-modal/sticky-modal';
-import UserAvatar from '../../../common/user-avatar/user-avatar';
+import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
 import HeaderUserNav from './header-user-nav/header-user-nav';
 import css from './header-user.module.scss';

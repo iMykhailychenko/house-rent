@@ -2,9 +2,9 @@ import React, { ReactElement, useState } from 'react';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
-import { useAppDispatch } from '../../../hooks/redux.hook';
-import useTrans from '../../../hooks/trans.hook';
-import { SEARCH_FILTERS } from '../../../state/entities/filters/filters.interface';
+import { useAppDispatch } from '../../../../hooks/redux.hook';
+import useTrans from '../../../../hooks/trans.hook';
+import { SEARCH_FILTERS } from '../../../../state/entities/filters/filters.interface';
 import {
     changeDistrictFilterAction,
     changeGeneralFilterAction,
@@ -13,13 +13,13 @@ import {
     changePriceFilterAction,
     changeRoomFilterAction,
     clearAllFilterAction,
-} from '../../../state/entities/filters/filters.reducer';
-import { useAllFiltersSelector } from '../../../state/entities/filters/filters.selector';
-import Button from '../../common/button/button';
-import CardSizeSwitcher from '../../common/card-size-switcher/card-size-switcher';
-import Chips from '../../common/chips/chips';
-import CitySelect from '../../common/city-select/city-select';
-import SearchInput from '../../common/search-input/search-input';
+} from '../../../../state/entities/filters/filters.reducer';
+import { useAllFiltersSelector } from '../../../../state/entities/filters/filters.selector';
+import Button from '../../button/button';
+import CardSizeSwitcher from '../../card-size-switcher/card-size-switcher';
+import Chips from '../../chips/chips';
+import CitySelect from '../../city-select/city-select';
+import SearchInput from '../../search-input/search-input';
 
 import css from './post-filters.module.scss';
 

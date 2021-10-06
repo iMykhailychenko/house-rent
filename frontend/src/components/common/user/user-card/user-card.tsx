@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import useTrans from '../../../hooks/trans.hook';
-import { IUser } from '../../../interfaces';
-import { onlineStatus } from '../../../utils/helpers';
-import routes from '../../../utils/routes';
+import useTrans from '../../../../hooks/trans.hook';
+import { IUser } from '../../../../interfaces';
+import { onlineStatus } from '../../../../utils/helpers';
+import routes from '../../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
 
 import css from './user-card.module.scss';

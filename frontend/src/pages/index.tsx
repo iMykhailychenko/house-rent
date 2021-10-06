@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 
 import { GetServerSideProps } from 'next';
 
-import PostFilters from '../components/layout/post-filters/post-filters';
-import PostsList from '../components/layout/posts-list/posts-list';
+import PostFilters from '../components/common/post/post-filters/post-filters';
+import PostsList from '../components/common/post/posts-list/posts-list';
 import RootLayout from '../components/layout/root-layout/root-layout';
 import Section from '../components/layout/section/section';
 import Meta from '../components/meta/meta';

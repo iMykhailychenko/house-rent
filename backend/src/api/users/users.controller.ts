@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 
 import database from '../../database';
-import { User, UserRole } from './users.entity';
+import { User } from './users.entity';
 import errorWrapper from '../../utils/errorWrapper';
 import ErrorNormalize from '../../utils/errorNormalize';
 import errorCatch from '../../utils/errorCatch';
+import { Role } from './dto/role.dto';
+import { validate } from 'class-validator';
 
 export const usersListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
     const page = +req.query.page || 1;
@@ -42,10 +44,12 @@ export const userRoleController = errorWrapper(async (req: Request, res: Respons
     const user = await repository.findOne({ id: +req.params.userId }).catch(error => {
         throw new ErrorNormalize(400, error);
     });
-
     if (!user) throw new ErrorNormalize(404, 'user with this id do not exist');
-    if (!req.body.role || ![UserRole.USER, UserRole.REALTOR].includes(req.body.role))
-        throw new ErrorNormalize(400, 'invalid user role');
+
+    const role = new Role();
+    role.role = req.body.role;
+    const errors = await validate(role);
+    if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
 
     user.role = req.body.role;
     await repository.save(user).catch(errorCatch(400));

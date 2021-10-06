@@ -11,12 +11,12 @@ interface ILocales {
     [key: string]: IContent;
 }
 
-type UseTransType = (value: string) => string;
+type UseTransType = (value?: string) => string;
 
 const useTrans = (): UseTransType => {
     const router = useRouter();
-    return (value: string): string => {
-        return (locales as ILocales)[router?.locale || LANGUAGE_ENUM.UA][value] || String(value);
+    return (value?: string): string => {
+        return (locales as ILocales)[router?.locale || LANGUAGE_ENUM.UA][value || ''] || String(value || '');
     };
 };
 

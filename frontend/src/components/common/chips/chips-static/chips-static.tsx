@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import clsx from 'clsx';
 
-import Tooltip from '../tooltip/tooltip';
+import Tooltip from '../../tooltip/tooltip';
 
 import css from './chips-static.module.scss';
 

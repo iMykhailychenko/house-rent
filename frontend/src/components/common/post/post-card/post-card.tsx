@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import useConfig from '../../../hooks/config.hook';
-import { IPost } from '../../../state/entities/posts/posts.interface';
+import useConfig from '../../../../hooks/config.hook';
+import { IPost } from '../../../../state/entities/posts/posts.interface';
 
 import PostCardLg from './post-cart-lg/post-cart-lg';
 import PostCardSm from './post-cart-sm/post-cart-sm';

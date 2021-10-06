@@ -2,17 +2,17 @@ import React, { ReactElement } from 'react';
 
 import { Bookmark, QuestionAnswer, Share, Visibility } from '@material-ui/icons';
 
-import useAuth from '../../../../hooks/auth.hook';
-import { useAppDispatch } from '../../../../hooks/redux.hook';
-import useTrans from '../../../../hooks/trans.hook';
-import { IPost } from '../../../../state/entities/posts/posts.interface';
-import { togglePostFavoriteThunk } from '../../../../state/entities/posts/posts.thunk';
-import LoginForm from '../../auth/login-form/login-form';
-import Button from '../../button/button';
-import { modal } from '../../modal/modal';
-import SmallModalWrp from '../../modal/small-modal-wrp/small-modal-wrp';
-import StickyModal from '../../modal/sticky-modal/sticky-modal';
-import Tooltip from '../../tooltip/tooltip';
+import useAuth from '../../../../../hooks/auth.hook';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
+import useTrans from '../../../../../hooks/trans.hook';
+import { IPost } from '../../../../../state/entities/posts/posts.interface';
+import { togglePostFavoriteThunk } from '../../../../../state/entities/posts/posts.thunk';
+import LoginForm from '../../../auth/login-form/login-form';
+import Button from '../../../button/button';
+import { modal } from '../../../modal/modal';
+import SmallModalWrp from '../../../modal/small-modal-wrp/small-modal-wrp';
+import StickyModal from '../../../modal/sticky-modal/sticky-modal';
+import Tooltip from '../../../tooltip/tooltip';
 import SharePostModal from '../share-post-modal/share-post-modal';
 
 import css from './post-card-footer.module.scss';

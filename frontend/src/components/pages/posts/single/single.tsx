@@ -5,7 +5,7 @@ import { useSinglePostSelector } from '../../../../state/entities/posts/posts.se
 import { formatDate } from '../../../../utils/helpers';
 import FullScreenImg from '../../../common/full-screen-img/full-screen-img';
 import NotFoundPost from '../../../common/not-found/not-found-post/not-found-post';
-import PostCardFooter from '../../../common/post-card/post-card-footer/post-card-footer';
+import PostCardFooter from '../../../common/post/post-card/post-card-footer/post-card-footer';
 import Socials from '../../../common/share-links/share-links';
 import Container from '../../../layout/container/container';
 

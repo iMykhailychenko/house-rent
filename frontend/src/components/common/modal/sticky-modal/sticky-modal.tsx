@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { Close } from '@material-ui/icons';
 
 import useMaxWidth from '../../../../hooks/media.hook';
+import useTrans from '../../../../hooks/trans.hook';
 import Button from '../../button/button';
 import { modal } from '../modal';
 
@@ -14,7 +15,9 @@ interface IProps {
 }
 
 const StickyModal = ({ title = '', children }: IProps): ReactElement => {
+    const trans = useTrans();
     const media = useMaxWidth(768);
+
     useEffect(() => {
         const backdrop = document.getElementById('backdrop');
         if (backdrop) backdrop.style.alignItems = media ? 'center' : 'flex-end';
@@ -23,7 +26,7 @@ const StickyModal = ({ title = '', children }: IProps): ReactElement => {
     return (
         <div className={css.root}>
             <header className={css.header}>
-                <h2 className={css.title}>{title}</h2>
+                <h2 className={css.title}>{trans(title)}</h2>
                 <Button className={css.btn} secondary onClick={modal.close}>
                     <Close />
                 </Button>

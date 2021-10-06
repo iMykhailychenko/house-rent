@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 
 import { Apartment, ChildFriendly, Group, HomeWork, Pets, Weekend } from '@material-ui/icons';
 
-import useTrans from '../../../../../hooks/trans.hook';
-import { IPost } from '../../../../../state/entities/posts/posts.interface';
-import ChipsStatic from '../../../chips-static/chips-static';
+import useTrans from '../../../../../../hooks/trans.hook';
+import { IPost } from '../../../../../../state/entities/posts/posts.interface';
+import ChipsStatic from '../../../../chips/chips-static/chips-static';
 
 import css from './post-info-block.module.scss';
 

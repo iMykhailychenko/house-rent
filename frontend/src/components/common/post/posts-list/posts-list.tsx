@@ -1,15 +1,15 @@
 import React, { ReactElement, useRef, useState } from 'react';
 
-import uiConfig from '../../../config/ui.config';
-import useConfig from '../../../hooks/config.hook';
-import useTrans from '../../../hooks/trans.hook';
-import { IPostListState } from '../../../state/entities/posts/posts.interface';
-import { usePostListSelector } from '../../../state/entities/posts/posts.selector';
-import EmptyPostsList from '../../common/nothing-to-show/emprty-posts-list/emprty-posts-list';
-import Pagination from '../../common/pagination/pagination';
-import PostCard from '../../common/post-card/post-card';
-import PostsSkeleton from '../../common/skeletons/posts-sleleton/posts-skeleton';
-import Container from '../container/container';
+import uiConfig from '../../../../config/ui.config';
+import useConfig from '../../../../hooks/config.hook';
+import useTrans from '../../../../hooks/trans.hook';
+import { IPostListState } from '../../../../state/entities/posts/posts.interface';
+import { usePostListSelector } from '../../../../state/entities/posts/posts.selector';
+import Container from '../../../layout/container/container';
+import EmptyPostsList from '../../not-found/emprty-posts-list/emprty-posts-list';
+import Pagination from '../../pagination/pagination';
+import PostsSkeleton from '../../skeletons/posts-sleleton/posts-skeleton';
+import PostCard from '../post-card/post-card';
 
 import css from './posts-list.module.scss';
 

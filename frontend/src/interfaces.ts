@@ -11,7 +11,7 @@ export interface IUser {
     lastName: string;
     isEmailVerified: boolean;
     email: string;
-    role: UserRole[] | null;
+    role: UserRole[];
 }
 
 export interface IChips {
