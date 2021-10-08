@@ -3,6 +3,11 @@
     justify-content: space-between;
 }
 
+.smallSize {
+    padding-bottom: 0.6rem;
+    border-bottom: 0.1rem solid var(--gray-5);
+}
+
 .tooltip {
     width: max-content;
     max-width: 20rem;
@@ -13,7 +18,7 @@
     align-items: center;
 
     button {
-        margin-right: 1rem;
+        margin-right: 0.5rem;
     }
 
     .icon {

@@ -19,13 +19,14 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 2rem 0;
+
+    &.sm {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
-.sm {
-    width: calc(100% - var(--filters-sidebar-width));
-}
-
-.lg {
+.wrp {
     width: calc(100% - var(--filters-sidebar-width));
 }
 

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { ArrowBack } from '@material-ui/icons';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import { useFormik } from 'formik';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';

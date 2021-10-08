@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
 import Link from 'next/link';
 

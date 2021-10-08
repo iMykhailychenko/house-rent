@@ -36,7 +36,7 @@ export enum LANGUAGE_ENUM {
 }
 
 export interface IConfig {
-    cardSize: 'sm' | 'lg';
+    cardSize: 'sm' | 'md' | 'lg';
 }
 
 export enum UserRole {

@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
 
-import { Apps, ViewHeadline } from '@material-ui/icons';
+import Apps from '@material-ui/icons/Apps';
+import ViewComfyIcon from '@material-ui/icons/ViewComfy';
+import ViewHeadline from '@material-ui/icons/ViewHeadline';
 import clsx from 'clsx';
 
 import useConfig from '../../../hooks/config.hook';
@@ -10,13 +12,9 @@ import css from './card-size-switcher.module.scss';
 const CardSizeSwitcher = (): ReactElement => {
     const [config, setConfig] = useConfig();
 
-    const handleSmallCard = (): void => {
-        setConfig({ ...config, cardSize: 'sm' });
-    };
-
-    const handleLargeCard = (): void => {
-        setConfig({ ...config, cardSize: 'lg' });
-    };
+    const handleSmallCard = (): void => setConfig({ ...config, cardSize: 'sm' });
+    const handleMidCard = (): void => setConfig({ ...config, cardSize: 'md' });
+    const handleLargeCard = (): void => setConfig({ ...config, cardSize: 'lg' });
 
     return (
         <div className={css.flex}>
@@ -29,12 +27,20 @@ const CardSizeSwitcher = (): ReactElement => {
                 <ViewHeadline />
             </button>
             <button
+                className={clsx(css.button, config.cardSize === 'md' && css.active)}
+                onClick={handleMidCard}
+                title="middle cards"
+                type="button"
+            >
+                <Apps />
+            </button>
+            <button
                 className={clsx(css.button, config.cardSize === 'sm' && css.active)}
                 onClick={handleSmallCard}
                 title="small cards"
                 type="button"
             >
-                <Apps />
+                <ViewComfyIcon />
             </button>
         </div>
     );

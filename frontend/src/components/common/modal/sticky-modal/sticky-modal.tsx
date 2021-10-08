@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 
-import { Close } from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
 
 import useMaxWidth from '../../../../hooks/media.hook';
 import useTrans from '../../../../hooks/trans.hook';

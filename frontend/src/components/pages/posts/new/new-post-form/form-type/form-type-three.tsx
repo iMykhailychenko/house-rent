@@ -1,6 +1,7 @@
 import React, { ReactElement, useMemo } from 'react';
 
-import { ArrowBack } from '@material-ui/icons';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { useFormik } from 'formik';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
@@ -87,6 +88,7 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): ReactEleme
             <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
                 <>
                     <button className={css.link} type="button" onClick={openTitleTemplateModal}>
+                        <SwapHorizIcon />
                         змінити шаблон
                     </button>
                     <Textarea
@@ -108,6 +110,7 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): ReactEleme
             >
                 <>
                     <button className={css.link} type="button" onClick={openDescriptionTemplateModal}>
+                        <SwapHorizIcon />
                         змінити шаблон
                     </button>
                     <Textarea

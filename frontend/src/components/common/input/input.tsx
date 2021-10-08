@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement, useState } from 'react';
 
-import { HelpOutline, Visibility, VisibilityOff } from '@material-ui/icons';
+import HelpOutline from '@material-ui/icons/HelpOutline';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
 
 import useTrans from '../../../hooks/trans.hook';

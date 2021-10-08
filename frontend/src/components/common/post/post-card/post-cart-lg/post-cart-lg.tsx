@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Launch } from '@material-ui/icons';
+import Launch from '@material-ui/icons/Launch';
 import Link from 'next/link';
 
 import useTrans from '../../../../../hooks/trans.hook';
@@ -13,11 +13,11 @@ import ImageWrp from '../../../image-wrp/image-wrp';
 import { modal } from '../../../modal/modal';
 import Tooltip from '../../../tooltip/tooltip';
 import UserCard from '../../../user/user-card/user-card';
-import PostCardFooter from '../post-card-footer/post-card-footer';
-import PostPreviewModal from '../post-preview-modal/post-preview-modal';
+import PostCardFooter from '../components/post-card-footer/post-card-footer';
+import PostInfoBlock from '../components/post-info-block/post-info-block';
+import PostPreviewModal from '../components/post-preview-modal/post-preview-modal';
 
 import css from './post-cart-lg.module.scss';
-import PostInfoBlock from './post-info-block/post-info-block';
 
 interface IProps {
     post: IPost;
@@ -66,7 +66,7 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
 
                 <PostInfoBlock post={post} />
 
-                <PostCardFooter post={post} />
+                <PostCardFooter size="lg" post={post} />
             </div>
         </div>
     );

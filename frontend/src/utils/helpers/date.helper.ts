@@ -38,10 +38,10 @@ export const formatDate = (value: string | Date | number = new Date(), trans: Tr
     )} ${date.getFullYear()}`;
 };
 
-const FIVE_MINUTES_IN_MS = 300_000;
+const TWENTY_MINUTES_IN_MS = 1_200_000;
 
 export const onlineStatus = (value: string | number | Date = new Date(), trans: TransFn): string => {
     const date = validateDate(value);
-    const isOnline = Date.now() - +date < FIVE_MINUTES_IN_MS;
+    const isOnline = Date.now() - +date < TWENTY_MINUTES_IN_MS;
     return isOnline ? 'online' : formatDate(value, trans);
 };

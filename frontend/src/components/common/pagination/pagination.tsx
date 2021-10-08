@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 
-import { NavigateNext, Sync } from '@material-ui/icons';
+import NavigateNext from '@material-ui/icons/NavigateNext';
+import Sync from '@material-ui/icons/Sync';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';

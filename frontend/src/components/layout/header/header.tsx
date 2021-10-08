@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import { Home } from '@material-ui/icons';
+import Home from '@material-ui/icons/Home';
 
 import useAuth from '../../../hooks/auth.hook';
 import routes from '../../../utils/routes';
@@ -24,7 +24,7 @@ const AppHeader = (): ReactElement => {
 
     return (
         <>
-            <header className={css.header}>
+            <header id="header" className={css.header}>
                 <Container className={css.inner} size="md">
                     <div className={css.item}>
                         <Link className={css.home} href={routes.home} type="button" secondary>

@@ -28,6 +28,8 @@ const UserBanner = (): ReactElement => {
         }
     };
 
+    const online = onlineStatus(userState.data.lastActivity, trans);
+
     return (
         <div className={css.flex}>
             <UserAvatar
@@ -40,7 +42,9 @@ const UserBanner = (): ReactElement => {
             <h2 className={css.title}>
                 {userState.data.firstName} {userState.data.lastName}
             </h2>
-            <p className={css.text}>{onlineStatus(userState.data.lastActivity, trans)}</p>
+            <p className={online === 'online' ? css.online : css.offline} title={online === 'online' ? 'online' : 'offline'}>
+                {online}
+            </p>
             <p className={css.text}>
                 роль на сайті:{' '}
                 {userState.data.role.includes(UserRole.USER)

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Person } from '@material-ui/icons';
+import Person from '@material-ui/icons/Person';
 
 import useTrans from '../../../../hooks/trans.hook';
 import JoinForm from '../../../common/auth/join-form/join-form';

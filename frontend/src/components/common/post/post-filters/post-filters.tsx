@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';

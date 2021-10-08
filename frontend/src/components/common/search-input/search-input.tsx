@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, ReactElement } from 'react';
 
-import { Close, Search } from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
+import Search from '@material-ui/icons/Search';
 import clsx from 'clsx';
 
 import useTrans from '../../../hooks/trans.hook';

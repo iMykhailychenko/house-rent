@@ -1,10 +1,7 @@
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { User } from '../api/users/users.entity';
-import { Post } from '../api/posts/posts.entity';
-import { Chat } from '../api/chat/chat.entity';
-import { Favorite } from '../api/favorite/favorite.entity';
+import { ConnectionOptions } from 'typeorm';
+import path from 'path';
 
-const dbConfig: PostgresConnectionOptions = {
+const dbConfig: ConnectionOptions = {
     type: 'postgres',
     host: process.env.POSTGRES_HOST || 'localhost',
     database: process.env.POSTGRES_DB || 'house_rent_test',
@@ -12,8 +9,12 @@ const dbConfig: PostgresConnectionOptions = {
     username: process.env.POSTGRES_USER || 'house_rent_test',
     password: process.env.POSTGRES_PASSWORD || 'house_rent_test',
     logging: true,
-    synchronize: true,
-    entities: [User, Post, Chat, Favorite],
+    synchronize: false,
+    entities: [path.join(__dirname, '..', '**', '*.entity{.js,.ts}')],
+    migrations: [path.join(__dirname, '..', 'migrations', '**', '*{.js,.ts}')],
+    cli: {
+        migrationsDir: path.join(__dirname, '..', 'migrations'),
+    },
 };
 
 export default dbConfig;

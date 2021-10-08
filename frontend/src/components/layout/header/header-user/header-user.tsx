@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Notifications } from '@material-ui/icons';
+import Notifications from '@material-ui/icons/Notifications';
 
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import Badge from '../../../common/badge/badge';

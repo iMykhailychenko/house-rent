@@ -9,7 +9,23 @@
         }
     }
 
-    p {
-        color: var(--gray-6);
+    .info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .offline,
+    .online {
+        width: max-content;
+        padding: 0.1rem 0.5rem 0.2rem;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        background: var(--success-secondary);
+        color: var(--success);
+    }
+
+    .offline {
+        background: var(--gray-2);
+        color: var(--gray-7);
     }
 }

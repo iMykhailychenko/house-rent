@@ -2,15 +2,21 @@
     "name": "backend",
     "version": "1.0.0",
     "main": "dist/app.js",
-    "license": "MIT",
+    "private": true,
     "scripts": {
-        "clean": "rm -rf dist/*",
-        "migration:create": "typeorm migration:create -n HouseRent",
-        "migration:run": "typeorm migration:run",
         "lint": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\" --config ./.prettierrc && eslint --fix ./ && tslint -c tslint.json -p tsconfig.json --fix",
-        "start": "yarn run clean && yarn run tsc && node dist/app.js",
-        "dev": "nodemon --watch src --exec yarn run start",
-        "test": "jest src/* --testTimeout=20000 --runInBand"
+        "clean": "rm -rf dist/*",
+        "build": "yarn clean && yarn tsc",
+        "build:hard": "yarn build && yarn db:drop && yarn db:migrate",
+        "start": "yarn build && node dist/app.js",
+        "start:hard": "yarn build:hard && node dist/app.js",
+        "dev": "nodemon --watch src --exec yarn start",
+        "dev:hard": "nodemon --watch src --exec yarn start:hard",
+        "test": "jest src/* --testTimeout=20000 --runInBand",
+        "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js --config ./src/config/db.config.ts",
+        "db:drop": "yarn typeorm schema:drop",
+        "db:migration": "yarn typeorm migration:generate -n",
+        "db:migrate": "yarn typeorm migration:run"
     },
     "jest": {
         "testEnvironment": "node",

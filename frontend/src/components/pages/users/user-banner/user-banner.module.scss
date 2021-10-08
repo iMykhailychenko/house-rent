@@ -13,6 +13,21 @@
     pointer-events: none;
 }
 
+.offline,
+.online {
+    width: max-content;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    background: var(--success-secondary);
+    color: var(--success);
+}
+
+.offline {
+    background: var(--gray-4);
+    color: var(--gray-7);
+}
+
 .text,
 .title {
     width: 100%;

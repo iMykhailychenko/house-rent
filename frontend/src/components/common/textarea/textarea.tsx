@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement } from 'react';
 
-import { HelpOutline } from '@material-ui/icons';
+import HelpOutline from '@material-ui/icons/HelpOutline';
 import clsx from 'clsx';
 import TextareaAutosize from 'react-textarea-autosize';
 

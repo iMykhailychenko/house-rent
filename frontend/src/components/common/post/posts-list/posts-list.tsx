@@ -1,5 +1,7 @@
 import React, { ReactElement, useRef, useState } from 'react';
 
+import clsx from 'clsx';
+
 import uiConfig from '../../../../config/ui.config';
 import useConfig from '../../../../hooks/config.hook';
 import useTrans from '../../../../hooks/trans.hook';
@@ -48,8 +50,8 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
                 {title && <h2 className="title-2">{trans(title)}</h2>}
 
                 <div className={css.flex}>
-                    <div className={css[config.cardSize]}>
-                        <div ref={ref} className={css.inner}>
+                    <div className={css.wrp}>
+                        <div ref={ref} className={clsx(css.inner, css[config.cardSize])}>
                             {loading ? (
                                 <PostsSkeleton amount={uiConfig.postsPerPage} />
                             ) : posts.data.length ? (
@@ -57,7 +59,7 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
                             ) : (
                                 <EmptyPostsList />
                             )}
-                            {loadingMore && <PostsSkeleton amount={uiConfig.postsPerPage / 2} />}
+                            {loadingMore && <PostsSkeleton amount={Math.ceil(uiConfig.postsPerPage / 2)} />}
                         </div>
                         <Pagination
                             total={posts.totalPages}

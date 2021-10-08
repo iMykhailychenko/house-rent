@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { BrightnessHigh, BrightnessLow } from '@material-ui/icons';
+import BrightnessHigh from '@material-ui/icons/BrightnessHigh';
+import BrightnessLow from '@material-ui/icons/BrightnessLow';
 import clsx from 'clsx';
 
 import useTheme from '../../../hooks/theme.hook';

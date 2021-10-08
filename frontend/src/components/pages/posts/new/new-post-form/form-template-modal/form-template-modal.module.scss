@@ -1,18 +1,32 @@
-.link {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    margin-bottom: 3rem;
-    border-radius: 0.8rem;
-    text-align: left;
-    background: var(--gray-1);
+.accordion {
+    box-shadow: none !important;
+    background: var(--gray-1) !important;
 
     &:hover {
-        background: var(--secondary);
+        background: var(--secondary) !important;
     }
+
+    .icon {
+        font-size: 2rem !important;
+    }
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 0.6rem;
+    text-align: left;
+    background: var(--white);
+    border: 0.1rem solid var(--gray-5);
+}
+
+.details {
+    padding: 0 !important;
 }
 
 .text {
     margin: 0.5rem 1rem;
+    font-size: 1.4rem !important;
     font-weight: 500;
 }

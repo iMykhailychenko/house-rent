@@ -1,5 +1,5 @@
 const uiConfig = {
-    postsPerPage: 2,
+    postsPerPage: 3,
 };
 
 export default uiConfig;

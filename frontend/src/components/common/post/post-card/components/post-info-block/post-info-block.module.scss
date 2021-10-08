@@ -2,7 +2,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .row {
@@ -27,12 +27,13 @@
 .chip {
     display: flex;
     align-items: center;
-    height: 2.5rem;
+    height: 2rem;
     margin: 0 0.5rem 0.5rem 0;
-    padding: 0 1rem 0.1rem;
+    padding: 0 0.8rem 0.1rem;
     border-radius: 1rem;
     background: var(--gray-2);
     color: var(--primary);
     font-weight: 600;
+    font-size: 1.2rem;
     line-height: 1;
 }

@@ -1,4 +1,25 @@
 .sm {
+    .img {
+        height: 7.7rem;
+    }
+
+    .flex {
+        margin-top: 2rem;
+
+        .actions,
+        .submit {
+            height: 3rem;
+            width: 4rem;
+            border-radius: 3rem;
+        }
+
+        .actions {
+            width: 8rem;
+        }
+    }
+}
+
+.md {
     width: 47%;
     padding: 3rem 0 8rem;
 
@@ -13,7 +34,7 @@
 
 .lg {
     width: 100%;
-    padding: 2rem 0;
+    padding: 1rem 0;
     border-top: 0.1rem solid var(--gray-5);
 
     .user {
@@ -21,11 +42,11 @@
     }
 
     .flex {
-        margin: 2rem 0;
+        margin: 0.5rem 0;
 
         .actions,
         .submit {
-            height: 3em;
+            height: 3rem;
         }
     }
 
@@ -50,10 +71,10 @@
 
     .chipLong,
     .chip {
-        height: 3rem;
+        height: 2.2rem;
         width: 10rem;
         margin: 0 0.5rem 0.8rem 0;
-        border-radius: 0.6rem;
+        border-radius: 8rem;
     }
 
     .chipLong {

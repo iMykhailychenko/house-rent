@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Drawer } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
 
 import css from './app-drawer.module.scss';
 

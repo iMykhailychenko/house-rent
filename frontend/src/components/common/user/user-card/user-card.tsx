@@ -18,13 +18,14 @@ interface IProps {
 
 const UserCard = ({ user, className }: IProps): ReactElement => {
     const trans = useTrans();
+    const online = onlineStatus(user.lastActivity, trans);
     return (
         <Link href={routes.users.profile(user.id)}>
-            <a className={clsx(css.root, className)}>
+            <a title={online === 'online' ? 'online' : 'offline'} className={clsx(css.root, className)}>
                 <UserAvatar src={user.avatar} firstName={user.firstName} lastName={user.lastName} />
                 <div className={css.info}>
                     <h4>{`${user.firstName} ${user.lastName}`}</h4>
-                    <p>{onlineStatus(user.lastActivity, trans)}</p>
+                    <p className={online === 'online' ? css.online : css.offline}>{online}</p>
                 </div>
             </a>
         </Link>

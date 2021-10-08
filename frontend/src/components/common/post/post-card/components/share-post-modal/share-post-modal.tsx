@@ -1,13 +1,13 @@
 import React, { ReactElement, useState } from 'react';
 
-import { FileCopy } from '@material-ui/icons';
+import FileCopy from '@material-ui/icons/FileCopy';
 import clsx from 'clsx';
 
-import { IPost } from '../../../../../state/entities/posts/posts.interface';
-import { copyText, cutString } from '../../../../../utils/helpers';
-import routes from '../../../../../utils/routes';
-import Socials from '../../../share-links/share-links';
-import Tooltip from '../../../tooltip/tooltip';
+import { IPost } from '../../../../../../state/entities/posts/posts.interface';
+import { copyText, cutString } from '../../../../../../utils/helpers';
+import routes from '../../../../../../utils/routes';
+import Socials from '../../../../share-links/share-links';
+import Tooltip from '../../../../tooltip/tooltip';
 
 import css from './share-post-modal.module.scss';
 
