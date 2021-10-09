@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import Home from '@material-ui/icons/Home';
+import Home from '@mui/icons-material/Home';
 
 import useAuth from '../../../hooks/auth.hook';
 import routes from '../../../utils/routes';

@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import FileCopy from '@material-ui/icons/FileCopy';
+import FileCopy from '@mui/icons-material/FileCopy';
 import clsx from 'clsx';
 
 import { IPost } from '../../../../../../state/entities/posts/posts.interface';
@@ -38,7 +38,7 @@ const SharePostModal = ({ post }: IProps): ReactElement => {
     return (
         <>
             <h2 className={css.postTitle}>{post.title}</h2>
-            <p className={css.postText}>{cutString(post.description, 100)}</p>
+            <p className={css.postText}>{cutString(post.description, 180)}</p>
             {post.image && <img className={css.postImg} src={post.image} alt="" />}
 
             <Tooltip content="Натисніть щоб скопійовано посилання">

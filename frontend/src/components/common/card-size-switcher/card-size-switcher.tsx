@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 
-import Apps from '@material-ui/icons/Apps';
-import ViewComfyIcon from '@material-ui/icons/ViewComfy';
-import ViewHeadline from '@material-ui/icons/ViewHeadline';
+import Grid3x3Icon from '@mui/icons-material/Grid3x3';
+import Grid4x4Icon from '@mui/icons-material/Grid4x4';
+import ViewHeadline from '@mui/icons-material/ViewHeadline';
 import clsx from 'clsx';
 
 import useConfig from '../../../hooks/config.hook';
@@ -17,32 +17,35 @@ const CardSizeSwitcher = (): ReactElement => {
     const handleLargeCard = (): void => setConfig({ ...config, cardSize: 'lg' });
 
     return (
-        <div className={css.flex}>
-            <button
-                className={clsx(css.button, config.cardSize === 'lg' && css.active)}
-                onClick={handleLargeCard}
-                title="large cards"
-                type="button"
-            >
-                <ViewHeadline />
-            </button>
-            <button
-                className={clsx(css.button, config.cardSize === 'md' && css.active)}
-                onClick={handleMidCard}
-                title="middle cards"
-                type="button"
-            >
-                <Apps />
-            </button>
-            <button
-                className={clsx(css.button, config.cardSize === 'sm' && css.active)}
-                onClick={handleSmallCard}
-                title="small cards"
-                type="button"
-            >
-                <ViewComfyIcon />
-            </button>
-        </div>
+        <>
+            <h4 className={css.title}>Змінити розмір оголошення</h4>
+            <div className={css.flex}>
+                <button
+                    className={clsx(css.button, config.cardSize === 'lg' && css.active)}
+                    onClick={handleLargeCard}
+                    title="large cards"
+                    type="button"
+                >
+                    <ViewHeadline />
+                </button>
+                <button
+                    className={clsx(css.button, config.cardSize === 'md' && css.active)}
+                    onClick={handleMidCard}
+                    title="middle cards"
+                    type="button"
+                >
+                    <Grid3x3Icon />
+                </button>
+                <button
+                    className={clsx(css.button, config.cardSize === 'sm' && css.active)}
+                    onClick={handleSmallCard}
+                    title="small cards"
+                    type="button"
+                >
+                    <Grid4x4Icon />
+                </button>
+            </div>
+        </>
     );
 };
 

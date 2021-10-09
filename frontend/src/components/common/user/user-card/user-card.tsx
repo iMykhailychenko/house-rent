@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import useTrans from '../../../../hooks/trans.hook';
 import { IUser } from '../../../../interfaces';
+import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { onlineStatus } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
@@ -18,7 +19,9 @@ interface IProps {
 
 const UserCard = ({ user, className }: IProps): ReactElement => {
     const trans = useTrans();
-    const online = onlineStatus(user.lastActivity, trans);
+    const profileState = useProfileInfoSelector();
+    const online = profileState.data.id === user.id ? 'online' : onlineStatus(user.lastActivity, trans);
+
     return (
         <Link href={routes.users.profile(user.id)}>
             <a title={online === 'online' ? 'online' : 'offline'} className={clsx(css.root, className)}>

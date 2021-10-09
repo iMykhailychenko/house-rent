@@ -78,6 +78,10 @@
         .item {
             padding: 1rem 2rem;
             font-size: 1.4rem;
+
+            &:hover {
+                background: var(--gray-3);
+            }
         }
 
         &:global(.enter-done) {

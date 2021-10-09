@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'react';
 
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import clsx from 'clsx';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';

@@ -14,8 +14,10 @@
         "test-all": "yarn lint && yarn type-check && jest"
     },
     "dependencies": {
-        "@material-ui/core": "^4.12.3",
-        "@material-ui/icons": "^4.11.2",
+        "@emotion/react": "^11.4.1",
+        "@emotion/styled": "^11.3.0",
+        "@mui/icons-material": "^5.0.3",
+        "@mui/material": "^5.0.3",
         "@reduxjs/toolkit": "^1.6.1",
         "axios": "^0.21.1",
         "axios-logger": "^2.5.0",

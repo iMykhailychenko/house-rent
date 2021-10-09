@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import Close from '@material-ui/icons/Close';
+import Close from '@mui/icons-material/Close';
 
 import useTrans from '../../../../hooks/trans.hook';
 import Button from '../../button/button';

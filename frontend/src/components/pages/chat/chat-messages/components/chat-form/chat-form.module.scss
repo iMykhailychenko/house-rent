@@ -1,0 +1,41 @@
+.root {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.file,
+.send {
+    width: 3.5rem;
+    min-width: 3.5rem;
+    height: 5rem;
+    font-size: 2rem;
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.file {
+    svg {
+        transform: rotate(20deg);
+    }
+}
+
+.inputWrp {
+    flex-grow: 1;
+    margin: 0;
+
+    .input {
+        margin: 0;
+        padding: 1.5rem 1rem 0.5rem;
+        min-height: 5rem;
+        max-height: 50rem;
+        border-radius: 0.2rem;
+        border: none;
+
+        &:hover {
+            border: none;
+        }
+    }
+}

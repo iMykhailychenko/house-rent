@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuItem from '@mui/material/MenuItem';
 import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 

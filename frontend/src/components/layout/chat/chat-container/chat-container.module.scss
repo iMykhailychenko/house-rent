@@ -1,0 +1,4 @@
+.container {
+    width: calc(100% - (var(--chat-sidebar-width) * 2) - 4rem);
+    height: 100%;
+}

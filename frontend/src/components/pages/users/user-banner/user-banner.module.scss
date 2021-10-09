@@ -31,7 +31,7 @@
 .text,
 .title {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-size: 3rem;
     text-align: center;
 }
@@ -39,6 +39,25 @@
 .text {
     font-size: 1.6rem;
     color: var(--gray-8);
+}
+
+.role {
+    display: flex;
+
+    .roleItem {
+        margin: 0.8rem 0.4rem;
+        padding: 0.2rem 0.8rem;
+        border-radius: 1rem;
+        color: var(--primary);
+        background: var(--white);
+        font-weight: 600;
+        font-size: 1.2rem;
+
+        svg {
+            margin-right: 0.5rem;
+            font-size: 1.4rem;
+        }
+    }
 }
 
 .btn {

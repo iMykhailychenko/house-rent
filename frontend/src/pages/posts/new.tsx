@@ -13,7 +13,7 @@ const NewPostPage = (): ReactElement => {
     }, []);
 
     return (
-        <RootLayout>
+        <RootLayout withFooter={false}>
             <NewPostContainer />
         </RootLayout>
     );

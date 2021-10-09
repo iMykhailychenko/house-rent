@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import Notifications from '@material-ui/icons/Notifications';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import Badge from '../../../common/badge/badge';
@@ -29,8 +30,12 @@ const HeaderUser = (): ReactElement | null => {
         profile.data && (
             <>
                 <Button className={css.btn} secondary>
-                    <Badge className={css.badge} number={0} />
-                    <Notifications />
+                    <Badge className={css.badge} number={2} />
+                    <NotificationsNoneOutlinedIcon />
+                </Button>
+
+                <Button className={css.btn} onClick={handleClick} secondary>
+                    <SettingsOutlinedIcon />
                 </Button>
 
                 <button type="button" className={css.flex} onClick={handleClick}>

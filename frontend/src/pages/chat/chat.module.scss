@@ -1,0 +1,10 @@
+.root {
+    height: calc(var(--100vh, 100vh) - var(--header-height));
+    margin: 0;
+    padding-top: 1rem;
+    overflow: hidden;
+}
+
+.container {
+    height: 100%;
+}

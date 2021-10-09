@@ -57,7 +57,7 @@ const SinglePostComponent = (): ReactElement => {
                         <AboutApartment post={postData} />
 
                         <div className={css.wrap}>
-                            <PostCardFooter post={postData} />
+                            <PostCardFooter size="lg" post={postData} />
                         </div>
                     </>
                 </Container>

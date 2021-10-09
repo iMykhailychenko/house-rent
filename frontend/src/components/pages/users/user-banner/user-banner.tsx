@@ -1,8 +1,11 @@
 import React, { ReactElement } from 'react';
 
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+
 import { useRole } from '../../../../hooks/role.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
+import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers';
 import Button from '../../../common/button/button';
@@ -13,10 +16,26 @@ import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
 import css from './user-banner.module.scss';
 
+interface IRoleProps {
+    text: string;
+    title: string;
+}
+const RoleComponent = ({ text, title }: IRoleProps): ReactElement => {
+    const trans = useTrans();
+    return (
+        <p className={css.roleItem} title={trans(title)}>
+            <PersonSearchIcon />
+            <span>{trans(text)}</span>
+        </p>
+    );
+};
+
 const UserBanner = (): ReactElement => {
     const role = useRole();
     const trans = useTrans();
     const userState = useUserInfoSelector();
+    const profileState = useProfileInfoSelector();
+    const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
 
     const openChat = (): void => {
         if (!role.isRealtor) {
@@ -27,8 +46,6 @@ const UserBanner = (): ReactElement => {
             );
         }
     };
-
-    const online = onlineStatus(userState.data.lastActivity, trans);
 
     return (
         <div className={css.flex}>
@@ -45,14 +62,21 @@ const UserBanner = (): ReactElement => {
             <p className={online === 'online' ? css.online : css.offline} title={online === 'online' ? 'online' : 'offline'}>
                 {online}
             </p>
-            <p className={css.text}>
-                роль на сайті:{' '}
-                {userState.data.role.includes(UserRole.USER)
-                    ? userState.data.role.includes(UserRole.REALTOR)
-                        ? 'шукає житло / здає житло в оренду'
-                        : 'шукає житло'
-                    : 'здає житло в оренду'}
-            </p>
+            <p className={css.text}>Роль на сайті:</p>
+            <div className={css.role}>
+                {userState.data.role.includes(UserRole.USER) ? (
+                    userState.data.role.includes(UserRole.REALTOR) ? (
+                        <>
+                            <RoleComponent text="Шукає житло" title="Роль на сайті" />
+                            <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                        </>
+                    ) : (
+                        <RoleComponent text="Шукає житло" title="Роль на сайті" />
+                    )
+                ) : (
+                    <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                )}
+            </div>
 
             <Button primary className={css.btn} onClick={openChat}>
                 Написати повідомлення

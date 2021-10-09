@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import Switch from '@material-ui/core/Switch';
+import Switch from '@mui/material/Switch';
 
 interface IProps {
     value: boolean;

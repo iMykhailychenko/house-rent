@@ -1,7 +1,11 @@
 .flex {
     display: flex;
     align-items: center;
-    margin-left: 3rem;
+    margin-left: 1rem;
+
+    svg {
+        font-size: 2.2rem;
+    }
 }
 
 .inner {

@@ -1,0 +1,32 @@
+.root {
+    margin-bottom: 3rem;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+
+    --avatar-diameter: 5rem;
+}
+
+.inner {
+    width: calc(100% - var(--avatar-diameter) - 1rem);
+}
+
+.avatar {
+    height: var(--avatar-diameter);
+    width: var(--avatar-diameter);
+    border-radius: 50%;
+}
+
+.text {
+    height: 1.2rem;
+    margin: 0 0 0.2rem;
+}
+
+.small {
+    width: 50%;
+}

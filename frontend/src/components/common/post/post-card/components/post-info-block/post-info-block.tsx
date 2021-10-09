@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 
-import Apartment from '@material-ui/icons/Apartment';
-import ChildFriendly from '@material-ui/icons/ChildFriendly';
-import Group from '@material-ui/icons/Group';
-import HomeWork from '@material-ui/icons/HomeWork';
-import Pets from '@material-ui/icons/Pets';
-import Weekend from '@material-ui/icons/Weekend';
+import Apartment from '@mui/icons-material/Apartment';
+import ChildFriendly from '@mui/icons-material/ChildFriendly';
+import Group from '@mui/icons-material/Group';
+import HomeWork from '@mui/icons-material/HomeWork';
+import Pets from '@mui/icons-material/Pets';
+import Weekend from '@mui/icons-material/Weekend';
 
 import useTrans from '../../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../../state/entities/posts/posts.interface';

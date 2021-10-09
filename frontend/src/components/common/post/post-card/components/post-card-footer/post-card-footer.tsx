@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 
-import Bookmark from '@material-ui/icons/Bookmark';
-import Launch from '@material-ui/icons/Launch';
-import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
-import Share from '@material-ui/icons/Share';
-import Visibility from '@material-ui/icons/Visibility';
+import Bookmark from '@mui/icons-material/Bookmark';
+import QuestionAnswer from '@mui/icons-material/QuestionAnswer';
+import Share from '@mui/icons-material/Share';
+import Visibility from '@mui/icons-material/Visibility';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import clsx from 'clsx';
 
 import useAuth from '../../../../../../hooks/auth.hook';
@@ -33,8 +33,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     const [auth] = useAuth();
     const trans = useTrans();
 
-    const btnSize = size !== 'lg' ? 'sm' : 'md';
-    const smallSize = size === 'sm';
+    const isSmallSize = size === 'sm';
 
     const loginForm = (): void => {
         modal.open(
@@ -67,7 +66,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     };
 
     return (
-        <div className={clsx(css.flex, smallSize && css.smallSize)}>
+        <div className={clsx(css.flex, isSmallSize && css.smallSize)}>
             <div className={css.info}>
                 <Tooltip
                     className={css.tooltip}
@@ -76,7 +75,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                     <Button
                         size="sm"
                         primary={post.isFavorite}
-                        secondary={!post.isFavorite && !smallSize}
+                        secondary={!post.isFavorite && !isSmallSize}
                         onClick={toggleFavorite}
                     >
                         <Bookmark />
@@ -84,12 +83,12 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button size="sm" secondary={!smallSize} onClick={openSharePostModal}>
+                    <Button size="sm" secondary={!isSmallSize} onClick={openSharePostModal}>
                         <Share />
                     </Button>
                 </Tooltip>
 
-                {!smallSize && (
+                {!isSmallSize && (
                     <>
                         <Tooltip content="views">
                             <div className={css.icon}>
@@ -115,7 +114,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 )}
             </div>
 
-            {!smallSize ? (
+            {!isSmallSize ? (
                 <Tooltip className={css.tooltip} content="click_to_start_chat">
                     <Button size="sm" primary onClick={openChat}>
                         {trans('answer')}
@@ -124,7 +123,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
             ) : (
                 <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
                     <Button size="sm" onClick={openPostPreview}>
-                        <Launch />
+                        <ZoomOutMapIcon />
                     </Button>
                 </Tooltip>
             )}

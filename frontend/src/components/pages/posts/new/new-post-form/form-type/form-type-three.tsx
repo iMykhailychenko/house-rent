@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo } from 'react';
 
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { useFormik } from 'formik';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';

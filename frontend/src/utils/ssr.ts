@@ -36,19 +36,24 @@ export const withStore = <T>(callback?: SSRCallback<T>): GetServerSideProps => {
 };
 
 export const withAuthRedirect =
-    <T>(callback: SSRCallback<T> | null, reverse = false): GetServerSideProps =>
+    <T>(callback?: SSRCallback<T> | null, reverse = false): GetServerSideProps =>
     async (context: GetServerSidePropsContext): Promise<ReturnCallback<T> | { redirect: Redirect }> => {
         const token = axios.defaults.headers.common.Authorization;
         if (reverse ? token : !token) {
             return {
                 redirect: {
                     statusCode: 302,
-                    destination: routes.auth.login,
+                    destination: reverse ? routes.home : routes.auth.login,
                 },
             };
         }
 
         const store = initializeStore(rootInitialState);
+
+        if (!reverse && token) {
+            await store.dispatch(profileInfoThunk());
+            await store.dispatch(cookiesTokenAction(token));
+        }
 
         if (callback) {
             const result = await callback({ ...context, store });

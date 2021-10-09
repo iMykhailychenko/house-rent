@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { IUser } from '../../../../interfaces';
+import { IUser, UserRole } from '../../../../interfaces';
 
 import UserCard from './user-card';
 
@@ -13,7 +13,7 @@ const mockUser: IUser = {
     email: 'eee@ee.com',
     firstName: 'firstName',
     lastName: 'lastName',
-    role: null,
+    role: [UserRole.USER],
 };
 
 describe('UserCard component', () => {

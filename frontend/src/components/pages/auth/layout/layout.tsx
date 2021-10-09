@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import Home from '@material-ui/icons/Home';
+import Home from '@mui/icons-material/Home';
 
 import routes from '../../../../utils/routes';
 import Link from '../../../common/link/link';

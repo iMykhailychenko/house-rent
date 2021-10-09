@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 import clsx from 'clsx';
 
 import css from './checkbox-lg.module.scss';

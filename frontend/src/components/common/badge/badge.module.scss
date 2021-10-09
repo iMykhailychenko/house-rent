@@ -19,14 +19,13 @@
     transition: 0.3s ease-in-out;
 
     span {
-        margin-right: 0.1rem;
-        margin-bottom: 0.1rem;
+        margin-bottom: 0.25rem;
     }
 }
 
 .number:global(.enter-done) {
-    transform: scale(1);
-    opacity: 1;
+    transform: scale(1) !important;
+    opacity: 1 !important;
 }
 
 .big {

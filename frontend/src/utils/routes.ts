@@ -1,5 +1,7 @@
 const routes = {
     home: '/',
+    private: '/private',
+    chat: '/chat',
     auth: {
         login: '/auth/login',
         join: '/auth/join',

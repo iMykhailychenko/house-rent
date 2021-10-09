@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import Close from '@material-ui/icons/Close';
+import Close from '@mui/icons-material/Close';
 import clsx from 'clsx';
 
 import css from './full-screen-img.module.scss';

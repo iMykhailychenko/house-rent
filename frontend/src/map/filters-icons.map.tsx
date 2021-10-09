@@ -1,15 +1,15 @@
 import { ReactElement } from 'react';
 
-import Apartment from '@material-ui/icons/Apartment';
-import HomeWork from '@material-ui/icons/HomeWork';
-import Weekend from '@material-ui/icons/Weekend';
-import Whatshot from '@material-ui/icons/Whatshot';
+import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
+import MapsHomeWorkOutlinedIcon from '@mui/icons-material/MapsHomeWorkOutlined';
+import WeekendOutlinedIcon from '@mui/icons-material/WeekendOutlined';
+import Whatshot from '@mui/icons-material/Whatshot';
 
 const filtersIconsMap: { [key: string]: ReactElement } = {
     hot: <Whatshot />,
-    rooms: <Weekend />,
-    old_house: <HomeWork />,
-    new_house: <Apartment />,
+    rooms: <WeekendOutlinedIcon />,
+    old_house: <MapsHomeWorkOutlinedIcon />,
+    new_house: <BusinessOutlinedIcon />,
 };
 
 export default filtersIconsMap;

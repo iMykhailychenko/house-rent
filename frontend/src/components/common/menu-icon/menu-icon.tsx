@@ -1,6 +1,6 @@
 import React, { MouseEvent, ReactElement } from 'react';
 
-import Menu from '@material-ui/icons/Menu';
+import Menu from '@mui/icons-material/Menu';
 import clsx from 'clsx';
 
 import Button from '../button/button';
