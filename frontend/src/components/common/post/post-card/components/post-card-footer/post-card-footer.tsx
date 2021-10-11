@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 
-import Bookmark from '@mui/icons-material/Bookmark';
+import { Bookmark } from '@mui/icons-material';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import LaunchIcon from '@mui/icons-material/Launch';
 import QuestionAnswer from '@mui/icons-material/QuestionAnswer';
 import Share from '@mui/icons-material/Share';
 import Visibility from '@mui/icons-material/Visibility';
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import clsx from 'clsx';
 
 import useAuth from '../../../../../../hooks/auth.hook';
@@ -78,7 +79,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                         secondary={!post.isFavorite && !isSmallSize}
                         onClick={toggleFavorite}
                     >
-                        <Bookmark />
+                        {post.isFavorite ? <Bookmark /> : <BookmarkBorderIcon />}
                     </Button>
                 </Tooltip>
 
@@ -106,7 +107,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
 
                         <Tooltip className={css.tooltip} content="added_to_favorites">
                             <div className={css.icon}>
-                                <Bookmark />
+                                <BookmarkBorderIcon />
                                 <span>{post.favorite}</span>
                             </div>
                         </Tooltip>
@@ -123,7 +124,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
             ) : (
                 <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
                     <Button size="sm" onClick={openPostPreview}>
-                        <ZoomOutMapIcon />
+                        <LaunchIcon />
                     </Button>
                 </Tooltip>
             )}

@@ -1,4 +1,5 @@
 import authInitialState from './entities/auth/auth.initial-state';
+import { chatInitialState } from './entities/chats/chats.initial-state';
 import filtersInitialState from './entities/filters/filters.initial-state';
 import { mediaInitialState } from './entities/media/media.initial-state';
 import { postsInitialState } from './entities/posts/posts.initial-state';
@@ -13,6 +14,7 @@ const rootInitialState: IState = {
     posts: postsInitialState,
     users: usersInitialState,
     media: mediaInitialState,
+    chats: chatInitialState,
 };
 
 export default rootInitialState;

@@ -14,18 +14,11 @@
     color: var(--true-white);
     line-height: 1;
     border: 0.1rem solid var(--true-white);
-    transform: scale(0);
-    opacity: 0;
     transition: 0.3s ease-in-out;
 
     span {
         margin-bottom: 0.25rem;
     }
-}
-
-.number:global(.enter-done) {
-    transform: scale(1) !important;
-    opacity: 1 !important;
 }
 
 .big {

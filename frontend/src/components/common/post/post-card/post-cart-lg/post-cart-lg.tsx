@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
+import LaunchIcon from '@mui/icons-material/Launch';
 import Link from 'next/link';
 
 import useTrans from '../../../../../hooks/trans.hook';
@@ -37,7 +37,7 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
 
                 <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
                     <Button secondary onClick={openPostPreview}>
-                        <ZoomOutMapIcon />
+                        <LaunchIcon />
                     </Button>
                 </Tooltip>
             </div>

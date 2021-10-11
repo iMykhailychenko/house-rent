@@ -1,4 +1,4 @@
-import { IUser } from '../../../interfaces';
+import { IUser, Pagination } from '../../../interfaces';
 import { ThunkStatuses } from '../../interfaces';
 import { City } from '../filters/filters.interface';
 
@@ -91,14 +91,7 @@ export interface ISinglePostState {
     data: IPost;
 }
 
-export interface IPostListState {
-    error: string | null;
-    status: ThunkStatuses;
-    totalItems: number;
-    totalPages: number;
-    currentPage: number;
-    data: IPost[];
-}
+export type IPostListState = Pagination<IPost> & { error: string | null; status: ThunkStatuses };
 
 export interface IPostState {
     new: INewPostState;

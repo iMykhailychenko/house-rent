@@ -28,7 +28,7 @@ const HeaderUserNav = (): ReactElement => {
     return (
         <ul>
             <li className={css.li}>
-                <Link href={routes.chat}>
+                <Link href={routes.chats.init}>
                     <a className={css.btn}>
                         <ChatOutlinedIcon />
                         <span>{trans('Мої повідомлення')} (2)</span>

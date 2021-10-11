@@ -1,0 +1,33 @@
+.item {
+    --avatar: 5rem;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.8rem;
+
+    &:hover {
+        background: var(--gray-2);
+    }
+
+    &.new {
+        background: var(--secondary);
+    }
+
+    .inner {
+        width: calc(100% - var(--avatar) - 0.5rem);
+    }
+
+    .title {
+        font-size: 1.2rem;
+        color: var(--black);
+    }
+
+    .text {
+        font-size: 1.1rem;
+        color: var(--gray-8);
+    }
+}
