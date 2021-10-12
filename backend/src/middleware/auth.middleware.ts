@@ -1,58 +1,33 @@
-import errorWrapper from '../utils/errorWrapper';
-import { NextFunction, Request, Response } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-import ErrorNormalize from '../utils/errorNormalize';
+import { UsersService } from '../api/users/users.service';
 import authConfig from '../config/auth.config';
-import { User } from '../api/users/users.entity';
-import database from '../database';
-import errorCatch from '../utils/errorCatch';
+import { AuthRequest } from '../interfaces/users.interface';
 
-const auth = errorWrapper(async (req: Request & { user: User }, _: Response, next: NextFunction) => {
-    const token = req.get('Authorization') && req.get('Authorization').replace('Bearer ', '');
-    if (!token) throw new ErrorNormalize(401, 'no token provided');
+@Injectable()
+export class AuthMiddleware implements NestMiddleware {
+    constructor(private readonly userService: UsersService) {}
 
-    let decoded: JwtPayload;
-    try {
-        decoded = jwt.verify(token, authConfig.accessKey) as JwtPayload;
-    } catch (error) {
-        throw new ErrorNormalize(401, 'invalid token provided');
+    async use(req: AuthRequest, res: Response, next: NextFunction) {
+        if (!req.get('Authorization')) {
+            req.user = null;
+            next();
+            return;
+        }
+
+        const token = req.get('Authorization').replace('Bearer ', '');
+
+        try {
+            const decoded = jwt.verify(token, authConfig.accessKey);
+            req.user = await this.userService.findById(decoded.id);
+        } catch (error) {
+            req.user = null;
+            next();
+            return;
+        }
+
+        next();
     }
-    if (!decoded?.id) throw new ErrorNormalize(401, 'invalid token provided');
-    if (+decoded.exp < Date.now()) throw new ErrorNormalize(401, 'token is outdated');
-
-    const repository = database.connection.getRepository(User);
-    const user = await repository.findOne({ id: decoded.id }).catch(errorCatch(401, 'not authorized'));
-    if (!user) throw new ErrorNormalize(401, 'not authorized');
-
-    user.lastActivity = new Date();
-    await repository.save(user).catch(errorCatch(400));
-
-    req.user = user;
-    return next();
-});
-
-export const checkAuth = errorWrapper(async (req: Request & { user: User }, _: Response, next: NextFunction) => {
-    const token = req.get('Authorization') && req.get('Authorization').replace('Bearer ', '');
-    if (!token) return next();
-
-    let decoded: JwtPayload;
-    try {
-        decoded = jwt.verify(token, authConfig.accessKey) as JwtPayload;
-    } catch (error) {
-        return next();
-    }
-
-    if (!decoded?.id || +decoded.exp < Date.now()) return next();
-    const repository = database.connection.getRepository(User);
-    const user = await repository.findOne({ id: decoded.id }).catch(next);
-    if (!user) return next();
-
-    user.lastActivity = new Date();
-    await repository.save(user).catch(errorCatch(400));
-
-    req.user = user;
-    return next();
-});
-
-export default auth;
+}

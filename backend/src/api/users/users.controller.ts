@@ -1,58 +1,52 @@
-import { Request, Response } from 'express';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 
-import database from '../../database';
-import { User } from './users.entity';
-import errorWrapper from '../../utils/errorWrapper';
-import ErrorNormalize from '../../utils/errorNormalize';
-import errorCatch from '../../utils/errorCatch';
-import { Role } from './dto/role.dto';
-import { validate } from 'class-validator';
+import { User } from '../../decorators/users.decorator';
+import { AuthGuard } from '../../guards/auth.guards';
+import { Pagination } from '../../interfaces/app.interface';
+import { LoginInterface } from '../../interfaces/users.interface';
 
-export const usersListController = errorWrapper(async (req: Request, res: Response): Promise<void> => {
-    const page = +req.query.page || 1;
-    const limit = +req.query.limit || 20;
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
+import { UserEntity } from './entities/users.entity';
+import { UsersService } from './users.service';
 
-    const repository = database.connection.getRepository(User);
-    const [result, total] = await repository.findAndCount({
-        take: limit,
-        skip: limit * (page - 1),
-    });
+@Controller('users')
+export class UsersController {
+    constructor(private readonly userService: UsersService) {}
 
-    res.json({
-        totalItems: total,
-        totalPages: Math.ceil(total / limit) - 1,
-        currentPage: +page,
-        data: result,
-    });
-});
+    @Post('')
+    @UsePipes(new ValidationPipe({ transform: true }))
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async join(@Body() createUserDto: CreateUserDto): Promise<void> {
+        await this.userService.createUser(createUserDto);
+    }
 
-export const userProfileController = errorWrapper(async (req: Request & { user: User }, res: Response) => {
-    res.json(req.user);
-});
+    @Post('login')
+    @UsePipes(new ValidationPipe())
+    async login(@Body() createUserDto: CreateUserDto): Promise<LoginInterface> {
+        return await this.userService.login(createUserDto);
+    }
 
-export const singleUserController = errorWrapper(async (req: Request, res: Response) => {
-    const repository = database.connection.getRepository(User);
-    const user = await repository.findOne({ id: +req.params.userId }).catch(errorCatch(400));
+    @Get('')
+    async findAll(@Query('page') page = 1, @Query('limit') limit = 1): Promise<Pagination<UserEntity>> {
+        return await this.userService.findAll(page, limit);
+    }
 
-    if (!user) throw new ErrorNormalize(404, 'user with this id do not exist');
+    @Get(':userId')
+    async findById(@Param('userId') userId: number): Promise<UserEntity> {
+        return await this.userService.findById(userId);
+    }
 
-    res.json(user);
-});
+    @Get('profile')
+    @UseGuards(AuthGuard)
+    async getCurrentUser(@User() user: UserEntity): Promise<UserEntity> {
+        return user;
+    }
 
-export const userRoleController = errorWrapper(async (req: Request, res: Response) => {
-    const repository = database.connection.getRepository(User);
-    const user = await repository.findOne({ id: +req.params.userId }).catch(error => {
-        throw new ErrorNormalize(400, error);
-    });
-    if (!user) throw new ErrorNormalize(404, 'user with this id do not exist');
-
-    const role = new Role();
-    role.role = req.body.role;
-    const errors = await validate(role);
-    if (errors.length) throw new ErrorNormalize(400, Object.values(errors[0].constraints)[0]);
-
-    user.role = req.body.role;
-    await repository.save(user).catch(errorCatch(400));
-
-    res.status(204).send();
-});
+    @Put('')
+    @UseGuards(AuthGuard)
+    @UsePipes(new ValidationPipe())
+    async updateUser(@User('id') userId: number, @Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
+        return await this.userService.updateUser(userId, updateUserDto);
+    }
+}

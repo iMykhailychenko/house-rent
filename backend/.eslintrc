@@ -1,6 +1,6 @@
 {
   "plugins": [
-    "simple-import-sort"
+    "import"
   ],
   "root": true,
   "parser": "@typescript-eslint/parser",
@@ -35,7 +35,21 @@
         "usePrettierrc": true
       }
     ],
-    "no-unused-vars": "warn",
+    "import/first": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": false },
+        "groups": ["external", "builtin", "parent", "sibling", "index"],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always"
+      }
+    ],
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/no-mutable-exports": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "no-console": "off",
     "comma-dangle": "off",
     "no-underscore-dangle": "off",
