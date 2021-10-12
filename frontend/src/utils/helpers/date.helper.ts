@@ -38,6 +38,11 @@ export const formatDate = (value: string | Date | number = new Date(), trans: Tr
     )} ${date.getFullYear()}`;
 };
 
+export const formatTime = (value: string | Date | number = new Date()): string => {
+    const date = validateDate(value);
+    return `${addZero(date.getHours())}:${addZero(date.getMinutes())}`;
+};
+
 const TWENTY_MINUTES_IN_MS = 1_200_000;
 
 export const onlineStatus = (value: string | number | Date = new Date(), trans: TransFn): string => {

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { useChatListSelector } from '../../../../../state/entities/chats/chats.selector';
-import ChatItemSkeleton from '../../../../common/skeletons/chat/chat-item/chat-item';
+import { useChatListSelector } from '../../../../state/entities/chats/chats.selector';
+import ChatItemSkeleton from '../../../common/skeletons/chat/chat-item/chat-item';
 
 import ChatListItem from './components/chat-list-item';
 

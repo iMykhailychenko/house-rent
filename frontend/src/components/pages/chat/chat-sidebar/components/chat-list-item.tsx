@@ -3,11 +3,11 @@ import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { Chat } from '../../../../../../state/entities/chats/chats.interface';
-import { cutString } from '../../../../../../utils/helpers';
-import routes from '../../../../../../utils/routes';
-import Badge from '../../../../../common/badge/badge';
-import UserAvatar from '../../../../../common/user/user-avatar/user-avatar';
+import { Chat } from '../../../../../state/entities/chats/chats.interface';
+import { cutString } from '../../../../../utils/helpers';
+import routes from '../../../../../utils/routes';
+import Badge from '../../../../common/badge/badge';
+import UserAvatar from '../../../../common/user/user-avatar/user-avatar';
 import css from '../chat-sidebar.module.scss';
 
 interface IProps {

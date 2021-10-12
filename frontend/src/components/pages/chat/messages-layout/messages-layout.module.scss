@@ -1,0 +1,40 @@
+.date {
+    width: 100%;
+    margin: 6rem 0 0;
+    padding: 0.5rem 0;
+    border-bottom: 0.1em solid var(--gray-4);
+    color: var(--gray-6);
+}
+
+.flex {
+    display: flex;
+    align-items: flex-start;
+    margin: 3rem 0 -1.5rem;
+
+    &:hover {
+        .user {
+            color: var(--primary);
+        }
+    }
+}
+
+.textWrp {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0.5rem 0;
+
+    .text {
+        width: calc(100% - 9rem);
+        margin-left: 4.5rem;
+        color: var(--gray-9);
+        font-size: 1.3rem;
+    }
+
+    .time {
+        color: var(--gray-6);
+        font-size: 1.1rem;
+    }
+}

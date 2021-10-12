@@ -1,90 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import { Pagination, Response, UserRole } from '../../../interfaces';
+import { Pagination, Response } from '../../../interfaces';
 
-import { Chat } from './chats.interface';
-
-const chatMock: Chat[] = [
-    {
-        id: 1,
-        creationDate: '2021-10-07T15:07:30.114Z',
-        newMessages: 0,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: {
-            id: 1,
-            creationDate: '2021-10-07T15:07:30.114Z',
-            lastActivity: '2021-10-11T06:42:47.760Z',
-            avatar: null,
-            firstName: 'Иван',
-            lastName: 'Бобров',
-            isEmailVerified: false,
-            email: 'user2@email.com',
-            role: [UserRole.REALTOR],
-        },
-    },
-    {
-        id: 2,
-        creationDate: '2021-10-07T15:07:30.114Z',
-        newMessages: 3,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: {
-            id: 1,
-            creationDate: '2021-10-07T15:07:30.114Z',
-            lastActivity: '2021-10-11T06:42:47.760Z',
-            avatar: null,
-            firstName: 'Иван',
-            lastName: 'Бобров',
-            isEmailVerified: false,
-            email: 'user2@email.com',
-            role: [UserRole.REALTOR],
-        },
-    },
-    {
-        id: 2,
-        creationDate: '2021-10-07T15:07:30.114Z',
-        newMessages: 31,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: {
-            id: 1,
-            creationDate: '2021-10-07T15:07:30.114Z',
-            lastActivity: '2021-10-11T06:42:47.760Z',
-            avatar: null,
-            firstName: 'Иван',
-            lastName: 'Бобров',
-            isEmailVerified: false,
-            email: 'user2@email.com',
-            role: [UserRole.REALTOR],
-        },
-    },
-    {
-        id: 3,
-        creationDate: '2021-10-07T15:07:30.114Z',
-        newMessages: 0,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: {
-            id: 1,
-            creationDate: '2021-10-07T15:07:30.114Z',
-            lastActivity: '2021-10-11T06:42:47.760Z',
-            avatar: null,
-            firstName: 'Иван',
-            lastName: 'Бобров',
-            isEmailVerified: false,
-            email: 'user2@email.com',
-            role: [UserRole.REALTOR],
-        },
-    },
-];
-
-const chatPaginationMock = {
-    totalItems: 0,
-    totalPages: 0,
-    currentPage: 0,
-    data: chatMock,
-};
+import { Chat, Message, MessagesListPayload } from './chats.interface';
+import { chatMockPagination, messagesMockPagination } from './chats.mock';
 
 const chatsServices = {
     // chats: (page = 1): Response<Pagination<Chat>> => axios.get(endpointConfig(`/chats/?page=${page}`)),
@@ -97,13 +16,26 @@ const chatsServices = {
         new Promise<AxiosResponse<Pagination<Chat>>>(resolve => {
             setTimeout(() => {
                 resolve({
-                    data: chatPaginationMock,
+                    data: chatMockPagination,
                     status: 200 + page,
                     statusText: 'ok',
                     headers: null,
                     config: { url: '' },
                 } as AxiosResponse);
-            }, 3000);
+            }, 1500);
+        }),
+
+    messages: (data: MessagesListPayload): Response<Pagination<Message>> =>
+        new Promise<AxiosResponse<Pagination<Message>>>(resolve => {
+            setTimeout(() => {
+                resolve({
+                    data: messagesMockPagination,
+                    status: 200 + data.chatId,
+                    statusText: 'ok',
+                    headers: null,
+                    config: { url: '' },
+                } as AxiosResponse);
+            }, 1500);
         }),
 };
 

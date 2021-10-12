@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import ImageWrp from '../../../../common/image-wrp/image-wrp';
+import ImageWrp from '../../../common/image-wrp/image-wrp';
 
 import css from './chat-banner.module.scss';
 

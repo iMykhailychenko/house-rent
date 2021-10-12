@@ -32,6 +32,11 @@ export interface SingleChat {
     data: Chat | null;
 }
 
+export interface MessagesListPayload {
+    page?: number;
+    chatId: number;
+}
+
 export interface IChatsState {
     single: SingleChat;
     list: ChatsList;

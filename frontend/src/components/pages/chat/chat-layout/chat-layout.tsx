@@ -3,15 +3,15 @@ import React, { ReactElement } from 'react';
 import ChatContainer from '../../../layout/chat/chat-container/chat-container';
 import ChatFlow from '../../../layout/chat/chat-flow/chat-flow';
 import ChatSidebarWrp from '../../../layout/chat/chat-sidebar-wrp/chat-sidebar-wrp';
-import ChatSidebar from '../components/chat-sidebar/chat-sidebar';
+import ChatSidebar from '../chat-sidebar/chat-sidebar';
 
-import css from './chat-component.module.scss';
+import css from './chat-layout.module.scss';
 
 interface IProps {
     disabled?: boolean;
     children: ReactElement;
 }
-const ChatComponent = ({ disabled, children }: IProps): ReactElement => {
+const ChatLayout = ({ disabled, children }: IProps): ReactElement => {
     return (
         <div className={css.root}>
             <ChatSidebarWrp>
@@ -24,4 +24,4 @@ const ChatComponent = ({ disabled, children }: IProps): ReactElement => {
     );
 };
 
-export default ChatComponent;
+export default ChatLayout;

@@ -4,8 +4,8 @@ import { GetServerSideProps } from 'next';
 
 import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
-import ChatComponent from '../../components/pages/chat/chats-page/chat-component';
-import ChatBanner from '../../components/pages/chat/components/chat-banner/chat-banner';
+import ChatBanner from '../../components/pages/chat/chat-banner/chat-banner';
+import ChatLayout from '../../components/pages/chat/chat-layout/chat-layout';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { chatListThunk } from '../../state/entities/chats/chats.thunk';
 import { withAuthRedirect } from '../../utils/ssr';
@@ -22,9 +22,9 @@ const Chats = (): ReactElement => {
     return (
         <RootLayout withFooter={false} className={css.root}>
             <Container size="md" className={css.container}>
-                <ChatComponent disabled>
+                <ChatLayout disabled>
                     <ChatBanner />
-                </ChatComponent>
+                </ChatLayout>
             </Container>
         </RootLayout>
     );
