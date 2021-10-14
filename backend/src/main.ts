@@ -6,6 +6,7 @@ import appConfig from './config/app.config';
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
         logger: true,
+        cors: true,
     });
     app.setGlobalPrefix('api/v1');
     await app.listen(appConfig.port, appConfig.host, () =>
@@ -13,4 +14,4 @@ async function bootstrap() {
     );
 }
 
-bootstrap().catch(() => console.log('Init error'));
+bootstrap().catch(() => console.log('error while initializing app'));

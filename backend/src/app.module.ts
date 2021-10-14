@@ -15,7 +15,7 @@ import { AuthMiddleware } from './middleware/auth.middleware';
     providers: [],
 })
 export class AppModule {
-    cofigure(consumer: MiddlewareConsumer): void {
+    configure(consumer: MiddlewareConsumer): void {
         consumer.apply(AuthMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
     }
 }

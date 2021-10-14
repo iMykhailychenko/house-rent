@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import authConfig from '../../../config/auth.config';
@@ -10,7 +10,7 @@ export enum UserRole {
     REALTOR = 'realtor',
 }
 
-@Entity()
+@Entity('users')
 export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number;

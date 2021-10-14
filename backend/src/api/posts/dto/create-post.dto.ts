@@ -3,7 +3,6 @@ import { IsArray, IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Ma
 import {
     City,
     DISTRICT_FILTERS,
-    GENERAL_FILTERS,
     HOUSE_TYPE_FILTERS,
     POST_STATUS,
     PRICE_FILTERS,
@@ -14,7 +13,7 @@ import { DistrictValidator } from '../posts.validate';
 export class CreatePostDto {
     @IsString()
     @IsNotEmpty()
-    @MaxLength(300)
+    @MaxLength(500)
     title: string;
 
     @IsString()
@@ -41,15 +40,10 @@ export class CreatePostDto {
     @IsDate()
     creationDate: Date = new Date();
 
-    @IsArray()
+    @IsString()
     @IsNotEmpty()
-    @IsEnum(POST_STATUS, { each: true })
-    status: POST_STATUS[] = [POST_STATUS.IDLE];
-
-    @IsArray()
-    @IsNotEmpty()
-    @IsEnum(GENERAL_FILTERS, { each: true })
-    generalFilters: GENERAL_FILTERS[];
+    @IsEnum(POST_STATUS)
+    status: POST_STATUS = POST_STATUS.IDLE;
 
     @IsArray()
     @IsNotEmpty()

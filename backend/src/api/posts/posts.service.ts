@@ -23,30 +23,29 @@ export class PostsService {
 
     getSqlQueryForSearch(searchFilters: SearchPostDto): SelectQueryBuilder<PostEntity> {
         return this.postRepository
-            .createQueryBuilder('post')
-            .leftJoinAndSelect('post.user', 'user')
-            .loadRelationCountAndMap('post.favorite', 'post.favorite')
-            .loadRelationCountAndMap('post.chats', 'post.chats')
-            .where('post.status = :status', { status: POST_STATUS.IDLE })
-            .andWhere('((:general)::text[] IS NULL OR (post.generalFilters)::text[] @> (:general)::text[])', {
+            .createQueryBuilder('posts')
+            .leftJoinAndSelect('posts.user', 'users')
+            .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
+            .where('posts.status = :status', { status: POST_STATUS.IDLE })
+            .andWhere('((:general)::text[] IS NULL OR (posts.generalFilters)::text[] @> (:general)::text[])', {
                 general: searchFilters.general,
             })
-            .andWhere('((:room)::text[] IS NULL OR (post.roomFilters)::text[] @> (:room)::text[])', { room: searchFilters.room })
-            .andWhere('((:houseType)::text[] IS NULL OR (post.houseTypeFilters)::text[] @> (:houseType)::text[])', {
+            .andWhere('((:room)::text[] IS NULL OR (posts.roomFilters)::text[] @> (:room)::text[])', { room: searchFilters.room })
+            .andWhere('((:houseType)::text[] IS NULL OR (posts.houseTypeFilters)::text[] @> (:houseType)::text[])', {
                 houseType: searchFilters.houseType,
             })
-            .andWhere('((:city)::varchar IS NULL OR post.cityFilters = :city)', { city: searchFilters.city })
-            .andWhere('((:district)::text[] IS NULL OR (post.districtFilters)::text[] @> (:district)::text[])', {
+            .andWhere('((:city)::varchar IS NULL OR posts.cityFilters = :city)', { city: searchFilters.city })
+            .andWhere('((:district)::text[] IS NULL OR (posts.districtFilters)::text[] @> (:district)::text[])', {
                 district: searchFilters.district,
             })
-            .andWhere('((:price)::text[] IS NULL OR (post.priceFilters)::text[] @> (:price)::text[])', {
+            .andWhere('((:price)::text[] IS NULL OR (posts.priceFilters)::text[] @> (:price)::text[])', {
                 price: searchFilters.price,
             })
             .andWhere(
-                '(((:query)::varchar IS NULL OR LOWER(post.title) like LOWER(:query)) OR ((:query)::varchar IS NULL OR LOWER(post.description) like LOWER(:query)))',
+                '(((:query)::varchar IS NULL OR LOWER(posts.title) like LOWER(:query)) OR ((:query)::varchar IS NULL OR LOWER(posts.description) like LOWER(:query)))',
                 { query: searchFilters.query ? `%${searchFilters.query}%` : null },
             )
-            .orderBy('post.creationDate', 'DESC');
+            .orderBy('posts.creationDate', 'DESC');
     }
 
     formatPagination<T>(data: T[], total: number, searchPostDto: SearchPostDto): Pagination<T> {
@@ -73,11 +72,11 @@ export class PostsService {
 
     async findAllForUser(userId: number, searchPostDto: SearchPostDto): Promise<Pagination<PostEntity>> {
         const sqlQuery = await this.getSqlQueryForSearch(searchPostDto);
-        const total = await sqlQuery.andWhere('user.id = :userId', { userId }).getCount();
+        const total = await sqlQuery.andWhere('users.id = :userId', { userId }).getCount();
 
         const { page = 1, limit = 20 } = searchPostDto;
         const result = await sqlQuery
-            .andWhere('user.id = :userId', { userId })
+            .andWhere('users.id = :userId', { userId })
             .offset(limit * (page - 1))
             .limit(limit)
             .getMany();
@@ -103,17 +102,16 @@ export class PostsService {
 
     async findById(postId: number): Promise<PostEntity> {
         const post = await this.postRepository
-            .createQueryBuilder('post')
+            .createQueryBuilder('posts')
             .where({ id: postId })
-            .leftJoinAndSelect('post.user', 'user')
-            .loadRelationCountAndMap('post.favorite', 'post.favorite')
-            .loadRelationCountAndMap('post.chats', 'post.chats')
+            .leftJoinAndSelect('posts.user', 'users')
+            .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
             .getOne();
 
         if (!post) throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
 
         await this.postRepository
-            .createQueryBuilder('post')
+            .createQueryBuilder('posts')
             .update(PostEntity)
             .set({ views: () => 'views + 1' })
             .where({ id: postId })
@@ -124,7 +122,7 @@ export class PostsService {
 
     async createPost(userId: number, createPostDto: CreatePostDto): Promise<PostEntity> {
         const post = new PostEntity();
-        Object.assign(createPostDto, post);
+        Object.assign(post, createPostDto);
         post.user = await this.userRepository.findOne(userId);
         return await this.postRepository.save(post);
     }
@@ -134,7 +132,7 @@ export class PostsService {
         if (post.user.id !== userId) {
             throw new HttpException('No permission', HttpStatus.FORBIDDEN);
         }
-        Object.assign(updatePostDto, post);
+        Object.assign(post, updatePostDto);
         return await this.postRepository.save(post);
     }
 

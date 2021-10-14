@@ -1,12 +1,10 @@
-import { IsArray, IsEnum, IsNumber, IsOptional, IsString, Min, Validate } from 'class-validator';
+import { IsArray, IsEnum, IsInt, IsOptional, IsString, Min, Validate } from 'class-validator';
 
 import {
-    ALL_STATUSES,
     City,
     DISTRICT_FILTERS,
     GENERAL_FILTERS,
     HOUSE_TYPE_FILTERS,
-    POST_STATUS,
     PRICE_FILTERS,
     ROOM_FILTERS,
 } from '../../../interfaces/posts.interface';
@@ -16,11 +14,6 @@ export class SearchPostDto {
     @IsString()
     @IsOptional()
     query: string;
-
-    @IsArray()
-    @IsEnum(POST_STATUS, { each: true })
-    @IsOptional()
-    status: POST_STATUS[] = ALL_STATUSES;
 
     @IsArray()
     @IsEnum(GENERAL_FILTERS, { each: true })
@@ -51,13 +44,13 @@ export class SearchPostDto {
     @IsOptional()
     district: DISTRICT_FILTERS[];
 
-    @IsNumber()
+    @IsInt()
     @IsOptional()
-    @Min(1)
+    @Min(0)
     page: number;
 
-    @IsNumber()
+    @IsInt()
     @IsOptional()
-    @Min(1)
+    @Min(0)
     limit: number;
 }

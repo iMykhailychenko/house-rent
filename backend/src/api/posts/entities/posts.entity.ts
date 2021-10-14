@@ -13,13 +13,13 @@ import {
 import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
 import { UserEntity } from '../../users/entities/users.entity';
 
-@Entity()
+@Entity('posts')
 export class PostEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('text', { array: true, default: [POST_STATUS.IDLE] })
-    status: POST_STATUS[];
+    @Column({ type: 'varchar', default: POST_STATUS })
+    status: POST_STATUS;
 
     @Column({ type: 'timestamp', default: new Date() })
     creationDate: Date;

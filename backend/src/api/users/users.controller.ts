@@ -5,11 +5,11 @@ import {
     HttpCode,
     HttpStatus,
     Param,
+    ParseIntPipe,
     Post,
     Put,
     Query,
     UseGuards,
-    UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
 
@@ -30,26 +30,22 @@ export class UsersController {
     constructor(private readonly userService: UsersService) {}
 
     @Post('')
-    @UsePipes(new ValidationPipe({ transform: true }))
     @HttpCode(HttpStatus.NO_CONTENT)
-    async join(@Body() createUserDto: CreateUserDto): Promise<void> {
+    async join(@Body(new ValidationPipe({ transform: true })) createUserDto: CreateUserDto): Promise<void> {
         await this.userService.createUser(createUserDto);
     }
 
     @Post('login')
-    @UsePipes(new ValidationPipe())
-    async login(@Body() loginDto: LoginDto): Promise<LoginInterface> {
+    async login(@Body(new ValidationPipe({ transform: true })) loginDto: LoginDto): Promise<LoginInterface> {
         return await this.userService.login(loginDto);
     }
 
     @Get('')
-    async findAll(@Query('page') page = 1, @Query('limit') limit = 1): Promise<Pagination<UserEntity>> {
+    async findAll(
+        @Query('page', ParseIntPipe) page = 1,
+        @Query('limit', ParseIntPipe) limit = 1,
+    ): Promise<Pagination<UserEntity>> {
         return await this.userService.findAll(page, limit);
-    }
-
-    @Get(':userId')
-    async findById(@Param('userId') userId: number): Promise<UserEntity> {
-        return await this.userService.findById(userId);
     }
 
     @Get('profile')
@@ -58,17 +54,26 @@ export class UsersController {
         return user;
     }
 
+    @Get(':userId')
+    async findById(@Param('userId', ParseIntPipe) userId: number): Promise<UserEntity> {
+        return await this.userService.findById(userId);
+    }
+
     @Put('role')
     @UseGuards(AuthGuard)
-    @UsePipes(new ValidationPipe())
-    async updateUserRole(@User('id') userId: number, @Body() roleDto: RoleDto): Promise<UserEntity> {
+    async updateUserRole(
+        @User('id') userId: number,
+        @Body(new ValidationPipe({ transform: true })) roleDto: RoleDto,
+    ): Promise<UserEntity> {
         return await this.userService.updateUserRole(userId, roleDto);
     }
 
     @Put('')
     @UseGuards(AuthGuard)
-    @UsePipes(new ValidationPipe())
-    async updateUser(@User('id') userId: number, @Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
+    async updateUser(
+        @User('id') userId: number,
+        @Body(new ValidationPipe({ transform: true })) updateUserDto: UpdateUserDto,
+    ): Promise<UserEntity> {
         return await this.userService.updateUser(userId, updateUserDto);
     }
 }
