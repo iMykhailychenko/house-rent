@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
-import authConfig from 'src/config/auth.config';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { ChatEntity } from '../../chats/entities/chats.entity';
+import authConfig from '../../../config/auth.config';
 import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
 import { PostEntity } from '../../posts/entities/posts.entity';
 
@@ -42,12 +41,6 @@ export class UserEntity {
 
     @OneToMany(() => PostEntity, posts => posts.user)
     posts: PostEntity[];
-
-    @OneToMany(() => ChatEntity, chats => chats.author)
-    chatsAuthor: ChatEntity[];
-
-    @OneToMany(() => ChatEntity, chats => chats.companion)
-    chatsCompanion: ChatEntity[];
 
     @OneToMany(() => FavoriteEntity, favorite => favorite.user)
     favorite: FavoriteEntity[];

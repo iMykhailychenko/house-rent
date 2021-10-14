@@ -10,7 +10,7 @@ import { AuthRequest } from '../interfaces/users.interface';
 export class AuthMiddleware implements NestMiddleware {
     constructor(private readonly userService: UsersService) {}
 
-    async use(req: AuthRequest, res: Response, next: NextFunction) {
+    async use(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
         if (!req.get('Authorization')) {
             req.user = null;
             next();

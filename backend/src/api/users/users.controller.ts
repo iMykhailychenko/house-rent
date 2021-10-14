@@ -1,4 +1,17 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post,
+    Put,
+    Query,
+    UseGuards,
+    UsePipes,
+    ValidationPipe,
+} from '@nestjs/common';
 
 import { User } from '../../decorators/users.decorator';
 import { AuthGuard } from '../../guards/auth.guards';
@@ -6,6 +19,8 @@ import { Pagination } from '../../interfaces/app.interface';
 import { LoginInterface } from '../../interfaces/users.interface';
 
 import CreateUserDto from './dto/create-user.dto';
+import { LoginDto } from './dto/login.dto';
+import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
 import { UsersService } from './users.service';
@@ -23,8 +38,8 @@ export class UsersController {
 
     @Post('login')
     @UsePipes(new ValidationPipe())
-    async login(@Body() createUserDto: CreateUserDto): Promise<LoginInterface> {
-        return await this.userService.login(createUserDto);
+    async login(@Body() loginDto: LoginDto): Promise<LoginInterface> {
+        return await this.userService.login(loginDto);
     }
 
     @Get('')
@@ -41,6 +56,13 @@ export class UsersController {
     @UseGuards(AuthGuard)
     async getCurrentUser(@User() user: UserEntity): Promise<UserEntity> {
         return user;
+    }
+
+    @Put('role')
+    @UseGuards(AuthGuard)
+    @UsePipes(new ValidationPipe())
+    async updateUserRole(@User('id') userId: number, @Body() roleDto: RoleDto): Promise<UserEntity> {
+        return await this.userService.updateUserRole(userId, roleDto);
     }
 
     @Put('')

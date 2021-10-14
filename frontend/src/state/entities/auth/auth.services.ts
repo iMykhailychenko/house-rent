@@ -6,8 +6,8 @@ import { Response } from '../../../interfaces';
 import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
 
 const authServices = {
-    login: (body: ILoginPayload): Response<IAuthResponse> => axios.post(endpointConfig('/auth/login'), body),
-    join: (body: IJoinPayload): Response<void> => axios.post(endpointConfig('/auth/join'), body),
+    join: (body: IJoinPayload): Response<void> => axios.post(endpointConfig('/users'), body),
+    login: (body: ILoginPayload): Response<IAuthResponse> => axios.post(endpointConfig('/users/login'), body),
 };
 
 export default authServices;

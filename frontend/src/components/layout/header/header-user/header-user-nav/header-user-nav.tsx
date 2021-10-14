@@ -22,7 +22,7 @@ const HeaderUserNav = (): ReactElement => {
 
     const logout = (): void => {
         dispatch(logoutAction());
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (

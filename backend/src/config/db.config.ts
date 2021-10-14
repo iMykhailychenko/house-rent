@@ -9,8 +9,9 @@ const dbConfig: ConnectionOptions = {
     password: process.env.POSTGRES_PASSWORD || 'house_rent_test',
     logging: true,
     synchronize: false,
+    migrationsRun: true,
     entities: ['dist/**/*.entity{.ts,.js}'],
-    migrations: ['migrations/**/*.entity{.ts,.js}'],
+    migrations: ['migrations/**/*{.ts,.js}'],
     cli: {
         migrationsDir: 'migrations',
     },

@@ -10,6 +10,7 @@ import { LoginInterface } from '../../interfaces/users.interface';
 
 import CreateUserDto from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
 
@@ -58,6 +59,12 @@ export class UsersService {
             currentPage: +page,
             data: result,
         };
+    }
+
+    async updateUserRole(userId: number, roleDto: RoleDto): Promise<UserEntity> {
+        const user = await this.findById(userId);
+        user.role = roleDto.role;
+        return await this.userRepository.save(user);
     }
 
     async updateUser(userId: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {

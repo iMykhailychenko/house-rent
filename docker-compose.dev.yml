@@ -5,7 +5,7 @@ services:
     container_name: backend
     build: ./backend
     restart: unless-stopped
-    command: yarn dev
+    command: yarn start:dev
     env_file:
       - ./.env.dev
     volumes:
