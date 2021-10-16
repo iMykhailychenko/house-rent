@@ -1,4 +1,3 @@
-import { IsBoolean } from 'class-validator';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import {
@@ -27,7 +26,7 @@ export class PostEntity {
     @Column({ type: 'int', default: 0 })
     views: number;
 
-    @Column({ type: 'varchar', length: 300 })
+    @Column({ type: 'varchar' })
     title: string;
 
     @Column({ type: 'varchar' })
@@ -66,7 +65,6 @@ export class PostEntity {
     @ManyToOne(() => UserEntity, user => user.posts)
     user: UserEntity;
 
-    @IsBoolean()
     isFavorite: boolean;
 
     @OneToMany(() => FavoriteEntity, favorite => favorite.post)

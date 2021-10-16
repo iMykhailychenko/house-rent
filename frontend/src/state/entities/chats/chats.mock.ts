@@ -23,41 +23,6 @@ const user2 = {
     role: [UserRole.USER],
 };
 
-const chatMock: Chat[] = [
-    {
-        id: 1,
-        creationDate: '2021-10-07T23:09:30.114Z',
-        newMessages: 0,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: user,
-    },
-    {
-        id: 2,
-        creationDate: '2021-10-07T23:07:30.114Z',
-        newMessages: 3,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: user,
-    },
-    {
-        id: 2,
-        creationDate: '2021-10-07T22:22:30.114Z',
-        newMessages: 31,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: user,
-    },
-    {
-        id: 3,
-        creationDate: '2021-10-07T22:12:30.114Z',
-        newMessages: 0,
-        lastMessage:
-            'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
-        recipient: user,
-    },
-];
-
 const messagesMock: Message[] = [
     {
         id: 5,
@@ -155,6 +120,16 @@ const messagesMock: Message[] = [
         uploads: [],
         creationDate: '2021-10-04T10:07:31.114Z',
         author: user,
+    },
+];
+
+const chatMock: Chat[] = [
+    {
+        id: 1,
+        creationDate: '2021-10-07T23:09:30.114Z',
+        unreadMessages: 0,
+        lastMessage: messagesMock[0],
+        user: user2,
     },
 ];
 

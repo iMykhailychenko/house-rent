@@ -54,8 +54,8 @@ const JoinForm = (): ReactElement => {
         initialValues: {
             firstName: '',
             lastName: '',
-            password: '',
-            email: '',
+            email: 'user2@email.com',
+            password: 'Asdf1234!',
         },
         validationSchema: JoinSchema,
         onSubmit: values => {

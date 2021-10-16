@@ -7,10 +7,14 @@ export const addMonthToDate = (amount = 1): Date => {
     return new Date(today.setMonth(today.getMonth() + amount));
 };
 
+const convertUTCDateToLocalDate = (date: Date): Date => {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+};
+
 export const validateDate = (value: string | Date | number): Date => {
     try {
-        if (value instanceof Date) return value;
-        return new Date(value);
+        if (value instanceof Date) return convertUTCDateToLocalDate(value);
+        return convertUTCDateToLocalDate(new Date(value));
     } catch (e) {
         return new Date();
     }

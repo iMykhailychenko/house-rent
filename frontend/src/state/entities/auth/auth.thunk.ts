@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { modal } from '../../../components/common/modal/modal';
-import { addMonthToDate } from '../../../utils/helpers';
+import { addMonthToDate, errorNotif } from '../../../utils/helpers';
 import routes from '../../../utils/routes';
 import { profileInfoThunk } from '../profile/profile.thunk';
 
@@ -12,7 +12,7 @@ import authServices from './auth.services';
 
 export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
     'AUTH/LOGIN',
-    async (payload: ILoginPayload, { dispatch }) => {
+    async (payload: ILoginPayload, { dispatch, rejectWithValue }) => {
         try {
             const { data, status } = await authServices.login(payload);
             if (status < 200 || status >= 300) throw new Error();
@@ -23,10 +23,9 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
 
             return data;
         } catch (error) {
-            console.dir(error.response || error);
-            delete axios.defaults.headers.common.Authorization;
-            return { accessToken: null } as IAuthResponse;
-            throw new Error();
+            errorNotif(error);
+            rejectWithValue({ accessToken: null } as IAuthResponse);
+            throw new Error(error);
         } finally {
             modal.close();
         }

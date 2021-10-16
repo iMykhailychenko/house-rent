@@ -1,4 +1,5 @@
 import '../styles/root.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { ReactElement, useEffect } from 'react';
 
@@ -8,6 +9,7 @@ import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { Router } from 'next/router';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import ModalComponent, { modal } from '../components/common/modal/modal';
 import appConfig from '../config/app.config';
@@ -51,6 +53,7 @@ const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppP
         <Provider store={store}>
             <RootProvider serverProps={{ auth, theme, width, config }}>
                 <Component {...pageProps} />
+                <ToastContainer />
                 <ModalComponent />
             </RootProvider>
         </Provider>
@@ -86,6 +89,7 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
         defaultValue: authInitialState,
     });
     axios.defaults.headers.common.Authorization = auth.accessToken ? `Bearer ${auth.accessToken}` : null;
+    console.log(axios.defaults.headers.common.Authorization);
 
     return { ...props, auth, theme, config, width: isMobile ? 450 : 1300 };
 };

@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
-import { updateUserRole } from '../../../../state/entities/users/users.thunk';
+import { updateProfileRole } from '../../../../state/entities/profile/profile.thunk';
 import Button from '../../button/button';
 import Checkbox from '../../checkbox/checkbox';
 import { modal } from '../../modal/modal';
@@ -28,9 +28,10 @@ const ChangeUserRole = ({ title, className }: IProps): ReactElement => {
 
     const toggleRealtorCheckbox = (value: boolean): void =>
         value ? setUserRoles(prev => [UserRole.REALTOR, ...prev]) : setUserRoles([UserRole.USER]);
+
     const submit = async (): Promise<void> => {
         setLoading(true);
-        await dispatch(updateUserRole({ id: profileState.data.id, role: userRoles })).unwrap();
+        await dispatch(updateProfileRole(userRoles)).unwrap();
         setLoading(false);
         modal.close();
     };

@@ -1,0 +1,21 @@
+.message {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .avatar {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+    }
+
+    .name {
+        width: 20rem;
+        margin-left: 2rem;
+    }
+}

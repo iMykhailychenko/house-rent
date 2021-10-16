@@ -1,0 +1,61 @@
+.Toastify__toast {
+    --toastify-toast-min-height: 5rem;
+    --toastify-color-light: var(--gray-9);
+    --toastify-color-dark: var(--gray-9);
+    --toastify-color-info: #3498db;
+    --toastify-color-success: var(--success);
+    --toastify-color-warning: var(--warning);
+    --toastify-color-error: var(--error);
+    --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+    --toastify-icon-color-info: var(--toastify-color-info);
+    --toastify-icon-color-success: var(--toastify-color-success);
+    --toastify-icon-color-warning: var(--toastify-color-warning);
+    --toastify-icon-color-error: var(--toastify-color-error);
+    --toastify-toast-width: 3.2rem;
+    --toastify-toast-background: var(--gray-9);
+    --toastify-toast-max-height: 80rem;
+    --toastify-font-family: sans-serif;
+    --toastify-z-index: 9999;
+    --toastify-text-color-light: #757575;
+    --toastify-text-color-dark: #fff;
+    --toastify-text-color-info: #fff;
+    --toastify-text-color-success: #fff;
+    --toastify-text-color-warning: #fff;
+    --toastify-text-color-error: #fff;
+    font-size: 1.2rem;
+}
+
+.Toastify__toast {
+    border-radius: 0.8rem;
+}
+
+.Toastify__toast. Toastify__toast-body {
+    margin: 0;
+    width: calc(100% - 5.5rem);
+}
+
+.Toastify__close-button.Toastify__close-button--light {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 5.5rem;
+    opacity: 0.8;
+    color: var(--white);
+    background: var(--gray-9);
+    border-left: 0.1rem solid var(--gray-7);
+}
+
+.Toastify__close-button.Toastify__close-button--light:hover {
+    background: var(--gray-8);
+}
+
+.Toastify__close-button.Toastify__close-button--light svg {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.Toastify__toast-icon.Toastify--animate-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+}

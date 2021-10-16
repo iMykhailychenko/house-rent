@@ -51,7 +51,7 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
 
                 <div className={css.flex}>
                     <div className={css.wrp}>
-                        <div ref={ref} className={clsx(css.inner, css[config.cardSize])}>
+                        <div ref={ref} className={clsx(css.inner, css[posts.data.length ? config.cardSize : 'lg'])}>
                             {loading ? (
                                 <PostsSkeleton amount={uiConfig.postsPerPage} />
                             ) : posts.data.length ? (

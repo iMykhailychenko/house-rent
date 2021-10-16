@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser, UserRole } from '../../../interfaces';
+import { IUser } from '../../../interfaces';
 import { profileInitialState } from '../profile/profile.initial-state';
 
 import { IUserState } from './users.interface';
-import { updateUserRole, userInfoThunk } from './users.thunk';
+import { userInfoThunk } from './users.thunk';
 
 const userSlice = createSlice({
     name: 'USER',
@@ -20,10 +20,6 @@ const userSlice = createSlice({
         });
         builder.addCase(userInfoThunk.rejected, (state: IUserState) => {
             state.status = 'error';
-        });
-
-        builder.addCase(updateUserRole.fulfilled, (state: IUserState, action: PayloadAction<UserRole[]>) => {
-            state.data.role = action.payload;
         });
     },
 });

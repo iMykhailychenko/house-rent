@@ -51,9 +51,8 @@ const FormTypeFour = ({ value }: IProps): ReactElement => {
     const uploadWithoutPhoto = async (): Promise<void> => {
         try {
             const data = await dispatch(newPostThunk(value)).unwrap();
-            if (data?.id) dispatch(updateFormType(FORM_TYPE.DONE));
-
-            new Error();
+            if (!data?.id) throw new Error();
+            dispatch(updateFormType(FORM_TYPE.DONE));
         } catch (error) {
             console.log(error?.response || error);
         }
@@ -63,7 +62,8 @@ const FormTypeFour = ({ value }: IProps): ReactElement => {
         if (file) {
             try {
                 const image = await dispatch(mediaThunk(file)).unwrap();
-                await dispatch(newPostThunk({ ...value, image: image.url }));
+                const data = await dispatch(newPostThunk({ ...value, image: image.url })).unwrap();
+                if (!data?.id) throw new Error();
                 dispatch(updateFormType(FORM_TYPE.DONE));
             } catch (error) {
                 console.log(error?.response || error);

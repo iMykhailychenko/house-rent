@@ -1,15 +1,7 @@
 import { useRouter } from 'next/router';
 
 import locales from '../assets/translations';
-import { LANGUAGE_ENUM } from '../interfaces';
-
-interface IContent {
-    [key: string]: string;
-}
-
-interface ILocales {
-    [key: string]: IContent;
-}
+import { ILocales, LANGUAGE_ENUM } from '../interfaces';
 
 type UseTransType = (value?: string) => string;
 

@@ -35,6 +35,14 @@ export enum LANGUAGE_ENUM {
     UA = 'ua',
 }
 
+export interface IContent {
+    [key: string]: string;
+}
+
+export interface ILocales {
+    [key: string]: IContent;
+}
+
 export interface IConfig {
     cardSize: 'sm' | 'md' | 'lg';
 }

@@ -24,7 +24,7 @@ export const SearchPost = createParamDecorator(async (data: unknown, ctx: Execut
 
     if (req.query.room) searchDto.room = (req.query.room as string).split(',') as ROOM_FILTERS[];
     if (req.query.district) searchDto.district = (req.query.district as string).split(',') as DISTRICT_FILTERS[];
-    if (req.query.houseType) searchDto.houseType = (req.query.houseType as string).split(',') as HOUSE_TYPE_FILTERS[];
+    if (req.query.house_type) searchDto.houseType = (req.query.house_type as string).split(',') as HOUSE_TYPE_FILTERS[];
     if (req.query.general) searchDto.general = (req.query.general as string).split(',') as GENERAL_FILTERS[];
     if (req.query.price) searchDto.price = (req.query.price as string).split(',') as PRICE_FILTERS[];
 

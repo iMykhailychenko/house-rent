@@ -1,8 +1,5 @@
 import React, { ReactElement } from 'react';
 
-import Grid3x3Icon from '@mui/icons-material/Grid3x3';
-import Grid4x4Icon from '@mui/icons-material/Grid4x4';
-import ViewHeadline from '@mui/icons-material/ViewHeadline';
 import clsx from 'clsx';
 
 import useConfig from '../../../hooks/config.hook';
@@ -26,7 +23,7 @@ const CardSizeSwitcher = (): ReactElement => {
                     title="large cards"
                     type="button"
                 >
-                    <ViewHeadline />
+                    1x
                 </button>
                 <button
                     className={clsx(css.button, config.cardSize === 'md' && css.active)}
@@ -34,7 +31,7 @@ const CardSizeSwitcher = (): ReactElement => {
                     title="middle cards"
                     type="button"
                 >
-                    <Grid3x3Icon />
+                    2x
                 </button>
                 <button
                     className={clsx(css.button, config.cardSize === 'sm' && css.active)}
@@ -42,7 +39,7 @@ const CardSizeSwitcher = (): ReactElement => {
                     title="small cards"
                     type="button"
                 >
-                    <Grid4x4Icon />
+                    3x
                 </button>
             </div>
         </>

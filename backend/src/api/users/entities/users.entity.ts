@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import authConfig from '../../../config/auth.config';
+import { MessageEntity } from '../../chats/entities/messages.entity';
 import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
 import { PostEntity } from '../../posts/entities/posts.entity';
 
@@ -39,17 +40,20 @@ export class UserEntity {
     @Column({ type: 'varchar', select: false })
     password: string;
 
+    @Column({
+        type: 'simple-array',
+        nullable: true,
+    })
+    role: UserRole[];
+
     @OneToMany(() => PostEntity, posts => posts.user)
     posts: PostEntity[];
 
     @OneToMany(() => FavoriteEntity, favorite => favorite.user)
     favorite: FavoriteEntity[];
 
-    @Column({
-        type: 'simple-array',
-        nullable: true,
-    })
-    role: UserRole[];
+    @OneToMany(() => MessageEntity, message => message.author)
+    messages: MessageEntity[];
 
     @BeforeInsert()
     async hashPassword(): Promise<void> {

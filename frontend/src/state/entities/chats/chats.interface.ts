@@ -1,12 +1,17 @@
 import { IUser, Pagination } from '../../../interfaces';
 import { ThunkStatuses } from '../../interfaces';
 
+export interface CreateChatPayload {
+    customer: number;
+    realtor: number;
+}
+
 export interface Chat {
     id: number;
     creationDate: string;
-    newMessages: number;
-    lastMessage: string;
-    recipient: IUser;
+    unreadMessages: number;
+    lastMessage: Message;
+    user: IUser;
 }
 
 export interface Message {

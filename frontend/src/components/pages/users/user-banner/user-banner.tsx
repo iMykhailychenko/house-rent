@@ -1,10 +1,12 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
+import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useRole } from '../../../../hooks/role.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
+import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers';
@@ -33,18 +35,27 @@ const RoleComponent = ({ text, title }: IRoleProps): ReactElement => {
 const UserBanner = (): ReactElement => {
     const role = useRole();
     const trans = useTrans();
+    const dispatch = useAppDispatch();
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
     const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
 
-    const openChat = (): void => {
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const openChat = async (): Promise<void> => {
         if (!role.isRealtor) {
             modal.open(
                 <StickyModal title="Змінити роль">
                     <ChangeUserRole title="Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?" />
                 </StickyModal>,
             );
+
+            return;
         }
+
+        setLoading(true);
+        await dispatch(createChatThunk({ realtor: profileState.data.id, customer: userState.data.id })).unwrap();
+        setLoading(false);
     };
 
     return (
@@ -78,7 +89,7 @@ const UserBanner = (): ReactElement => {
                 )}
             </div>
 
-            <Button primary className={css.btn} onClick={openChat}>
+            <Button loading={loading} primary className={css.btn} onClick={openChat}>
                 Написати повідомлення
             </Button>
         </div>

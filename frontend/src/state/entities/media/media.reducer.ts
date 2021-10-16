@@ -1,21 +1,28 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { errorNotif } from '../../../utils/helpers';
+
 import { mediaInitialState } from './media.initial-state';
 import { IMediaResponse, IMediaState } from './media.interface';
 import { mediaServices } from './media.services';
 
 export const mediaThunk = createAsyncThunk<IMediaResponse, File>('MEDIA/UPLOAD', async (payload: File, { dispatch }) => {
-    const form = new FormData();
-    form.append('image', payload);
+    try {
+        const form = new FormData();
+        form.append('image', payload);
 
-    const { data, status } = await mediaServices.upload(form, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress: (event: ProgressEvent): void => {
-            dispatch(updateProgress(Math.round((100 * event.loaded) / event.total)));
-        },
-    });
-    if (status < 200 || status >= 300) throw new Error();
-    return data;
+        const { data, status } = await mediaServices.upload(form, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+            onUploadProgress: (event: ProgressEvent): void => {
+                dispatch(updateProgress(Math.round((100 * event.loaded) / event.total)));
+            },
+        });
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    } catch (error) {
+        errorNotif(error);
+        throw new Error(error);
+    }
 });
 
 const mediaSlice = createSlice({

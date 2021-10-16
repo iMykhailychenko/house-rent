@@ -1,21 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { IUser, UserRole } from '../../../interfaces';
+import { IUser } from '../../../interfaces';
+import { errorNotif } from '../../../utils/helpers';
 
-import { IRoleUpdatePayload } from './users.interface';
 import userServices from './users.services';
 
-export const userInfoThunk = createAsyncThunk<IUser, number>('PROFILE/INFO', async payload => {
-    const { data, status } = await userServices.getUserInfo(payload);
-    if (status < 200 || status >= 300) throw new Error();
-    return data;
-});
-
-export const updateUserRole = createAsyncThunk<UserRole[], IRoleUpdatePayload>(
-    'PROFILE/UPDATE_ROLE',
-    async ({ id, role }: IRoleUpdatePayload) => {
-        const { status } = await userServices.updateUserRole(id, role);
+export const userInfoThunk = createAsyncThunk<IUser, number>('USER/INFO', async payload => {
+    try {
+        const { data, status } = await userServices.getUserInfo(payload);
         if (status < 200 || status >= 300) throw new Error();
-        return role;
-    },
-);
+        return data;
+    } catch (error) {
+        errorNotif(error);
+        throw new Error(error);
+    }
+});

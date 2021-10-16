@@ -18,20 +18,20 @@ const ChatListItem = ({ chat }: IProps): ReactElement => {
     return (
         <>
             {chat.map(data => (
-                <Link key={data.id} href={routes.chats.messages(data.id)}>
-                    <a className={clsx(css.item, data.newMessages && css.new)}>
-                        <Badge number={data.newMessages} />
+                <Link key={data.id} href={routes.chats.messages(data.id)} shallow>
+                    <a className={clsx(css.item, data.unreadMessages && css.new)}>
+                        <Badge number={data.unreadMessages} />
                         <UserAvatar
                             diameter={5}
-                            src={data.recipient.avatar}
-                            firstName={data.recipient.firstName}
-                            lastName={data.recipient.lastName}
+                            src={data.user.avatar}
+                            firstName={data.user.firstName}
+                            lastName={data.user.lastName}
                         />
                         <div className={css.inner}>
                             <h4 className={css.title}>
-                                {data.recipient.firstName} {data.recipient.lastName}
+                                {data.user.firstName} {data.user.lastName}
                             </h4>
-                            <p className={css.text}>{cutString(data.lastMessage, 60)}</p>
+                            <p className={css.text}>{data.lastMessage.text ? cutString(data.lastMessage.text, 60) : '...'}</p>
                         </div>
                     </a>
                 </Link>

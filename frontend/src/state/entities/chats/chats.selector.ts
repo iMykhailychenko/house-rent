@@ -11,6 +11,9 @@ export const useChatListSelector = (): ChatsList => useAppSelector<ChatsList>(({
 export const useSingleChatSelector = (): SingleChat =>
     useAppSelector<SingleChat>(({ chats }: RootState) => chats.single, shallowEqual);
 
+export const useChatsStatusSelector = (): ThunkStatuses =>
+    useAppSelector<ThunkStatuses>(({ chats }: RootState) => chats.list.status, shallowEqual);
+
 export const useMessageSelector = (): MessagesList =>
     useAppSelector<MessagesList>(({ chats }: RootState) => chats.messages, shallowEqual);
 
