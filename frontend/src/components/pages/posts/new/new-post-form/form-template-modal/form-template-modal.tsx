@@ -1,37 +1,35 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
+import clsx from 'clsx';
 
-import MiddleModalWrp from '../../../../../common/modal/middle-modal-wrp/middle-modal-wrp';
+import Button from '../../../../../common/button/button';
 import { modal } from '../../../../../common/modal/modal';
+import StickyModal from '../../../../../common/modal/sticky-modal/sticky-modal';
 
 import css from './form-template-modal.module.scss';
 
 interface FormTemplateModalItemProps {
     index: number;
+    active: number;
     text: string;
     onChange: (index: number) => void;
 }
 
-const FormTemplateModalItem = ({ onChange, index, text }: FormTemplateModalItemProps): ReactElement => {
-    const handleChange = () => {
-        onChange(index);
-        modal.close();
-    };
-
+const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): ReactElement => {
+    const handleChange = () => onChange(index);
     return (
-        <Accordion defaultExpanded={index === 0} className={css.accordion}>
+        <Accordion defaultExpanded={index === 0} className={clsx(css.accordion, active === index && css.active)}>
             <AccordionSummary
                 disableRipple={false}
                 expandIcon={<ExpandMoreIcon className={css.icon} />}
-                aria-controls={`Шаблон № {index + 1}`}
+                aria-controls={`Шаблон № ${index + 1}`}
                 id={'AccordionSummary' + index}
             >
-                <Typography className={css.text}>Шаблон № {index + 1}</Typography>
+                <p className={css.text}>Шаблон № {index + 1}</p>
             </AccordionSummary>
             <AccordionDetails className={css.details}>
                 <button
@@ -52,21 +50,33 @@ interface FormTemplateModalProps {
 }
 
 const FormTemplateModal = ({ title, list, onChange }: FormTemplateModalProps): ReactElement => {
-    const handleChange = (index: number) => {
-        onChange(index);
+    const [selected, setSelected] = useState<number>(0);
+
+    const handleChange = () => {
+        onChange(selected);
         modal.close();
     };
 
     return (
-        <MiddleModalWrp title={title}>
-            <ul>
-                {list.map<ReactElement>((text, index) => (
-                    <li key={index}>
-                        <FormTemplateModalItem text={text} index={index} onChange={handleChange} />
-                    </li>
-                ))}
-            </ul>
-        </MiddleModalWrp>
+        <StickyModal title={title}>
+            <>
+                <ul>
+                    {list.map<ReactElement>((text, index) => (
+                        <li key={index}>
+                            <FormTemplateModalItem text={text} active={selected} index={index} onChange={setSelected} />
+                        </li>
+                    ))}
+                </ul>
+                <div className={css.flex}>
+                    <Button onClick={modal.close} secondary>
+                        Скасувати
+                    </Button>
+                    <Button onClick={handleChange} primary>
+                        Обрати шаблон
+                    </Button>
+                </div>
+            </>
+        </StickyModal>
     );
 };
 

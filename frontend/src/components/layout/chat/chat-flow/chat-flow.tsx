@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 
 import { useMessageStatusSelector } from '../../../../state/entities/chats/chats.selector';
 
@@ -13,6 +14,9 @@ interface IProps {
 }
 
 const ChatFlow = ({ disabled, children }: IProps): ReactElement => {
+    const router = useRouter();
+    const chatId = +String(router.query.chatId);
+
     const ref = useRef<HTMLDivElement>(null);
     const innerRef = useRef<HTMLDivElement>(null);
     const status = useMessageStatusSelector();
@@ -26,11 +30,11 @@ const ChatFlow = ({ disabled, children }: IProps): ReactElement => {
     return (
         <div className={css.root}>
             <div ref={ref} className={css.flow}>
-                <div ref={innerRef} className={clsx(css.scroll, disabled && css.disabled)}>
+                <div ref={innerRef} className={clsx(css.scroll, { [css.disabled]: disabled, [css.withForm]: chatId })}>
                     {children}
                 </div>
             </div>
-            <ChatForm disabled={disabled} />
+            {chatId ? <ChatForm /> : null}
         </div>
     );
 };

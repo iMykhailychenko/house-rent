@@ -89,7 +89,6 @@ HouseRentApp.getInitialProps = async (appContext: AppContextType<Router>): Promi
         defaultValue: authInitialState,
     });
     axios.defaults.headers.common.Authorization = auth.accessToken ? `Bearer ${auth.accessToken}` : null;
-    console.log(axios.defaults.headers.common.Authorization);
 
     return { ...props, auth, theme, config, width: isMobile ? 450 : 1300 };
 };

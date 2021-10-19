@@ -1,24 +1,42 @@
 .accordion {
-    box-shadow: none !important;
+    margin-bottom: 1.5rem !important;
+    color: var(--black);
     background: var(--gray-1) !important;
+    border-radius: 0.6rem !important;
+    border: 0.1rem solid var(--gray-5);
+    box-shadow: var(--box-shadow-1);
+    overflow: hidden;
 
-    &:hover {
+    &.active {
+        border: 0.1rem solid var(--primary);
         background: var(--secondary) !important;
     }
 
-    .icon {
-        font-size: 2rem !important;
+    &:hover {
+        box-shadow: var(--box-shadow-2);
     }
+
+    :global(.MuiButtonBase-root) {
+        min-height: 48px !important;
+    }
+
+    :global(.MuiAccordionSummary-content) {
+        margin: 0 !important;
+    }
+}
+
+.icon {
+    color: var(--black);
+    font-size: 2rem !important;
 }
 
 .btn {
     display: block;
     width: 100%;
     padding: 2rem;
-    border-radius: 0.6rem;
     text-align: left;
     background: var(--white);
-    border: 0.1rem solid var(--gray-5);
+    color: var(--black);
 }
 
 .details {
@@ -26,7 +44,17 @@
 }
 
 .text {
-    margin: 0.5rem 1rem;
     font-size: 1.4rem !important;
     font-weight: 500;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 3rem;
+
+    button {
+        margin-left: 1rem;
+    }
 }

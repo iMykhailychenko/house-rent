@@ -6,6 +6,11 @@ export interface CreateChatPayload {
     realtor: number;
 }
 
+export interface ChatListPayload {
+    withLoader?: boolean;
+    page?: number;
+}
+
 export interface Chat {
     id: number;
     creationDate: string;

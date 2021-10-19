@@ -2,25 +2,28 @@ import React, { ChangeEvent, ReactElement, useState } from 'react';
 
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
-import clsx from 'clsx';
 
+import { useChatSocket } from '../../../../../hooks/chat.hook';
 import Textarea from '../../../../common/textarea/textarea';
 import Tooltip from '../../../../common/tooltip/tooltip';
 
 import css from './chat-form.module.scss';
 
-interface IProps {
-    disabled?: boolean;
-}
+const ChatForm = (): ReactElement => {
+    const socket = useChatSocket();
 
-const ChatForm = ({ disabled }: IProps): ReactElement => {
     const [value, setValue] = useState<string>('');
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-        !disabled && setValue(event.target.value);
+        setValue(event.target.value);
+    };
+
+    const submit = (): void => {
+        socket.emit('message', value);
+        setValue('');
     };
 
     return (
-        <div className={clsx(css.root, disabled && css.disabled)}>
+        <div className={css.root}>
             <Textarea
                 value={value}
                 className={css.input}
@@ -37,7 +40,7 @@ const ChatForm = ({ disabled }: IProps): ReactElement => {
                         </button>
                     </Tooltip>
                     <Tooltip content="Надіслати повідомлення">
-                        <button className={css.send} type="button">
+                        <button className={css.send} type="button" onClick={submit}>
                             <SendIcon />
                         </button>
                     </Tooltip>

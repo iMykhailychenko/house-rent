@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { ChatsGateway } from './api/chats/chats.gateway';
 import { ChatsModule } from './api/chats/chats.module';
 import { FavoriteModule } from './api/favorite/favorite.module';
 import { MediaModule } from './api/media/media.module';
@@ -12,7 +13,7 @@ import { AuthMiddleware } from './middleware/auth.middleware';
 @Module({
     imports: [TypeOrmModule.forRoot(dbConfig), FavoriteModule, MediaModule, PostsModule, UsersModule, ChatsModule],
     controllers: [],
-    providers: [],
+    providers: [ChatsGateway],
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer): void {

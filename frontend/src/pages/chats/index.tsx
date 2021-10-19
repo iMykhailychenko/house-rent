@@ -18,7 +18,7 @@ const Chats = (): ReactElement => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (auth?.accessToken) dispatch(chatListThunk());
+        if (auth?.accessToken) dispatch(chatListThunk({ page: 1, withLoader: true }));
     }, [dispatch, auth?.accessToken]);
 
     return (

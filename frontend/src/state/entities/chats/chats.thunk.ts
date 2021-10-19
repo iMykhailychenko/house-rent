@@ -3,12 +3,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Pagination } from '../../../interfaces';
 import { errorNotif } from '../../../utils/helpers';
 
-import { Chat, CreateChatPayload, Message, MessagesListPayload } from './chats.interface';
+import { Chat, ChatListPayload, CreateChatPayload, Message, MessagesListPayload } from './chats.interface';
 import chatsServices from './chats.services';
 
-export const chatListThunk = createAsyncThunk<Pagination<Chat>, number | undefined>('CHATS/LIST', async (payload?: number) => {
+export const chatListThunk = createAsyncThunk<Pagination<Chat>, ChatListPayload>('CHATS/LIST', async payload => {
     try {
-        const { data, status } = await chatsServices.chats(payload);
+        const { data, status } = await chatsServices.chats(payload.page);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {

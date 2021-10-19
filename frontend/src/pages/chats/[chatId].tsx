@@ -10,7 +10,7 @@ import ChatLayout from '../../components/pages/chat/chat-layout/chat-layout';
 import MessagesLayout from '../../components/pages/chat/messages-layout/messages-layout';
 import useAuth from '../../hooks/auth.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
-import { useChatsStatusSelector, useMessageStatusSelector } from '../../state/entities/chats/chats.selector';
+import { useMessageStatusSelector } from '../../state/entities/chats/chats.selector';
 import { chatListThunk, messagesListThunk } from '../../state/entities/chats/chats.thunk';
 import { withAuthRedirect } from '../../utils/ssr';
 
@@ -22,16 +22,14 @@ const Messages = (): ReactElement => {
     const router = useRouter();
     const chatId = +String(router.query.chatId);
 
-    const chatStatus = useChatsStatusSelector();
     const messageStatus = useMessageStatusSelector();
     const isLoading = messageStatus === 'idle' || messageStatus === 'loading';
 
     useEffect(() => {
-        if (auth?.accessToken) {
-            if (chatStatus === 'idle') dispatch(chatListThunk());
-            if (messageStatus === 'idle') dispatch(messagesListThunk({ chatId }));
+        if (auth?.accessToken && messageStatus === 'idle') {
+            dispatch(messagesListThunk({ chatId }));
         }
-    }, [chatId, chatStatus, dispatch, auth?.accessToken, messageStatus]);
+    }, [chatId, dispatch, auth?.accessToken, messageStatus]);
 
     return (
         <RootLayout withFooter={false} className={css.root}>
@@ -42,6 +40,8 @@ const Messages = (): ReactElement => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withAuthRedirect();
+export const getServerSideProps: GetServerSideProps = withAuthRedirect(async ctx => {
+    await ctx.store?.dispatch(chatListThunk({ page: 1 }));
+});
 
 export default Messages;

@@ -18,7 +18,7 @@ const ChatListItem = ({ chat }: IProps): ReactElement => {
     return (
         <>
             {chat.map(data => (
-                <Link key={data.id} href={routes.chats.messages(data.id)} shallow>
+                <Link key={data.id} href={routes.chats.messages(data.id)}>
                     <a className={clsx(css.item, data.unreadMessages && css.new)}>
                         <Badge number={data.unreadMessages} />
                         <UserAvatar
