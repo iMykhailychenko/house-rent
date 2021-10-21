@@ -2,8 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
-import { Pagination } from '../../interfaces/app.interface';
-import { POST_STATUS } from '../../interfaces/posts.interface';
+import { Pagination } from '../../shared/interfaces/interface';
 import { FavoriteEntity } from '../favorite/entities/favorite.entity';
 import { UserEntity } from '../users/entities/users.entity';
 
@@ -12,6 +11,7 @@ import { SearchPostDto } from './dto/search-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { StatusDto } from './dto/update-status.dto';
 import { PostEntity } from './entities/posts.entity';
+import { POST_STATUS } from './posts.interface';
 
 @Injectable()
 export class PostsService {

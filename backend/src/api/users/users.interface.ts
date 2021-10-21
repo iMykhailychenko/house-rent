@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { UserEntity } from '../api/users/entities/users.entity';
+import { UserEntity } from './entities/users.entity';
 
 export interface LoginInterface {
     accessToken: string;

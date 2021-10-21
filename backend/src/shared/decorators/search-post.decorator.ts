@@ -7,10 +7,10 @@ import {
     HOUSE_TYPE_FILTERS,
     PRICE_FILTERS,
     ROOM_FILTERS,
-} from 'src/interfaces/posts.interface';
+} from 'src/api/posts/posts.interface';
 
-import { SearchPostDto } from '../api/posts/dto/search-post.dto';
-import { AuthRequest } from '../interfaces/users.interface';
+import { SearchPostDto } from '../../api/posts/dto/search-post.dto';
+import { AuthRequest } from '../../api/users/users.interface';
 
 export const SearchPost = createParamDecorator(async (data: unknown, ctx: ExecutionContext) => {
     const req = ctx.switchToHttp().getRequest<AuthRequest>();

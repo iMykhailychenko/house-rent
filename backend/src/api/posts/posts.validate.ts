@@ -1,8 +1,7 @@
 import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
-import { KYIV_DISTRICT_FILTERS, LVIV_DISTRICT_FILTERS } from '../../interfaces/posts.interface';
-
 import { PostEntity } from './entities/posts.entity';
+import { KYIV_DISTRICT_FILTERS, LVIV_DISTRICT_FILTERS } from './posts.interface';
 
 const enumMap = {
     kyiv: KYIV_DISTRICT_FILTERS,

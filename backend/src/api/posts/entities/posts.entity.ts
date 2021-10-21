@@ -1,5 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
+import { UserEntity } from '../../users/entities/users.entity';
 import {
     City,
     DISTRICT_FILTERS,
@@ -8,9 +10,7 @@ import {
     POST_STATUS,
     PRICE_FILTERS,
     ROOM_FILTERS,
-} from '../../../interfaces/posts.interface';
-import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
-import { UserEntity } from '../../users/entities/users.entity';
+} from '../posts.interface';
 
 @Entity('posts')
 export class PostEntity {
@@ -20,7 +20,7 @@ export class PostEntity {
     @Column({ type: 'varchar', default: POST_STATUS })
     status: POST_STATUS;
 
-    @Column({ type: 'timestamp', default: new Date() })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creationDate: Date;
 
     @Column({ type: 'int', default: 0 })

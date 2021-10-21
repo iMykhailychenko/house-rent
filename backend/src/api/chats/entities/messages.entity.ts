@@ -9,7 +9,7 @@ export class MessageEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'timestamp', default: new Date() })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creationDate: Date;
 
     @Column({ type: 'varchar', length: 500 })

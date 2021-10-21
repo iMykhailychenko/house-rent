@@ -12,7 +12,6 @@ import { useUserInfoSelector } from '../../../../state/entities/users/users.sele
 import { onlineStatus } from '../../../../utils/helpers';
 import Button from '../../../common/button/button';
 import { modal } from '../../../common/modal/modal';
-import StickyModal from '../../../common/modal/sticky-modal/sticky-modal';
 import ChangeUserRole from '../../../common/user/change-user-role/change-user-role';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
@@ -42,14 +41,15 @@ const UserBanner = (): ReactElement => {
 
     const [loading, setLoading] = useState<boolean>(false);
 
+    const changeUserRole = (): void => {
+        modal.open(
+            <ChangeUserRole title="Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?" />,
+        );
+    };
+
     const openChat = async (): Promise<void> => {
         if (!role.isRealtor) {
-            modal.open(
-                <StickyModal title="Змінити роль">
-                    <ChangeUserRole title="Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?" />
-                </StickyModal>,
-            );
-
+            changeUserRole();
             return;
         }
 
@@ -89,9 +89,17 @@ const UserBanner = (): ReactElement => {
                 )}
             </div>
 
-            <Button loading={loading} primary className={css.btn} onClick={openChat}>
-                Написати повідомлення
-            </Button>
+            {profileState.data.id === userState.data.id && (
+                <button type="button" className={css.link} onClick={changeUserRole}>
+                    Змінити роль на сайті
+                </button>
+            )}
+
+            {profileState.data.id !== userState.data.id && (
+                <Button loading={loading} primary className={css.btn} onClick={openChat}>
+                    Написати повідомлення
+                </Button>
+            )}
         </div>
     );
 };

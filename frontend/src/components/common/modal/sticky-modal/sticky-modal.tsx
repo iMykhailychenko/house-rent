@@ -12,9 +12,10 @@ import css from './sticky-modal.module.scss';
 interface IProps {
     title?: string;
     children: ReactElement[] | ReactElement | string;
+    footer?: ReactElement[] | ReactElement;
 }
 
-const StickyModal = ({ title = '', children }: IProps): ReactElement => {
+const StickyModal = ({ title = '', footer, children }: IProps): ReactElement => {
     const trans = useTrans();
     const media = useMaxWidth(768);
 
@@ -32,6 +33,7 @@ const StickyModal = ({ title = '', children }: IProps): ReactElement => {
                 </Button>
             </header>
             <div className={css.inner}>{children}</div>
+            {footer && <footer className={css.footer}>{footer}</footer>}
         </div>
     );
 };

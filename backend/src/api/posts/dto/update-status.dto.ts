@@ -1,6 +1,6 @@
 import { IsArray, IsEnum, IsNotEmpty } from 'class-validator';
 
-import { POST_STATUS } from '../../../interfaces/posts.interface';
+import { POST_STATUS } from '../posts.interface';
 
 export class StatusDto {
     @IsArray()

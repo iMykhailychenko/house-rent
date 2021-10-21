@@ -9,14 +9,17 @@ import { chatListThunk, messagesListThunk } from './chats.thunk';
 const chatSlice = createSlice({
     name: 'CHATS',
     initialState: chatInitialState,
-    reducers: {},
+    reducers: {
+        pushMessage(state: IChatsState, action: PayloadAction<Message>) {
+            state.messages.data.unshift(action.payload);
+        },
+    },
     extraReducers: builder => {
         // CHATS PAGINATION THUNK
         builder.addCase(
             chatListThunk.pending,
             (state: IChatsState, action: PayloadAction<unknown, string, { arg: ChatListPayload }>) => {
                 if (action.meta.arg.withLoader) {
-                    console.log('state.list.status =');
                     state.list.status = 'loading';
                 }
             },
@@ -53,5 +56,7 @@ const chatSlice = createSlice({
         });
     },
 });
+
+export const { pushMessage } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -30,7 +30,7 @@
     font-size: 2rem !important;
 }
 
-.btn {
+.content {
     display: block;
     width: 100%;
     padding: 2rem;
@@ -48,13 +48,6 @@
     font-weight: 500;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 3rem;
-
-    button {
-        margin-left: 1rem;
-    }
+.primary {
+    margin-left: 1rem;
 }

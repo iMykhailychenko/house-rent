@@ -8,10 +8,11 @@ import { MediaModule } from './api/media/media.module';
 import { PostsModule } from './api/posts/posts.module';
 import { UsersModule } from './api/users/users.module';
 import dbConfig from './config/db.config';
-import { AuthMiddleware } from './middleware/auth.middleware';
+import { JwtModule } from './shared/jwt/jwt.module';
+import { AuthMiddleware } from './shared/middleware/auth.middleware';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(dbConfig), FavoriteModule, MediaModule, PostsModule, UsersModule, ChatsModule],
+    imports: [TypeOrmModule.forRoot(dbConfig), FavoriteModule, MediaModule, PostsModule, UsersModule, ChatsModule, JwtModule],
     controllers: [],
     providers: [ChatsGateway],
 })

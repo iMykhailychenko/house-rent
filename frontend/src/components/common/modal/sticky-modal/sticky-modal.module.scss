@@ -17,7 +17,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 2rem;
+        height: 6.7rem;
+        padding: 1.5rem 2rem;
+        border-bottom: 0.1rem solid var(--gray-3);
 
         @media (max-width: 768px) {
             position: relative;
@@ -36,9 +38,18 @@
         }
     }
 
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 6.7rem;
+        padding: 1.5rem 2rem;
+        border-top: 0.1rem solid var(--gray-3);
+    }
+
     .inner {
-        padding: 0 2rem 2rem;
-        max-height: 80vh;
+        padding: 2rem;
+        max-height: calc(90vh - 13.4rem);
         overflow: auto;
     }
 }

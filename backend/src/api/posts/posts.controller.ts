@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, ValidationPipe } from '@nestjs/common';
 
-import { SearchPost } from '../../decorators/search-post.decorator';
-import { User } from '../../decorators/users.decorator';
-import { AuthGuard } from '../../guards/auth.guards';
-import { Pagination } from '../../interfaces/app.interface';
+import { SearchPost } from '../../shared/decorators/search-post.decorator';
+import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
+import { Pagination } from '../../shared/interfaces/interface';
 
 import { CreatePostDto } from './dto/create-post.dto';
 import { SearchPostDto } from './dto/search-post.dto';

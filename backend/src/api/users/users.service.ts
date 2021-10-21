@@ -5,14 +5,14 @@ import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
 import authConfig from '../../config/auth.config';
-import { Pagination } from '../../interfaces/app.interface';
-import { LoginInterface } from '../../interfaces/users.interface';
+import { Pagination } from '../../shared/interfaces/interface';
 
 import CreateUserDto from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
+import { LoginInterface } from './users.interface';
 
 @Injectable()
 export class UsersService {

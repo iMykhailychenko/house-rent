@@ -16,10 +16,10 @@ export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'timestamp', default: new Date() })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creationDate: Date;
 
-    @Column({ type: 'timestamp', default: new Date() })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     lastActivity: Date;
 
     @Column({ type: 'varchar', nullable: true })

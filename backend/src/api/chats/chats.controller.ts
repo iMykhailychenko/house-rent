@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/guards/auth.guards';
+import { AuthGuard } from 'src/shared/guards/auth.guards';
 
-import { User } from '../../decorators/users.decorator';
-import { Pagination } from '../../interfaces/app.interface';
-import { ChatResponse } from '../../interfaces/chats.interface';
+import { User } from '../../shared/decorators/users.decorator';
+import { Pagination } from '../../shared/interfaces/interface';
 
+import { ChatResponse } from './chats.interface';
 import { ChatsService } from './chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { ChatEntity } from './entities/chats.entity';

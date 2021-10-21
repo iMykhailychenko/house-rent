@@ -4,8 +4,9 @@ import { diskStorage } from 'multer';
 
 import { join } from 'path';
 
-import { AuthGuard } from '../../guards/auth.guards';
-import { UploadsResponse } from '../../interfaces/upload.interface';
+import { AuthGuard } from '../../shared/guards/auth.guards';
+
+import { UploadsResponse } from './media.interface';
 
 @Controller('media')
 export class MediaController {

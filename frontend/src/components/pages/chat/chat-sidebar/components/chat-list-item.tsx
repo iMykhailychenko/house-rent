@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Chat } from '../../../../../state/entities/chats/chats.interface';
 import { cutString } from '../../../../../utils/helpers';
@@ -15,11 +16,14 @@ interface IProps {
 }
 
 const ChatListItem = ({ chat }: IProps): ReactElement => {
+    const history = useRouter();
+    const chatId = +String(history.query.chatId);
+
     return (
         <>
             {chat.map(data => (
                 <Link key={data.id} href={routes.chats.messages(data.id)}>
-                    <a className={clsx(css.item, data.unreadMessages && css.new)}>
+                    <a className={clsx(css.item, { [css.new]: data.unreadMessages, [css.active]: chatId === data.id })}>
                         <Badge number={data.unreadMessages} />
                         <UserAvatar
                             diameter={5}

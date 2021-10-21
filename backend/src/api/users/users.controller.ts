@@ -13,16 +13,16 @@ import {
     ValidationPipe,
 } from '@nestjs/common';
 
-import { User } from '../../decorators/users.decorator';
-import { AuthGuard } from '../../guards/auth.guards';
-import { Pagination } from '../../interfaces/app.interface';
-import { LoginInterface } from '../../interfaces/users.interface';
+import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
+import { Pagination } from '../../shared/interfaces/interface';
 
 import CreateUserDto from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
+import { LoginInterface } from './users.interface';
 import { UsersService } from './users.service';
 
 @Controller('users')

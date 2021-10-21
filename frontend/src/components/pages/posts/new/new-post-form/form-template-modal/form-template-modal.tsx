@@ -22,7 +22,11 @@ interface FormTemplateModalItemProps {
 const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): ReactElement => {
     const handleChange = () => onChange(index);
     return (
-        <Accordion defaultExpanded={index === 0} className={clsx(css.accordion, active === index && css.active)}>
+        <Accordion
+            onClick={handleChange}
+            defaultExpanded={index === 0}
+            className={clsx(css.accordion, active === index && css.active)}
+        >
             <AccordionSummary
                 disableRipple={false}
                 expandIcon={<ExpandMoreIcon className={css.icon} />}
@@ -32,12 +36,7 @@ const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateMo
                 <p className={css.text}>Шаблон № {index + 1}</p>
             </AccordionSummary>
             <AccordionDetails className={css.details}>
-                <button
-                    type="button"
-                    className={css.btn}
-                    onClick={handleChange}
-                    dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, '<br/>') }}
-                />
+                <p className={css.content} dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, '<br/>') }} />
             </AccordionDetails>
         </Accordion>
     );
@@ -58,24 +57,26 @@ const FormTemplateModal = ({ title, list, onChange }: FormTemplateModalProps): R
     };
 
     return (
-        <StickyModal title={title}>
-            <>
-                <ul>
-                    {list.map<ReactElement>((text, index) => (
-                        <li key={index}>
-                            <FormTemplateModalItem text={text} active={selected} index={index} onChange={setSelected} />
-                        </li>
-                    ))}
-                </ul>
-                <div className={css.flex}>
+        <StickyModal
+            title={title}
+            footer={
+                <>
                     <Button onClick={modal.close} secondary>
                         Скасувати
                     </Button>
-                    <Button onClick={handleChange} primary>
+                    <Button className={css.primary} onClick={handleChange} primary>
                         Обрати шаблон
                     </Button>
-                </div>
-            </>
+                </>
+            }
+        >
+            <ul>
+                {list.map<ReactElement>((text, index) => (
+                    <li key={index}>
+                        <FormTemplateModalItem text={text} active={selected} index={index} onChange={setSelected} />
+                    </li>
+                ))}
+            </ul>
         </StickyModal>
     );
 };

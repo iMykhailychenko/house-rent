@@ -9,7 +9,7 @@ export class ChatEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'timestamp', default: new Date() })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creationDate: Date;
 
     @OneToMany(() => MessageEntity, message => message.chat)

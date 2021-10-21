@@ -47,6 +47,13 @@ export interface MessagesListPayload {
     chatId: number;
 }
 
+export interface SocketMessagesPayload {
+    author: number;
+    message: string;
+    uploads: string[];
+    chatId: number;
+}
+
 export interface IChatsState {
     single: SingleChat;
     list: ChatsList;

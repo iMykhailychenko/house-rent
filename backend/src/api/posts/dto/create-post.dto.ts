@@ -1,13 +1,6 @@
 import { IsArray, IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Validate } from 'class-validator';
 
-import {
-    City,
-    DISTRICT_FILTERS,
-    HOUSE_TYPE_FILTERS,
-    POST_STATUS,
-    PRICE_FILTERS,
-    ROOM_FILTERS,
-} from '../../../interfaces/posts.interface';
+import { City, DISTRICT_FILTERS, HOUSE_TYPE_FILTERS, POST_STATUS, PRICE_FILTERS, ROOM_FILTERS } from '../posts.interface';
 import { DistrictValidator } from '../posts.validate';
 
 export class CreatePostDto {

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AuthGuard } from '../../guards/auth.guards';
+import { AuthGuard } from '../../shared/guards/auth.guards';
 
 import { UserEntity } from './entities/users.entity';
 import { UsersController } from './users.controller';

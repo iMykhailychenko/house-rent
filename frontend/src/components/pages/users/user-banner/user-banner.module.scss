@@ -63,3 +63,12 @@
 .btn {
     margin-top: 2rem;
 }
+
+.link {
+    color: var(--primary);
+    font-weight: 500;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

@@ -1,5 +1,6 @@
-import { MessageEntity } from '../api/chats/entities/messages.entity';
-import { UserEntity } from '../api/users/entities/users.entity';
+import { UserEntity } from '../users/entities/users.entity';
+
+import { MessageEntity } from './entities/messages.entity';
 
 export interface FindAllChatsParams {
     userId: number;

@@ -8,6 +8,7 @@ import { updateProfileRole } from '../../../../state/entities/profile/profile.th
 import Button from '../../button/button';
 import Checkbox from '../../checkbox/checkbox';
 import { modal } from '../../modal/modal';
+import StickyModal from '../../modal/sticky-modal/sticky-modal';
 
 import css from './change-user-role.module.scss';
 
@@ -37,32 +38,37 @@ const ChangeUserRole = ({ title, className }: IProps): ReactElement => {
     };
 
     return (
-        <div className={className}>
-            {title && <h3 className={css.title}>{title}</h3>}
-            <div className={css.checkbox}>
-                <Checkbox
-                    size="lg"
-                    title={trans('Користувач')}
-                    value={userRoles.includes(UserRole.USER)}
-                    onChange={toggleUserCheckbox}
-                />
-                <Checkbox
-                    size="lg"
-                    title={trans('Власник або рієлтор')}
-                    value={userRoles.includes(UserRole.REALTOR)}
-                    onChange={toggleRealtorCheckbox}
-                />
+        <StickyModal
+            title="Змінити роль"
+            footer={
+                <>
+                    <Button secondary onClick={modal.close}>
+                        Скасувати
+                    </Button>
+                    <Button primary className={css.primary} onClick={submit} loading={loading}>
+                        Змінити
+                    </Button>
+                </>
+            }
+        >
+            <div className={className}>
+                {title && <h3 className={css.title}>{title}</h3>}
+                <div className={css.checkbox}>
+                    <Checkbox
+                        size="lg"
+                        title={trans('Користувач')}
+                        value={userRoles.includes(UserRole.USER)}
+                        onChange={toggleUserCheckbox}
+                    />
+                    <Checkbox
+                        size="lg"
+                        title={trans('Власник або рієлтор')}
+                        value={userRoles.includes(UserRole.REALTOR)}
+                        onChange={toggleRealtorCheckbox}
+                    />
+                </div>
             </div>
-
-            <div className={css.flex}>
-                <Button secondary onClick={modal.close}>
-                    Скасувати
-                </Button>
-                <Button primary onClick={submit} loading={loading}>
-                    Змінити
-                </Button>
-            </div>
-        </div>
+        </StickyModal>
     );
 };
 

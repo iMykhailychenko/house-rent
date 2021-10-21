@@ -17,6 +17,10 @@
         background: var(--secondary);
     }
 
+    &.active {
+        border: 0.1rem solid var(--primary);
+    }
+
     .inner {
         width: calc(100% - var(--avatar) - 0.5rem);
     }

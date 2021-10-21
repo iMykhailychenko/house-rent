@@ -1,7 +1,7 @@
 import { Controller, HttpCode, HttpStatus, Param, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
 
-import { User } from '../../decorators/users.decorator';
-import { AuthGuard } from '../../guards/auth.guards';
+import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
 
 import { FavoriteService } from './favorite.service';
 
