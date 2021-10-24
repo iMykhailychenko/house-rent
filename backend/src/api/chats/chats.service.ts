@@ -67,8 +67,6 @@ export class ChatsService {
             .getOne();
         if (!chat) throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
 
-        await this.updateUnreadMessages(chat, userId);
-
         const [result, total] = await this.messageRepository.findAndCount({
             relations: ['author'],
             where: {
@@ -87,6 +85,23 @@ export class ChatsService {
             currentPage: +page,
             data: result,
         };
+    }
+
+    async findChatById(chatId: number, userId: number): Promise<ChatEntity> {
+        const chat = await this.chatRepository
+            .createQueryBuilder('chats')
+            .where('(chats.users)::int[] @> (:userId)::int[]', { userId: [userId] })
+            .getOne();
+        if (!chat) throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+
+        await this.updateUnreadMessages(chatId, userId);
+
+        chat.unreadMessages = 0;
+        chat.lastMessage = await this.messageRepository.findOne({ order: { creationDate: 'DESC' } });
+        chat.user = await this.userRepository.findOne(userId === chat.users[0] ? chat.users[1] : chat.users[0]);
+        delete chat.users;
+
+        return chat;
     }
 
     async createChat(userId: number, createChatDto: CreateChatDto): Promise<ChatEntity> {
@@ -144,13 +159,14 @@ export class ChatsService {
         return chat.users.includes(userId);
     }
 
-    async updateUnreadMessages(chatId: ChatEntity, userId: number): Promise<void> {
+    async updateUnreadMessages(chatId: number, userId: number): Promise<void> {
         await this.messageRepository
             .createQueryBuilder('messages')
             .leftJoin('messages.author', 'author')
+            .leftJoin('messages.chat', 'chat')
             .update()
             .set({ isNew: false })
-            .where('author.id != :userId', { userId })
+            .where('(chat.id = chatId AND author.id != :userId)', { userId, chatId })
             .execute();
     }
 }

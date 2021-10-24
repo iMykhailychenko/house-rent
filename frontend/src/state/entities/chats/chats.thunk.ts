@@ -17,6 +17,17 @@ export const chatListThunk = createAsyncThunk<Pagination<Chat>, ChatListPayload>
     }
 });
 
+export const singleChatThunk = createAsyncThunk<Chat, number>('CHATS/SINGLE', async payload => {
+    try {
+        const { data, status } = await chatsServices.singleChat(payload);
+        if (status < 200 || status >= 300) throw new Error();
+        return data;
+    } catch (error) {
+        errorNotif(error);
+        throw new Error(error);
+    }
+});
+
 export const messagesListThunk = createAsyncThunk<Pagination<Message>, MessagesListPayload>('MESSAGES/LIST', async payload => {
     try {
         const { data, status } = await chatsServices.messages(payload);

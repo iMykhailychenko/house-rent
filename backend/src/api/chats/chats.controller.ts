@@ -24,6 +24,12 @@ export class ChatsController {
         return await this.chatsService.formatChatResponse({ userId, page, limit });
     }
 
+    @Get(':chatId')
+    @UseGuards(AuthGuard)
+    async findChatById(@User('id') userId: number, @Param('chatId', ParseIntPipe) chatId: number): Promise<ChatResponse> {
+        return await this.chatsService.findChatById(chatId, userId);
+    }
+
     @Get('messages/:chatId')
     @UseGuards(AuthGuard)
     async findAllMessages(

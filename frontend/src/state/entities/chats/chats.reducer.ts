@@ -4,7 +4,7 @@ import { Pagination } from '../../../interfaces';
 
 import { chatInitialState } from './chats.initial-state';
 import { Chat, ChatListPayload, IChatsState, Message } from './chats.interface';
-import { chatListThunk, messagesListThunk } from './chats.thunk';
+import { chatListThunk, messagesListThunk, singleChatThunk } from './chats.thunk';
 
 const chatSlice = createSlice({
     name: 'CHATS',
@@ -37,6 +37,18 @@ const chatSlice = createSlice({
         builder.addCase(chatListThunk.rejected, (state: IChatsState) => {
             state.list.status = 'error';
             state.list.error = 'error';
+        });
+
+        // SINGLE CHAT
+        builder.addCase(singleChatThunk.pending, (state: IChatsState) => {
+            state.single.status = 'loading';
+        });
+        builder.addCase(singleChatThunk.fulfilled, (state: IChatsState, action: PayloadAction<Chat>) => {
+            state.single.status = 'success';
+            state.single.data = action.payload;
+        });
+        builder.addCase(singleChatThunk.rejected, (state: IChatsState) => {
+            state.single.status = 'error';
         });
 
         // MESSAGES PAGINATION THUNK

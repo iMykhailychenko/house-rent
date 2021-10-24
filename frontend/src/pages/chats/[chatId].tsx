@@ -11,7 +11,7 @@ import MessagesLayout from '../../components/pages/chat/messages-layout/messages
 import useAuth from '../../hooks/auth.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { useMessageStatusSelector } from '../../state/entities/chats/chats.selector';
-import { chatListThunk, messagesListThunk } from '../../state/entities/chats/chats.thunk';
+import { chatListThunk, messagesListThunk, singleChatThunk } from '../../state/entities/chats/chats.thunk';
 import { withAuthRedirect } from '../../utils/ssr';
 
 import css from './chats.module.scss';
@@ -41,6 +41,7 @@ const Messages = (): ReactElement => {
 };
 
 export const getServerSideProps: GetServerSideProps = withAuthRedirect(async ctx => {
+    await ctx.store?.dispatch(singleChatThunk(+String(ctx.query.chatId)));
     await ctx.store?.dispatch(chatListThunk({ page: 1 }));
 });
 

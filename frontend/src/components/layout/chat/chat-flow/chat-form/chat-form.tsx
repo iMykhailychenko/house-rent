@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 import { useChatSocket } from '../../../../../hooks/chat.hook';
 import useMaxWidth from '../../../../../hooks/media.hook';
-import { SocketMessagesPayload } from '../../../../../state/entities/chats/chats.interface';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import Textarea from '../../../../common/textarea/textarea';
 import Tooltip from '../../../../common/tooltip/tooltip';
@@ -24,13 +23,12 @@ const ChatForm = (): ReactElement => {
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => setValue(event.target.value);
     const submit = (): void => {
-        const message: SocketMessagesPayload = {
+        socket?.send({
             chatId,
             uploads: [],
             message: value,
             author: profileState.data.id,
-        };
-        socket?.emit('msgToServer', message);
+        });
         setValue('');
     };
 
