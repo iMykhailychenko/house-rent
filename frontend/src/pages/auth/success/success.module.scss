@@ -1,0 +1,50 @@
+.root {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+    color: var(--true-white);
+    text-align: center;
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+
+    p {
+        max-width: 50rem;
+        font-size: 1.4rem;
+    }
+
+    .flex {
+        --black: var(--true-white);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 4rem;
+        font-weight: 600;
+
+        .link {
+            margin: 0 1rem;
+            color: var(--black);
+
+            svg {
+                font-size: 2rem;
+                margin-right: 0.4rem;
+                margin-bottom: 0.2rem;
+            }
+
+            &:hover {
+                color: var(--primary);
+            }
+        }
+    }
+}

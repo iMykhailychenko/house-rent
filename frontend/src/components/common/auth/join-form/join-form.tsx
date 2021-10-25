@@ -73,7 +73,7 @@ const JoinForm = (): ReactElement => {
     return (
         <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
-                id="first_name_email"
+                id="first_name"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
                 error={formik.touched.firstName && formik.errors.firstName}
@@ -82,7 +82,7 @@ const JoinForm = (): ReactElement => {
             />
 
             <Input
-                id="last_name_email"
+                id="last_name"
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
                 error={formik.touched.lastName && formik.errors.lastName}

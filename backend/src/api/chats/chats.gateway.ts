@@ -1,4 +1,4 @@
-import { UsePipes, ValidationPipe } from '@nestjs/common';
+import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import {
     OnGatewayConnection,
     OnGatewayDisconnect,
@@ -19,30 +19,36 @@ import { MessageDto } from './dto/create-message.dto';
 @WebSocketGateway(8001, { namespace: 'chat', cors: true })
 export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Server;
+    private logger: Logger = new Logger('ChatsGateway');
 
     constructor(private readonly jwtService: JwtService, private readonly chatsService: ChatsService) {}
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('msgToServer')
     async handleMessage(client: Socket, payload: MessageDto): Promise<void> {
+        const room = this.server.adapter['rooms']?.get(String(payload.chatId));
+        if (!room || !room.has(client.id)) throw new WsException('Forbidden');
+
         const message = await this.chatsService.createMessage(payload);
-        this.server.in(String(payload.chatId)).emit('msgToClient', message);
+        this.server.to(String(payload.chatId)).emit('msgToClient', message);
     }
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('joinChat')
     async handleJoin(client: Socket, chatId: number): Promise<void> {
         await this.chatRoomManager(client.handshake.auth.token, chatId);
-        await client.join(String(chatId));
-        this.server.in(String(chatId)).emit('userJoined', chatId);
+
+        client.join(String(chatId));
+        this.server.to(String(chatId)).emit('userJoined', chatId);
     }
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('leaveChat')
     async handleLeave(client: Socket, chatId: number): Promise<void> {
         await this.chatRoomManager(client.handshake.auth.token, chatId);
-        await client.leave(String(chatId));
-        client.broadcast.to(String(chatId)).emit('userLeft', chatId);
+
+        client.leave(String(chatId));
+        this.server.to(String(chatId)).emit('userLeft', chatId);
     }
 
     private async chatRoomManager(token: string, payload: number): Promise<UserEntity> {
@@ -56,14 +62,14 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     }
 
     public afterInit(server: Server): void {
-        console.log('Init chat gateway');
+        this.logger.log('Init chat gateway');
     }
 
     public handleDisconnect(client: Socket): void {
-        console.log(`Client disconnected: ${client.id}`);
+        this.logger.log(`Client disconnected: ${client.id}`);
     }
 
     public handleConnection(client: Socket): void {
-        console.log(`Client connected: ${client.id}`);
+        this.logger.log(`Client connected: ${client.id}`);
     }
 }
