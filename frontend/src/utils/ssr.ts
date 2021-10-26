@@ -10,14 +10,16 @@ import { initializeStore } from '../state/store';
 
 import routes from './routes';
 
-type ReturnCallback<T> = { props: T | { state: RootState } };
+type NextReturnCallback<T> = { props: T | { state: RootState } } | { redirect: Redirect };
+type CustomReturnCallback<T> = { props?: T | { state: RootState }; redirect?: boolean } | void;
+
 type SSRCallback<T> = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     context: GetServerSidePropsContext & { store?: Store<RootState, any> },
-) => Promise<ReturnCallback<T> | void>;
+) => Promise<CustomReturnCallback<T>>;
 
 export const withStore = <T>(callback?: SSRCallback<T>): GetServerSideProps => {
-    return async (context: GetServerSidePropsContext): Promise<ReturnCallback<T>> => {
+    return async (context: GetServerSidePropsContext): Promise<NextReturnCallback<T>> => {
         const store = initializeStore(rootInitialState);
 
         const token = axios.defaults.headers.common.Authorization;
@@ -28,6 +30,14 @@ export const withStore = <T>(callback?: SSRCallback<T>): GetServerSideProps => {
 
         if (callback) {
             const result = await callback({ ...context, store });
+            if (result?.redirect)
+                return {
+                    redirect: {
+                        statusCode: 302,
+                        destination: routes.home,
+                    },
+                };
+
             return { props: { ...(result?.props || {}), state: store.getState() } };
         }
 
@@ -37,7 +47,7 @@ export const withStore = <T>(callback?: SSRCallback<T>): GetServerSideProps => {
 
 export const withAuthRedirect =
     <T>(callback?: SSRCallback<T> | null, reverse = false): GetServerSideProps =>
-    async (context: GetServerSidePropsContext): Promise<ReturnCallback<T> | { redirect: Redirect }> => {
+    async (context: GetServerSidePropsContext): Promise<NextReturnCallback<T>> => {
         const token = axios.defaults.headers.common.Authorization;
         if (reverse ? token : !token) {
             return {
@@ -57,6 +67,16 @@ export const withAuthRedirect =
 
         if (callback) {
             const result = await callback({ ...context, store });
+
+            if (result?.redirect) {
+                return {
+                    redirect: {
+                        statusCode: 302,
+                        destination: reverse ? routes.home : routes.auth.login,
+                    },
+                };
+            }
+
             return { props: { ...(result?.props || {}), state: store.getState() } };
         }
 

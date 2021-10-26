@@ -2,11 +2,13 @@ import React, { ReactElement } from 'react';
 
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
-import { GetServerSideProps } from 'next';
+import Cookies from 'js-cookie';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
 import Link from '../../../components/common/link/link';
 import Container from '../../../components/layout/container/container';
+import { parseCookie } from '../../../utils/helpers';
 import routes from '../../../utils/routes';
 import { withAuthRedirect } from '../../../utils/ssr';
 
@@ -15,6 +17,7 @@ import css from './success.module.scss';
 const TentComponent = dynamic(() => import('../../../apps/login-app'));
 
 const AuthSuccessPage = (): ReactElement => {
+    Cookies.remove('show_success_page');
     return (
         <>
             <TentComponent />
@@ -38,6 +41,19 @@ const AuthSuccessPage = (): ReactElement => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withAuthRedirect(null, true);
+export const getServerSideProps: GetServerSideProps = withAuthRedirect(
+    async (ctx: GetServerSidePropsContext): Promise<{ redirect: boolean } | void> => {
+        const pageState = parseCookie<{ openPage: boolean }>({
+            key: 'show_success_page',
+            value: ctx?.req?.headers?.cookie,
+            defaultValue: { openPage: false },
+        });
+
+        if (!pageState.openPage) {
+            return { redirect: true };
+        }
+    },
+    true,
+);
 
 export default AuthSuccessPage;

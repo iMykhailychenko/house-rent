@@ -33,9 +33,9 @@ const AboutApartment = ({ post }: IProps): ReactElement => {
                     </div>
 
                     <div className={css.cell}>
-                        <ImageWrp name="cash" />
+                        <ImageWrp name="coin" />
                         <ReadMoreText
-                            img="cash"
+                            img="coin"
                             title="cash"
                             label={trans('price')}
                             text={post.priceFilters.map(trans).join(', ')}

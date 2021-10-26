@@ -1,3 +1,14 @@
+:root {
+    --primary: #3f51b5;
+    --primary-hover: #0c229e;
+    --secondary: #f0f2ff;
+
+    --success: #28bf65;
+    --success-secondary: #28bf6525;
+    --warning: #fadb14;
+    --error: #cf1322;
+}
+
 .white {
     --white: #fff;
     --black: #000;
@@ -12,15 +23,6 @@
     --gray-8: #434343;
     --gray-9: #262626;
     --gray-10: #141414;
-
-    --primary: #3f51b5;
-    --primary-hover: #0c229e;
-    --secondary: #f0f2ff;
-
-    --success: #28bf65;
-    --success-secondary: #28bf6525;
-    --warning: #fadb14;
-    --error: #cf1322;
 }
 
 .black {
@@ -38,12 +40,5 @@
     --gray-2: #262626;
     --gray-1: #141414;
 
-    --primary: #3f51b5;
-    --primary-hover: #0c229e;
     --secondary: #2b2b39;
-
-    --success: #28bf65;
-    --success-secondary: #28bf6525;
-    --warning: #fadb14;
-    --error: #cf1322;
 }

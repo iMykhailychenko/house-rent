@@ -23,7 +23,7 @@ const SmallModalWrp = ({ title = '', children }: IProps): ReactElement => {
                     <Close />
                 </Button>
             </header>
-            {children}
+            <div className={css.inner}>{children}</div>
         </div>
     );
 };

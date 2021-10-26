@@ -1,7 +1,9 @@
 import React, { ReactElement, useState } from 'react';
 
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import { useRouter } from 'next/router';
 
+import useAuth from '../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useRole } from '../../../../hooks/role.hook';
 import useTrans from '../../../../hooks/trans.hook';
@@ -10,8 +12,11 @@ import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers';
+import routes from '../../../../utils/routes';
+import LoginForm from '../../../common/auth/login-form/login-form';
 import Button from '../../../common/button/button';
 import { modal } from '../../../common/modal/modal';
+import SmallModalWrp from '../../../common/modal/small-modal-wrp/small-modal-wrp';
 import ChangeUserRole from '../../../common/user/change-user-role/change-user-role';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
@@ -34,6 +39,8 @@ const RoleComponent = ({ text, title }: IRoleProps): ReactElement => {
 const UserBanner = (): ReactElement => {
     const role = useRole();
     const trans = useTrans();
+    const [auth] = useAuth();
+    const history = useRouter();
     const dispatch = useAppDispatch();
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
@@ -47,15 +54,21 @@ const UserBanner = (): ReactElement => {
         );
     };
 
+    const loginForm = (): void => {
+        modal.open(
+            <SmallModalWrp>
+                <LoginForm />
+            </SmallModalWrp>,
+        );
+    };
+
     const openChat = async (): Promise<void> => {
-        if (!role.isRealtor) {
-            changeUserRole();
-            return;
-        }
+        if (!auth?.accessToken) return loginForm();
+        if (!role.isRealtor) return changeUserRole();
 
         setLoading(true);
-        await dispatch(createChatThunk({ realtor: profileState.data.id, customer: userState.data.id })).unwrap();
-        setLoading(false);
+        const chat = await dispatch(createChatThunk({ realtor: profileState.data.id, customer: userState.data.id })).unwrap();
+        history.push(routes.chats.messages(chat.id));
     };
 
     return (

@@ -28,18 +28,25 @@
     width: 100%;
 }
 
-.menu {
-    font-size: 2rem;
-}
+.inner {
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.5rem;
 
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1.5rem;
-}
+        .menu {
+            font-size: 2rem;
+        }
 
-.home {
-    margin-right: 1.5rem;
-    font-size: 2rem;
+        .home {
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            color: var(--black);
+
+            &:hover {
+                color: var(--primary);
+            }
+        }
+    }
 }

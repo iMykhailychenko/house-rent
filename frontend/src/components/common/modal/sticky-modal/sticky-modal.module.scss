@@ -1,5 +1,9 @@
 @import '../../../../styles/helpers/mixin';
 
+:global(.black) .root .header {
+    border-top: 0.1rem solid var(--gray-4);
+}
+
 .root {
     position: relative;
     width: 100%;
@@ -17,13 +21,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 6.7rem;
-        padding: 1.5rem 2rem;
-        border-bottom: 0.1rem solid var(--gray-3);
+        padding: 0.4rem 2rem;
+        background: var(--gray-3);
+        border-radius: 1rem 1rem 0 0;
+        border-top: 0.1rem solid var(--white);
 
         @media (max-width: 768px) {
             position: relative;
-            cursor: grab;
             user-select: none;
         }
 
@@ -33,7 +37,7 @@
 
         .title {
             width: calc(100% - 6rem);
-            font-size: 2rem;
+            font-size: 1.2rem;
             font-weight: 400;
         }
     }

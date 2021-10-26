@@ -23,7 +23,7 @@ const CardSizeSwitcher = (): ReactElement => {
                     title="large cards"
                     type="button"
                 >
-                    1x
+                    3x
                 </button>
                 <button
                     className={clsx(css.button, config.cardSize === 'md' && css.active)}
@@ -39,7 +39,7 @@ const CardSizeSwitcher = (): ReactElement => {
                     title="small cards"
                     type="button"
                 >
-                    3x
+                    1x
                 </button>
             </div>
         </>

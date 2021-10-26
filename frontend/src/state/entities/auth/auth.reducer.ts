@@ -26,6 +26,7 @@ const authSlice = createSlice({
         });
         builder.addCase(authJoinThunk.fulfilled, (state: IAuthState) => {
             state.joinStatus = 'success';
+            Cookies.set('show_success_page', JSON.stringify({ openPage: true }));
         });
         builder.addCase(authJoinThunk.rejected, (state: IAuthState) => {
             state.joinStatus = 'error';
