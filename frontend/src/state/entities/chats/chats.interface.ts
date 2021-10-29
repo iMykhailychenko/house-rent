@@ -13,7 +13,7 @@ export interface ChatListPayload {
 
 export interface Chat {
     id: number;
-    creationDate: string;
+    createdAt: string;
     unreadMessages: number;
     lastMessage: Message;
     user: IUser;
@@ -24,7 +24,7 @@ export interface Message {
     text: string;
     isNew: boolean;
     uploads: string[];
-    creationDate: string;
+    createdAt: string;
     author: IUser;
 }
 

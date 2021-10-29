@@ -31,7 +31,7 @@ export class CreatePostDto {
     image: string;
 
     @IsDate()
-    creationDate: Date = new Date();
+    createdAt: Date = new Date();
 
     @IsString()
     @IsNotEmpty()

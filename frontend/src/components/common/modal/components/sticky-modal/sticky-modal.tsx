@@ -2,10 +2,10 @@ import React, { ReactElement, useEffect } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
-import useMaxWidth from '../../../../hooks/media.hook';
-import useTrans from '../../../../hooks/trans.hook';
-import Button from '../../button/button';
-import { modal } from '../modal';
+import useMaxWidth from '../../../../../hooks/media.hook';
+import useTrans from '../../../../../hooks/trans.hook';
+import Button from '../../../button/button';
+import { modal } from '../../modal';
 
 import css from './sticky-modal.module.scss';
 

@@ -11,9 +11,7 @@ import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import Input from '../../input/input';
 import Link from '../../link/link';
-import { modal } from '../../modal/modal';
-import SmallModalWrp from '../../modal/small-modal-wrp/small-modal-wrp';
-import JoinForm from '../join-form/join-form';
+import joinModal from '../../modal/modals/join-modal/join-modal';
 import Services from '../services/services';
 
 import css from './login-form.module.scss';
@@ -38,13 +36,6 @@ const LoginForm = (): ReactElement => {
             dispatch(authLoginThunk(values));
         },
     });
-
-    const join = (): void =>
-        modal.open(
-            <SmallModalWrp title="Зареєструватися">
-                <JoinForm />
-            </SmallModalWrp>,
-        );
 
     return (
         <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
@@ -73,7 +64,7 @@ const LoginForm = (): ReactElement => {
             </Link>
 
             <div className={css.flex}>
-                <Button className={css.btn} secondary onClick={join}>
+                <Button className={css.btn} secondary onClick={joinModal}>
                     {trans('Зареєструватися')}
                 </Button>
                 <Button loading={authState.loginStatus === 'loading'} className={css.btn} type="submit" primary>

@@ -24,7 +24,7 @@ export class ChatsService {
         const sqlQuery = this.chatRepository
             .createQueryBuilder('chats')
             .where('(chats.users)::int[] @> (:userId)::int[]', { userId: [userId] })
-            .orderBy('chats.creationDate', 'DESC');
+            .orderBy('chats.createdAt', 'DESC');
 
         const total = await sqlQuery.getCount();
         const result = await sqlQuery
@@ -49,7 +49,7 @@ export class ChatsService {
                 .leftJoin('messages.author', 'author')
                 .where('messages.chat = :chatId', { chatId: chat.id });
 
-            chat.lastMessage = await sqlQuery.orderBy('messages.creationDate', 'DESC').getOne();
+            chat.lastMessage = await sqlQuery.orderBy('messages.createdAt', 'DESC').getOne();
             chat.unreadMessages = await sqlQuery
                 .andWhere('(messages.isNew = TRUE AND author.id != :userId)', { userId })
                 .getCount();
@@ -74,7 +74,7 @@ export class ChatsService {
                     id: chatId,
                 },
             },
-            order: { creationDate: 'DESC' },
+            order: { createdAt: 'DESC' },
             take: limit,
             skip: limit * (page - 1),
         });
@@ -97,7 +97,7 @@ export class ChatsService {
         await this.updateUnreadMessages(chatId, userId);
 
         chat.unreadMessages = 0;
-        chat.lastMessage = await this.messageRepository.findOne({ order: { creationDate: 'DESC' } });
+        chat.lastMessage = await this.messageRepository.findOne({ order: { createdAt: 'DESC' } });
         chat.user = await this.userRepository.findOne(userId === chat.users[0] ? chat.users[1] : chat.users[0]);
         delete chat.users;
 
@@ -166,6 +166,17 @@ export class ChatsService {
             .leftJoin('messages.chat', 'chat')
             .update()
             .set({ isNew: false })
+            .where('(chat.id = chatId AND author.id != :userId)', { userId, chatId })
+            .execute();
+    }
+
+    async updateMessage(chatId: number, userId: number, text: string): Promise<void> {
+        await this.messageRepository
+            .createQueryBuilder('messages')
+            .leftJoin('messages.author', 'author')
+            .leftJoin('messages.chat', 'chat')
+            .update()
+            .set({ text })
             .where('(chat.id = chatId AND author.id != :userId)', { userId, chatId })
             .execute();
     }

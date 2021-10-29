@@ -4,7 +4,7 @@ import { IProfileInfoState } from './profile.interface';
 
 export const userInitValue: IUser = {
     id: 0,
-    creationDate: '01-01-2021',
+    createdAt: '01-01-2021',
     lastActivity: '01-01-2021',
     avatar: null,
     firstName: 'loading...',

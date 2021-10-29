@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
-import useTrans from '../../../../hooks/trans.hook';
-import Button from '../../button/button';
-import { modal } from '../modal';
+import useTrans from '../../../../../hooks/trans.hook';
+import Button from '../../../button/button';
+import { modal } from '../../modal';
 
 import css from './large-modal-wrp.module.scss';
 

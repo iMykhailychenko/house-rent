@@ -13,10 +13,9 @@ import { useProfileInfoSelector } from '../../../../state/entities/profile/profi
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers';
 import routes from '../../../../utils/routes';
-import LoginForm from '../../../common/auth/login-form/login-form';
 import Button from '../../../common/button/button';
 import { modal } from '../../../common/modal/modal';
-import SmallModalWrp from '../../../common/modal/small-modal-wrp/small-modal-wrp';
+import loginModal from '../../../common/modal/modals/login-modal/login-modal';
 import ChangeUserRole from '../../../common/user/change-user-role/change-user-role';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
@@ -54,16 +53,8 @@ const UserBanner = (): ReactElement => {
         );
     };
 
-    const loginForm = (): void => {
-        modal.open(
-            <SmallModalWrp>
-                <LoginForm />
-            </SmallModalWrp>,
-        );
-    };
-
     const openChat = async (): Promise<void> => {
-        if (!auth?.accessToken) return loginForm();
+        if (!auth?.accessToken) return loginModal();
         if (!role.isRealtor) return changeUserRole();
 
         setLoading(true);

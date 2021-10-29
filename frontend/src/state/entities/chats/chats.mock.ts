@@ -4,7 +4,7 @@ import { Chat, Message } from './chats.interface';
 
 const user = {
     id: 1,
-    creationDate: '2021-10-07T15:07:30.114Z',
+    createdAt: '2021-10-07T15:07:30.114Z',
     lastActivity: '2021-10-11T06:42:47.760Z',
     avatar: null,
     firstName: 'Иван',
@@ -29,7 +29,7 @@ const messagesMock: Message[] = [
         text: 'Dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-07T22:07:30.114Z',
+        createdAt: '2021-10-07T22:07:30.114Z',
         author: user,
     },
     {
@@ -37,7 +37,7 @@ const messagesMock: Message[] = [
         text: 'Sit amet ipsum dolor sit amet ipsum dolor',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-07T21:07:30.114Z',
+        createdAt: '2021-10-07T21:07:30.114Z',
         author: user2,
     },
     {
@@ -45,7 +45,7 @@ const messagesMock: Message[] = [
         text: 'Famet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet. Sit amet ipsum dolor sit amet ipsum dolor',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-07T20:07:30.114Z',
+        createdAt: '2021-10-07T20:07:30.114Z',
         author: user2,
     },
     {
@@ -53,7 +53,7 @@ const messagesMock: Message[] = [
         text: 'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T19:07:30.114Z',
+        createdAt: '2021-10-06T19:07:30.114Z',
         author: user,
     },
     {
@@ -61,7 +61,7 @@ const messagesMock: Message[] = [
         text: 'Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T18:07:30.114Z',
+        createdAt: '2021-10-06T18:07:30.114Z',
         author: user,
     },
 
@@ -70,7 +70,7 @@ const messagesMock: Message[] = [
         text: 'Dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T17:07:30.114Z',
+        createdAt: '2021-10-06T17:07:30.114Z',
         author: user,
     },
     {
@@ -78,7 +78,7 @@ const messagesMock: Message[] = [
         text: 'Sit amet ipsum dolor sit amet ipsum dolor',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T16:07:30.114Z',
+        createdAt: '2021-10-06T16:07:30.114Z',
         author: user2,
     },
     {
@@ -86,7 +86,7 @@ const messagesMock: Message[] = [
         text: 'Famet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet. Sit amet ipsum dolor sit amet ipsum dolor',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T15:05:30.114Z',
+        createdAt: '2021-10-06T15:05:30.114Z',
         author: user2,
     },
     {
@@ -94,7 +94,7 @@ const messagesMock: Message[] = [
         text: 'Amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-06T14:04:01.114Z',
+        createdAt: '2021-10-06T14:04:01.114Z',
         author: user,
     },
     {
@@ -102,7 +102,7 @@ const messagesMock: Message[] = [
         text: 'Ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-05T13:03:30.114Z',
+        createdAt: '2021-10-05T13:03:30.114Z',
         author: user,
     },
     {
@@ -110,7 +110,7 @@ const messagesMock: Message[] = [
         text: 'Amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-05T12:08:30.114Z',
+        createdAt: '2021-10-05T12:08:30.114Z',
         author: user,
     },
     {
@@ -118,7 +118,7 @@ const messagesMock: Message[] = [
         text: 'Ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet Lorem ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet ipsum dolor sit amet',
         isNew: false,
         uploads: [],
-        creationDate: '2021-10-04T10:07:31.114Z',
+        createdAt: '2021-10-04T10:07:31.114Z',
         author: user,
     },
 ];
@@ -126,7 +126,7 @@ const messagesMock: Message[] = [
 const chatMock: Chat[] = [
     {
         id: 1,
-        creationDate: '2021-10-07T23:09:30.114Z',
+        createdAt: '2021-10-07T23:09:30.114Z',
         unreadMessages: 0,
         lastMessage: messagesMock[0],
         user: user2,

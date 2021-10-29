@@ -59,7 +59,7 @@ const PostCardLg = ({ post }: IProps): ReactElement => {
                                 <h3>{post.title}</h3>
                             </Tooltip>
                             <p>{cutString(post.description, 180)}</p>
-                            <p className={css.date}>Дата створення: {formatDate(post.creationDate, trans)}</p>
+                            <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
                         </a>
                     </Link>
                 </div>

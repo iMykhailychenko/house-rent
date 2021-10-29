@@ -3,37 +3,21 @@ import React, { ReactElement } from 'react';
 import Person from '@mui/icons-material/Person';
 
 import useTrans from '../../../../hooks/trans.hook';
-import JoinForm from '../../../common/auth/join-form/join-form';
-import LoginForm from '../../../common/auth/login-form/login-form';
-import { modal } from '../../../common/modal/modal';
-import SmallModalWrp from '../../../common/modal/small-modal-wrp/small-modal-wrp';
+import joinModal from '../../../common/modal/modals/join-modal/join-modal';
+import loginModal from '../../../common/modal/modals/login-modal/login-modal';
 
 import css from './header-auth.module.scss';
 
 const HeaderAuth = (): ReactElement => {
     const trans = useTrans();
 
-    const login = (): void =>
-        modal.open(
-            <SmallModalWrp title="Увійти в особистий кабінет">
-                <LoginForm />
-            </SmallModalWrp>,
-        );
-
-    const join = (): void =>
-        modal.open(
-            <SmallModalWrp title="Зареєструватися">
-                <JoinForm />
-            </SmallModalWrp>,
-        );
-
     return (
         <div className={css.root}>
             <Person />
-            <button className={css.button} type="button" onClick={login}>
+            <button className={css.button} type="button" onClick={loginModal}>
                 {trans('login')}
             </button>
-            <button className={css.button} type="button" onClick={join}>
+            <button className={css.button} type="button" onClick={joinModal}>
                 {trans('join')}
             </button>
         </div>

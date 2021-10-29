@@ -7,8 +7,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import clsx from 'clsx';
 
 import Button from '../../../../../common/button/button';
+import StickyModal from '../../../../../common/modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../../../../common/modal/modal';
-import StickyModal from '../../../../../common/modal/sticky-modal/sticky-modal';
 
 import css from './form-template-modal.module.scss';
 

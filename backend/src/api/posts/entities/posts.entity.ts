@@ -21,7 +21,7 @@ export class PostEntity {
     status: POST_STATUS;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    creationDate: Date;
+    createdAt: Date;
 
     @Column({ type: 'int', default: 0 })
     views: number;

@@ -40,7 +40,7 @@ const SinglePostComponent = (): ReactElement => {
 
                             <div className={css.inner}>
                                 <p className={css.small}>{trans('created')}:</p>
-                                <p className={css.date}>{formatDate(postData.creationDate, trans)}</p>
+                                <p className={css.date}>{formatDate(postData.createdAt, trans)}</p>
                             </div>
                         </div>
 

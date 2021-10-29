@@ -10,9 +10,7 @@ import { useAuthSelector } from '../../../../state/entities/auth/auth.selector';
 import { authJoinThunk } from '../../../../state/entities/auth/auth.thunk';
 import Button from '../../button/button';
 import Input from '../../input/input';
-import { modal } from '../../modal/modal';
-import SmallModalWrp from '../../modal/small-modal-wrp/small-modal-wrp';
-import LoginForm from '../login-form/login-form';
+import loginModal from '../../modal/modals/login-modal/login-modal';
 import Services from '../services/services';
 
 import css from './join-form.module.scss';
@@ -63,13 +61,6 @@ const JoinForm = (): ReactElement => {
         },
     });
 
-    const login = (): void =>
-        modal.open(
-            <SmallModalWrp title="Увійти в особистий кабінет">
-                <LoginForm />
-            </SmallModalWrp>,
-        );
-
     return (
         <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
@@ -113,7 +104,7 @@ const JoinForm = (): ReactElement => {
             />
 
             <div className={css.flex}>
-                <Button className={css.btn} secondary onClick={login}>
+                <Button className={css.btn} secondary onClick={loginModal}>
                     {trans('Увійти')}
                 </Button>
                 <Button

@@ -6,8 +6,8 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import Badge from '../../../common/badge/badge';
 import Button from '../../../common/button/button';
+import StickyModal from '../../../common/modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../../common/modal/modal';
-import StickyModal from '../../../common/modal/sticky-modal/sticky-modal';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
 import HeaderUserNav from './header-user-nav/header-user-nav';

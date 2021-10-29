@@ -10,7 +10,7 @@ export class ChatEntity {
     id: number;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    creationDate: Date;
+    createdAt: Date;
 
     @OneToMany(() => MessageEntity, message => message.chat)
     messages: MessageEntity[];

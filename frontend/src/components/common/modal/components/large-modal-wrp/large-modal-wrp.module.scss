@@ -1,11 +1,10 @@
-@import '../../../../styles/helpers/mixin';
+@import '../../../../../styles/helpers/mixin';
 
 .root {
     width: 96%;
-    max-width: 80rem;
+    max-width: 110rem;
     height: max-content;
     margin: 2rem 0;
-    padding: 1.5rem 2rem 2rem;
     border-radius: 1rem;
     background: var(--white);
 
@@ -14,9 +13,13 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 3rem;
+        padding: 0.5rem 2rem;
+        border-radius: 1rem 1rem 0 0;
+        background: var(--gray-3);
 
         .btn {
             padding: 0 1.1rem;
+            font-size: 1.8rem;
         }
 
         .title {

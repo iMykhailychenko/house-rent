@@ -24,6 +24,16 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     constructor(private readonly jwtService: JwtService, private readonly chatsService: ChatsService) {}
 
     @UsePipes(new ValidationPipe({ transform: true }))
+    @SubscribeMessage('editMessage')
+    async editMessage(client: Socket, payload: MessageDto): Promise<void> {
+        const room = this.server.adapter['rooms']?.get(String(payload.chatId));
+        if (!room || !room.has(client.id)) throw new WsException('Forbidden');
+
+        const message = await this.chatsService.createMessage(payload);
+        this.server.to(String(payload.chatId)).emit('messageEdited', message);
+    }
+
+    @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('msgToServer')
     async handleMessage(client: Socket, payload: MessageDto): Promise<void> {
         const room = this.server.adapter['rooms']?.get(String(payload.chatId));

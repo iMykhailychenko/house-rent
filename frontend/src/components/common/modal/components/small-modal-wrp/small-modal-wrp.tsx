@@ -2,20 +2,19 @@ import React, { ReactElement } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
-import useTrans from '../../../../hooks/trans.hook';
-import Button from '../../button/button';
-import { modal } from '../modal';
+import useTrans from '../../../../../hooks/trans.hook';
+import Button from '../../../button/button';
+import { modal } from '../../modal';
 
-import css from './middle-modal-wrp.module.scss';
+import css from './small-modal-wrp.module.scss';
 
 interface IProps {
     title?: string;
     children: ReactElement[] | ReactElement | string;
 }
 
-const MiddleModalWrp = ({ children = '', title }: IProps): ReactElement => {
+const SmallModalWrp = ({ title = '', children }: IProps): ReactElement => {
     const trans = useTrans();
-
     return (
         <div className={css.root}>
             <header className={css.header}>
@@ -24,9 +23,9 @@ const MiddleModalWrp = ({ children = '', title }: IProps): ReactElement => {
                     <Close />
                 </Button>
             </header>
-            {children}
+            <div className={css.inner}>{children}</div>
         </div>
     );
 };
 
-export default MiddleModalWrp;
+export default SmallModalWrp;

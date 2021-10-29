@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import useTrans from '../../../../../hooks/trans.hook';
 import { cutString } from '../../../../../utils/helpers';
 import ImageWrp from '../../../../common/image-wrp/image-wrp';
+import StickyModal from '../../../../common/modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../../../common/modal/modal';
-import StickyModal from '../../../../common/modal/sticky-modal/sticky-modal';
 import css from '../single.module.scss';
 
 interface IProps {

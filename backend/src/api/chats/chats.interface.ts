@@ -21,7 +21,7 @@ export enum CustomMessages {
 
 export interface ChatResponse {
     id: number;
-    creationDate: Date;
+    createdAt: Date;
     unreadMessages: number;
     lastMessage: MessageEntity;
     user: UserEntity;

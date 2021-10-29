@@ -4,7 +4,7 @@ export type TransFn = (value: string) => string;
 
 export interface IUser {
     id: number;
-    creationDate: string;
+    createdAt: string;
     lastActivity: string;
     avatar: string | null;
     firstName: string;

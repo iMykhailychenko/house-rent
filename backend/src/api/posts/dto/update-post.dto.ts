@@ -38,7 +38,7 @@ export class UpdatePostDto {
 
     @IsDate()
     @IsOptional()
-    creationDate: Date = new Date();
+    createdAt: Date = new Date();
 
     @IsArray()
     @IsNotEmpty()

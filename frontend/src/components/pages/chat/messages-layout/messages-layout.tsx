@@ -12,8 +12,8 @@ const MessagesLayout = (): ReactElement => {
     return (
         <>
             {messages.data?.map((message, index, array) => {
-                const prevDay = validateDate(array[index + 1]?.creationDate);
-                const currentDay = validateDate(message.creationDate);
+                const prevDay = validateDate(array[index + 1]?.createdAt);
+                const currentDay = validateDate(message.createdAt);
 
                 const isNextDay = prevDay.getDate() !== currentDay.getDate();
 
@@ -23,7 +23,7 @@ const MessagesLayout = (): ReactElement => {
                             message={message}
                             isFirstMessage={message.author.id !== array[index + 1]?.author.id || isNextDay}
                         />
-                        {isNextDay && <DateSeparator date={array[index + 1]?.creationDate ? prevDay : currentDay} />}
+                        {isNextDay && <DateSeparator date={array[index + 1]?.createdAt ? prevDay : currentDay} />}
                     </Fragment>
                 );
             })}

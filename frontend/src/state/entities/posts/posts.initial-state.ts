@@ -11,7 +11,7 @@ export const singlePostsInitialState: IPost = {
     children: 'loading...',
     pets: 'loading...',
     cityFilters: 'loading...',
-    creationDate: 'loading...',
+    createdAt: 'loading...',
     districtFilters: ['loading...'],
     generalFilters: null,
     houseTypeFilters: ['loading...'],

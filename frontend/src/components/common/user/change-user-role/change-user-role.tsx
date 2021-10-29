@@ -7,8 +7,8 @@ import { useProfileInfoSelector } from '../../../../state/entities/profile/profi
 import { updateProfileRole } from '../../../../state/entities/profile/profile.thunk';
 import Button from '../../button/button';
 import Checkbox from '../../checkbox/checkbox';
+import StickyModal from '../../modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../modal/modal';
-import StickyModal from '../../modal/sticky-modal/sticky-modal';
 
 import css from './change-user-role.module.scss';
 

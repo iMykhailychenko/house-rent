@@ -21,7 +21,7 @@ export interface IPost {
     pets: string;
     views: number;
     cityFilters: string;
-    creationDate: string;
+    createdAt: string;
     districtFilters: string[];
     generalFilters: string[] | null;
     houseTypeFilters: string[];

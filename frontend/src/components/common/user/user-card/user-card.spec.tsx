@@ -6,7 +6,7 @@ import UserCard from './user-card';
 
 const mockUser: IUser = {
     id: 1,
-    creationDate: '1-1-1991',
+    createdAt: '1-1-1991',
     lastActivity: '1-1-1991',
     avatar: null,
     isEmailVerified: false,

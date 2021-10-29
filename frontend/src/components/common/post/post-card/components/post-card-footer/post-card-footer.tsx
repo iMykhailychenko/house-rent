@@ -18,15 +18,13 @@ import { IPost } from '../../../../../../state/entities/posts/posts.interface';
 import { togglePostFavoriteThunk } from '../../../../../../state/entities/posts/posts.thunk';
 import { useProfileInfoSelector } from '../../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../../utils/routes';
-import LoginForm from '../../../../auth/login-form/login-form';
 import Button from '../../../../button/button';
 import { modal } from '../../../../modal/modal';
-import SmallModalWrp from '../../../../modal/small-modal-wrp/small-modal-wrp';
-import StickyModal from '../../../../modal/sticky-modal/sticky-modal';
+import loginModal from '../../../../modal/modals/login-modal/login-modal';
+import sharePostModal from '../../../../modal/modals/share-post-modal/share-post-modal';
 import Tooltip from '../../../../tooltip/tooltip';
 import ChangeUserRole from '../../../../user/change-user-role/change-user-role';
 import PostPreviewModal from '../post-preview-modal/post-preview-modal';
-import SharePostModal from '../share-post-modal/share-post-modal';
 
 import css from './post-card-footer.module.scss';
 
@@ -45,24 +43,8 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     const profileState = useProfileInfoSelector();
     const isSmallSize = size === 'sm';
 
-    const loginForm = (): void => {
-        modal.open(
-            <SmallModalWrp>
-                <LoginForm />
-            </SmallModalWrp>,
-        );
-    };
-
-    const openSharePostModal = (): void => {
-        modal.open(
-            <StickyModal>
-                <SharePostModal post={post} />
-            </StickyModal>,
-        );
-    };
-
     const toggleFavorite = (): void => {
-        if (!auth?.accessToken) return loginForm();
+        if (!auth?.accessToken) return loginModal();
         dispatch(togglePostFavoriteThunk(post.id));
     };
 
@@ -73,7 +55,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
     };
 
     const openChat = async () => {
-        if (!auth?.accessToken) return loginForm();
+        if (!auth?.accessToken) return loginModal();
 
         if (!role.isRealtor) {
             changeUserRole();
@@ -106,7 +88,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button size="sm" secondary={!isSmallSize} onClick={openSharePostModal}>
+                    <Button size="sm" secondary={!isSmallSize} onClick={sharePostModal(post)}>
                         <Share />
                     </Button>
                 </Tooltip>
