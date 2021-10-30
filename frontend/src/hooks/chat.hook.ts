@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { io, Socket } from 'socket.io-client';
 
-import { SocketMessagesPayload } from '../state/entities/chats/chats.interface';
+import { SocketMessagesPayload, UpdateMessagesPayload } from '../state/entities/chats/chats.interface';
 
 import useAuth from './auth.hook';
 
@@ -44,6 +44,10 @@ class ChatSocket {
 
     send = (message: SocketMessagesPayload): void => {
         this.client?.emit('msgToServer', message);
+    };
+
+    update = (data: UpdateMessagesPayload): void => {
+        this.client?.emit('editMessage', data);
     };
 }
 

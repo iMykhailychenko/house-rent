@@ -25,6 +25,7 @@ export interface Message {
     isNew: boolean;
     uploads: string[];
     createdAt: string;
+    updatedAt: string | null;
     author: IUser;
 }
 
@@ -52,6 +53,14 @@ export interface SocketMessagesPayload {
     message: string;
     uploads: string[];
     chatId: number;
+}
+
+export interface UpdateMessagesPayload {
+    id: number;
+    chatId: number;
+    userId: number;
+    message: string;
+    uploads: string[];
 }
 
 export interface IChatsState {

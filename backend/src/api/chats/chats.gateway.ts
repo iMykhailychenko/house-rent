@@ -15,6 +15,7 @@ import { UserEntity } from '../users/entities/users.entity';
 
 import { ChatsService } from './chats.service';
 import { MessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 
 @WebSocketGateway(8001, { namespace: 'chat', cors: true })
 export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -25,11 +26,11 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('editMessage')
-    async editMessage(client: Socket, payload: MessageDto): Promise<void> {
+    async editMessage(client: Socket, payload: UpdateMessageDto): Promise<void> {
         const room = this.server.adapter['rooms']?.get(String(payload.chatId));
         if (!room || !room.has(client.id)) throw new WsException('Forbidden');
 
-        const message = await this.chatsService.createMessage(payload);
+        const message = await this.chatsService.updateMessage(payload);
         this.server.to(String(payload.chatId)).emit('messageEdited', message);
     }
 

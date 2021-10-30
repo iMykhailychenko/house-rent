@@ -1,9 +1,9 @@
 import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class MessageDto {
+export class UpdateMessageDto {
     @IsNotEmpty()
     @IsInt()
-    author: number;
+    id: number;
 
     @IsNotEmpty()
     @IsString()
@@ -14,6 +14,9 @@ export class MessageDto {
     uploads: string[];
 
     @IsInt()
-    @IsOptional()
     chatId: number;
+
+    @IsNotEmpty()
+    @IsInt()
+    userId: number;
 }

@@ -13,6 +13,9 @@ const chatSlice = createSlice({
         pushMessage(state: IChatsState, action: PayloadAction<Message>) {
             state.messages.data.unshift(action.payload);
         },
+        updateMessage(state: IChatsState, action: PayloadAction<Message>) {
+            state.messages.data = state.messages.data.map(msg => (msg.id === action.payload.id ? action.payload : msg));
+        },
     },
     extraReducers: builder => {
         // CHATS PAGINATION THUNK
@@ -69,6 +72,6 @@ const chatSlice = createSlice({
     },
 });
 
-export const { pushMessage } = chatSlice.actions;
+export const { pushMessage, updateMessage } = chatSlice.actions;
 
 export default chatSlice.reducer;

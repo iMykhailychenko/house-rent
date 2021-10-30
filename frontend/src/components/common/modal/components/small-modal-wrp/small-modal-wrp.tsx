@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import Close from '@mui/icons-material/Close';
 
 import useTrans from '../../../../../hooks/trans.hook';
-import Button from '../../../button/button';
 import { modal } from '../../modal';
 
 import css from './small-modal-wrp.module.scss';
@@ -19,9 +18,9 @@ const SmallModalWrp = ({ title = '', children }: IProps): ReactElement => {
         <div className={css.root}>
             <header className={css.header}>
                 <h2 className={css.title}>{trans(title)}</h2>
-                <Button className={css.btn} secondary onClick={modal.close}>
+                <button className={css.btn} type='button' onClick={modal.close}>
                     <Close />
-                </Button>
+                </button>
             </header>
             <div className={css.inner}>{children}</div>
         </div>

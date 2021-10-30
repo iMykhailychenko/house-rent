@@ -9,6 +9,7 @@ import { UserEntity, UserRole } from '../users/entities/users.entity';
 import { ChatResponse, CustomMessages, FindAllChatsParams, FindAllMessagesParams } from './chats.interface';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { MessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 import { ChatEntity } from './entities/chats.entity';
 import { MessageEntity } from './entities/messages.entity';
 
@@ -170,14 +171,15 @@ export class ChatsService {
             .execute();
     }
 
-    async updateMessage(chatId: number, userId: number, text: string): Promise<void> {
-        await this.messageRepository
-            .createQueryBuilder('messages')
-            .leftJoin('messages.author', 'author')
-            .leftJoin('messages.chat', 'chat')
-            .update()
-            .set({ text })
-            .where('(chat.id = chatId AND author.id != :userId)', { userId, chatId })
-            .execute();
+    async updateMessage({ id, uploads, message: text, userId }: UpdateMessageDto): Promise<MessageEntity> {
+        const message = await this.messageRepository.findOne(id, { relations: ['author'] });
+        message.text = text;
+        message.isNew = false;
+        message.updatedAt = new Date();
+        if (uploads.length) message.uploads = uploads;
+
+        if (userId !== message.author.id) throw new WsException('Forbidden');
+
+        return await this.messageRepository.save(message);
     }
 }

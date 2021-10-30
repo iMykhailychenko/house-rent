@@ -4,7 +4,6 @@ import Close from '@mui/icons-material/Close';
 
 import useMaxWidth from '../../../../../hooks/media.hook';
 import useTrans from '../../../../../hooks/trans.hook';
-import Button from '../../../button/button';
 import { modal } from '../../modal';
 
 import css from './sticky-modal.module.scss';
@@ -28,9 +27,9 @@ const StickyModal = ({ title = '', footer, children }: IProps): ReactElement => 
         <div className={css.root}>
             <header className={css.header}>
                 <h2 className={css.title}>{trans(title)}</h2>
-                <Button className={css.btn} secondary onClick={modal.close}>
+                <button type="button" className={css.btn} onClick={modal.close}>
                     <Close />
-                </Button>
+                </button>
             </header>
             <div className={css.inner}>{children}</div>
             {footer && <footer className={css.footer}>{footer}</footer>}

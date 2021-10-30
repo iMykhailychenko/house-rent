@@ -14,6 +14,5 @@ export class MessageDto {
     uploads: string[];
 
     @IsInt()
-    @IsOptional()
     chatId: number;
 }

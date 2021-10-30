@@ -17,9 +17,6 @@ export class FavoriteService {
 
     async toggleFavorite(userId: number, postId: number): Promise<void> {
         const post = await this.postRepository.findOne(postId, { relations: ['user'] });
-        if (post.user.id !== userId) {
-            throw new HttpException('No permission', HttpStatus.FORBIDDEN);
-        }
 
         const favorite = await this.favoriteRepository.findOne({
             where: {

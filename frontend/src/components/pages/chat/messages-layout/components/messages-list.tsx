@@ -22,15 +22,18 @@ const MessagesList = ({ isFirstMessage = false, message }: IProps): ReactElement
             <div className={css.textWrp}>
                 {profileState.data.id === message.author.id ? (
                     <button
-                        className={css.text}
-                        onClick={editMessageModal(message.text)}
+                        className={css.btnText}
+                        onClick={editMessageModal(message)}
                         dangerouslySetInnerHTML={{ __html: message.text?.replace(/\n/gi, '<br/>') }}
                     />
                 ) : (
                     <p className={css.text} dangerouslySetInnerHTML={{ __html: message.text?.replace(/\n/gi, '<br/>') }} />
                 )}
 
-                <span className={css.time}>{formatTime(message.createdAt)}</span>
+                <p className={css.time}>
+                    <span>{formatTime(message.createdAt)}</span>
+                    {message.updatedAt && <span>edited</span>}
+                </p>
             </div>
             {isFirstMessage && (
                 <Link href={routes.users.profile(message.author.id)}>

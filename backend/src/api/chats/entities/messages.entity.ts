@@ -12,6 +12,9 @@ export class MessageEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
+    @Column({ type: 'timestamp', default: null, nullable: true })
+    updatedAt: Date;
+
     @Column({ type: 'varchar', length: 500 })
     text: string;
 

@@ -12,7 +12,7 @@ import useAuth from '../../hooks/auth.hook';
 import { useChatSocket } from '../../hooks/chat.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { Message } from '../../state/entities/chats/chats.interface';
-import { pushMessage } from '../../state/entities/chats/chats.reducer';
+import { pushMessage, updateMessage } from '../../state/entities/chats/chats.reducer';
 import { useMessageStatusSelector } from '../../state/entities/chats/chats.selector';
 import { chatListThunk, messagesListThunk, singleChatThunk } from '../../state/entities/chats/chats.thunk';
 import { withAuthRedirect } from '../../utils/ssr';
@@ -33,6 +33,9 @@ const Messages = (): ReactElement => {
     useEffect(() => {
         socket?.client?.on('msgToClient', (msg: Message) => {
             dispatch(pushMessage(msg));
+        });
+        socket?.client?.on('messageEdited', (msg: Message) => {
+            dispatch(updateMessage(msg));
         });
     }, [socket, dispatch]);
 
