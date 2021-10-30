@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { useSinglePostSelector } from '../../../../../../state/entities/posts/posts.selector';
-import { singlePostThunk } from '../../../../../../state/entities/posts/posts.thunk';
+import { singlePostThunk } from '../../../../../../state/entities/posts/thunks/single-post.thunk';
 import SinglePostComponent from '../../../../../pages/posts/single/single';
 import LargeModalWrp from '../../../../modal/components/large-modal-wrp/large-modal-wrp';
 

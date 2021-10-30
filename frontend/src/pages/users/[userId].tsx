@@ -10,14 +10,12 @@ import RootLayout from '../../components/layout/root-layout/root-layout';
 import Section from '../../components/layout/section/section';
 import UserBanner from '../../components/pages/users/user-banner/user-banner';
 import { useAppDispatch } from '../../hooks/redux.hook';
-import { usePostListSelector } from '../../state/entities/posts/posts.selector';
-import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../state/entities/posts/posts.thunk';
+import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../state/entities/posts/thunks/user-posts.thunk';
 import { userInfoThunk } from '../../state/entities/users/users.thunk';
 import { withStore } from '../../utils/ssr';
 
 const UserProfile = (): JSX.Element => {
     const dispatch = useAppDispatch();
-    const postsState = usePostListSelector();
 
     const router = useRouter();
     const userId = +String(router.query.userId);
@@ -26,10 +24,10 @@ const UserProfile = (): JSX.Element => {
         dispatch(getUserPostsListThunk({ userId, page: 1 }));
     };
     const openPage = async (page: number): Promise<void> => {
-        await dispatch(getUserPostsListThunk({ userId, page })).unwrap();
+        dispatch(getUserPostsListThunk({ userId, page }));
     };
     const loadMore = async (page: number): Promise<void> => {
-        await dispatch(getUserPostsListPaginationThunk({ userId, page })).unwrap();
+        await dispatch(getUserPostsListPaginationThunk({ userId, page }));
     };
 
     return (
@@ -38,7 +36,7 @@ const UserProfile = (): JSX.Element => {
                 <UserBanner />
             </Container>
             <Section id="home-posts">
-                <PostsList title="Усі активні пости користувача" posts={postsState} onPage={openPage} onMore={loadMore}>
+                <PostsList title="Усі активні пости користувача" onPage={openPage} onMore={loadMore}>
                     <PostFilters onSubmit={submit} />
                 </PostsList>
             </Section>

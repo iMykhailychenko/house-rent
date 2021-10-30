@@ -9,22 +9,29 @@ import css from '../posts-skeleton.module.scss';
 
 interface IProps {
     className?: string;
+    amount?: number;
 }
 
-const PostsMdSkeleton = ({ className }: IProps): JSX.Element => {
-    return (
-        <div className={clsx(css.md, className)}>
-            <RectSkeleton />
-            <TextSkeleton className={css.title} />
-            <TextSkeleton />
-            <TextSkeleton className={css.short} />
-            <UserCardSkeleton className={css.user} />
+const PostsMdSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
+    const list = new Array(amount).fill(null);
 
-            <div className={css.flex}>
-                <RectSkeleton className={css.actions} />
-                <RectSkeleton className={css.submit} />
-            </div>
-        </div>
+    return (
+        <>
+            {list.map(item => (
+                <div key={item} className={clsx(css.md, className)}>
+                    <RectSkeleton />
+                    <TextSkeleton className={css.title} />
+                    <TextSkeleton />
+                    <TextSkeleton className={css.short} />
+                    <UserCardSkeleton className={css.user} />
+
+                    <div className={css.flex}>
+                        <RectSkeleton className={css.actions} />
+                        <RectSkeleton className={css.submit} />
+                    </div>
+                </div>
+            ))}
+        </>
     );
 };
 

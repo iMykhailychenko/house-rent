@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import SinglePostComponent from '../../components/pages/posts/single/single';
-import { singlePostThunk } from '../../state/entities/posts/posts.thunk';
+import { singlePostThunk } from '../../state/entities/posts/thunks/single-post.thunk';
 import { withStore } from '../../utils/ssr';
 
 const SinglePost = (): JSX.Element => {

@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
     private: '/private',
+    myPosts: '/my-posts',
     chats: {
         init: '/chats',
         messages: (id: string | number): string => `/chats/${id}`,

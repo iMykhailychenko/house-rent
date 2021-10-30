@@ -15,7 +15,7 @@ import { useRole } from '../../../../../../hooks/role.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
 import { createChatThunk } from '../../../../../../state/entities/chats/chats.thunk';
 import { IPost } from '../../../../../../state/entities/posts/posts.interface';
-import { togglePostFavoriteThunk } from '../../../../../../state/entities/posts/posts.thunk';
+import { togglePostFavoriteThunk } from '../../../../../../state/entities/posts/thunks/post-favorite.thunk';
 import { useProfileInfoSelector } from '../../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../../utils/routes';
 import Button from '../../../../button/button';

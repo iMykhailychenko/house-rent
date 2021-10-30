@@ -10,7 +10,7 @@ import { useUploadMediaSelector } from '../../../../../../state/entities/media/m
 import { FORM_TYPE, INewPostPayload } from '../../../../../../state/entities/posts/posts.interface';
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import { useNewPostSelector } from '../../../../../../state/entities/posts/posts.selector';
-import { newPostThunk } from '../../../../../../state/entities/posts/posts.thunk';
+import { newPostThunk } from '../../../../../../state/entities/posts/thunks/new-post.thunk';
 import Button from '../../../../../common/button/button';
 import Progress from '../../../../../common/progress/progress';
 import css from '../new-post-form.module.scss';

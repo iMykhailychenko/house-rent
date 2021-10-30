@@ -1,0 +1,17 @@
+.wrp {
+    width: 100%;
+    --card-width: 37rem;
+
+    .inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 4rem;
+        flex-wrap: wrap;
+        margin: 2rem 0;
+    }
+
+    .card {
+        width: var(--card-width);
+        padding: 0;
+    }
+}

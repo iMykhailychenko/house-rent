@@ -9,45 +9,52 @@ import css from '../posts-skeleton.module.scss';
 
 interface IProps {
     className?: string;
+    amount?: number;
 }
 
-const PostsLgSkeleton = ({ className }: IProps): JSX.Element => {
+const PostsLgSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
+    const list = new Array(amount).fill(null);
+
     return (
-        <div className={clsx(css.lg, className)}>
-            <UserCardSkeleton className={css.user} />
+        <>
+            {list.map(item => (
+                <div key={item} className={clsx(css.lg, className)}>
+                    <UserCardSkeleton className={css.user} />
 
-            <div className={css.flex}>
-                <RectSkeleton className={css.img} />
-                <div className={css.wrp}>
-                    <TextSkeleton className={css.title} />
-                    <TextSkeleton amount={2} />
-                    <TextSkeleton className={css.short} />
-                </div>
-            </div>
+                    <div className={css.flex}>
+                        <RectSkeleton className={css.img} />
+                        <div className={css.wrp}>
+                            <TextSkeleton className={css.title} />
+                            <TextSkeleton amount={2} />
+                            <TextSkeleton className={css.short} />
+                        </div>
+                    </div>
 
-            <div className={css.flex}>
-                <div className={css.cell}>
-                    <RectSkeleton className={css.chip} />
-                    <RectSkeleton className={css.chip} />
-                </div>
-                <div className={css.cell}>
-                    <RectSkeleton className={css.chip} />
-                    <RectSkeleton className={css.chipLong} />
-                </div>
-                <div className={css.cell}>
-                    <RectSkeleton className={css.chip} />
-                </div>
-                <div className={css.cell}>
-                    <RectSkeleton className={css.chip} />
-                    <RectSkeleton className={css.chip} />
-                </div>
-            </div>
+                    <div className={css.flex}>
+                        <div className={css.cell}>
+                            <RectSkeleton className={css.chip} />
+                            <RectSkeleton className={css.chip} />
+                        </div>
+                        <div className={css.cell}>
+                            <RectSkeleton className={css.chip} />
+                            <RectSkeleton className={css.chipLong} />
+                        </div>
+                        <div className={css.cell}>
+                            <RectSkeleton className={css.chip} />
+                        </div>
+                        <div className={css.cell}>
+                            <RectSkeleton className={css.chip} />
+                            <RectSkeleton className={css.chip} />
+                        </div>
+                    </div>
 
-            <div className={css.flex}>
-                <RectSkeleton className={css.actions} />
-                <RectSkeleton className={css.submit} />
-            </div>
-        </div>
+                    <div className={css.flex}>
+                        <RectSkeleton className={css.actions} />
+                        <RectSkeleton className={css.submit} />
+                    </div>
+                </div>
+            ))}
+        </>
     );
 };
 

@@ -8,19 +8,26 @@ import css from '../posts-skeleton.module.scss';
 
 interface IProps {
     className?: string;
+    amount?: number;
 }
 
-const PostsSmSkeleton = ({ className }: IProps): JSX.Element => {
-    return (
-        <div className={clsx(css.sm, className)}>
-            <RectSkeleton className={css.img} />
-            <TextSkeleton amount={2} />
+const PostsSmSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
+    const list = new Array(amount).fill(null);
 
-            <div className={css.flex}>
-                <RectSkeleton className={css.actions} />
-                <RectSkeleton className={css.submit} />
-            </div>
-        </div>
+    return (
+        <>
+            {list.map(item => (
+                <div key={item} className={clsx(css.sm, className)}>
+                    <RectSkeleton className={css.img} />
+                    <TextSkeleton amount={2} />
+
+                    <div className={css.flex}>
+                        <RectSkeleton className={css.actions} />
+                        <RectSkeleton className={css.submit} />
+                    </div>
+                </div>
+            ))}
+        </>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import useConfig from '../../../../hooks/config.hook';
 
@@ -13,21 +13,14 @@ interface IProps {
 
 const PostsSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
     const [config] = useConfig();
-    const list = new Array(amount).fill(null);
 
     const postSkeletonMap = {
-        sm: <PostsSmSkeleton className={className} />,
-        md: <PostsMdSkeleton className={className} />,
-        lg: <PostsLgSkeleton className={className} />,
+        sm: <PostsSmSkeleton amount={amount} className={className} />,
+        md: <PostsMdSkeleton amount={amount} className={className} />,
+        lg: <PostsLgSkeleton amount={amount} className={className} />,
     };
 
-    return (
-        <>
-            {list.map((_, index) => (
-                <Fragment key={index}>{postSkeletonMap[config.cardSize]}</Fragment>
-            ))}
-        </>
-    );
+    return postSkeletonMap[config.cardSize];
 };
 
 export default PostsSkeleton;
