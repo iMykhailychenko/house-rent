@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 import axios from 'axios';
 
@@ -14,10 +14,10 @@ export const Auth = createContext<AuthHook>([authInitialState, () => undefined])
 
 interface IProps {
     authServer?: IAuthState | null;
-    children: ReactElement;
+    children: JSX.Element;
 }
 
-const AuthProvider = ({ authServer = authInitialState, children }: IProps): ReactElement => {
+const AuthProvider = ({ authServer = authInitialState, children }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
     const [value, setValue] = useState<IAuthState | null>(authInitialState);
     const auth = useAuthSelector();

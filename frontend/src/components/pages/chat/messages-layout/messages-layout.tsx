@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { Fragment } from 'react';
 
 import { useMessageSelector } from '../../../../state/entities/chats/chats.selector';
 import { validateDate } from '../../../../utils/helpers';
@@ -6,7 +6,7 @@ import { validateDate } from '../../../../utils/helpers';
 import DateSeparator from './components/date-separator';
 import MessagesList from './components/messages-list';
 
-const MessagesLayout = (): ReactElement => {
+const MessagesLayout = (): JSX.Element => {
     const messages = useMessageSelector();
 
     return (

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -11,7 +11,7 @@ interface IProps {
     className?: string;
 }
 
-const UserCardSkeleton = ({ className }: IProps): ReactElement => {
+const UserCardSkeleton = ({ className }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.root, className)}>
             <RectSkeleton className={css.avatar} />

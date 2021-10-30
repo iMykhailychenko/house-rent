@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useConfig from '../../../../hooks/config.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
@@ -11,7 +11,7 @@ interface IProps {
     post: IPost;
 }
 
-const PostCard = ({ post }: IProps): ReactElement => {
+const PostCard = ({ post }: IProps): JSX.Element => {
     const [config] = useConfig();
 
     const postCardMap = {

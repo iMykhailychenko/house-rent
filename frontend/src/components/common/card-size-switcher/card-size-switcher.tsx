@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -6,7 +6,7 @@ import useConfig from '../../../hooks/config.hook';
 
 import css from './card-size-switcher.module.scss';
 
-const CardSizeSwitcher = (): ReactElement => {
+const CardSizeSwitcher = (): JSX.Element => {
     const [config, setConfig] = useConfig();
 
     const handleSmallCard = (): void => setConfig({ ...config, cardSize: 'sm' });

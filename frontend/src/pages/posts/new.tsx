@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -6,7 +6,7 @@ import RootLayout from '../../components/layout/root-layout/root-layout';
 import NewPostContainer from '../../components/pages/posts/new/new-post-container/new-post-container';
 import { withStore } from '../../utils/ssr';
 
-const NewPostPage = (): ReactElement => {
+const NewPostPage = (): JSX.Element => {
     useEffect(() => {
         document.body.classList.add('new-post-page');
         return () => document.body.classList.remove('new-post-page');

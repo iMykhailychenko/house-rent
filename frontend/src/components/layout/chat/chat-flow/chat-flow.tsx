@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -9,11 +9,11 @@ import css from './chat-flow.module.scss';
 import ChatForm from './chat-form/chat-form';
 
 interface IProps {
-    children: ReactElement;
+    children: JSX.Element;
     disabled?: boolean;
 }
 
-const ChatFlow = ({ disabled, children }: IProps): ReactElement => {
+const ChatFlow = ({ disabled, children }: IProps): JSX.Element => {
     const router = useRouter();
     const chatId = +String(router.query.chatId);
 

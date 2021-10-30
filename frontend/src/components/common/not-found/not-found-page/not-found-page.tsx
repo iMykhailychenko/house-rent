@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-const NotFoundPage = (): ReactElement => {
+const NotFoundPage = (): JSX.Element => {
     return (
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eligendi error est fugiat iure maxime molestiae nobis

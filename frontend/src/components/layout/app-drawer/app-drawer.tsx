@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Drawer from '@mui/material/Drawer';
 
@@ -9,7 +9,7 @@ interface IProps {
     onClose: () => void;
 }
 
-const AppDrawer = ({ open, onClose }: IProps): ReactElement => {
+const AppDrawer = ({ open, onClose }: IProps): JSX.Element => {
     return (
         <Drawer open={open} onClose={onClose}>
             <div className={css.inner}>

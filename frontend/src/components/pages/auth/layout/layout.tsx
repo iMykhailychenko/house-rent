@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Home from '@mui/icons-material/Home';
 
@@ -9,10 +9,10 @@ import css from './layout.module.scss';
 
 interface IProps {
     src: string;
-    children: ReactElement[] | ReactElement;
+    children: JSX.Element[] | JSX.Element;
 }
 
-const AuthLayout = ({ src, children }: IProps): ReactElement => (
+const AuthLayout = ({ src, children }: IProps): JSX.Element => (
     <div className={css.root}>
         <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
         <div className={css.wrp}>

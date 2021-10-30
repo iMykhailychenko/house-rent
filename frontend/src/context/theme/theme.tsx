@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 import Cookies from 'js-cookie';
 
@@ -9,10 +9,10 @@ export const Theme = createContext<[theme: THEME_ENUM, setTheme: (v: THEME_ENUM)
 
 interface IProps {
     serverTheme?: THEME_ENUM;
-    children: ReactElement;
+    children: JSX.Element;
 }
 
-const ThemeProvider = ({ children, serverTheme = THEME_ENUM.WHITE }: IProps): ReactElement => {
+const ThemeProvider = ({ children, serverTheme = THEME_ENUM.WHITE }: IProps): JSX.Element => {
     const [theme, setTheme] = useState<THEME_ENUM>(serverTheme || 'white');
 
     useEffect(() => {

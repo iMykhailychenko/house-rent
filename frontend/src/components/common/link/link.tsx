@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import NextLink from 'next/link';
@@ -13,10 +13,10 @@ interface IProps {
     loading?: boolean;
     type?: 'link' | 'button';
     title?: string;
-    children: ReactElement[] | ReactElement | string;
+    children: JSX.Element[] | JSX.Element | string;
 }
 
-const Link = ({ type = 'link', href, className, children, loading, primary, secondary, title }: IProps): ReactElement => {
+const Link = ({ type = 'link', href, className, children, loading, primary, secondary, title }: IProps): JSX.Element => {
     return (
         <NextLink href={href} passHref>
             <a

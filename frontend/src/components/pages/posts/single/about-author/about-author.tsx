@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -12,7 +12,7 @@ interface IProps {
     post: IPost;
 }
 
-const AboutAuthor = ({ post }: IProps): ReactElement => {
+const AboutAuthor = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

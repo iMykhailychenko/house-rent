@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -10,10 +10,10 @@ interface IProps {
     chip: string | number;
     active?: boolean;
     tooltip: string;
-    children?: ReactElement;
+    children?: JSX.Element;
 }
 
-const ChipsStatic = ({ children, active = false, chip, tooltip }: IProps): ReactElement => {
+const ChipsStatic = ({ children, active = false, chip, tooltip }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.chip, { [css.active]: active })}>
             <Tooltip className={css.tooltip} content={tooltip}>

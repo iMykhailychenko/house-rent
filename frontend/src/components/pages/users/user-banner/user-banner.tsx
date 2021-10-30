@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import { useRouter } from 'next/router';
@@ -25,7 +25,7 @@ interface IRoleProps {
     text: string;
     title: string;
 }
-const RoleComponent = ({ text, title }: IRoleProps): ReactElement => {
+const RoleComponent = ({ text, title }: IRoleProps): JSX.Element => {
     const trans = useTrans();
     return (
         <p className={css.roleItem} title={trans(title)}>
@@ -35,7 +35,7 @@ const RoleComponent = ({ text, title }: IRoleProps): ReactElement => {
     );
 };
 
-const UserBanner = (): ReactElement => {
+const UserBanner = (): JSX.Element => {
     const role = useRole();
     const trans = useTrans();
     const [auth] = useAuth();

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -7,7 +7,7 @@ import SinglePostComponent from '../../components/pages/posts/single/single';
 import { singlePostThunk } from '../../state/entities/posts/posts.thunk';
 import { withStore } from '../../utils/ssr';
 
-const SinglePost = (): ReactElement => {
+const SinglePost = (): JSX.Element => {
     return (
         <RootLayout>
             <SinglePostComponent />

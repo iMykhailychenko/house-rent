@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
@@ -14,7 +14,7 @@ interface IProps {
     direction?: 'left' | 'right';
 }
 
-const ArrowLink = ({ href, children, className, direction = 'right' }: IProps): ReactElement => (
+const ArrowLink = ({ href, children, className, direction = 'right' }: IProps): JSX.Element => (
     <Link href={href} passHref>
         <a className={clsx(css.link, className)}>
             {direction === 'left' && <ChevronLeft />}

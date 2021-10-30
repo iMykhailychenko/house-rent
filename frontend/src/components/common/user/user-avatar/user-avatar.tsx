@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties } from 'react';
 
 import clsx from 'clsx';
 
@@ -12,7 +12,7 @@ interface IProps {
     diameter?: number;
 }
 
-const UserAvatar = ({ className, src, firstName = '-', lastName = '-', diameter = 4 }: IProps): ReactElement => {
+const UserAvatar = ({ className, src, firstName = '-', lastName = '-', diameter = 4 }: IProps): JSX.Element => {
     const style: CSSProperties = { height: `${diameter}rem`, width: `${diameter}rem` };
     return src ? (
         <img className={clsx(css.img, className)} style={style} src={src} alt="User avatar" title="User avatar" />

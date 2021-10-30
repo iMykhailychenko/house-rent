@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useChatListSelector } from '../../../../state/entities/chats/chats.selector';
 import ChatItemSkeleton from '../../../common/skeletons/chat/chat-item/chat-item';
 
 import ChatListItem from './components/chat-list-item';
 
-const ChatSidebar = (): ReactElement => {
+const ChatSidebar = (): JSX.Element => {
     const chatListState = useChatListSelector();
     const loading = chatListState.status === 'idle' || chatListState.status === 'loading';
 

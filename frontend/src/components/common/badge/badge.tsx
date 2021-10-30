@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -9,7 +9,7 @@ interface IProps {
     number?: number;
 }
 
-const Badge = ({ number = 0, className }: IProps): ReactElement | null => {
+const Badge = ({ number = 0, className }: IProps): JSX.Element | null => {
     return number ? (
         <div className={clsx(css.number, className, { [css.big]: number >= 10 })}>
             <span>{number < 10 ? number : '+9'}</span>

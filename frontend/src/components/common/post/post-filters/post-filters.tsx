@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -28,7 +28,7 @@ interface IProps {
     onSubmit: () => void;
 }
 
-const PostFilters = ({ onSubmit }: IProps): ReactElement => {
+const PostFilters = ({ onSubmit }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
     const filters = useAllFiltersSelector();

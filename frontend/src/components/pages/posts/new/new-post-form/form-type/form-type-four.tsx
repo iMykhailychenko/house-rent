@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
@@ -19,7 +19,7 @@ interface IProps {
     value: INewPostPayload;
 }
 
-const FormTypeFour = ({ value }: IProps): ReactElement => {
+const FormTypeFour = ({ value }: IProps): JSX.Element => {
     const ref = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
 

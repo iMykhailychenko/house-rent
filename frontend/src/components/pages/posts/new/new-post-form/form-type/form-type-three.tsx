@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Sync from '@mui/icons-material/Sync';
@@ -28,7 +28,7 @@ interface IProps {
     onSubmit: (value: IStepThree) => void;
 }
 
-const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): ReactElement => {
+const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
 

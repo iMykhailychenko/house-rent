@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
@@ -11,7 +11,7 @@ import css from '../new-post-form.module.scss';
 
 const ConfettiWrp = dynamic(() => import('../../../../../common/confetti/confetti'), { ssr: false });
 
-const FormTypeDone = (): ReactElement => {
+const FormTypeDone = (): JSX.Element => {
     const newPostState = useNewPostSelector();
 
     return (

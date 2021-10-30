@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -12,7 +12,7 @@ interface IProps {
     amount?: number;
 }
 
-const ChatItemSkeleton = ({ className, amount = 1 }: IProps): ReactElement => {
+const ChatItemSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
     const list = new Array(amount).fill(null);
 
     return (

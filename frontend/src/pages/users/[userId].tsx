@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -15,7 +15,7 @@ import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../st
 import { userInfoThunk } from '../../state/entities/users/users.thunk';
 import { withStore } from '../../utils/ssr';
 
-const UserProfile = (): ReactElement => {
+const UserProfile = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const postsState = usePostListSelector();
 

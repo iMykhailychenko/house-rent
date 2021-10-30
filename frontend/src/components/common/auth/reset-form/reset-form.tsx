@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -15,7 +15,7 @@ const ResetSchema = Yup.object().shape({
     email: Yup.string().email('invalid_email').required('required'),
 });
 
-const ResetForm = (): ReactElement => {
+const ResetForm = (): JSX.Element => {
     const trans = useTrans();
 
     const formik = useFormik({

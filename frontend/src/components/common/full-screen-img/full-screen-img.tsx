@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import Close from '@mui/icons-material/Close';
 import clsx from 'clsx';
@@ -13,7 +13,7 @@ interface IProps {
     alt?: string;
 }
 
-const FullScreenImg = ({ className, src, height, width, alt }: IProps): ReactElement => {
+const FullScreenImg = ({ className, src, height, width, alt }: IProps): JSX.Element => {
     const [fullscreen, setFullscreen] = useState(false);
     const open = (): void => setFullscreen(true);
     const close = (): void => setFullscreen(false);

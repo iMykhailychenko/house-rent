@@ -1,5 +1,3 @@
-import { ReactElement } from 'react';
-
 import { fireEvent } from '@testing-library/react';
 
 import useConfig from '../../../hooks/config.hook';
@@ -24,7 +22,7 @@ describe('CardSizeSwitcher component', () => {
     });
 
     it('change card size test with context', () => {
-        const Component = (): ReactElement => {
+        const Component = (): JSX.Element => {
             const [config] = useConfig();
             return (
                 <>

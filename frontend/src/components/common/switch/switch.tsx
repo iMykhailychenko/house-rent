@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import SwitchLg from './switch-lg/switch-lg';
 import SwitchSm from './switch-sm/switch-sm';
@@ -12,7 +12,7 @@ interface IProps {
     width?: number;
 }
 
-const Switch = ({ value, onChange, labels, size = 'sm', className, width }: IProps): ReactElement => {
+const Switch = ({ value, onChange, labels, size = 'sm', className, width }: IProps): JSX.Element => {
     return size === 'sm' ? (
         <SwitchSm value={value} onChange={onChange} className={className} />
     ) : (

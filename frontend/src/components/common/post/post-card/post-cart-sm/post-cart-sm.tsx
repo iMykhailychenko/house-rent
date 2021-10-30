@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Link from 'next/link';
 
@@ -16,7 +16,7 @@ interface IProps {
     post: IPost;
 }
 
-const PostCardSm = ({ post }: IProps): ReactElement => {
+const PostCardSm = ({ post }: IProps): JSX.Element => {
     return (
         <div className={css.root}>
             {post.image ? (

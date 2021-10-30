@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Close from '@mui/icons-material/Close';
 
@@ -9,10 +9,10 @@ import css from './middle-modal-wrp.module.scss';
 
 interface IProps {
     title?: string;
-    children: ReactElement[] | ReactElement | string;
+    children: JSX.Element[] | JSX.Element | string;
 }
 
-const MiddleModalWrp = ({ children = '', title }: IProps): ReactElement => {
+const MiddleModalWrp = ({ children = '', title }: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

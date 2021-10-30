@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { useSinglePostSelector } from '../../../../../../state/entities/posts/posts.selector';
@@ -12,7 +12,7 @@ interface IProps {
     postId: number;
 }
 
-const PostPreviewModal = ({ postId }: IProps): ReactElement => {
+const PostPreviewModal = ({ postId }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
     const postData = useSinglePostSelector();
 

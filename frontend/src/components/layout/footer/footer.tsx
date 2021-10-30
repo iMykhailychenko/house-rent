@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Container from '../container/container';
 
 import css from './footer.module.scss';
 
-const AppFooter = (): ReactElement => {
+const AppFooter = (): JSX.Element => {
     return (
         <footer className={css.footer}>
             <Container size="md">

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -11,7 +11,7 @@ import { IAuthState } from '../state/entities/auth/auth.interface';
 import { initializeStore } from '../state/store';
 
 interface IProps {
-    children: ReactElement;
+    children: JSX.Element;
 }
 
 interface ProvidersProps {
@@ -21,8 +21,8 @@ interface ProvidersProps {
     config: IConfig;
 }
 
-const customRender = (ui: ReactElement, props?: ProvidersProps | null, options?: RenderOptions): RenderResult => {
-    const AppProviders = ({ children }: IProps): ReactElement => (
+const customRender = (ui: JSX.Element, props?: ProvidersProps | null, options?: RenderOptions): RenderResult => {
+    const AppProviders = ({ children }: IProps): JSX.Element => (
         <Provider store={initializeStore()}>
             <RootProvider
                 serverProps={{

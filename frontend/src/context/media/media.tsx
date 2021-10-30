@@ -1,13 +1,13 @@
-import React, { createContext, ReactElement, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const Media = createContext<[media: number, setMedia: ((value: number) => void) | null]>([768, null]);
 
 interface IProps {
     width?: number;
-    children: ReactElement[] | ReactElement;
+    children: JSX.Element[] | JSX.Element;
 }
 
-const MediaProvider = ({ children, width = 768 }: IProps): ReactElement => {
+const MediaProvider = ({ children, width = 768 }: IProps): JSX.Element => {
     const [media, setMedia] = useState<number>(width);
 
     useEffect(() => {

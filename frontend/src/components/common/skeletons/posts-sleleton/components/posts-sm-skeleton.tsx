@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ interface IProps {
     className?: string;
 }
 
-const PostsSmSkeleton = ({ className }: IProps): ReactElement => {
+const PostsSmSkeleton = ({ className }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.sm, className)}>
             <RectSkeleton className={css.img} />

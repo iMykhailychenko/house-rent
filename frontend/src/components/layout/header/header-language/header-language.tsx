@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -13,7 +13,7 @@ interface IProps {
     language: LANGUAGE_ENUM;
 }
 
-const LanguageButton = ({ language }: IProps): ReactElement => {
+const LanguageButton = ({ language }: IProps): JSX.Element => {
     const history = useRouter();
 
     const handleClick = (): void => {
@@ -27,7 +27,7 @@ const LanguageButton = ({ language }: IProps): ReactElement => {
     );
 };
 
-const HeaderLanguage = (): ReactElement => {
+const HeaderLanguage = (): JSX.Element => {
     return (
         <div className={css.root}>
             {locales.map(language => (

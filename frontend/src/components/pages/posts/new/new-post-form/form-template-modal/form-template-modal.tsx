@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
@@ -19,7 +19,7 @@ interface FormTemplateModalItemProps {
     onChange: (index: number) => void;
 }
 
-const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): ReactElement => {
+const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): JSX.Element => {
     const handleChange = () => onChange(index);
     return (
         <Accordion
@@ -48,7 +48,7 @@ interface FormTemplateModalProps {
     onChange: (index: number) => void;
 }
 
-const FormTemplateModal = ({ title, list, onChange }: FormTemplateModalProps): ReactElement => {
+const FormTemplateModal = ({ title, list, onChange }: FormTemplateModalProps): JSX.Element => {
     const [selected, setSelected] = useState<number>(0);
 
     const handleChange = () => {
@@ -71,7 +71,7 @@ const FormTemplateModal = ({ title, list, onChange }: FormTemplateModalProps): R
             }
         >
             <ul>
-                {list.map<ReactElement>((text, index) => (
+                {list.map<JSX.Element>((text, index) => (
                     <li key={index}>
                         <FormTemplateModalItem text={text} active={selected} index={index} onChange={setSelected} />
                     </li>

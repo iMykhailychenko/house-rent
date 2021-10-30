@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent, ReactElement, TouchEvent } from 'react';
+import React, { Component, MouseEvent, TouchEvent } from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -88,7 +88,7 @@ export default class ModalComponent extends Component<unknown, IState> {
         modal.close();
     };
 
-    render(): ReactElement {
+    render(): JSX.Element {
         const { dom } = this.state;
         return (
             <CSSTransition timeout={200} unmountOnExit in={!!dom}>

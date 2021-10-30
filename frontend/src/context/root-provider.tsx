@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { IConfig, THEME_ENUM } from '../interfaces';
 import { IAuthState } from '../state/entities/auth/auth.interface';
@@ -9,7 +9,7 @@ import MediaProvider from './media/media';
 import ThemeProvider from './theme/theme';
 
 interface IProps {
-    children: ReactElement[] | ReactElement;
+    children: JSX.Element[] | JSX.Element;
     serverProps: {
         auth: IAuthState;
         theme: THEME_ENUM;
@@ -18,7 +18,7 @@ interface IProps {
     };
 }
 
-const RootProvider = ({ serverProps, children }: IProps): ReactElement => (
+const RootProvider = ({ serverProps, children }: IProps): JSX.Element => (
     <AuthProvider authServer={serverProps.auth}>
         <ThemeProvider serverTheme={serverProps.theme}>
             <ConfigProvider value={serverProps.config}>

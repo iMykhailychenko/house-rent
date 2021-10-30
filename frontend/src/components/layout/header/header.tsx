@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import Home from '@mui/icons-material/Home';
 
@@ -15,7 +15,7 @@ import HeaderLanguage from './header-language/header-language';
 import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
 
-const AppHeader = (): ReactElement => {
+const AppHeader = (): JSX.Element => {
     const [token] = useAuth();
     const [drawer, setDrawer] = useState(false);
 

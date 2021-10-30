@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement, useState } from 'react';
+import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 
 import HelpOutline from '@mui/icons-material/HelpOutline';
 import Visibility from '@mui/icons-material/Visibility';
@@ -28,7 +28,7 @@ interface IProps {
     readOnly?: boolean;
     autoComplete?: string;
     label?: string;
-    info?: ReactElement | string;
+    info?: JSX.Element | string;
 }
 
 const Input = ({
@@ -49,7 +49,7 @@ const Input = ({
     autoComplete,
     label,
     info,
-}: IProps): ReactElement => {
+}: IProps): JSX.Element => {
     const trans = useTrans();
     const [show, setShow] = useState<string>(type);
 

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -12,7 +12,7 @@ interface IProps {
     width?: number;
 }
 
-const SwitchLg = ({ value, onChange, labels = ['on', 'off'], className, width = 5 }: IProps): ReactElement => {
+const SwitchLg = ({ value, onChange, labels = ['on', 'off'], className, width = 5 }: IProps): JSX.Element => {
     const handleClick = (): void => {
         if (onChange) onChange(!value);
     };

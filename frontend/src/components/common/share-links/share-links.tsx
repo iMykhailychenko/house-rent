@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import env from '../../../config/env.config';
 
@@ -11,7 +11,7 @@ interface IProps {
     hover?: boolean;
 }
 
-const Socials = ({ title, fill = 'var(--gray-6)', link = '', hover = true }: IProps): ReactElement => {
+const Socials = ({ title, fill = 'var(--gray-6)', link = '', hover = true }: IProps): JSX.Element => {
     const host = env.host || 'http://localhost:3000';
 
     return (

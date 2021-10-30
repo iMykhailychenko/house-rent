@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useTrans from '../../../../../../hooks/trans.hook';
 
@@ -9,10 +9,10 @@ interface IProps {
     label: string;
     error?: string | string[] | boolean;
     required?: boolean;
-    children: ReactElement;
+    children: JSX.Element;
 }
 
-const FormSegment = ({ id, label, error, required = true, children }: IProps): ReactElement => {
+const FormSegment = ({ id, label, error, required = true, children }: IProps): JSX.Element => {
     const trans = useTrans();
     const requiredStar = required ? ' *' : '';
 

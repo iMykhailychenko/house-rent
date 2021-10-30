@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import clsx from 'clsx';
@@ -14,7 +14,7 @@ interface IProps {
     onChange: (value: boolean) => void;
 }
 
-const CheckboxSm = ({ className, error = false, title, name, value, onChange }: IProps): ReactElement => {
+const CheckboxSm = ({ className, error = false, title, name, value, onChange }: IProps): JSX.Element => {
     const handleClick = (): void => {
         onChange(!value);
     };

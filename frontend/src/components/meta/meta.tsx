@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ const color = '#0492ff';
 const siteName = 'House Rent';
 const host = env.host || 'http://localhost:3000';
 
-const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): ReactElement => {
+const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): JSX.Element => {
     const trans = useTrans();
     const history = useRouter();
 

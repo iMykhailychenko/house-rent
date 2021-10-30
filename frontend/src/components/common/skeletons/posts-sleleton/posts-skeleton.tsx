@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { Fragment } from 'react';
 
 import useConfig from '../../../../hooks/config.hook';
 
@@ -11,7 +11,7 @@ interface IProps {
     amount?: number;
 }
 
-const PostsSkeleton = ({ className, amount = 1 }: IProps): ReactElement => {
+const PostsSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
     const [config] = useConfig();
     const list = new Array(amount).fill(null);
 

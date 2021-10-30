@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactElement } from 'react';
+import React, { MouseEvent } from 'react';
 
 import clsx from 'clsx';
 
@@ -13,7 +13,7 @@ interface IProps {
     disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-    children: ReactElement[] | ReactElement | string;
+    children: JSX.Element[] | JSX.Element | string;
 }
 
 const Button = ({
@@ -26,7 +26,7 @@ const Button = ({
     primary,
     secondary,
     disabled = false,
-}: IProps): ReactElement => (
+}: IProps): JSX.Element => (
     <button
         className={clsx(css.button, className, {
             [css.small]: size === 'sm',

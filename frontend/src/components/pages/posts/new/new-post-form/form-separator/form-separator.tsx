@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useTrans from '../../../../../../hooks/trans.hook';
 
@@ -8,7 +8,7 @@ interface IProps {
     children?: string;
 }
 
-const FormSeparator = ({ children }: IProps): ReactElement => {
+const FormSeparator = ({ children }: IProps): JSX.Element => {
     const trans = useTrans();
     return (
         <div className={css.root}>

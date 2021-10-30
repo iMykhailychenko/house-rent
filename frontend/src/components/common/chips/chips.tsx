@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import clsx from 'clsx';
 
@@ -13,7 +13,7 @@ interface IChipsItemProps {
     onChange: (value: IChips) => void;
 }
 
-const ChipsItem = ({ chip, onChange }: IChipsItemProps): ReactElement => {
+const ChipsItem = ({ chip, onChange }: IChipsItemProps): JSX.Element => {
     const trans = useTrans();
     const ref = useRef<HTMLButtonElement>(null);
     const handleClick = (): void => onChange({ ...chip, active: !chip.active });
@@ -43,7 +43,7 @@ interface IProps {
     onChange?: (value: string[]) => void;
 }
 
-const Chips = ({ chips, onChange }: IProps): ReactElement => {
+const Chips = ({ chips, onChange }: IProps): JSX.Element => {
     const handleChange = useCallback(
         (value: IChips): void => {
             onChange &&
@@ -64,7 +64,7 @@ const Chips = ({ chips, onChange }: IProps): ReactElement => {
 
     return (
         <div className={clsx(css.flex, !onChange && css.readOnly)}>
-            {list.map<ReactElement>(chip => (
+            {list.map<JSX.Element>(chip => (
                 <ChipsItem key={chip.name} chip={chip} onChange={handleChange} />
             ))}
         </div>

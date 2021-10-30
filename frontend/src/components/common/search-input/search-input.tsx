@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, ReactElement } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 
 import Close from '@mui/icons-material/Close';
 import Search from '@mui/icons-material/Search';
@@ -32,7 +32,7 @@ const SearchInput = ({
     loading = false,
     disabled = false,
     placeholder = '',
-}: IProps): ReactElement => {
+}: IProps): JSX.Element => {
     const trans = useTrans();
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {

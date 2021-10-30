@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -19,7 +19,7 @@ const titleMap = {
     [FORM_TYPE.DONE]: 'Вітаємо! Ви зробили це. Ваше оголошення створене та чекає на активацію',
 };
 
-const NewPostContainer = (): ReactElement => {
+const NewPostContainer = (): JSX.Element => {
     const [token] = useAuth();
     const newPostState = useNewPostSelector();
 

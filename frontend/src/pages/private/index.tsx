@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -6,7 +6,7 @@ import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import { withAuthRedirect } from '../../utils/ssr';
 
-const Private = (): ReactElement => {
+const Private = (): JSX.Element => {
     return (
         <RootLayout>
             <Container size="lg">

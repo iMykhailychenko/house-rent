@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
@@ -17,7 +17,7 @@ interface IProps {
     className?: string;
 }
 
-const ChangeUserRole = ({ title, className }: IProps): ReactElement => {
+const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
     const profileState = useProfileInfoSelector();

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Switch from '@mui/material/Switch';
 
@@ -8,7 +8,7 @@ interface IProps {
     className?: string;
 }
 
-const SwitchSm = ({ value, onChange, className }: IProps): ReactElement => {
+const SwitchSm = ({ value, onChange, className }: IProps): JSX.Element => {
     const handleClick = (): void => {
         if (onChange) onChange(!value);
     };

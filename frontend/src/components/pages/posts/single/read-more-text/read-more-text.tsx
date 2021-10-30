@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { cutString } from '../../../../../utils/helpers';
@@ -14,7 +14,7 @@ interface IProps {
     title: string;
 }
 
-const ReadMoreText = ({ label, text, img, title }: IProps): ReactElement => {
+const ReadMoreText = ({ label, text, img, title }: IProps): JSX.Element => {
     const trans = useTrans();
 
     const readMore = (): void => {

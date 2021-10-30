@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -13,7 +13,7 @@ import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 import HeaderUserNav from './header-user-nav/header-user-nav';
 import css from './header-user.module.scss';
 
-const HeaderUser = (): ReactElement | null => {
+const HeaderUser = (): JSX.Element | null => {
     const profile = useProfileInfoSelector();
 
     const handleClick = (): void => {

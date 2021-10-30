@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -17,7 +17,7 @@ interface IProps {
     className?: string;
 }
 
-const UserCard = ({ user, className }: IProps): ReactElement => {
+const UserCard = ({ user, className }: IProps): JSX.Element => {
     const trans = useTrans();
     const profileState = useProfileInfoSelector();
     const online = profileState.data.id === user.id ? 'online' : onlineStatus(user.lastActivity, trans);

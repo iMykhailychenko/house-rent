@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -19,7 +19,7 @@ import { withAuthRedirect } from '../../utils/ssr';
 
 import css from './chats.module.scss';
 
-const Messages = (): ReactElement => {
+const Messages = (): JSX.Element => {
     const [auth] = useAuth();
     const socket = useChatSocket();
     const dispatch = useAppDispatch();

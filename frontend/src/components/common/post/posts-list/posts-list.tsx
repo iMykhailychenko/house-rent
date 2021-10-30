@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import clsx from 'clsx';
 
@@ -18,12 +18,12 @@ import css from './posts-list.module.scss';
 interface IProps {
     title?: string;
     posts: IPostListState;
-    children: ReactElement;
+    children: JSX.Element;
     onPage: (page: number) => Promise<void>;
     onMore: (page: number) => Promise<void>;
 }
 
-const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactElement => {
+const PostsList = ({ title, posts, onPage, onMore, children }: IProps): JSX.Element => {
     const trans = useTrans();
     const [config] = useConfig();
     const postsState = usePostListSelector();
@@ -51,7 +51,7 @@ const PostsList = ({ title, posts, onPage, onMore, children }: IProps): ReactEle
 
                 <div className={css.flex}>
                     <div className={css.wrp}>
-                        <div ref={ref} className={clsx(css.inner, css[posts.data.length ? config.cardSize : 'lg'])}>
+                        <div ref={ref} className={clsx(css.inner, posts.data.length ? css[config.cardSize] : css.lg)}>
                             {loading ? (
                                 <PostsSkeleton amount={uiConfig.postsPerPage} />
                             ) : posts.data.length ? (

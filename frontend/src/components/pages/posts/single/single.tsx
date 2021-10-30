@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useTrans from '../../../../hooks/trans.hook';
 import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
@@ -13,7 +13,7 @@ import AboutApartment from './about-apartment/about-apartment';
 import AboutAuthor from './about-author/about-author';
 import css from './single.module.scss';
 
-const SinglePostComponent = (): ReactElement => {
+const SinglePostComponent = (): JSX.Element => {
     const trans = useTrans();
     const postState = useSinglePostSelector();
     const postData = postState.data;

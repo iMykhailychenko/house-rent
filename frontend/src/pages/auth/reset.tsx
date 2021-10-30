@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -6,7 +6,7 @@ import ResetForm from '../../components/common/auth/reset-form/reset-form';
 import AuthLayout from '../../components/pages/auth/layout/layout';
 import { withAuthRedirect } from '../../utils/ssr';
 
-const ResetPage = (): ReactElement => (
+const ResetPage = (): JSX.Element => (
     <AuthLayout src="reset">
         <ResetForm />
     </AuthLayout>

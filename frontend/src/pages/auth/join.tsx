@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -6,7 +6,7 @@ import JoinForm from '../../components/common/auth/join-form/join-form';
 import AuthLayout from '../../components/pages/auth/layout/layout';
 import { withAuthRedirect } from '../../utils/ssr';
 
-const JoinPage = (): ReactElement => (
+const JoinPage = (): JSX.Element => (
     <AuthLayout src="join">
         <JoinForm />
     </AuthLayout>

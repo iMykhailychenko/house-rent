@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement } from 'react';
+import React, { ChangeEvent, FocusEvent, KeyboardEvent } from 'react';
 
 import HelpOutline from '@mui/icons-material/HelpOutline';
 import clsx from 'clsx';
@@ -25,7 +25,7 @@ interface IProps {
     error?: string | boolean;
     readOnly?: boolean;
     label?: string;
-    info?: ReactElement | string;
+    info?: JSX.Element | string;
 }
 
 const Textarea = ({
@@ -45,7 +45,7 @@ const Textarea = ({
     readOnly,
     label,
     info,
-}: IProps): ReactElement => {
+}: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

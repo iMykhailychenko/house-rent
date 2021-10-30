@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -15,7 +15,7 @@ interface IProps {
     chat: Chat[];
 }
 
-const ChatListItem = ({ chat }: IProps): ReactElement => {
+const ChatListItem = ({ chat }: IProps): JSX.Element => {
     const history = useRouter();
     const chatId = +String(history.query.chatId);
     const socket = useChatSocket();

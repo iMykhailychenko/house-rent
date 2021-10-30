@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
@@ -15,7 +15,7 @@ import routes from '../../../../../utils/routes';
 
 import css from './header-user-nav.module.scss';
 
-const HeaderUserNav = (): ReactElement => {
+const HeaderUserNav = (): JSX.Element => {
     const trans = useTrans();
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();

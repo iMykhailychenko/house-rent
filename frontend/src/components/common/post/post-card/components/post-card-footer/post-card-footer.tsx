@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Bookmark from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -33,7 +33,7 @@ interface IProps {
     post: IPost;
 }
 
-const PostCardFooter = ({ size = 'md', post }: IProps): ReactElement => {
+const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
 

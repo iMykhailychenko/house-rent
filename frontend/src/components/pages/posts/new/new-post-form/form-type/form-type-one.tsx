@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useFormik } from 'formik';
 
@@ -21,7 +21,7 @@ interface IProps {
     onSubmit: (value: IStepOne) => void;
 }
 
-const FormTypeOne = ({ initialValues, onSubmit }: IProps): ReactElement => {
+const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const formik = useFormik<IStepOne>({

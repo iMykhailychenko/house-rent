@@ -1,11 +1,11 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Confetti from 'react-confetti';
 import ReactDOM from 'react-dom';
 
 import useMaxWidth from '../../../hooks/media.hook';
 
-const ConfettiWrp = (): ReactElement => {
+const ConfettiWrp = (): JSX.Element => {
     const media = useMaxWidth(768);
 
     const [party, setParty] = useState<boolean>(true);

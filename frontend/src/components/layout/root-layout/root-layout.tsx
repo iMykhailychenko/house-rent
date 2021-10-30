@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -11,10 +11,10 @@ interface IProps {
     withHeader?: boolean;
     withFooter?: boolean;
     className?: string;
-    children: ReactElement[] | ReactElement;
+    children: JSX.Element[] | JSX.Element;
 }
 
-const RootLayout = ({ children, className, withHeader = true, withFooter = true }: IProps): ReactElement => {
+const RootLayout = ({ children, className, withHeader = true, withFooter = true }: IProps): JSX.Element => {
     return (
         <>
             {withHeader && <AppHeader />}

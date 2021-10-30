@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import BrightnessHigh from '@mui/icons-material/BrightnessHigh';
 import BrightnessLow from '@mui/icons-material/BrightnessLow';
@@ -14,7 +14,7 @@ interface IProps {
     className?: string;
 }
 
-const SwitchTheme = ({ className }: IProps): ReactElement => {
+const SwitchTheme = ({ className }: IProps): JSX.Element => {
     const [theme, setTheme] = useTheme();
 
     const handleClick = (): void => {

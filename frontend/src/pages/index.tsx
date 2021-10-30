@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -13,7 +13,7 @@ import { usePostListSelector } from '../state/entities/posts/posts.selector';
 import { postListPaginationThunk, postListThunk } from '../state/entities/posts/posts.thunk';
 import { withStore } from '../utils/ssr';
 
-const HomePage = (): ReactElement => {
+const HomePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const postsState = usePostListSelector();
     const title = 'Якщо ви рієлтори чи власник квартири, то в першу чергу зверніть увагу на термінові оголошення';

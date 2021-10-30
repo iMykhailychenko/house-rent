@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Apartment from '@mui/icons-material/Apartment';
 import ChildFriendly from '@mui/icons-material/ChildFriendly';
@@ -17,7 +17,7 @@ interface IProps {
     post: IPost;
 }
 
-const PostInfoBlock = ({ post }: IProps): ReactElement => {
+const PostInfoBlock = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

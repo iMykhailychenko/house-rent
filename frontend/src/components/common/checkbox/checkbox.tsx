@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import CheckboxLg from './checkbox-lg/checkbox-lg';
 import CheckboxSm from './checkbox-sm/checkbox-sm';
@@ -13,7 +13,7 @@ interface IProps {
     onChange: (value: boolean) => void;
 }
 
-const Checkbox = ({ className, error = false, size = 'sm', name, title, value, onChange }: IProps): ReactElement => {
+const Checkbox = ({ className, error = false, size = 'sm', name, title, value, onChange }: IProps): JSX.Element => {
     const map = {
         sm: <CheckboxSm className={className} error={error} title={title} value={value} onChange={onChange} name={name} />,
         lg: <CheckboxLg className={className} error={error} title={title} value={value} onChange={onChange} name={name} />,

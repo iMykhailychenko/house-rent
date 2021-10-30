@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import css from './emprty-posts-list.module.scss';
 
-const EmptyPostsList = (): ReactElement => {
+const EmptyPostsList = (): JSX.Element => {
     return (
         <div className={css.root}>
             <img className={css.img} src="/icons/form.png" alt="" />

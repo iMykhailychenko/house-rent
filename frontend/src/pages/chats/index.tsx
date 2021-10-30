@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { GetServerSideProps } from 'next';
 
@@ -13,7 +13,7 @@ import { withAuthRedirect } from '../../utils/ssr';
 
 import css from './chats.module.scss';
 
-const Chats = (): ReactElement => {
+const Chats = (): JSX.Element => {
     const [auth] = useAuth();
     const dispatch = useAppDispatch();
 

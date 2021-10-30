@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
@@ -10,7 +10,7 @@ interface IProps {
     post: IPost;
 }
 
-const AboutApartment = ({ post }: IProps): ReactElement => {
+const AboutApartment = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

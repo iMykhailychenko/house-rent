@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import MenuItem from '@mui/material/MenuItem';
 import clsx from 'clsx';
@@ -16,7 +16,7 @@ interface SelectItemProps {
     onChange: (value: SelectValue) => void;
 }
 
-const SelectItem = ({ children, value, onClose, onChange }: SelectItemProps): ReactElement => {
+const SelectItem = ({ children, value, onClose, onChange }: SelectItemProps): JSX.Element => {
     const handleClick = (): void => {
         onChange(value);
         onClose();
@@ -38,7 +38,7 @@ interface IProps {
     onChange: (value: SelectValue) => void;
 }
 
-const Select = ({ error = false, className, placeholder = '', list, value, onChange }: IProps): ReactElement => {
+const Select = ({ error = false, className, placeholder = '', list, value, onChange }: IProps): JSX.Element => {
     const trans = useTrans();
 
     const [open, setOpen] = useState(false);

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
@@ -14,9 +14,9 @@ import { withAuthRedirect } from '../../../utils/ssr';
 
 import css from './success.module.scss';
 
-const TentComponent = dynamic(() => import('../../../apps/login-app'));
+const TentComponent = dynamic(() => import('../../../apps/sea'));
 
-const AuthSuccessPage = (): ReactElement => {
+const AuthSuccessPage = (): JSX.Element => {
     Cookies.remove('show_success_page');
     return (
         <>

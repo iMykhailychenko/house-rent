@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -13,7 +13,7 @@ const list = [
     { id: 'lviv', value: 'lviv' },
 ];
 
-const CitySelect = (): ReactElement => {
+const CitySelect = (): JSX.Element => {
     const dispatch = useDispatch();
     const city = useCityFiltersSelector();
 

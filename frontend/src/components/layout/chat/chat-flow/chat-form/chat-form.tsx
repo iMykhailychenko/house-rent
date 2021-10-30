@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
@@ -12,7 +12,7 @@ import Tooltip from '../../../../common/tooltip/tooltip';
 
 import css from './chat-form.module.scss';
 
-const ChatForm = (): ReactElement => {
+const ChatForm = (): JSX.Element => {
     const history = useRouter();
     const chatId = +String(history.query.chatId);
 

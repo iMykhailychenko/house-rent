@@ -1,12 +1,12 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import css from './chat-sidebar-wrp.module.scss';
 
 interface IProps {
-    children?: ReactElement[] | ReactElement;
+    children?: JSX.Element[] | JSX.Element;
 }
 
-const ChatSidebarWrp = ({ children }: IProps): ReactElement => {
+const ChatSidebarWrp = ({ children }: IProps): JSX.Element => {
     return <div className={css.sidebar}>{children}</div>;
 };
 export default ChatSidebarWrp;

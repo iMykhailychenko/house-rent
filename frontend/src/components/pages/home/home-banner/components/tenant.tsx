@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -7,7 +7,7 @@ import routes from '../../../../../utils/routes';
 import Link from '../../../../common/link/link';
 import css from '../home-banner.module.scss';
 
-const Tenant = (): ReactElement => {
+const Tenant = (): JSX.Element => {
     const trans = useTrans();
 
     return (

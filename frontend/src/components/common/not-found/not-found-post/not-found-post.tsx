@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import routes from '../../../../utils/routes';
 import Container from '../../../layout/container/container';
@@ -9,10 +9,10 @@ import css from './not-found-post.module.scss';
 
 interface IProps {
     error?: boolean;
-    children: ReactElement;
+    children: JSX.Element;
 }
 
-const NotFoundPost = ({ error = false, children }: IProps): ReactElement => {
+const NotFoundPost = ({ error = false, children }: IProps): JSX.Element => {
     return error ? (
         <Container size="md" className={css.root}>
             <div className={css.inner}>

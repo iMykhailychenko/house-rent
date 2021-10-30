@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Person from '@mui/icons-material/Person';
 
@@ -8,7 +8,7 @@ import loginModal from '../../../common/modal/modals/login-modal/login-modal';
 
 import css from './header-auth.module.scss';
 
-const HeaderAuth = (): ReactElement => {
+const HeaderAuth = (): JSX.Element => {
     const trans = useTrans();
 
     return (

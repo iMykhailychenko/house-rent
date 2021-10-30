@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import { useFormik } from 'formik';
@@ -30,7 +30,7 @@ interface PasswordInfoProps {
     value: string;
 }
 
-const PasswordInfo = ({ value }: PasswordInfoProps): ReactElement => {
+const PasswordInfo = ({ value }: PasswordInfoProps): JSX.Element => {
     const trans = useTrans();
 
     return (
@@ -43,7 +43,7 @@ const PasswordInfo = ({ value }: PasswordInfoProps): ReactElement => {
     );
 };
 
-const JoinForm = (): ReactElement => {
+const JoinForm = (): JSX.Element => {
     const trans = useTrans();
     const dispatch = useDispatch();
     const authState = useAuthSelector();

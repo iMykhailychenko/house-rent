@@ -1,7 +1,7 @@
 import '../styles/root.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ReactElement, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import axios from 'axios';
 import type { AppProps } from 'next/app';
@@ -28,7 +28,7 @@ interface IProps {
     config: IConfig;
 }
 
-const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppProps & IProps): ReactElement => {
+const HouseRentApp = ({ Component, pageProps, auth, theme, width, config }: AppProps & IProps): JSX.Element => {
     const store = initializeStore(pageProps.state);
     interceptor(store.dispatch);
 

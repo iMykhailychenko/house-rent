@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ const LoginSchema = Yup.object().shape({
     password: Yup.string().min(6, 'short_password').max(30, 'long_password').required('required'),
 });
 
-const LoginForm = (): ReactElement => {
+const LoginForm = (): JSX.Element => {
     const trans = useTrans();
     const dispatch = useDispatch();
     const authState = useAuthSelector();

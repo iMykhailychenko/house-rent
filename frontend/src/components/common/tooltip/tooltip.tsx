@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 
@@ -11,14 +11,14 @@ interface IProps {
     className?: string;
     classNameWrp?: string;
     withMobile?: boolean;
-    children: ReactElement | ReactElement[];
-    content?: boolean | string | ReactElement | ReactElement[];
+    children: JSX.Element | JSX.Element[];
+    content?: boolean | string | JSX.Element | JSX.Element[];
     hidden?: boolean;
 }
 
 type PositionClassNames = 'top_left' | 'top_right' | 'bottom_left' | 'bottom_right';
 
-const Tooltip = ({ children, withMobile = false, className, classNameWrp, content, hidden = false }: IProps): ReactElement => {
+const Tooltip = ({ children, withMobile = false, className, classNameWrp, content, hidden = false }: IProps): JSX.Element => {
     const trans = useTrans();
     const media = useMaxWidth(768);
     const ref = useRef<HTMLDivElement | null>(null);

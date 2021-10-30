@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import css from './image-wrp.module.scss';
 
@@ -7,7 +7,7 @@ interface IProps {
     alt?: string;
 }
 
-const ImageWrp = ({ name, alt = '' }: IProps): ReactElement => (
+const ImageWrp = ({ name, alt = '' }: IProps): JSX.Element => (
     <div className={css.img}>
         <div className={css.inner}>
             <img src={`/icons/${name}.png`} alt={alt} draggable="false" />

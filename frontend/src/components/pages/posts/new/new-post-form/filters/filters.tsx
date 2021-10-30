@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -16,7 +16,7 @@ interface IProps {
     onChange: (name: string, value: string[]) => void;
 }
 
-const Filters = ({ error = false, size = 'sm', all, name, value, onChange }: IProps): ReactElement => {
+const Filters = ({ error = false, size = 'sm', all, name, value, onChange }: IProps): JSX.Element => {
     const trans = useTrans();
 
     const handleChange = (item: string) => (active: boolean) => {

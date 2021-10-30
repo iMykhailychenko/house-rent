@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import RectSkeleton from '../../rect-skeleton/rect-skeleton';
 import TextSkeleton from '../../text-skeleton/text-skeleton';
 
 import css from './messages.module.scss';
 
-const MessagesSkeleton = (): ReactElement => {
+const MessagesSkeleton = (): JSX.Element => {
     return (
         <>
             <div className={css.message}>

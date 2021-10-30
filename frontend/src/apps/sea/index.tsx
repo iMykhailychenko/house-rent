@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import LoginApp from './app/app';
-import css from './login-app.module.scss';
+import css from './sea.module.scss';
 
 const LoginComponent = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null);

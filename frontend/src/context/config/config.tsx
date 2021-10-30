@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 import Cookies from 'js-cookie';
 
@@ -11,10 +11,10 @@ export const Config = createContext<IConfigValue>([appConfig, () => undefined]);
 
 interface IProps {
     value?: IConfig;
-    children: JSX.Element | JSX.Element[] | ReactElement;
+    children: JSX.Element | JSX.Element[];
 }
 
-const ConfigProvider = ({ children, value = appConfig }: IProps): ReactElement => {
+const ConfigProvider = ({ children, value = appConfig }: IProps): JSX.Element => {
     const [config, setConfig] = useState<IConfig>(value);
     const handleConfig = (data: IConfig): void => {
         try {

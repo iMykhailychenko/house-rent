@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactElement } from 'react';
+import React, { MouseEvent } from 'react';
 
 import Menu from '@mui/icons-material/Menu';
 import clsx from 'clsx';
@@ -12,7 +12,7 @@ interface IProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const MenuIcon = ({ onClick, className }: IProps): ReactElement => (
+const MenuIcon = ({ onClick, className }: IProps): JSX.Element => (
     <Button className={clsx(css.button, className)} type="button" onClick={onClick}>
         <Menu />
     </Button>

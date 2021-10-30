@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
 import css from './services.module.scss';
 
-const Services = (): ReactElement => (
+const Services = (): JSX.Element => (
     <ul className={css.list}>
         <li>
             <button className={clsx(css.socials, css.facebook)} type="button">

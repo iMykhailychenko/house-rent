@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import NavigateNext from '@mui/icons-material/NavigateNext';
 import Sync from '@mui/icons-material/Sync';
@@ -20,7 +20,7 @@ interface IProps {
     onMore: (page: number) => void;
 }
 
-const Pagination = ({ className, loading, total, onPage, onMore }: IProps): ReactElement => {
+const Pagination = ({ className, loading, total, onPage, onMore }: IProps): JSX.Element => {
     const trans = useTrans();
     const history = useRouter();
     const init = +(history.query?.page || 1);

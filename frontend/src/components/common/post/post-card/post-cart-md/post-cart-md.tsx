@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import LaunchIcon from '@mui/icons-material/Launch';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ interface IProps {
     post: IPost;
 }
 
-const PostCardMd = ({ post }: IProps): ReactElement => {
+const PostCardMd = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
 
     const openPostPreview = (): void => {

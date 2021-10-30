@@ -1,4 +1,4 @@
-﻿import React, { ReactElement } from 'react';
+﻿import React from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -6,7 +6,7 @@ import useTrans from '../../../../../hooks/trans.hook';
 import Button from '../../../../common/button/button';
 import css from '../home-banner.module.scss';
 
-const Owner = (): ReactElement => {
+const Owner = (): JSX.Element => {
     const trans = useTrans();
 
     const handleClick = (): void => {

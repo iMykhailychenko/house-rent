@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import css from './progress.module.scss';
 
@@ -6,7 +6,7 @@ interface IProps {
     number: number;
 }
 
-const Progress = ({ number }: IProps): ReactElement => {
+const Progress = ({ number }: IProps): JSX.Element => {
     return (
         <div className={css.root}>
             <span className={css.number}>{number}%</span>

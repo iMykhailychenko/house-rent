@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ interface SegmentedControlItemProps {
     onChange: (value: string) => void;
 }
 
-const SegmentedControlItem = ({ active, value, onChange }: SegmentedControlItemProps): ReactElement => {
+const SegmentedControlItem = ({ active, value, onChange }: SegmentedControlItemProps): JSX.Element => {
     const handleClick = (): void => {
         onChange(value.id);
     };
@@ -31,11 +31,11 @@ interface IProps {
     className?: string;
 }
 
-const SegmentedControl = ({ active, value, onChange, className }: IProps): ReactElement => {
+const SegmentedControl = ({ active, value, onChange, className }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.wrapper, className)}>
             <ul className={css.list}>
-                {value.map<ReactElement>(item => (
+                {value.map<JSX.Element>(item => (
                     <SegmentedControlItem key={item.id} active={active} value={item} onChange={onChange} />
                 ))}
             </ul>

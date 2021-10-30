@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import ImageWrp from '../../../common/image-wrp/image-wrp';
 
 import css from './chat-banner.module.scss';
 
-const ChatBanner = (): ReactElement => {
+const ChatBanner = (): JSX.Element => {
     return (
         <div className={css.root}>
             <ImageWrp name="chat" />

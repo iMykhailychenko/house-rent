@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ interface IProps {
     isFirstMessage?: boolean;
     message: Message;
 }
-const MessagesList = ({ isFirstMessage = false, message }: IProps): ReactElement => {
+const MessagesList = ({ isFirstMessage = false, message }: IProps): JSX.Element => {
     const profileState = useProfileInfoSelector();
 
     return (

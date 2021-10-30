@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { IUser } from '../../../../../interfaces';
@@ -34,7 +34,7 @@ const formThreeInitialState: IStepThree = {
 
 export type TemplateDataType = IStepOne & IStepTwo & IUser;
 
-const NewPostForm = (): ReactElement => {
+const NewPostForm = (): JSX.Element => {
     const trans = useTrans();
     const newPostState = useNewPostSelector();
     const profileData = useProfileInfoSelector();

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Close from '@mui/icons-material/Close';
 
@@ -9,10 +9,10 @@ import css from './large-modal-wrp.module.scss';
 
 interface IProps {
     title?: string;
-    children: ReactElement[] | ReactElement | string;
+    children: JSX.Element[] | JSX.Element | string;
 }
 
-const LargeModalWrp = ({ children = '', title }: IProps): ReactElement => {
+const LargeModalWrp = ({ children = '', title }: IProps): JSX.Element => {
     const trans = useTrans();
 
     return (

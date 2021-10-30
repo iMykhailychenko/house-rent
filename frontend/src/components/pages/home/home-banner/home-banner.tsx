@@ -1,4 +1,4 @@
-﻿import React, { ReactElement, useState } from 'react';
+﻿import React, { useState } from 'react';
 
 import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
@@ -16,7 +16,7 @@ const USER_ROLE = [
     { id: 'owner', name: 'Власник / рієлтор' },
 ];
 
-const HomeBanner = (): ReactElement => {
+const HomeBanner = (): JSX.Element => {
     const [userRole, setUserRole] = useState(USER_ROLE[0].id);
 
     const handleChange = (value: boolean): void => {

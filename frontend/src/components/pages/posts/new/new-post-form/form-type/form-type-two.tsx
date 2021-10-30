@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { useFormik } from 'formik';
@@ -23,7 +23,7 @@ interface IProps {
     onSubmit: (value: IStepTwo) => void;
 }
 
-const FormTypeTwo = ({ initialValues, onSubmit }: IProps): ReactElement => {
+const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
     const newPostState = useNewPostSelector();
 
