@@ -19,7 +19,7 @@ interface IProps {
 }
 
 const RootProvider = ({ serverProps, children }: IProps): JSX.Element => (
-    <AuthProvider authServer={serverProps.auth}>
+    <AuthProvider auth={serverProps.auth}>
         <ThemeProvider serverTheme={serverProps.theme}>
             <ConfigProvider value={serverProps.config}>
                 <MediaProvider width={serverProps.width}>{children}</MediaProvider>

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 
 import { SearchPost } from '../../shared/decorators/search-post.decorator';
 import { User } from '../../shared/decorators/users.decorator';
@@ -10,6 +10,7 @@ import { SearchPostDto } from './dto/search-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { StatusDto } from './dto/update-status.dto';
 import { PostEntity } from './entities/posts.entity';
+import { POST_STATUS } from './posts.interface';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
@@ -38,6 +39,17 @@ export class PostsController {
             currentUserId,
             await this.postsService.findAllForUser(userId, searchFilters),
         );
+    }
+
+    @Get('personal')
+    @UseGuards(AuthGuard)
+    async findAllPersonal(
+        @User('id') userId: number,
+        @Query('page', ParseIntPipe) page: number,
+        @Query('limit', ParseIntPipe) limit: number,
+        @Query('status') status: POST_STATUS,
+    ): Promise<Pagination<PostEntity>> {
+        return await this.postsService.findAllPersonal(userId, { page, limit, status });
     }
 
     @Get('read/users/:userId')

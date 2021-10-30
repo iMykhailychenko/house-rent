@@ -5,7 +5,7 @@ import endpointConfig from '../../../config/endpoint.config';
 import uiConfig from '../../../config/ui.config';
 import { Pagination, Params, Response } from '../../../interfaces';
 
-import { IEditPostPayload, INewPostPayload, IPost, IUserPostsListPayload } from './posts.interface';
+import { IEditPostPayload, INewPostPayload, IPersonalPostsListPayload, IPost, IUserPostsListPayload } from './posts.interface';
 
 const postsServices = {
     singlePost: (id: number): Response<IPost> => {
@@ -24,6 +24,8 @@ const postsServices = {
             ),
         );
     },
+    personalPosts: (query: IPersonalPostsListPayload): Response<Pagination<IPost>> =>
+        axios.get(endpointConfig('/posts/personal'), { params: { ...query, limit: uiConfig.postsPerPage } }),
     getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> => {
         const path = axios.defaults.headers.common.Authorization ? '/posts/users' : '/posts/read/users';
         return axios.get(

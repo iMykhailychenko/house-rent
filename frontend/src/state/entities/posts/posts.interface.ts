@@ -65,6 +65,11 @@ export interface IUserPostsListPayload {
     page: number;
 }
 
+export interface IPersonalPostsListPayload {
+    status: POST_STATUS;
+    page: number;
+}
+
 export enum FORM_TYPE {
     ONE = 'one',
     TWO = 'two',

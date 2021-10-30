@@ -6,38 +6,30 @@ import { useAppDispatch } from '../../hooks/redux.hook';
 import authInitialState from '../../state/entities/auth/auth.initial-state';
 import { IAuthState } from '../../state/entities/auth/auth.interface';
 import { logoutAction } from '../../state/entities/auth/auth.reducer';
-import { useAuthSelector } from '../../state/entities/auth/auth.selector';
 import { useProfileInfoSelector } from '../../state/entities/profile/profile.selector';
 
 export type AuthHook = [value: IAuthState | null, setAuth: (value: IAuthState | null) => void];
 export const Auth = createContext<AuthHook>([authInitialState, () => undefined]);
 
 interface IProps {
-    authServer?: IAuthState | null;
+    auth?: IAuthState | null;
     children: JSX.Element;
 }
 
-const AuthProvider = ({ authServer = authInitialState, children }: IProps): JSX.Element => {
+const AuthProvider = ({ auth = authInitialState, children }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
-    const [value, setValue] = useState<IAuthState | null>(authInitialState);
-    const auth = useAuthSelector();
     const profile = useProfileInfoSelector();
+    const [value, setValue] = useState<IAuthState | null>(authInitialState);
 
     useEffect(() => {
-        if (process.browser) {
-            if (auth?.accessToken) {
-                setValue(auth);
-                axios.defaults.headers.common.Authorization = auth.accessToken.includes('Bearer')
-                    ? auth.accessToken
-                    : `Bearer ${auth.accessToken}`;
-            } else {
-                setValue(authInitialState);
-                dispatch(logoutAction());
-            }
+        if (auth?.accessToken) {
+            setValue(auth);
+            axios.defaults.headers.common.Authorization = auth?.accessToken;
         } else {
-            setValue(authServer);
+            setValue(authInitialState);
+            dispatch(logoutAction());
         }
-    }, [auth, authServer, dispatch]);
+    }, [auth, dispatch]);
 
     useEffect(() => {
         if (profile.status === 'error') {

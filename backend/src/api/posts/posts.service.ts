@@ -7,6 +7,7 @@ import { FavoriteEntity } from '../favorite/entities/favorite.entity';
 import { UserEntity } from '../users/entities/users.entity';
 
 import { CreatePostDto } from './dto/create-post.dto';
+import { PersonalPostDto } from './dto/personal-post.dto';
 import { SearchPostDto } from './dto/search-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { StatusDto } from './dto/update-status.dto';
@@ -82,6 +83,29 @@ export class PostsService {
             .getMany();
 
         return this.formatPagination(result, total, searchPostDto);
+    }
+
+    async findAllPersonal(userId: number, personalPostDto: PersonalPostDto): Promise<Pagination<PostEntity>> {
+        const { limit, page, status } = personalPostDto;
+        const [result, total] = await this.postRepository.findAndCount({
+            relations: ['user'],
+            where: {
+                status: status,
+                user: {
+                    id: userId,
+                },
+            },
+            order: { createdAt: 'DESC' },
+            take: limit,
+            skip: limit * (page - 1),
+        });
+
+        return {
+            totalItems: total,
+            totalPages: Math.ceil(total / limit) - 1,
+            currentPage: +page,
+            data: result,
+        };
     }
 
     async isPostInFavorite(postId: number, userId: number): Promise<boolean> {
