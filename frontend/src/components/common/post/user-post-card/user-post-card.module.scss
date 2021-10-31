@@ -24,6 +24,33 @@
 
         .link {
             margin: 0;
+
+            span {
+                margin: 1rem 0 0;
+                display: block;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+            }
+
+            .idle {
+                color: var(--primary);
+                background: var(--secondary);
+            }
+
+            .draft {
+                color: var(--warning);
+                background: var(--warning-secondary);
+            }
+
+            .archive {
+                color: var(--error);
+                background: var(--error-secondary);
+            }
+
+            .active {
+                color: var(--success);
+                background: var(--success-secondary);
+            }
         }
     }
 
@@ -31,6 +58,7 @@
         display: flex;
         border-top: 0.1rem solid var(--gray-3);
         border-radius: 0 0 0.6rem 0.6rem;
+        overflow: hidden;
 
         .editBtn {
             width: calc(100% / 3);

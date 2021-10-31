@@ -5,8 +5,10 @@
 
     --success: #28bf65;
     --success-secondary: #28bf6525;
-    --warning: #fadb14;
+    --warning: #b78b00;
+    --warning-secondary: #d99d1e25;
     --error: #cf1322;
+    --error-secondary: #cf132225;
 }
 
 .white {

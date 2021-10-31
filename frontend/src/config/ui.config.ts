@@ -1,7 +1,7 @@
 const uiConfig = {
-    postsPerPage: 3,
+    postsPerPage: 20,
     chatsPerPage: 20,
-    messagesPerPage: 40,
+    messagesPerPage: 5,
 };
 
 export default uiConfig;

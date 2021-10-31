@@ -102,7 +102,7 @@ export class PostsService {
 
         return {
             totalItems: total,
-            totalPages: Math.ceil(total / limit) - 1,
+            totalPages: Math.ceil(total / limit),
             currentPage: +page,
             data: result,
         };

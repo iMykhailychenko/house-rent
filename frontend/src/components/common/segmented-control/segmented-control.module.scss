@@ -11,6 +11,7 @@
     width: max-content;
     border: 0.1rem solid var(--primary);
     border-radius: 0.5rem;
+    overflow: hidden;
 }
 
 .item {
@@ -19,14 +20,20 @@
     }
 
     button {
-        height: 4rem;
+        height: 3.5rem;
         padding: 0 1rem;
         white-space: nowrap;
-        color: var(--black);
+        color: var(--gray-8);
+        font-size: 1.2rem;
+
+        &:hover {
+            background: var(--secondary);
+        }
     }
 }
 
 .active button {
     background: var(--primary);
     color: var(--true-white);
+    pointer-events: none;
 }

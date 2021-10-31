@@ -3,7 +3,6 @@ import React from 'react';
 import Bookmark from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import LaunchIcon from '@mui/icons-material/Launch';
-import QuestionAnswer from '@mui/icons-material/QuestionAnswer';
 import Share from '@mui/icons-material/Share';
 import Visibility from '@mui/icons-material/Visibility';
 import clsx from 'clsx';
@@ -101,15 +100,6 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                                 <span>{post.views}</span>
                             </div>
                         </Tooltip>
-
-                        {profileState?.data?.id !== post.user.id && (
-                            <Tooltip content="reviews">
-                                <div className={css.icon}>
-                                    <QuestionAnswer />
-                                    <span>{post.chats}</span>
-                                </div>
-                            </Tooltip>
-                        )}
 
                         <Tooltip className={css.tooltip} content="added_to_favorites">
                             <div className={css.icon}>

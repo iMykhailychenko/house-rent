@@ -37,6 +37,8 @@ const UserPostCard = ({ post }: IProps): JSX.Element => {
                         </Tooltip>
                         <p>{cutString(post.description, 80)}</p>
                         <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
+
+                        <span className={css[post.status]}>Статус оголошення: {post.status}</span>
                     </a>
                 </Link>
             </div>

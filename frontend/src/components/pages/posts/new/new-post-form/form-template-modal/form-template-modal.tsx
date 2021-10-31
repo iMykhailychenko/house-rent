@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import IconButton from '@mui/material/IconButton';
 import clsx from 'clsx';
 
 import Button from '../../../../../common/button/button';
@@ -21,15 +22,21 @@ interface FormTemplateModalItemProps {
 
 const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): JSX.Element => {
     const handleChange = () => onChange(index);
+    const [open, setOpen] = useState<boolean>(index === 0);
+    const handleOpen = (event: MouseEvent<HTMLButtonElement>): void => {
+        event.stopPropagation();
+        setOpen(prev => !prev);
+    };
+
     return (
-        <Accordion
-            onClick={handleChange}
-            defaultExpanded={index === 0}
-            className={clsx(css.accordion, active === index && css.active)}
-        >
+        <Accordion onClick={handleChange} expanded={open} className={clsx(css.accordion, active === index && css.active)}>
             <AccordionSummary
                 disableRipple={false}
-                expandIcon={<ExpandMoreIcon className={css.icon} />}
+                expandIcon={
+                    <IconButton className={css.arrowBtn} onClick={handleOpen}>
+                        <ExpandMoreIcon className={css.icon} />
+                    </IconButton>
+                }
                 aria-controls={`Шаблон № ${index + 1}`}
                 id={'AccordionSummary' + index}
             >

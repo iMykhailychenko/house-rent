@@ -33,7 +33,7 @@ const FormTypeDone = (): JSX.Element => {
                     </span>
                 </p>
                 <div className={clsx(css.flex, css.mb)}>
-                    <Link href={routes.home} primary>
+                    <Link href={routes.myPosts} primary>
                         Проглянути всі ваші оголошення
                     </Link>
                 </div>
