@@ -27,21 +27,30 @@ export class PostsService {
             .createQueryBuilder('posts')
             .leftJoinAndSelect('posts.user', 'users')
             .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
-            .where('posts.status = :status', { status: POST_STATUS.IDLE })
+            .where('posts.status = :status', { status: POST_STATUS.DRAFT })
             .andWhere('((:general)::text[] IS NULL OR (posts.generalFilters)::text[] @> (:general)::text[])', {
                 general: searchFilters.general,
             })
-            .andWhere('((:room)::text[] IS NULL OR (posts.roomFilters)::text[] @> (:room)::text[])', { room: searchFilters.room })
+            .andWhere(
+                '(((:room)::text[] IS NULL) OR ((posts.roomFilters)::text[] @> (:room)::text[]) OR ((posts.roomFilters)::text[] <@ (:room)::text[]))',
+                { room: searchFilters.room },
+            )
             .andWhere('((:houseType)::text[] IS NULL OR (posts.houseTypeFilters)::text[] @> (:houseType)::text[])', {
                 houseType: searchFilters.houseType,
             })
             .andWhere('((:city)::varchar IS NULL OR posts.cityFilters = :city)', { city: searchFilters.city })
-            .andWhere('((:district)::text[] IS NULL OR (posts.districtFilters)::text[] @> (:district)::text[])', {
-                district: searchFilters.district,
-            })
-            .andWhere('((:price)::text[] IS NULL OR (posts.priceFilters)::text[] @> (:price)::text[])', {
-                price: searchFilters.price,
-            })
+            .andWhere(
+                '(((:district)::text[] IS NULL) OR ((posts.districtFilters)::text[] <@ (:district)::text[]) OR ((posts.districtFilters)::text[] @> (:district)::text[]))',
+                {
+                    district: searchFilters.district,
+                },
+            )
+            .andWhere(
+                '(((:price)::text[] IS NULL) OR ((posts.priceFilters)::text[] @> (:price)::text[]) OR ((posts.priceFilters)::text[] <@ (:price)::text[]))',
+                {
+                    price: searchFilters.price,
+                },
+            )
             .andWhere(
                 '(((:query)::varchar IS NULL OR LOWER(posts.title) like LOWER(:query)) OR ((:query)::varchar IS NULL OR LOWER(posts.description) like LOWER(:query)))',
                 { query: searchFilters.query ? `%${searchFilters.query}%` : null },

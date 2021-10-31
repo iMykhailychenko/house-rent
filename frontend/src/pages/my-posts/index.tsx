@@ -18,7 +18,6 @@ import { withAuthRedirect } from '../../utils/ssr';
 import css from './my-posts.module.scss';
 
 const tabs = [
-    { id: POST_STATUS.IDLE, name: POST_STATUS.IDLE },
     { id: POST_STATUS.ACTIVE, name: POST_STATUS.ACTIVE },
     { id: POST_STATUS.DRAFT, name: POST_STATUS.DRAFT },
     { id: POST_STATUS.ARCHIVE, name: POST_STATUS.ARCHIVE },
@@ -30,7 +29,7 @@ const MyPosts = (): JSX.Element => {
     const profile = useProfileInfoSelector();
 
     const history = useRouter();
-    const status = String(history.query.status || POST_STATUS.IDLE) as POST_STATUS;
+    const status = String(history.query.status || POST_STATUS.DRAFT) as POST_STATUS;
 
     useEffect(() => {
         if (auth?.accessToken) {

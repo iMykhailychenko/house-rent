@@ -41,9 +41,11 @@ const UserBanner = (): JSX.Element => {
     const [auth] = useAuth();
     const history = useRouter();
     const dispatch = useAppDispatch();
+
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
     const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
+    const userData = auth?.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -67,20 +69,20 @@ const UserBanner = (): JSX.Element => {
             <UserAvatar
                 diameter={25}
                 className={css.avatar}
-                src={userState.data.avatar}
-                firstName={userState.data.firstName}
-                lastName={userState.data.lastName}
+                src={userData.avatar}
+                firstName={userData.firstName}
+                lastName={userData.lastName}
             />
             <h2 className={css.title}>
-                {userState.data.firstName} {userState.data.lastName}
+                {userData.firstName} {userData.lastName}
             </h2>
             <p className={online === 'online' ? css.online : css.offline} title={online === 'online' ? 'online' : 'offline'}>
                 {online}
             </p>
             <p className={css.text}>Роль на сайті:</p>
             <div className={css.role}>
-                {userState.data.role.includes(UserRole.USER) ? (
-                    userState.data.role.includes(UserRole.REALTOR) ? (
+                {userData.role.includes(UserRole.USER) ? (
+                    userData.role.includes(UserRole.REALTOR) ? (
                         <>
                             <RoleComponent text="Шукає житло" title="Роль на сайті" />
                             <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
@@ -93,13 +95,11 @@ const UserBanner = (): JSX.Element => {
                 )}
             </div>
 
-            {profileState.data.id === userState.data.id && (
+            {profileState.data.id === userState.data.id ? (
                 <button type="button" className={css.link} onClick={changeUserRole}>
                     Змінити роль на сайті
                 </button>
-            )}
-
-            {profileState.data.id !== userState.data.id && (
+            ) : (
                 <Button loading={loading} primary className={css.btn} onClick={openChat}>
                     Написати повідомлення
                 </Button>

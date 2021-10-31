@@ -32,14 +32,9 @@
                 border-radius: 0.5rem;
             }
 
-            .idle {
+            .draft {
                 color: var(--primary);
                 background: var(--secondary);
-            }
-
-            .draft {
-                color: var(--warning);
-                background: var(--warning-secondary);
             }
 
             .archive {

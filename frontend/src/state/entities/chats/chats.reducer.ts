@@ -12,6 +12,9 @@ const chatSlice = createSlice({
     reducers: {
         pushMessage(state: IChatsState, action: PayloadAction<Message>) {
             state.messages.data.unshift(action.payload);
+            state.list.data = state.list.data.map(chat =>
+                chat.id === state.single.data?.id ? { ...chat, lastMessage: action.payload } : chat,
+            );
         },
         updateMessage(state: IChatsState, action: PayloadAction<Message>) {
             state.messages.data = state.messages.data.map(msg => (msg.id === action.payload.id ? action.payload : msg));

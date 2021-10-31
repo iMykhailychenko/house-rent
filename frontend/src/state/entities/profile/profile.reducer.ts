@@ -26,7 +26,7 @@ const profileSlice = createSlice({
             state.status = 'error';
         });
 
-        builder.addCase(updateProfileRole.fulfilled, (state: IUserState, action: PayloadAction<UserRole[]>) => {
+        builder.addCase(updateProfileRole.fulfilled, (state: IProfileInfoState, action: PayloadAction<UserRole[]>) => {
             state.data.role = action.payload;
         });
     },

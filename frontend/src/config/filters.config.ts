@@ -159,10 +159,6 @@ export const districtFilters = (city: City = 'kyiv', district: string[] = []): I
 };
 
 export const statusFilter = (init: string[] = ALL_STATUSES): IChipsMap => ({
-    [POST_STATUS.IDLE]: {
-        name: POST_STATUS.IDLE,
-        active: init.includes(POST_STATUS.IDLE),
-    },
     [POST_STATUS.ACTIVE]: {
         name: POST_STATUS.ACTIVE,
         active: init.includes(POST_STATUS.ACTIVE),

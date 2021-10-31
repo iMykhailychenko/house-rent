@@ -21,6 +21,7 @@ const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
     const profileState = useProfileInfoSelector();
+
     const [userRoles, setUserRoles] = useState<UserRole[]>(profileState.data.role);
     const [loading, setLoading] = useState(false);
 

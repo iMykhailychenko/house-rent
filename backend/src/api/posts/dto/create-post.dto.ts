@@ -36,7 +36,7 @@ export class CreatePostDto {
     @IsString()
     @IsNotEmpty()
     @IsEnum(POST_STATUS)
-    status: POST_STATUS = POST_STATUS.IDLE;
+    status: POST_STATUS = POST_STATUS.DRAFT;
 
     @IsArray()
     @IsNotEmpty()

@@ -25,7 +25,7 @@ const MyPostsList = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null);
 
     const history = useRouter();
-    const status = String(history.query.status || POST_STATUS.IDLE) as POST_STATUS;
+    const status = String(history.query.status || POST_STATUS.DRAFT) as POST_STATUS;
     const [loadingMore, setLoadingMore] = useState(false);
 
     const openPage = (page: number): void => {

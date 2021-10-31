@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useTrans from '../../../../hooks/trans.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString, formatDate } from '../../../../utils/helpers';
+import { postActionsMap } from '../../../../utils/post-functions';
 import routes from '../../../../utils/routes';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
 import ImageWrp from '../../image-wrp/image-wrp';
@@ -45,10 +46,10 @@ const UserPostCard = ({ post }: IProps): JSX.Element => {
 
             <div className={css.footer}>
                 <button type="button" className={css.editBtn}>
-                    Видалити
+                    {postActionsMap[post.status][0]}
                 </button>
                 <button type="button" className={css.editBtn}>
-                    Редагувати
+                    {postActionsMap[post.status][1]}
                 </button>
                 <button type="button" className={css.editBtn}>
                     Інше
