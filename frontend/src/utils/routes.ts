@@ -18,6 +18,7 @@ const routes = {
     posts: {
         list: '/posts',
         new: '/posts/new',
+        edit: (id: string | number): string => `/posts/edit/${id}`,
         single: (id: string | number): string => `/posts/${id}`,
     },
 };

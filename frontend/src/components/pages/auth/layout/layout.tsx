@@ -4,6 +4,7 @@ import Home from '@mui/icons-material/Home';
 
 import routes from '../../../../utils/routes';
 import Link from '../../../common/link/link';
+import RootLayout from '../../../layout/root-layout/root-layout';
 
 import css from './layout.module.scss';
 
@@ -13,16 +14,18 @@ interface IProps {
 }
 
 const AuthLayout = ({ src, children }: IProps): JSX.Element => (
-    <div className={css.root}>
-        <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
-        <div className={css.wrp}>
-            <Link className={css.link} href={routes.home}>
-                <Home />
-                <span>Повернутись на головну</span>
-            </Link>
-            {children}
+    <RootLayout className={css.main} withFooter={false}>
+        <div className={css.root}>
+            <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
+            <div className={css.wrp}>
+                <Link className={css.link} href={routes.home}>
+                    <Home />
+                    <span>Повернутись на головну</span>
+                </Link>
+                {children}
+            </div>
         </div>
-    </div>
+    </RootLayout>
 );
 
 export default AuthLayout;

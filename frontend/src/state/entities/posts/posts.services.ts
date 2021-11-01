@@ -5,7 +5,15 @@ import endpointConfig from '../../../config/endpoint.config';
 import uiConfig from '../../../config/ui.config';
 import { Pagination, Params, Response } from '../../../interfaces';
 
-import { IEditPostPayload, INewPostPayload, IPersonalPostsListPayload, IPost, IUserPostsListPayload } from './posts.interface';
+import {
+    IEditPostPayload,
+    IEditPostStatusPayload,
+    INewPostPayload,
+    IPersonalPostsListPayload,
+    IPost,
+    IUserPostsListPayload,
+    POST_STATUS,
+} from './posts.interface';
 
 const postsServices = {
     singlePost: (id: number): Response<IPost> => {
@@ -39,6 +47,8 @@ const postsServices = {
     },
     newPost: (body: INewPostPayload): Response<IPost> => axios.post(endpointConfig('/posts'), body),
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => axios.put(endpointConfig(`/posts/${id}`), body),
+    updatePostStatus: ({ id, status }: IEditPostStatusPayload): Response<IPost> =>
+        axios.put(endpointConfig(`/posts/${id}/status`), { status }),
     toggleFavorite: (id: number): Response<void> => axios.put(endpointConfig(`/favorite/${id}`)),
 };
 

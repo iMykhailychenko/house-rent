@@ -5,6 +5,7 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
@@ -35,41 +36,28 @@ const HeaderUserNav = (): JSX.Element => {
                 </li>
             )}
             <li className={css.li}>
-                <Link href={routes.chats.init}>
-                    <a className={css.btn}>
-                        <ChatOutlinedIcon />
-                        <span>{trans('Мої повідомлення')} (2)</span>
-                    </a>
+                <Link href={routes.private}>
+                    <a className={css.btn}>{trans('Особистий кабінет')}</a>
                 </Link>
             </li>
             <li className={css.li}>
-                <Link href={routes.private}>
-                    <a className={css.btn}>
-                        <DashboardOutlinedIcon />
-                        <span>{trans('Особистий кабінет')}</span>
-                    </a>
+                <Link href={routes.chats.init}>
+                    <a className={css.btn}>{trans('Мої повідомлення')} (2)</a>
                 </Link>
             </li>
             <li className={css.li}>
                 <Link href={routes.users.profile(profileState.data.id)}>
-                    <a className={css.btn}>
-                        <AccountCircleOutlinedIcon />
-                        <span>{trans('Проглянути свій профіль')}</span>
-                    </a>
+                    <a className={css.btn}>{trans('Проглянути свій профіль')}</a>
                 </Link>
             </li>
             <li className={css.li}>
                 <Link href={routes.posts.new}>
-                    <a className={css.btn}>
-                        <CreateNewFolderOutlinedIcon />
-                        <span>{trans('Створити оголошення')}</span>
-                    </a>
+                    <a className={css.btn}>{trans('Створити оголошення')}</a>
                 </Link>
             </li>
             <li className={css.li}>
-                <button className={css.btn} type="button" onClick={logout}>
-                    <LogoutIcon />
-                    <span>{trans('Вийти')}</span>
+                <button className={clsx(css.btn, css.error)} type="button" onClick={logout}>
+                    {trans('Вийти')}
                 </button>
             </li>
         </ul>

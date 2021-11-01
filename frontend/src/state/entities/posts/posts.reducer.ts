@@ -8,6 +8,7 @@ import { postFavoriteReducer } from './reducers/post-favorite.reducer';
 import { postListReducer } from './reducers/post-list.reducer';
 import { singlePostReducer } from './reducers/single-post.reducer';
 import { updatePostReducer } from './reducers/update-post.reducer';
+import { updateStatusReducer } from './reducers/update-status.reducer';
 import { userPostsReducer } from './reducers/user-posts.reducer';
 
 const postsSlice = createSlice({
@@ -21,6 +22,7 @@ const postsSlice = createSlice({
     extraReducers: builder => {
         newPostReducer(builder);
         updatePostReducer(builder);
+        updateStatusReducer(builder);
         singlePostReducer(builder);
         postListReducer(builder);
         userPostsReducer(builder);

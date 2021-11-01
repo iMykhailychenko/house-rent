@@ -1,14 +1,17 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
+import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { cutString, formatDate } from '../../../../utils/helpers';
-import { postActionsMap } from '../../../../utils/post-functions';
+import { postActionsMap, postFunctionsMap } from '../../../../utils/post-functions';
 import routes from '../../../../utils/routes';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
 import ImageWrp from '../../image-wrp/image-wrp';
+import userPostActions from '../../modal/modals/user-post-actions/user-post-actions';
 import Tooltip from '../../tooltip/tooltip';
 
 import css from './user-post-card.module.scss';
@@ -18,6 +21,17 @@ interface IProps {
 }
 const UserPostCard = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
+    const history = useRouter();
+    const dispatch = useAppDispatch();
+    const functions = postFunctionsMap(dispatch, history);
+
+    const handleAction = async (index: number): Promise<void> => {
+        const action = postActionsMap[post.status][index];
+        await functions[action](post.id);
+    };
+
+    const handleFirstAction = async (): Promise<void> => await handleAction(0);
+    const handleSecondAction = async (): Promise<void> => await handleAction(1);
 
     return (
         <div className={css.root}>
@@ -45,13 +59,13 @@ const UserPostCard = ({ post }: IProps): JSX.Element => {
             </div>
 
             <div className={css.footer}>
-                <button type="button" className={css.editBtn}>
+                <button type="button" className={css.editBtn} onClick={handleFirstAction}>
                     {postActionsMap[post.status][0]}
                 </button>
-                <button type="button" className={css.editBtn}>
+                <button type="button" className={css.editBtn} onClick={handleSecondAction}>
                     {postActionsMap[post.status][1]}
                 </button>
-                <button type="button" className={css.editBtn}>
+                <button type="button" className={css.editBtn} onClick={userPostActions(post)}>
                     Інше
                 </button>
             </div>

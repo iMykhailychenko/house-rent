@@ -27,7 +27,7 @@ export class PostsService {
             .createQueryBuilder('posts')
             .leftJoinAndSelect('posts.user', 'users')
             .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
-            .where('posts.status = :status', { status: POST_STATUS.DRAFT })
+            .where('posts.status = :status', { status: POST_STATUS.ACTIVE })
             .andWhere('((:general)::text[] IS NULL OR (posts.generalFilters)::text[] @> (:general)::text[])', {
                 general: searchFilters.general,
             })

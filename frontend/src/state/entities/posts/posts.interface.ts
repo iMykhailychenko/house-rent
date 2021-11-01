@@ -59,6 +59,11 @@ export interface IEditPostPayload {
     body: Partial<IPost>;
 }
 
+export interface IEditPostStatusPayload {
+    id: number;
+    status: POST_STATUS;
+}
+
 export interface IUserPostsListPayload {
     userId: number;
     page: number;

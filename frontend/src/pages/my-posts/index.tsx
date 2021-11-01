@@ -18,8 +18,8 @@ import { withAuthRedirect } from '../../utils/ssr';
 import css from './my-posts.module.scss';
 
 const tabs = [
-    { id: POST_STATUS.ACTIVE, name: POST_STATUS.ACTIVE },
     { id: POST_STATUS.DRAFT, name: POST_STATUS.DRAFT },
+    { id: POST_STATUS.ACTIVE, name: POST_STATUS.ACTIVE },
     { id: POST_STATUS.ARCHIVE, name: POST_STATUS.ARCHIVE },
 ];
 
