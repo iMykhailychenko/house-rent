@@ -8,6 +8,25 @@
     box-shadow: var(--box-shadow-1);
     transition: 0.3s ease-in-out;
 
+    --card-width: 40rem;
+    --image-wrp-diameter: 10rem;
+
+    @media (max-width: 1580px) {
+        --card-width: 23vw;
+    }
+
+    @media (max-width: 1350px) {
+        --card-width: 30vw;
+    }
+
+    @media (max-width: 960px) {
+        --card-width: 44vw;
+    }
+
+    @media (max-width: 640px) {
+        --card-width: 30rem;
+    }
+
     &:hover {
         box-shadow: var(--box-shadow-2);
     }

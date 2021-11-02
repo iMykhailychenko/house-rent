@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IUser, UserRole } from '../../../interfaces';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 
+import { IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
 export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async () => {
@@ -15,6 +16,20 @@ export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async ()
         throw new Error(error);
     }
 });
+
+export const updateProfileThunk = createAsyncThunk<IUser, IUpdateProfilePayload>(
+    'PROFILE/UPDATE_PROFILE',
+    async (payload: IUpdateProfilePayload) => {
+        try {
+            const { data, status } = await profileServices.updateProfile(payload);
+            if (status < 200 || status >= 300) throw new Error();
+            return data;
+        } catch (error) {
+            errorNotif(error);
+            throw new Error(error);
+        }
+    },
+);
 
 export const updateProfileRole = createAsyncThunk<UserRole[], UserRole[]>('PROFILE/UPDATE_ROLE', async (role: UserRole[]) => {
     try {

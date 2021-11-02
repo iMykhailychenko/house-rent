@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser, UserRole } from '../../../interfaces';
-import { IUserState } from '../users/users.interface';
 
 import { profileInitialState } from './profile.initial-state';
 import { IProfileInfoState } from './profile.interface';
-import { profileInfoThunk, updateProfileRole } from './profile.thunk';
+import { profileInfoThunk, updateProfileRole, updateProfileThunk } from './profile.thunk';
 
 const profileSlice = createSlice({
     name: 'PROFILE',
@@ -28,6 +27,10 @@ const profileSlice = createSlice({
 
         builder.addCase(updateProfileRole.fulfilled, (state: IProfileInfoState, action: PayloadAction<UserRole[]>) => {
             state.data.role = action.payload;
+        });
+
+        builder.addCase(updateProfileThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser>) => {
+            state.data = action.payload;
         });
     },
 });

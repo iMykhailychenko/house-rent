@@ -19,7 +19,7 @@ import { withAuthRedirect } from '../../utils/ssr';
 
 import css from './chats.module.scss';
 
-const Messages = (): JSX.Element => {
+const MessagesPage = (): JSX.Element => {
     const [auth] = useAuth();
     const socket = useChatSocket();
     const dispatch = useAppDispatch();
@@ -59,4 +59,4 @@ export const getServerSideProps: GetServerSideProps = withAuthRedirect(async ctx
     await ctx.store?.dispatch(chatListThunk({ page: 1 }));
 });
 
-export default Messages;
+export default MessagesPage;

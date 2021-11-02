@@ -45,7 +45,8 @@ const MyPostsList = (): JSX.Element => {
 
     return (
         <div ref={ref} className={css.wrp}>
-            <h2 className={css.title}>Всього знайдено оголошень: {postsState.totalItems}</h2>
+            {!!postsState.totalItems && <h2 className={css.title}>Всього знайдено оголошень: {postsState.totalItems}</h2>}
+
             {loading ? (
                 <div className={css.inner}>
                     <PostsMdSkeleton className={css.card} amount={uiConfig.postsPerPage} />

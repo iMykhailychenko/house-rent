@@ -7,7 +7,7 @@ import SinglePostComponent from '../../components/pages/posts/single/single';
 import { singlePostThunk } from '../../state/entities/posts/thunks/single-post.thunk';
 import { withStore } from '../../utils/ssr';
 
-const SinglePost = (): JSX.Element => {
+const SinglePostPage = (): JSX.Element => {
     return (
         <RootLayout>
             <SinglePostComponent />
@@ -20,4 +20,4 @@ export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
     await ctx.store?.dispatch(singlePostThunk(postId));
 });
 
-export default SinglePost;
+export default SinglePostPage;

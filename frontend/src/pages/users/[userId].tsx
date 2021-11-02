@@ -14,7 +14,7 @@ import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../st
 import { userInfoThunk } from '../../state/entities/users/users.thunk';
 import { withStore } from '../../utils/ssr';
 
-const UserProfile = (): JSX.Element => {
+const UserProfilePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const router = useRouter();
@@ -53,4 +53,4 @@ export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
     await ctx.store?.dispatch(userInfoThunk(userId));
 });
 
-export default UserProfile;
+export default UserProfilePage;

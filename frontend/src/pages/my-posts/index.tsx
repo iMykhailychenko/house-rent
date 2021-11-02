@@ -23,7 +23,7 @@ const tabs = [
     { id: POST_STATUS.ARCHIVE, name: POST_STATUS.ARCHIVE },
 ];
 
-const MyPosts = (): JSX.Element => {
+const MyPostsPage = (): JSX.Element => {
     const [auth] = useAuth();
     const dispatch = useAppDispatch();
     const profile = useProfileInfoSelector();
@@ -53,4 +53,4 @@ const MyPosts = (): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = withAuthRedirect();
 
-export default MyPosts;
+export default MyPostsPage;

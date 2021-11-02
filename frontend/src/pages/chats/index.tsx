@@ -13,7 +13,7 @@ import { withAuthRedirect } from '../../utils/ssr';
 
 import css from './chats.module.scss';
 
-const Chats = (): JSX.Element => {
+const ChatsPage = (): JSX.Element => {
     const [auth] = useAuth();
     const dispatch = useAppDispatch();
 
@@ -34,4 +34,4 @@ const Chats = (): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = withAuthRedirect();
 
-export default Chats;
+export default ChatsPage;

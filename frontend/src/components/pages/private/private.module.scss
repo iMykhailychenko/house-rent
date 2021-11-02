@@ -1,0 +1,15 @@
+.aside {
+    position: relative;
+    width: var(--sidebar-width);
+    height: auto;
+
+    .sticky {
+        position: sticky;
+        top: 10rem;
+        left: 0;
+    }
+}
+
+.container {
+    width: calc(100% - var(--sidebar-width) - 4rem);
+}
