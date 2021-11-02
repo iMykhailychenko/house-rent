@@ -6,7 +6,7 @@ import Link from 'next/link';
 import useTrans from '../../../../hooks/trans.hook';
 import { IUser } from '../../../../interfaces';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
-import { onlineStatus } from '../../../../utils/helpers';
+import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
 import UserAvatar from '../user-avatar/user-avatar';
 

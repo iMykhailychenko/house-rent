@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 
 import Link from '../../../components/common/link/link';
 import Container from '../../../components/layout/container/container';
-import { parseCookie } from '../../../utils/helpers';
+import { parseCookie } from '../../../utils/helpers/cookie.helper';
 import routes from '../../../utils/routes';
 import { withAuthRedirect } from '../../../utils/ssr';
 

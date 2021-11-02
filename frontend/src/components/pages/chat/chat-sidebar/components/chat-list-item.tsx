@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { useChatSocket } from '../../../../../hooks/chat.hook';
 import { Chat } from '../../../../../state/entities/chats/chats.interface';
-import { cutString } from '../../../../../utils/helpers';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Badge from '../../../../common/badge/badge';
 import UserAvatar from '../../../../common/user/user-avatar/user-avatar';

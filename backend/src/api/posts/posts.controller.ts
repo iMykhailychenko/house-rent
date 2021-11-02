@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 
 import { SearchPost } from '../../shared/decorators/search-post.decorator';
 import { User } from '../../shared/decorators/users.decorator';
@@ -62,13 +62,13 @@ export class PostsController {
 
     @Get('read/:postId')
     async findByIdRead(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
-        return await this.postsService.findById(postId);
+        return await this.postsService.findByIdRead(postId);
     }
 
     @Get(':postId')
     @UseGuards(AuthGuard)
     async findById(@User('id') userId: number, @Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
-        return await this.postsService.addFavoriteFieldToSinglePosts(userId, await this.postsService.findById(postId));
+        return await this.postsService.findById(postId, userId);
     }
 
     @Post('')
@@ -98,5 +98,11 @@ export class PostsController {
         @Body(new ValidationPipe({ transform: true })) statusDto: StatusDto,
     ): Promise<PostEntity> {
         return await this.postsService.updateStatus(userId, postId, statusDto);
+    }
+
+    @Delete(':postId')
+    @UseGuards(AuthGuard)
+    async deletePost(@User('id') userId: number, @Param('postId', ParseIntPipe) postId: number): Promise<void> {
+        await this.postsService.deletePost(userId, postId);
     }
 }

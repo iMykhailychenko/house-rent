@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { useMessageSelector } from '../../../../state/entities/chats/chats.selector';
-import { validateDate } from '../../../../utils/helpers';
+import { validateDate } from '../../../../utils/helpers/date.helper';
 
 import DateSeparator from './components/date-separator';
 import MessagesList from './components/messages-list';

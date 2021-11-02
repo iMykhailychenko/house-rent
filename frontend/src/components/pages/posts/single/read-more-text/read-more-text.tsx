@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
-import { cutString } from '../../../../../utils/helpers';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import ImageWrp from '../../../../common/image-wrp/image-wrp';
 import StickyModal from '../../../../common/modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../../../common/modal/modal';

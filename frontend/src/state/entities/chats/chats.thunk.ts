@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
-import { errorNotif } from '../../../utils/helpers';
+import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 
 import { Chat, ChatListPayload, CreateChatPayload, Message, MessagesListPayload } from './chats.interface';
 import chatsServices from './chats.services';

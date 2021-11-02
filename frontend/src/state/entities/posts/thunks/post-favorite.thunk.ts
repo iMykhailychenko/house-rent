@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { errorNotif } from '../../../../utils/helpers';
+import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import postsServices from '../posts.services';
 
 export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {

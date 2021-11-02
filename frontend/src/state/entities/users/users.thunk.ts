@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { IUser } from '../../../interfaces';
-import { errorNotif } from '../../../utils/helpers';
+import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 
 import userServices from './users.services';
 

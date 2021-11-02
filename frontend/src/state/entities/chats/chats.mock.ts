@@ -30,6 +30,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-07T22:07:30.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -38,6 +39,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-07T21:07:30.114Z',
+        updatedAt: null,
         author: user2,
     },
     {
@@ -46,6 +48,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-07T20:07:30.114Z',
+        updatedAt: null,
         author: user2,
     },
     {
@@ -54,6 +57,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T19:07:30.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -62,6 +66,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T18:07:30.114Z',
+        updatedAt: null,
         author: user,
     },
 
@@ -71,6 +76,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T17:07:30.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -79,6 +85,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T16:07:30.114Z',
+        updatedAt: null,
         author: user2,
     },
     {
@@ -87,6 +94,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T15:05:30.114Z',
+        updatedAt: null,
         author: user2,
     },
     {
@@ -95,6 +103,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-06T14:04:01.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -103,6 +112,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-05T13:03:30.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -111,6 +121,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-05T12:08:30.114Z',
+        updatedAt: null,
         author: user,
     },
     {
@@ -119,6 +130,7 @@ const messagesMock: Message[] = [
         isNew: false,
         uploads: [],
         createdAt: '2021-10-04T10:07:31.114Z',
+        updatedAt: null,
         author: user,
     },
 ];

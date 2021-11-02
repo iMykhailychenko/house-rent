@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTrans from '../../../../hooks/trans.hook';
 import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
-import { formatDate } from '../../../../utils/helpers';
+import { formatDate } from '../../../../utils/helpers/date.helper';
 import FullScreenImg from '../../../common/full-screen-img/full-screen-img';
 import NotFoundPost from '../../../common/not-found/not-found-post/not-found-post';
 import PostCardFooter from '../../../common/post/post-card/components/post-card-footer/post-card-footer';

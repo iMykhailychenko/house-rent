@@ -3,7 +3,6 @@ import React from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
-import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { POST_ACTIONS, postActionsMap, postFunctionsMap } from '../../../../../utils/post-functions';
@@ -18,9 +17,8 @@ interface IProps {
 const UserPostActions = ({ post }: IProps): JSX.Element => {
     const trans = useTrans();
     const history = useRouter();
-    const dispatch = useAppDispatch();
     const actions = postActionsMap[post.status];
-    const functions = postFunctionsMap(dispatch, history);
+    const functions = postFunctionsMap(history);
 
     const handleAction = (action: POST_ACTIONS) => async (): Promise<void> => {
         await functions[action](post.id);

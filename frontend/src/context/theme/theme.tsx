@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 import { THEME_ENUM } from '../../interfaces';
-import { addMonthToDate } from '../../utils/helpers';
+import { addMonthToDate } from '../../utils/helpers/date.helper';
 
 export const Theme = createContext<[theme: THEME_ENUM, setTheme: (v: THEME_ENUM) => void]>([THEME_ENUM.WHITE, () => undefined]);
 

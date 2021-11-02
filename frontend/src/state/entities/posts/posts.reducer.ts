@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPostState } from './posts.interface';
+import { deletePostReducer } from './reducers/delete-post.reducer';
 import { newPostReducer } from './reducers/new-post.reducer';
 import { personalPostsReducer } from './reducers/personal-posts.reducer';
 import { postFavoriteReducer } from './reducers/post-favorite.reducer';
@@ -28,6 +29,7 @@ const postsSlice = createSlice({
         userPostsReducer(builder);
         personalPostsReducer(builder);
         postFavoriteReducer(builder);
+        deletePostReducer(builder);
     },
 });
 

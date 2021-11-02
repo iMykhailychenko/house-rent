@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../../interfaces';
-import { errorNotif } from '../../../../utils/helpers';
+import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { searchFiltersToArray } from '../../../../utils/helpers/filters.util';
 import { paginationEmitter } from '../../../../utils/helpers/pagination.helper';
 import { AsyncThunkConfig } from '../../../interfaces';

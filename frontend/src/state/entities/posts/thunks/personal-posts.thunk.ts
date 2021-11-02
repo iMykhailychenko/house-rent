@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../../interfaces';
-import { errorNotif } from '../../../../utils/helpers';
+import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { AsyncThunkConfig } from '../../../interfaces';
 import { IPersonalPostsListPayload, IPost } from '../posts.interface';
 import postsServices from '../posts.services';

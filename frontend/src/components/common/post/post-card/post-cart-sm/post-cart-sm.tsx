@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
-import { cutString } from '../../../../../utils/helpers';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import FullScreenImg from '../../../full-screen-img/full-screen-img';
 import ImageWrp from '../../../image-wrp/image-wrp';

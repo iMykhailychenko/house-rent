@@ -49,6 +49,7 @@ const postsServices = {
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => axios.put(endpointConfig(`/posts/${id}`), body),
     updatePostStatus: ({ id, status }: IEditPostStatusPayload): Response<IPost> =>
         axios.put(endpointConfig(`/posts/${id}/status`), { status }),
+    deletePost: (id: number): Response<void> => axios.delete(endpointConfig(`/posts/${id}`)),
     toggleFavorite: (id: number): Response<void> => axios.put(endpointConfig(`/favorite/${id}`)),
 };
 

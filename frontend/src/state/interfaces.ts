@@ -10,6 +10,8 @@ import { IUserState } from './entities/users/users.interface';
 
 export type ThunkStatuses = 'idle' | 'loading' | 'success' | 'error';
 
+export type ErrorState = { status: number; message: string } | null;
+
 export interface IState {
     auth: IAuthState;
     filters: IFiltersState;

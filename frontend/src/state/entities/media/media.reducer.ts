@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { errorNotif } from '../../../utils/helpers';
+import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 
 import { mediaInitialState } from './media.initial-state';
 import { IMediaResponse, IMediaState } from './media.interface';

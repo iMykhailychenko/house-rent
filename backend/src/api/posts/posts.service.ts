@@ -128,16 +128,11 @@ export class PostsService {
         return postsList;
     }
 
-    async addFavoriteFieldToSinglePosts(userId: number, post: PostEntity): Promise<PostEntity> {
-        post.isFavorite = await this.isPostInFavorite(post.id, userId);
-        return post;
-    }
-
-    async findById(postId: number): Promise<PostEntity> {
+    async findByIdRead(postId: number): Promise<PostEntity> {
         const post = await this.postRepository
             .createQueryBuilder('posts')
-            .where({ id: postId })
-            .leftJoinAndSelect('posts.user', 'users')
+            .where({ id: postId, status: POST_STATUS.ACTIVE })
+            .leftJoinAndSelect('posts.user', 'user')
             .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
             .getOne();
 
@@ -149,6 +144,30 @@ export class PostsService {
             .set({ views: () => 'views + 1' })
             .where({ id: postId })
             .execute();
+
+        return { ...post, views: post.views + 1, isFavorite: false };
+    }
+
+    async findById(postId: number, userId: number): Promise<PostEntity> {
+        const post = await this.postRepository
+            .createQueryBuilder('posts')
+            .where({ id: postId })
+            .leftJoinAndSelect('posts.user', 'user')
+            .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
+            .getOne();
+
+        if (!post) throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
+        if (post.status !== POST_STATUS.ACTIVE && post.user.id !== userId)
+            throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
+
+        await this.postRepository
+            .createQueryBuilder('posts')
+            .update(PostEntity)
+            .set({ views: () => 'views + 1' })
+            .where({ id: postId })
+            .execute();
+
+        post.isFavorite = await this.isPostInFavorite(post.id, userId);
 
         return { ...post, views: post.views + 1, isFavorite: false };
     }
@@ -176,5 +195,11 @@ export class PostsService {
         }
         post.status = statusDto.status;
         return await this.postRepository.save(post);
+    }
+
+    async deletePost(userId: number, postId: number): Promise<void> {
+        const post = await this.postRepository.findOne(postId, { relations: ['user'] });
+        if (post.id !== postId) throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        await this.postRepository.delete(post);
     }
 }

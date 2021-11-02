@@ -3,7 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { modal } from '../../../components/common/modal/modal';
-import { addMonthToDate, errorNotif } from '../../../utils/helpers';
+import { addMonthToDate } from '../../../utils/helpers/date.helper';
+import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import routes from '../../../utils/routes';
 import { profileInfoThunk } from '../profile/profile.thunk';
 

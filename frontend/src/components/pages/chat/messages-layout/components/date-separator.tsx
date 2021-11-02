@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useTrans from '../../../../../hooks/trans.hook';
-import { formatDate } from '../../../../../utils/helpers';
+import { formatDate } from '../../../../../utils/helpers/date.helper';
 import css from '../messages-layout.module.scss';
 
 interface IProps {

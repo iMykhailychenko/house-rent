@@ -1,14 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
-import { IPost } from '../posts.interface';
 import postsServices from '../posts.services';
 
-export const singlePostThunk = createAsyncThunk<IPost, number>('POSTS/SINGLE', async (payload: number) => {
+export const deletePostThunk = createAsyncThunk<number, number>('POSTS/DELETE', async (payload: number) => {
     try {
-        const { data, status } = await postsServices.singlePost(payload);
+        const { status } = await postsServices.deletePost(payload);
         if (status < 200 || status >= 300) throw new Error();
-        return data;
+        return payload;
     } catch (error) {
         errorNotif(error);
         throw new Error(error);

@@ -4,7 +4,8 @@ import FileCopy from '@mui/icons-material/FileCopy';
 import clsx from 'clsx';
 
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
-import { copyText, cutString } from '../../../../../utils/helpers';
+import { copyText } from '../../../../../utils/helpers/copy-text.helper';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Socials from '../../../share-links/share-links';
 import Tooltip from '../../../tooltip/tooltip';

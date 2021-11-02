@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 import appConfig from '../../config/app.config';
 import { IConfig } from '../../interfaces';
-import { addMonthToDate } from '../../utils/helpers';
+import { addMonthToDate } from '../../utils/helpers/date.helper';
 
 export type IConfigValue = [config: IConfig, setConfig: (value: IConfig) => void];
 export const Config = createContext<IConfigValue>([appConfig, () => undefined]);

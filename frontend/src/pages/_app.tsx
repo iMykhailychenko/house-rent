@@ -18,7 +18,7 @@ import { IConfig, THEME_ENUM } from '../interfaces';
 import authInitialState from '../state/entities/auth/auth.initial-state';
 import { IAuthState } from '../state/entities/auth/auth.interface';
 import { initializeStore } from '../state/store';
-import { parseCookie } from '../utils/helpers';
+import { parseCookie } from '../utils/helpers/cookie.helper';
 import interceptor from '../utils/interceptors';
 
 interface IProps {

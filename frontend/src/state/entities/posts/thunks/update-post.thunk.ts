@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { errorNotif } from '../../../../utils/helpers';
+import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { IEditPostPayload, IPost } from '../posts.interface';
 import postsServices from '../posts.services';
 

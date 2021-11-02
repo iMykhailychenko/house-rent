@@ -11,7 +11,7 @@ import { UserRole } from '../../../../interfaces';
 import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
-import { onlineStatus } from '../../../../utils/helpers';
+import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
 import Button from '../../../common/button/button';
 import { modal } from '../../../common/modal/modal';
