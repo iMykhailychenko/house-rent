@@ -96,6 +96,7 @@
             font-size: 1.6rem;
             line-height: 1.2;
             color: var(--black);
+            word-break: break-all;
             transition: 0.3s ease-in-out;
             @include cutString;
         }

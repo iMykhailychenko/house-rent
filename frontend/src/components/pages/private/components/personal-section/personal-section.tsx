@@ -1,13 +1,34 @@
 import React from 'react';
 
+import EditIcon from '@mui/icons-material/Edit';
+
 import css from './personal-section.module.scss';
 
 interface IProps {
+    title?: string;
+    icon?: JSX.Element;
     children: JSX.Element;
+    onClick?: () => void;
 }
 
-const PersonalSection = ({ children }: IProps): JSX.Element => {
-    return <div className={css.root}>{children}</div>;
+const PersonalSection = ({ icon, title, children, onClick }: IProps): JSX.Element => {
+    return (
+        <div className={css.root}>
+            <div className={css.header}>
+                <div className={css.title}>
+                    {icon}
+                    {title && <h4>{title}</h4>}
+                </div>
+                {onClick && (
+                    <button className={css.link} type="button">
+                        <EditIcon />
+                        <span>Редагувати</span>
+                    </button>
+                )}
+            </div>
+            {children}
+        </div>
+    );
 };
 
 export default PersonalSection;
