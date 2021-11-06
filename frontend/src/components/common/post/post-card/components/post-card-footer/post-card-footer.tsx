@@ -19,10 +19,10 @@ import { useProfileInfoSelector } from '../../../../../../state/entities/profile
 import routes from '../../../../../../utils/routes';
 import Button from '../../../../button/button';
 import { modal } from '../../../../modal/modal';
+import changeUserRole from '../../../../modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../../modal/modals/login-modal/login-modal';
 import sharePostModal from '../../../../modal/modals/share-post-modal/share-post-modal';
 import Tooltip from '../../../../tooltip/tooltip';
-import ChangeUserRole from '../../../../user/change-user-role/change-user-role';
 import PostPreviewModal from '../post-preview-modal/post-preview-modal';
 
 import css from './post-card-footer.module.scss';
@@ -47,17 +47,13 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
         dispatch(togglePostFavoriteThunk(post.id));
     };
 
-    const changeUserRole = (): void => {
-        modal.open(
-            <ChangeUserRole title="Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?" />,
-        );
-    };
-
     const openChat = async () => {
         if (!auth?.accessToken) return loginModal();
 
         if (!role.isRealtor) {
-            changeUserRole();
+            changeUserRole(
+                "Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?",
+            );
             return;
         }
 

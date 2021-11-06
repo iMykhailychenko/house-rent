@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 
-import { useAppDispatch } from '../../../../hooks/redux.hook';
-import useTrans from '../../../../hooks/trans.hook';
-import { UserRole } from '../../../../interfaces';
-import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
-import { updateProfileRole } from '../../../../state/entities/profile/profile.thunk';
-import Button from '../../button/button';
-import Checkbox from '../../checkbox/checkbox';
-import StickyModal from '../../modal/components/sticky-modal/sticky-modal';
-import { modal } from '../../modal/modal';
+import { toast } from 'react-toastify';
+
+import toastConfig from '../../../../../config/toast.cofig';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
+import useTrans from '../../../../../hooks/trans.hook';
+import { UserRole } from '../../../../../interfaces';
+import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { updateProfileRole } from '../../../../../state/entities/profile/profile.thunk';
+import Button from '../../../button/button';
+import Checkbox from '../../../checkbox/checkbox';
+import StickyModal from '../../components/sticky-modal/sticky-modal';
+import { modal } from '../../modal';
 
 import css from './change-user-role.module.scss';
 
 interface IProps {
-    title?: string;
-    className?: string;
+    title: string;
 }
 
-const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
+const ChangeUserRole = ({ title }: IProps): JSX.Element => {
     const trans = useTrans();
     const dispatch = useAppDispatch();
     const profileState = useProfileInfoSelector();
@@ -33,8 +35,11 @@ const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
 
     const submit = async (): Promise<void> => {
         setLoading(true);
-        await dispatch(updateProfileRole(userRoles)).unwrap();
-        setLoading(false);
+        const newRole = await dispatch(updateProfileRole(userRoles)).unwrap();
+        if (newRole) {
+            setLoading(false);
+            toast.success('Ви успішно змінили роль на сайті!', toastConfig);
+        }
         modal.close();
     };
 
@@ -52,8 +57,8 @@ const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
                 </>
             }
         >
-            <div className={className}>
-                {title && <h3 className={css.title}>{title}</h3>}
+            <div>
+                <h3 className={css.title}>{title}</h3>
                 <div className={css.checkbox}>
                     <Checkbox
                         size="lg"
@@ -73,4 +78,8 @@ const ChangeUserRole = ({ title, className }: IProps): JSX.Element => {
     );
 };
 
-export default ChangeUserRole;
+const changeUserRole = (title = ''): void => {
+    modal.open(<ChangeUserRole title={title} />);
+};
+
+export default changeUserRole;

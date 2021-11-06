@@ -20,7 +20,7 @@ const PersonalSection = ({ icon, title, children, onClick }: IProps): JSX.Elemen
                     {title && <h4>{title}</h4>}
                 </div>
                 {onClick && (
-                    <button className={css.link} type="button">
+                    <button className={css.link} type="button" onClick={onClick}>
                         <EditIcon />
                         <span>Редагувати</span>
                     </button>

@@ -14,9 +14,8 @@ import { useUserInfoSelector } from '../../../../state/entities/users/users.sele
 import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
 import Button from '../../../common/button/button';
-import { modal } from '../../../common/modal/modal';
+import changeUserRole from '../../../common/modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../common/modal/modals/login-modal/login-modal';
-import ChangeUserRole from '../../../common/user/change-user-role/change-user-role';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
 import css from './user-banner.module.scss';
@@ -49,15 +48,14 @@ const UserBanner = (): JSX.Element => {
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    const changeUserRole = (): void => {
-        modal.open(
-            <ChangeUserRole title="Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?" />,
+    const changeUserRoleModal = (): void =>
+        changeUserRole(
+            "Щоб написати повідомлення ви маєте указати свою роль на сайті як 'Власник квартири або рієлтор'. Змінити роль?",
         );
-    };
 
     const openChat = async (): Promise<void> => {
         if (!auth?.accessToken) return loginModal();
-        if (!role.isRealtor) return changeUserRole();
+        if (!role.isRealtor) return changeUserRoleModal();
 
         setLoading(true);
         const chat = await dispatch(createChatThunk({ realtor: profileState.data.id, customer: userState.data.id })).unwrap();
@@ -96,7 +94,7 @@ const UserBanner = (): JSX.Element => {
             </div>
 
             {profileState.data.id === userState.data.id ? (
-                <button type="button" className={css.link} onClick={changeUserRole}>
+                <button type="button" className={css.link} onClick={changeUserRoleModal}>
                     Змінити роль на сайті
                 </button>
             ) : (

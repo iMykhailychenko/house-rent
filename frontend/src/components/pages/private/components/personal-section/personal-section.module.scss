@@ -1,6 +1,6 @@
 .root {
     margin-bottom: 2rem;
-    padding: 3rem 4rem 4rem;
+    padding: 3rem 4rem 2rem;
     border: 0.1rem solid var(--gray-4);
     border-radius: 1rem;
 
@@ -8,7 +8,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 3rem;
+        padding-bottom: 1rem;
+        margin-left: -0.5rem;
     }
 
     .link {
@@ -38,8 +39,8 @@
 
         svg {
             margin-right: 0.8rem;
-            margin-bottom: 0.1rem;
-            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+            font-size: 2.5rem;
         }
     }
 }

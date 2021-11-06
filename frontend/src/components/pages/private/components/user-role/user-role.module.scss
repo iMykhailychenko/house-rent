@@ -1,0 +1,32 @@
+.list {
+    display: flex;
+
+    .role {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 20rem;
+        height: 20rem;
+        padding: 1rem;
+        border-radius: 0.6rem;
+        background: var(--gray-1);
+        border: 0.1rem solid var(--gray-4);
+
+        &:nth-of-type(1) {
+            margin-right: 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: calc(100% - 8rem);
+            object-fit: contain;
+        }
+
+        p {
+            margin-top: 1rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+    }
+}
