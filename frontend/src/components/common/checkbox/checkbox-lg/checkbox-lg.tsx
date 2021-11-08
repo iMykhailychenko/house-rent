@@ -10,11 +10,12 @@ interface IProps {
     error?: boolean;
     name?: string;
     title: string;
+    small?: string;
     value: boolean;
     onChange: (value: boolean) => void;
 }
 
-const CheckboxLg = ({ className, error = false, name, title, value, onChange }: IProps): JSX.Element => {
+const CheckboxLg = ({ className, error = false, name, title, small, value, onChange }: IProps): JSX.Element => {
     const handleClick = (): void => onChange(!value);
 
     return (
@@ -26,7 +27,10 @@ const CheckboxLg = ({ className, error = false, name, title, value, onChange }: 
             <div className={css.checkbox}>
                 <Checkbox className={css.icon} checked={value} color="primary" inputProps={{ 'aria-label': title }} name={name} />
             </div>
-            <span className={css.text}>{title}</span>
+            <p>
+                <span className={css.title}>{title}</span>
+                <span className={css.text}>{small}</span>
+            </p>
         </button>
     );
 };

@@ -62,13 +62,15 @@ const ChangeUserRole = ({ title }: IProps): JSX.Element => {
                 <div className={css.checkbox}>
                     <Checkbox
                         size="lg"
-                        title={trans('Користувач')}
+                        title={trans('Шукаю квартиру')}
+                        small={trans('Я зареєструвався на сайті щоб знайти квартиру своєї мрії')}
                         value={userRoles.includes(UserRole.USER)}
                         onChange={toggleUserCheckbox}
                     />
                     <Checkbox
                         size="lg"
-                        title={trans('Власник або рієлтор')}
+                        title={trans('Власник / Рієлтор')}
+                        small={trans('Я зареєструвався на сайті бо маю чудову квартиру яка чикає на нових мешканців')}
                         value={userRoles.includes(UserRole.REALTOR)}
                         onChange={toggleRealtorCheckbox}
                     />

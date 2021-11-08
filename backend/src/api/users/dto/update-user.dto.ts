@@ -16,13 +16,6 @@ export default class UpdateUserDto {
     lastName: string;
 
     @IsString()
-    @IsEmail()
-    @IsNotEmpty()
-    @IsOptional()
-    @IsNotEmpty()
-    email: string;
-
-    @IsString()
     @IsNotEmpty()
     @IsOptional()
     @IsNotEmpty()

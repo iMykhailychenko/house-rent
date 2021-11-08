@@ -52,6 +52,10 @@
         height: 6.7rem;
         padding: 1.5rem 2rem;
         border-top: 0.1rem solid var(--gray-3);
+
+        button {
+            margin-left: 1rem;
+        }
     }
 
     .inner {

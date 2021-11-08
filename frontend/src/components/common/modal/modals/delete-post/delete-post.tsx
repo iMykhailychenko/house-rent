@@ -12,8 +12,6 @@ import Button from '../../../button/button';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
-import css from './delete-post.module.scss';
-
 interface IProps {
     postId: number;
     isSinglePost: boolean;
@@ -39,10 +37,10 @@ const DeletePost = ({ postId, isSinglePost }: IProps): JSX.Element => {
             title="⛔️ Видалити цей пост?"
             footer={
                 <>
-                    <Button className={css.btn} secondary onClick={modal.close}>
+                    <Button secondary onClick={modal.close}>
                         Скасувати
                     </Button>
-                    <Button className={css.btn} primary onClick={handleSubmit}>
+                    <Button primary onClick={handleSubmit}>
                         Видалити
                     </Button>
                 </>

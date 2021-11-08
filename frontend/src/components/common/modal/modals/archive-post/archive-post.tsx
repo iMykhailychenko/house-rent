@@ -12,8 +12,6 @@ import Button from '../../../button/button';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
-import css from './archive-post.module.scss';
-
 interface IProps {
     postId: number;
     isSinglePost: boolean;
@@ -39,10 +37,10 @@ const ArchivePost = ({ postId, isSinglePost }: IProps): JSX.Element => {
             title="Помістити до архіву цей пост?"
             footer={
                 <>
-                    <Button className={css.btn} secondary onClick={modal.close}>
+                    <Button secondary onClick={modal.close}>
                         Скасувати
                     </Button>
-                    <Button className={css.btn} primary onClick={handleSubmit}>
+                    <Button primary onClick={handleSubmit}>
                         Помістити до архіву
                     </Button>
                 </>

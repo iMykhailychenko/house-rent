@@ -45,10 +45,10 @@ const EditMessageModal = ({ message }: IProps): JSX.Element => {
             title="Редагувати повідомлення"
             footer={
                 <>
-                    <Button className={css.btn} secondary onClick={modal.close}>
+                    <Button secondary onClick={modal.close}>
                         Скасувати
                     </Button>
-                    <Button className={css.btn} primary onClick={handleSubmit}>
+                    <Button primary onClick={handleSubmit}>
                         Змінити
                     </Button>
                 </>

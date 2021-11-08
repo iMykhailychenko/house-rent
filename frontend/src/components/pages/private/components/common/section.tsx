@@ -2,7 +2,7 @@ import React from 'react';
 
 import EditIcon from '@mui/icons-material/Edit';
 
-import css from './personal-section.module.scss';
+import css from './common.module.scss';
 
 interface IProps {
     title?: string;
@@ -11,7 +11,7 @@ interface IProps {
     onClick?: () => void;
 }
 
-const PersonalSection = ({ icon, title, children, onClick }: IProps): JSX.Element => {
+const Section = ({ icon, title, children, onClick }: IProps): JSX.Element => {
     return (
         <div className={css.root}>
             <div className={css.header}>
@@ -31,4 +31,4 @@ const PersonalSection = ({ icon, title, children, onClick }: IProps): JSX.Elemen
     );
 };
 
-export default PersonalSection;
+export default Section;

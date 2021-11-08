@@ -1,32 +1,38 @@
 .list {
     display: flex;
+    justify-content: space-between;
 
     .role {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        width: 20rem;
-        height: 20rem;
+        width: 48%;
+        height: 35rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
         padding: 1rem;
         border-radius: 0.6rem;
         background: var(--gray-1);
         border: 0.1rem solid var(--gray-4);
 
-        &:nth-of-type(1) {
-            margin-right: 2rem;
-        }
-
         img {
             max-width: 100%;
-            max-height: calc(100% - 8rem);
+            max-height: calc(100% - 16rem);
             object-fit: contain;
         }
 
         p {
-            margin-top: 1rem;
-            font-size: 1.6rem;
+            margin: 3rem 0 1rem;
+            font-size: 1.4rem;
             font-weight: 400;
+        }
+
+        small {
+            max-width: 30rem;
+            padding: 0 2rem;
+            text-align: center;
+            color: var(--gray-7);
         }
     }
 }
