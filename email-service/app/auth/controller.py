@@ -1,5 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
+
 from app.auth import service
+from app.auth.schema import AuthVerifyBody
 
 router = APIRouter(
     prefix="/auth",
@@ -7,7 +9,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", status_code=204)
-def verify_email() -> None:
-    service.send_auth_verification_email()
+@router.post("/", status_code=204)
+def verify_email(data: AuthVerifyBody = Body(...)) -> None:
+    service.send_auth_verification_email(data)
 

@@ -1,18 +1,24 @@
 import os
+from datetime import date
 
 from emails.template import JinjaTemplate
 from utils.message import Message
 
+from app.auth.schema import AuthVerifyBody
+from config import BACKEND_API_URL
 
-def send_auth_verification_email() -> None:
+
+def send_auth_verification_email(data: AuthVerifyBody) -> None:
     dir_name = os.path.dirname(__file__)
     with open(os.path.join(dir_name, "view.html")) as html:
         template = JinjaTemplate(html.read())
-        subject = "Email verification for user ddd"
 
-        template_vars = {
-            "email": "test@mail.ru"
-        }
-
-        message = Message()
-        message.send(html=template, to='igor.c.m@ukr.net', subject=subject, template_vars=template_vars)
+    subject = "Підтвердження реєстрації на сайті \"House rent\""
+    template_vars = {
+        "first_name": data.first_name,
+        "last_name": data.last_name,
+        "link": f"{BACKEND_API_URL}?{data.token}",
+        "registration_date": date.today().strftime("%d-%m-%Y")
+    }
+    message = Message()
+    message.send(html=template, to='igor.c.m@ukr.net', subject=subject, template_vars=template_vars)

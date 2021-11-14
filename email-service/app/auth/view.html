@@ -1,4 +1,154 @@
-<div>
-    <h2>{{email}}</h2>
-    <p>Hello! How are you?</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Підтвердження реєстрації на сайті "House rent"</title>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+                    'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+                    'Noto Color Emoji';
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="min-height: 80vh; padding: 80px 0 40px">
+            <table style="max-width: 500px; width: 90%; margin: 0 auto">
+                <tbody>
+                    <tr>
+                        <td>
+                            <a
+                                style="
+                                    display: block;
+                                    cursor: pointer;
+                                    text-decoration: none;
+                                    font-weight: 800;
+                                    font-size: 30px;
+                                    color: #3f51b5;
+                                "
+                                href="http://house-rent.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                HOUSE-RENT
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2 style="font-size: 18px; font-weight: 700; margin: 10px 0; color: #444">
+                                ✅ Підтвердження реєстрації на сайті "House rent"
+                            </h2>
+                            <hr />
+                            <h3 style="font-size: 18px; margin: 40px 0 10px">
+                                Дякуємо що користуєтесь сервісом
+                                <a
+                                    style="color: #3f51b5"
+                                    href="http://house-rent.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    >house-rent.com</a
+                                >
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr style="display: block; padding: 30px; background: #f6f6f6; border-radius: 6px">
+                        <td>
+                            <div
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 150px;
+                                    width: 150px;
+                                    margin: 0 auto 40px;
+                                    border-radius: 50%;
+                                    background: #fff;
+                                "
+                            >
+                                <img
+                                    height="100px"
+                                    width="100px"
+                                    style="display: block; margin: auto"
+                                    src="https://storage.googleapis.com/isometriclove.appspot.com/company.png"
+                                    alt=""
+                                />
+                            </div>
+                            <p style="font-size: 16px; margin: 0; color: #666">
+                                Ви зареєструвались як {{first_name}} {{last_name}}. Дата реєстрації:
+                                {{registration_date}}
+                            </p>
+                            <p style="font-size: 16px; margin: 30px 0 0">
+                                Для завершення реєстрації перейдіть за цим посиланням:
+                                <a href="{{link}}" target="_blank" rel="noopener noreferrer"> {{link}}</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p style="font-size: 16px; margin: 30px 0 10px">
+                                Якщо ви не реєструвались на сайті то просто проігноруйте це повідомлення
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <hr />
+                            <a
+                                style="
+                                    display: block;
+                                    margin: 40px 0 0;
+                                    width: 100%;
+                                    text-align: center;
+                                    font-size: 16px;
+                                    text-decoration: none;
+                                    font-weight: 600;
+                                    color: #999;
+                                "
+                                href="http://phoqer.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                House rent
+                            </a>
+                            <p
+                                style="
+                                    font-size: 14px;
+                                    margin: 5px 0 0;
+                                    text-align: center;
+                                    font-weight: 400;
+                                    color: #999;
+                                "
+                            >
+                                © 2021
+                            </p>
+                            <p
+                                style="
+                                    font-size: 14px;
+                                    margin: 5px 0 0;
+                                    text-align: center;
+                                    font-weight: 400;
+                                    color: #999;
+                                "
+                            >
+                                All rights reserved
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
