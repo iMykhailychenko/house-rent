@@ -7,7 +7,7 @@ router = APIRouter(
 )
 
 
-@router.get("/")
-def verify_email():
+@router.get("/", status_code=204)
+def verify_email() -> None:
     service.send_auth_verification_email()
 
