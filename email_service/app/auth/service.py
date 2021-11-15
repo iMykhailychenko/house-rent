@@ -2,10 +2,10 @@ import os
 from datetime import date
 
 from emails.template import JinjaTemplate
-from utils.message import Message
 
 from app.auth.schema import AuthVerifyBody
-from config import BACKEND_API_URL
+from utils.message import Message
+from config import BASE_URL
 
 
 def send_auth_verification_email(data: AuthVerifyBody) -> None:
@@ -17,8 +17,8 @@ def send_auth_verification_email(data: AuthVerifyBody) -> None:
     template_vars = {
         "first_name": data.first_name,
         "last_name": data.last_name,
-        "link": f"{BASE_URL}/auth/verify?{data.token}",
+        "link": f"{BASE_URL}/api/v1/users/verify?token={data.token}",
         "registration_date": date.today().strftime("%d-%m-%Y")
     }
     message = Message()
-    message.send(html=template, to='igor.c.m@ukr.net', subject=subject, template_vars=template_vars)
+    message.send(html=template, to=data.email, subject=subject, template_vars=template_vars)

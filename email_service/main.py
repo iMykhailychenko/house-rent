@@ -1,15 +1,12 @@
 import uvicorn
 
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 
-from config import EMAIL_APP_PORT, EMAIL_APP_HOST
 from app.home import controller as home
 from app.auth import controller as auth
+from config import EMAIL_APP_PORT, EMAIL_APP_HOST
 
 app = FastAPI()
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(home.router)
 app.include_router(auth.router)

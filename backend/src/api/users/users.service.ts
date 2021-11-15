@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import axios from 'axios';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
@@ -9,6 +10,7 @@ import { Pagination } from '../../shared/interfaces/interface';
 
 import CreateUserDto from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { EmailDto } from './dto/update-email.dto';
 import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
@@ -26,7 +28,10 @@ export class UsersService {
 
         const newUser = new UserEntity();
         Object.assign(newUser, createUserDto);
-        return await this.userRepository.save(newUser);
+        const savedUser = await this.userRepository.save(newUser);
+        await this.sendEmail(savedUser);
+
+        return savedUser;
     }
 
     async login(loginDto: LoginDto): Promise<LoginInterface> {
@@ -39,7 +44,7 @@ export class UsersService {
             throw new HttpException('Credentials not valid', HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        const oneMonthInMS = 30 * 24 * 60 * 60 * 1000;
+        const oneMonthInMS = 2_629_800_000;
         return { accessToken: jwt.sign({ id: user.id, exp: Date.now() + oneMonthInMS }, authConfig.accessKey) };
     }
 
@@ -67,9 +72,49 @@ export class UsersService {
         return await this.userRepository.save(user);
     }
 
+    async updateUserEmail(userId: number, emailDto: EmailDto): Promise<UserEntity> {
+        const user = await this.findById(userId);
+        user.email = emailDto.email;
+        user.isEmailVerified = false;
+        const savedUser = await this.userRepository.save(user);
+        await this.sendEmail(savedUser);
+
+        return savedUser;
+    }
+
     async updateUser(userId: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
         const user = await this.findById(userId);
         Object.assign(user, updateUserDto);
         return await this.userRepository.save(user);
+    }
+
+    async sendEmail(user: UserEntity): Promise<void> {
+        const oneHourInMS = 3_600_000;
+        const { status } = await axios.post(authConfig.emailServiceHost + '/auth', {
+            email: user.email,
+            token: jwt.sign({ id: user.id, exp: Date.now() + oneHourInMS }, authConfig.emailSecret),
+            first_name: user.firstName,
+            last_name: user.lastName,
+        });
+
+        if (status > 299) {
+            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+        }
+    }
+
+    async verifyEmail(token: string): Promise<boolean> {
+        try {
+            console.log(token);
+            const decoded = jwt.verify(token, authConfig.emailSecret);
+            const user = await this.findById(+decoded.id);
+
+            if (!user) return false;
+
+            user.isEmailVerified = true;
+            await this.userRepository.save(user);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 }

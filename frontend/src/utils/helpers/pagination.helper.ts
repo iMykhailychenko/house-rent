@@ -4,7 +4,8 @@ import { shallowRouter } from './shallow-router.helper';
 
 interface IPaginationEmitter {
     update: (page: number) => void;
-    onPaginate: (callback: () => void) => void;
+    subscribe: (callback: () => void) => void;
+    unsubscribe: (callback: () => void) => void;
 }
 
 class PaginationEmitter extends EventEmitter implements IPaginationEmitter {
@@ -17,8 +18,12 @@ class PaginationEmitter extends EventEmitter implements IPaginationEmitter {
         this.emit('pagination', page);
     };
 
-    onPaginate = (callback: (page: number) => void): void => {
+    subscribe = (callback: (page: number) => void): void => {
         this.on('pagination', callback);
+    };
+
+    unsubscribe = (callback: (page: number) => void): void => {
+        this.off('pagination', callback);
     };
 }
 

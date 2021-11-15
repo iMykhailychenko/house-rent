@@ -23,8 +23,9 @@ class Message:
             "subject": subject,
             "mail_from": ("House rent", SMTP_USER)
         }
+        print(self.smtp)
         message = emails.Message(**message_params)
         response = message.send(to=to, smtp=self.smtp, render=template_vars)
 
         if response.status_code != 250:
-            raise HTTPException(status_code=500, detail="Internal server error")
+            raise HTTPException(status_code=502, detail="Error with email service")

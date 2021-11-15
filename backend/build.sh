@@ -2,5 +2,3 @@
 
 yarn remove bcrypt
 yarn add bcrypt
-
-exec "$@"

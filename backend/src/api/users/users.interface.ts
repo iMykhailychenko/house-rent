@@ -7,3 +7,7 @@ export interface LoginInterface {
 }
 
 export type AuthRequest = Request & { user?: UserEntity };
+
+export interface AuthRedirectPayload {
+    url: string;
+}

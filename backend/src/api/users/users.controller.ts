@@ -9,20 +9,23 @@ import {
     Post,
     Put,
     Query,
+    Redirect,
     UseGuards,
     ValidationPipe,
 } from '@nestjs/common';
 
+import appConfig from '../../config/app.config';
 import { User } from '../../shared/decorators/users.decorator';
 import { AuthGuard } from '../../shared/guards/auth.guards';
 import { Pagination } from '../../shared/interfaces/interface';
 
 import CreateUserDto from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { EmailDto } from './dto/update-email.dto';
 import { RoleDto } from './dto/update-role.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
-import { LoginInterface } from './users.interface';
+import { AuthRedirectPayload, LoginInterface } from './users.interface';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -54,11 +57,6 @@ export class UsersController {
         return user;
     }
 
-    @Get(':userId')
-    async findById(@Param('userId', ParseIntPipe) userId: number): Promise<UserEntity> {
-        return await this.userService.findById(userId);
-    }
-
     @Put('role')
     @UseGuards(AuthGuard)
     async updateUserRole(
@@ -68,6 +66,15 @@ export class UsersController {
         return await this.userService.updateUserRole(userId, roleDto);
     }
 
+    @Put('email')
+    @UseGuards(AuthGuard)
+    async updateUserEmail(
+        @User('id') userId: number,
+        @Body(new ValidationPipe({ transform: true })) emailDto: EmailDto,
+    ): Promise<UserEntity> {
+        return await this.userService.updateUserEmail(userId, emailDto);
+    }
+
     @Put('')
     @UseGuards(AuthGuard)
     async updateUser(
@@ -75,5 +82,17 @@ export class UsersController {
         @Body(new ValidationPipe({ transform: true })) updateUserDto: UpdateUserDto,
     ): Promise<UserEntity> {
         return await this.userService.updateUser(userId, updateUserDto);
+    }
+
+    @Get('verify')
+    @Redirect()
+    async verifyEmail(@Query('token') token: string): Promise<AuthRedirectPayload> {
+        const isValid = await this.userService.verifyEmail(token);
+        return { url: `${appConfig.baseUrl}/verify/${isValid ? 'success' : 'error'}` };
+    }
+
+    @Get(':userId')
+    async findById(@Param('userId', ParseIntPipe) userId: number): Promise<UserEntity> {
+        return await this.userService.findById(userId);
     }
 }

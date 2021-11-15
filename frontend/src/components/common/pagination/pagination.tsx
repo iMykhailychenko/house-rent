@@ -27,7 +27,11 @@ const Pagination = ({ className, loading, total, onPage, onMore }: IProps): JSX.
     const [page, setPage] = useState<number>(init < total ? init : total);
 
     useEffect(() => {
-        paginationEmitter.onPaginate(setPage);
+        paginationEmitter.subscribe(setPage);
+
+        return () => {
+            paginationEmitter.unsubscribe(setPage);
+        };
     }, []);
 
     useEffect(() => {

@@ -4,8 +4,15 @@
     justify-content: center;
     flex-direction: column;
 
+    .avatarWrp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .avatar {
         font-size: 8rem;
+        margin: 0;
     }
 
     .input {
@@ -18,6 +25,7 @@
         visibility: hidden;
     }
 
+    .delete,
     .btn {
         margin: 4rem auto 0;
 
@@ -26,5 +34,10 @@
             margin-bottom: 0.2rem;
             font-size: 1.6rem;
         }
+    }
+
+    .delete {
+        margin: 2rem auto 0;
+        color: var(--error);
     }
 }

@@ -6,4 +6,3 @@ class AuthVerifyBody(BaseModel):
     token: str
     first_name: str
     last_name: str
-    user_agent: str

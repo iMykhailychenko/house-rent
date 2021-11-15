@@ -5,7 +5,7 @@ export interface IUpdateProfilePayload {
     role?: UserRole[];
     firstName?: string;
     lastName?: string;
-    avatar?: string;
+    avatar?: string | null;
     email?: string;
 }
 
