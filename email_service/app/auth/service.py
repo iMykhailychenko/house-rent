@@ -17,7 +17,7 @@ def send_auth_verification_email(data: AuthVerifyBody) -> None:
     template_vars = {
         "first_name": data.first_name,
         "last_name": data.last_name,
-        "link": f"{BACKEND_API_URL}?{data.token}",
+        "link": f"{BASE_URL}/auth/verify?{data.token}",
         "registration_date": date.today().strftime("%d-%m-%Y")
     }
     message = Message()
