@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Home from '@mui/icons-material/Home';
 
@@ -13,19 +13,29 @@ interface IProps {
     children: JSX.Element[] | JSX.Element;
 }
 
-const AuthLayout = ({ src, children }: IProps): JSX.Element => (
-    <RootLayout className={css.main} withFooter={false}>
-        <div className={css.root}>
-            <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
-            <div className={css.wrp}>
-                <Link className={css.link} href={routes.home}>
-                    <Home />
-                    <span>Повернутись на головну</span>
-                </Link>
-                {children}
+const AuthLayout = ({ src, children }: IProps): JSX.Element => {
+    useEffect(() => {
+        document.querySelector('html')?.classList?.add('default');
+
+        return () => {
+            document.querySelector('html')?.classList?.remove('default');
+        };
+    }, []);
+
+    return (
+        <RootLayout className={css.main} withTheme={false} withFooter={false}>
+            <div className={css.root}>
+                <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
+                <div className={css.wrp}>
+                    <Link className={css.link} href={routes.home}>
+                        <Home />
+                        <span>Повернутись на головну</span>
+                    </Link>
+                    {children}
+                </div>
             </div>
-        </div>
-    </RootLayout>
-);
+        </RootLayout>
+    );
+};
 
 export default AuthLayout;

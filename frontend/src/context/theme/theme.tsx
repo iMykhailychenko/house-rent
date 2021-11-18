@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 import { THEME_ENUM } from '../../interfaces';
-import { addMonthToDate } from '../../utils/helpers/date.helper';
+import { addYearToDate } from '../../utils/helpers/date.helper';
 
 export const Theme = createContext<[theme: THEME_ENUM, setTheme: (v: THEME_ENUM) => void]>([THEME_ENUM.WHITE, () => undefined]);
 
@@ -16,17 +16,20 @@ const ThemeProvider = ({ children, serverTheme = THEME_ENUM.WHITE }: IProps): JS
     const [theme, setTheme] = useState<THEME_ENUM>(serverTheme || 'white');
 
     useEffect(() => {
-        if (process.browser && document.querySelector('html')) {
-            document.querySelector('html')?.classList?.add(theme);
+        const ref = document.querySelector('html');
+        if (process.browser && ref) {
+            ref.classList.add(theme);
         }
     }, [theme]);
 
     const handleTheme = (value: THEME_ENUM): void => {
         try {
-            Cookies.set('house_rent_theme', value, { expires: addMonthToDate(1) });
-            if (document.querySelector('html')) {
-                document.querySelector('html')?.classList?.remove(theme);
-                document.querySelector('html')?.classList?.add(value);
+            Cookies.set('house_rent_theme', value, { expires: addYearToDate(1) });
+            const ref = document.querySelector('html');
+            if (ref) {
+                ref.classList.remove('default');
+                ref.classList.remove(theme);
+                ref.classList.add(value);
             }
             setTheme(value);
         } catch (error) {

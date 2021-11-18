@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 
 import { UserEntity } from '../../api/users/entities/users.entity';
 import { UsersService } from '../../api/users/users.service';
-import authConfig from '../../config/auth.config';
+import { authConfig } from '../../config/auth.config';
 
 @Injectable()
 export class JwtService {

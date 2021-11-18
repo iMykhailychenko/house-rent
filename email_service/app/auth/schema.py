@@ -6,3 +6,7 @@ class AuthVerifyBody(BaseModel):
     token: str
     first_name: str
     last_name: str
+
+
+class ChangeEmailBody(AuthVerifyBody):
+    old_email: str

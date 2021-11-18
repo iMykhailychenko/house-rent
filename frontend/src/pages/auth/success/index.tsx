@@ -1,42 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import HomeIcon from '@mui/icons-material/Home';
 import Cookies from 'js-cookie';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
 import Link from '../../../components/common/link/link';
 import Container from '../../../components/layout/container/container';
+import RootLayout from '../../../components/layout/root-layout/root-layout';
+import Meta from '../../../components/meta/meta';
 import { parseCookie } from '../../../utils/helpers/cookie.helper';
 import routes from '../../../utils/routes';
 import { withAuthRedirect } from '../../../utils/ssr';
 
 import css from './success.module.scss';
 
-const TentComponent = dynamic(() => import('../../../apps/sea'));
+const SeaComponent = dynamic(() => import('../../../apps/sea'));
+const ConfettiWrp = dynamic(() => import('../../../components/common/confetti/confetti'), { ssr: false });
 
 const AuthSuccessPage = (): JSX.Element => {
-    Cookies.remove('show_success_page');
+    useEffect(() => {
+        Cookies.remove('show_success_page');
+        document.querySelector('html')?.classList?.add('default');
+
+        return () => {
+            document.querySelector('html')?.classList?.remove('default');
+        };
+    }, []);
+
     return (
         <>
-            <TentComponent />
-            <Container className={css.root} size="sm">
-                <h2>Ви успішно зареєструвались на сайті.</h2>
-                <p>
-                    Ми надіслали вам листа на електронну пошту. Перейдіть за посилланням щоб остаточно закінчити процес реєстрації
-                </p>
-                <div className={css.flex}>
-                    <Link className={css.link} href={routes.home}>
-                        <HomeIcon />
-                        <span>Перейти на головну</span>
-                    </Link>
-                    <Link className={css.link} href={routes.auth.login}>
-                        <ExitToAppIcon />
-                        <span>Увійти в особистий кабінет</span>
-                    </Link>
-                </div>
-            </Container>
+            <Meta />
+            <RootLayout withTheme={false} withFooter={false}>
+                <ConfettiWrp />
+                <SeaComponent />
+                <Container className={css.root} size="sm">
+                    <h2>Ви успішно зареєструвались на сайті.</h2>
+                    <p>
+                        Ми надіслали вам листа на електронну пошту. Перейдіть за посилланням в ньому щоб остаточно закінчити
+                        процес реєстрації
+                    </p>
+                    <div className={css.flex}>
+                        <Link className={css.link} type="button" secondary href={routes.auth.login}>
+                            <ExitToAppIcon />
+                            <span>Увійти в особистий кабінет</span>
+                        </Link>
+                    </div>
+                </Container>
+            </RootLayout>
         </>
     );
 };

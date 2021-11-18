@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import SegmentedControl from '../../components/common/segmented-control/segmented-control';
 import Container from '../../components/layout/container/container';
 import PrivateLayout from '../../components/layout/private-layout/private-layout';
+import Meta from '../../components/meta/meta';
 import MyPostsList from '../../components/pages/my-posts/my-posts';
 import useAuth from '../../hooks/auth.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
@@ -42,12 +43,15 @@ const MyPostsPage = (): JSX.Element => {
     };
 
     return (
-        <PrivateLayout>
-            <Container size="lg">
-                <SegmentedControl className={css.control} active={status} onChange={handleTabChange} value={tabs} />
-                <>{auth?.accessToken ? <MyPostsList /> : null}</>
-            </Container>
-        </PrivateLayout>
+        <>
+            <Meta />
+            <PrivateLayout>
+                <Container size="lg">
+                    <SegmentedControl className={css.control} active={status} onChange={handleTabChange} value={tabs} />
+                    <>{auth?.accessToken ? <MyPostsList /> : null}</>
+                </Container>
+            </PrivateLayout>
+        </>
     );
 };
 

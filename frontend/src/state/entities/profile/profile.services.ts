@@ -9,6 +9,7 @@ const profileServices = {
     getProfileInfo: (): Response<IUser> => axios.get(endpointConfig('/users/profile')),
     updateProfile: (body: IUpdateProfilePayload): Response<IUser> => axios.put(endpointConfig('/users'), body),
     updateProfileRole: (role: UserRole[]): Response<void> => axios.put(endpointConfig('/users/role'), { role }),
+    sendNewEmail: (): Response<void> => axios.post(endpointConfig('/users/email')),
 };
 
 export default profileServices;

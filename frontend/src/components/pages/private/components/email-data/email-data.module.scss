@@ -8,6 +8,11 @@
     border-radius: 0.6rem;
     background: var(--warning-secondary);
 
+    .spinner {
+        height: 2rem;
+        width: 2rem;
+    }
+
     svg {
         font-size: 2rem;
     }

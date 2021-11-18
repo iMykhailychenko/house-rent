@@ -27,15 +27,17 @@ const HomePage = (): JSX.Element => {
     };
 
     return (
-        <RootLayout>
+        <>
             <Meta />
-            <HomeBanner />
-            <Section id="home-posts">
-                <PostsList title={title} onPage={openPage} onMore={loadMore}>
-                    <PostFilters onSubmit={submit} />
-                </PostsList>
-            </Section>
-        </RootLayout>
+            <RootLayout>
+                <HomeBanner />
+                <Section id="home-posts">
+                    <PostsList title={title} onPage={openPage} onMore={loadMore}>
+                        <PostFilters onSubmit={submit} />
+                    </PostsList>
+                </Section>
+            </RootLayout>
+        </>
     );
 };
 

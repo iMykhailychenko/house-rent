@@ -7,6 +7,11 @@ export const addMonthToDate = (amount = 1): Date => {
     return new Date(today.setMonth(today.getMonth() + amount));
 };
 
+export const addYearToDate = (amount = 1): Date => {
+    const today = new Date();
+    return new Date(today.setFullYear(today.getFullYear() + amount));
+};
+
 const convertUTCDateToLocalDate = (date: Date): Date => {
     return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
 };

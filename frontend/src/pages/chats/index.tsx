@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 
 import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
+import Meta from '../../components/meta/meta';
 import ChatBanner from '../../components/pages/chat/chat-banner/chat-banner';
 import ChatLayout from '../../components/pages/chat/chat-layout/chat-layout';
 import useAuth from '../../hooks/auth.hook';
@@ -22,13 +23,16 @@ const ChatsPage = (): JSX.Element => {
     }, [dispatch, auth?.accessToken]);
 
     return (
-        <RootLayout withFooter={false} className={css.root}>
-            <Container size="md" className={css.container}>
-                <ChatLayout disabled>
-                    <ChatBanner />
-                </ChatLayout>
-            </Container>
-        </RootLayout>
+        <>
+            <Meta />
+            <RootLayout withFooter={false} className={css.root}>
+                <Container size="md" className={css.container}>
+                    <ChatLayout disabled>
+                        <ChatBanner />
+                    </ChatLayout>
+                </Container>
+            </RootLayout>
+        </>
     );
 };
 

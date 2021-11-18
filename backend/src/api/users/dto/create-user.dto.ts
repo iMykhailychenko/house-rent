@@ -2,7 +2,7 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString, Matches, MaxLength, MinLength } 
 
 import { UserRole } from '../entities/users.entity';
 
-export default class CreateUserDto {
+export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
     firstName: string;

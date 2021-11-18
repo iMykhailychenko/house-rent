@@ -15,7 +15,11 @@ import HeaderLanguage from './header-language/header-language';
 import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
 
-const AppHeader = (): JSX.Element => {
+interface IProps {
+    withTheme?: boolean;
+}
+
+const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
     const [token] = useAuth();
     const [drawer, setDrawer] = useState(false);
 
@@ -35,7 +39,7 @@ const AppHeader = (): JSX.Element => {
                     </div>
 
                     <div className={css.item}>
-                        <SwitchTheme />
+                        {withTheme && <SwitchTheme />}
                         {token?.accessToken ? <HeaderUser /> : <HeaderAuth />}
                     </div>
                 </Container>

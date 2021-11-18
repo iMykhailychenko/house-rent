@@ -14,16 +14,16 @@ import {
     ValidationPipe,
 } from '@nestjs/common';
 
-import appConfig from '../../config/app.config';
+import { appConfig } from '../../config/app.config';
 import { User } from '../../shared/decorators/users.decorator';
 import { AuthGuard } from '../../shared/guards/auth.guards';
 import { Pagination } from '../../shared/interfaces/interface';
 
-import CreateUserDto from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { EmailDto } from './dto/update-email.dto';
 import { RoleDto } from './dto/update-role.dto';
-import UpdateUserDto from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
 import { AuthRedirectPayload, LoginInterface } from './users.interface';
 import { UsersService } from './users.service';
@@ -73,6 +73,12 @@ export class UsersController {
         @Body(new ValidationPipe({ transform: true })) emailDto: EmailDto,
     ): Promise<UserEntity> {
         return await this.userService.updateUserEmail(userId, emailDto);
+    }
+
+    @Post('email')
+    @UseGuards(AuthGuard)
+    async sendNewEmail(@User() user: UserEntity): Promise<void> {
+        await this.userService.sendEmail(user);
     }
 
     @Put('')

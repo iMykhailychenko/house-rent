@@ -8,6 +8,7 @@ import PostsList from '../../components/common/post/posts-list/posts-list';
 import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import Section from '../../components/layout/section/section';
+import Meta from '../../components/meta/meta';
 import UserBanner from '../../components/pages/users/user-banner/user-banner';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../state/entities/posts/thunks/user-posts.thunk';
@@ -31,16 +32,19 @@ const UserProfilePage = (): JSX.Element => {
     };
 
     return (
-        <RootLayout>
-            <Container size="lg">
-                <UserBanner />
-            </Container>
-            <Section id="home-posts">
-                <PostsList title="Усі активні пости користувача" onPage={openPage} onMore={loadMore}>
-                    <PostFilters onSubmit={submit} />
-                </PostsList>
-            </Section>
-        </RootLayout>
+        <>
+            <Meta />
+            <RootLayout>
+                <Container size="lg">
+                    <UserBanner />
+                </Container>
+                <Section id="home-posts">
+                    <PostsList title="Усі активні пости користувача" onPage={openPage} onMore={loadMore}>
+                        <PostFilters onSubmit={submit} />
+                    </PostsList>
+                </Section>
+            </RootLayout>
+        </>
     );
 };
 

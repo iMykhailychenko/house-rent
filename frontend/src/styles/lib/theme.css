@@ -8,9 +8,10 @@
     --warning: #b78b00;
     --warning-secondary: #d99d1e25;
     --error: #cf1322;
-    --error-secondary: #cf132225;
 }
 
+.default.black,
+.default.white,
 .white {
     --white: #fff;
     --black: #000;
@@ -25,6 +26,8 @@
     --gray-8: #434343;
     --gray-9: #262626;
     --gray-10: #141414;
+
+    --error-secondary: #cf132210;
 }
 
 .black {
@@ -43,4 +46,5 @@
     --gray-1: #141414;
 
     --secondary: #2b2b39;
+    --error-secondary: #cf132225;
 }

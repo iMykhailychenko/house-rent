@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import MessagesSkeleton from '../../components/common/skeletons/chat/messages/messages';
 import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
+import Meta from '../../components/meta/meta';
 import ChatLayout from '../../components/pages/chat/chat-layout/chat-layout';
 import MessagesLayout from '../../components/pages/chat/messages-layout/messages-layout';
 import useAuth from '../../hooks/auth.hook';
@@ -46,11 +47,14 @@ const MessagesPage = (): JSX.Element => {
     }, [chatId, dispatch, auth?.accessToken, messageStatus]);
 
     return (
-        <RootLayout withFooter={false} className={css.root}>
-            <Container size="md" className={css.container}>
-                <ChatLayout>{isLoading ? <MessagesSkeleton /> : <MessagesLayout />}</ChatLayout>
-            </Container>
-        </RootLayout>
+        <>
+            <Meta />
+            <RootLayout withFooter={false} className={css.root}>
+                <Container size="md" className={css.container}>
+                    <ChatLayout>{isLoading ? <MessagesSkeleton /> : <MessagesLayout />}</ChatLayout>
+                </Container>
+            </RootLayout>
+        </>
     );
 };
 

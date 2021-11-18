@@ -7,7 +7,7 @@ import { FavoriteModule } from './api/favorite/favorite.module';
 import { MediaModule } from './api/media/media.module';
 import { PostsModule } from './api/posts/posts.module';
 import { UsersModule } from './api/users/users.module';
-import dbConfig from './config/db.config';
+import { dbConfig } from './config/db.config';
 import { JwtModule } from './shared/jwt/jwt.module';
 import { AuthMiddleware } from './shared/middleware/auth.middleware';
 

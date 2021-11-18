@@ -6,7 +6,7 @@ import { FavoriteEntity } from '../api/favorite/entities/favorite.entity';
 import { PostEntity } from '../api/posts/entities/posts.entity';
 import { UserEntity } from '../api/users/entities/users.entity';
 
-const dbConfig: ConnectionOptions = {
+export const dbConfig: ConnectionOptions = {
     type: 'postgres',
     host: process.env.POSTGRES_HOST || 'localhost',
     database: process.env.POSTGRES_DB || 'house_rent_dev',
@@ -24,5 +24,3 @@ const dbConfig: ConnectionOptions = {
     //     migrationsDir: 'migrations',
     // },
 };
-
-export default dbConfig;

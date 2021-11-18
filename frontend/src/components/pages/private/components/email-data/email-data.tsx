@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
 import WarningOutlinedIcon from '@mui/icons-material/WarningOutlined';
 
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { sendNewEmail } from '../../../../../state/entities/profile/profile.thunk';
+import routes from '../../../../../utils/routes';
 import changeEmailModal from '../../../../common/modal/modals/change-email/change-email';
 import Cell from '../common/cell';
 import Row from '../common/row';
@@ -14,7 +17,21 @@ import css from './email-data.module.scss';
 
 const EmailData = (): JSX.Element => {
     const trans = useTrans();
+    const dispatch = useAppDispatch();
     const profileState = useProfileInfoSelector().data;
+
+    const [loading, setLoading] = useState(false);
+
+    const handleEmail = async (): Promise<void> => {
+        try {
+            setLoading(true);
+            await dispatch(sendNewEmail());
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <Section title={trans('Контакти')} icon={<AttachEmailOutlinedIcon />} onClick={changeEmailModal}>
@@ -26,13 +43,13 @@ const EmailData = (): JSX.Element => {
                     </Cell>
                     {!profileState.isEmailVerified && (
                         <div className={css.warn}>
-                            <WarningOutlinedIcon />
+                            {loading ? <img className={css.spinner} src="/spinner.gif" alt="" /> : <WarningOutlinedIcon />}
                             <div className={css.inner}>
                                 <small>
                                     Увага! Ви не веріфікували вашу пошту. Для верифікації потрібно перейти за посилання в листі,
                                     що ми надіслали на вашу пошту.
                                 </small>
-                                <button type="button" className={css.link}>
+                                <button type="button" onClick={handleEmail} className={css.link}>
                                     Надіслати лист повторно
                                 </button>
                             </div>

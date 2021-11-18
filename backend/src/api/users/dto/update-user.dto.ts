@@ -2,7 +2,7 @@ import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validat
 
 import { UserRole } from '../entities/users.entity';
 
-export default class UpdateUserDto {
+export class UpdateUserDto {
     @IsString()
     @IsNotEmpty()
     @IsOptional()

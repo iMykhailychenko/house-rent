@@ -1,6 +1,6 @@
 .root {
     position: absolute;
-    top: 5rem;
+    top: 20rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -9,7 +9,9 @@
     justify-content: center;
     flex-direction: column;
     height: auto;
-    padding: 0;
+    padding: 4rem 0 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
     color: var(--true-white);
     text-align: center;
 
@@ -33,17 +35,10 @@
         font-weight: 600;
 
         .link {
-            margin: 0 1rem;
-            color: var(--black);
-
             svg {
                 font-size: 2rem;
-                margin-right: 0.4rem;
-                margin-bottom: 0.2rem;
-            }
-
-            &:hover {
-                color: var(--primary);
+                margin-right: 0.6rem;
+                margin-bottom: 0.3rem;
             }
         }
     }

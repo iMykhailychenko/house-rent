@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 
 import RootLayout from '../../components/layout/root-layout/root-layout';
+import Meta from '../../components/meta/meta';
 import NewPostContainer from '../../components/pages/posts/new/new-post-container/new-post-container';
 import { withStore } from '../../utils/ssr';
 
@@ -13,9 +14,12 @@ const NewPostPage = (): JSX.Element => {
     }, []);
 
     return (
-        <RootLayout withFooter={false}>
-            <NewPostContainer />
-        </RootLayout>
+        <>
+            <Meta />
+            <RootLayout withFooter={false}>
+                <NewPostContainer />
+            </RootLayout>
+        </>
     );
 };
 

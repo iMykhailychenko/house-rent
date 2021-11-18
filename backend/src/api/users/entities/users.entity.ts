@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import authConfig from '../../../config/auth.config';
+import { authConfig } from '../../../config/auth.config';
 import { MessageEntity } from '../../chats/entities/messages.entity';
 import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
 import { PostEntity } from '../../posts/entities/posts.entity';
