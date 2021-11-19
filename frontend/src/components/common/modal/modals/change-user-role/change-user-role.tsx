@@ -7,13 +7,14 @@ import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { UserRole } from '../../../../../interfaces';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
-import { updateProfileRole } from '../../../../../state/entities/profile/profile.thunk';
+import { updateProfileRoleThunk } from '../../../../../state/entities/profile/profile.thunk';
 import Button from '../../../button/button';
 import Checkbox from '../../../checkbox/checkbox';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
 import css from './change-user-role.module.scss';
+import confirmDeleteUserRole from './components/confirm-delete-user-role';
 
 interface IProps {
     title: string;
@@ -28,19 +29,35 @@ const ChangeUserRole = ({ title }: IProps): JSX.Element => {
     const [loading, setLoading] = useState(false);
 
     const toggleUserCheckbox = (value: boolean): void =>
-        value ? setUserRoles(prev => [UserRole.USER, ...prev]) : setUserRoles([UserRole.REALTOR]);
+        value
+            ? setUserRoles(prev => (prev.length === 1 ? [UserRole.USER, UserRole.REALTOR] : [UserRole.USER]))
+            : setUserRoles([UserRole.REALTOR]);
 
     const toggleRealtorCheckbox = (value: boolean): void =>
-        value ? setUserRoles(prev => [UserRole.REALTOR, ...prev]) : setUserRoles([UserRole.USER]);
+        value
+            ? setUserRoles(prev => (prev.length === 1 ? [UserRole.USER, UserRole.REALTOR] : [UserRole.REALTOR]))
+            : setUserRoles([UserRole.USER]);
 
     const submit = async (): Promise<void> => {
-        setLoading(true);
-        const newRole = await dispatch(updateProfileRole(userRoles)).unwrap();
-        if (newRole) {
-            setLoading(false);
-            toast.success('Ви успішно змінили роль на сайті!', toastConfig);
+        const isEqual =
+            profileState.data.role.length === userRoles.length && profileState.data.role.every(item => userRoles.includes(item));
+        if (isEqual) {
+            toast.warn('Ви не змінили роль, змініть роль або натисніть "Скасувати"', { ...toastConfig, toastId: 'user-role' });
+            return;
         }
-        modal.close();
+
+        setLoading(true);
+        const onSubmit = async (): Promise<void> => {
+            await dispatch(updateProfileRoleThunk(userRoles));
+            modal.close();
+        };
+
+        if (profileState.data.role.includes(UserRole.USER) && !userRoles.includes(UserRole.USER)) {
+            confirmDeleteUserRole({ loading, onSubmit });
+            return;
+        }
+
+        await onSubmit();
     };
 
     return (

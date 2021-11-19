@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { IAuthState } from './entities/auth/auth.interface';
+import { Banner } from './entities/banners/banners.interface';
 import { IChatsState } from './entities/chats/chats.interface';
 import { IFiltersState } from './entities/filters/filters.interface';
 import { IMediaState } from './entities/media/media.interface';
@@ -20,6 +21,7 @@ export interface IState {
     users: IUserState;
     media: IMediaState;
     chats: IChatsState;
+    banners: Banner[];
 }
 
 export type AsyncThunkConfig = {

@@ -12,7 +12,7 @@ import RootLayout from '../../components/layout/root-layout/root-layout';
 import Meta from '../../components/meta/meta';
 import useAuth from '../../hooks/auth.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
-import { sendNewEmail } from '../../state/entities/profile/profile.thunk';
+import { sendNewEmailThunk } from '../../state/entities/profile/profile.thunk';
 import routes from '../../utils/routes';
 import { withStore } from '../../utils/ssr';
 
@@ -28,7 +28,7 @@ const ErrorVerifyPage = (): JSX.Element => {
     const handleEmail = async (): Promise<void> => {
         try {
             setLoading(true);
-            await dispatch(sendNewEmail());
+            await dispatch(sendNewEmailThunk());
             history.push(routes.home);
         } catch (error) {
             console.log(error);

@@ -1,4 +1,5 @@
 import authInitialState from './entities/auth/auth.initial-state';
+import { bannersInitialState } from './entities/banners/banners.initial-state';
 import { chatInitialState } from './entities/chats/chats.initial-state';
 import filtersInitialState from './entities/filters/filters.initial-state';
 import { mediaInitialState } from './entities/media/media.initial-state';
@@ -15,6 +16,7 @@ const rootInitialState: IState = {
     users: usersInitialState,
     media: mediaInitialState,
     chats: chatInitialState,
+    banners: bannersInitialState,
 };
 
 export default rootInitialState;

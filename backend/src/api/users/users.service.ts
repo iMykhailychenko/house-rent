@@ -6,6 +6,8 @@ import { Repository } from 'typeorm';
 
 import { authConfig } from '../../config/auth.config';
 import { Pagination } from '../../shared/interfaces/interface';
+import { PostEntity } from '../posts/entities/posts.entity';
+import { POST_STATUS } from '../posts/posts.interface';
 import { SecurityService } from '../security/security.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
@@ -13,13 +15,14 @@ import { LoginDto } from './dto/login.dto';
 import { EmailDto } from './dto/update-email.dto';
 import { RoleDto } from './dto/update-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserEntity } from './entities/users.entity';
+import { UserEntity, UserRole } from './entities/users.entity';
 import { LoginInterface } from './users.interface';
 
 @Injectable()
 export class UsersService {
     constructor(
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        @InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
         private readonly securityService: SecurityService,
     ) {}
 
@@ -71,6 +74,22 @@ export class UsersService {
 
     async updateUserRole(userId: number, roleDto: RoleDto): Promise<UserEntity> {
         const user = await this.findById(userId);
+        if (user.role.includes(UserRole.USER) && !roleDto.role.includes(UserRole.USER)) {
+            const posts = await this.postRepository.find({
+                relations: ['user'],
+                where: {
+                    status: POST_STATUS.ACTIVE,
+                    user: {
+                        id: userId,
+                    },
+                },
+            });
+
+            for await (const post of posts) {
+                post.status = POST_STATUS.ARCHIVE;
+                await this.postRepository.save(post);
+            }
+        }
         user.role = roleDto.role;
         return await this.userRepository.save(user);
     }

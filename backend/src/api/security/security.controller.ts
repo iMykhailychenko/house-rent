@@ -6,6 +6,7 @@ import { AuthGuard } from '../../shared/guards/auth.guards';
 import { UserEntity } from '../users/entities/users.entity';
 import { AuthRedirectPayload } from '../users/users.interface';
 
+import { EmailType } from './security.interface';
 import { SecurityService } from './security.service';
 
 @Controller('security')
@@ -14,9 +15,12 @@ export class SecurityController {
 
     @Get('verify')
     @Redirect()
-    async verifyEmail(@Query('token') token: string): Promise<AuthRedirectPayload> {
+    async verifyEmail(
+        @Query('token') token: string,
+        @Query('type') type: EmailType = EmailType.CHANGE_EMAIL,
+    ): Promise<AuthRedirectPayload> {
         const isValid = await this.securityService.verifyEmail(token);
-        return { url: `${appConfig.baseUrl}/verify/${isValid ? 'success' : 'error'}` };
+        return { url: `${appConfig.baseUrl}/verify/${isValid ? 'success' : 'error'}?type=${type}` };
     }
 
     @Post('email')

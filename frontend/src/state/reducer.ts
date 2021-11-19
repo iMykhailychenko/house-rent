@@ -1,6 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import auth from './entities/auth/auth.reducer';
+import banners from './entities/banners/banners.reducer';
 import chats from './entities/chats/chats.reducer';
 import filters from './entities/filters/filters.reducer';
 import media from './entities/media/media.reducer';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers<IState>({
     users,
     media,
     chats,
+    banners,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -10,4 +10,5 @@ SMTP_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 # app
 EMAIL_APP_PORT = int(os.environ.get("EMAIL_APP_PORT", 8000))
 EMAIL_APP_HOST = os.environ.get("EMAIL_APP_HOST", "0.0.0.0")
-BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
+# BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
+BASE_URL = "http://localhost:8000"

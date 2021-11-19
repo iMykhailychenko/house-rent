@@ -6,8 +6,7 @@ import WarningOutlinedIcon from '@mui/icons-material/WarningOutlined';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
-import { sendNewEmail } from '../../../../../state/entities/profile/profile.thunk';
-import routes from '../../../../../utils/routes';
+import { sendNewEmailThunk } from '../../../../../state/entities/profile/profile.thunk';
 import changeEmailModal from '../../../../common/modal/modals/change-email/change-email';
 import Cell from '../common/cell';
 import Row from '../common/row';
@@ -25,7 +24,7 @@ const EmailData = (): JSX.Element => {
     const handleEmail = async (): Promise<void> => {
         try {
             setLoading(true);
-            await dispatch(sendNewEmail());
+            await dispatch(sendNewEmailThunk());
         } catch (error) {
             console.log(error);
         } finally {

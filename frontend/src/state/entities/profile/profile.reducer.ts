@@ -4,7 +4,7 @@ import { IUser, UserRole } from '../../../interfaces';
 
 import { profileInitialState } from './profile.initial-state';
 import { IProfileInfoState } from './profile.interface';
-import { profileInfoThunk, updateProfileRole, updateProfileThunk } from './profile.thunk';
+import { changeEmailThunk, profileInfoThunk, updateProfileRoleThunk, updateProfileThunk } from './profile.thunk';
 
 const profileSlice = createSlice({
     name: 'PROFILE',
@@ -25,11 +25,15 @@ const profileSlice = createSlice({
             state.status = 'error';
         });
 
-        builder.addCase(updateProfileRole.fulfilled, (state: IProfileInfoState, action: PayloadAction<UserRole[]>) => {
+        builder.addCase(updateProfileRoleThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<UserRole[]>) => {
             state.data.role = action.payload;
         });
 
         builder.addCase(updateProfileThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser>) => {
+            state.data = action.payload;
+        });
+
+        builder.addCase(changeEmailThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser>) => {
             state.data = action.payload;
         });
     },

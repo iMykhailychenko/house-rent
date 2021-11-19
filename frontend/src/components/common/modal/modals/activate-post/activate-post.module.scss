@@ -1,0 +1,15 @@
+.warn {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    font-size: 1.2rem;
+    background: var(--warning-secondary);
+    color: var(--warning);
+
+    .link {
+        color: inherit;
+        font-size: inherit;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+}

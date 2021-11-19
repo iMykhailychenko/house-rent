@@ -4,7 +4,7 @@ import { Repository, SelectQueryBuilder } from 'typeorm';
 
 import { Pagination } from '../../shared/interfaces/interface';
 import { FavoriteEntity } from '../favorite/entities/favorite.entity';
-import { UserEntity } from '../users/entities/users.entity';
+import { UserEntity, UserRole } from '../users/entities/users.entity';
 
 import { CreatePostDto } from './dto/create-post.dto';
 import { PersonalPostDto } from './dto/personal-post.dto';
@@ -190,7 +190,7 @@ export class PostsService {
 
     async updateStatus(userId: number, postId: number, statusDto: StatusDto): Promise<PostEntity> {
         const post = await this.postRepository.findOne(postId, { relations: ['user'] });
-        if (post.user.id !== userId) {
+        if (post.user.id !== userId || !post.user.role.includes(UserRole.USER)) {
             throw new HttpException('No permission', HttpStatus.FORBIDDEN);
         }
         post.status = statusDto.status;

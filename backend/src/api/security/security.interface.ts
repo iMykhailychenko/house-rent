@@ -1,4 +1,4 @@
 export enum EmailType {
-    CONFIR_EMAIL = '/auth/confir-email',
-    CHANGE_EMAIL = '/auth/change-email',
+    CONFIRM_EMAIL = 'confirm-email',
+    CHANGE_EMAIL = 'change-email',
 }

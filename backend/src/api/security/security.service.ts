@@ -9,16 +9,18 @@ import { UserEntity } from '../users/entities/users.entity';
 
 import { EmailType } from './security.interface';
 
-const oneHourInMS = 3_600_000;
+const ONE_HOUR_IN_MS = 3_600_000;
+const ONE_WEEK_IN_MS = 604_800_000;
 
 @Injectable()
 export class SecurityService {
     constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
     async sendEmail(user: UserEntity): Promise<void> {
-        const { status } = await axios.post(authConfig.emailServiceHost + EmailType.CONFIR_EMAIL, {
+        const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CONFIRM_EMAIL;
+        const { status } = await axios.post(URL, {
             email: user.email,
-            token: jwt.sign({ id: user.id, exp: Date.now() + oneHourInMS }, authConfig.emailSecret),
+            token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
             first_name: user.firstName,
             last_name: user.lastName,
         });
@@ -29,10 +31,12 @@ export class SecurityService {
     }
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
-        const { status } = await axios.post(authConfig.emailServiceHost + EmailType.CHANGE_EMAIL, {
+        const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_EMAIL;
+        const { status } = await axios.post(URL, {
             email: user.email,
             old_email: oldEmail,
-            token: jwt.sign({ id: user.id, exp: Date.now() + oneHourInMS }, authConfig.emailSecret),
+            token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
+            recover_token: jwt.sign({ id: user.id, exp: Date.now() + ONE_WEEK_IN_MS }, authConfig.resetPasswordSecret),
             first_name: user.firstName,
             last_name: user.lastName,
         });

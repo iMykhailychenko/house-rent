@@ -14,3 +14,12 @@
 .title {
     font-size: 1.4rem;
 }
+
+.warn {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    font-size: 1.2rem;
+    background: var(--warning-secondary);
+    color: var(--warning);
+}

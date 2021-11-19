@@ -23,7 +23,6 @@ class Message:
             "subject": subject,
             "mail_from": ("House rent", SMTP_USER)
         }
-        print(self.smtp)
         message = emails.Message(**message_params)
         response = message.send(to=to, smtp=self.smtp, render=template_vars)
 

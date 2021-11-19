@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthGuard } from '../../shared/guards/auth.guards';
 import { JwtService } from '../../shared/jwt/jwt.service';
+import { PostEntity } from '../posts/entities/posts.entity';
 import { SecurityService } from '../security/security.service';
 import { UserEntity } from '../users/entities/users.entity';
 import { UsersService } from '../users/users.service';
@@ -13,7 +14,7 @@ import { ChatEntity } from './entities/chats.entity';
 import { MessageEntity } from './entities/messages.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ChatEntity, MessageEntity, UserEntity])],
+    imports: [TypeOrmModule.forFeature([ChatEntity, MessageEntity, UserEntity, PostEntity])],
     controllers: [ChatsController],
     providers: [ChatsService, AuthGuard, JwtService, UsersService, SecurityService],
     exports: [ChatsService],

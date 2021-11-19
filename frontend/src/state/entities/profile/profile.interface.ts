@@ -9,6 +9,10 @@ export interface IUpdateProfilePayload {
     email?: string;
 }
 
+export interface ChangeEmailPayload {
+    email: string;
+}
+
 export interface IProfileInfoState {
     status: ThunkStatuses;
     data: IUser;
