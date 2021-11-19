@@ -10,3 +10,4 @@ class AuthVerifyBody(BaseModel):
 
 class ChangeEmailBody(AuthVerifyBody):
     old_email: str
+    recover_token: str

@@ -11,8 +11,3 @@ export type AuthRequest = Request & { user?: UserEntity };
 export interface AuthRedirectPayload {
     url: string;
 }
-
-export enum EmailType {
-    CONFIR_EMAIL = '/auth/confir-email',
-    CHANGE_EMAIL = '/auth/change-email',
-}

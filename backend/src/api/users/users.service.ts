@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import axios from 'axios';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
 import { authConfig } from '../../config/auth.config';
 import { Pagination } from '../../shared/interfaces/interface';
+import { SecurityService } from '../security/security.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -14,11 +14,14 @@ import { EmailDto } from './dto/update-email.dto';
 import { RoleDto } from './dto/update-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
-import { EmailType, LoginInterface } from './users.interface';
+import { LoginInterface } from './users.interface';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
+    constructor(
+        @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        private readonly securityService: SecurityService,
+    ) {}
 
     async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
         const user = await this.userRepository.findOne({ email: createUserDto.email });
@@ -29,7 +32,7 @@ export class UsersService {
         const newUser = new UserEntity();
         Object.assign(newUser, createUserDto);
         const savedUser = await this.userRepository.save(newUser);
-        await this.sendEmail(savedUser);
+        await this.securityService.sendEmail(savedUser);
 
         return savedUser;
     }
@@ -40,7 +43,7 @@ export class UsersService {
             throw new HttpException('Credentials not valid', HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        if (!bcrypt.compare(loginDto.password, user.password)) {
+        if (!(await bcrypt.compare(loginDto.password, user.password))) {
             throw new HttpException('Credentials not valid', HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
@@ -78,7 +81,7 @@ export class UsersService {
         user.email = emailDto.email;
         user.isEmailVerified = false;
         const newUser = await this.userRepository.save(user);
-        await this.sendChangeEmail(newUser, oldEmail);
+        await this.securityService.sendChangeEmail(newUser, oldEmail);
 
         return newUser;
     }
@@ -87,49 +90,5 @@ export class UsersService {
         const user = await this.findById(userId);
         Object.assign(user, updateUserDto);
         return await this.userRepository.save(user);
-    }
-
-    async sendEmail(user: UserEntity): Promise<void> {
-        const oneHourInMS = 3_600_000;
-        const { status } = await axios.post(authConfig.emailServiceHost + EmailType.CONFIR_EMAIL, {
-            email: user.email,
-            token: jwt.sign({ id: user.id, exp: Date.now() + oneHourInMS }, authConfig.emailSecret),
-            first_name: user.firstName,
-            last_name: user.lastName,
-        });
-
-        if (status > 299) {
-            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-        }
-    }
-
-    async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
-        const oneHourInMS = 3_600_000;
-        const { status } = await axios.post(authConfig.emailServiceHost + EmailType.CHANGE_EMAIL, {
-            email: user.email,
-            old_email: oldEmail,
-            token: jwt.sign({ id: user.id, exp: Date.now() + oneHourInMS }, authConfig.emailSecret),
-            first_name: user.firstName,
-            last_name: user.lastName,
-        });
-
-        if (status > 299) {
-            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-        }
-    }
-
-    async verifyEmail(token: string): Promise<boolean> {
-        try {
-            const decoded = jwt.verify(token, authConfig.emailSecret);
-            const user = await this.findById(+decoded.id);
-
-            if (!user) return false;
-
-            user.isEmailVerified = true;
-            await this.userRepository.save(user);
-            return true;
-        } catch (e) {
-            return false;
-        }
     }
 }

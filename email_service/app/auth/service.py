@@ -17,8 +17,7 @@ def send_auth_verification_email(data: AuthVerifyBody) -> None:
     template_vars = {
         "first_name": data.first_name,
         "last_name": data.last_name,
-        "link": f"{BASE_URL}/api/v1/users/verify?token={data.token}",
-        "registration_date": date.today().strftime("%d-%m-%Y")
+        "link": f"{BASE_URL}/api/v1/security/verify?token={data.token}",
     }
     message = Message()
     message.send(html=template, to=data.email, subject=subject, template_vars=template_vars)
@@ -30,11 +29,12 @@ def send_change_email_verification(data: ChangeEmailBody) -> None:
         template = JinjaTemplate(html.read())
 
     subject = "Підтвердження зміни електронної пошти | \"House rent\""
-    template_vars = {
+    new_email_template_vars = {
+        "email": data.email,
+        "old_email": data.old_email,
         "first_name": data.first_name,
         "last_name": data.last_name,
-        "link": f"{BASE_URL}/api/v1/users/verify?token={data.token}",
-        "registration_date": date.today().strftime("%d-%m-%Y")
+        "link": f"{BASE_URL}/api/v1/security/verify?token={data.token}",
     }
     message = Message()
-    message.send(html=template, to=data.email, subject=subject, template_vars=template_vars)
+    message.send(html=template, to=data.email, subject=subject, template_vars=new_email_template_vars)
