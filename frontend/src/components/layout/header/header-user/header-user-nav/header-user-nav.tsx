@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import LogoutIcon from '@mui/icons-material/Logout';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -51,12 +46,16 @@ const HeaderUserNav = (): JSX.Element => {
                 </Link>
             </li>
             <li className={css.li}>
-                <Link href={routes.posts.new}>
-                    <a className={css.btn}>{trans('Створити оголошення')}</a>
-                </Link>
+                {profileState.data.isEmailVerified ? (
+                    <Link href={routes.posts.new}>
+                        <a className={css.btn}>{trans('Створити оголошення')}</a>
+                    </Link>
+                ) : (
+                    <p className={clsx(css.btn, css.disabled)}>{trans('Створити оголошення')}</p>
+                )}
             </li>
             <li className={css.li}>
-                <button className={clsx(css.btn, css.error)} type="button" onClick={logout}>
+                <button type="button" onClick={logout} className={clsx(css.btn, css.error)}>
                     {trans('Вийти')}
                 </button>
             </li>

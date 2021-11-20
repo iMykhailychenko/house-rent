@@ -9,11 +9,11 @@ const bannersSlice = createSlice({
     reducers: {
         addBanner(state: Banner[], action: PayloadAction<Banner>) {
             if (!state.some(({ id }) => id === action.payload.id)) {
-                state.push(action.payload);
+                state.unshift(action.payload);
             }
         },
         deleteBanner(state: Banner[], action: PayloadAction<string>) {
-            return state.filter(({ id }) => id === action.payload);
+            return state.filter(({ id }) => id !== action.payload);
         },
         deleteAllBanners() {
             return [];

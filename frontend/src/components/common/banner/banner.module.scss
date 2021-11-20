@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixin';
+
 .root {
     position: sticky;
     top: 0;
@@ -5,8 +7,68 @@
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
-    height: var(--banner-height);
-    background: var(--secondary);
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 6rem;
+    color: var(--black);
+    transition: 0.15s ease-in-out;
+
+    &.open {
+        height: var(--banner-height);
+        opacity: 1;
+        overflow: unset;
+    }
+
+    &.warning {
+        color: var(--warning);
+        background: var(--warning-secondary);
+    }
+
+    &.error {
+        color: var(--error);
+        background: var(--error-secondary);
+    }
+
+    &.info {
+        color: var(--primary);
+        background: var(--secondary);
+    }
+
+    &.success {
+        color: var(--success);
+        background: var(--success-secondary);
+    }
+
+    .content {
+        width: calc(100% - 15rem);
+        margin-right: 1rem;
+        text-align: center;
+        @include cutString;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .more {
+        margin-right: 1rem;
+        padding: 0.3rem 1rem;
+        background: var(--true-white);
+        color: var(--true-black);
+        border-radius: 0.6rem;
+    }
+
+    .close {
+        height: 2.5rem;
+        min-width: 2.5rem;
+        background: var(--true-white);
+        color: var(--true-black);
+        border-radius: 50%;
+        font-size: 1.2rem;
+    }
 }

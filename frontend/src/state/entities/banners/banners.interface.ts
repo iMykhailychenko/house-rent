@@ -1,7 +1,8 @@
 export enum BannerType {
-    ERROR = 0,
-    WARNING = 1,
-    INFO = 2,
+    ERROR = 'error',
+    WARNING = 'warning',
+    INFO = 'info',
+    SUCCESS = 'success',
 }
 
 export interface Banner {

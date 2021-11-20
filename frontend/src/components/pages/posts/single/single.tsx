@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
+import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
+import { addBanner } from '../../../../state/entities/banners/banners.reducer';
+import { POST_STATUS } from '../../../../state/entities/posts/posts.interface';
 import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
+import { POST_IN_ARCHIVE, POST_IN_DRAFT } from '../../../../utils/common-banners';
 import { formatDate } from '../../../../utils/helpers/date.helper';
 import FullScreenImg from '../../../common/full-screen-img/full-screen-img';
 import NotFoundPost from '../../../common/not-found/not-found-post/not-found-post';
@@ -15,8 +19,19 @@ import css from './single.module.scss';
 
 const SinglePostComponent = (): JSX.Element => {
     const trans = useTrans();
+    const dispatch = useAppDispatch();
+
     const postState = useSinglePostSelector();
     const postData = postState.data;
+
+    useEffect(() => {
+        if (postData.status === POST_STATUS.ARCHIVE) {
+            dispatch(addBanner(POST_IN_ARCHIVE));
+        }
+        if (postData.status === POST_STATUS.DRAFT) {
+            dispatch(addBanner(POST_IN_DRAFT));
+        }
+    }, [dispatch, postData.status]);
 
     return (
         <NotFoundPost error={!postData.id}>

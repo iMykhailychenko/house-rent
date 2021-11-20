@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Home from '@mui/icons-material/Home';
-import dynamic from 'next/dynamic';
 
 import useAuth from '../../../hooks/auth.hook';
 import routes from '../../../utils/routes';
@@ -15,8 +14,6 @@ import HeaderAuth from './header-auth/header-auth';
 import HeaderLanguage from './header-language/header-language';
 import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
-
-const Banners = dynamic(() => import('../../common/banner/banner'), { ssr: false });
 
 interface IProps {
     withTheme?: boolean;
@@ -48,7 +45,6 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                 </Container>
             </header>
             <AppDrawer open={drawer} onClose={handleClose} />
-            <Banners />
         </>
     );
 };

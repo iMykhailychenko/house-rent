@@ -6,49 +6,54 @@ import * as Yup from 'yup';
 
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
-import { sendRestorePasswordEmailThunk } from '../../../../state/entities/auth/auth.thunk';
+import { restorePasswordThunk } from '../../../../state/entities/auth/auth.thunk';
 import routes from '../../../../utils/routes';
 import Button from '../../button/button';
 import Input from '../../input/input';
 import Link from '../../link/link';
 
-import css from './reset-form.module.scss';
+import css from './password-form.module.scss';
 
-const ResetSchema = Yup.object().shape({
-    email: Yup.string().email('invalid_email').required('required'),
+const PasswordSchema = Yup.object().shape({
+    password: Yup.string()
+        .min(6, 'short_password')
+        .max(30, 'long_password')
+        .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{6,}$/, 'invalid_password')
+        .required('required'),
 });
 
-const ResetForm = (): JSX.Element => {
+const PasswordForm = (): JSX.Element => {
     const trans = useTrans();
-    const history = useRouter();
     const dispatch = useAppDispatch();
+
+    const history = useRouter();
+    const token = String(history.query.token);
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            password: '',
         },
-        validationSchema: ResetSchema,
+        validationSchema: PasswordSchema,
         onSubmit: async values => {
-            await dispatch(sendRestorePasswordEmailThunk(values));
-            history.push(routes.home);
+            await dispatch(restorePasswordThunk({ ...values, token }));
         },
     });
 
     return (
         <form action="#" method="post" className={css.form} onSubmit={formik.handleSubmit}>
             <Input
-                id="reset_email"
-                value={formik.values.email}
+                id="password"
+                value={formik.values.password}
                 onChange={formik.handleChange}
-                error={formik.touched.email && formik.errors.email}
-                placeholder="example@mail.com"
-                name="email"
-                label="email"
+                error={formik.touched.password && formik.errors.password}
+                placeholder="Новий пароль"
+                name="password"
+                label="password"
             />
 
             <div className={css.flex}>
                 <Button className={css.btn} type="submit" primary>
-                    {trans('Відновити пароль')}
+                    {trans('Змінити пароль')}
                 </Button>
             </div>
 
@@ -62,4 +67,4 @@ const ResetForm = (): JSX.Element => {
     );
 };
 
-export default ResetForm;
+export default PasswordForm;

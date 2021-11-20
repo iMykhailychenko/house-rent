@@ -3,15 +3,22 @@ import { toast } from 'react-toastify';
 
 import toastConfig from '../../../config/toast.cofig';
 import { IUser, UserRole } from '../../../interfaces';
+import { VALIDATE_EMAIL_WARN } from '../../../utils/common-banners';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
+import { addBanner } from '../banners/banners.reducer';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
-export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async () => {
+export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async (_, { dispatch }) => {
     try {
         const { data, status } = await profileServices.getProfileInfo();
         if (status < 200 || status >= 300) throw new Error();
+
+        if (!data.isEmailVerified) {
+            dispatch(addBanner(VALIDATE_EMAIL_WARN));
+        }
+
         return data;
     } catch (error) {
         errorNotif(error);
@@ -60,7 +67,7 @@ export const sendNewEmailThunk = createAsyncThunk<void, void>('PROFILE/NEW_EMAIL
 });
 
 export const changeEmailThunk = createAsyncThunk<IUser, ChangeEmailPayload>(
-    'PROFILE/NEW_EMAIL',
+    'PROFILE/CHANGE_EMAIL',
     async (payload: ChangeEmailPayload) => {
         try {
             const { data, status } = await profileServices.changeEmail(payload);

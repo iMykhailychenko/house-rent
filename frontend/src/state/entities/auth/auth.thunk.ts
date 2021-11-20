@@ -4,12 +4,19 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 import { modal } from '../../../components/common/modal/modal';
+import toastConfig from '../../../config/toast.cofig';
 import { addMonthToDate } from '../../../utils/helpers/date.helper';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import routes from '../../../utils/routes';
 import { profileInfoThunk } from '../profile/profile.thunk';
 
-import { IAuthResponse, IJoinPayload, ILoginPayload } from './auth.interface';
+import {
+    IAuthResponse,
+    IJoinPayload,
+    ILoginPayload,
+    IRestorePasswordEmailPayload,
+    IRestorePasswordPayload,
+} from './auth.interface';
 import authServices from './auth.services';
 
 export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
@@ -51,3 +58,29 @@ export const authJoinThunk = createAsyncThunk<void, IJoinPayload>('AUTH/JOIN', a
         throw new Error(error);
     }
 });
+
+export const sendRestorePasswordEmailThunk = createAsyncThunk<void, IRestorePasswordEmailPayload>(
+    'AUTH/RESTORE_PASSWORD_EMAIL',
+    async (payload: IRestorePasswordEmailPayload) => {
+        try {
+            const { status } = await authServices.restorePasswordEmail(payload);
+            if (status < 200 || status >= 300) throw new Error();
+            toast.success('Ми надіслали на вашу електронну пошту лист з підтвердженням зміни пароля', toastConfig);
+        } catch (error) {
+            toast.error('Виникла помилка при відправленні листа!', toastConfig);
+            throw new Error(error);
+        }
+    },
+);
+
+export const restorePasswordThunk = createAsyncThunk<void, IRestorePasswordPayload>(
+    'AUTH/RESTORE_PASSWORD',
+    async (payload: IRestorePasswordPayload) => {
+        try {
+            const { status } = await authServices.restorePassword(payload);
+            if (status < 200 || status >= 300) throw new Error();
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
+);

@@ -42,3 +42,9 @@
 .error {
     color: var(--error);
 }
+
+.disabled {
+    color: var(--gray-5);
+    background: var(--gray-2);
+    pointer-events: none;
+}

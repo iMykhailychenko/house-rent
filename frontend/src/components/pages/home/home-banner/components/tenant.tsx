@@ -1,14 +1,33 @@
 import React from 'react';
 
+import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 
+import useAuth from '../../../../../hooks/auth.hook';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
+import { addBanner } from '../../../../../state/entities/banners/banners.reducer';
+import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { VALIDATE_EMAIL_ERROR } from '../../../../../utils/common-banners';
 import routes from '../../../../../utils/routes';
-import Link from '../../../../common/link/link';
+import Button from '../../../../common/button/button';
 import css from '../home-banner.module.scss';
 
 const Tenant = (): JSX.Element => {
     const trans = useTrans();
+    const [auth] = useAuth();
+    const history = useRouter();
+    const dispatch = useAppDispatch();
+    const profileData = useProfileInfoSelector();
+
+    const handleRedirect = (): void => {
+        if (auth?.accessToken && !profileData.data.isEmailVerified) {
+            dispatch(addBanner(VALIDATE_EMAIL_ERROR));
+            return;
+        }
+
+        history.push(routes.posts.new);
+    };
 
     return (
         <div className={css.animation}>
@@ -25,9 +44,9 @@ const Tenant = (): JSX.Element => {
             </CSSTransition>
 
             <CSSTransition in timeout={250} appear>
-                <Link className={css.button} href={routes.posts.new} type="button" primary>
+                <Button className={css.button} onClick={handleRedirect} primary>
                     Створити оголошення
-                </Link>
+                </Button>
             </CSSTransition>
         </div>
     );

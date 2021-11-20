@@ -1,12 +1,9 @@
 :root {
     --primary: #3f51b5;
     --primary-hover: #0c229e;
-    --secondary: #f0f2ff;
 
     --success: #28bf65;
-    --success-secondary: #28bf6525;
     --warning: #b78b00;
-    --warning-secondary: #d99d1e25;
     --error: #cf1322;
 }
 
@@ -27,7 +24,10 @@
     --gray-9: #262626;
     --gray-10: #141414;
 
-    --error-secondary: #cf132210;
+    --secondary: #f0f2ff;
+    --warning-secondary: #faf1e1;
+    --success-secondary: #e4f5e8;
+    --error-secondary: #fcf2f3;
 }
 
 .black {
@@ -46,5 +46,7 @@
     --gray-1: #141414;
 
     --secondary: #2b2b39;
-    --error-secondary: #cf132225;
+    --warning-secondary: #1f1607;
+    --success-secondary: #0a1c0f;
+    --error-secondary: #1f0605;
 }

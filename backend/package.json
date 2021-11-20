@@ -9,7 +9,7 @@
         "prebuild": "rimraf dist",
         "build": "nest build",
         "start": "ts-node -r tsconfig-paths/register src/main.ts",
-        "start:dev": "nodemon",
+        "dev": "nodemon",
         "start:prod": "node ./dist/main.js",
         "start:debug": "nest start --debug --watch",
         "prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

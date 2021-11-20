@@ -35,7 +35,7 @@ export class UsersService {
         const newUser = new UserEntity();
         Object.assign(newUser, createUserDto);
         const savedUser = await this.userRepository.save(newUser);
-        await this.securityService.sendEmail(savedUser);
+        await this.securityService.sendConfirmEmail(savedUser);
 
         return savedUser;
     }

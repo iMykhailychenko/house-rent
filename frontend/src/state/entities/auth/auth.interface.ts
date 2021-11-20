@@ -15,6 +15,15 @@ export interface ILoginPayload {
     password: string;
 }
 
+export interface IRestorePasswordPayload {
+    token: string;
+    password: string;
+}
+
+export interface IRestorePasswordEmailPayload {
+    email: string;
+}
+
 export interface IJoinPayload {
     firstName: string;
     lastName: string;
