@@ -1,4 +1,4 @@
-import { Banner, BannerType } from '../state/entities/banners/banners.interface';
+import { Banner, BannerType } from '../components/common/banner/banner.interface';
 
 export const POST_IN_ARCHIVE: Banner = {
     id: 'POST_IN_ARCHIVE',

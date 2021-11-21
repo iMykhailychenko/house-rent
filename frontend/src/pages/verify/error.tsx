@@ -47,7 +47,7 @@ const ErrorVerifyPage = (): JSX.Element => {
                         <span>Повернутись на головну</span>
                     </Link>
                     <div className={css.error}>
-                        <h2>Виникла помилка верифікації електронної пошти</h2>
+                        <h2>Виникла помилка верифікації!</h2>
                         <p>Можливо термін дії посилання вже закінчився. Спробуйте авторизуватись та надіслати лист повторно</p>
                         {auth?.accessToken ? (
                             <Button loading={loading} primary onClick={handleEmail}>

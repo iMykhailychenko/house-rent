@@ -1,22 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
+import { banner } from '../../../components/common/banner/banner';
 import toastConfig from '../../../config/toast.cofig';
 import { IUser, UserRole } from '../../../interfaces';
 import { VALIDATE_EMAIL_WARN } from '../../../utils/common-banners';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
-import { addBanner } from '../banners/banners.reducer';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
-export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async (_, { dispatch }) => {
+export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async () => {
     try {
         const { data, status } = await profileServices.getProfileInfo();
         if (status < 200 || status >= 300) throw new Error();
 
         if (!data.isEmailVerified) {
-            dispatch(addBanner(VALIDATE_EMAIL_WARN));
+            banner.add(VALIDATE_EMAIL_WARN);
         }
 
         return data;

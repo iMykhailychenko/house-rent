@@ -29,8 +29,8 @@ const ResetForm = (): JSX.Element => {
         },
         validationSchema: ResetSchema,
         onSubmit: async values => {
+            await history.push(routes.home);
             await dispatch(sendRestorePasswordEmailThunk(values));
-            history.push(routes.home);
         },
     });
 

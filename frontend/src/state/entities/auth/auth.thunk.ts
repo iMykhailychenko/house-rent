@@ -3,8 +3,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
+import { banner } from '../../../components/common/banner/banner';
+import { BannerType } from '../../../components/common/banner/banner.interface';
 import { modal } from '../../../components/common/modal/modal';
-import toastConfig from '../../../config/toast.cofig';
 import { addMonthToDate } from '../../../utils/helpers/date.helper';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import routes from '../../../utils/routes';
@@ -65,9 +66,17 @@ export const sendRestorePasswordEmailThunk = createAsyncThunk<void, IRestorePass
         try {
             const { status } = await authServices.restorePasswordEmail(payload);
             if (status < 200 || status >= 300) throw new Error();
-            toast.success('Ми надіслали на вашу електронну пошту лист з підтвердженням зміни пароля', toastConfig);
+            banner.add({
+                id: 'RESTORE_PASSWORD_EMAIL',
+                type: BannerType.SUCCESS,
+                content: 'Ми надіслали на вашу електронну пошту лист з підтвердженням зміни пароля',
+            });
         } catch (error) {
-            toast.error('Виникла помилка при відправленні листа!', toastConfig);
+            banner.add({
+                id: 'RESTORE_PASSWORD_EMAIL',
+                type: BannerType.ERROR,
+                content: 'Виникла помилка при відправленні листа!',
+            });
             throw new Error(error);
         }
     },
@@ -79,7 +88,18 @@ export const restorePasswordThunk = createAsyncThunk<void, IRestorePasswordPaylo
         try {
             const { status } = await authServices.restorePassword(payload);
             if (status < 200 || status >= 300) throw new Error();
+            banner.add({
+                id: 'RESTORE_PASSWORD',
+                type: BannerType.SUCCESS,
+                content: 'Ви успішно змінили пароль. Тепер ви можете увійти в особистий кабінет використовуючи новий пароль',
+            });
         } catch (error) {
+            banner.add({
+                id: 'RESTORE_PASSWORD',
+                type: BannerType.ERROR,
+                content:
+                    'Виникла помилка зміни пароля! Схоже що ви використовували застаріле або невалідне посилання. Спробуйте надіслати запит на зміну пароля повторно',
+            });
             throw new Error(error);
         }
     },

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import axios from 'axios';
+import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
@@ -69,7 +70,7 @@ export class SecurityService {
     async verifyEmail(token: string): Promise<boolean> {
         try {
             const decoded = jwt.verify(token, authConfig.emailSecret);
-            if (+decoded.id) return false;
+            if (!+decoded.id || new Date() > new Date(decoded.exp)) return false;
 
             const user = await this.userRepository.findOne(+decoded.id);
             if (!user) return false;
@@ -86,7 +87,7 @@ export class SecurityService {
     async restoreEmail(token: string): Promise<boolean> {
         try {
             const decoded = jwt.verify(token, authConfig.resetPasswordSecret);
-            if (!(+decoded.id || decoded.email)) return false;
+            if (!+decoded.id || !decoded.email || new Date() > new Date(decoded.exp)) return false;
 
             const user = await this.userRepository.findOne(+decoded.id);
             if (!user) return false;
@@ -103,8 +104,8 @@ export class SecurityService {
 
     async changePassword(restorePasswordDto: RestorePasswordDto): Promise<void> {
         const decoded = jwt.verify(restorePasswordDto.token, authConfig.resetPasswordSecret);
-        if (!(+decoded.id || decoded.email)) {
-            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        if (!+decoded.id || !decoded.email || new Date() > new Date(decoded.exp)) {
+            throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
         }
 
         const user = await this.userRepository.findOne(+decoded.id);
@@ -112,7 +113,7 @@ export class SecurityService {
             throw new HttpException('Not found', HttpStatus.NOT_FOUND);
         }
 
-        user.password = restorePasswordDto.password;
+        user.password = await bcrypt.hash(restorePasswordDto.password, authConfig.saltRounds);
         await this.userRepository.save(user);
     }
 }

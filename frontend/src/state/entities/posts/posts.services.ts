@@ -12,7 +12,6 @@ import {
     IPersonalPostsListPayload,
     IPost,
     IUserPostsListPayload,
-    POST_STATUS,
 } from './posts.interface';
 
 const postsServices = {

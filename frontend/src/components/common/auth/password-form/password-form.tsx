@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
@@ -35,6 +35,7 @@ const PasswordForm = (): JSX.Element => {
         },
         validationSchema: PasswordSchema,
         onSubmit: async values => {
+            await history.push(routes.home, undefined, { shallow: true });
             await dispatch(restorePasswordThunk({ ...values, token }));
         },
     });
@@ -49,6 +50,7 @@ const PasswordForm = (): JSX.Element => {
                 placeholder="Новий пароль"
                 name="password"
                 label="password"
+                type="password"
             />
 
             <div className={css.flex}>

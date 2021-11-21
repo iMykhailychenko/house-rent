@@ -3,31 +3,27 @@ import React, { useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import clsx from 'clsx';
 
-import { useAppDispatch } from '../../../../../hooks/redux.hook';
-import { Banner } from '../../../../../state/entities/banners/banners.interface';
-import { deleteAllBanners, deleteBanner } from '../../../../../state/entities/banners/banners.reducer';
-import { useBannersSelector } from '../../../../../state/entities/banners/banners.selector';
+import { banner } from '../../../banner/banner';
+import { Banner } from '../../../banner/banner.interface';
 import Button from '../../../button/button';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
 import css from './show-all-banners.module.scss';
 
-interface IProps {
-    banner: Banner;
+interface BannerItemProps {
+    item: Banner;
+    banners: Banner[];
 }
-const BannerItem = ({ banner }: IProps): JSX.Element => {
-    const dispatch = useAppDispatch();
-    const banners = useBannersSelector();
-
+const BannerItem = ({ item, banners }: BannerItemProps): JSX.Element => {
     const handleDelete = useCallback((): void => {
         if (banners.length === 1) modal.close();
-        dispatch(deleteBanner(banner.id));
-    }, [banner.id, banners.length, dispatch]);
+        banner.remove(item.id);
+    }, [item.id, banners.length]);
 
     return (
-        <li className={clsx(css.banner, css[banner.type])}>
-            <div className={css.content}>{banner.content}</div>
+        <li className={clsx(css.banner, css[item.type])}>
+            <div className={css.content}>{item.content}</div>
             <button className={css.close} type="button" onClick={handleDelete}>
                 <CloseIcon />
             </button>
@@ -35,12 +31,13 @@ const BannerItem = ({ banner }: IProps): JSX.Element => {
     );
 };
 
-const ShowAllBanners = (): JSX.Element => {
-    const dispatch = useAppDispatch();
-    const banners = useBannersSelector();
+interface ShowAllBannersProps {
+    banners: Banner[];
+}
 
+const ShowAllBanners = ({ banners }: ShowAllBannersProps): JSX.Element => {
     const handleDeleteAll = () => {
-        dispatch(deleteAllBanners());
+        banner.removeAll();
         modal.close();
     };
 
@@ -57,15 +54,15 @@ const ShowAllBanners = (): JSX.Element => {
         >
             <ul>
                 {banners.map(banner => (
-                    <BannerItem key={banner.id} banner={banner} />
+                    <BannerItem key={banner.id} item={banner} banners={banners} />
                 ))}
             </ul>
         </StickyModal>
     );
 };
 
-const showAllBanners = (): void => {
-    modal.open(<ShowAllBanners />);
+const showAllBanners = (banners: Banner[]): void => {
+    modal.open(<ShowAllBanners banners={banners} />);
 };
 
 export default showAllBanners;

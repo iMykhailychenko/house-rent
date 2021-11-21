@@ -7,8 +7,8 @@ from utils.enums import EmailTypeEnum
 from utils.message import Message
 from config import BASE_URL
 
-DIR_NAME = os.path.dirname(__file__)
 message = Message()
+DIR_NAME = os.path.dirname(__file__)
 
 
 def send_confirm_email(data: ConfirmEmailBody) -> None:
@@ -18,7 +18,8 @@ def send_confirm_email(data: ConfirmEmailBody) -> None:
         template_vars = {
             "first_name": data.first_name,
             "last_name": data.last_name,
-            "link": f"{BASE_URL}/api/v1/security/confirm-email?token={data.token}&type={EmailTypeEnum.CONFIRM_EMAIL}",
+            "link": f"{BASE_URL}/api/v1/security/confirm-email?"
+                    f"token={data.token}&type={EmailTypeEnum.CONFIRM_EMAIL.value}",
         }
         message.send(html=template, to=data.email, subject=subject, template_vars=template_vars)
 
@@ -30,7 +31,8 @@ def send_change_email(data: ChangeEmailBody) -> None:
         new_email_template_vars = {
             "email": data.email,
             "old_email": data.old_email,
-            "link": f"{BASE_URL}/api/v1/security/confirm-email?token={data.token}&type={EmailTypeEnum.CHANGE_EMAIL}",
+            "link": f"{BASE_URL}/api/v1/security/confirm-email?"
+                    f"token={data.token}&type={EmailTypeEnum.CHANGE_EMAIL.value}",
         }
         message.send(html=template, to=data.email, subject=subject, template_vars=new_email_template_vars)
 
@@ -41,7 +43,7 @@ def send_change_email(data: ChangeEmailBody) -> None:
             "email": data.email,
             "old_email": data.old_email,
             "link": f"{BASE_URL}/api/v1/security/restore-email?"
-                    f"token={data.recover_token}&type={EmailTypeEnum.CHANGE_EMAIL}",
+                    f"token={data.recover_token}&type={EmailTypeEnum.RECOVER_EMAIL.value}",
         }
         message.send(html=template, to=data.old_email, subject=subject, template_vars=recover_email_template_vars)
 

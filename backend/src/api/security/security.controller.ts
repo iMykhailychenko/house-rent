@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Redirect, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Redirect, UseGuards, ValidationPipe } from '@nestjs/common';
 
 import { appConfig } from '../../config/app.config';
 import { User } from '../../shared/decorators/users.decorator';
@@ -19,7 +19,7 @@ export class SecurityController {
     @Redirect()
     async verifyEmail(
         @Query('token') token: string,
-        @Query('type') type: EmailType = EmailType.CHANGE_EMAIL,
+        @Query('type', ValidationPipe) type: EmailType = EmailType.CHANGE_EMAIL,
     ): Promise<AuthRedirectPayload> {
         const isValid = await this.securityService.verifyEmail(token);
         return { url: `${appConfig.baseUrl}/verify/${isValid ? 'success' : 'error'}?type=${type}` };
@@ -29,7 +29,7 @@ export class SecurityController {
     @Redirect()
     async restoreEmail(
         @Query('token') token: string,
-        @Query('type') type: EmailType = EmailType.CHANGE_EMAIL,
+        @Query('type', ValidationPipe) type: EmailType = EmailType.CHANGE_EMAIL,
     ): Promise<AuthRedirectPayload> {
         const isValid = await this.securityService.restoreEmail(token);
         return { url: `${appConfig.baseUrl}/verify/${isValid ? 'success' : 'error'}?type=${type}` };
