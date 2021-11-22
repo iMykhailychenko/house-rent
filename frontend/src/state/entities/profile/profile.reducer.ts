@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser, UserRole } from '../../../interfaces';
+import { restorePasswordThunk } from '../auth/auth.thunk';
 
 import { profileInitialState } from './profile.initial-state';
 import { IProfileInfoState } from './profile.interface';
@@ -35,6 +36,10 @@ const profileSlice = createSlice({
 
         builder.addCase(changeEmailThunk.fulfilled, (state: IProfileInfoState, action: PayloadAction<IUser>) => {
             state.data = action.payload;
+        });
+
+        builder.addCase(restorePasswordThunk.fulfilled, () => {
+            return profileInitialState;
         });
     },
 });

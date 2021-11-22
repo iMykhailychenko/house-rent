@@ -4,8 +4,10 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 
+import useAuth from '../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
+import authInitialState from '../../../../state/entities/auth/auth.initial-state';
 import { restorePasswordThunk } from '../../../../state/entities/auth/auth.thunk';
 import routes from '../../../../utils/routes';
 import Button from '../../button/button';
@@ -24,6 +26,7 @@ const PasswordSchema = Yup.object().shape({
 
 const PasswordForm = (): JSX.Element => {
     const trans = useTrans();
+    const [_, setAuth] = useAuth();
     const dispatch = useAppDispatch();
 
     const history = useRouter();
@@ -37,6 +40,7 @@ const PasswordForm = (): JSX.Element => {
         onSubmit: async values => {
             await history.push(routes.home, undefined, { shallow: true });
             await dispatch(restorePasswordThunk({ ...values, token }));
+            setAuth(authInitialState);
         },
     });
 

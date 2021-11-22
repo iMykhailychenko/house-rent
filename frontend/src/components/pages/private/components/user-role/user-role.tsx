@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUserCircleOutlined';
+import clsx from 'clsx';
 
 import { UserRole } from '../../../../../interfaces';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
@@ -23,7 +24,7 @@ const UserRoleSection = (): JSX.Element => {
         <Section title="Роль на сайті" icon={<SupervisedUserCircleOutlinedIcon />} onClick={changeUserRoleModal}>
             <ul className={css.list}>
                 {profileState.role.map(role => (
-                    <li className={css.role} key={role}>
+                    <li className={clsx(css.role, css[role])} key={role}>
                         <img src={`/icons/${role}_role.png`} alt="" />
                         <p>{role}</p>
                         <small>{descriptionMap[role]}</small>

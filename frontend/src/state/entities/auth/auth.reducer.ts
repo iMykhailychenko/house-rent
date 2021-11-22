@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 import authInitialState from './auth.initial-state';
 import { IAuthResponse, IAuthState } from './auth.interface';
-import { authJoinThunk, authLoginThunk } from './auth.thunk';
+import { authJoinThunk, authLoginThunk, restorePasswordThunk } from './auth.thunk';
 
 const authSlice = createSlice({
     name: 'AUTH',
@@ -42,6 +42,12 @@ const authSlice = createSlice({
         });
         builder.addCase(authLoginThunk.rejected, (state: IAuthState) => {
             state.loginStatus = 'error';
+        });
+
+        builder.addCase(restorePasswordThunk.fulfilled, () => {
+            delete axios.defaults.headers.common.Authorization;
+            Cookies.remove('house_rent_auth');
+            return authInitialState;
         });
     },
 });

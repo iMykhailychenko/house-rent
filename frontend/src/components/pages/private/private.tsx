@@ -18,8 +18,8 @@ const PrivateComponent = (): JSX.Element => {
             <div className={css.container}>
                 <PersonalData />
                 <EmailData />
-                <ChangePassword />
                 <UserRoleSection />
+                <ChangePassword />
             </div>
         </>
     );

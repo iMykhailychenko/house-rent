@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
+import toastConfig from '../../../../../config/toast.cofig';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { useRole } from '../../../../../hooks/role.hook';
 import { POST_STATUS } from '../../../../../state/entities/posts/posts.interface';
@@ -29,7 +31,10 @@ const ActivatePost = ({ postId, isSinglePost }: IProps): JSX.Element => {
     const handleSubmit = async (): Promise<void> => {
         if (!userRole.isUser) return;
         await dispatch(updatePostStatusThunk({ id: postId, status: POST_STATUS.ACTIVE }));
-        if (!isSinglePost) await dispatch(personalPostsListThunk({ status, page }));
+        if (!isSinglePost) {
+            await dispatch(personalPostsListThunk({ status, page }));
+        }
+        toast.success('Ви успішно активували свій пост! Тепер він доступний для інших користувачів на сайті', toastConfig);
         modal.close();
     };
 

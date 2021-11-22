@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next';
 import PasswordForm from '../../components/common/auth/password-form/password-form';
 import Meta from '../../components/meta/meta';
 import AuthLayout from '../../components/pages/auth/layout/layout';
-import { withAuthRedirect } from '../../utils/ssr';
+import { withStore } from '../../utils/ssr';
 
 const PasswordPage = (): JSX.Element => {
     return (
@@ -18,6 +18,6 @@ const PasswordPage = (): JSX.Element => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withAuthRedirect(null, true);
+export const getServerSideProps: GetServerSideProps = withStore();
 
 export default PasswordPage;
