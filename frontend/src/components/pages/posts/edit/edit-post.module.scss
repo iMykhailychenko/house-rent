@@ -1,0 +1,9 @@
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 4rem 6rem;
+    border-radius: 1.5rem;
+    background: var(--gray-0);
+}

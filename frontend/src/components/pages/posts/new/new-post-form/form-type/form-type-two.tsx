@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { useFormik } from 'formik';
 
+import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { SelectValue } from '../../../../../../interfaces';
 import { FORM_TYPE, IStepTwo } from '../../../../../../state/entities/posts/posts.interface';
@@ -14,6 +15,7 @@ import Select from '../../../../../common/select/select';
 import Filters from '../filters/filters';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
+import { formTwoInitialState } from '../new-post-form';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormTwoSchema } from '../new-post-form.validation';
@@ -27,6 +29,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
     const newPostState = useNewPostSelector();
 
+    const errorHandler = useFormikError<IStepTwo>();
     const formik = useFormik<IStepTwo>({
         initialValues,
         validationSchema: FormTwoSchema,
@@ -36,6 +39,10 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
+
+    useEffect(() => {
+        errorHandler(formik);
+    }, [errorHandler, formik]);
 
     const handleSelectCity = (value: SelectValue): void => {
         formik.setFieldValue('cityFilters', value.id);

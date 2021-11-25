@@ -72,25 +72,27 @@ const normalizeFilters = (
     }: TemplateDataType,
     trans: TransFn,
 ): NormalizedFilters => {
-    const sortedRooms = roomFilters.sort((a, b) => sortingMap[a] - sortingMap[b]);
-    const sortedPrice = priceFilters.sort((a, b) => sortingMap[a] - sortingMap[b]);
+    const sortedRooms = roomFilters.length ? roomFilters.sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
+    const sortedPrice = priceFilters.length ? priceFilters.sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
 
-    const room =
-        sortedRooms.length === 1
+    const room = sortedRooms
+        ? sortedRooms.length === 1
             ? roomMap[sortedRooms[0]]
-            : roomMap[sortedRooms[0]] + '-' + roomMap[sortedRooms[sortedRooms.length - 1]];
-    const price =
-        sortedPrice.length === 1
+            : roomMap[sortedRooms[0]] + '-' + roomMap[sortedRooms[sortedRooms.length - 1]]
+        : '[...]';
+    const price = sortedPrice
+        ? sortedPrice.length === 1
             ? trans(sortedPrice[0])
-            : priceMapMin[sortedPrice[0]] + priceMapMax[sortedPrice[sortedPrice.length - 1]];
+            : priceMapMin[sortedPrice[0]] + priceMapMax[sortedPrice[sortedPrice.length - 1]]
+        : '[...]';
 
     return {
         room,
         price,
         user: firstName,
         city: trans(cityFilters),
-        houseType: trans('in_' + houseTypeFilters.join('_')),
-        district: districtFilters.map(dist => trans(dist)).join(', '),
+        houseType: houseTypeFilters.length ? trans('in_' + houseTypeFilters.join('_')) : '[...]',
+        district: districtFilters.length ? districtFilters.map(dist => trans(dist)).join(', ') : '[...]',
         metro: cityFilters === 'kyiv' ? trans('near_metro') : '',
         residents: +residentsAmount === 1 ? trans('single') : trans('with_hwo'),
         pets: pets ? `[${trans('pets').toLowerCase()}: ${pets}]` : trans('no_pets').toLowerCase(),

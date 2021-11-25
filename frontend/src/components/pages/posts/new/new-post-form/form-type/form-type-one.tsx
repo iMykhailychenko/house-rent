@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useFormik } from 'formik';
 
+import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { SelectValue } from '../../../../../../interfaces';
 import { FORM_TYPE, IStepOne } from '../../../../../../state/entities/posts/posts.interface';
@@ -12,6 +13,7 @@ import Select from '../../../../../common/select/select';
 import Textarea from '../../../../../common/textarea/textarea';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
+import { formOneInitialState } from '../new-post-form';
 import { residentsAmount } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormOneSchema } from '../new-post-form.validation';
@@ -24,15 +26,23 @@ interface IProps {
 const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
 
+    const errorHandler = useFormikError<IStepOne>();
     const formik = useFormik<IStepOne>({
         initialValues,
         validationSchema: FormOneSchema,
+        onReset: (_, { setValues }) => {
+            setValues(formOneInitialState);
+        },
         onSubmit: values => {
             onSubmit(values);
             dispatch(updateFormType(FORM_TYPE.TWO));
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
+
+    useEffect(() => {
+        errorHandler(formik);
+    }, [errorHandler, formik]);
 
     const changeResidentsAmount = (value: SelectValue): void => {
         formik.setFieldValue('residentsAmount', +value.value);

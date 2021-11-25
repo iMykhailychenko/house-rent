@@ -20,9 +20,4 @@ export class UpdateUserDto {
     @IsOptional()
     @IsNotEmpty()
     avatar: string;
-
-    @IsOptional()
-    @IsNotEmpty()
-    @IsEnum(UserRole, { each: true })
-    role: UserRole[] = [UserRole.USER];
 }

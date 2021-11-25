@@ -13,13 +13,13 @@ import FormTypeThree from './form-type/form-type-three';
 import FormTypeTwo from './form-type/form-type-two';
 import { getDescriptionTemplate, getTitleTemplate } from './new-post-form.utils';
 
-const formOneInitialState: IStepOne = {
+export const formOneInitialState: IStepOne = {
     residentsAmount: '',
     children: '',
     pets: '',
 };
 
-const formTwoInitialState: IStepTwo = {
+export const formTwoInitialState: IStepTwo = {
     houseTypeFilters: [],
     roomFilters: [],
     priceFilters: [],
@@ -27,7 +27,7 @@ const formTwoInitialState: IStepTwo = {
     districtFilters: [],
 };
 
-const formThreeInitialState: IStepThree = {
+export const formThreeInitialState: IStepThree = {
     title: '',
     description: '',
 };

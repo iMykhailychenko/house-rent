@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { updateProfileThunk } from '../../../../../state/entities/profile/profile.thunk';
 import Button from '../../../button/button';
 import Input from '../../../input/input';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
@@ -15,6 +16,7 @@ import css from './change-user-data.module.scss';
 const ChangeUserData = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const profileState = useProfileInfoSelector().data;
+    const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -25,9 +27,10 @@ const ChangeUserData = (): JSX.Element => {
             firstName: Yup.string().min(1, 'short_input').max(50, 'long_input').required('required'),
             lastName: Yup.string().min(1, 'short_input').max(100, 'long_input').required('required'),
         }),
-        onSubmit: values => {
-            console.log(values);
-            console.log(dispatch);
+        onSubmit: async values => {
+            setLoading(false);
+            dispatch(updateProfileThunk(values));
+            modal.close();
         },
     });
 
@@ -39,7 +42,7 @@ const ChangeUserData = (): JSX.Element => {
                     <Button secondary onClick={modal.close}>
                         Скасувати
                     </Button>
-                    <Button primary onClick={formik.submitForm}>
+                    <Button primary onClick={formik.submitForm} loading={loading}>
                         Змінити
                     </Button>
                 </>

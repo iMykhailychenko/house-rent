@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Sync from '@mui/icons-material/Sync';
 import { useFormik } from 'formik';
 
+import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
 import { FORM_TYPE, IStepThree } from '../../../../../../state/entities/posts/posts.interface';
@@ -15,7 +16,7 @@ import Textarea from '../../../../../common/textarea/textarea';
 import FormSeparator from '../form-separator/form-separator';
 import FormTemplateModal from '../form-template-modal/form-template-modal';
 import FormSegment from '../from-segment/from-segment';
-import { TemplateDataType } from '../new-post-form';
+import { formThreeInitialState, TemplateDataType } from '../new-post-form';
 import css from '../new-post-form.module.scss';
 import { getDescriptionTemplate, getTitleTemplate } from '../new-post-form.utils';
 import { FormThreeSchema } from '../new-post-form.validation';
@@ -32,15 +33,23 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
     const trans = useTrans();
     const dispatch = useAppDispatch();
 
+    const errorHandler = useFormikError<IStepThree>();
     const formik = useFormik<IStepThree>({
         initialValues,
         validationSchema: FormThreeSchema,
+        onReset: (_, { setValues }) => {
+            setValues(formThreeInitialState);
+        },
         onSubmit: values => {
             onSubmit(values);
             dispatch(updateFormType(FORM_TYPE.FOUR));
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
+
+    useEffect(() => {
+        errorHandler(formik);
+    }, [errorHandler, formik]);
 
     const titleTemplateList = useMemo(
         () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate(allData, trans, index)),
@@ -87,10 +96,6 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
             </FormSeparator>
             <FormSegment label="title" id="new_post_title" error={formik.touched.title && formik.errors.title}>
                 <>
-                    <button className={css.link} type="button" onClick={openTitleTemplateModal}>
-                        <Sync />
-                        Змінити шаблон
-                    </button>
                     <Textarea
                         id="new_post_title"
                         className={css.input}
@@ -101,6 +106,10 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
                         placeholder="title"
                         name="title"
                     />
+                    <button className={css.link} type="button" onClick={openTitleTemplateModal}>
+                        <Sync />
+                        Змінити шаблон
+                    </button>
                 </>
             </FormSegment>
             <FormSegment
@@ -109,10 +118,6 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
                 error={formik.touched.description && formik.errors.description}
             >
                 <>
-                    <button className={css.link} type="button" onClick={openDescriptionTemplateModal}>
-                        <Sync />
-                        Змінити шаблон
-                    </button>
                     <Textarea
                         id="new_post_description"
                         className={css.input}
@@ -123,6 +128,10 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
                         placeholder="description"
                         name="description"
                     />
+                    <button className={css.link} type="button" onClick={openDescriptionTemplateModal}>
+                        <Sync />
+                        Змінити шаблон
+                    </button>
                 </>
             </FormSegment>
 
