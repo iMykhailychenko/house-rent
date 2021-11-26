@@ -98,7 +98,7 @@
         }
     }
 
-    p {
+    .innerText {
         height: 100%;
         margin: 2rem 0;
         font-weight: 300;
@@ -117,10 +117,27 @@
 }
 
 .center {
-    margin: 4rem;
+    margin: 4rem 0;
     text-align: center;
 
     strong {
+        display: block;
+        margin-bottom: 2rem;
         font-weight: 400;
+    }
+}
+
+.chips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .chip {
+        margin: 0.3rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background: var(--primary);
+        color: var(--true-white);
     }
 }

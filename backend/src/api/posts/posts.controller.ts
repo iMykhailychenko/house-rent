@@ -87,7 +87,7 @@ export class PostsController {
         @Param('postId', ParseIntPipe) postId: number,
         @Body(new ValidationPipe({ transform: true })) updatePostDto: UpdatePostDto,
     ): Promise<PostEntity> {
-        return await this.postsService.updateUser(userId, postId, updatePostDto);
+        return await this.postsService.updatePost(userId, postId, updatePostDto);
     }
 
     @Put(':postId/status')

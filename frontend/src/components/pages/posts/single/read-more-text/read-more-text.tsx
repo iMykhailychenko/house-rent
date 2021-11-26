@@ -9,36 +9,47 @@ import css from '../single.module.scss';
 
 interface IProps {
     label?: string;
-    text: string;
+    text: string | string[];
     img: string;
     title: string;
 }
 
 const ReadMoreText = ({ label, text, img, title }: IProps): JSX.Element => {
     const trans = useTrans();
+    const srt = Array.isArray(text) ? text.map(trans).join(', ') : text;
 
     const readMore = (): void => {
         modal.open(
             <StickyModal title={title}>
                 <ImageWrp name={img} />
-                <p className={css.center}>
+                <div className={css.center}>
                     {label && <strong>{label}: </strong>}
-                    {text}
-                </p>
+                    {Array.isArray(text) ? (
+                        <div className={css.chips}>
+                            {text.map(item => (
+                                <p key={item} className={css.chip}>
+                                    {trans(item)}
+                                </p>
+                            ))}
+                        </div>
+                    ) : (
+                        text
+                    )}
+                </div>
             </StickyModal>,
         );
     };
 
     return (
-        <p>
-            {label && <strong>{label}: </strong>}
-            {cutString(text, 45) + ' '}
-            {text.length > 45 && (
+        <div className={css.innerText}>
+            {label && <strong>{trans(label)}: </strong>}
+            {cutString(srt, 40) + ' '}
+            {srt.length > 40 && (
                 <button className={css.link} onClick={readMore} type="button">
                     {trans('читати далі')}
                 </button>
             )}
-        </p>
+        </div>
     );
 };
 

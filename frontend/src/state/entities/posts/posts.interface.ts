@@ -56,7 +56,7 @@ export type INewPostPayload = IStepOne & IStepTwo & IStepThree & { image?: strin
 
 export interface IEditPostPayload {
     id: number;
-    body: Partial<IPost>;
+    body: INewPostPayload;
 }
 
 export interface IEditPostStatusPayload {

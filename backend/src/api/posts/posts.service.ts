@@ -179,8 +179,10 @@ export class PostsService {
         return await this.postRepository.save(post);
     }
 
-    async updateUser(userId: number, postId: number, updatePostDto: UpdatePostDto): Promise<PostEntity> {
+    async updatePost(userId: number, postId: number, updatePostDto: UpdatePostDto): Promise<PostEntity> {
         const post = await this.postRepository.findOne(postId, { relations: ['user'] });
+        if (!post) throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
+
         if (post.user.id !== userId) {
             throw new HttpException('No permission', HttpStatus.FORBIDDEN);
         }

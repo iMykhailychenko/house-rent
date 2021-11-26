@@ -1,39 +1,43 @@
 import React, { useEffect } from 'react';
 
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import { useAppDispatch } from '../../../../hooks/redux.hook';
-import { useSinglePostSelector } from '../../../../state/entities/posts/posts.selector';
+import { useSinglePostSelector, useUpdateLoadingSelector } from '../../../../state/entities/posts/posts.selector';
 import { singlePostThunk } from '../../../../state/entities/posts/thunks/single-post.thunk';
 import Container from '../../../layout/container/container';
 
 import EditPostForm from './edit-post-form/edit-post-form';
+import EditPostSkeleton from './edit-post-skeleton/edit-post-skeleton';
 import css from './edit-post.module.scss';
 import UpdateImage from './update-image/update-image';
+import UploadProvider from './update-image/update-image.context';
 
 const EditPost = (): JSX.Element => {
     const dispatch = useAppDispatch();
-    const postState = useSinglePostSelector();
 
     const history = useRouter();
     const postId = +String(history.query.postId);
 
+    const status = useUpdateLoadingSelector();
+    const postState = useSinglePostSelector();
+
     useEffect(() => {
         if (!postState.data.id) {
-            setTimeout(() => {
-                dispatch(singlePostThunk(postId));
-            }, 2000);
+            dispatch(singlePostThunk(postId));
         }
     }, [dispatch, postId, postState]);
 
     return (
-        <>
-            <UpdateImage />
-            <Container size="sm">
-                <div className={css.inner}>{postState.status === 'success' ? <EditPostForm /> : null}</div>
-            </Container>
-        </>
+        <UploadProvider>
+            <>
+                {status === 'loading' && <img className={css.spinner} src="/spinner.gif" alt="" />}
+                <UpdateImage />
+                <Container size="sm">
+                    <div className={css.inner}>{postState.status === 'success' ? <EditPostForm /> : <EditPostSkeleton />}</div>
+                </Container>
+            </>
+        </UploadProvider>
     );
 };
 

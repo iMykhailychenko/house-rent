@@ -72,8 +72,8 @@ const normalizeFilters = (
     }: TemplateDataType,
     trans: TransFn,
 ): NormalizedFilters => {
-    const sortedRooms = roomFilters.length ? roomFilters.sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
-    const sortedPrice = priceFilters.length ? priceFilters.sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
+    const sortedRooms = roomFilters?.length ? [...roomFilters].sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
+    const sortedPrice = priceFilters?.length ? [...priceFilters].sort((a, b) => sortingMap[a] - sortingMap[b]) : null;
 
     const room = sortedRooms
         ? sortedRooms.length === 1

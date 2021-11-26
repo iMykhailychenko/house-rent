@@ -36,10 +36,6 @@ export class UpdatePostDto {
     @IsOptional()
     image: string;
 
-    @IsDate()
-    @IsOptional()
-    createdAt: Date = new Date();
-
     @IsArray()
     @IsNotEmpty()
     @IsOptional()

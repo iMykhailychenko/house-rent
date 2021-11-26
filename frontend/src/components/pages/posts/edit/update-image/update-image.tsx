@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext, useRef } from 'react';
 
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -8,11 +8,12 @@ import Button from '../../../../common/button/button';
 import FullScreenImg from '../../../../common/full-screen-img/full-screen-img';
 import Container from '../../../../layout/container/container';
 
+import { UploadContext } from './update-image.context';
 import css from './update-image.module.scss';
 
 const UpdateImage = (): JSX.Element => {
     const ref = useRef<HTMLInputElement>(null);
-    const [file, setFile] = useState<File | null>(null);
+    const [file, setFile] = useContext(UploadContext);
 
     const click = (): void => {
         document.body.style.overflow = '';

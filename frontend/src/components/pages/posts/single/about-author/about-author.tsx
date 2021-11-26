@@ -21,7 +21,7 @@ const AboutAuthor = ({ post }: IProps): JSX.Element => {
             <div className={css.row}>
                 <div className={css.cell}>
                     <ImageWrp name="user" />
-                    <p>
+                    <p className={css.innerText}>
                         {trans('residentsAmount')}: {post.residentsAmount}
                     </p>
                 </div>

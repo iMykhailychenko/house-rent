@@ -20,43 +20,31 @@ const AboutApartment = ({ post }: IProps): JSX.Element => {
                 <div className={css.row}>
                     <div className={css.cell}>
                         <ImageWrp name="building" />
-                        <p>
+                        <p className={css.innerText}>
                             <strong>{trans('houseType')}</strong>: {post.houseTypeFilters.map(trans).join(', ')}
                         </p>
                     </div>
 
                     <div className={css.cell}>
                         <ImageWrp name="chair" />
-                        <p>
-                            <strong>{trans('rooms')}</strong>: {post.roomFilters.map(trans).join(', ')}
-                        </p>
+                        <ReadMoreText img="chair" title="rooms" label="rooms" text={post.roomFilters} />
                     </div>
 
                     <div className={css.cell}>
                         <ImageWrp name="coin" />
-                        <ReadMoreText
-                            img="coin"
-                            title="cash"
-                            label={trans('price')}
-                            text={post.priceFilters.map(trans).join(', ')}
-                        />
+                        <ReadMoreText img="coin" title="cash" label="price" text={post.priceFilters} />
                     </div>
                 </div>
                 <div className={css.row}>
                     <div className={css.cell}>
                         <ImageWrp name="location" />
-                        <p>
+                        <p className={css.innerText}>
                             <strong>{trans('city')}</strong>: {trans(post.cityFilters)}
                         </p>
                     </div>
                     <div className={css.cell}>
                         <ImageWrp name="target" />
-                        <ReadMoreText
-                            img="target"
-                            title="district"
-                            label={trans('district')}
-                            text={post.districtFilters.map(trans).join(', ')}
-                        />
+                        <ReadMoreText img="target" title="district" label="district" text={post.districtFilters} />
                     </div>
                     <div style={{ width: '20rem' }} />
                 </div>

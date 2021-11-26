@@ -1,14 +1,21 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 
 import Sync from '@mui/icons-material/Sync';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 
 import useFormikError from '../../../../../hooks/formik-error.hook';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { SelectValue } from '../../../../../interfaces';
+import { mediaThunk } from '../../../../../state/entities/media/media.reducer';
 import { INewPostPayload } from '../../../../../state/entities/posts/posts.interface';
 import { useSinglePostSelector } from '../../../../../state/entities/posts/posts.selector';
+import { updatePostThunk } from '../../../../../state/entities/posts/thunks/update-post.thunk';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import routes from '../../../../../utils/routes';
+import { banner } from '../../../../common/banner/banner';
+import { BannerType } from '../../../../common/banner/banner.interface';
 import Button from '../../../../common/button/button';
 import { modal } from '../../../../common/modal/modal';
 import Select from '../../../../common/select/select';
@@ -29,6 +36,7 @@ import {
 } from '../../new/new-post-form/new-post-form.config';
 import css from '../../new/new-post-form/new-post-form.module.scss';
 import { getDescriptionTemplate, getTitleTemplate } from '../../new/new-post-form/new-post-form.utils';
+import { UploadContext } from '../update-image/update-image.context';
 
 import { normalizePostData } from './edit-post-form.config';
 import { EditPostFormSchema } from './edit-post-form.validation';
@@ -37,17 +45,30 @@ const TEMPLATES_AMOUNT_ARRAY = [0, 1, 2, 3, 4];
 
 const EditPostForm = (): JSX.Element => {
     const trans = useTrans();
+    const dispatch = useAppDispatch();
+    const history = useRouter();
 
     const postState = useSinglePostSelector();
-    const profileData = useProfileInfoSelector();
+    const profileState = useProfileInfoSelector();
+
+    const [file] = useContext(UploadContext);
 
     const errorHandler = useFormikError<INewPostPayload>();
     const formik = useFormik<INewPostPayload>({
         initialValues: normalizePostData(postState.data),
         validationSchema: EditPostFormSchema,
-        onSubmit: values => {
+        onSubmit: async values => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log(values);
+
+            if (file) {
+                values.image = (await dispatch(mediaThunk(file)).unwrap()).url;
+            }
+
+            const newPost = await dispatch(updatePostThunk({ id: postState.data.id, body: values })).unwrap();
+            if (newPost) {
+                await history.push(routes.posts.single(newPost.id));
+                banner.add({ id: 'UPDATE_POST', type: BannerType.SUCCESS, content: 'Ваш пост успішно оновлено' });
+            }
         },
     });
 
@@ -56,13 +77,13 @@ const EditPostForm = (): JSX.Element => {
     }, [errorHandler, formik]);
 
     const titleTemplateList = useMemo(
-        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate({ ...formik.values, ...profileData.data }, trans, index)),
-        [formik.values, profileData.data, trans],
+        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate({ ...formik.values, ...profileState.data }, trans, index)),
+        [formik.values, profileState.data, trans],
     );
     const descriptionTemplateList = useMemo(
         () =>
-            TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate({ ...formik.values, ...profileData.data }, trans, index)),
-        [formik.values, profileData.data, trans],
+            TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate({ ...formik.values, ...profileState.data }, trans, index)),
+        [formik.values, profileState.data, trans],
     );
 
     const openTitleTemplateModal = (): void =>
