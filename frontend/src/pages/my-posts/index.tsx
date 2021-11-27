@@ -30,7 +30,7 @@ const MyPostsPage = (): JSX.Element => {
     const profile = useProfileInfoSelector();
 
     const history = useRouter();
-    const status = String(history.query.status || POST_STATUS.DRAFT) as POST_STATUS;
+    const status = String(history.query.status || POST_STATUS.ACTIVE) as POST_STATUS;
 
     useEffect(() => {
         if (auth?.accessToken) {

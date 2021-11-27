@@ -41,6 +41,14 @@ export class PostsController {
         );
     }
 
+    @Get('read/users/:userId')
+    async findAllForUserRead(
+        @Param('userId', ParseIntPipe) userId: number,
+        @SearchPost() searchFilters: SearchPostDto,
+    ): Promise<Pagination<PostEntity>> {
+        return await this.postsService.findAllForUser(userId, searchFilters);
+    }
+
     @Get('personal')
     @UseGuards(AuthGuard)
     async findAllPersonal(
@@ -52,17 +60,19 @@ export class PostsController {
         return await this.postsService.findAllPersonal(userId, { page, limit, status });
     }
 
-    @Get('read/users/:userId')
-    async findAllForUserRead(
-        @Param('userId', ParseIntPipe) userId: number,
-        @SearchPost() searchFilters: SearchPostDto,
-    ): Promise<Pagination<PostEntity>> {
-        return await this.postsService.findAllForUser(userId, searchFilters);
-    }
-
     @Get('read/:postId')
     async findByIdRead(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
         return await this.postsService.findByIdRead(postId);
+    }
+
+    @Get('favorite')
+    @UseGuards(AuthGuard)
+    async findFavorite(
+        @User('id') userId: number,
+        @Query('page', ParseIntPipe) page: number,
+        @Query('limit', ParseIntPipe) limit: number,
+    ): Promise<Pagination<PostEntity>> {
+        return await this.postsService.findFavorite(userId, page, limit);
     }
 
     @Get(':postId')

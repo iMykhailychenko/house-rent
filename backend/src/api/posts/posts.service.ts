@@ -25,7 +25,7 @@ export class PostsService {
     getSqlQueryForSearch(searchFilters: SearchPostDto): SelectQueryBuilder<PostEntity> {
         return this.postRepository
             .createQueryBuilder('posts')
-            .leftJoinAndSelect('posts.user', 'users')
+            .leftJoinAndSelect('posts.user', 'user')
             .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
             .where('posts.status = :status', { status: POST_STATUS.ACTIVE })
             .andWhere('((:general)::text[] IS NULL OR (posts.generalFilters)::text[] @> (:general)::text[])', {
@@ -58,13 +58,24 @@ export class PostsService {
             .orderBy('posts.createdAt', 'DESC');
     }
 
-    formatPagination<T>(data: T[], total: number, searchPostDto: SearchPostDto): Pagination<T> {
+    formatPagination<T>(data: T[], total: number, pagination: { limit: number; page: number }): Pagination<T> {
         return {
             totalItems: total,
-            totalPages: Math.ceil(total / searchPostDto.limit),
-            currentPage: searchPostDto.page,
+            totalPages: Math.ceil(total / pagination.limit),
+            currentPage: pagination.page,
             data: data || [],
         };
+    }
+
+    async isPostInFavorite(postId: number, userId: number): Promise<boolean> {
+        return !!(await this.favoriteRepository.findOne({ where: { post: postId, user: userId } }));
+    }
+
+    async addFavoriteFieldToPostsList(userId: number, postsList: Pagination<PostEntity>): Promise<Pagination<PostEntity>> {
+        for await (const post of postsList.data) {
+            post.isFavorite = await this.isPostInFavorite(post.id, userId);
+        }
+        return postsList;
     }
 
     async findAll(searchPostDto: SearchPostDto): Promise<Pagination<PostEntity>> {
@@ -77,21 +88,44 @@ export class PostsService {
             .limit(limit)
             .getMany();
 
-        return this.formatPagination(result, total, searchPostDto);
+        return this.formatPagination(result, total, { page, limit });
     }
 
     async findAllForUser(userId: number, searchPostDto: SearchPostDto): Promise<Pagination<PostEntity>> {
         const sqlQuery = await this.getSqlQueryForSearch(searchPostDto);
-        const total = await sqlQuery.andWhere('users.id = :userId', { userId }).getCount();
+        const total = await sqlQuery.andWhere('user.id = :userId', { userId }).getCount();
 
         const { page = 1, limit = 20 } = searchPostDto;
         const result = await sqlQuery
-            .andWhere('users.id = :userId', { userId })
+            .andWhere('user.id = :userId', { userId })
             .offset(limit * (page - 1))
             .limit(limit)
             .getMany();
 
         return this.formatPagination(result, total, searchPostDto);
+    }
+
+    async findFavorite(userId: number, page = 1, limit = 20): Promise<Pagination<PostEntity>> {
+        const sqlQuery = this.postRepository
+            .createQueryBuilder('posts')
+            .leftJoinAndSelect('posts.user', 'user')
+            .leftJoin('posts.favorite', 'favorite')
+            .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
+            .where('posts.status = :status', { status: POST_STATUS.ACTIVE })
+            .andWhere('favorite.user = :userId', { userId })
+            .orderBy('posts.createdAt', 'DESC');
+
+        const total = await sqlQuery.getCount();
+        const result = await sqlQuery
+            .offset(limit * (page - 1))
+            .limit(limit)
+            .getMany();
+
+        return this.formatPagination(
+            result.map(post => ({ ...post, isFavorite: true })),
+            total,
+            { page, limit },
+        );
     }
 
     async findAllPersonal(userId: number, personalPostDto: PersonalPostDto): Promise<Pagination<PostEntity>> {
@@ -115,17 +149,6 @@ export class PostsService {
             currentPage: +page,
             data: result,
         };
-    }
-
-    async isPostInFavorite(postId: number, userId: number): Promise<boolean> {
-        return !!(await this.favoriteRepository.findOne({ where: { post: postId, user: userId } }));
-    }
-
-    async addFavoriteFieldToPostsList(userId: number, postsList: Pagination<PostEntity>): Promise<Pagination<PostEntity>> {
-        for await (const post of postsList.data) {
-            post.isFavorite = await this.isPostInFavorite(post.id, userId);
-        }
-        return postsList;
     }
 
     async findByIdRead(postId: number): Promise<PostEntity> {

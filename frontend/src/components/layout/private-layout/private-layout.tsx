@@ -67,6 +67,14 @@ const PrivateLayout = ({ children }: IProps): JSX.Element => {
                                 </a>
                             </Link>
                         </li>
+
+                        <li>
+                            <Link href={routes.favorite} shallow>
+                                <a className={clsx(css.link, { [css.active]: history.pathname.includes(routes.favorite) })}>
+                                    Обрані оголошення
+                                </a>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </Container>

@@ -60,8 +60,9 @@ export class UsersService {
 
     async findAll(page: number, limit: number): Promise<Pagination<UserEntity>> {
         const [result, total] = await this.userRepository.findAndCount({
-            take: limit,
+            order: { createdAt: 'DESC' },
             skip: limit * (page - 1),
+            take: limit,
         });
 
         return {

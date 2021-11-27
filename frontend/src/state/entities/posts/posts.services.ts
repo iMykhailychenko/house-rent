@@ -20,29 +20,16 @@ const postsServices = {
         return axios.get(endpointConfig(path + id));
     },
     postsList: (page: number, query: Params = {}): Response<Pagination<IPost>> => {
-        const path = axios.defaults.headers.common.Authorization ? '/posts/?' : '/posts/read/?';
-        return axios.get(
-            endpointConfig(
-                path +
-                    queryString.stringify(
-                        { page, limit: uiConfig.postsPerPage, ...query },
-                        { skipNull: true, arrayFormat: 'comma' },
-                    ),
-            ),
-        );
+        const path = axios.defaults.headers.common.Authorization ? '/posts' : '/posts/read';
+        return axios.get(endpointConfig(path), { params: { page, limit: uiConfig.postsPerPage, ...query } });
     },
     personalPosts: (query: IPersonalPostsListPayload): Response<Pagination<IPost>> =>
         axios.get(endpointConfig('/posts/personal'), { params: { ...query, limit: uiConfig.postsPerPage } }),
     getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> => {
         const path = axios.defaults.headers.common.Authorization ? '/posts/users' : '/posts/read/users';
-        return axios.get(
-            endpointConfig(
-                `${path}/${data.userId}/?${queryString.stringify(
-                    { limit: uiConfig.postsPerPage, page: data.page, ...query },
-                    { skipNull: true },
-                )}`,
-            ),
-        );
+        return axios.get(endpointConfig(`${path}/${data.userId}}`), {
+            params: { limit: uiConfig.postsPerPage, page: data.page, ...query },
+        });
     },
     newPost: (body: INewPostPayload): Response<IPost> => axios.post(endpointConfig('/posts'), body),
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => axios.put(endpointConfig(`/posts/${id}`), body),
@@ -50,6 +37,8 @@ const postsServices = {
         axios.put(endpointConfig(`/posts/${id}/status`), { status }),
     deletePost: (id: number): Response<void> => axios.delete(endpointConfig(`/posts/${id}`)),
     toggleFavorite: (id: number): Response<void> => axios.put(endpointConfig(`/favorite/${id}`)),
+    getFavorite: (page: number): Response<Pagination<IPost>> =>
+        axios.get(endpointConfig('/posts/favorite'), { params: { page, limit: uiConfig.postsPerPage } }),
 };
 
 export default postsServices;

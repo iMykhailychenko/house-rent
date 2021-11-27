@@ -43,15 +43,15 @@
         width: var(--img-width);
         padding: 2rem;
         border-radius: 0.6rem;
-        background: var(--gray-1);
+        background: var(--primary);
 
         --image-wrp-diameter: calc(var(--img-width) - 18rem);
 
         p {
             margin-top: 0.5rem;
-            font-weight: 600;
+            font-weight: 400;
             font-size: 1.2rem;
-            color: var(--gray-5);
+            color: var(--true-white);
             line-height: 1.2;
             text-align: center;
         }

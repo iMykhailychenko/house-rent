@@ -21,10 +21,10 @@ interface IProps {
 
 const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
     const [token] = useAuth();
-    const [drawer, setDrawer] = useState(false);
 
-    const handleClose = (): void => setDrawer(false);
-    const handleOpen = (): void => setDrawer(true);
+    const [drawer, setDrawer] = useState(false);
+    const handleDrawerClose = (): void => setDrawer(false);
+    const handleDrawerOpen = (): void => setDrawer(true);
 
     return (
         <>
@@ -34,7 +34,7 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                         <Link className={css.home} href={routes.home} type="button" secondary>
                             <Home />
                         </Link>
-                        <MenuIcon className={css.menu} onClick={handleOpen} />
+                        <MenuIcon className={css.menu} onClick={handleDrawerOpen} />
                         <HeaderLanguage />
                     </div>
 
@@ -44,7 +44,7 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                     </div>
                 </Container>
             </header>
-            <AppDrawer open={drawer} onClose={handleClose} />
+            <AppDrawer open={drawer} onClose={handleDrawerClose} />
         </>
     );
 };
