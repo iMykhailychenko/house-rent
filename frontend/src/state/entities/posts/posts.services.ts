@@ -20,16 +20,29 @@ const postsServices = {
         return axios.get(endpointConfig(path + id));
     },
     postsList: (page: number, query: Params = {}): Response<Pagination<IPost>> => {
-        const path = axios.defaults.headers.common.Authorization ? '/posts' : '/posts/read';
-        return axios.get(endpointConfig(path), { params: { page, limit: uiConfig.postsPerPage, ...query } });
+        const path = axios.defaults.headers.common.Authorization ? '/posts/?' : '/posts/read/?';
+        return axios.get(
+            endpointConfig(
+                path +
+                    queryString.stringify(
+                        { page, limit: uiConfig.postsPerPage, ...query },
+                        { skipNull: true, arrayFormat: 'comma' },
+                    ),
+            ),
+        );
     },
     personalPosts: (query: IPersonalPostsListPayload): Response<Pagination<IPost>> =>
         axios.get(endpointConfig('/posts/personal'), { params: { ...query, limit: uiConfig.postsPerPage } }),
     getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> => {
         const path = axios.defaults.headers.common.Authorization ? '/posts/users' : '/posts/read/users';
-        return axios.get(endpointConfig(`${path}/${data.userId}}`), {
-            params: { limit: uiConfig.postsPerPage, page: data.page, ...query },
-        });
+        return axios.get(
+            endpointConfig(
+                `${path}/${data.userId}/?${queryString.stringify(
+                    { limit: uiConfig.postsPerPage, page: data.page, ...query },
+                    { skipNull: true },
+                )}`,
+            ),
+        );
     },
     newPost: (body: INewPostPayload): Response<IPost> => axios.post(endpointConfig('/posts'), body),
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => axios.put(endpointConfig(`/posts/${id}`), body),

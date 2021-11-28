@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
-import useTrans from '../../../../../../hooks/trans.hook';
+import { useGetDescriptionTemplate, useGetTitleTemplate } from '../../../../../../hooks/template/get-template.hook';
 import { FORM_TYPE, IStepThree } from '../../../../../../state/entities/posts/posts.interface';
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import Button from '../../../../../common/button/button';
@@ -18,7 +18,6 @@ import FormTemplateModal from '../form-template-modal/form-template-modal';
 import FormSegment from '../from-segment/from-segment';
 import { formThreeInitialState, TemplateDataType } from '../new-post-form';
 import css from '../new-post-form.module.scss';
-import { getDescriptionTemplate, getTitleTemplate } from '../new-post-form.utils';
 import { FormThreeSchema } from '../new-post-form.validation';
 
 const TEMPLATES_AMOUNT_ARRAY = [0, 1, 2, 3, 4];
@@ -30,8 +29,9 @@ interface IProps {
 }
 
 const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Element => {
-    const trans = useTrans();
     const dispatch = useAppDispatch();
+    const getTitleTemplate = useGetTitleTemplate();
+    const getDescriptionTemplate = useGetDescriptionTemplate();
 
     const errorHandler = useFormikError<IStepThree>();
     const formik = useFormik<IStepThree>({
@@ -52,12 +52,12 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
     }, [errorHandler, formik]);
 
     const titleTemplateList = useMemo(
-        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate(allData, trans, index)),
-        [allData, trans],
+        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate(allData, index)),
+        [allData, getTitleTemplate],
     );
     const descriptionTemplateList = useMemo(
-        () => TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate(allData, trans, index)),
-        [allData, trans],
+        () => TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate(allData, index)),
+        [allData, getDescriptionTemplate],
     );
 
     const openTitleTemplateModal = (): void =>

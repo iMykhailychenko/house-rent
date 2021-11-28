@@ -2,6 +2,16 @@ export enum GENERAL_FILTERS {
     HOT = 'hot',
 }
 
+export enum RESIDENTS_AMOUNT {
+    ONE = 'one_resident',
+    TWO = 'two_resident',
+    THREE = 'three_resident',
+    FOUR = 'four_resident',
+    FIVE = 'five_resident',
+    SIX = 'six_resident',
+    MORE = 'more_resident',
+}
+
 export enum ROOM_FILTERS {
     ONE = 'one',
     TWO = 'two',
@@ -58,11 +68,3 @@ export enum POST_STATUS {
 }
 
 export const ALL_STATUSES = [POST_STATUS.DRAFT, POST_STATUS.ACTIVE, POST_STATUS.ARCHIVE];
-
-export enum RESIDENTS_AMOUNT {
-    ONE = 'one',
-    TWO = 'two',
-    THREE = 'three',
-    FOUR = 'four',
-    MORE = 'more',
-}

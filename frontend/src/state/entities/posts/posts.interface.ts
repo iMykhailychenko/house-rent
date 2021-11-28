@@ -34,7 +34,7 @@ export interface IPost {
 }
 
 export interface IStepOne {
-    residentsAmount: number | string;
+    residentsAmount: string;
     children: string;
     pets: string;
 }

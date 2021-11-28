@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const FormOneSchema = Yup.object().shape({
-    residentsAmount: Yup.number().min(1, 'min_residents_amount').max(15, 'max_residents_amount').required('required'),
+    residentsAmount: Yup.string().required('required'),
     children: Yup.string(),
     pets: Yup.string(),
 });

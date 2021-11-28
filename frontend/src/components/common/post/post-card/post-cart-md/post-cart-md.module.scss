@@ -66,7 +66,6 @@
     .link {
         flex-grow: 2;
         width: 100%;
-        margin-bottom: 2rem;
         padding-bottom: 0.2rem;
         font-weight: 400;
         transition: 0.3s ease-in-out;
@@ -92,13 +91,13 @@
         }
 
         h3 {
+            min-height: 5rem;
             padding: 0.5rem;
             font-size: 1.6rem;
             line-height: 1.2;
             color: var(--black);
             word-break: break-all;
             transition: 0.3s ease-in-out;
-            @include cutString;
         }
 
         p {
@@ -113,5 +112,26 @@
             color: var(--gray-6);
             font-size: 1.2rem;
         }
+    }
+}
+
+.chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1rem 0.2rem;
+
+    .chip {
+        display: flex;
+        align-items: center;
+        height: 2.2rem;
+        margin: 0 0.5rem 0.5rem 0;
+        padding: 0 1rem;
+        border-radius: 1rem;
+        background: var(--gray-2);
+        color: var(--primary);
+        font-weight: 500;
+        font-size: 1.1rem;
+        line-height: 1;
     }
 }

@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
+import useSortPrice from '../../../../../../hooks/sort-price.hook';
+import useSortRooms from '../../../../../../hooks/sort-room.hook';
 import { SelectValue } from '../../../../../../interfaces';
 import { FORM_TYPE, IStepTwo } from '../../../../../../state/entities/posts/posts.interface';
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
@@ -15,7 +17,6 @@ import Select from '../../../../../common/select/select';
 import Filters from '../filters/filters';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
-import { formTwoInitialState } from '../new-post-form';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormTwoSchema } from '../new-post-form.validation';
@@ -28,6 +29,9 @@ interface IProps {
 const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
     const newPostState = useNewPostSelector();
+
+    const sortPrice = useSortPrice();
+    const sortRooms = useSortRooms();
 
     const errorHandler = useFormikError<IStepTwo>();
     const formik = useFormik<IStepTwo>({
@@ -44,6 +48,14 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         errorHandler(formik);
     }, [errorHandler, formik]);
 
+    const handlePrice = (name: string, value: string[]): void => {
+        formik.setFieldValue(name, sortPrice(value));
+    };
+
+    const handleRooms = (name: string, value: string[]): void => {
+        formik.setFieldValue(name, sortRooms(value));
+    };
+
     const handleSelectCity = (value: SelectValue): void => {
         formik.setFieldValue('cityFilters', value.id);
         formik.setFieldValue('districtFilters', []);
@@ -53,12 +65,14 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         formik.resetForm();
     };
-    const goBack = (): void => {
+    const goBack = async (): Promise<void> => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         onSubmit(formik.values);
         dispatch(updateFormType(FORM_TYPE.ONE));
     };
-    const submitForm = (): Promise<void> => formik.submitForm();
+    const submitForm = async (): Promise<void> => {
+        return await formik.submitForm();
+    };
 
     return (
         <form action="#" method="post" className={css.form}>
@@ -78,8 +92,8 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
                     size="lg"
                     all={rooms}
                     name="roomFilters"
+                    onChange={handleRooms}
                     value={formik.values.roomFilters}
-                    onChange={formik.setFieldValue}
                     error={formik.touched.roomFilters && !!formik.errors.roomFilters}
                 />
             </FormSegment>
@@ -89,8 +103,8 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
                     size="lg"
                     all={price}
                     name="priceFilters"
+                    onChange={handlePrice}
                     value={formik.values.priceFilters}
-                    onChange={formik.setFieldValue}
                     error={formik.touched.priceFilters && !!formik.errors.priceFilters}
                 />
             </FormSegment>

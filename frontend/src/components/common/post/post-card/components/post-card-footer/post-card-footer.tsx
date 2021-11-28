@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import useAuth from '../../../../../../hooks/auth.hook';
+import useMinMaxPrice from '../../../../../../hooks/min-max-price.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { useRole } from '../../../../../../hooks/role.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
@@ -39,6 +40,8 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     const role = useRole();
     const [auth] = useAuth();
     const history = useRouter();
+
+    const minMaxPrice = useMinMaxPrice();
     const profileState = useProfileInfoSelector();
     const isSmallSize = size === 'sm';
 
@@ -106,6 +109,8 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                     </>
                 )}
             </div>
+
+            {isSmallSize && <p className={css.price}>{minMaxPrice(post.priceFilters)}</p>}
 
             {!isSmallSize ? (
                 profileState?.data?.id === post.user.id ? (

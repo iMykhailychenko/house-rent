@@ -9,6 +9,7 @@ import {
     HOUSE_TYPE_FILTERS,
     POST_STATUS,
     PRICE_FILTERS,
+    RESIDENTS_AMOUNT,
     ROOM_FILTERS,
 } from '../posts.interface';
 
@@ -17,7 +18,7 @@ export class PostEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', default: POST_STATUS })
+    @Column({ type: 'varchar', default: POST_STATUS.DRAFT })
     status: POST_STATUS;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -32,8 +33,8 @@ export class PostEntity {
     @Column({ type: 'varchar' })
     description: string;
 
-    @Column({ type: 'int' })
-    residentsAmount: number;
+    @Column({ type: 'varchar' })
+    residentsAmount: RESIDENTS_AMOUNT;
 
     @Column({ type: 'varchar', default: null, nullable: true })
     children: string;

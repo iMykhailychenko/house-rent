@@ -1,0 +1,29 @@
+.root {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+
+    .button {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        height: 4rem;
+        min-width: 4rem;
+        border-radius: 0.4rem;
+        border: 0.1rem solid var(--gray-5);
+
+        &:hover {
+            color: var(--primary);
+            background: var(--secondary);
+            border-color: var(--primary);
+        }
+    }
+
+    .active,
+    .active:hover {
+        color: var(--true-white);
+        background: var(--primary);
+        border-color: var(--primary);
+    }
+}

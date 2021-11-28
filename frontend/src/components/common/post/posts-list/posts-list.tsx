@@ -16,12 +16,13 @@ import css from './posts-list.module.scss';
 
 interface IProps {
     title?: string;
+    className?: string;
     children: JSX.Element;
     onPage: (page: number) => Promise<void>;
     onMore: (page: number) => Promise<void>;
 }
 
-const PostsList = ({ title, onPage, onMore, children }: IProps): JSX.Element => {
+const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.Element => {
     const trans = useTrans();
     const [config] = useConfig();
     const postsState = usePostListSelector();
@@ -44,7 +45,7 @@ const PostsList = ({ title, onPage, onMore, children }: IProps): JSX.Element => 
 
     return (
         <Container size="md">
-            <div className={css.root}>
+            <div className={clsx(css.root, className)}>
                 {title && <h2 className="title-2">{trans(title)}</h2>}
 
                 <div className={css.flex}>

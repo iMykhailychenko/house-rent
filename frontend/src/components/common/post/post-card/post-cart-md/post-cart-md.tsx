@@ -45,12 +45,19 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
                         <Tooltip classNameWrp={css.tooltip} content={post.title}>
-                            <h3>{post.title}</h3>
+                            <h3>{cutString(post.title, 80)}</h3>
                         </Tooltip>
-                        <p>{cutString(post.description, 80)}</p>
                         <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
                     </a>
                 </Link>
+
+                <div className={css.chips}>
+                    {post.priceFilters.map(item => (
+                        <span className={css.chip} key={item}>
+                            {trans(item)}
+                        </span>
+                    ))}
+                </div>
 
                 <div className={css.flex}>
                     <UserCard user={post.user} />

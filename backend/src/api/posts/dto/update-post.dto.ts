@@ -1,6 +1,6 @@
-import { IsArray, IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Validate } from 'class-validator';
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, Validate } from 'class-validator';
 
-import { City, DISTRICT_FILTERS, HOUSE_TYPE_FILTERS, PRICE_FILTERS, ROOM_FILTERS } from '../posts.interface';
+import { City, DISTRICT_FILTERS, HOUSE_TYPE_FILTERS, PRICE_FILTERS, RESIDENTS_AMOUNT, ROOM_FILTERS } from '../posts.interface';
 import { DistrictValidator } from '../posts.validate';
 
 export class UpdatePostDto {
@@ -16,10 +16,11 @@ export class UpdatePostDto {
     @IsOptional()
     description: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
+    @IsEnum(RESIDENTS_AMOUNT)
     @IsOptional()
-    residentsAmount: number;
+    residentsAmount: RESIDENTS_AMOUNT;
 
     @IsString()
     @IsOptional()

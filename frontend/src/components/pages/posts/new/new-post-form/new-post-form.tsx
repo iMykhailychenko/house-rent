@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-import useTrans from '../../../../../hooks/trans.hook';
+import { useGetDescriptionTemplate, useGetTitleTemplate } from '../../../../../hooks/template/get-template.hook';
 import { IUser } from '../../../../../interfaces';
 import { FORM_TYPE, IStepOne, IStepThree, IStepTwo } from '../../../../../state/entities/posts/posts.interface';
 import { useNewPostSelector } from '../../../../../state/entities/posts/posts.selector';
@@ -11,7 +11,6 @@ import FormTypeFour from './form-type/form-type-four';
 import FormTypeOne from './form-type/form-type-one';
 import FormTypeThree from './form-type/form-type-three';
 import FormTypeTwo from './form-type/form-type-two';
-import { getDescriptionTemplate, getTitleTemplate } from './new-post-form.utils';
 
 export const formOneInitialState: IStepOne = {
     residentsAmount: '',
@@ -35,9 +34,11 @@ export const formThreeInitialState: IStepThree = {
 export type TemplateDataType = IStepOne & IStepTwo & IUser;
 
 const NewPostForm = (): JSX.Element => {
-    const trans = useTrans();
     const newPostState = useNewPostSelector();
     const profileData = useProfileInfoSelector();
+
+    const getTitleTemplate = useGetTitleTemplate();
+    const getDescriptionTemplate = useGetDescriptionTemplate();
 
     const [formOneState, setFormOneState] = useState<IStepOne>(formOneInitialState);
     const [formTwoState, setFormTwoState] = useState<IStepTwo>(formTwoInitialState);
@@ -51,8 +52,8 @@ const NewPostForm = (): JSX.Element => {
     const submitSecondForm = (value: IStepTwo): void => {
         setFormTwoState(value);
         setFormThreeState({
-            title: getTitleTemplate({ ...formOneState, ...value, ...profileData, ...profileData.data }, trans),
-            description: getDescriptionTemplate({ ...formOneState, ...value, ...profileData.data }, trans),
+            title: getTitleTemplate({ ...formOneState, ...value, ...profileData, ...profileData.data }),
+            description: getDescriptionTemplate({ ...formOneState, ...value, ...profileData.data }),
         });
     };
 

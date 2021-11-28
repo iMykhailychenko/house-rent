@@ -1,6 +1,14 @@
-import { IsArray, IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Validate } from 'class-validator';
+import { IsArray, IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, Validate } from 'class-validator';
 
-import { City, DISTRICT_FILTERS, HOUSE_TYPE_FILTERS, POST_STATUS, PRICE_FILTERS, ROOM_FILTERS } from '../posts.interface';
+import {
+    City,
+    DISTRICT_FILTERS,
+    HOUSE_TYPE_FILTERS,
+    POST_STATUS,
+    PRICE_FILTERS,
+    RESIDENTS_AMOUNT,
+    ROOM_FILTERS,
+} from '../posts.interface';
 import { DistrictValidator } from '../posts.validate';
 
 export class CreatePostDto {
@@ -14,9 +22,10 @@ export class CreatePostDto {
     @MaxLength(1000)
     description: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    residentsAmount: number;
+    @IsEnum(RESIDENTS_AMOUNT)
+    residentsAmount: RESIDENTS_AMOUNT;
 
     @IsString()
     @IsOptional()

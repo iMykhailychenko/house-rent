@@ -6,7 +6,9 @@ import { useRouter } from 'next/router';
 
 import useFormikError from '../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
-import useTrans from '../../../../../hooks/trans.hook';
+import useSortPrice from '../../../../../hooks/sort-price.hook';
+import useSortRooms from '../../../../../hooks/sort-room.hook';
+import { useGetDescriptionTemplate, useGetTitleTemplate } from '../../../../../hooks/template/get-template.hook';
 import { SelectValue } from '../../../../../interfaces';
 import { mediaThunk } from '../../../../../state/entities/media/media.reducer';
 import { INewPostPayload } from '../../../../../state/entities/posts/posts.interface';
@@ -35,7 +37,6 @@ import {
     rooms,
 } from '../../new/new-post-form/new-post-form.config';
 import css from '../../new/new-post-form/new-post-form.module.scss';
-import { getDescriptionTemplate, getTitleTemplate } from '../../new/new-post-form/new-post-form.utils';
 import { UploadContext } from '../update-image/update-image.context';
 
 import { normalizePostData } from './edit-post-form.config';
@@ -44,17 +45,22 @@ import { EditPostFormSchema } from './edit-post-form.validation';
 const TEMPLATES_AMOUNT_ARRAY = [0, 1, 2, 3, 4];
 
 const EditPostForm = (): JSX.Element => {
-    const trans = useTrans();
-    const dispatch = useAppDispatch();
     const history = useRouter();
+    const dispatch = useAppDispatch();
+
+    const sortPrice = useSortPrice();
+    const sortRooms = useSortRooms();
 
     const postState = useSinglePostSelector();
     const profileState = useProfileInfoSelector();
 
     const [file] = useContext(UploadContext);
+    const getTitleTemplate = useGetTitleTemplate();
+    const getDescriptionTemplate = useGetDescriptionTemplate();
 
     const errorHandler = useFormikError<INewPostPayload>();
     const formik = useFormik<INewPostPayload>({
+        enableReinitialize: true,
         initialValues: normalizePostData(postState.data),
         validationSchema: EditPostFormSchema,
         onSubmit: async values => {
@@ -77,34 +83,45 @@ const EditPostForm = (): JSX.Element => {
     }, [errorHandler, formik]);
 
     const titleTemplateList = useMemo(
-        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate({ ...formik.values, ...profileState.data }, trans, index)),
-        [formik.values, profileState.data, trans],
+        () => TEMPLATES_AMOUNT_ARRAY.map(index => getTitleTemplate({ ...formik.values, ...profileState.data }, index)),
+        [formik.values, getTitleTemplate, profileState.data],
     );
     const descriptionTemplateList = useMemo(
-        () =>
-            TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate({ ...formik.values, ...profileState.data }, trans, index)),
-        [formik.values, profileState.data, trans],
+        () => TEMPLATES_AMOUNT_ARRAY.map(index => getDescriptionTemplate({ ...formik.values, ...profileState.data }, index)),
+        [formik.values, getDescriptionTemplate, profileState.data],
     );
 
-    const openTitleTemplateModal = (): void =>
+    const openTitleTemplateModal = (): void => {
         modal.open(
             <FormTemplateModal
                 title="Шаблони заголовку"
-                onChange={(index: number) => formik.setFieldValue('title', titleTemplateList[index])}
                 list={titleTemplateList}
+                onChange={(index: number) => formik.setFieldValue('title', titleTemplateList[index])}
             />,
         );
-    const openDescriptionTemplateModal = (): void =>
+    };
+
+    const openDescriptionTemplateModal = async (): Promise<void> => {
+        console.log(formik.values.priceFilters);
         modal.open(
             <FormTemplateModal
                 title="Шаблони опису"
-                onChange={(index: number) => formik.setFieldValue('description', descriptionTemplateList[index])}
                 list={descriptionTemplateList}
+                onChange={(index: number) => formik.setFieldValue('description', descriptionTemplateList[index])}
             />,
         );
+    };
 
     const changeResidentsAmount = (value: SelectValue): void => {
         formik.setFieldValue('residentsAmount', +value.value);
+    };
+
+    const handlePrice = (name: string, value: string[]): void => {
+        formik.setFieldValue(name, sortPrice(value));
+    };
+
+    const handleRooms = (name: string, value: string[]): void => {
+        formik.setFieldValue(name, sortRooms(value));
     };
 
     const handleSelectCity = (value: SelectValue): void => {
@@ -222,8 +239,8 @@ const EditPostForm = (): JSX.Element => {
                     size="lg"
                     all={rooms}
                     name="roomFilters"
+                    onChange={handleRooms}
                     value={formik.values.roomFilters}
-                    onChange={formik.setFieldValue}
                     error={formik.touched.roomFilters && !!formik.errors.roomFilters}
                 />
             </FormSegment>
@@ -233,8 +250,8 @@ const EditPostForm = (): JSX.Element => {
                     size="lg"
                     all={price}
                     name="priceFilters"
+                    onChange={handlePrice}
                     value={formik.values.priceFilters}
-                    onChange={formik.setFieldValue}
                     error={formik.touched.priceFilters && !!formik.errors.priceFilters}
                 />
             </FormSegment>

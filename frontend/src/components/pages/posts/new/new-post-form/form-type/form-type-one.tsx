@@ -4,17 +4,15 @@ import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
-import { SelectValue } from '../../../../../../interfaces';
 import { FORM_TYPE, IStepOne } from '../../../../../../state/entities/posts/posts.interface';
 import { updateFormType } from '../../../../../../state/entities/posts/posts.reducer';
 import Button from '../../../../../common/button/button';
 import ImageWrp from '../../../../../common/image-wrp/image-wrp';
-import Select from '../../../../../common/select/select';
 import Textarea from '../../../../../common/textarea/textarea';
+import FormResidents from '../form-residents/form-residents';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
 import { formOneInitialState } from '../new-post-form';
-import { residentsAmount } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormOneSchema } from '../new-post-form.validation';
 
@@ -44,10 +42,6 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         errorHandler(formik);
     }, [errorHandler, formik]);
 
-    const changeResidentsAmount = (value: SelectValue): void => {
-        formik.setFieldValue('residentsAmount', +value.value);
-    };
-
     const resetForm = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         formik.resetForm();
@@ -65,14 +59,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
                 id="residents_amount"
                 error={formik.touched.residentsAmount && formik.errors.residentsAmount}
             >
-                <Select
-                    className={css.select}
-                    list={residentsAmount}
-                    placeholder="residentsAmount"
-                    onChange={changeResidentsAmount}
-                    value={residentsAmount.find(item => +item.value === formik.values.residentsAmount)}
-                    error={formik.touched.residentsAmount && !!formik.errors.residentsAmount}
-                />
+                <FormResidents value={formik.values.residentsAmount} onChange={formik.setFieldValue} />
             </FormSegment>
             <FormSegment
                 id="children"

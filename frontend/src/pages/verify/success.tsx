@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 
 import Button from '../../components/common/button/button';
 import Link from '../../components/common/link/link';
-import loginModal from '../../components/common/modal/modals/login-modal/login-modal';
 import Container from '../../components/layout/container/container';
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import Meta from '../../components/meta/meta';
@@ -48,9 +47,9 @@ const SuccessVerifyPage = (): JSX.Element => {
                 </Link>
             )
         ) : (
-            <Button primary onClick={loginModal}>
+            <Link type="button" primary href={routes.auth.login}>
                 Авторизуватись
-            </Button>
+            </Link>
         );
 
     const pageTypeMap: { [key: string]: JSX.Element } = {

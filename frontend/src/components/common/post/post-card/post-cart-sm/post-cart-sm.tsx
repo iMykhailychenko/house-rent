@@ -2,6 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
+import useMinMaxPrice from '../../../../../hooks/min-max-price.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
@@ -32,10 +33,11 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
                         <Tooltip classNameWrp={css.tooltip} content={post.title}>
-                            <h3>{cutString(post.title, 50)}</h3>
+                            <h3>{cutString(post.title, 100)}</h3>
                         </Tooltip>
                     </a>
                 </Link>
+
                 <PostCardFooter size="sm" post={post} />
             </div>
         </div>
