@@ -1,7 +1,7 @@
 import { IUser } from '../../../interfaces';
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 
 export interface IUserState {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     data: IUser;
 }

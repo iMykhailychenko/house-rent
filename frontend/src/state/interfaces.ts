@@ -8,7 +8,7 @@ import { IPostState } from './entities/posts/posts.interface';
 import { IProfileInfoState } from './entities/profile/profile.interface';
 import { IUserState } from './entities/users/users.interface';
 
-export type ThunkStatuses = 'idle' | 'loading' | 'success' | 'error';
+export type LoadingStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export type ErrorState = { status: number; message: string } | null;
 

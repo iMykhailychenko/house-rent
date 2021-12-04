@@ -1,9 +1,9 @@
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 
 export interface IAuthState {
     accessToken: string | null;
-    loginStatus: ThunkStatuses;
-    joinStatus: ThunkStatuses;
+    loginStatus: LoadingStatus;
+    joinStatus: LoadingStatus;
 }
 
 export interface IAuthResponse {

@@ -1,5 +1,5 @@
 import { IUser, Pagination } from '../../../interfaces';
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 
 export interface CreateChatPayload {
     customer: number;
@@ -30,7 +30,7 @@ export interface Message {
 }
 
 interface BaseType {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     error: string | null;
 }
 
@@ -39,7 +39,7 @@ export type ChatsList = Pagination<Chat> & BaseType;
 export type MessagesList = Pagination<Message> & BaseType;
 
 export interface SingleChat {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     data: Chat | null;
 }
 

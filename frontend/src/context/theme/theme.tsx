@@ -8,12 +8,12 @@ import { addYearToDate } from '../../utils/helpers/date.helper';
 export const Theme = createContext<[theme: THEME_ENUM, setTheme: (v: THEME_ENUM) => void]>([THEME_ENUM.WHITE, () => undefined]);
 
 interface IProps {
-    serverTheme?: THEME_ENUM;
+    initValue?: THEME_ENUM;
     children: JSX.Element;
 }
 
-const ThemeProvider = ({ children, serverTheme = THEME_ENUM.WHITE }: IProps): JSX.Element => {
-    const [theme, setTheme] = useState<THEME_ENUM>(serverTheme || 'white');
+const ThemeProvider = ({ children, initValue = THEME_ENUM.WHITE }: IProps): JSX.Element => {
+    const [theme, setTheme] = useState<THEME_ENUM>(initValue || 'white');
 
     useEffect(() => {
         const ref = document.querySelector('html');

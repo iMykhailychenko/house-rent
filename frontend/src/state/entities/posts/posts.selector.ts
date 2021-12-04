@@ -1,7 +1,7 @@
 import { shallowEqual } from 'react-redux';
 
 import { useAppSelector } from '../../../hooks/redux.hook';
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 import { RootState } from '../../reducer';
 
 import { INewPostState, IPostListState, ISinglePostState } from './posts.interface';
@@ -15,5 +15,5 @@ export const useSinglePostSelector = (): ISinglePostState =>
 export const usePostListSelector = (): IPostListState =>
     useAppSelector<IPostListState>(({ posts }: RootState) => posts.list, shallowEqual);
 
-export const useUpdateLoadingSelector = (): ThunkStatuses =>
-    useAppSelector<ThunkStatuses>(({ posts }: RootState) => posts.update.status, shallowEqual);
+export const useUpdateLoadingSelector = (): LoadingStatus =>
+    useAppSelector<LoadingStatus>(({ posts }: RootState) => posts.update.status, shallowEqual);

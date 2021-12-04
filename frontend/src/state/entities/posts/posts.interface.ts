@@ -1,5 +1,5 @@
 import { IUser, Pagination } from '../../../interfaces';
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 import { City } from '../filters/filters.interface';
 
 export enum POST_STATUS {
@@ -84,23 +84,23 @@ export enum FORM_TYPE {
 
 export interface INewPostState {
     formType: FORM_TYPE;
-    status: ThunkStatuses;
+    status: LoadingStatus;
     data: IPost | null;
     error: string | null;
 }
 
 export interface IUpdatePostState {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     error: string | null;
 }
 
 export interface ISinglePostState {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     error: string | null;
     data: IPost;
 }
 
-export type IPostListState = Pagination<IPost> & { error: string | null; status: ThunkStatuses };
+export type IPostListState = Pagination<IPost> & { error: string | null; status: LoadingStatus };
 
 export interface IPostState {
     new: INewPostState;

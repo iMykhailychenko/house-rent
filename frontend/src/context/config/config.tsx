@@ -10,12 +10,12 @@ export type IConfigValue = [config: IConfig, setConfig: (value: IConfig) => void
 export const Config = createContext<IConfigValue>([appConfig, () => undefined]);
 
 interface IProps {
-    value?: IConfig;
+    initValue?: IConfig;
     children: JSX.Element | JSX.Element[];
 }
 
-const ConfigProvider = ({ children, value = appConfig }: IProps): JSX.Element => {
-    const [config, setConfig] = useState<IConfig>(value);
+const ConfigProvider = ({ children, initValue = appConfig }: IProps): JSX.Element => {
+    const [config, setConfig] = useState<IConfig>(initValue);
     const handleConfig = (data: IConfig): void => {
         try {
             Cookies.set('house_rent_config', JSON.stringify(data), { expires: addMonthToDate(1) });

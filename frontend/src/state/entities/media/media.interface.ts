@@ -1,8 +1,8 @@
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 
 export interface IMediaState {
     progress: number;
-    status: ThunkStatuses;
+    status: LoadingStatus;
     url: string | null;
 }
 

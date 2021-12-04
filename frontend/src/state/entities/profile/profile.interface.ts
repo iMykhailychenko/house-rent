@@ -1,5 +1,5 @@
 import { IUser, UserRole } from '../../../interfaces';
-import { ThunkStatuses } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces';
 
 export interface IUpdateProfilePayload {
     role?: UserRole[];
@@ -14,6 +14,6 @@ export interface ChangeEmailPayload {
 }
 
 export interface IProfileInfoState {
-    status: ThunkStatuses;
+    status: LoadingStatus;
     data: IUser;
 }
