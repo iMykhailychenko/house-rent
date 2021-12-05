@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser, UserRole } from '../../../interfaces';
+import { hydrate } from '../../actions';
+import { IState } from '../../interfaces';
 import { restorePasswordThunk } from '../auth/auth.thunk';
 
 import { profileInitialState } from './profile.initial-state';
@@ -12,6 +14,8 @@ const profileSlice = createSlice({
     initialState: profileInitialState,
     reducers: {},
     extraReducers: builder => {
+        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.profile);
+
         builder.addCase('AUTH/logoutAction', () => profileInitialState);
 
         // thunk

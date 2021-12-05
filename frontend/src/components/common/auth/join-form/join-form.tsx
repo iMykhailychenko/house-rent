@@ -2,10 +2,13 @@ import React from 'react';
 
 import clsx from 'clsx';
 import { useFormik } from 'formik';
+import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
+import { SHOW_SUCCESS_PAGE } from '../../../../constant/cookie.constant';
 import useTrans from '../../../../hooks/trans.hook';
+import { IJoinPayload } from '../../../../state/entities/auth/auth.interface';
 import { useAuthSelector } from '../../../../state/entities/auth/auth.selector';
 import { authJoinThunk } from '../../../../state/entities/auth/auth.thunk';
 import Button from '../../button/button';
@@ -48,7 +51,7 @@ const JoinForm = (): JSX.Element => {
     const dispatch = useDispatch();
     const authState = useAuthSelector();
 
-    const formik = useFormik({
+    const formik = useFormik<IJoinPayload>({
         initialValues: {
             firstName: '',
             lastName: '',
@@ -56,8 +59,9 @@ const JoinForm = (): JSX.Element => {
             password: 'Asdf1234!',
         },
         validationSchema: JoinSchema,
-        onSubmit: values => {
-            dispatch(authJoinThunk(values));
+        onSubmit: async (values): Promise<void> => {
+            await dispatch(authJoinThunk(values));
+            Cookies.set(SHOW_SUCCESS_PAGE, JSON.stringify({ openPage: true }));
         },
     });
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
@@ -16,7 +15,6 @@ import { useRole } from '../../hooks/role.hook';
 import { sendRestorePasswordEmailThunk } from '../../state/entities/auth/auth.thunk';
 import { useProfileInfoSelector } from '../../state/entities/profile/profile.selector';
 import routes from '../../utils/routes';
-import { withStore } from '../../utils/ssr';
 
 import css from './verify.module.scss';
 
@@ -24,7 +22,7 @@ const ConfettiWrp = dynamic(() => import('../../components/common/confetti/confe
 
 const SuccessVerifyPage = (): JSX.Element => {
     const role = useRole();
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const dispatch = useAppDispatch();
     const profileData = useProfileInfoSelector();
 
@@ -36,7 +34,7 @@ const SuccessVerifyPage = (): JSX.Element => {
     };
 
     const renderActionBtn = (): JSX.Element =>
-        auth?.accessToken ? (
+        token.accessToken ? (
             role.isUser ? (
                 <Link type="button" primary href={routes.posts.new}>
                     Створити оголошення
@@ -71,7 +69,7 @@ const SuccessVerifyPage = (): JSX.Element => {
             <>
                 <h2>Ви успішно відновили вашу електронну пошту.</h2>
                 <p>Ми рекомендуємо вам терміново змінити пароль на сайті!</p>
-                {auth?.accessToken ? (
+                {token.accessToken ? (
                     <Button primary onClick={handleChangePassword}>
                         Змінити пароль
                     </Button>
@@ -100,7 +98,5 @@ const SuccessVerifyPage = (): JSX.Element => {
         </>
     );
 };
-
-export const getServerSideProps: GetServerSideProps = withStore();
 
 export default SuccessVerifyPage;

@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { hydrate } from '../../actions';
+import { IState } from '../../interfaces';
+
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPostState } from './posts.interface';
 import { deletePostReducer } from './reducers/delete-post.reducer';
@@ -21,6 +24,7 @@ const postsSlice = createSlice({
         },
     },
     extraReducers: builder => {
+        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.posts);
         newPostReducer(builder);
         updatePostReducer(builder);
         updateStatusReducer(builder);

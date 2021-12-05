@@ -1,21 +1,17 @@
 import React from 'react';
 
-import { GetServerSideProps } from 'next';
-
+import AuthRedirect from '../../components/common/auth/auth-redirect/auth-redirect';
 import LoginForm from '../../components/common/auth/login-form/login-form';
 import Meta from '../../components/meta/meta';
 import AuthLayout from '../../components/pages/auth/layout/layout';
-import { withAuthRedirect } from '../../utils/ssr';
 
 const LoginPage = (): JSX.Element => (
-    <>
+    <AuthRedirect reverse={true}>
         <Meta />
         <AuthLayout src="login">
             <LoginForm />
         </AuthLayout>
-    </>
+    </AuthRedirect>
 );
-
-export const getServerSideProps: GetServerSideProps = withAuthRedirect(null, true);
 
 export default LoginPage;

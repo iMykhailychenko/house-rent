@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 type UploadContextType = [file: File | null, setFile: (file: File | null) => void];
-export const UploadContext = createContext<UploadContextType>([null, (_: File | null) => undefined]);
+export const UploadContext = createContext<UploadContextType>([null, () => undefined]);
 
 interface IProps {
     children: JSX.Element[] | JSX.Element;

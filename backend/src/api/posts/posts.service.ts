@@ -67,17 +67,6 @@ export class PostsService {
         };
     }
 
-    async isPostInFavorite(postId: number, userId: number): Promise<boolean> {
-        return !!(await this.favoriteRepository.findOne({ where: { post: postId, user: userId } }));
-    }
-
-    async addFavoriteFieldToPostsList(userId: number, postsList: Pagination<PostEntity>): Promise<Pagination<PostEntity>> {
-        for await (const post of postsList.data) {
-            post.isFavorite = await this.isPostInFavorite(post.id, userId);
-        }
-        return postsList;
-    }
-
     async findAll(searchPostDto: SearchPostDto): Promise<Pagination<PostEntity>> {
         const sqlQuery = await this.getSqlQueryForSearch(searchPostDto);
         const total = await sqlQuery.getCount();
@@ -151,7 +140,7 @@ export class PostsService {
         };
     }
 
-    async findByIdRead(postId: number): Promise<PostEntity> {
+    async findById(postId: number): Promise<PostEntity> {
         const post = await this.postRepository
             .createQueryBuilder('posts')
             .where({ id: postId, status: POST_STATUS.ACTIVE })
@@ -168,31 +157,7 @@ export class PostsService {
             .where({ id: postId })
             .execute();
 
-        return { ...post, views: post.views + 1, isFavorite: false };
-    }
-
-    async findById(postId: number, userId: number): Promise<PostEntity> {
-        const post = await this.postRepository
-            .createQueryBuilder('posts')
-            .where({ id: postId })
-            .leftJoinAndSelect('posts.user', 'user')
-            .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
-            .getOne();
-
-        if (!post) throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
-        if (post.status !== POST_STATUS.ACTIVE && post.user.id !== userId)
-            throw new HttpException('Post with this id do not exist', HttpStatus.NOT_FOUND);
-
-        await this.postRepository
-            .createQueryBuilder('posts')
-            .update(PostEntity)
-            .set({ views: () => 'views + 1' })
-            .where({ id: postId })
-            .execute();
-
-        post.isFavorite = await this.isPostInFavorite(post.id, userId);
-
-        return { ...post, views: post.views + 1, isFavorite: false };
+        return { ...post, views: post.views + 1 };
     }
 
     async createPost(userId: number, createPostDto: CreatePostDto): Promise<PostEntity> {

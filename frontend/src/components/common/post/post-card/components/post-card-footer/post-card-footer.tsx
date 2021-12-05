@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Bookmark from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import LaunchIcon from '@mui/icons-material/Launch';
 import Share from '@mui/icons-material/Share';
@@ -38,7 +37,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const role = useRole();
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const history = useRouter();
 
     const minMaxPrice = useMinMaxPrice();
@@ -46,12 +45,12 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     const isSmallSize = size === 'sm';
 
     const toggleFavorite = (): void => {
-        if (!auth?.accessToken) return loginModal();
+        if (!token.accessToken) return loginModal();
         dispatch(togglePostFavoriteThunk(post.id));
     };
 
     const openChat = async () => {
-        if (!auth?.accessToken) return loginModal();
+        if (!token.accessToken) return loginModal();
 
         if (!role.isRealtor) {
             changeUserRole(
@@ -71,17 +70,9 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.flex, isSmallSize && css.smallSize)}>
             <div className={css.info}>
-                <Tooltip
-                    className={css.tooltip}
-                    content={post.isFavorite ? 'remove_post_from_favorites' : 'add_post_to_favorites'}
-                >
-                    <Button
-                        size="sm"
-                        primary={post.isFavorite}
-                        secondary={!post.isFavorite && !isSmallSize}
-                        onClick={toggleFavorite}
-                    >
-                        {post.isFavorite ? <Bookmark /> : <BookmarkBorderIcon />}
+                <Tooltip className={css.tooltip} content="add_post_to_favorites">
+                    <Button size="sm" secondary={!isSmallSize} onClick={toggleFavorite}>
+                        <BookmarkBorderIcon />
                     </Button>
                 </Tooltip>
 

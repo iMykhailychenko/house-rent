@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Close from '@mui/icons-material/Close';
 
-import useMaxWidth from '../../../../../hooks/media.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { modal } from '../../modal';
 
@@ -16,12 +15,6 @@ interface IProps {
 
 const StickyModal = ({ title = '', footer, children }: IProps): JSX.Element => {
     const trans = useTrans();
-    const media = useMaxWidth(768);
-
-    useEffect(() => {
-        const backdrop = document.getElementById('backdrop');
-        if (backdrop) backdrop.style.alignItems = media ? 'center' : 'flex-end';
-    }, [media]);
 
     return (
         <div className={css.root}>

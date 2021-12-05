@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 
 import Cookies from 'js-cookie';
 
+import { HOUSE_RENT_THEME } from '../../constant/cookie.constant';
 import { THEME_ENUM } from '../../interfaces';
 import { addYearToDate } from '../../utils/helpers/date.helper';
 
@@ -24,7 +25,7 @@ const ThemeProvider = ({ children, initValue = THEME_ENUM.WHITE }: IProps): JSX.
 
     const handleTheme = (value: THEME_ENUM): void => {
         try {
-            Cookies.set('house_rent_theme', value, { expires: addYearToDate(1) });
+            Cookies.set(HOUSE_RENT_THEME, value, { expires: addYearToDate(1) });
             const ref = document.querySelector('html');
             if (ref) {
                 ref.classList.remove('default');

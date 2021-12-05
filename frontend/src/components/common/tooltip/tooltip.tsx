@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 
-import useMaxWidth from '../../../hooks/media.hook';
 import useTrans from '../../../hooks/trans.hook';
 
 import css from './tooltip.module.scss';
@@ -18,9 +17,8 @@ interface IProps {
 
 type PositionClassNames = 'top_left' | 'top_right' | 'bottom_left' | 'bottom_right';
 
-const Tooltip = ({ children, withMobile = false, className, classNameWrp, content, hidden = false }: IProps): JSX.Element => {
+const Tooltip = ({ children, withMobile = false, className, content, hidden = false }: IProps): JSX.Element => {
     const trans = useTrans();
-    const media = useMaxWidth(768);
     const ref = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState<PositionClassNames>('top_right');
 
@@ -37,17 +35,15 @@ const Tooltip = ({ children, withMobile = false, className, classNameWrp, conten
 
     const handleHover = (): void => handleTooltipPosition();
 
-    return media || withMobile ? (
-        <div ref={ref} className={clsx(css.wrp, classNameWrp)} onMouseEnter={handleHover}>
+    return (
+        <div ref={ref} className={clsx(css.wrp, className, { [css.mobile]: withMobile })} onMouseEnter={handleHover}>
             {!hidden && content && (
-                <div className={clsx(css.tooltip, css[position], 'tooltip', className)}>
+                <div className={clsx(css.tooltip, css[position], 'tooltip')}>
                     {typeof content === 'string' ? trans(content) : content}
                 </div>
             )}
             {children}
         </div>
-    ) : (
-        <>{children}</>
     );
 };
 

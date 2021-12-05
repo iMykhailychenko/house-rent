@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 import Cookies from 'js-cookie';
 
 import appConfig from '../../config/app.config';
+import { HOUSE_RENT_CONFIG } from '../../constant/cookie.constant';
 import { IConfig } from '../../interfaces';
 import { addMonthToDate } from '../../utils/helpers/date.helper';
 
@@ -18,7 +19,7 @@ const ConfigProvider = ({ children, initValue = appConfig }: IProps): JSX.Elemen
     const [config, setConfig] = useState<IConfig>(initValue);
     const handleConfig = (data: IConfig): void => {
         try {
-            Cookies.set('house_rent_config', JSON.stringify(data), { expires: addMonthToDate(1) });
+            Cookies.set(HOUSE_RENT_CONFIG, JSON.stringify(data), { expires: addMonthToDate(1) });
             setConfig(data);
         } catch (error) {
             setConfig(appConfig);

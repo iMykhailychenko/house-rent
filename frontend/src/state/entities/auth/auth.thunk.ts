@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 import { banner } from '../../../components/common/banner/banner';
 import { BannerType } from '../../../components/common/banner/banner.interface';
 import { modal } from '../../../components/common/modal/modal';
+import { HOUSE_RENT_AUTH } from '../../../constant/cookie.constant';
 import { addMonthToDate } from '../../../utils/helpers/date.helper';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
+import api from '../../../utils/interceptors';
 import routes from '../../../utils/routes';
-import { profileInfoThunk } from '../profile/profile.thunk';
 
 import {
     IAuthResponse,
@@ -22,14 +22,14 @@ import authServices from './auth.services';
 
 export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
     'AUTH/LOGIN',
-    async (payload: ILoginPayload, { dispatch, rejectWithValue }) => {
+    async (payload: ILoginPayload, { rejectWithValue }) => {
         try {
             const { data, status } = await authServices.login(payload);
             if (status !== 201) throw new Error();
 
-            Cookies.set('house_rent_auth', JSON.stringify(data), { expires: addMonthToDate(1) });
-            axios.defaults.headers.common.Authorization = data.accessToken;
-            await dispatch(profileInfoThunk());
+            const accessToken = `Bearer ${data.accessToken}`;
+            Cookies.set(HOUSE_RENT_AUTH, JSON.stringify({ accessToken }), { expires: addMonthToDate(1) });
+            api.defaults.headers.common.Authorization = accessToken || null;
 
             return data;
         } catch (error) {

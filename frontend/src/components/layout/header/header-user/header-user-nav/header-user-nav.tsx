@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
 
+import useAuth from '../../../../../hooks/auth.hook';
 import useTrans from '../../../../../hooks/trans.hook';
-import { logoutAction } from '../../../../../state/entities/auth/auth.reducer';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../utils/routes';
 
@@ -13,14 +12,13 @@ import css from './header-user-nav.module.scss';
 
 const HeaderUserNav = (): JSX.Element => {
     const trans = useTrans();
+    const { logout } = useAuth();
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
     const profileState = useProfileInfoSelector();
 
-    const logout = (): void => {
+    const handleLogout = (): void => {
         setLoading(true);
-        dispatch(logoutAction());
-        window.location.reload();
+        logout();
     };
 
     return (
@@ -55,7 +53,7 @@ const HeaderUserNav = (): JSX.Element => {
                 )}
             </li>
             <li className={css.li}>
-                <button type="button" onClick={logout} className={clsx(css.btn, css.error)}>
+                <button type="button" onClick={handleLogout} className={clsx(css.btn, css.error)}>
                     {trans('Вийти')}
                 </button>
             </li>

@@ -37,14 +37,14 @@ const RoleComponent = ({ text, title }: IRoleProps): JSX.Element => {
 const UserBanner = (): JSX.Element => {
     const role = useRole();
     const trans = useTrans();
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const history = useRouter();
     const dispatch = useAppDispatch();
 
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
     const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
-    const userData = auth?.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
+    const userData = token.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -54,7 +54,7 @@ const UserBanner = (): JSX.Element => {
         );
 
     const openChat = async (): Promise<void> => {
-        if (!auth?.accessToken) return loginModal();
+        if (!token.accessToken) return loginModal();
         if (!role.isRealtor) return changeUserRoleModal();
 
         setLoading(true);

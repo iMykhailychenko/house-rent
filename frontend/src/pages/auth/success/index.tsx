@@ -2,16 +2,14 @@ import React, { useEffect } from 'react';
 
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Cookies from 'js-cookie';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
 import Link from '../../../components/common/link/link';
 import Container from '../../../components/layout/container/container';
 import RootLayout from '../../../components/layout/root-layout/root-layout';
 import Meta from '../../../components/meta/meta';
-import { parseCookie } from '../../../utils/helpers/cookie.helper';
+import { SHOW_SUCCESS_PAGE } from '../../../constant/cookie.constant';
 import routes from '../../../utils/routes';
-import { withAuthRedirect } from '../../../utils/ssr';
 
 import css from './success.module.scss';
 
@@ -20,7 +18,7 @@ const ConfettiWrp = dynamic(() => import('../../../components/common/confetti/co
 
 const AuthSuccessPage = (): JSX.Element => {
     useEffect(() => {
-        Cookies.remove('show_success_page');
+        Cookies.remove(SHOW_SUCCESS_PAGE);
         document.querySelector('html')?.classList?.add('default');
 
         return () => {
@@ -52,19 +50,19 @@ const AuthSuccessPage = (): JSX.Element => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withAuthRedirect(
-    async (ctx: GetServerSidePropsContext): Promise<{ redirect: boolean } | void> => {
-        const pageState = parseCookie<{ openPage: boolean }>({
-            key: 'show_success_page',
-            value: ctx?.req?.headers?.cookie,
-            defaultValue: { openPage: false },
-        });
-
-        if (!pageState.openPage) {
-            return { redirect: true };
-        }
-    },
-    true,
-);
+// export const getServerSideProps: GetServerSideProps = withAuthRedirect(
+//     async (ctx: GetServerSidePropsContext): Promise<{ redirect: boolean } | void> => {
+//         const pageState = parseCookie<{ openPage: boolean }>({
+//             key: 'show_success_page',
+//             value: ctx?.req?.headers?.cookie,
+//             defaultValue: { openPage: false },
+//         });
+//
+//         if (!pageState.openPage) {
+//             return { redirect: true };
+//         }
+//     },
+//     true,
+// );
 
 export default AuthSuccessPage;

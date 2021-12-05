@@ -2,7 +2,6 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import useMinMaxPrice from '../../../../../hooks/min-max-price.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';

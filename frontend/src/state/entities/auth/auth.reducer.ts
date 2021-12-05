@@ -1,32 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { createSlice } from '@reduxjs/toolkit';
 
 import authInitialState from './auth.initial-state';
-import { IAuthResponse, IAuthState } from './auth.interface';
+import { IAuthState } from './auth.interface';
 import { authJoinThunk, authLoginThunk, restorePasswordThunk } from './auth.thunk';
 
 const authSlice = createSlice({
     name: 'AUTH',
     initialState: authInitialState,
-    reducers: {
-        cookiesTokenAction(state: IAuthState, action: PayloadAction<string>) {
-            state.accessToken = action.payload;
-            state.loginStatus = 'success';
-        },
-        logoutAction() {
-            delete axios.defaults.headers.common.Authorization;
-            Cookies.remove('house_rent_auth');
-            return authInitialState;
-        },
-    },
+    reducers: {},
     extraReducers: builder => {
         builder.addCase(authJoinThunk.pending, (state: IAuthState) => {
             state.joinStatus = 'loading';
         });
         builder.addCase(authJoinThunk.fulfilled, (state: IAuthState) => {
             state.joinStatus = 'success';
-            Cookies.set('show_success_page', JSON.stringify({ openPage: true }));
         });
         builder.addCase(authJoinThunk.rejected, (state: IAuthState) => {
             state.joinStatus = 'error';
@@ -35,23 +22,17 @@ const authSlice = createSlice({
         builder.addCase(authLoginThunk.pending, (state: IAuthState) => {
             state.loginStatus = 'loading';
         });
-        builder.addCase(authLoginThunk.fulfilled, (state: IAuthState, action: PayloadAction<IAuthResponse>) => {
+        builder.addCase(authLoginThunk.fulfilled, (state: IAuthState) => {
             state.loginStatus = 'success';
-            state.accessToken = action.payload.accessToken;
-            window.location.reload();
         });
         builder.addCase(authLoginThunk.rejected, (state: IAuthState) => {
             state.loginStatus = 'error';
         });
 
         builder.addCase(restorePasswordThunk.fulfilled, () => {
-            delete axios.defaults.headers.common.Authorization;
-            Cookies.remove('house_rent_auth');
             return authInitialState;
         });
     },
 });
-
-export const { cookiesTokenAction, logoutAction } = authSlice.actions;
 
 export default authSlice.reducer;

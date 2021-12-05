@@ -4,6 +4,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import rootInitialState from './initial-state';
 import rootReducer, { RootState } from './reducer';
 
+// eslint-disable-next-line
 export type AppStore = Store<RootState, any>;
 
 const makeStore = (): AppStore =>

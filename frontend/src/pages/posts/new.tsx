@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { GetServerSideProps } from 'next';
-
+import GetStaticProfile from '../../components/common/auth/get-static-profile/get-static-profile';
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import Meta from '../../components/meta/meta';
 import NewPostContainer from '../../components/pages/posts/new/new-post-container/new-post-container';
-import { withStore } from '../../utils/ssr';
 
 const NewPostPage = (): JSX.Element => {
     useEffect(() => {
@@ -14,15 +12,13 @@ const NewPostPage = (): JSX.Element => {
     }, []);
 
     return (
-        <>
+        <GetStaticProfile>
             <Meta />
             <RootLayout withFooter={false}>
                 <NewPostContainer />
             </RootLayout>
-        </>
+        </GetStaticProfile>
     );
 };
-
-export const getServerSideProps: GetServerSideProps = withStore();
 
 export default NewPostPage;

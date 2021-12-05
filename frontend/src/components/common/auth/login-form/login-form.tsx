@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
+import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
+import { ILoginPayload } from '../../../../state/entities/auth/auth.interface';
 import { useAuthSelector } from '../../../../state/entities/auth/auth.selector';
 import { authLoginThunk } from '../../../../state/entities/auth/auth.thunk';
 import routes from '../../../../utils/routes';
@@ -23,17 +24,18 @@ const LoginSchema = Yup.object().shape({
 
 const LoginForm = (): JSX.Element => {
     const trans = useTrans();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const authState = useAuthSelector();
 
-    const formik = useFormik({
+    const formik = useFormik<ILoginPayload>({
         initialValues: {
             email: 'user2@email.com',
             password: 'Asdf1234!',
         },
         validationSchema: LoginSchema,
-        onSubmit: values => {
-            dispatch(authLoginThunk(values));
+        onSubmit: async (values): Promise<void> => {
+            const data = await dispatch(authLoginThunk(values)).unwrap();
+            if (data.accessToken) window.location.reload();
         },
     });
 

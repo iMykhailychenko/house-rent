@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Button from '../../components/common/button/button';
@@ -14,12 +13,11 @@ import useAuth from '../../hooks/auth.hook';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { sendNewEmailThunk } from '../../state/entities/profile/profile.thunk';
 import routes from '../../utils/routes';
-import { withStore } from '../../utils/ssr';
 
 import css from './verify.module.scss';
 
 const ErrorVerifyPage = (): JSX.Element => {
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const history = useRouter();
     const dispatch = useAppDispatch();
 
@@ -49,7 +47,7 @@ const ErrorVerifyPage = (): JSX.Element => {
                     <div className={css.error}>
                         <h2>Виникла помилка верифікації!</h2>
                         <p>Можливо термін дії посилання вже закінчився. Спробуйте авторизуватись та надіслати лист повторно</p>
-                        {auth?.accessToken ? (
+                        {token.accessToken ? (
                             <Button loading={loading} primary onClick={handleEmail}>
                                 Надіслати лист повторно
                             </Button>
@@ -64,7 +62,5 @@ const ErrorVerifyPage = (): JSX.Element => {
         </>
     );
 };
-
-export const getServerSideProps: GetServerSideProps = withStore();
 
 export default ErrorVerifyPage;

@@ -20,8 +20,7 @@ interface IProps {
 }
 
 const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
-    const [token] = useAuth();
-
+    const { token } = useAuth();
     const [drawer, setDrawer] = useState(false);
     const handleDrawerClose = (): void => setDrawer(false);
     const handleDrawerOpen = (): void => setDrawer(true);
@@ -40,7 +39,7 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
 
                     <div className={css.item}>
                         {withTheme && <SwitchTheme />}
-                        {token?.accessToken ? <HeaderUser /> : <HeaderAuth />}
+                        {token.accessToken ? <HeaderUser /> : <HeaderAuth />}
                     </div>
                 </Container>
             </header>

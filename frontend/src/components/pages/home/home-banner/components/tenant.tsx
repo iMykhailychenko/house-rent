@@ -14,12 +14,12 @@ import css from '../home-banner.module.scss';
 
 const Tenant = (): JSX.Element => {
     const trans = useTrans();
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const history = useRouter();
     const profileData = useProfileInfoSelector();
 
     const handleRedirect = (): void => {
-        if (auth?.accessToken && !profileData.data.isEmailVerified) {
+        if (token.accessToken && !profileData.data.isEmailVerified) {
             banner.add(VALIDATE_EMAIL_ERROR);
             return;
         }

@@ -66,8 +66,6 @@ export class PostEntity {
     @ManyToOne(() => UserEntity, user => user.posts)
     user: UserEntity;
 
-    isFavorite: boolean;
-
     @OneToMany(() => FavoriteEntity, favorite => favorite.post)
     favorite: FavoriteEntity[];
 }

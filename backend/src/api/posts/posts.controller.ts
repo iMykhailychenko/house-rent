@@ -18,30 +18,11 @@ export class PostsController {
     constructor(private readonly postsService: PostsService) {}
 
     @Get('')
-    @UseGuards(AuthGuard)
-    async findAll(@User('id') userId: number, @SearchPost() searchFilters: SearchPostDto): Promise<Pagination<PostEntity>> {
-        return await this.postsService.addFavoriteFieldToPostsList(userId, await this.postsService.findAll(searchFilters));
-    }
-
-    @Get('read')
     async findAllRead(@SearchPost() searchFilters: SearchPostDto): Promise<Pagination<PostEntity>> {
         return await this.postsService.findAll(searchFilters);
     }
 
     @Get('users/:userId')
-    @UseGuards(AuthGuard)
-    async findAllForUser(
-        @User('id') currentUserId: number,
-        @Param('userId', ParseIntPipe) userId: number,
-        @SearchPost() searchFilters: SearchPostDto,
-    ): Promise<Pagination<PostEntity>> {
-        return await this.postsService.addFavoriteFieldToPostsList(
-            currentUserId,
-            await this.postsService.findAllForUser(userId, searchFilters),
-        );
-    }
-
-    @Get('read/users/:userId')
     async findAllForUserRead(
         @Param('userId', ParseIntPipe) userId: number,
         @SearchPost() searchFilters: SearchPostDto,
@@ -60,11 +41,6 @@ export class PostsController {
         return await this.postsService.findAllPersonal(userId, { page, limit, status });
     }
 
-    @Get('read/:postId')
-    async findByIdRead(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
-        return await this.postsService.findByIdRead(postId);
-    }
-
     @Get('favorite')
     @UseGuards(AuthGuard)
     async findFavorite(
@@ -76,9 +52,8 @@ export class PostsController {
     }
 
     @Get(':postId')
-    @UseGuards(AuthGuard)
-    async findById(@User('id') userId: number, @Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
-        return await this.postsService.findById(postId, userId);
+    async findByIdRead(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
+        return await this.postsService.findById(postId);
     }
 
     @Post('')

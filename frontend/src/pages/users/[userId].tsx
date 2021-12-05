@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import PostFilters from '../../components/common/post/post-filters/post-filters';
@@ -12,8 +11,6 @@ import Meta from '../../components/meta/meta';
 import UserBanner from '../../components/pages/users/user-banner/user-banner';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { getUserPostsListPaginationThunk, getUserPostsListThunk } from '../../state/entities/posts/thunks/user-posts.thunk';
-import { userInfoThunk } from '../../state/entities/users/users.thunk';
-import { withStore } from '../../utils/ssr';
 
 const UserProfilePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -48,13 +45,13 @@ const UserProfilePage = (): JSX.Element => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
-    const page = +String(ctx.query?.page || 1);
-    const userId = +String(ctx.params?.userId || 0);
-
-    if (!userId) return;
-    await ctx.store?.dispatch(getUserPostsListThunk({ userId, page }));
-    await ctx.store?.dispatch(userInfoThunk(userId));
-});
+// export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
+//     const page = +String(ctx.query?.page || 1);
+//     const userId = +String(ctx.params?.userId || 0);
+//
+//     if (!userId) return;
+//     await ctx.store?.dispatch(getUserPostsListThunk({ userId, page }));
+//     await ctx.store?.dispatch(userInfoThunk(userId));
+// });
 
 export default UserProfilePage;

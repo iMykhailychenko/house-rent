@@ -12,8 +12,7 @@ api.interceptors.response.use(
     res => AxiosLogger.responseLogger(res, { data: false }),
     error => {
         if (error?.response?.status === 401) {
-            delete api.defaults.headers.common.Authorization;
-            if (process.browser) window.location.reload();
+            // delete api.defaults.headers.common.Authorization;
         }
 
         return Promise.reject(error);

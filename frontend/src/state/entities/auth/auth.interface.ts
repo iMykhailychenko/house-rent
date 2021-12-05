@@ -1,7 +1,6 @@
 import { LoadingStatus } from '../../interfaces';
 
 export interface IAuthState {
-    accessToken: string | null;
     loginStatus: LoadingStatus;
     joinStatus: LoadingStatus;
 }

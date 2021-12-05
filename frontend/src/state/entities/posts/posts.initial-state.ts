@@ -19,7 +19,6 @@ export const singlePostsInitialState: IPost = {
     roomFilters: ['loading...'],
     status: POST_STATUS.ACTIVE,
     user: userInitValue,
-    isFavorite: false,
     favorite: 0,
     chats: 0,
     views: 0,

@@ -15,35 +15,28 @@ import {
 } from './posts.interface';
 
 const postsServices = {
-    singlePost: (id: number): Response<IPost> => {
-        const path = api.defaults.headers.common.Authorization ? '/posts/' : '/posts/read/';
-        return api.get(endpointConfig(path + id));
-    },
-    postsList: (page: number, query: Params = {}): Response<Pagination<IPost>> => {
-        const path = api.defaults.headers.common.Authorization ? '/posts/?' : '/posts/read/?';
-        return api.get(
+    singlePost: (id: number): Response<IPost> => api.get(endpointConfig('/posts/' + id)),
+    postsList: (page: number, query: Params = {}): Response<Pagination<IPost>> =>
+        api.get(
             endpointConfig(
-                path +
+                '/posts/?' +
                     queryString.stringify(
                         { page, limit: uiConfig.postsPerPage, ...query },
                         { skipNull: true, arrayFormat: 'comma' },
                     ),
             ),
-        );
-    },
+        ),
     personalPosts: (query: IPersonalPostsListPayload): Response<Pagination<IPost>> =>
         api.get(endpointConfig('/posts/personal'), { params: { ...query, limit: uiConfig.postsPerPage } }),
-    getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> => {
-        const path = api.defaults.headers.common.Authorization ? '/posts/users' : '/posts/read/users';
-        return api.get(
+    getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> =>
+        api.get(
             endpointConfig(
-                `${path}/${data.userId}/?${queryString.stringify(
+                `/posts/users/${data.userId}/?${queryString.stringify(
                     { limit: uiConfig.postsPerPage, page: data.page, ...query },
                     { skipNull: true },
                 )}`,
             ),
-        );
-    },
+        ),
     newPost: (body: INewPostPayload): Response<IPost> => api.post(endpointConfig('/posts'), body),
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => api.put(endpointConfig(`/posts/${id}`), body),
     updatePostStatus: ({ id, status }: IEditPostStatusPayload): Response<IPost> =>

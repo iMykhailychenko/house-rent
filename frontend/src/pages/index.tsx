@@ -10,7 +10,9 @@ import Meta from '../components/meta/meta';
 import HomeBanner from '../components/pages/home/home-banner/home-banner';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { postListPaginationThunk, postListThunk } from '../state/entities/posts/thunks/post-list.thunk';
-import { withStore } from '../utils/ssr';
+import { profileInfoThunk } from '../state/entities/profile/profile.thunk';
+import { wrapper } from '../state/store';
+import { cookieAuth } from '../utils/helpers/cookie.helper';
 
 const HomePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -41,8 +43,13 @@ const HomePage = (): JSX.Element => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withStore(async ctx => {
-    await ctx.store?.dispatch(postListThunk(+String(ctx.query?.page || 1)));
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store => async context => {
+    if (cookieAuth(context.req.headers.cookie).accessToken) {
+        await store.dispatch(profileInfoThunk());
+    }
+
+    await store.dispatch(postListThunk(+String(context.query?.page || 1)));
+    return { props: {} };
 });
 
 export default HomePage;

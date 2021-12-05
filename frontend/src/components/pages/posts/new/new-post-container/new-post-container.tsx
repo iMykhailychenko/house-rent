@@ -20,14 +20,14 @@ const titleMap = {
 };
 
 const NewPostContainer = (): JSX.Element => {
-    const [token] = useAuth();
+    const { token } = useAuth();
     const newPostState = useNewPostSelector();
 
     return (
         <Container size="sm" className={css.root}>
             <h2 className={css.title}>{titleMap[newPostState.formType]}</h2>
-            <div className={clsx(css.inner, !token?.accessToken && css.notAuth)}>
-                {token?.accessToken ? <NewPostForm /> : <JoinForm />}
+            <div className={clsx(css.inner, !token.accessToken && css.notAuth)}>
+                {token.accessToken ? <NewPostForm /> : <JoinForm />}
             </div>
         </Container>
     );

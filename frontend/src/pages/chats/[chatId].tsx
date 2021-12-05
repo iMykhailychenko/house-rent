@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import MessagesSkeleton from '../../components/common/skeletons/chat/messages/messages';
@@ -15,13 +14,12 @@ import { useAppDispatch } from '../../hooks/redux.hook';
 import { Message } from '../../state/entities/chats/chats.interface';
 import { pushMessage, updateMessage } from '../../state/entities/chats/chats.reducer';
 import { useMessageStatusSelector } from '../../state/entities/chats/chats.selector';
-import { chatListThunk, messagesListThunk, singleChatThunk } from '../../state/entities/chats/chats.thunk';
-import { withAuthRedirect } from '../../utils/ssr';
+import { messagesListThunk } from '../../state/entities/chats/chats.thunk';
 
 import css from './chats.module.scss';
 
 const MessagesPage = (): JSX.Element => {
-    const [auth] = useAuth();
+    const { token } = useAuth();
     const socket = useChatSocket();
     const dispatch = useAppDispatch();
 
@@ -41,10 +39,10 @@ const MessagesPage = (): JSX.Element => {
     }, [socket, dispatch]);
 
     useEffect(() => {
-        if (auth?.accessToken && messageStatus === 'idle') {
+        if (token.accessToken && messageStatus === 'idle') {
             dispatch(messagesListThunk({ chatId }));
         }
-    }, [chatId, dispatch, auth?.accessToken, messageStatus]);
+    }, [chatId, dispatch, token.accessToken, messageStatus]);
 
     return (
         <>
@@ -58,9 +56,9 @@ const MessagesPage = (): JSX.Element => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = withAuthRedirect(async ctx => {
-    await ctx.store?.dispatch(singleChatThunk(+String(ctx.query.chatId)));
-    await ctx.store?.dispatch(chatListThunk({ page: 1 }));
-});
+// export const getServerSideProps: GetServerSideProps = withAuthRedirect(async ctx => {
+//     await ctx.store?.dispatch(singleChatThunk(+String(ctx.query.chatId)));
+//     await ctx.store?.dispatch(chatListThunk({ page: 1 }));
+// });
 
 export default MessagesPage;
