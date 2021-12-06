@@ -8,7 +8,6 @@ import css from './tooltip.module.scss';
 
 interface IProps {
     className?: string;
-    classNameWrp?: string;
     withMobile?: boolean;
     children: JSX.Element | JSX.Element[];
     content?: boolean | string | JSX.Element | JSX.Element[];

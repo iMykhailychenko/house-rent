@@ -18,12 +18,12 @@ export class PostsController {
     constructor(private readonly postsService: PostsService) {}
 
     @Get('')
-    async findAllRead(@SearchPost() searchFilters: SearchPostDto): Promise<Pagination<PostEntity>> {
+    async findAll(@SearchPost() searchFilters: SearchPostDto): Promise<Pagination<PostEntity>> {
         return await this.postsService.findAll(searchFilters);
     }
 
     @Get('users/:userId')
-    async findAllForUserRead(
+    async findAllForUser(
         @Param('userId', ParseIntPipe) userId: number,
         @SearchPost() searchFilters: SearchPostDto,
     ): Promise<Pagination<PostEntity>> {
@@ -52,7 +52,7 @@ export class PostsController {
     }
 
     @Get(':postId')
-    async findByIdRead(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
+    async findById(@Param('postId', ParseIntPipe) postId: number): Promise<PostEntity> {
         return await this.postsService.findById(postId);
     }
 

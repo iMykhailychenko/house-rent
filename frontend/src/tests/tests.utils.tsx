@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import { Provider } from 'react-redux';
 
-import appConfig from '../config/app.config';
-import RootProvider from '../context/root-provider';
+import AuthProvider from '../context/auth/auth';
+import ConfigProvider from '../context/config/config';
+import ThemeProvider from '../context/theme/theme';
 import { IConfig, THEME_ENUM } from '../interfaces';
-import authInitialState from '../state/entities/auth/auth.initial-state';
 import { IAuthState } from '../state/entities/auth/auth.interface';
-import { initializeStore } from '../state/store';
+import { wrapper } from '../state/store';
 
 interface IProps {
     children: JSX.Element;
@@ -23,22 +22,15 @@ interface ProvidersProps {
 
 const customRender = (ui: JSX.Element, props?: ProvidersProps | null, options?: RenderOptions): RenderResult => {
     const AppProviders = ({ children }: IProps): JSX.Element => (
-        <Provider store={initializeStore()}>
-            <RootProvider
-                serverProps={{
-                    auth: props?.auth || authInitialState,
-                    theme: props?.theme || THEME_ENUM.WHITE,
-                    width: props?.width || 1300,
-                    config: props?.config || appConfig,
-                }}
-            >
-                {children}
-            </RootProvider>
-        </Provider>
+        <AuthProvider initValue={{ accessToken: 'Bearer test' }}>
+            <ThemeProvider initValue={THEME_ENUM.WHITE}>
+                <ConfigProvider>{children}</ConfigProvider>
+            </ThemeProvider>
+        </AuthProvider>
     );
 
     return render(ui, {
-        wrapper: AppProviders,
+        wrapper: wrapper.withRedux(AppProviders),
         ...options,
     } as RenderOptions);
 };

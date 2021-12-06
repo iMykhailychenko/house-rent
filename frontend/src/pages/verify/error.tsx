@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useRouter } from 'next/router';
 
+import GetStaticProfile from '../../components/common/auth/get-static-profile/get-static-profile';
 import Button from '../../components/common/button/button';
 import Link from '../../components/common/link/link';
 import loginModal from '../../components/common/modal/modals/login-modal/login-modal';
@@ -36,7 +37,7 @@ const ErrorVerifyPage = (): JSX.Element => {
     };
 
     return (
-        <>
+        <GetStaticProfile>
             <Meta />
             <RootLayout withFooter={false} className={css.root}>
                 <Container className={css.inner} size="sm">
@@ -59,7 +60,7 @@ const ErrorVerifyPage = (): JSX.Element => {
                     </div>
                 </Container>
             </RootLayout>
-        </>
+        </GetStaticProfile>
     );
 };
 

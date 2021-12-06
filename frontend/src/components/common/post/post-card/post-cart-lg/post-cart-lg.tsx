@@ -36,7 +36,7 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
             <div className={css.flex}>
                 <UserCard user={post.user} />
 
-                <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
+                <Tooltip content="Відкрити пост на весь екран">
                     <Button secondary onClick={openPostPreview}>
                         <LaunchIcon />
                     </Button>
@@ -56,7 +56,7 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
 
                     <Link href={routes.posts.single(post.id)}>
                         <a className={css.link}>
-                            <Tooltip classNameWrp={css.tooltip} content={post.title}>
+                            <Tooltip className={css.tooltip} content={post.title}>
                                 <h3>{post.title}</h3>
                             </Tooltip>
                             <p>{cutString(post.description, 180)}</p>

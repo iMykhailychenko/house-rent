@@ -23,6 +23,7 @@ import { modal } from '../../../../common/modal/modal';
 import Select from '../../../../common/select/select';
 import Textarea from '../../../../common/textarea/textarea';
 import Filters from '../../new/new-post-form/filters/filters';
+import FormResidents from '../../new/new-post-form/form-residents/form-residents';
 import FormSeparator from '../../new/new-post-form/form-separator/form-separator';
 import FormTemplateModal from '../../new/new-post-form/form-template-modal/form-template-modal';
 import FormSegment from '../../new/new-post-form/from-segment/from-segment';
@@ -33,7 +34,6 @@ import {
     formatSelectValue,
     houseType,
     price,
-    residentsAmount,
     rooms,
 } from '../../new/new-post-form/new-post-form.config';
 import css from '../../new/new-post-form/new-post-form.module.scss';
@@ -112,10 +112,6 @@ const EditPostForm = (): JSX.Element => {
         );
     };
 
-    const changeResidentsAmount = (value: SelectValue): void => {
-        formik.setFieldValue('residentsAmount', +value.value);
-    };
-
     const handlePrice = (name: string, value: string[]): void => {
         formik.setFieldValue(name, sortPrice(value));
     };
@@ -182,14 +178,7 @@ const EditPostForm = (): JSX.Element => {
                 id="residents_amount"
                 error={formik.touched.residentsAmount && formik.errors.residentsAmount}
             >
-                <Select
-                    className={css.select}
-                    list={residentsAmount}
-                    placeholder="residentsAmount"
-                    onChange={changeResidentsAmount}
-                    value={residentsAmount.find(item => +item.value === formik.values.residentsAmount)}
-                    error={formik.touched.residentsAmount && !!formik.errors.residentsAmount}
-                />
+                <FormResidents value={formik.values.residentsAmount} onChange={formik.setFieldValue} />
             </FormSegment>
             <FormSegment
                 id="children"

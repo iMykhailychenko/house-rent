@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
+import { hydrate } from '../../actions';
+import { IState } from '../../interfaces';
 
 import { chatInitialState } from './chats.initial-state';
 import { Chat, ChatListPayload, IChatsState, Message } from './chats.interface';
@@ -21,6 +23,8 @@ const chatSlice = createSlice({
         },
     },
     extraReducers: builder => {
+        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.chats);
+
         // CHATS PAGINATION THUNK
         builder.addCase(
             chatListThunk.pending,

@@ -2,17 +2,11 @@ import queryString from 'query-string';
 
 import endpointConfig from '../../../config/endpoint.config';
 import uiConfig from '../../../config/ui.config';
+import { MAX_POSTS_FOR_USER } from '../../../constant/post.constant';
 import { Pagination, Params, Response } from '../../../interfaces';
 import api from '../../../utils/interceptors';
 
-import {
-    IEditPostPayload,
-    IEditPostStatusPayload,
-    INewPostPayload,
-    IPersonalPostsListPayload,
-    IPost,
-    IUserPostsListPayload,
-} from './posts.interface';
+import { IEditPostPayload, IEditPostStatusPayload, INewPostPayload, IPersonalPostsListPayload, IPost } from './posts.interface';
 
 const postsServices = {
     singlePost: (id: number): Response<IPost> => api.get(endpointConfig('/posts/' + id)),
@@ -28,15 +22,8 @@ const postsServices = {
         ),
     personalPosts: (query: IPersonalPostsListPayload): Response<Pagination<IPost>> =>
         api.get(endpointConfig('/posts/personal'), { params: { ...query, limit: uiConfig.postsPerPage } }),
-    getUserPostsList: (data: IUserPostsListPayload, query: Params): Response<Pagination<IPost>> =>
-        api.get(
-            endpointConfig(
-                `/posts/users/${data.userId}/?${queryString.stringify(
-                    { limit: uiConfig.postsPerPage, page: data.page, ...query },
-                    { skipNull: true },
-                )}`,
-            ),
-        ),
+    getUserPostsList: (userId: number): Response<Pagination<IPost>> =>
+        api.get(endpointConfig(`/posts/users/${userId}`), { params: { limit: MAX_POSTS_FOR_USER } }),
     newPost: (body: INewPostPayload): Response<IPost> => api.post(endpointConfig('/posts'), body),
     updatePost: ({ id, body }: IEditPostPayload): Response<IPost> => api.put(endpointConfig(`/posts/${id}`), body),
     updatePostStatus: ({ id, status }: IEditPostStatusPayload): Response<IPost> =>

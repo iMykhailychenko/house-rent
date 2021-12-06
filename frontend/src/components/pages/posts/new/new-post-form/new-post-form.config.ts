@@ -1,4 +1,5 @@
 import { SelectValue } from '../../../../../interfaces';
+import { RESIDENTS_AMOUNT } from '../../../../../state/entities/filters/filters.interface';
 
 export const rooms: string[] = ['one', 'two', 'three', 'four', 'more'];
 
@@ -7,13 +8,13 @@ export const houseType: string[] = ['new', 'old'];
 export const price: string[] = ['price_one', 'price_two', 'price_three', 'price_four', 'price_five', 'price_six', 'price_seven'];
 
 export const residentsAmount: string[] = [
-    'one_resident',
-    'two_resident',
-    'three_resident',
-    'four_resident',
-    'five_resident',
-    'six_resident',
-    'more_resident',
+    RESIDENTS_AMOUNT.ONE,
+    RESIDENTS_AMOUNT.TWO,
+    RESIDENTS_AMOUNT.THREE,
+    RESIDENTS_AMOUNT.FOUR,
+    RESIDENTS_AMOUNT.FIVE,
+    RESIDENTS_AMOUNT.SIX,
+    RESIDENTS_AMOUNT.MORE,
 ];
 
 export const districtKyiv: string[] = [

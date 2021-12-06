@@ -44,7 +44,7 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
             <div className={css.content}>
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
-                        <Tooltip classNameWrp={css.tooltip} content={post.title}>
+                        <Tooltip className={css.tooltip} content={post.title}>
                             <h3>{cutString(post.title, 80)}</h3>
                         </Tooltip>
                         <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
@@ -61,7 +61,7 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
 
                 <div className={css.flex}>
                     <UserCard user={post.user} />
-                    <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
+                    <Tooltip content="Відкрити пост на весь екран">
                         <Button size="sm" secondary onClick={openPostPreview}>
                             <LaunchIcon />
                         </Button>

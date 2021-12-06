@@ -17,7 +17,7 @@
         margin-bottom: 2rem;
     }
 
-    .tooltip {
+    :global(.tooltip) {
         min-width: 15rem;
     }
 
@@ -70,7 +70,7 @@
         font-weight: 400;
         transition: 0.3s ease-in-out;
 
-        .tooltip {
+        :global(.tooltip) {
             width: 100%;
         }
 

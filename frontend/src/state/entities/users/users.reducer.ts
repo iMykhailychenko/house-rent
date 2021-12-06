@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser } from '../../../interfaces';
+import { hydrate } from '../../actions';
+import { IState } from '../../interfaces';
 import { profileInitialState } from '../profile/profile.initial-state';
 
 import { IUserState } from './users.interface';
@@ -11,6 +13,8 @@ const userSlice = createSlice({
     initialState: profileInitialState,
     reducers: {},
     extraReducers: builder => {
+        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.users);
+
         builder.addCase(userInfoThunk.pending, (state: IUserState) => {
             state.status = 'loading';
         });

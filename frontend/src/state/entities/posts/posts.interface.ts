@@ -15,7 +15,7 @@ export interface IPost {
     title: string;
     description: string;
     image: string | null;
-    residentsAmount: number;
+    residentsAmount: string;
     children: string;
     pets: string;
     views: number;
@@ -33,7 +33,7 @@ export interface IPost {
 }
 
 export interface IStepOne {
-    residentsAmount: number;
+    residentsAmount: string;
     children: string;
     pets: string;
 }
@@ -61,11 +61,6 @@ export interface IEditPostPayload {
 export interface IEditPostStatusPayload {
     id: number;
     status: POST_STATUS;
-}
-
-export interface IUserPostsListPayload {
-    userId: number;
-    page: number;
 }
 
 export interface IPersonalPostsListPayload {

@@ -4,6 +4,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import GetStaticProfile from '../../components/common/auth/get-static-profile/get-static-profile';
 import Button from '../../components/common/button/button';
 import Link from '../../components/common/link/link';
 import Container from '../../components/layout/container/container';
@@ -83,7 +84,7 @@ const SuccessVerifyPage = (): JSX.Element => {
     };
 
     return (
-        <>
+        <GetStaticProfile>
             <Meta />
             <ConfettiWrp />
             <RootLayout withFooter={false} className={css.root}>
@@ -95,7 +96,7 @@ const SuccessVerifyPage = (): JSX.Element => {
                     <div className={css.success}>{pageTypeMap[type]}</div>
                 </Container>
             </RootLayout>
-        </>
+        </GetStaticProfile>
     );
 };
 

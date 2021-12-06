@@ -26,3 +26,13 @@ export type IFiltersState = {
     [SEARCH_FILTERS.DISTRICT]: IChipsMap;
     [USER_POSTS_FILTERS.STATUS]: IChipsMap;
 };
+
+export enum RESIDENTS_AMOUNT {
+    ONE = 'one_resident',
+    TWO = 'two_resident',
+    THREE = 'three_resident',
+    FOUR = 'four_resident',
+    FIVE = 'five_resident',
+    SIX = 'six_resident',
+    MORE = 'more_resident',
+}

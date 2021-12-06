@@ -12,7 +12,7 @@
     color: var(--gray-6);
     user-select: none;
 
-    .tooltip {
+    :global(.tooltip) {
         width: max-content;
         max-width: 20rem;
     }

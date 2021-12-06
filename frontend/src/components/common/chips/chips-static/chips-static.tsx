@@ -16,7 +16,7 @@ interface IProps {
 const ChipsStatic = ({ children, active = false, chip, tooltip }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.chip, { [css.active]: active })}>
-            <Tooltip className={css.tooltip} content={tooltip}>
+            <Tooltip content={tooltip}>
                 <div className={css.inner}>
                     {children}
                     <p>{chip}</p>

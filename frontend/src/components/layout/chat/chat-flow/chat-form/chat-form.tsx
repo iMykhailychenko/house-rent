@@ -5,7 +5,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { useRouter } from 'next/router';
 
 import { useChatSocket } from '../../../../../hooks/chat.hook';
-import useMaxWidth from '../../../../../hooks/media.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import Textarea from '../../../../common/textarea/textarea';
 import Tooltip from '../../../../common/tooltip/tooltip';
@@ -16,7 +15,6 @@ const ChatForm = (): JSX.Element => {
     const history = useRouter();
     const chatId = +String(history.query.chatId);
 
-    const mobile = useMaxWidth(768);
     const socket = useChatSocket();
     const profileState = useProfileInfoSelector();
     const [value, setValue] = useState<string>('');
@@ -34,7 +32,7 @@ const ChatForm = (): JSX.Element => {
 
     const handleKeyPress = (event: KeyboardEvent<HTMLTextAreaElement>): void => {
         if (event.key === 'Enter' && !event.shiftKey) {
-            if (!mobile) return;
+            if (window.innerWidth < 768) return;
 
             event.preventDefault();
             submit();

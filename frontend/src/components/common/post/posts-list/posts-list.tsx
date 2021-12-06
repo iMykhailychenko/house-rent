@@ -18,8 +18,8 @@ interface IProps {
     title?: string;
     className?: string;
     children: JSX.Element;
-    onPage: (page: number) => Promise<void>;
-    onMore: (page: number) => Promise<void>;
+    onPage?: (page: number) => Promise<void>;
+    onMore?: (page: number) => Promise<void>;
 }
 
 const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.Element => {
@@ -34,13 +34,13 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
     const openPage = (page: number): void => {
         const top = ref.current?.offsetTop || 0;
         window.scrollTo({ top: top - 150, behavior: 'smooth' });
-        onPage(page).catch(console.log);
+        onPage && onPage(page).catch(console.log);
     };
     const loadMore = (page: number): void => {
         const top = (ref.current?.offsetTop || 0) + (ref.current?.offsetHeight || 0) - 300;
         window.scrollTo({ top, behavior: 'smooth' });
         setLoadingMore(true);
-        onMore(page).finally(() => setLoadingMore(false));
+        onMore && onMore(page).finally(() => setLoadingMore(false));
     };
 
     return (

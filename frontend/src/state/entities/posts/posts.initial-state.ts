@@ -1,3 +1,4 @@
+import { RESIDENTS_AMOUNT } from '../filters/filters.interface';
 import { userInitValue } from '../profile/profile.initial-state';
 
 import { FORM_TYPE, IPost, IPostState, POST_STATUS } from './posts.interface';
@@ -7,7 +8,7 @@ export const singlePostsInitialState: IPost = {
     title: 'loading...',
     description: 'loading...',
     image: null,
-    residentsAmount: 0,
+    residentsAmount: RESIDENTS_AMOUNT.ONE,
     children: 'loading...',
     pets: 'loading...',
     cityFilters: 'loading...',

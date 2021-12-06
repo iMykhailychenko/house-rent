@@ -14,7 +14,11 @@ const profileSlice = createSlice({
     initialState: profileInitialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.profile);
+        builder.addCase(hydrate, (_, action: PayloadAction<IState>) => {
+            if (action.payload.profile.status !== 'idle') {
+                return action.payload.profile;
+            }
+        });
 
         builder.addCase('AUTH/logoutAction', () => profileInitialState);
 

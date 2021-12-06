@@ -70,8 +70,8 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     return (
         <div className={clsx(css.flex, isSmallSize && css.smallSize)}>
             <div className={css.info}>
-                <Tooltip className={css.tooltip} content="add_post_to_favorites">
-                    <Button size="sm" secondary={!isSmallSize} onClick={toggleFavorite}>
+                <Tooltip content="add_post_to_favorites">
+                    <Button size="sm" primary onClick={toggleFavorite}>
                         <BookmarkBorderIcon />
                     </Button>
                 </Tooltip>
@@ -91,7 +91,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                             </div>
                         </Tooltip>
 
-                        <Tooltip className={css.tooltip} content="added_to_favorites">
+                        <Tooltip content="added_to_favorites">
                             <div className={css.icon}>
                                 <BookmarkBorderIcon />
                                 <span>{post.favorite}</span>
@@ -107,14 +107,14 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                 profileState?.data?.id === post.user.id ? (
                     <p className={css.author}>Ви є автором цього оголошення</p>
                 ) : (
-                    <Tooltip className={css.tooltip} content="click_to_start_chat">
+                    <Tooltip content="click_to_start_chat">
                         <Button size="sm" primary onClick={openChat}>
                             {trans('answer')}
                         </Button>
                     </Tooltip>
                 )
             ) : (
-                <Tooltip className={css.tooltip} content="Відкрити пост на весь екран">
+                <Tooltip content="Відкрити пост на весь екран">
                     <Button size="sm" onClick={openPostPreview}>
                         <LaunchIcon />
                     </Button>
