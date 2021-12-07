@@ -94,6 +94,12 @@ export interface ISinglePostState {
     data: IPost;
 }
 
+export interface IPostConfigState {
+    status: LoadingStatus;
+    error: string | null;
+    data: { [id: string]: IPost & { isFavorite: boolean } };
+}
+
 export type IPostListState = Pagination<IPost> & { error: string | null; status: LoadingStatus };
 
 export interface IPostState {
@@ -101,4 +107,5 @@ export interface IPostState {
     update: IUpdatePostState;
     single: ISinglePostState;
     list: IPostListState;
+    config: IPostConfigState;
 }

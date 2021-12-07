@@ -7,10 +7,24 @@ import { AsyncThunkConfig } from '../../../interfaces';
 import { IPost } from '../posts.interface';
 import postsServices from '../posts.services';
 
-export const togglePostFavoriteThunk = createAsyncThunk<void, number>('POSTS/TOGGLE_FAVORITE', async payload => {
+export const togglePostFavoriteThunk = createAsyncThunk<void, number, AsyncThunkConfig>(
+    'POSTS/TOGGLE_FAVORITE',
+    async payload => {
+        try {
+            const { status } = await postsServices.toggleFavorite(payload);
+            if (status < 200 || status >= 300) throw new Error();
+        } catch (error) {
+            errorNotif(error);
+            throw new Error(error);
+        }
+    },
+);
+
+export const getIsPostFavoriteThunk = createAsyncThunk<boolean, IPost, AsyncThunkConfig>('POSTS/IS_FAVORITE', async payload => {
     try {
-        const { status } = await postsServices.toggleFavorite(payload);
+        const { data, status } = await postsServices.getIsPostFavorite(payload.id);
         if (status < 200 || status >= 300) throw new Error();
+        return data;
     } catch (error) {
         errorNotif(error);
         throw new Error(error);

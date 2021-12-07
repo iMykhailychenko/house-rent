@@ -22,7 +22,7 @@ const SwitchTheme = ({ className }: IProps): JSX.Element => {
     };
 
     return (
-        <Button className={clsx(css.root, className)} onClick={handleClick}>
+        <Button className={clsx(css.root, className)} secondary onClick={handleClick}>
             {theme === THEME_ENUM.BLACK ? <BrightnessLow /> : <BrightnessHigh />}
         </Button>
     );

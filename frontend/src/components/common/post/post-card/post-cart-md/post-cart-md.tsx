@@ -62,7 +62,7 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
                 <div className={css.flex}>
                     <UserCard user={post.user} />
                     <Tooltip content="Відкрити пост на весь екран">
-                        <Button size="sm" secondary onClick={openPostPreview}>
+                        <Button className={css.launch} secondary onClick={openPostPreview}>
                             <LaunchIcon />
                         </Button>
                     </Tooltip>

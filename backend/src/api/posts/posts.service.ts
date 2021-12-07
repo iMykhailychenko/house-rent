@@ -12,7 +12,7 @@ import { SearchPostDto } from './dto/search-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { StatusDto } from './dto/update-status.dto';
 import { PostEntity } from './entities/posts.entity';
-import { POST_STATUS } from './posts.interface';
+import { POST_STATUS, PostConfig } from './posts.interface';
 
 @Injectable()
 export class PostsService {
@@ -143,7 +143,7 @@ export class PostsService {
     async findById(postId: number): Promise<PostEntity> {
         const post = await this.postRepository
             .createQueryBuilder('posts')
-            .where({ id: postId, status: POST_STATUS.ACTIVE })
+            .where({ id: postId })
             .leftJoinAndSelect('posts.user', 'user')
             .loadRelationCountAndMap('posts.favorite', 'posts.favorite')
             .getOne();
@@ -158,6 +158,10 @@ export class PostsService {
             .execute();
 
         return { ...post, views: post.views + 1 };
+    }
+
+    async addFavoriteField(postId: number, userId: number): Promise<boolean> {
+        return !!(await this.favoriteRepository.findOne({ where: { post: postId, user: userId } }));
     }
 
     async createPost(userId: number, createPostDto: CreatePostDto): Promise<PostEntity> {

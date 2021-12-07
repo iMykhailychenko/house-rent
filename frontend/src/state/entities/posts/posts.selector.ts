@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../hooks/redux.hook';
 import { LoadingStatus } from '../../interfaces';
 import { RootState } from '../../reducer';
 
-import { INewPostState, IPostListState, ISinglePostState } from './posts.interface';
+import { INewPostState, IPost, IPostListState, ISinglePostState } from './posts.interface';
 
 export const useNewPostSelector = (): INewPostState =>
     useAppSelector<INewPostState>(({ posts }: RootState) => posts.new, shallowEqual);
@@ -17,3 +17,6 @@ export const usePostListSelector = (): IPostListState =>
 
 export const useUpdateLoadingSelector = (): LoadingStatus =>
     useAppSelector<LoadingStatus>(({ posts }: RootState) => posts.update.status, shallowEqual);
+
+export const useConfigDataSelector = (): { [id: string]: IPost & { isFavorite: boolean } } =>
+    useAppSelector<{ [id: string]: IPost & { isFavorite: boolean } }>(({ posts }: RootState) => posts.config.data, shallowEqual);

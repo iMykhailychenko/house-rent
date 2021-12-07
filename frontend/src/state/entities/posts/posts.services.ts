@@ -32,6 +32,7 @@ const postsServices = {
     toggleFavorite: (id: number): Response<void> => api.put(endpointConfig(`/favorite/${id}`)),
     getFavorite: (page: number): Response<Pagination<IPost>> =>
         api.get(endpointConfig('/posts/favorite'), { params: { page, limit: uiConfig.postsPerPage } }),
+    getIsPostFavorite: (id: number): Response<boolean> => api.get(endpointConfig(`/posts/${id}/favorite`)),
 };
 
 export default postsServices;

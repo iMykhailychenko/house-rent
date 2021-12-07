@@ -34,7 +34,7 @@ const SinglePostComponent = (): JSX.Element => {
     }, [dispatch, postData.status]);
 
     return (
-        <NotFoundPost error={!postData.id}>
+        <NotFoundPost error={!!postState.error}>
             <>
                 <Container size="md">
                     <>

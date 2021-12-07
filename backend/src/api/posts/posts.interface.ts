@@ -1,3 +1,5 @@
+import { PostEntity } from './entities/posts.entity';
+
 export enum GENERAL_FILTERS {
     HOT = 'hot',
 }
@@ -68,3 +70,7 @@ export enum POST_STATUS {
 }
 
 export const ALL_STATUSES = [POST_STATUS.DRAFT, POST_STATUS.ACTIVE, POST_STATUS.ARCHIVE];
+
+export type PostConfig = PostEntity & {
+    isFavorite: boolean;
+};

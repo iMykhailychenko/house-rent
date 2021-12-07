@@ -56,6 +56,12 @@ export class PostsController {
         return await this.postsService.findById(postId);
     }
 
+    @Get(':postId/favorite')
+    @UseGuards(AuthGuard)
+    async findByIdConfig(@User('id') userId: number, @Param('postId', ParseIntPipe) postId: number): Promise<boolean> {
+        return await this.postsService.addFavoriteField(postId, userId);
+    }
+
     @Post('')
     @UseGuards(AuthGuard)
     async createPost(

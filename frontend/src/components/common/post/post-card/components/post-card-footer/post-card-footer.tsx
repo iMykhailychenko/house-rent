@@ -1,10 +1,10 @@
 import React from 'react';
 
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import LaunchIcon from '@mui/icons-material/Launch';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Share from '@mui/icons-material/Share';
 import Visibility from '@mui/icons-material/Visibility';
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import useAuth from '../../../../../../hooks/auth.hook';
@@ -14,16 +14,14 @@ import { useRole } from '../../../../../../hooks/role.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
 import { createChatThunk } from '../../../../../../state/entities/chats/chats.thunk';
 import { IPost } from '../../../../../../state/entities/posts/posts.interface';
-import { togglePostFavoriteThunk } from '../../../../../../state/entities/posts/thunks/post-favorite.thunk';
 import { useProfileInfoSelector } from '../../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../../utils/routes';
 import Button from '../../../../button/button';
-import { modal } from '../../../../modal/modal';
 import changeUserRole from '../../../../modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../../modal/modals/login-modal/login-modal';
+import postConfigModal from '../../../../modal/modals/post-config/post-config';
 import sharePostModal from '../../../../modal/modals/share-post-modal/share-post-modal';
 import Tooltip from '../../../../tooltip/tooltip';
-import PostPreviewModal from '../post-preview-modal/post-preview-modal';
 
 import css from './post-card-footer.module.scss';
 
@@ -44,11 +42,6 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     const profileState = useProfileInfoSelector();
     const isSmallSize = size === 'sm';
 
-    const toggleFavorite = (): void => {
-        if (!token.accessToken) return loginModal();
-        dispatch(togglePostFavoriteThunk(post.id));
-    };
-
     const openChat = async () => {
         if (!token.accessToken) return loginModal();
 
@@ -63,21 +56,22 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
         history.push(routes.chats.messages(chat.id));
     };
 
-    const openPostPreview = (): void => {
-        modal.open(<PostPreviewModal postId={post.id} />);
+    const openPostConfig = () => {
+        if (!token.accessToken) return loginModal();
+        postConfigModal(post);
     };
 
     return (
-        <div className={clsx(css.flex, isSmallSize && css.smallSize)}>
+        <div className={css.flex}>
             <div className={css.info}>
                 <Tooltip content="add_post_to_favorites">
-                    <Button size="sm" primary onClick={toggleFavorite}>
-                        <BookmarkBorderIcon />
+                    <Button className={css.options} secondary onClick={openPostConfig}>
+                        <MoreVertIcon />
                     </Button>
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button size="sm" secondary={!isSmallSize} onClick={sharePostModal(post)}>
+                    <Button onClick={sharePostModal(post)} secondary={isSmallSize}>
                         <Share />
                     </Button>
                 </Tooltip>
@@ -101,24 +95,22 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                 )}
             </div>
 
-            {isSmallSize && <p className={css.price}>{minMaxPrice(post.priceFilters)}</p>}
-
             {!isSmallSize ? (
                 profileState?.data?.id === post.user.id ? (
-                    <p className={css.author}>Ви є автором цього оголошення</p>
+                    <Tooltip content="Ви є автором цього оголошення">
+                        <div className={css.author}>
+                            <DoneAllIcon />
+                        </div>
+                    </Tooltip>
                 ) : (
                     <Tooltip content="click_to_start_chat">
-                        <Button size="sm" primary onClick={openChat}>
+                        <Button primary onClick={openChat}>
                             {trans('answer')}
                         </Button>
                     </Tooltip>
                 )
             ) : (
-                <Tooltip content="Відкрити пост на весь екран">
-                    <Button size="sm" onClick={openPostPreview}>
-                        <LaunchIcon />
-                    </Button>
-                </Tooltip>
+                <p className={css.price}>{minMaxPrice(post.priceFilters)}</p>
             )}
         </div>
     );

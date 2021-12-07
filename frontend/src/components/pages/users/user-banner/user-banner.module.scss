@@ -20,12 +20,14 @@
     border-radius: 1rem;
     font-size: 1.5rem;
     background: var(--success-secondary);
+    border: 0.1rem solid var(--success);
     color: var(--success);
 }
 
 .offline {
-    background: var(--gray-4);
-    color: var(--gray-7);
+    background: var(--warning-secondary);
+    border: 0.1rem solid var(--warning);
+    color: var(--warning);
 }
 
 .text,
@@ -46,8 +48,8 @@
 
     .roleItem {
         margin: 0.8rem 0.4rem;
-        padding: 0.2rem 0.8rem;
-        border-radius: 1rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.5rem;
         color: var(--primary);
         background: var(--white);
         font-weight: 600;
@@ -61,10 +63,11 @@
 }
 
 .btn {
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 .link {
+    margin-top: 4rem;
     color: var(--primary);
     font-weight: 500;
 

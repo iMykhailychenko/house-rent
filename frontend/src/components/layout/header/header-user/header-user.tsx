@@ -5,12 +5,10 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import Badge from '../../../common/badge/badge';
 import Button from '../../../common/button/button';
-import StickyModal from '../../../common/modal/components/sticky-modal/sticky-modal';
-import { modal } from '../../../common/modal/modal';
+import profileNavModal from '../../../common/modal/modals/profile-nav/profile-nav';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 import HeaderNotification from '../header-notification/header-notification';
 
-import HeaderUserNav from './header-user-nav/header-user-nav';
 import css from './header-user.module.scss';
 
 const HeaderUser = (): JSX.Element | null => {
@@ -18,14 +16,6 @@ const HeaderUser = (): JSX.Element | null => {
 
     const [notifications, setNotifications] = useState(false);
     const toggleNotifications = (): void => setNotifications(prev => !prev);
-
-    const handleClick = (): void => {
-        modal.open(
-            <StickyModal title={`${profile?.data?.firstName} ${profile?.data?.lastName}`}>
-                <HeaderUserNav />
-            </StickyModal>,
-        );
-    };
 
     return profile.status === 'loading' ? (
         <div>loading...</div>
@@ -36,7 +26,7 @@ const HeaderUser = (): JSX.Element | null => {
                 <NotificationsNoneOutlinedIcon />
             </Button>
 
-            <button type="button" className={css.flex} onClick={handleClick}>
+            <button type="button" className={css.flex} onClick={profileNavModal}>
                 <UserAvatar src={profile.data?.avatar} firstName={profile.data.firstName} lastName={profile.data.lastName} />
                 <div className={css.inner}>
                     <h3 className={css.title}>{`${profile.data.firstName} ${profile.data.lastName}`}</h3>
