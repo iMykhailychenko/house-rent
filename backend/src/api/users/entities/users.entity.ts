@@ -4,6 +4,7 @@ import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 
 import { authConfig } from '../../../config/auth.config';
 import { MessageEntity } from '../../chats/entities/messages.entity';
 import { FavoriteEntity } from '../../favorite/entities/favorite.entity';
+import { NotificationsEntity } from '../../notifications/entities/notifications.entity';
 import { PostEntity } from '../../posts/entities/posts.entity';
 
 export enum UserRole {
@@ -54,6 +55,9 @@ export class UserEntity {
 
     @OneToMany(() => MessageEntity, message => message.author)
     messages: MessageEntity[];
+
+    @OneToMany(() => NotificationsEntity, notification => notification.user)
+    notifications: NotificationsEntity[];
 
     @BeforeInsert()
     async hashPassword(): Promise<void> {

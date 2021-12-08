@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -9,7 +10,7 @@ import { UsersService } from '../../api/users/users.service';
 import { JwtService } from './jwt.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([UserEntity, PostEntity])],
+    imports: [TypeOrmModule.forFeature([UserEntity, PostEntity]), HttpModule],
     providers: [JwtService, UsersService, SecurityService],
     exports: [JwtService],
 })

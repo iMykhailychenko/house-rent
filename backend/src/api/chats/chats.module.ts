@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -14,7 +15,7 @@ import { ChatEntity } from './entities/chats.entity';
 import { MessageEntity } from './entities/messages.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ChatEntity, MessageEntity, UserEntity, PostEntity])],
+    imports: [TypeOrmModule.forFeature([ChatEntity, MessageEntity, UserEntity, PostEntity]), HttpModule],
     controllers: [ChatsController],
     providers: [ChatsService, AuthGuard, JwtService, UsersService, SecurityService],
     exports: [ChatsService],

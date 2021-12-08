@@ -31,6 +31,20 @@ class ModalManagement extends EventEmitter {
         this.emitChange();
     };
 
+    setSticky(): void {
+        const element = document.querySelector<HTMLDivElement>('#backdrop');
+        if (element) {
+            element.style.alignItems = 'flex-end';
+        }
+    }
+
+    deleteSticky(): void {
+        const element = document.querySelector<HTMLDivElement>('#backdrop');
+        if (element) {
+            element.style.alignItems = 'center';
+        }
+    }
+
     close = (): void => {
         if (!this.dom && !this.scrollY) return;
 

@@ -5,7 +5,7 @@ import { hydrate } from '../../actions';
 import { IState } from '../../interfaces';
 
 import { chatInitialState } from './chats.initial-state';
-import { Chat, ChatListPayload, IChatsState, Message } from './chats.interface';
+import { Chat, IChatsState, Message } from './chats.interface';
 import { chatListThunk, messagesListThunk, singleChatThunk } from './chats.thunk';
 
 const chatSlice = createSlice({
@@ -26,24 +26,16 @@ const chatSlice = createSlice({
         builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.chats);
 
         // CHATS PAGINATION THUNK
-        builder.addCase(
-            chatListThunk.pending,
-            (state: IChatsState, action: PayloadAction<unknown, string, { arg: ChatListPayload }>) => {
-                if (action.meta.arg.withLoader) {
-                    state.list.status = 'loading';
-                }
-            },
-        );
-        builder.addCase(
-            chatListThunk.fulfilled,
-            (state: IChatsState, action: PayloadAction<Pagination<Chat>, string, { arg: ChatListPayload }>) => {
-                state.list.status = 'success';
-                state.list.totalItems = action.payload.totalItems;
-                state.list.totalPages = action.payload.totalPages;
-                state.list.currentPage = action.payload.currentPage;
-                state.list.data = action.payload.data;
-            },
-        );
+        builder.addCase(chatListThunk.pending, (state: IChatsState) => {
+            state.list.status = 'loading';
+        });
+        builder.addCase(chatListThunk.fulfilled, (state: IChatsState, action: PayloadAction<Pagination<Chat>>) => {
+            state.list.status = 'success';
+            state.list.totalItems = action.payload.totalItems;
+            state.list.totalPages = action.payload.totalPages;
+            state.list.currentPage = action.payload.currentPage;
+            state.list.data = action.payload.data;
+        });
         builder.addCase(chatListThunk.rejected, (state: IChatsState) => {
             state.list.status = 'error';
             state.list.error = 'error';

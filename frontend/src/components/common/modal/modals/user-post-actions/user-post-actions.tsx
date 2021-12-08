@@ -32,7 +32,7 @@ const UserPostActions = ({ post }: IProps): JSX.Element => {
                         <button
                             type="button"
                             onClick={handleAction(action)}
-                            className={clsx(css.btn, action === POST_ACTIONS.DELETE && css.delete)}
+                            className={clsx(css.btn, action === POST_ACTIONS.DELETE && css.error)}
                         >
                             {trans(action)}
                         </button>

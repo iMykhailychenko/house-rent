@@ -1,6 +1,6 @@
+import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import axios from 'axios';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
@@ -17,37 +17,44 @@ const ONE_WEEK_IN_MS = 604_800_000;
 
 @Injectable()
 export class SecurityService {
-    constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
+    constructor(
+        @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        private httpService: HttpService,
+    ) {}
 
     async sendConfirmEmail(user: UserEntity): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CONFIRM_EMAIL;
-        const { status } = await axios.post(URL, {
-            email: user.email,
-            token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
-            first_name: user.firstName,
-            last_name: user.lastName,
-        });
-
-        if (status > 299) {
-            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-        }
+        this.httpService
+            .post(URL, {
+                email: user.email,
+                token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
+                first_name: user.firstName,
+                last_name: user.lastName,
+            })
+            .subscribe(({ status }) => {
+                if (status > 299) {
+                    throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                }
+            });
     }
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_EMAIL;
-        const { status } = await axios.post(URL, {
-            email: user.email,
-            old_email: oldEmail,
-            token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
-            recover_token: jwt.sign(
-                { id: user.id, email: oldEmail, exp: Date.now() + ONE_WEEK_IN_MS },
-                authConfig.resetPasswordSecret,
-            ),
-        });
-
-        if (status > 299) {
-            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-        }
+        this.httpService
+            .post(URL, {
+                email: user.email,
+                old_email: oldEmail,
+                token: jwt.sign({ id: user.id, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.emailSecret),
+                recover_token: jwt.sign(
+                    { id: user.id, email: oldEmail, exp: Date.now() + ONE_WEEK_IN_MS },
+                    authConfig.resetPasswordSecret,
+                ),
+            })
+            .subscribe(({ status }) => {
+                if (status > 299) {
+                    throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                }
+            });
     }
 
     async sendChangePasswordEmail(restorePasswordDto: RestoreEmailDto): Promise<void> {
@@ -57,14 +64,19 @@ export class SecurityService {
         }
 
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_PASSWORD;
-        const { status } = await axios.post(URL, {
-            email: user.email,
-            token: jwt.sign({ id: user.id, email: user.email, exp: Date.now() + ONE_HOUR_IN_MS }, authConfig.resetPasswordSecret),
-        });
-
-        if (status > 299) {
-            throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-        }
+        this.httpService
+            .post(URL, {
+                email: user.email,
+                token: jwt.sign(
+                    { id: user.id, email: user.email, exp: Date.now() + ONE_HOUR_IN_MS },
+                    authConfig.resetPasswordSecret,
+                ),
+            })
+            .subscribe(({ status }) => {
+                if (status > 299) {
+                    throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                }
+            });
     }
 
     async verifyEmail(token: string): Promise<boolean> {

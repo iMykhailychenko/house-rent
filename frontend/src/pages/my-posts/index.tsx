@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
+import AuthRedirect from '../../components/common/auth/auth-redirect/auth-redirect';
+import GetStaticProfile from '../../components/common/auth/get-static-profile/get-static-profile';
 import SegmentedControl from '../../components/common/segmented-control/segmented-control';
 import Container from '../../components/layout/container/container';
 import PrivateLayout from '../../components/layout/private-layout/private-layout';
@@ -41,15 +43,17 @@ const MyPostsPage = (): JSX.Element => {
     };
 
     return (
-        <>
-            <Meta />
-            <PrivateLayout>
-                <Container size="lg">
-                    <SegmentedControl className={css.control} active={status} onChange={handleTabChange} value={tabs} />
-                    <>{token.accessToken ? <MyPostsList /> : null}</>
-                </Container>
-            </PrivateLayout>
-        </>
+        <AuthRedirect>
+            <GetStaticProfile>
+                <Meta />
+                <PrivateLayout>
+                    <Container size="lg">
+                        <SegmentedControl className={css.control} active={status} onChange={handleTabChange} value={tabs} />
+                        <>{token.accessToken ? <MyPostsList /> : null}</>
+                    </Container>
+                </PrivateLayout>
+            </GetStaticProfile>
+        </AuthRedirect>
     );
 };
 

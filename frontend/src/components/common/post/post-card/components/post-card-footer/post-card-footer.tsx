@@ -2,7 +2,7 @@ import React from 'react';
 
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ReadMoreOutlinedIcon from '@mui/icons-material/ReadMoreOutlined';
 import Share from '@mui/icons-material/Share';
 import Visibility from '@mui/icons-material/Visibility';
 import { useRouter } from 'next/router';
@@ -64,9 +64,9 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     return (
         <div className={css.flex}>
             <div className={css.info}>
-                <Tooltip content="add_post_to_favorites">
+                <Tooltip content="Додаткові дії з цим постом">
                     <Button className={css.options} secondary onClick={openPostConfig}>
-                        <MoreVertIcon />
+                        <ReadMoreOutlinedIcon />
                     </Button>
                 </Tooltip>
 

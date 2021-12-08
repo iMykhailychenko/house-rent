@@ -2,18 +2,18 @@
     display: flex;
     justify-content: space-between;
 
+    :global(.tooltip) {
+        width: max-content;
+        max-width: 20rem;
+    }
+
     .info {
         display: flex;
         align-items: center;
 
-        :global(.tooltip) {
-            width: max-content;
-            max-width: 20rem;
-        }
-
         .options {
             svg {
-                font-size: 1.4rem;
+                font-size: 2rem;
             }
         }
 

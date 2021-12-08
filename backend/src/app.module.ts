@@ -5,6 +5,8 @@ import { ChatsGateway } from './api/chats/chats.gateway';
 import { ChatsModule } from './api/chats/chats.module';
 import { FavoriteModule } from './api/favorite/favorite.module';
 import { MediaModule } from './api/media/media.module';
+import { NotificationsGateway } from './api/notifications/notifications.gateway';
+import { NotificationsModule } from './api/notifications/notifications.module';
 import { PostsModule } from './api/posts/posts.module';
 import { SecurityModule } from './api/security/security.module';
 import { UsersModule } from './api/users/users.module';
@@ -22,9 +24,10 @@ import { AuthMiddleware } from './shared/middleware/auth.middleware';
         ChatsModule,
         JwtModule,
         SecurityModule,
+        NotificationsModule,
     ],
     controllers: [],
-    providers: [ChatsGateway],
+    providers: [ChatsGateway, NotificationsGateway],
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer): void {

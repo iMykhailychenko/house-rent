@@ -3,6 +3,8 @@ import { io, Socket } from 'socket.io-client';
 
 import { SocketMessagesPayload, UpdateMessagesPayload } from '../state/entities/chats/chats.interface';
 
+import useAuth from './auth.hook';
+
 class ChatSocket {
     private static instance: ChatSocket;
     private readonly chatId: number | undefined;
@@ -41,6 +43,7 @@ class ChatSocket {
     };
 
     send = (message: SocketMessagesPayload): void => {
+        console.log(message);
         this.client?.emit('msgToServer', message);
     };
 
@@ -50,9 +53,9 @@ class ChatSocket {
 }
 
 export const useChatSocket = (): ChatSocket | null => {
-    const auth = { accessToken: '' };
+    const { token } = useAuth();
     const history = useRouter();
     const chatId = +String(history.query.chatId);
-    if (!auth?.accessToken || !chatId || !process.browser) return null;
-    return new ChatSocket(auth.accessToken, chatId);
+    if (!token?.accessToken || !chatId || !process.browser) return null;
+    return new ChatSocket(token.accessToken, chatId);
 };

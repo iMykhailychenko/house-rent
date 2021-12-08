@@ -16,6 +16,10 @@ interface IProps {
 const StickyModal = ({ title = '', footer, children }: IProps): JSX.Element => {
     const trans = useTrans();
 
+    if (window.innerWidth < 768) {
+        modal.setSticky();
+    }
+
     return (
         <div className={css.root}>
             <header className={css.header}>
