@@ -4,6 +4,8 @@ import { WsException } from '@nestjs/websockets';
 import { Repository } from 'typeorm';
 
 import { Pagination } from '../../shared/interfaces/interface';
+import { NotificationsType } from '../notifications/notifications.interface';
+import { NotificationsService } from '../notifications/notifications.service';
 import { UserEntity, UserRole } from '../users/entities/users.entity';
 
 import { ChatResponse, CustomMessages, FindAllChatsParams, FindAllMessagesParams } from './chats.interface';
@@ -19,6 +21,7 @@ export class ChatsService {
         @InjectRepository(ChatEntity) private readonly chatRepository: Repository<ChatEntity>,
         @InjectRepository(MessageEntity) private readonly messageRepository: Repository<MessageEntity>,
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        private readonly notificationsService: NotificationsService,
     ) {}
 
     async findAll({ userId, page = 1, limit = 20 }: FindAllChatsParams): Promise<Pagination<ChatEntity>> {
@@ -134,6 +137,13 @@ export class ChatsService {
         newChat.messages = [firstMessage];
         newChat.users = [realtor.id, customer.id];
 
+        await this.notificationsService.createNotification({
+            chatId: chat.id,
+            userId: realtor.id,
+            recipientId: customer.id,
+            type: NotificationsType.NEW_CHAT,
+        });
+
         await this.messageRepository.save(firstMessage);
         return await this.chatRepository.save(newChat);
     }
@@ -143,13 +153,20 @@ export class ChatsService {
         if (!author) throw new WsException('User do not exist');
 
         const chat = await this.chatRepository.findOne(createMessageDto.chatId);
-        if (!author) throw new WsException('Chat do not exist');
+        if (!chat) throw new WsException('Chat do not exist');
 
         const message = new MessageEntity();
         message.chat = chat;
         message.author = author;
         message.text = createMessageDto.message;
         message.uploads = createMessageDto.uploads;
+
+        await this.notificationsService.createNotification({
+            chatId: chat.id,
+            userId: author.id,
+            recipientId: chat.users[0] === author.id ? chat.users[1] : chat.users[0],
+            type: NotificationsType.NEW_MESSAGE,
+        });
 
         return await this.messageRepository.save(message);
     }

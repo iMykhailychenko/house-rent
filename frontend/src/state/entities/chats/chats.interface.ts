@@ -1,5 +1,5 @@
 import { IUser, Pagination } from '../../../interfaces';
-import { LoadingStatus } from '../../interfaces';
+import { ErrorState, LoadingStatus } from '../../interfaces/common';
 
 export interface CreateChatPayload {
     customer: number;
@@ -26,7 +26,7 @@ export interface Message {
 
 interface BaseType {
     status: LoadingStatus;
-    error: string | null;
+    error: ErrorState;
 }
 
 export type ChatsList = Pagination<Chat> & BaseType;

@@ -1,7 +1,7 @@
 import { shallowEqual } from 'react-redux';
 
 import { useAppSelector } from '../../../hooks/redux.hook';
-import { LoadingStatus } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces/common';
 import { RootState } from '../../reducer';
 
 import { ChatsList, MessagesList, SingleChat } from './chats.interface';

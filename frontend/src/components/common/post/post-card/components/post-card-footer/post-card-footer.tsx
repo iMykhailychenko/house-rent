@@ -71,7 +71,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button onClick={sharePostModal(post)} secondary={isSmallSize}>
+                    <Button onClick={sharePostModal(post)}>
                         <Share />
                     </Button>
                 </Tooltip>

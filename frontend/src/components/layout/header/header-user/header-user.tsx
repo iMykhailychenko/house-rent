@@ -4,6 +4,7 @@ import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutl
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { useRouter } from 'next/router';
 
+import { useNotificationsCountSelector } from '../../../../state/entities/notifications/notifications.selector';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import routes from '../../../../utils/routes';
 import Badge from '../../../common/badge/badge';
@@ -17,6 +18,7 @@ import css from './header-user.module.scss';
 const HeaderUser = (): JSX.Element | null => {
     const history = useRouter();
     const profile = useProfileInfoSelector();
+    const notificationCount = useNotificationsCountSelector();
 
     const [notifications, setNotifications] = useState(false);
     const toggleNotifications = (): void => setNotifications(prev => !prev);
@@ -34,7 +36,7 @@ const HeaderUser = (): JSX.Element | null => {
             </Button>
 
             <Button className={css.btn} secondary onClick={toggleNotifications}>
-                <Badge className={css.badge} number={2} />
+                <Badge className={css.badge} number={notificationCount} />
                 <NotificationsNoneOutlinedIcon />
             </Button>
 

@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser } from '../../../interfaces';
 import { hydrate } from '../../actions';
-import { IState } from '../../interfaces';
+import { ErrorState } from '../../interfaces/common';
+import { IState } from '../../interfaces/root';
 import { profileInitialState } from '../profile/profile.initial-state';
 
 import { IUserState } from './users.interface';
@@ -22,8 +23,9 @@ const userSlice = createSlice({
             state.status = 'success';
             state.data = action.payload;
         });
-        builder.addCase(userInfoThunk.rejected, (state: IUserState) => {
+        builder.addCase(userInfoThunk.rejected, (state: IUserState, action) => {
             state.status = 'error';
+            state.error = action.payload as ErrorState;
         });
     },
 });

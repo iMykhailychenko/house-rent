@@ -1,5 +1,5 @@
 import { IUser, UserRole } from '../../../interfaces';
-import { LoadingStatus } from '../../interfaces';
+import { CommonState } from '../../interfaces/common';
 
 export interface IUpdateProfilePayload {
     role?: UserRole[];
@@ -13,7 +13,4 @@ export interface ChangeEmailPayload {
     email: string;
 }
 
-export interface IProfileInfoState {
-    status: LoadingStatus;
-    data: IUser;
-}
+export type IProfileInfoState = CommonState<IUser>;

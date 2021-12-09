@@ -31,9 +31,7 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
             <div className={css.content}>
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
-                        <Tooltip className={css.tooltip} content={post.title}>
-                            <h3>{cutString(post.title, 100)}</h3>
-                        </Tooltip>
+                        <h3>{cutString(post.title, 100)}</h3>
                     </a>
                 </Link>
 

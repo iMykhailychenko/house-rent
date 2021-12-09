@@ -16,5 +16,6 @@ export const userInitValue: IUser = {
 
 export const profileInitialState: IProfileInfoState = {
     status: 'idle',
+    error: null,
     data: userInitValue,
 };

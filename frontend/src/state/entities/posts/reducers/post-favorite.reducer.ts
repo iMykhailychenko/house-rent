@@ -1,6 +1,7 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../../interfaces';
+import { ErrorState } from '../../../interfaces/common';
 import { IPost, IPostState } from '../posts.interface';
 import {
     getFavoritePostsPaginationThunk,
@@ -21,9 +22,9 @@ export const postFavoriteReducer = (builder: ActionReducerMapBuilder<IPostState>
             state.config.data[action.meta.arg.id] = { ...action.meta.arg, isFavorite: action.payload };
         },
     );
-    builder.addCase(getIsPostFavoriteThunk.rejected, (state: IPostState) => {
+    builder.addCase(getIsPostFavoriteThunk.rejected, (state: IPostState, action) => {
         state.config.status = 'error';
-        state.config.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 
     builder.addCase(togglePostFavoriteThunk.pending, (state: IPostState) => {
@@ -36,9 +37,9 @@ export const postFavoriteReducer = (builder: ActionReducerMapBuilder<IPostState>
             state.config.data[action.meta.arg].isFavorite = !state.config.data[action.meta.arg].isFavorite;
         },
     );
-    builder.addCase(togglePostFavoriteThunk.rejected, (state: IPostState) => {
+    builder.addCase(togglePostFavoriteThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
         state.config.status = 'error';
-        state.config.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 
     // TOGGLE FAVORITE
@@ -46,15 +47,11 @@ export const postFavoriteReducer = (builder: ActionReducerMapBuilder<IPostState>
         state.list.status = 'loading';
     });
     builder.addCase(getFavoritePostsThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
-        state.list.status = 'success';
-        state.list.totalItems = action.payload.totalItems;
-        state.list.totalPages = action.payload.totalPages;
-        state.list.currentPage = action.payload.currentPage;
-        state.list.data = action.payload.data;
+        state.list = { ...action.payload, status: 'success', error: null };
     });
-    builder.addCase(getFavoritePostsThunk.rejected, (state: IPostState) => {
+    builder.addCase(getFavoritePostsThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
         state.list.status = 'error';
-        state.list.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 
     // FAVORITE LIST
@@ -62,14 +59,10 @@ export const postFavoriteReducer = (builder: ActionReducerMapBuilder<IPostState>
         state.list.status = 'loading';
     });
     builder.addCase(getFavoritePostsPaginationThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
-        state.list.status = 'success';
-        state.list.totalItems = action.payload.totalItems;
-        state.list.totalPages = action.payload.totalPages;
-        state.list.currentPage = action.payload.currentPage;
-        state.list.data = [...state.list.data, ...action.payload.data];
+        state.list = { ...action.payload, data: [...state.list.data, ...action.payload.data], status: 'success', error: null };
     });
-    builder.addCase(getFavoritePostsPaginationThunk.rejected, (state: IPostState) => {
+    builder.addCase(getFavoritePostsPaginationThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
         state.list.status = 'error';
-        state.list.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 };

@@ -20,4 +20,10 @@ export class NotificationsController {
     ): Promise<Pagination<NotificationsEntity>> {
         return await this.notificationsService.getNotifications(userId, limit, page);
     }
+
+    @Get('count')
+    @UseGuards(AuthGuard)
+    async getCountNotifications(@User('id') userId: number): Promise<number> {
+        return await this.notificationsService.getCountNotifications(userId);
+    }
 }

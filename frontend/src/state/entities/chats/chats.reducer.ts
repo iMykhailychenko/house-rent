@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../interfaces';
 import { hydrate } from '../../actions';
-import { IState } from '../../interfaces';
+import { ErrorState } from '../../interfaces/common';
+import { IState } from '../../interfaces/root';
 
 import { chatInitialState } from './chats.initial-state';
 import { Chat, IChatsState, Message } from './chats.interface';
@@ -30,15 +31,11 @@ const chatSlice = createSlice({
             state.list.status = 'loading';
         });
         builder.addCase(chatListThunk.fulfilled, (state: IChatsState, action: PayloadAction<Pagination<Chat>>) => {
-            state.list.status = 'success';
-            state.list.totalItems = action.payload.totalItems;
-            state.list.totalPages = action.payload.totalPages;
-            state.list.currentPage = action.payload.currentPage;
-            state.list.data = action.payload.data;
+            state.list = { ...action.payload, status: 'success', error: null };
         });
-        builder.addCase(chatListThunk.rejected, (state: IChatsState) => {
+        builder.addCase(chatListThunk.rejected, (state: IChatsState, action: PayloadAction<unknown>) => {
             state.list.status = 'error';
-            state.list.error = 'error';
+            state.list.error = action.payload as ErrorState;
         });
 
         // SINGLE CHAT
@@ -49,8 +46,9 @@ const chatSlice = createSlice({
             state.single.status = 'success';
             state.single.data = action.payload;
         });
-        builder.addCase(singleChatThunk.rejected, (state: IChatsState) => {
+        builder.addCase(singleChatThunk.rejected, (state: IChatsState, action: PayloadAction<unknown>) => {
             state.single.status = 'error';
+            state.list.error = action.payload as ErrorState;
         });
 
         // MESSAGES PAGINATION THUNK
@@ -58,15 +56,11 @@ const chatSlice = createSlice({
             state.messages.status = 'loading';
         });
         builder.addCase(messagesListThunk.fulfilled, (state: IChatsState, action: PayloadAction<Pagination<Message>>) => {
-            state.messages.status = 'success';
-            state.messages.totalItems = action.payload.totalItems;
-            state.messages.totalPages = action.payload.totalPages;
-            state.messages.currentPage = action.payload.currentPage;
-            state.messages.data = action.payload.data;
+            state.messages = { ...action.payload, status: 'success', error: null };
         });
-        builder.addCase(messagesListThunk.rejected, (state: IChatsState) => {
+        builder.addCase(messagesListThunk.rejected, (state: IChatsState, action: PayloadAction<unknown>) => {
             state.messages.status = 'error';
-            state.messages.error = 'error';
+            state.list.error = action.payload as ErrorState;
         });
     },
 });

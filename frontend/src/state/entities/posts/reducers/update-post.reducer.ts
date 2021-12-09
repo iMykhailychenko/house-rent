@@ -1,5 +1,6 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
 
+import { ErrorState } from '../../../interfaces/common';
 import { IPostState } from '../posts.interface';
 import { updatePostThunk } from '../thunks/update-post.thunk';
 
@@ -10,8 +11,8 @@ export const updatePostReducer = (builder: ActionReducerMapBuilder<IPostState>):
     builder.addCase(updatePostThunk.fulfilled, (state: IPostState) => {
         state.update.status = 'success';
     });
-    builder.addCase(updatePostThunk.rejected, (state: IPostState) => {
+    builder.addCase(updatePostThunk.rejected, (state: IPostState, action) => {
         state.update.status = 'error';
-        state.update.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 };

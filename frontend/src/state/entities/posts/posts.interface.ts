@@ -1,5 +1,5 @@
 import { IUser, Pagination } from '../../../interfaces';
-import { LoadingStatus } from '../../interfaces';
+import { CommonState, ErrorState, LoadingStatus } from '../../interfaces/common';
 import { City } from '../filters/filters.interface';
 
 export enum POST_STATUS {
@@ -76,36 +76,12 @@ export enum FORM_TYPE {
     DONE = 'done',
 }
 
-export interface INewPostState {
-    formType: FORM_TYPE;
-    status: LoadingStatus;
-    data: IPost | null;
-    error: string | null;
-}
-
-export interface IUpdatePostState {
-    status: LoadingStatus;
-    error: string | null;
-}
-
-export interface ISinglePostState {
-    status: LoadingStatus;
-    error: string | null;
-    data: IPost;
-}
-
-export interface IPostConfigState {
-    status: LoadingStatus;
-    error: string | null;
-    data: { [id: string]: IPost & { isFavorite: boolean } };
-}
-
-export type IPostListState = Pagination<IPost> & { error: string | null; status: LoadingStatus };
+export type IPostListState = Pagination<IPost> & { error: ErrorState; status: LoadingStatus };
 
 export interface IPostState {
-    new: INewPostState;
-    update: IUpdatePostState;
-    single: ISinglePostState;
+    new: CommonState<IPost | null> & { formType: FORM_TYPE };
+    update: CommonState<null>;
+    single: CommonState<IPost>;
     list: IPostListState;
-    config: IPostConfigState;
+    config: CommonState<{ [id: string]: IPost & { isFavorite: boolean } }>;
 }

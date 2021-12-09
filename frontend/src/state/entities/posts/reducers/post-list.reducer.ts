@@ -1,6 +1,7 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../../interfaces';
+import { ErrorState } from '../../../interfaces/common';
 import { IPost, IPostState } from '../posts.interface';
 import { postListPaginationThunk, postListThunk } from '../thunks/post-list.thunk';
 
@@ -10,27 +11,19 @@ export const postListReducer = (builder: ActionReducerMapBuilder<IPostState>): v
         state.list.status = 'loading';
     });
     builder.addCase(postListThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
-        state.list.status = 'success';
-        state.list.totalItems = action.payload.totalItems;
-        state.list.totalPages = action.payload.totalPages;
-        state.list.currentPage = action.payload.currentPage;
-        state.list.data = action.payload.data;
+        state.list = { ...action.payload, error: null, status: 'success' };
     });
-    builder.addCase(postListThunk.rejected, (state: IPostState) => {
+    builder.addCase(postListThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
         state.list.status = 'error';
-        state.list.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 
     // POST PAGINATION THUNK
     builder.addCase(postListPaginationThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
-        state.list.status = 'success';
-        state.list.totalItems = action.payload.totalItems;
-        state.list.totalPages = action.payload.totalPages;
-        state.list.currentPage = action.payload.currentPage;
-        state.list.data = [...state.list.data, ...action.payload.data];
+        state.list = { ...action.payload, error: null, status: 'success', data: [...state.list.data, ...action.payload.data] };
     });
-    builder.addCase(postListPaginationThunk.rejected, (state: IPostState) => {
+    builder.addCase(postListPaginationThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
         state.list.status = 'error';
-        state.list.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 };

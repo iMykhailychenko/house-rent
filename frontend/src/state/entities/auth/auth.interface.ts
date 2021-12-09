@@ -1,4 +1,4 @@
-import { LoadingStatus } from '../../interfaces';
+import { LoadingStatus } from '../../interfaces/common';
 
 export interface IAuthState {
     loginStatus: LoadingStatus;

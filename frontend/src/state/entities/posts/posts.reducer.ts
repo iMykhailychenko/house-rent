@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { hydrate } from '../../actions';
-import { IState } from '../../interfaces';
+import { IState } from '../../interfaces/root';
 
 import { postsInitialState } from './posts.initial-state';
 import { FORM_TYPE, IPostState } from './posts.interface';

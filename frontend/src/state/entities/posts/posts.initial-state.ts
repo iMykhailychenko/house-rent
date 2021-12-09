@@ -35,6 +35,7 @@ export const postsInitialState: IPostState = {
     update: {
         status: 'idle',
         error: null,
+        data: null,
     },
     single: {
         error: null,

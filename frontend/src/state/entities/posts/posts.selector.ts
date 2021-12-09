@@ -1,16 +1,16 @@
 import { shallowEqual } from 'react-redux';
 
 import { useAppSelector } from '../../../hooks/redux.hook';
-import { LoadingStatus } from '../../interfaces';
+import { CommonState, LoadingStatus } from '../../interfaces/common';
 import { RootState } from '../../reducer';
 
-import { INewPostState, IPost, IPostListState, ISinglePostState } from './posts.interface';
+import { FORM_TYPE, IPost, IPostListState } from './posts.interface';
 
-export const useNewPostSelector = (): INewPostState =>
-    useAppSelector<INewPostState>(({ posts }: RootState) => posts.new, shallowEqual);
+export const useNewPostSelector = (): CommonState<IPost | null> & { formType: FORM_TYPE } =>
+    useAppSelector<CommonState<IPost | null> & { formType: FORM_TYPE }>(({ posts }: RootState) => posts.new, shallowEqual);
 
-export const useSinglePostSelector = (): ISinglePostState =>
-    useAppSelector<ISinglePostState>(({ posts }: RootState) => posts.single, shallowEqual);
+export const useSinglePostSelector = (): CommonState<IPost> =>
+    useAppSelector<CommonState<IPost>>(({ posts }: RootState) => posts.single, shallowEqual);
 
 export const usePostListSelector = (): IPostListState =>
     useAppSelector<IPostListState>(({ posts }: RootState) => posts.list, shallowEqual);

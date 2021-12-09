@@ -1,7 +1,4 @@
 import { IUser } from '../../../interfaces';
-import { LoadingStatus } from '../../interfaces';
+import { CommonState } from '../../interfaces/common';
 
-export interface IUserState {
-    status: LoadingStatus;
-    data: IUser;
-}
+export type IUserState = CommonState<IUser>;

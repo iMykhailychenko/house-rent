@@ -34,8 +34,7 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
             return data;
         } catch (error) {
             errorNotif(error);
-            rejectWithValue({ accessToken: null } as IAuthResponse);
-            throw new Error(error);
+            return rejectWithValue({ accessToken: null } as IAuthResponse);
         } finally {
             modal.close();
         }

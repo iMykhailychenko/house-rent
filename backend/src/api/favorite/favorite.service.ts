@@ -1,7 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { NotificationsType } from '../notifications/notifications.interface';
+import { NotificationsService } from '../notifications/notifications.service';
 import { PostEntity } from '../posts/entities/posts.entity';
 import { UserEntity } from '../users/entities/users.entity';
 
@@ -13,6 +15,7 @@ export class FavoriteService {
         @InjectRepository(FavoriteEntity) private readonly favoriteRepository: Repository<FavoriteEntity>,
         @InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        private readonly notificationsService: NotificationsService,
     ) {}
 
     async toggleFavorite(userId: number, postId: number): Promise<void> {
@@ -33,6 +36,13 @@ export class FavoriteService {
             const favorite = new FavoriteEntity();
             favorite.post = post;
             favorite.user = user;
+
+            await this.notificationsService.createNotification({
+                userId: user.id,
+                postId: post.id,
+                recipientId: post.user.id,
+                type: NotificationsType.NEW_FAVORITE,
+            });
 
             await this.favoriteRepository.save(favorite);
         }

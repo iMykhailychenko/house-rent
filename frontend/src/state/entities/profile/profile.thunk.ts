@@ -6,43 +6,53 @@ import toastConfig from '../../../config/toast.cofig';
 import { IUser, UserRole } from '../../../interfaces';
 import { VALIDATE_EMAIL_WARN } from '../../../utils/common-banners';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
+import { AsyncThunkConfig } from '../../interfaces/common';
+import { formatSeverError } from '../../utils';
+import { getNotificationsCountThunk } from '../notifications/notifications.thunk';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
-export const profileInfoThunk = createAsyncThunk<IUser>('PROFILE/INFO', async () => {
-    try {
-        const { data, status } = await profileServices.getProfileInfo();
-        if (status < 200 || status >= 300) throw new Error();
+export const profileInfoThunk = createAsyncThunk<IUser, unknown, AsyncThunkConfig>(
+    'PROFILE/INFO',
+    async (_, { dispatch, rejectWithValue }) => {
+        try {
+            const { data, status } = await profileServices.getProfileInfo();
+            if (status < 200 || status >= 300) throw new Error();
 
-        if (!data.isEmailVerified) {
-            banner.add(VALIDATE_EMAIL_WARN);
+            if (!data.isEmailVerified) {
+                banner.add(VALIDATE_EMAIL_WARN);
+            }
+
+            if (data) {
+                dispatch(getNotificationsCountThunk());
+            }
+
+            return data;
+        } catch (error) {
+            errorNotif(error);
+            return rejectWithValue(formatSeverError(error));
         }
-
-        return data;
-    } catch (error) {
-        errorNotif(error);
-        throw new Error(error);
-    }
-});
+    },
+);
 
 export const updateProfileThunk = createAsyncThunk<IUser, IUpdateProfilePayload>(
     'PROFILE/UPDATE_PROFILE',
-    async (payload: IUpdateProfilePayload) => {
+    async (payload: IUpdateProfilePayload, { rejectWithValue }) => {
         try {
             const { data, status } = await profileServices.updateProfile(payload);
             if (status < 200 || status >= 300) throw new Error();
             return data;
         } catch (error) {
             errorNotif(error);
-            throw new Error(error);
+            return rejectWithValue(formatSeverError(error));
         }
     },
 );
 
 export const updateProfileRoleThunk = createAsyncThunk<UserRole[], UserRole[]>(
     'PROFILE/UPDATE_ROLE',
-    async (role: UserRole[]) => {
+    async (role: UserRole[], { rejectWithValue }) => {
         try {
             const { status } = await profileServices.updateProfileRole(role);
             if (status < 200 || status >= 300) throw new Error();
@@ -50,25 +60,25 @@ export const updateProfileRoleThunk = createAsyncThunk<UserRole[], UserRole[]>(
             return role;
         } catch (error) {
             errorNotif(error);
-            throw new Error(error);
+            return rejectWithValue(formatSeverError(error));
         }
     },
 );
 
-export const sendNewEmailThunk = createAsyncThunk<void, void>('PROFILE/NEW_EMAIL', async () => {
+export const sendNewEmailThunk = createAsyncThunk<void, void>('PROFILE/NEW_EMAIL', async (_, { rejectWithValue }) => {
     try {
         const { status } = await profileServices.sendNewEmail();
         if (status < 200 || status >= 300) throw new Error();
         toast.success('Лист успішно відправлено на вашу електронну пошту', toastConfig);
     } catch (error) {
-        toast.error('Виникла помилка при відправленні листа!', toastConfig);
-        throw new Error(error);
+        errorNotif(error, 'Виникла помилка при відправленні листа!');
+        return rejectWithValue(formatSeverError(error));
     }
 });
 
 export const changeEmailThunk = createAsyncThunk<IUser, ChangeEmailPayload>(
     'PROFILE/CHANGE_EMAIL',
-    async (payload: ChangeEmailPayload) => {
+    async (payload: ChangeEmailPayload, { rejectWithValue }) => {
         try {
             const { data, status } = await profileServices.changeEmail(payload);
             if (status < 200 || status >= 300) throw new Error();
@@ -78,8 +88,8 @@ export const changeEmailThunk = createAsyncThunk<IUser, ChangeEmailPayload>(
             );
             return data;
         } catch (error) {
-            toast.error('Виникла помилка підчас зміни електронної пошти', toastConfig);
-            throw new Error(error);
+            errorNotif(error, 'Виникла помилка підчас зміни електронної пошти');
+            return rejectWithValue(formatSeverError(error));
         }
     },
 );

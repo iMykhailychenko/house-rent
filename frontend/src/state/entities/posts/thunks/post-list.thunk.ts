@@ -4,12 +4,13 @@ import { Pagination } from '../../../../interfaces';
 import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { searchFiltersToArray } from '../../../../utils/helpers/filters.util';
 import { paginationEmitter } from '../../../../utils/helpers/pagination.helper';
-import { AsyncThunkConfig } from '../../../interfaces';
+import { AsyncThunkConfig } from '../../../interfaces/common';
+import { formatSeverError } from '../../../utils';
 import { IPost } from '../posts.interface';
 import postsServices from '../posts.services';
 
 type PayloadCreator = AsyncThunkPayloadCreator<Pagination<IPost>, number | undefined, AsyncThunkConfig>;
-const payloadCreator: PayloadCreator = async (payload = 1, { getState }) => {
+const payloadCreator: PayloadCreator = async (payload = 1, { getState, rejectWithValue }) => {
     try {
         paginationEmitter.update(payload);
         const state = getState();
@@ -18,7 +19,7 @@ const payloadCreator: PayloadCreator = async (payload = 1, { getState }) => {
         return data;
     } catch (error) {
         errorNotif(error);
-        throw new Error(error);
+        return rejectWithValue(formatSeverError(error));
     }
 };
 

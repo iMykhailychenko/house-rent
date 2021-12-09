@@ -1,7 +1,7 @@
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IState } from '../state/interfaces';
+import { IState } from '../state/interfaces/root';
 import { RootState } from '../state/reducer';
 
 export const useAppSelector = <T>(callback: (value: IState) => T, equalityFn?: (left: T, right: T) => boolean): T =>

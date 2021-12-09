@@ -1,6 +1,7 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit';
 
 import { Pagination } from '../../../../interfaces';
+import { ErrorState } from '../../../interfaces/common';
 import { IPost, IPostState } from '../posts.interface';
 import { getUserPostsListThunk } from '../thunks/user-posts.thunk';
 
@@ -10,14 +11,10 @@ export const userPostsReducer = (builder: ActionReducerMapBuilder<IPostState>): 
         state.list.status = 'loading';
     });
     builder.addCase(getUserPostsListThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
-        state.list.status = 'success';
-        state.list.totalItems = action.payload.totalItems;
-        state.list.totalPages = action.payload.totalPages;
-        state.list.currentPage = action.payload.currentPage;
-        state.list.data = action.payload.data;
+        state.list = { ...action.payload, status: 'success', error: null };
     });
-    builder.addCase(getUserPostsListThunk.rejected, (state: IPostState) => {
+    builder.addCase(getUserPostsListThunk.rejected, (state: IPostState, action) => {
         state.list.status = 'error';
-        state.list.error = 'error';
+        state.new.error = action.payload as ErrorState;
     });
 };
