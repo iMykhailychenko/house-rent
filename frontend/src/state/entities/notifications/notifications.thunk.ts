@@ -1,5 +1,7 @@
 import { AsyncThunkPayloadCreator, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
+import toastConfig from '../../../config/toast.cofig';
 import { Pagination } from '../../../interfaces';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import { paginationEmitter } from '../../../utils/helpers/pagination.helper';
@@ -39,6 +41,33 @@ export const getNotificationsCountThunk = createAsyncThunk<number, undefined, As
             const { data, status } = await notificationsServices.count();
             if (status < 200 || status >= 300) throw new Error();
             return data;
+        } catch (error) {
+            errorNotif(error);
+            return rejectWithValue(formatSeverError(error));
+        }
+    },
+);
+
+export const deleteNotificationByIdThunk = createAsyncThunk<void, number, AsyncThunkConfig>(
+    'NOTIFICATIONS/DELETE_BY_ID',
+    async (payload, { rejectWithValue }) => {
+        try {
+            const { status } = await notificationsServices.deleteById(payload);
+            if (status < 200 || status >= 300) throw new Error();
+            toast.success('Ви успішно видалили повідомлення', toastConfig);
+        } catch (error) {
+            errorNotif(error);
+            return rejectWithValue(formatSeverError(error));
+        }
+    },
+);
+
+export const deleteAllNotificationsThunk = createAsyncThunk<void, undefined, AsyncThunkConfig>(
+    'NOTIFICATIONS/DELETE_ALL',
+    async (_, { rejectWithValue }) => {
+        try {
+            const { status } = await notificationsServices.deleteAll();
+            if (status < 200 || status >= 300) throw new Error();
         } catch (error) {
             errorNotif(error);
             return rejectWithValue(formatSeverError(error));

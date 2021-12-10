@@ -9,4 +9,6 @@ export const notificationsServices = {
     get: (page: number): Response<Pagination<INotification>> =>
         api.get(endpointConfig('/notifications'), { params: { page, limit: uiConfig.notificationsPerPage } }),
     count: (): Response<number> => api.get(endpointConfig('/notifications/count')),
+    deleteAll: (): Response<void> => api.delete(endpointConfig('/notifications')),
+    deleteById: (id: number): Response<void> => api.delete(endpointConfig('/notifications/' + id)),
 };

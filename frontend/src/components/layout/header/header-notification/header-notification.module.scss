@@ -20,18 +20,23 @@
     top: calc(var(--header-height) + 2rem);
     right: 12rem;
     z-index: 101;
-    width: 30rem;
-    max-height: 50rem;
-    padding: 2rem;
+    max-width: 40rem;
+    min-width: 30rem;
+    width: 100%;
+    max-height: 80vh;
+    min-height: 10rem;
+    padding: 0 2rem 2rem;
     background: var(--white);
     border-radius: 0.6rem;
     overflow-y: auto;
 
-    @media (min-width: 1300px) {
-        right: calc((100% - 104rem) / 2);
+    &.center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .inner {
-        height: max-content;
+    @media (min-width: 1300px) {
+        right: calc((100% - 104rem) / 2);
     }
 }

@@ -1,0 +1,116 @@
+.inner {
+    position: relative;
+    height: max-content;
+    width: 100%;
+
+    &.loading {
+        padding-top: 3rem;
+    }
+
+    .emptyWrp {
+        padding: 3rem 0 0;
+        color: var(--black);
+
+        h4 {
+            width: 100%;
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 2.5rem;
+        }
+
+        p {
+            width: 100%;
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 8;
+        width: 100%;
+        background: var(--white);
+    }
+
+    .loader,
+    .item {
+        width: 100%;
+        padding: 2rem;
+        margin-bottom: 1rem;
+        border-radius: 0.6rem;
+    }
+
+    .loader {
+        border: 0.1rem solid var(--gray-3);
+        background: var(--gray-2);
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 0.1rem solid var(--gray-2);
+        background: var(--gray-2);
+
+        img {
+            min-width: 3rem;
+            margin-right: 1.5rem;
+        }
+
+        .mid {
+            width: calc(100% - 10rem);
+        }
+
+        a {
+            color: var(--gray-6);
+            font-weight: 500;
+
+            &:hover {
+                text-decoration: underline;
+                color: var(--primary);
+            }
+        }
+
+        .btn {
+            padding: 0 0.4rem;
+            font-size: 1.8rem;
+
+            &:hover {
+                color: var(--error);
+            }
+        }
+    }
+
+    .link {
+        padding: 2rem 0 1rem;
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+    .disabled {
+        color: var(--gray-6);
+        pointer-events: none;
+    }
+
+    .more {
+        width: 100%;
+        height: 4rem;
+        background: var(--secondary);
+        border-radius: 0.6rem;
+
+        &:hover {
+            color: var(--primary);
+        }
+    }
+}

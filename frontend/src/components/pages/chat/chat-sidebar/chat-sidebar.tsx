@@ -13,7 +13,7 @@ const ChatSidebar = (): JSX.Element => {
     return loading ? (
         <ChatItemSkeleton amount={6} />
     ) : chatListState.data.length ? (
-        <ChatListItem chat={chatListState.data} />
+        <ChatListItem />
     ) : (
         <div className={css.empty} />
     );

@@ -37,12 +37,14 @@ export class FavoriteService {
             favorite.post = post;
             favorite.user = user;
 
-            await this.notificationsService.createNotification({
-                userId: user.id,
-                postId: post.id,
-                recipientId: post.user.id,
-                type: NotificationsType.NEW_FAVORITE,
-            });
+            if (post.user.id !== user.id) {
+                await this.notificationsService.createNotification({
+                    postId: post.id,
+                    userId: user.id,
+                    recipientId: post.user.id,
+                    type: NotificationsType.NEW_FAVORITE,
+                });
+            }
 
             await this.favoriteRepository.save(favorite);
         }

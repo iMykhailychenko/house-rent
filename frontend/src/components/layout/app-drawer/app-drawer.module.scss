@@ -1,3 +1,46 @@
-.inner {
-    width: 40rem;
+:global(.black) {
+    .title,
+    .root {
+        background: var(--gray-1);
+    }
+}
+
+.root {
+    background: var(--white);
+
+    .inner {
+        width: 40rem;
+        padding: 2rem;
+
+        .menu {
+            margin-left: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 0 1.8rem;
+            font-size: 2rem;
+        }
+    }
+}
+
+.title {
+    font-size: 16px;
+    color: var(--black);
+    background: var(--white);
+}
+
+.list {
+    margin-bottom: 4rem;
+
+    * {
+        font-size: 16px;
+        color: var(--black);
+    }
+
+    svg {
+        margin-bottom: 4px;
+        font-size: 25px;
+    }
+
+    .btn:hover {
+        background: var(--gray-3);
+    }
 }

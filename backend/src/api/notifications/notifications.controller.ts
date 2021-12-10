@@ -1,4 +1,4 @@
-import { Controller, Get, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/shared/guards/auth.guards';
 
 import { User } from '../../shared/decorators/users.decorator';
@@ -25,5 +25,17 @@ export class NotificationsController {
     @UseGuards(AuthGuard)
     async getCountNotifications(@User('id') userId: number): Promise<number> {
         return await this.notificationsService.getCountNotifications(userId);
+    }
+
+    @Delete('')
+    @UseGuards(AuthGuard)
+    async deleteAll(@User('id') userId: number): Promise<void> {
+        await this.notificationsService.deleteAll(userId);
+    }
+
+    @Delete(':notificationId')
+    @UseGuards(AuthGuard)
+    async deleteById(@User('id') userId: number, @Param('notificationId', ParseIntPipe) notificationId: number): Promise<void> {
+        await this.notificationsService.deleteById(userId, notificationId);
     }
 }

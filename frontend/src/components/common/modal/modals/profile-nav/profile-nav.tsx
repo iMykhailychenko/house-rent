@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 import Link from 'next/link';
 
 import useAuth from '../../../../../hooks/auth.hook';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
+import { useMessageCountSelector } from '../../../../../state/entities/chats/chats.selector';
+import { messagesCountThunk } from '../../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../utils/routes';
 import SmallModalWrp from '../../components/small-modal-wrp/small-modal-wrp';
@@ -15,13 +18,20 @@ import css from './profile-nav.module.scss';
 export const ProfileNav = (): JSX.Element => {
     const trans = useTrans();
     const { logout } = useAuth();
-    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
+
+    const count = useMessageCountSelector();
     const profileState = useProfileInfoSelector();
+    const [loading, setLoading] = useState(false);
 
     const handleLogout = (): void => {
         setLoading(true);
         logout();
     };
+
+    useEffect(() => {
+        dispatch(messagesCountThunk());
+    }, [dispatch]);
 
     return (
         <SmallModalWrp title={`${profileState?.data?.firstName} ${profileState?.data?.lastName}`}>
@@ -38,7 +48,9 @@ export const ProfileNav = (): JSX.Element => {
                 </li>
                 <li className={css.li}>
                     <Link href={routes.chats.init}>
-                        <a className={css.btn}>{trans('Мої повідомлення')} (2)</a>
+                        <a className={css.btn}>
+                            {trans('Мої повідомлення')} {!!count && `(${count})`}
+                        </a>
                     </Link>
                 </li>
                 <li className={css.li}>

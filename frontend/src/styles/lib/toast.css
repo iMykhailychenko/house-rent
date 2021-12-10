@@ -1,28 +1,28 @@
 .Toastify {
     --toastify-toast-min-height: 5rem;
-    --toastify-color-light: var(--gray-10);
-    --toastify-color-dark: var(--gray-1);
+    --toastify-color-light: var(--gray-1);
+    --toastify-color-dark: var(--gray-10);
     --toastify-color-info: #3498db;
     --toastify-color-success: var(--success);
     --toastify-color-warning: var(--warning);
     --toastify-color-error: var(--error);
-    --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+    --toastify-color-transparent: rgba(255, 255, 255, 0.5);
     --toastify-icon-color-info: var(--toastify-color-info);
     --toastify-icon-color-success: var(--toastify-color-success);
     --toastify-icon-color-warning: var(--toastify-color-warning);
     --toastify-icon-color-error: var(--toastify-color-error);
     --toastify-toast-width: 45rem;
-    --toastify-toast-background: var(--gray-10);
+    --toastify-toast-background: var(--gray-1);
     --toastify-toast-max-height: 80rem;
     --toastify-font-family: sans-serif;
     --toastify-z-index: 9999;
-    --toastify-text-color-light: var(--gray-1);
+    --toastify-text-color-light: var(--gray-10);
     --toastify-text-color-dark: #fff;
     --toastify-text-color-info: #fff;
     --toastify-text-color-success: #fff;
     --toastify-text-color-warning: #fff;
     --toastify-text-color-error: #fff;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .Toastify__toast {
@@ -34,6 +34,14 @@
     max-width: calc(100% - 5.5rem);
 }
 
+.Toastify__toast .Toastify__toast-body a {
+    text-decoration: underline;
+}
+
+.Toastify__toast .Toastify__toast-body a:hover {
+    color: var(--gray-6);
+}
+
 .Toastify__close-button.Toastify__close-button--light {
     position: absolute;
     top: 0;
@@ -41,13 +49,13 @@
     height: 100%;
     width: 5.5rem;
     opacity: 0.8;
-    color: var(--white);
-    background: var(--gray-9);
-    border-left: 0.1rem solid var(--gray-7);
+    color: var(--black);
+    background: var(--gray-1);
+    border-left: 0.1rem solid var(--gray-4);
 }
 
 .Toastify__close-button.Toastify__close-button--light:hover {
-    background: var(--gray-8);
+    background: var(--gray-3);
 }
 
 .Toastify__close-button.Toastify__close-button--light svg {

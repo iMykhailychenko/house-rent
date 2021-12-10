@@ -59,6 +59,7 @@ export interface UpdateMessagesPayload {
 }
 
 export interface IChatsState {
+    count: number;
     single: SingleChat;
     list: ChatsList;
     messages: MessagesList;

@@ -64,6 +64,14 @@ export class ChatsService {
         return chatsList as Pagination<ChatResponse>;
     }
 
+    async getNewMessagesCount(userId: number): Promise<number> {
+        return this.messageRepository
+            .createQueryBuilder('messages')
+            .leftJoin('messages.author', 'author')
+            .where('(messages.isNew = TRUE AND author.id != :userId)', { userId })
+            .getCount();
+    }
+
     async findAllMessages({ chatId, userId, page = 1, limit = 20 }: FindAllMessagesParams): Promise<Pagination<MessageEntity>> {
         const chat = await this.chatRepository
             .createQueryBuilder('chats')
@@ -137,15 +145,17 @@ export class ChatsService {
         newChat.messages = [firstMessage];
         newChat.users = [realtor.id, customer.id];
 
+        await this.messageRepository.save(firstMessage);
+        const savedChat = await this.chatRepository.save(newChat);
+
         await this.notificationsService.createNotification({
-            chatId: chat.id,
+            chatId: savedChat.id,
             userId: realtor.id,
             recipientId: customer.id,
             type: NotificationsType.NEW_CHAT,
         });
 
-        await this.messageRepository.save(firstMessage);
-        return await this.chatRepository.save(newChat);
+        return savedChat;
     }
 
     async createMessage(createMessageDto: MessageDto): Promise<MessageEntity> {

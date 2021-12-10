@@ -5,24 +5,30 @@ import { ErrorState } from '../../interfaces/common';
 
 import { notificationsInitState } from './notifications.initial-state';
 import { INotification, INotificationState } from './notifications.interface';
-import { getNotificationsCountThunk, notificationsListPaginationThunk, notificationsListThunk } from './notifications.thunk';
+import {
+    deleteAllNotificationsThunk,
+    deleteNotificationByIdThunk,
+    getNotificationsCountThunk,
+    notificationsListPaginationThunk,
+    notificationsListThunk,
+} from './notifications.thunk';
 
 const notificationsSlice = createSlice({
     name: 'NOTIFICATIONS',
     initialState: notificationsInitState,
-    reducers: {},
+    reducers: {
+        pushNotificationsAction(state: INotificationState, action: PayloadAction<INotification>) {
+            state.count += 1;
+            state.data.data = [action.payload, ...state.data.data];
+        },
+        resetNotificationsCountAction(state: INotificationState) {
+            state.count = 0;
+        },
+    },
     extraReducers: builder => {
         // FETCH NOTIFICATIONS COUNT
-        builder.addCase(getNotificationsCountThunk.pending, (state: INotificationState) => {
-            state.status = 'loading';
-        });
         builder.addCase(getNotificationsCountThunk.fulfilled, (state: INotificationState, action: PayloadAction<number>) => {
-            state.status = 'success';
             state.count = action.payload;
-        });
-        builder.addCase(getNotificationsCountThunk.rejected, (state: INotificationState, action: PayloadAction<unknown>) => {
-            state.status = 'error';
-            state.error = (action.payload as ErrorState) || null;
         });
 
         // FETCH NOTIFICATIONS LIST
@@ -48,7 +54,22 @@ const notificationsSlice = createSlice({
                 state.data = { ...action.payload, data: [...state.data.data, ...action.payload.data] };
             },
         );
+
+        // DELETE
+        builder.addCase(
+            deleteNotificationByIdThunk.fulfilled,
+            (state: INotificationState, action: PayloadAction<unknown, string, { arg: number }>) => {
+                state.count = state.count < 1 ? 0 : state.count - 1;
+                state.data.data = state.data.data.filter(item => item.id !== action.meta.arg);
+            },
+        );
+        builder.addCase(deleteAllNotificationsThunk.fulfilled, (state: INotificationState) => {
+            state.count = 0;
+            state.data = notificationsInitState.data;
+        });
     },
 });
+
+export const { pushNotificationsAction, resetNotificationsCountAction } = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

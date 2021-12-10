@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const MenuIcon = ({ onClick, className }: IProps): JSX.Element => (
-    <Button className={clsx(css.button, className)} type="button" onClick={onClick}>
+    <Button secondary className={clsx(css.button, className)} type="button" onClick={onClick}>
         <Menu />
     </Button>
 );

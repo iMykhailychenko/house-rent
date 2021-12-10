@@ -8,24 +8,19 @@ import { VALIDATE_EMAIL_WARN } from '../../../utils/common-banners';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import { AsyncThunkConfig } from '../../interfaces/common';
 import { formatSeverError } from '../../utils';
-import { getNotificationsCountThunk } from '../notifications/notifications.thunk';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
 export const profileInfoThunk = createAsyncThunk<IUser, unknown, AsyncThunkConfig>(
     'PROFILE/INFO',
-    async (_, { dispatch, rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
             const { data, status } = await profileServices.getProfileInfo();
             if (status < 200 || status >= 300) throw new Error();
 
             if (!data.isEmailVerified) {
                 banner.add(VALIDATE_EMAIL_WARN);
-            }
-
-            if (data) {
-                dispatch(getNotificationsCountThunk());
             }
 
             return data;

@@ -16,38 +16,41 @@ class ChatSocket {
         ChatSocket.instance = this;
         this.client = io('ws://localhost:8001/chat', { auth: { token } });
         this.chatId = chatId;
-        this.initEventsListeners(chatId);
+        this.subscribe();
     }
 
-    initEventsListeners = (chatId: number): void => {
-        if (!this.client) return;
-
-        this.client.on('connect', () => {
-            this.client?.emit('joinChat', chatId);
-        });
-
-        this.client.on('userJoined', msg => {
-            console.log('userJoined ' + msg);
-        });
-        this.client.on('leaveChat', msg => {
-            console.log('leaveChat ' + msg);
-        });
-        this.client.on('connect_error', error => {
-            console.log(`connect_error due to ${error.message}`);
-        });
+    private errorHandler = (error: Error): void => {
+        console.log(`connect_error due to ${error.message}`);
     };
 
-    switchChat = (newChatId: number): void => {
+    private connectHandler = (): void => {
+        this.client?.emit('joinChat', this.chatId);
+    };
+
+    public subscribe = (): void => {
+        if (!this.client) return;
+
+        this.client.on('connect', this.connectHandler);
+        this.client.on('connect_error', this.errorHandler);
+    };
+
+    public unsubscribe = (): void => {
+        if (!this.client) return;
+
+        this.client.off('connect', this.connectHandler);
+        this.client.off('connect_error', this.errorHandler);
+    };
+
+    public switchChat = (newChatId: number): void => {
         this.client?.emit('leaveChat', this.chatId);
         this.client?.emit('joinChat', newChatId);
     };
 
-    send = (message: SocketMessagesPayload): void => {
-        console.log(message);
+    public send = (message: SocketMessagesPayload): void => {
         this.client?.emit('msgToServer', message);
     };
 
-    update = (data: UpdateMessagesPayload): void => {
+    public update = (data: UpdateMessagesPayload): void => {
         this.client?.emit('editMessage', data);
     };
 }
@@ -57,5 +60,6 @@ export const useChatSocket = (): ChatSocket | null => {
     const history = useRouter();
     const chatId = +String(history.query.chatId);
     if (!token?.accessToken || !chatId || !process.browser) return null;
+
     return new ChatSocket(token.accessToken, chatId);
 };

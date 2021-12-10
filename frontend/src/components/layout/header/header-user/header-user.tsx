@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -21,7 +21,10 @@ const HeaderUser = (): JSX.Element | null => {
     const notificationCount = useNotificationsCountSelector();
 
     const [notifications, setNotifications] = useState(false);
-    const toggleNotifications = (): void => setNotifications(prev => !prev);
+    const toggleNotifications = useCallback((): void => {
+        document.body.style.overflow = !notifications ? 'hidden' : '';
+        setNotifications(prev => !prev);
+    }, [notifications]);
 
     const createNewPost = (): void => {
         history.push(routes.posts.new);

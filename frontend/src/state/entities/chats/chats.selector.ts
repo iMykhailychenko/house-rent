@@ -19,3 +19,5 @@ export const useMessageSelector = (): MessagesList =>
 
 export const useMessageStatusSelector = (): LoadingStatus =>
     useAppSelector<LoadingStatus>(({ chats }: RootState) => chats.messages.status, shallowEqual);
+
+export const useMessageCountSelector = (): number => useAppSelector<number>(({ chats }: RootState) => chats.count, shallowEqual);

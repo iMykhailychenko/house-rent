@@ -24,6 +24,12 @@ export class ChatsController {
         return await this.chatsService.formatChatResponse({ userId, page, limit });
     }
 
+    @Get('count')
+    @UseGuards(AuthGuard)
+    async getNewMessagesCount(@User('id') userId: number): Promise<number> {
+        return await this.chatsService.getNewMessagesCount(userId);
+    }
+
     @Get(':chatId')
     @UseGuards(AuthGuard)
     async findChatById(@User('id') userId: number, @Param('chatId', ParseIntPipe) chatId: number): Promise<ChatResponse> {

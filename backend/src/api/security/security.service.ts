@@ -31,10 +31,15 @@ export class SecurityService {
                 first_name: user.firstName,
                 last_name: user.lastName,
             })
-            .subscribe(({ status }) => {
-                if (status > 299) {
+            .subscribe({
+                next: ({ status }) => {
+                    if (status > 299) {
+                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                    }
+                },
+                error: () => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                }
+                },
             });
     }
 
@@ -50,10 +55,15 @@ export class SecurityService {
                     authConfig.resetPasswordSecret,
                 ),
             })
-            .subscribe(({ status }) => {
-                if (status > 299) {
+            .subscribe({
+                next: ({ status }) => {
+                    if (status > 299) {
+                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                    }
+                },
+                error: () => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                }
+                },
             });
     }
 
@@ -72,10 +82,15 @@ export class SecurityService {
                     authConfig.resetPasswordSecret,
                 ),
             })
-            .subscribe(({ status }) => {
-                if (status > 299) {
+            .subscribe({
+                next: ({ status }) => {
+                    if (status > 299) {
+                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
+                    }
+                },
+                error: () => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                }
+                },
             });
     }
 

@@ -23,7 +23,7 @@ export class NotificationsGateway implements OnGatewayInit, OnGatewayConnection,
     constructor(private readonly jwtService: JwtService) {}
 
     public sendNotification(notification: NotificationsEntity): void {
-        this.server.emit('newNotification', notification);
+        this.server.to(String(notification.recipientId)).emit('newNotification', notification);
     }
 
     @UsePipes(new ValidationPipe({ transform: true }))
