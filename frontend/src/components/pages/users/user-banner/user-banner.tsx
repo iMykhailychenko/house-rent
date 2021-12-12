@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import Rating from '@mui/material/Rating';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import useAuth from '../../../../hooks/auth.hook';
@@ -63,45 +65,56 @@ const UserBanner = (): JSX.Element => {
     };
 
     return (
-        <div className={css.flex}>
-            <UserAvatar
-                diameter={25}
-                className={css.avatar}
-                src={userData.avatar}
-                firstName={userData.firstName}
-                lastName={userData.lastName}
-            />
-            <h2 className={css.title}>
-                {userData.firstName} {userData.lastName}
-            </h2>
-            <p className={online === 'online' ? css.online : css.offline} title={online === 'online' ? 'online' : 'offline'}>
-                {online}
-            </p>
-            <p className={css.text}>Роль на сайті:</p>
-            <div className={css.role}>
-                {userData.role.includes(UserRole.USER) ? (
-                    userData.role.includes(UserRole.REALTOR) ? (
-                        <>
-                            <RoleComponent text="Шукає житло" title="Роль на сайті" />
-                            <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
-                        </>
-                    ) : (
-                        <RoleComponent text="Шукає житло" title="Роль на сайті" />
-                    )
-                ) : (
-                    <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
-                )}
+        <div className={clsx(css.flex, css.box)}>
+            <div className={css.cell}>
+                <UserAvatar
+                    diameter={25}
+                    className={css.avatar}
+                    src={userData.avatar}
+                    firstName={userData.firstName}
+                    lastName={userData.lastName}
+                />
             </div>
 
-            {profileState.data.id === userState.data.id ? (
-                <button type="button" className={css.link} onClick={changeUserRoleModal}>
-                    Змінити роль на сайті
-                </button>
-            ) : (
-                <Button loading={loading} primary className={css.btn} onClick={openChat}>
-                    Написати повідомлення
-                </Button>
-            )}
+            <div className={css.cell}>
+                <h2 className={css.title}>
+                    {userData.firstName} {userData.lastName}
+                </h2>
+                <p className={online === 'online' ? css.online : css.offline} title={online === 'online' ? 'online' : 'offline'}>
+                    {online === 'online' ? online : 'Offline: ' + online}
+                </p>
+                <p className={css.text}>Рейтинг користувача:</p>
+                <div className={css.flex}>
+                    <Rating className={css.rating} name="half-rating-read" defaultValue={3.3} precision={0.1} readOnly />
+                    <span>3.3</span>
+                </div>
+
+                <p className={css.text}>Роль на сайті:</p>
+                <div className={css.role}>
+                    {userData.role.includes(UserRole.USER) ? (
+                        userData.role.includes(UserRole.REALTOR) ? (
+                            <>
+                                <RoleComponent text="Шукає житло" title="Роль на сайті" />
+                                <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                            </>
+                        ) : (
+                            <RoleComponent text="Шукає житло" title="Роль на сайті" />
+                        )
+                    ) : (
+                        <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                    )}
+                </div>
+
+                {profileState.data.id === userState.data.id ? (
+                    <Button primary className={css.btn} onClick={changeUserRoleModal}>
+                        Змінити роль на сайті
+                    </Button>
+                ) : (
+                    <Button loading={loading} primary className={css.btn} onClick={openChat}>
+                        Написати повідомлення
+                    </Button>
+                )}
+            </div>
         </div>
     );
 };

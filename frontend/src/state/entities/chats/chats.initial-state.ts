@@ -2,10 +2,7 @@ import { IChatsState } from './chats.interface';
 
 export const chatInitialState: IChatsState = {
     count: 0,
-    single: {
-        status: 'idle',
-        data: null,
-    },
+    active: 0,
     list: {
         status: 'idle',
         error: null,

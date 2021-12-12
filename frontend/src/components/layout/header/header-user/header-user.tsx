@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -25,6 +25,12 @@ const HeaderUser = (): JSX.Element | null => {
         document.body.style.overflow = !notifications ? 'hidden' : '';
         setNotifications(prev => !prev);
     }, [notifications]);
+
+    useEffect(() => {
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
 
     const createNewPost = (): void => {
         history.push(routes.posts.new);

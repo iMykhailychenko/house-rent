@@ -12,7 +12,7 @@ import { formatSeverError } from '../../utils';
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 import profileServices from './profile.services';
 
-export const profileInfoThunk = createAsyncThunk<IUser, unknown, AsyncThunkConfig>(
+export const profileInfoThunk = createAsyncThunk<IUser, undefined, AsyncThunkConfig>(
     'PROFILE/INFO',
     async (_, { rejectWithValue }) => {
         try {

@@ -33,11 +33,6 @@ export type ChatsList = Pagination<Chat> & BaseType;
 
 export type MessagesList = Pagination<Message> & BaseType;
 
-export interface SingleChat {
-    status: LoadingStatus;
-    data: Chat | null;
-}
-
 export interface MessagesListPayload {
     page?: number;
     chatId: number;
@@ -60,7 +55,7 @@ export interface UpdateMessagesPayload {
 
 export interface IChatsState {
     count: number;
-    single: SingleChat;
+    active: number;
     list: ChatsList;
     messages: MessagesList;
 }

@@ -4,6 +4,8 @@ import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDou
 import Drawer from '@mui/material/Drawer';
 import ListSubheader from '@mui/material/ListSubheader';
 
+import useAuth from '../../../hooks/auth.hook';
+import LoginForm from '../../common/auth/login-form/login-form';
 import Button from '../../common/button/button';
 import NotificationsList from '../../common/notifications/notifications-list';
 
@@ -16,6 +18,7 @@ interface IProps {
 }
 
 const AppDrawer = ({ open, onClose }: IProps): JSX.Element => {
+    const { token } = useAuth();
     return (
         <Drawer classes={{ paper: css.root }} open={open} onClose={onClose}>
             <div className={css.inner}>
@@ -24,10 +27,16 @@ const AppDrawer = ({ open, onClose }: IProps): JSX.Element => {
                 </Button>
                 <AppDrawerNav />
 
-                <ListSubheader className={css.title} component="div">
-                    Список повідомлень
-                </ListSubheader>
-                <NotificationsList />
+                {token.accessToken ? (
+                    <>
+                        <ListSubheader className={css.title} component="div">
+                            Список повідомлень
+                        </ListSubheader>
+                        <NotificationsList />
+                    </>
+                ) : (
+                    <LoginForm />
+                )}
             </div>
         </Drawer>
     );

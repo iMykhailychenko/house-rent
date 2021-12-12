@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { INotification, NotificationsType } from '../../../state/entities/notifications/notifications.interface';
+import { cutString } from '../../../utils/helpers/string.helper';
 import routes from '../../../utils/routes';
 
 interface IProps {
@@ -30,15 +31,14 @@ const notificationsMap = {
     ),
     [NotificationsType.NEW_MESSAGE]: (value: INotification): JSX.Element => (
         <>
-            <span>Нове повідомле від</span>{' '}
             <Link href={routes.users.profile(value.user.id)}>
                 <a>
-                    {value.user.firstName} {value.user.lastName}
+                    {value.user.firstName} {value.user.lastName}:
                 </a>
             </Link>
             <br />
             <Link href={routes.chats.messages(value.chatId)}>
-                <a>Переглянути повідомлення</a>
+                <a className="toast-link-body">{cutString(value.body, 100)}</a>
             </Link>
         </>
     ),

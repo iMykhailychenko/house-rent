@@ -9,5 +9,6 @@ export interface CreateNotification {
     postId?: number;
     userId: number;
     recipientId?: number;
+    body?: string;
     type: NotificationsType;
 }

@@ -13,21 +13,7 @@ const MessagesSkeleton = (): JSX.Element => {
                     <RectSkeleton className={css.avatar} />
                     <TextSkeleton className={css.name} />
                 </div>
-                <TextSkeleton amount={2} />
-            </div>
-            <div className={css.message}>
-                <div className={css.user}>
-                    <RectSkeleton className={css.avatar} />
-                    <TextSkeleton className={css.name} />
-                </div>
                 <TextSkeleton amount={3} />
-            </div>
-            <div className={css.message}>
-                <div className={css.user}>
-                    <RectSkeleton className={css.avatar} />
-                    <TextSkeleton className={css.name} />
-                </div>
-                <TextSkeleton amount={2} />
             </div>
             <div className={css.message}>
                 <div className={css.user}>

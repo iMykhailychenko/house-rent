@@ -80,6 +80,13 @@
                 text-decoration: underline;
                 color: var(--primary);
             }
+
+            &:global(.toast-link-body) {
+                display: block;
+                margin-top: 0.6rem;
+                color: var(--black);
+                font-weight: 400;
+            }
         }
 
         .btn {

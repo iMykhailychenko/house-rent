@@ -32,8 +32,8 @@ export class ChatsController {
 
     @Get(':chatId')
     @UseGuards(AuthGuard)
-    async findChatById(@User('id') userId: number, @Param('chatId', ParseIntPipe) chatId: number): Promise<ChatResponse> {
-        return await this.chatsService.findChatById(chatId, userId);
+    async updateUnreadMessages(@User('id') userId: number, @Param('chatId', ParseIntPipe) chatId: number): Promise<void> {
+        await this.chatsService.updateUnreadMessages(chatId, userId);
     }
 
     @Get('messages/:chatId')

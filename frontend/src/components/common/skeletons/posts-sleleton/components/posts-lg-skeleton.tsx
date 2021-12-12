@@ -17,8 +17,8 @@ const PostsLgSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
 
     return (
         <>
-            {list.map(item => (
-                <div key={item} className={clsx(css.lg, className)}>
+            {list.map((_, index) => (
+                <div key={index} className={clsx(css.lg, className)}>
                     <UserCardSkeleton className={css.user} />
 
                     <div className={css.flex}>

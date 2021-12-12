@@ -47,12 +47,11 @@ const UserPostCard = ({ post }: IProps): JSX.Element => {
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
                         <Tooltip className={css.tooltip} content={post.title}>
-                            <h3>{cutString(post.title, 80)}</h3>
+                            <h3>{post.title}</h3>
                         </Tooltip>
-                        <p>{cutString(post.description, 80)}</p>
+                        <p className={css.description}>{post.description}</p>
                         <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
-
-                        <span className={css[post.status]}>Статус оголошення: {post.status}</span>
+                        <span className={css[post.status]}>{post.status}</span>
                     </a>
                 </Link>
             </div>

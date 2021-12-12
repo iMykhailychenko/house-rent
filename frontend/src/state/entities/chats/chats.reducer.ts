@@ -20,10 +20,13 @@ const chatSlice = createSlice({
     name: 'CHATS',
     initialState: chatInitialState,
     reducers: {
+        updateMsgStatusAction(state: IChatsState) {
+            state.messages.data = state.messages.data.map(msg => ({ ...msg, isNew: false }));
+        },
         pushMessageAction(state: IChatsState, action: PayloadAction<Message>) {
             state.messages.data.unshift(action.payload);
             state.list.data = state.list.data.map(chat =>
-                chat.id === state.single.data?.id ? { ...chat, lastMessage: action.payload } : chat,
+                chat.id === state.active ? { ...chat, lastMessage: action.payload } : chat,
             );
         },
         updateMessageAction(state: IChatsState, action: PayloadAction<Message>) {
@@ -32,6 +35,16 @@ const chatSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.chats);
+
+        builder.addCase(
+            singleChatThunk.pending,
+            (state: IChatsState, action: PayloadAction<unknown, string, { arg: number }>) => {
+                state.active = action.meta.arg;
+                state.list.data = state.list.data.map(chat =>
+                    chat.id === action.meta.arg ? { ...chat, unreadMessages: 0 } : chat,
+                );
+            },
+        );
 
         // CHATS COUNT
         builder.addCase(messagesCountThunk.fulfilled, (state: IChatsState, action: PayloadAction<number>) => {
@@ -57,19 +70,6 @@ const chatSlice = createSlice({
                 status: 'success',
                 error: null,
             };
-        });
-
-        // SINGLE CHAT
-        builder.addCase(singleChatThunk.pending, (state: IChatsState) => {
-            state.single.status = 'loading';
-        });
-        builder.addCase(singleChatThunk.fulfilled, (state: IChatsState, action: PayloadAction<Chat>) => {
-            state.single.status = 'success';
-            state.single.data = action.payload;
-        });
-        builder.addCase(singleChatThunk.rejected, (state: IChatsState, action: PayloadAction<unknown>) => {
-            state.single.status = 'error';
-            state.list.error = action.payload as ErrorState;
         });
 
         // MESSAGES PAGINATION THUNK
@@ -98,6 +98,6 @@ const chatSlice = createSlice({
     },
 });
 
-export const { pushMessageAction, updateMessageAction } = chatSlice.actions;
+export const { updateMsgStatusAction, pushMessageAction, updateMessageAction } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import DoneIcon from '@mui/icons-material/Done';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import { Message } from '../../../../../state/entities/chats/chats.interface';
@@ -19,10 +22,10 @@ const MessagesList = ({ isFirstMessage = false, message }: IProps): JSX.Element 
 
     return (
         <>
-            <div className={css.textWrp}>
+            <div className={clsx(css.textWrp, { [css.noHover]: profileState.data.id !== message.author.id })}>
                 {profileState.data.id === message.author.id ? (
                     <button
-                        className={css.btnText}
+                        className={css.text}
                         onClick={editMessageModal(message)}
                         dangerouslySetInnerHTML={{ __html: message.text?.replace(/\n/gi, '<br/>') }}
                     />
@@ -31,8 +34,9 @@ const MessagesList = ({ isFirstMessage = false, message }: IProps): JSX.Element 
                 )}
 
                 <p className={css.time}>
-                    <span>{formatTime(message.createdAt)}</span>
                     {message.updatedAt && <span>edited</span>}
+                    {message.isNew ? <DoneIcon /> : <DoneAllIcon className={css.done} />}
+                    <span>{formatTime(message.createdAt)}</span>
                 </p>
             </div>
             {isFirstMessage && (

@@ -36,7 +36,7 @@ const Empty = (): JSX.Element => (
 
 const Loader = (): JSX.Element => (
     <>
-        {[1, 2, 3, 4, 5].map(item => (
+        {[1, 2, 3].map(item => (
             <div className={css.loader} key={item}>
                 <TextSkeleton amount={3} />
             </div>

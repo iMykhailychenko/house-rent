@@ -36,6 +36,13 @@
 
 .Toastify__toast .Toastify__toast-body a {
     text-decoration: underline;
+    word-break: break-word;
+}
+
+.Toastify__toast .Toastify__toast-body .toast-link-body {
+    display: block;
+    text-decoration: unset;
+    cursor: pointer;
 }
 
 .Toastify__toast .Toastify__toast-body a:hover {

@@ -1,7 +1,10 @@
 :global(.black) {
-    .title,
     .root {
         background: var(--gray-1);
+
+        .title {
+            background: var(--gray-1);
+        }
     }
 }
 
@@ -13,34 +16,49 @@
         padding: 2rem;
 
         .menu {
-            margin-left: 1.5rem;
+            margin-left: auto;
             margin-bottom: 2rem;
             padding: 0 1.8rem;
             font-size: 2rem;
         }
+
+        form p,
+        form label,
+        form input {
+            color: var(--black);
+        }
     }
-}
 
-.title {
-    font-size: 16px;
-    color: var(--black);
-    background: var(--white);
-}
+    .list {
+        margin-bottom: 4rem;
 
-.list {
-    margin-bottom: 4rem;
+        * {
+            font-size: 16px;
+            color: var(--black);
+        }
 
-    * {
+        svg {
+            margin-bottom: 4px;
+            font-size: 25px;
+        }
+
+        .btn:hover {
+            background: var(--gray-3);
+        }
+
+        .sub {
+            padding: 1.2rem 0 1.2rem 7.2rem;
+            background: var(--gray-1);
+
+            &:hover {
+                background: var(--gray-2);
+            }
+        }
+    }
+
+    .title {
         font-size: 16px;
         color: var(--black);
-    }
-
-    svg {
-        margin-bottom: 4px;
-        font-size: 25px;
-    }
-
-    .btn:hover {
-        background: var(--gray-3);
+        background: var(--white);
     }
 }

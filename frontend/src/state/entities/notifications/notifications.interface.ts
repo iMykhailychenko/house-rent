@@ -14,6 +14,7 @@ export interface INotification {
     recipientId: number;
     chatId: number;
     postId: number;
+    body: string;
     user: IUser;
     type: NotificationsType;
 }

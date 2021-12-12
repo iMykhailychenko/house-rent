@@ -1,7 +1,6 @@
 import React from 'react';
 
-import BrightnessHigh from '@mui/icons-material/BrightnessHigh';
-import BrightnessLow from '@mui/icons-material/BrightnessLow';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import clsx from 'clsx';
 
 import useTheme from '../../../hooks/theme.hook';
@@ -23,7 +22,7 @@ const SwitchTheme = ({ className }: IProps): JSX.Element => {
 
     return (
         <Button className={clsx(css.root, className)} secondary onClick={handleClick}>
-            {theme === THEME_ENUM.BLACK ? <BrightnessLow /> : <BrightnessHigh />}
+            <LightModeOutlinedIcon />
         </Button>
     );
 };

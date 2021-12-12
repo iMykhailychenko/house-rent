@@ -40,26 +40,25 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
         const room = this.server.adapter['rooms']?.get(String(payload.chatId));
         if (!room || !room.has(client.id)) throw new WsException('Forbidden');
 
-        const message = await this.chatsService.createMessage(payload);
+        const message = await this.chatsService.createMessage(payload, [...room].length !== 2);
         this.server.to(String(payload.chatId)).emit('msgToClient', message);
     }
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('joinChat')
     async handleJoin(client: Socket, chatId: number): Promise<void> {
-        await this.chatRoomManager(client.handshake.auth.token, chatId);
-
+        const user = await this.chatRoomManager(client.handshake.auth.token, chatId);
         client.join(String(chatId));
-        this.server.to(String(chatId)).emit('userJoined', chatId);
+        this.server.to(String(chatId)).emit('userJoined', { chatId, userId: user.id });
     }
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('leaveChat')
     async handleLeave(client: Socket, chatId: number): Promise<void> {
-        await this.chatRoomManager(client.handshake.auth.token, chatId);
-
+        const user = await this.chatRoomManager(client.handshake.auth.token, chatId);
+        console.log(client, chatId);
         client.leave(String(chatId));
-        this.server.to(String(chatId)).emit('userLeft', chatId);
+        this.server.to(String(chatId)).emit('userLeft', { chatId, userId: user.id });
     }
 
     private async chatRoomManager(token: string, payload: number): Promise<UserEntity> {

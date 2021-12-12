@@ -26,6 +26,9 @@ export class NotificationsEntity {
     @ManyToOne(() => UserEntity, user => user.notifications)
     user: UserEntity;
 
+    @Column({ type: 'varchar', default: null })
+    body: string;
+
     @Column({ type: 'varchar' })
     type: NotificationsType;
 }

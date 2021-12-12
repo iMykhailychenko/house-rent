@@ -5,11 +5,17 @@ import { useRouter } from 'next/router';
 import { useChatSocket } from '../../../../hooks/chat.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { Message } from '../../../../state/entities/chats/chats.interface';
-import { pushMessageAction, updateMessageAction } from '../../../../state/entities/chats/chats.reducer';
+import { pushMessageAction, updateMessageAction, updateMsgStatusAction } from '../../../../state/entities/chats/chats.reducer';
 import { useMessageStatusSelector } from '../../../../state/entities/chats/chats.selector';
 import { messagesListThunk, singleChatThunk } from '../../../../state/entities/chats/chats.thunk';
+import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import MessagesSkeleton from '../../../common/skeletons/chat/messages/messages';
 import MessagesLayout from '../messages-layout/messages-layout';
+
+interface JoinChat {
+    chatId: number;
+    userId: number;
+}
 
 const MessagesListEffect = (): JSX.Element => {
     const socket = useChatSocket();
@@ -17,6 +23,9 @@ const MessagesListEffect = (): JSX.Element => {
 
     const router = useRouter();
     const chatId = +String(router.query.chatId);
+
+    const profileState = useProfileInfoSelector();
+    const userId = profileState.data.id;
 
     const messageStatus = useMessageStatusSelector();
     const isLoading = messageStatus === 'idle' || messageStatus === 'loading';
@@ -43,17 +52,40 @@ const MessagesListEffect = (): JSX.Element => {
                 const chatInnerWrp = document.getElementById('chat-inner-wrp');
                 chatWrp?.scrollTo({ top: chatInnerWrp?.offsetHeight || 150 });
             };
-            const messageEdited = (msg: Message) => dispatch(updateMessageAction(msg));
             socket.client.on('msgToClient', msgToClient);
-            socket.client.on('messageEdited', messageEdited);
 
             return () => {
                 socket.client?.off('msgToClient', msgToClient);
-                socket.client?.off('messageEdited', messageEdited);
                 socket.unsubscribe();
             };
         }
-    }, [socket, dispatch]);
+    }, [dispatch, socket, socket?.client]);
+
+    useEffect(() => {
+        if (socket?.client) {
+            const messageEdited = (msg: Message) => dispatch(updateMessageAction(msg));
+            socket.client.on('messageEdited', messageEdited);
+
+            return () => {
+                socket.client?.off('messageEdited', messageEdited);
+            };
+        }
+    }, [dispatch, socket?.client]);
+
+    useEffect(() => {
+        if (socket?.client) {
+            const userJoined = (msg: JoinChat) => {
+                if (msg.userId !== userId) {
+                    dispatch(updateMsgStatusAction());
+                }
+            };
+            socket.client.on('userJoined', userJoined);
+
+            return () => {
+                socket.client?.off('userJoined', userJoined);
+            };
+        }
+    }, [dispatch, socket?.client, userId]);
 
     useEffect(() => {
         dispatch(messagesListThunk({ chatId }));

@@ -31,7 +31,7 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
             <div className={css.content}>
                 <Link href={routes.posts.single(post.id)}>
                     <a className={css.link}>
-                        <h3>{cutString(post.title, 100)}</h3>
+                        <h3>{post.title}</h3>
                     </a>
                 </Link>
 

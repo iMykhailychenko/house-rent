@@ -30,7 +30,7 @@ export const singleChatThunk = createAsyncThunk<Chat, number>('CHATS/SINGLE', as
     }
 });
 
-export const createChatThunk = createAsyncThunk<Chat, CreateChatPayload>('CHAT/CREATE', async (payload, { rejectWithValue }) => {
+export const createChatThunk = createAsyncThunk<Chat, CreateChatPayload>('CHATS/CREATE', async (payload, { rejectWithValue }) => {
     try {
         const { data, status } = await chatsServices.createChat(payload);
         if (status < 200 || status >= 300) throw new Error();

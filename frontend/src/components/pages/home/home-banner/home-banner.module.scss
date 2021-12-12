@@ -61,6 +61,7 @@
             margin-top: 4rem;
             width: 45%;
             max-width: 60rem;
+            color: var(--black);
 
             :global(.appear) {
                 position: relative;
@@ -72,7 +73,7 @@
                 position: relative;
                 top: 0;
                 opacity: 1;
-                transition: 0.6s ease-in-out;
+                transition: top 0.6s ease-in-out, opacity 0.6s ease-in-out, color 0.3s ease-in-out;
             }
 
             .button {

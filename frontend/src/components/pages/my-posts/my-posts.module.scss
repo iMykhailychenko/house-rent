@@ -13,8 +13,8 @@
     .inner {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        align-items: stretch;
         grid-gap: 5rem 1rem;
-        flex-wrap: wrap;
         margin-bottom: 4rem;
 
         --card-width: 40rem;

@@ -99,23 +99,6 @@ export class ChatsService {
         };
     }
 
-    async findChatById(chatId: number, userId: number): Promise<ChatEntity> {
-        const chat = await this.chatRepository
-            .createQueryBuilder('chats')
-            .where('(chats.users)::int[] @> (:userId)::int[]', { userId: [userId] })
-            .getOne();
-        if (!chat) throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-
-        await this.updateUnreadMessages(chatId, userId);
-
-        chat.unreadMessages = 0;
-        chat.lastMessage = await this.messageRepository.findOne({ order: { createdAt: 'DESC' } });
-        chat.user = await this.userRepository.findOne(userId === chat.users[0] ? chat.users[1] : chat.users[0]);
-        delete chat.users;
-
-        return chat;
-    }
-
     async createChat(userId: number, createChatDto: CreateChatDto): Promise<ChatEntity> {
         const realtor = await this.userRepository.findOne(createChatDto.realtor);
         if (!realtor) throw new HttpException('User with id' + createChatDto.realtor + 'not found', HttpStatus.NOT_FOUND);
@@ -158,7 +141,7 @@ export class ChatsService {
         return savedChat;
     }
 
-    async createMessage(createMessageDto: MessageDto): Promise<MessageEntity> {
+    async createMessage(createMessageDto: MessageDto, isNew = false): Promise<MessageEntity> {
         const author = await this.userRepository.findOne(createMessageDto.author);
         if (!author) throw new WsException('User do not exist');
 
@@ -168,6 +151,7 @@ export class ChatsService {
         const message = new MessageEntity();
         message.chat = chat;
         message.author = author;
+        message.isNew = isNew;
         message.text = createMessageDto.message;
         message.uploads = createMessageDto.uploads;
 
@@ -175,6 +159,7 @@ export class ChatsService {
             chatId: chat.id,
             userId: author.id,
             recipientId: chat.users[0] === author.id ? chat.users[1] : chat.users[0],
+            body: createMessageDto.message,
             type: NotificationsType.NEW_MESSAGE,
         });
 

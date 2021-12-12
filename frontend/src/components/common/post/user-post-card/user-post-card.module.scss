@@ -2,6 +2,7 @@
 @import '../post-card/post-cart-md/post-cart-md.module';
 
 .root {
+    height: auto;
     padding: 0;
     border-radius: 0.6rem;
     border: 0.1rem solid var(--gray-3);
@@ -45,9 +46,10 @@
             margin: 0;
 
             span {
-                margin: 1rem 0 0;
                 display: block;
-                padding: 0.5rem 1rem;
+                width: max-content;
+                margin: 1rem 0 0;
+                padding: 0.5rem 2rem;
                 border-radius: 0.5rem;
             }
 
@@ -65,6 +67,11 @@
                 color: var(--success);
                 background: var(--success-secondary);
             }
+        }
+
+        .description {
+            font-size: 1.2rem;
+            @include cutString(2);
         }
     }
 

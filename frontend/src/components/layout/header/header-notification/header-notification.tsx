@@ -34,7 +34,7 @@ const HeaderNotification = ({ onClose }: IProps): JSX.Element => {
     return ReactDOM.createPortal(
         <>
             <div className={css.backdrop} onClick={handleClose} aria-hidden="true" />
-            <div className={clsx(css.root, { [css.center]: notifications.data.length })}>
+            <div className={clsx(css.root, { [css.center]: !notifications.data.length })}>
                 <NotificationsList />
             </div>
         </>,

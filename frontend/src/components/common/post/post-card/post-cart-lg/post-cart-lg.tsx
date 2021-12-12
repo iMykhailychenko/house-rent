@@ -59,7 +59,7 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
                             <Tooltip className={css.tooltip} content={post.title}>
                                 <h3>{post.title}</h3>
                             </Tooltip>
-                            <p>{cutString(post.description, 180)}</p>
+                            <p className={css.description}>{post.description}</p>
                             <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
                         </a>
                     </Link>

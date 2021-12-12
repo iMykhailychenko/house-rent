@@ -16,8 +16,8 @@ const PostsSmSkeleton = ({ className, amount = 1 }: IProps): JSX.Element => {
 
     return (
         <>
-            {list.map(item => (
-                <div key={item} className={clsx(css.sm, className)}>
+            {list.map((_, index) => (
+                <div key={index} className={clsx(css.sm, className)}>
                     <RectSkeleton className={css.img} />
                     <TextSkeleton amount={2} />
 

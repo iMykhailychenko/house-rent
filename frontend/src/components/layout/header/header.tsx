@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Home from '@mui/icons-material/Home';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -31,7 +31,7 @@ interface IProps {
 const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
     const { token } = useAuth();
     const history = useRouter();
-    const chatId = history.query.chatId;
+    const chatId = +String(history.query.chatId || 0);
 
     const [drawer, setDrawer] = useState(false);
     const handleDrawerClose = (): void => setDrawer(false);
@@ -50,7 +50,7 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
         if (socket?.client && token.accessToken) {
             const newNotification = (msg: INotification) => {
                 dispatch(pushNotificationsAction(msg));
-                if (!chatId) {
+                if (!chatId || chatId !== msg.chatId) {
                     toast.success(<NotificationsTemplate value={msg} />, {
                         ...toastConfig,
                         autoClose: 15_000,
@@ -76,10 +76,10 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                     </div>
 
                     <div className={css.item}>
-                        <Link className={css.home} href={routes.home} type="button" secondary>
-                            <Home />
-                        </Link>
                         {withTheme && <SwitchTheme />}
+                        <Link className={css.home} href={routes.home} type="button" secondary>
+                            <HomeOutlinedIcon />
+                        </Link>
                         {token.accessToken ? <HeaderUser /> : <HeaderAuth />}
                     </div>
                 </Container>

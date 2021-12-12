@@ -43,7 +43,9 @@ class ChatSocket {
 
     public switchChat = (newChatId: number): void => {
         this.client?.emit('leaveChat', this.chatId);
-        this.client?.emit('joinChat', newChatId);
+        setTimeout(() => {
+            this.client?.emit('joinChat', newChatId);
+        }, 100);
     };
 
     public send = (message: SocketMessagesPayload): void => {
