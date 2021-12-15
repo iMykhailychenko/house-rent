@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useMessageSelector } from '../../../../state/entities/chats/chats.selector';
 import { messagesListPaginationThunk, messagesListThunk } from '../../../../state/entities/chats/chats.thunk';
 import { validateDate } from '../../../../utils/helpers/date.helper';
+import Button from '../../../common/button/button';
 
 import DateSeparator from './components/date-separator';
 import MessagesList from './components/messages-list';
@@ -32,6 +33,10 @@ const MessagesLayout = (): JSX.Element => {
 
     return (
         <>
+            <Button secondary className={css.rating}>
+                Оцініть чат з користувачем
+            </Button>
+
             {messages.data?.map((message, index, array) => {
                 const prevDay = validateDate(array[index + 1]?.createdAt);
                 const currentDay = validateDate(message.createdAt);

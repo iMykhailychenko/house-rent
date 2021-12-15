@@ -7,14 +7,14 @@ import { paginationEmitter } from '../../../../utils/helpers/pagination.helper';
 import { AsyncThunkConfig } from '../../../interfaces/common';
 import { formatSeverError } from '../../../utils';
 import { IPost } from '../posts.interface';
-import postsServices from '../posts.services';
+import postsService from '../posts.service';
 
 type PayloadCreator = AsyncThunkPayloadCreator<Pagination<IPost>, number | undefined, AsyncThunkConfig>;
 const payloadCreator: PayloadCreator = async (payload = 1, { getState, rejectWithValue }) => {
     try {
         paginationEmitter.update(payload);
         const state = getState();
-        const { data, status } = await postsServices.postsList(payload, searchFiltersToArray(state.filters));
+        const { data, status } = await postsService.postsList(payload, searchFiltersToArray(state.filters));
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {

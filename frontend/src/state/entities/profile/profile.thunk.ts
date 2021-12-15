@@ -10,13 +10,13 @@ import { AsyncThunkConfig } from '../../interfaces/common';
 import { formatSeverError } from '../../utils';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
-import profileServices from './profile.services';
+import profileService from './profile.service';
 
 export const profileInfoThunk = createAsyncThunk<IUser, undefined, AsyncThunkConfig>(
     'PROFILE/INFO',
     async (_, { rejectWithValue }) => {
         try {
-            const { data, status } = await profileServices.getProfileInfo();
+            const { data, status } = await profileService.getProfileInfo();
             if (status < 200 || status >= 300) throw new Error();
 
             if (!data.isEmailVerified) {
@@ -35,7 +35,7 @@ export const updateProfileThunk = createAsyncThunk<IUser, IUpdateProfilePayload>
     'PROFILE/UPDATE_PROFILE',
     async (payload: IUpdateProfilePayload, { rejectWithValue }) => {
         try {
-            const { data, status } = await profileServices.updateProfile(payload);
+            const { data, status } = await profileService.updateProfile(payload);
             if (status < 200 || status >= 300) throw new Error();
             return data;
         } catch (error) {
@@ -49,7 +49,7 @@ export const updateProfileRoleThunk = createAsyncThunk<UserRole[], UserRole[]>(
     'PROFILE/UPDATE_ROLE',
     async (role: UserRole[], { rejectWithValue }) => {
         try {
-            const { status } = await profileServices.updateProfileRole(role);
+            const { status } = await profileService.updateProfileRole(role);
             if (status < 200 || status >= 300) throw new Error();
             toast.success('Ви успішно змінили роль на сайті!', toastConfig);
             return role;
@@ -62,7 +62,7 @@ export const updateProfileRoleThunk = createAsyncThunk<UserRole[], UserRole[]>(
 
 export const sendNewEmailThunk = createAsyncThunk<void, void>('PROFILE/NEW_EMAIL', async (_, { rejectWithValue }) => {
     try {
-        const { status } = await profileServices.sendNewEmail();
+        const { status } = await profileService.sendNewEmail();
         if (status < 200 || status >= 300) throw new Error();
         toast.success('Лист успішно відправлено на вашу електронну пошту', toastConfig);
     } catch (error) {
@@ -75,7 +75,7 @@ export const changeEmailThunk = createAsyncThunk<IUser, ChangeEmailPayload>(
     'PROFILE/CHANGE_EMAIL',
     async (payload: ChangeEmailPayload, { rejectWithValue }) => {
         try {
-            const { data, status } = await profileServices.changeEmail(payload);
+            const { data, status } = await profileService.changeEmail(payload);
             if (status < 200 || status >= 300) throw new Error();
             toast.success(
                 'Ми надіслали вам листа на нову електронну пошту. Перейдіть за посиланням в ньому щоб верифікувати вашу нову пошту',

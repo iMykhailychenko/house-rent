@@ -5,13 +5,13 @@ import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { AsyncThunkConfig } from '../../../interfaces/common';
 import { formatSeverError } from '../../../utils';
 import { IPost } from '../posts.interface';
-import postsServices from '../posts.services';
+import postsService from '../posts.service';
 
 export const getUserPostsListThunk = createAsyncThunk<Pagination<IPost>, number, AsyncThunkConfig>(
     'POSTS/USER_POSTS',
     async (payload: number, { rejectWithValue }) => {
         try {
-            const { data, status } = await postsServices.getUserPostsList(payload);
+            const { data, status } = await postsService.getUserPostsList(payload);
             if (status < 200 || status >= 300) throw new Error();
             return data;
         } catch (error) {

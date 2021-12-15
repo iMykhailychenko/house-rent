@@ -183,6 +183,11 @@ export class ChatsService {
             .execute();
     }
 
+    async getSingleChat(chatId: number, userId: number): Promise<ChatEntity> {
+        await this.updateUnreadMessages(chatId, userId);
+        return await this.chatRepository.findOne(chatId);
+    }
+
     async updateMessage({ id, uploads, message: text, userId }: UpdateMessageDto): Promise<MessageEntity> {
         const message = await this.messageRepository.findOne(id, { relations: ['author'] });
         message.text = text;

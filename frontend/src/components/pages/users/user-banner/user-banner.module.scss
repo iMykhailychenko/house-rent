@@ -53,12 +53,18 @@
         color: var(--gray-6);
     }
 
+    .small,
     .text,
     .title {
         width: 100%;
         margin-top: 2rem;
         margin-bottom: 0.4rem;
         font-size: 3rem;
+    }
+
+    .small {
+        max-width: 38rem;
+        font-size: 1.2rem;
     }
 
     .text {

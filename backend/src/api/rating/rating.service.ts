@@ -1,19 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-import { CreateRatingDto } from './dto/create-rating.dto';
-import { UpdateRatingDto } from './dto/update-rating.dto';
+import { RatingEntity } from './entities/rating.entity';
+import { UserRating } from './rating.interface';
+import { parseNumber } from './rating.util';
 
 @Injectable()
 export class RatingService {
-    async findOne(profileId: number): Promise<string> {
-        return `This action returns a #${profileId} rating`;
+    constructor(@InjectRepository(RatingEntity) private readonly ratingRepository: Repository<RatingEntity>) {}
+
+    async findOne(userId: number): Promise<UserRating> {
+        const data = await this.ratingRepository
+            .createQueryBuilder('ratings')
+            .select('COUNT(*) as total')
+            .addSelect('AVG(ratings.value) as avg')
+            .where('ratings.userId = :userId', { userId })
+            .execute();
+
+        return { total: parseNumber(data?.[0]?.total), avg: parseNumber(data?.[0]?.avg) };
     }
 
-    async create(createRatingDto: CreateRatingDto): Promise<void> {
-        console.log(createRatingDto);
+    async create(reviewerId: number, userId: number): Promise<void> {
+        const rating = new RatingEntity();
+        rating.userId = userId;
+        rating.reviewerId = reviewerId;
+        rating.value = 5;
+
+        await this.ratingRepository.create(rating);
     }
 
-    async update(profileId: number, updateRatingDto: UpdateRatingDto): Promise<void> {
-        console.log(profileId, updateRatingDto);
+    async update(reviewerId: number, userId: number): Promise<void> {
+        console.log(reviewerId, userId);
     }
 }

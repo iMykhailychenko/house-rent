@@ -8,6 +8,7 @@ import { MediaModule } from './api/media/media.module';
 import { NotificationsGateway } from './api/notifications/notifications.gateway';
 import { NotificationsModule } from './api/notifications/notifications.module';
 import { PostsModule } from './api/posts/posts.module';
+import { RatingModule } from './api/rating/rating.module';
 import { SecurityModule } from './api/security/security.module';
 import { UsersModule } from './api/users/users.module';
 import { dbConfig } from './config/db.config';
@@ -23,6 +24,7 @@ import { AuthMiddleware } from './shared/middleware/auth.middleware';
         UsersModule,
         ChatsModule,
         JwtModule,
+        RatingModule,
         SecurityModule,
         NotificationsModule,
     ],

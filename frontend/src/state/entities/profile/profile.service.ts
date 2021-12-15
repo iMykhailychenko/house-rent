@@ -4,7 +4,7 @@ import api from '../../../utils/interceptors';
 
 import { ChangeEmailPayload, IUpdateProfilePayload } from './profile.interface';
 
-const profileServices = {
+const profileService = {
     getProfileInfo: (): Response<IUser> => api.get(endpointConfig('/users/profile')),
     updateProfile: (body: IUpdateProfilePayload): Response<IUser> => api.put(endpointConfig('/users'), body),
     updateProfileRole: (role: UserRole[]): Response<void> => api.put(endpointConfig('/users/role'), { role }),
@@ -12,4 +12,4 @@ const profileServices = {
     sendNewEmail: (): Response<void> => api.post(endpointConfig('/security/email')),
 };
 
-export default profileServices;
+export default profileService;

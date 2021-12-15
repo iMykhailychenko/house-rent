@@ -5,7 +5,7 @@ import api from '../../../utils/interceptors';
 
 import { INotification } from './notifications.interface';
 
-export const notificationsServices = {
+export const notificationsService = {
     get: (page: number): Response<Pagination<INotification>> =>
         api.get(endpointConfig('/notifications'), { params: { page, limit: uiConfig.notificationsPerPage } }),
     count: (): Response<number> => api.get(endpointConfig('/notifications/count')),

@@ -7,6 +7,7 @@ import media from './entities/media/media.reducer';
 import notifications from './entities/notifications/notifications.reducer';
 import posts from './entities/posts/posts.reducer';
 import profile from './entities/profile/profile.reducer';
+import rating from './entities/rating/rating.reducer';
 import users from './entities/users/users.reducer';
 import { IState } from './interfaces/root';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers<IState>({
     media,
     chats,
     notifications,
+    rating,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

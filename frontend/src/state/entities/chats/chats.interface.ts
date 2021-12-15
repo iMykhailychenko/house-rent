@@ -1,5 +1,5 @@
 import { IUser, Pagination } from '../../../interfaces';
-import { ErrorState, LoadingStatus } from '../../interfaces/common';
+import { CommonState, ErrorState, LoadingStatus } from '../../interfaces/common';
 
 export interface CreateChatPayload {
     customer: number;
@@ -12,6 +12,12 @@ export interface Chat {
     unreadMessages: number;
     lastMessage: Message;
     user: IUser;
+}
+
+export interface SingleChat {
+    id: number;
+    createdAt: string;
+    users: [number, number];
 }
 
 export interface Message {
@@ -56,6 +62,7 @@ export interface UpdateMessagesPayload {
 export interface IChatsState {
     count: number;
     active: number;
+    single: CommonState<{ realtorId: number; customerId: number }>;
     list: ChatsList;
     messages: MessagesList;
 }

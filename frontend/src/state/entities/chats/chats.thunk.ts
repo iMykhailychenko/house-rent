@@ -5,12 +5,12 @@ import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import { AsyncThunkConfig } from '../../interfaces/common';
 import { formatSeverError } from '../../utils';
 
-import { Chat, CreateChatPayload, Message, MessagesListPayload } from './chats.interface';
-import chatsServices from './chats.services';
+import { Chat, CreateChatPayload, Message, MessagesListPayload, SingleChat } from './chats.interface';
+import chatsService from './chats.service';
 
 export const messagesCountThunk = createAsyncThunk<number, undefined>('CHATS/COUNT', async (_, { rejectWithValue }) => {
     try {
-        const { data, status } = await chatsServices.count();
+        const { data, status } = await chatsService.count();
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
@@ -19,9 +19,9 @@ export const messagesCountThunk = createAsyncThunk<number, undefined>('CHATS/COU
     }
 });
 
-export const singleChatThunk = createAsyncThunk<Chat, number>('CHATS/SINGLE', async (payload, { rejectWithValue }) => {
+export const singleChatThunk = createAsyncThunk<SingleChat, number>('CHATS/SINGLE', async (payload, { rejectWithValue }) => {
     try {
-        const { data, status } = await chatsServices.singleChat(payload);
+        const { data, status } = await chatsService.singleChat(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
@@ -32,7 +32,7 @@ export const singleChatThunk = createAsyncThunk<Chat, number>('CHATS/SINGLE', as
 
 export const createChatThunk = createAsyncThunk<Chat, CreateChatPayload>('CHATS/CREATE', async (payload, { rejectWithValue }) => {
     try {
-        const { data, status } = await chatsServices.createChat(payload);
+        const { data, status } = await chatsService.createChat(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
@@ -44,7 +44,7 @@ export const createChatThunk = createAsyncThunk<Chat, CreateChatPayload>('CHATS/
 type ChatPayloadCreator = AsyncThunkPayloadCreator<Pagination<Chat>, number, AsyncThunkConfig>;
 const chatPayloadCreator: ChatPayloadCreator = async (payload = 1, { rejectWithValue }) => {
     try {
-        const { data, status } = await chatsServices.chats(payload);
+        const { data, status } = await chatsService.chats(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
@@ -58,7 +58,7 @@ export const chatListPaginationThunk = createAsyncThunk<Pagination<Chat>, number
 type MessagePayloadCreator = AsyncThunkPayloadCreator<Pagination<Message>, MessagesListPayload, AsyncThunkConfig>;
 const messagePayloadCreator: MessagePayloadCreator = async (payload, { rejectWithValue }) => {
     try {
-        const { data, status } = await chatsServices.messages(payload);
+        const { data, status } = await chatsService.messages(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {

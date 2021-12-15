@@ -4,7 +4,7 @@ import { IUser } from '../../../interfaces';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import { formatSeverError } from '../../utils';
 
-import userServices from './users.services';
+import userServices from './users.service';
 
 export const userInfoThunk = createAsyncThunk<IUser, number>('USER/INFO', async (payload: number, { rejectWithValue }) => {
     try {

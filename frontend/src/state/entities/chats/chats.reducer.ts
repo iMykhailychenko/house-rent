@@ -6,7 +6,7 @@ import { ErrorState } from '../../interfaces/common';
 import { IState } from '../../interfaces/root';
 
 import { chatInitialState } from './chats.initial-state';
-import { Chat, IChatsState, Message } from './chats.interface';
+import { Chat, IChatsState, Message, SingleChat } from './chats.interface';
 import {
     chatListPaginationThunk,
     chatListThunk,
@@ -36,15 +36,26 @@ const chatSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(hydrate, (_, action: PayloadAction<IState>) => action.payload.chats);
 
+        // SINGLE CHAT
         builder.addCase(
             singleChatThunk.pending,
             (state: IChatsState, action: PayloadAction<unknown, string, { arg: number }>) => {
+                state.single.status = 'loading';
                 state.active = action.meta.arg;
                 state.list.data = state.list.data.map(chat =>
                     chat.id === action.meta.arg ? { ...chat, unreadMessages: 0 } : chat,
                 );
             },
         );
+        builder.addCase(singleChatThunk.fulfilled, (state: IChatsState, action: PayloadAction<SingleChat>) => {
+            const [realtorId, customerId] = action.payload.users;
+            state.single.status = 'success';
+            state.single.data = { realtorId, customerId };
+        });
+        builder.addCase(singleChatThunk.rejected, (state: IChatsState, action: PayloadAction<unknown>) => {
+            state.single.status = 'error';
+            state.single.error = action.payload as ErrorState;
+        });
 
         // CHATS COUNT
         builder.addCase(messagesCountThunk.fulfilled, (state: IChatsState, action: PayloadAction<number>) => {

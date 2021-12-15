@@ -56,7 +56,6 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     @SubscribeMessage('leaveChat')
     async handleLeave(client: Socket, chatId: number): Promise<void> {
         const user = await this.chatRoomManager(client.handshake.auth.token, chatId);
-        console.log(client, chatId);
         client.leave(String(chatId));
         this.server.to(String(chatId)).emit('userLeft', { chatId, userId: user.id });
     }

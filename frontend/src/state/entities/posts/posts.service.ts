@@ -8,7 +8,7 @@ import api from '../../../utils/interceptors';
 
 import { IEditPostPayload, IEditPostStatusPayload, INewPostPayload, IPersonalPostsListPayload, IPost } from './posts.interface';
 
-const postsServices = {
+const postsService = {
     singlePost: (id: number): Response<IPost> => api.get(endpointConfig('/posts/' + id)),
     postsList: (page: number, query: Params = {}): Response<Pagination<IPost>> =>
         api.get(
@@ -35,4 +35,4 @@ const postsServices = {
     getIsPostFavorite: (id: number): Response<boolean> => api.get(endpointConfig(`/posts/${id}/favorite`)),
 };
 
-export default postsServices;
+export default postsService;

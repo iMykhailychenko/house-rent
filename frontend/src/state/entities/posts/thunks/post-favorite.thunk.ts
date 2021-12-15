@@ -6,13 +6,13 @@ import { paginationEmitter } from '../../../../utils/helpers/pagination.helper';
 import { AsyncThunkConfig } from '../../../interfaces/common';
 import { formatSeverError } from '../../../utils';
 import { IPost } from '../posts.interface';
-import postsServices from '../posts.services';
+import postsService from '../posts.service';
 
 export const togglePostFavoriteThunk = createAsyncThunk<void, number, AsyncThunkConfig>(
     'POSTS/TOGGLE_FAVORITE',
     async (payload, { rejectWithValue }) => {
         try {
-            const { status } = await postsServices.toggleFavorite(payload);
+            const { status } = await postsService.toggleFavorite(payload);
             if (status < 200 || status >= 300) throw new Error();
         } catch (error) {
             errorNotif(error);
@@ -25,7 +25,7 @@ export const getIsPostFavoriteThunk = createAsyncThunk<boolean, IPost, AsyncThun
     'POSTS/IS_FAVORITE',
     async (payload, { rejectWithValue }) => {
         try {
-            const { data, status } = await postsServices.getIsPostFavorite(payload.id);
+            const { data, status } = await postsService.getIsPostFavorite(payload.id);
             if (status < 200 || status >= 300) throw new Error();
             return data;
         } catch (error) {
@@ -39,7 +39,7 @@ type PayloadCreator = AsyncThunkPayloadCreator<Pagination<IPost>, number, AsyncT
 const payloadCreator: PayloadCreator = async (payload, { rejectWithValue }) => {
     try {
         paginationEmitter.update(payload);
-        const { data, status } = await postsServices.getFavorite(payload);
+        const { data, status } = await postsService.getFavorite(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {

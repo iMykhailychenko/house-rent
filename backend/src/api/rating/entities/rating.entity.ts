@@ -1,7 +1,19 @@
-import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('rating')
+@Entity('ratings')
 export class RatingEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({ type: 'int' })
+    userId: number;
+
+    @Column({ type: 'int' })
+    reviewerId: number;
+
+    @Column({ type: 'int' })
+    value: number;
+
+    total: number;
+    avg: number;
 }

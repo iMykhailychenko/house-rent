@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -18,6 +18,7 @@ import { LANG } from '../../constant/lang.constant';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { IUser, Pagination } from '../../interfaces';
 import { getUserPostsListThunk } from '../../state/entities/posts/thunks/user-posts.thunk';
+import { getRatingThunk } from '../../state/entities/rating/rating.thunk';
 import { userInfoThunk } from '../../state/entities/users/users.thunk';
 import { wrapper } from '../../state/store';
 import api from '../../utils/interceptors';
@@ -31,6 +32,10 @@ const UserProfilePage = (): JSX.Element => {
     const submit = (): void => {
         dispatch(getUserPostsListThunk(userId));
     };
+
+    useEffect(() => {
+        dispatch(getRatingThunk(userId));
+    }, [dispatch, userId]);
 
     return (
         <GetStaticProfile>

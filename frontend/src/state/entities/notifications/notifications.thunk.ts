@@ -9,13 +9,13 @@ import { AsyncThunkConfig } from '../../interfaces/common';
 import { formatSeverError } from '../../utils';
 
 import { INotification } from './notifications.interface';
-import { notificationsServices } from './notifications.services';
+import { notificationsService } from './notifications.service';
 
 type PayloadCreator = AsyncThunkPayloadCreator<Pagination<INotification>, number | undefined, AsyncThunkConfig>;
 const payloadCreator: PayloadCreator = async (payload = 1, { rejectWithValue }) => {
     try {
         paginationEmitter.update(payload);
-        const { data, status } = await notificationsServices.get(payload);
+        const { data, status } = await notificationsService.get(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
@@ -38,7 +38,7 @@ export const getNotificationsCountThunk = createAsyncThunk<number, undefined, As
     'NOTIFICATIONS/COUNT',
     async (_, { rejectWithValue }) => {
         try {
-            const { data, status } = await notificationsServices.count();
+            const { data, status } = await notificationsService.count();
             if (status < 200 || status >= 300) throw new Error();
             return data;
         } catch (error) {
@@ -52,7 +52,7 @@ export const deleteNotificationByIdThunk = createAsyncThunk<void, number, AsyncT
     'NOTIFICATIONS/DELETE_BY_ID',
     async (payload, { rejectWithValue }) => {
         try {
-            const { status } = await notificationsServices.deleteById(payload);
+            const { status } = await notificationsService.deleteById(payload);
             if (status < 200 || status >= 300) throw new Error();
             toast.success('Ви успішно видалили повідомлення', toastConfig);
         } catch (error) {
@@ -66,7 +66,7 @@ export const deleteAllNotificationsThunk = createAsyncThunk<void, undefined, Asy
     'NOTIFICATIONS/DELETE_ALL',
     async (_, { rejectWithValue }) => {
         try {
-            const { status } = await notificationsServices.deleteAll();
+            const { status } = await notificationsService.deleteAll();
             if (status < 200 || status >= 300) throw new Error();
         } catch (error) {
             errorNotif(error);

@@ -12,6 +12,7 @@ import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
 import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
+import { useUserRatingSelector } from '../../../../state/entities/rating/rating.selector';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
@@ -26,6 +27,7 @@ interface IRoleProps {
     text: string;
     title: string;
 }
+
 const RoleComponent = ({ text, title }: IRoleProps): JSX.Element => {
     const trans = useTrans();
     return (
@@ -45,6 +47,7 @@ const UserBanner = (): JSX.Element => {
 
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
+    const ratingState = useUserRatingSelector();
     const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
     const userData = token.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
 
@@ -60,7 +63,12 @@ const UserBanner = (): JSX.Element => {
         if (!role.isRealtor) return changeUserRoleModal();
 
         setLoading(true);
-        const chat = await dispatch(createChatThunk({ realtor: profileState.data.id, customer: userState.data.id })).unwrap();
+        const chat = await dispatch(
+            createChatThunk({
+                realtor: profileState.data.id,
+                customer: userState.data.id,
+            }),
+        ).unwrap();
         history.push(routes.chats.messages(chat.id));
     };
 
@@ -84,9 +92,21 @@ const UserBanner = (): JSX.Element => {
                     {online === 'online' ? online : 'Offline: ' + online}
                 </p>
                 <p className={css.text}>Рейтинг користувача:</p>
+                <p className={css.small}>
+                    Данний рейтинг будується на основі відгуків власників квартири/рієлторів після спілкування в чаті з
+                    користувачем
+                </p>
                 <div className={css.flex}>
-                    <Rating className={css.rating} name="half-rating-read" defaultValue={3.3} precision={0.1} readOnly />
-                    <span>3.3</span>
+                    <Rating
+                        className={css.rating}
+                        name="half-rating-read"
+                        value={ratingState.data.avg}
+                        precision={0.1}
+                        readOnly
+                    />
+                    <span>
+                        {ratingState.data.avg} / {ratingState.data.total}
+                    </span>
                 </div>
 
                 <p className={css.text}>Роль на сайті:</p>

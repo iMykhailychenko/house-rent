@@ -18,13 +18,13 @@ import {
     IRestorePasswordEmailPayload,
     IRestorePasswordPayload,
 } from './auth.interface';
-import authServices from './auth.services';
+import authService from './auth.service';
 
 export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
     'AUTH/LOGIN',
     async (payload: ILoginPayload, { rejectWithValue }) => {
         try {
-            const { data, status } = await authServices.login(payload);
+            const { data, status } = await authService.login(payload);
             if (status !== 201) throw new Error();
 
             const accessToken = `Bearer ${data.accessToken}`;
@@ -43,7 +43,7 @@ export const authLoginThunk = createAsyncThunk<IAuthResponse, ILoginPayload>(
 
 export const authJoinThunk = createAsyncThunk<void, IJoinPayload>('AUTH/JOIN', async (payload: IJoinPayload) => {
     try {
-        const { status } = await authServices.join(payload);
+        const { status } = await authService.join(payload);
         if (status === 502) {
             toast.error(
                 'Виникла помилка з відправкою листа на вашу електронну пошту. Можливо ви вказал невірну поту, перевіте її в особистому кабінеті',
@@ -63,7 +63,7 @@ export const sendRestorePasswordEmailThunk = createAsyncThunk<void, IRestorePass
     'AUTH/RESTORE_PASSWORD_EMAIL',
     async (payload: IRestorePasswordEmailPayload) => {
         try {
-            const { status } = await authServices.restorePasswordEmail(payload);
+            const { status } = await authService.restorePasswordEmail(payload);
             if (status < 200 || status >= 300) throw new Error();
             banner.add({
                 id: 'RESTORE_PASSWORD_EMAIL',
@@ -85,7 +85,7 @@ export const restorePasswordThunk = createAsyncThunk<void, IRestorePasswordPaylo
     'AUTH/RESTORE_PASSWORD',
     async (payload: IRestorePasswordPayload) => {
         try {
-            const { status } = await authServices.restorePassword(payload);
+            const { status } = await authService.restorePassword(payload);
             if (status < 200 || status >= 300) throw new Error();
             banner.add({
                 id: 'RESTORE_PASSWORD',

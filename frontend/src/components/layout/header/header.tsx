@@ -76,10 +76,10 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                     </div>
 
                     <div className={css.item}>
-                        {withTheme && <SwitchTheme />}
                         <Link className={css.home} href={routes.home} type="button" secondary>
                             <HomeOutlinedIcon />
                         </Link>
+                        {withTheme && <SwitchTheme />}
                         {token.accessToken ? <HeaderUser /> : <HeaderAuth />}
                     </div>
                 </Container>

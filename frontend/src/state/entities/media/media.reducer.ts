@@ -6,7 +6,7 @@ import { formatSeverError } from '../../utils';
 
 import { mediaInitialState } from './media.initial-state';
 import { IMediaResponse, IMediaState } from './media.interface';
-import { mediaServices } from './media.services';
+import { mediaService } from './media.service';
 
 export const mediaThunk = createAsyncThunk<IMediaResponse, File>(
     'MEDIA/UPLOAD',
@@ -15,7 +15,7 @@ export const mediaThunk = createAsyncThunk<IMediaResponse, File>(
             const form = new FormData();
             form.append('image', payload);
 
-            const { data, status } = await mediaServices.upload(form, {
+            const { data, status } = await mediaService.upload(form, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 onUploadProgress: (event: ProgressEvent): void => {
                     dispatch(updateProgress(Math.round((100 * event.loaded) / event.total)));

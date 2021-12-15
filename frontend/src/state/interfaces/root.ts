@@ -5,6 +5,7 @@ import { IMediaState } from '../entities/media/media.interface';
 import { INotificationState } from '../entities/notifications/notifications.interface';
 import { IPostState } from '../entities/posts/posts.interface';
 import { IProfileInfoState } from '../entities/profile/profile.interface';
+import { IRatingState } from '../entities/rating/rating.interface';
 import { IUserState } from '../entities/users/users.interface';
 
 export interface IState {
@@ -16,4 +17,5 @@ export interface IState {
     media: IMediaState;
     chats: IChatsState;
     notifications: INotificationState;
+    rating: IRatingState;
 }

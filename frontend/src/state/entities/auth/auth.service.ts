@@ -10,7 +10,7 @@ import {
     IRestorePasswordPayload,
 } from './auth.interface';
 
-const authServices = {
+const authService = {
     join: (body: IJoinPayload): Response<void> => api.post(endpointConfig('/users'), body),
     login: (body: ILoginPayload): Response<IAuthResponse> => api.post(endpointConfig('/users/login'), body),
     restorePassword: (body: IRestorePasswordPayload): Response<void> =>
@@ -19,4 +19,4 @@ const authServices = {
         api.post(endpointConfig('/security/password'), body),
 };
 
-export default authServices;
+export default authService;

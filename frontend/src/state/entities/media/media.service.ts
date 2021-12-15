@@ -6,7 +6,7 @@ import api from '../../../utils/interceptors';
 
 import { IMediaResponse } from './media.interface';
 
-export const mediaServices = {
+export const mediaService = {
     upload: (body: FormData, requestConfig: AxiosRequestConfig): Response<IMediaResponse> =>
         api.post(endpointConfig('/media'), body, requestConfig),
 };

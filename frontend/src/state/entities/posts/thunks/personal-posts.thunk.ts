@@ -5,12 +5,12 @@ import { errorNotif } from '../../../../utils/helpers/error-logger.helper';
 import { AsyncThunkConfig } from '../../../interfaces/common';
 import { formatSeverError } from '../../../utils';
 import { IPersonalPostsListPayload, IPost } from '../posts.interface';
-import postsServices from '../posts.services';
+import postsService from '../posts.service';
 
 type PayloadCreator = AsyncThunkPayloadCreator<Pagination<IPost>, IPersonalPostsListPayload, AsyncThunkConfig>;
 const payloadCreator: PayloadCreator = async (payload: IPersonalPostsListPayload, { rejectWithValue }) => {
     try {
-        const { data, status } = await postsServices.personalPosts(payload);
+        const { data, status } = await postsService.personalPosts(payload);
         if (status < 200 || status >= 300) throw new Error();
         return data;
     } catch (error) {
