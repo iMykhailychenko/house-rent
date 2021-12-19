@@ -18,7 +18,7 @@ const ChatListItem = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const history = useRouter();
-    const chatId = +String(history.query.chatId);
+    const chatId = Number(history.query.chatId);
 
     const socket = useChatSocket();
     const chatListState = useChatListSelector();

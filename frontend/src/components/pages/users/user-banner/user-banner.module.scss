@@ -80,18 +80,20 @@
     .role {
         display: flex;
         align-items: center;
+        margin-bottom: 3rem;
 
         .roleItem {
             display: flex;
             align-items: center;
             margin-top: 0.2rem;
             margin-right: 1rem;
-            padding: 0.8rem 1.5rem;
+            padding: 2rem 3rem;
             border-radius: 0.6rem;
             color: var(--primary);
             background: var(--white);
             font-weight: 500;
             font-size: 1.2rem;
+            border: 0.1rem dashed var(--primary);
 
             svg {
                 margin-bottom: 0.2rem;
@@ -101,8 +103,23 @@
         }
     }
 
-    .btn {
-        margin-top: 4rem;
+    .btn,
+    .ratingBtn {
+        margin-top: 2rem;
+    }
+
+    .ratingBtn {
+        background: var(--white);
+
+        span {
+            margin-top: 0.4rem;
+        }
+
+        svg {
+            margin-bottom: 0.4rem;
+            margin-right: 0.5rem;
+            font-size: 1.6rem;
+        }
     }
 
     .link {

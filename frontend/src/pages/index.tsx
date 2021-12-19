@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         await store.dispatch(profileInfoThunk());
     }
 
-    await store.dispatch(postListThunk(+String(context.query?.page || 1)));
+    await store.dispatch(postListThunk(Number(context.query?.page) || 1));
     return { props: {} };
 });
 

@@ -13,7 +13,7 @@ interface IProps {
 
 const ChatFlow = ({ disabled, children }: IProps): JSX.Element => {
     const router = useRouter();
-    const chatId = +String(router.query.chatId);
+    const chatId = Number(router.query.chatId);
 
     return (
         <div className={css.root}>

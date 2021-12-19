@@ -60,7 +60,7 @@ class ChatSocket {
 export const useChatSocket = (): ChatSocket | null => {
     const { token } = useAuth();
     const history = useRouter();
-    const chatId = +String(history.query.chatId);
+    const chatId = Number(history.query.chatId);
     if (!token?.accessToken || !chatId || !process.browser) return null;
 
     return new ChatSocket(token.accessToken, chatId);

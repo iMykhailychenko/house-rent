@@ -14,7 +14,7 @@ const FavoritePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const router = useRouter();
-    const page = +String(router.query?.page || 1);
+    const page = Number(router.query?.page || 1);
 
     useEffect(() => {
         dispatch(getFavoritePostsThunk(page));

@@ -40,7 +40,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(store => async ({ params }) => {
-    const postId = +String(params?.postId || 0);
+    const postId = Number(params?.postId);
+
+    if (postId) {
+        return {
+            notFound: true,
+        };
+    }
+
     await store.dispatch(singlePostThunk(postId));
 
     return { props: {} };

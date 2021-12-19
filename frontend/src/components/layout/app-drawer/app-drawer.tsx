@@ -25,7 +25,7 @@ const AppDrawer = ({ open, onClose }: IProps): JSX.Element => {
                 <Button secondary className={css.menu} onClick={onClose}>
                     <KeyboardDoubleArrowLeftOutlinedIcon />
                 </Button>
-                <AppDrawerNav />
+                <AppDrawerNav onClose={onClose} />
 
                 {token.accessToken ? (
                     <>

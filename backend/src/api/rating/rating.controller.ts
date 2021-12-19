@@ -4,7 +4,7 @@ import { AuthGuard } from 'src/shared/guards/auth.guards';
 import { User } from '../../shared/decorators/users.decorator';
 
 import { CrateRatingDto } from './dto/crate-rating.dto';
-import { UserRating } from './rating.interface';
+import { ICanRate, UserRating } from './rating.interface';
 import { RatingService } from './rating.service';
 
 @Controller('rating')
@@ -16,23 +16,31 @@ export class RatingController {
         return await this.ratingService.findOne(userId);
     }
 
+    @Get(':userId/can-rate')
+    @UseGuards(AuthGuard)
+    async canRate(@User('id') reviewerId: number, @Param('userId', ParseIntPipe) userId: number): Promise<ICanRate> {
+        const canRate = await this.ratingService.canRate(reviewerId, userId);
+        const isRated = await this.ratingService.isRated(reviewerId, userId);
+        return { canRate, isRated };
+    }
+
     @Put(':userId')
     @UseGuards(AuthGuard)
     async update(
-        @User('id') reviewId: number,
+        @User('id') reviewerId: number,
         @Param('userId', ParseIntPipe) userId: number,
         @Body(new ValidationPipe({ transform: true })) ratingDto: CrateRatingDto,
     ): Promise<void> {
-        await this.ratingService.update(reviewId, userId);
+        await this.ratingService.update(reviewerId, userId);
     }
 
     @Post(':userId')
     @UseGuards(AuthGuard)
     async create(
-        @User('id') reviewId: number,
+        @User('id') reviewerId: number,
         @Param('userId', ParseIntPipe) userId: number,
         @Body(new ValidationPipe({ transform: true })) ratingDto: CrateRatingDto,
     ): Promise<void> {
-        await this.ratingService.create(reviewId, userId);
+        await this.ratingService.create(reviewerId, userId, ratingDto);
     }
 }

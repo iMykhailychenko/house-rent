@@ -19,7 +19,7 @@ import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 import changeUserRole from '../change-user-role/change-user-role';
 import css from '../profile-nav/profile-nav.module.scss';
-import sharePostModal from '../share-post-modal/share-post-modal';
+import sharePost from '../share-post/share-post';
 
 interface IProps {
     post: IPost;
@@ -119,7 +119,7 @@ export const PostConfig = ({ post }: IProps): JSX.Element => {
                         )}
 
                         <li className={css.li}>
-                            <button type="button" className={css.btn} onClick={sharePostModal(post)}>
+                            <button type="button" className={css.btn} onClick={sharePost(post)}>
                                 Поділитись цим повідомленням
                             </button>
                         </li>

@@ -17,7 +17,7 @@ const EditPost = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const history = useRouter();
-    const postId = +String(history.query.postId);
+    const postId = Number(history.query.postId);
 
     const status = useUpdateLoadingSelector();
     const postState = useSinglePostSelector();

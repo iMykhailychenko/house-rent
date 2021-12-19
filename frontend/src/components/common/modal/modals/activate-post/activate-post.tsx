@@ -24,8 +24,8 @@ interface IProps {
 const ActivatePost = ({ postId, isSinglePost }: IProps): JSX.Element => {
     const history = useRouter();
     const userRole = useRole();
-    const page = +String(history.query.page || 1);
-    const status = String(history.query.status || POST_STATUS.DRAFT) as POST_STATUS;
+    const page = Number(history.query.page) || 1;
+    const status = (String(history.query.status) as POST_STATUS) || POST_STATUS.DRAFT;
     const dispatch = useAppDispatch();
 
     const handleSubmit = async (): Promise<void> => {

@@ -56,7 +56,7 @@ const PrivateLayout = ({ children }: IProps): JSX.Element => {
                         <li>
                             <Link href={routes.private} shallow>
                                 <a className={clsx(css.link, { [css.active]: history.pathname.includes(routes.private) })}>
-                                    Особистий кабінет
+                                    Налаштування
                                 </a>
                             </Link>
                         </li>

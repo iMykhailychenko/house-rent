@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ErrorState } from '../../interfaces/common';
 
 import { ratingInitialState } from './rating.initial-state';
-import { IRatingState, UserRating } from './rating.interface';
-import { getRatingThunk } from './rating.thunk';
+import { ICanRate, IRatingState, UserRating } from './rating.interface';
+import { canRateThunk, getRatingThunk } from './rating.thunk';
 
 const ratingSlice = createSlice({
     name: 'NOTIFICATIONS',
@@ -21,6 +21,11 @@ const ratingSlice = createSlice({
         builder.addCase(getRatingThunk.rejected, (state: IRatingState, action: PayloadAction<unknown>) => {
             state.status = 'error';
             state.error = action.payload as ErrorState;
+        });
+
+        builder.addCase(canRateThunk.fulfilled, (state: IRatingState, action: PayloadAction<ICanRate>) => {
+            state.canRate = action.payload.canRate;
+            state.isRated = action.payload.isRated;
         });
     },
 });

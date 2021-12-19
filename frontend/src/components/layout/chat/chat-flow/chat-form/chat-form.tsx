@@ -13,7 +13,7 @@ import css from './chat-form.module.scss';
 
 const ChatForm = (): JSX.Element => {
     const history = useRouter();
-    const chatId = +String(history.query.chatId);
+    const chatId = Number(history.query.chatId);
 
     const socket = useChatSocket();
     const profileState = useProfileInfoSelector();

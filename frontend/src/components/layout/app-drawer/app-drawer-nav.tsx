@@ -27,7 +27,11 @@ import routes from '../../../utils/routes';
 
 import css from './app-drawer.module.scss';
 
-const AppDrawerNav = (): JSX.Element => {
+interface IProps {
+    onClose: () => void;
+}
+
+const AppDrawerNav = ({ onClose }: IProps): JSX.Element => {
     const history = useRouter();
     const { token } = useAuth();
     const [theme, setTheme] = useTheme();
@@ -39,6 +43,11 @@ const AppDrawerNav = (): JSX.Element => {
 
     const handleClick = (): void => {
         setTheme(theme === THEME_ENUM.WHITE ? THEME_ENUM.BLACK : THEME_ENUM.WHITE);
+    };
+
+    const redirect = (url: string) => async (): Promise<void> => {
+        await history.push(url, undefined, { shallow: true });
+        onClose();
     };
 
     return (
@@ -70,7 +79,7 @@ const AppDrawerNav = (): JSX.Element => {
                     </ListSubheader>
                 }
             >
-                <ListItemButton className={css.btn} onClick={() => history.push(routes.home, undefined, { shallow: true })}>
+                <ListItemButton className={css.btn} onClick={redirect(routes.home)}>
                     <ListItemIcon>
                         <HomeOutlinedIcon />
                     </ListItemIcon>
@@ -89,45 +98,30 @@ const AppDrawerNav = (): JSX.Element => {
 
                         <Collapse in={open} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
-                                <ListItemButton
-                                    className={css.sub}
-                                    onClick={() => history.push(routes.private, undefined, { shallow: true })}
-                                >
+                                <ListItemButton className={css.sub} onClick={redirect(routes.private)}>
                                     <ListItemText primary="Налаштування" />
                                 </ListItemButton>
                             </List>
                             <List component="div" disablePadding>
-                                <ListItemButton
-                                    className={css.sub}
-                                    onClick={() => history.push(routes.myPosts, undefined, { shallow: true })}
-                                >
+                                <ListItemButton className={css.sub} onClick={redirect(routes.myPosts)}>
                                     <ListItemText primary="Мої оголошення" />
                                 </ListItemButton>
                             </List>
                             <List component="div" disablePadding>
-                                <ListItemButton
-                                    className={css.sub}
-                                    onClick={() => history.push(routes.favorite, undefined, { shallow: true })}
-                                >
+                                <ListItemButton className={css.sub} onClick={redirect(routes.favorite)}>
                                     <ListItemText primary="Збережені оголошення" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
 
-                        <ListItemButton
-                            className={css.btn}
-                            onClick={() => history.push(routes.posts.new, undefined, { shallow: true })}
-                        >
+                        <ListItemButton className={css.btn} onClick={redirect(routes.chats.init)}>
                             <ListItemIcon>
                                 <ChatOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Мої повідомлення' + (count ? ` ${count}` : '')} />
                         </ListItemButton>
 
-                        <ListItemButton
-                            className={css.btn}
-                            onClick={() => history.push(routes.posts.new, undefined, { shallow: true })}
-                        >
+                        <ListItemButton className={css.btn} onClick={redirect(routes.posts.new)}>
                             <ListItemIcon>
                                 <CreateNewFolderOutlinedIcon />
                             </ListItemIcon>
@@ -136,30 +130,21 @@ const AppDrawerNav = (): JSX.Element => {
                     </>
                 ) : (
                     <>
-                        <ListItemButton
-                            className={css.btn}
-                            onClick={() => history.push(routes.auth.join, undefined, { shallow: true })}
-                        >
+                        <ListItemButton className={css.btn} onClick={redirect(routes.auth.join)}>
                             <ListItemIcon>
                                 <AccountCircleOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Створити акаунт" />
                         </ListItemButton>
 
-                        <ListItemButton
-                            className={css.btn}
-                            onClick={() => history.push(routes.auth.login, undefined, { shallow: true })}
-                        >
+                        <ListItemButton className={css.btn} onClick={redirect(routes.auth.login)}>
                             <ListItemIcon>
                                 <InputIcon />
                             </ListItemIcon>
                             <ListItemText primary="Увійти в особистий кабінет" />
                         </ListItemButton>
 
-                        <ListItemButton
-                            className={css.btn}
-                            onClick={() => history.push(routes.auth.reset, undefined, { shallow: true })}
-                        >
+                        <ListItemButton className={css.btn} onClick={redirect(routes.auth.reset)}>
                             <ListItemIcon>
                                 <PasswordIcon />
                             </ListItemIcon>

@@ -35,7 +35,7 @@ const Pagination = ({ className, loading, total, onPage, onMore }: IProps): JSX.
     }, []);
 
     useEffect(() => {
-        setPage(+String(history.query?.page || 1));
+        setPage(Number(history.query?.page) || 1);
     }, [history.query]);
 
     const handlePagination = ({ selected }: { selected: number }): void => {

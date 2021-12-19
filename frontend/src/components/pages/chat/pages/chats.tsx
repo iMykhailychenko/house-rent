@@ -15,7 +15,7 @@ const ChatListEffect = ({ children }: IProps): JSX.Element => {
     const chatState = useChatListSelector();
 
     const history = useRouter();
-    const page = +String(history.query.page || 1);
+    const page = Number(history.query.page) || 1;
 
     useEffect(() => {
         if (chatState.status === 'idle') {

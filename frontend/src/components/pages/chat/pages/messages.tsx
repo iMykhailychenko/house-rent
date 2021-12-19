@@ -22,7 +22,7 @@ const MessagesListEffect = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const router = useRouter();
-    const chatId = +String(router.query.chatId);
+    const chatId = Number(router.query.chatId);
 
     const profileState = useProfileInfoSelector();
     const userId = profileState.data.id;

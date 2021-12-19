@@ -12,7 +12,7 @@ import Tooltip from '../../../tooltip/tooltip';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
-import css from './share-post-modal.module.scss';
+import css from './share-post.module.scss';
 
 interface IProps {
     post: IPost;
@@ -58,7 +58,7 @@ const SharePost = ({ post }: IProps): JSX.Element => {
     );
 };
 
-const sharePostModal = (post: IPost) => (): void => {
+const sharePost = (post: IPost) => (): void => {
     modal.open(
         <StickyModal>
             <SharePost post={post} />
@@ -66,4 +66,4 @@ const sharePostModal = (post: IPost) => (): void => {
     );
 };
 
-export default sharePostModal;
+export default sharePost;

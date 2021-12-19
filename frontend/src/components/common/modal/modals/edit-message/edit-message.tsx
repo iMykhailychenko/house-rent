@@ -10,18 +10,18 @@ import Textarea from '../../../textarea/textarea';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
-import css from './edit-message-modal.module.scss';
+import css from './edit-message.module.scss';
 
 interface IProps {
     message: Message;
 }
 
-const EditMessageModal = ({ message }: IProps): JSX.Element => {
+const EditMessage = ({ message }: IProps): JSX.Element => {
     const socket = useChatSocket();
     const profile = useProfileInfoSelector();
 
     const router = useRouter();
-    const chatId = +String(router.query.chatId);
+    const chatId = Number(router.query.chatId);
 
     const [text, setText] = useState<string>(message.text);
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => setText(event.target.value);
@@ -68,7 +68,7 @@ const EditMessageModal = ({ message }: IProps): JSX.Element => {
 };
 
 const editMessageModal = (message: Message) => (): void => {
-    modal.open(<EditMessageModal message={message} />);
+    modal.open(<EditMessage message={message} />);
 };
 
 export default editMessageModal;

@@ -6,7 +6,13 @@ export interface UserRating {
 }
 
 export interface RatingPayload {
+    userId: number;
     value: number;
 }
 
-export type IRatingState = CommonState<UserRating>;
+export interface ICanRate {
+    canRate: boolean;
+    isRated: boolean;
+}
+
+export type IRatingState = CommonState<UserRating> & ICanRate;

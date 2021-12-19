@@ -9,7 +9,7 @@ import { Message } from '../../../../../state/entities/chats/chats.interface';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import { formatTime } from '../../../../../utils/helpers/date.helper';
 import routes from '../../../../../utils/routes';
-import editMessageModal from '../../../../common/modal/modals/edit-message-modal/edit-message-modal';
+import editMessageModal from '../../../../common/modal/modals/edit-message/edit-message';
 import UserAvatar from '../../../../common/user/user-avatar/user-avatar';
 import css from '../messages-layout.module.scss';
 

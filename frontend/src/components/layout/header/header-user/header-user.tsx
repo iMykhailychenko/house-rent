@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 
 import { useNotificationsCountSelector } from '../../../../state/entities/notifications/notifications.selector';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
@@ -25,6 +25,16 @@ const HeaderUser = (): JSX.Element | null => {
         document.body.style.overflow = !notifications ? 'hidden' : '';
         setNotifications(prev => !prev);
     }, [notifications]);
+
+    useEffect(() => {
+        const handleClear = (): void => {
+            setNotifications(false);
+        };
+        Router.events.on('routeChangeStart', handleClear);
+        return () => {
+            Router.events.off('routeChangeStart', handleClear);
+        };
+    }, []);
 
     useEffect(() => {
         return () => {

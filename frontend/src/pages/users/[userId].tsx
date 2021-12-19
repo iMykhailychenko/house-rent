@@ -27,7 +27,7 @@ const UserProfilePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const router = useRouter();
-    const userId = +String(router.query.userId);
+    const userId = Number(router.query.userId);
 
     const submit = (): void => {
         dispatch(getUserPostsListThunk(userId));
@@ -67,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => async context => {
-    const userId = +String(context.params?.userId || 0);
+    const userId = Number(context.params?.userId);
 
     if (userId) {
         await store.dispatch(getUserPostsListThunk(userId));

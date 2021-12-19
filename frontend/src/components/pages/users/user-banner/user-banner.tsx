@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -13,12 +14,14 @@ import { UserRole } from '../../../../interfaces';
 import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserRatingSelector } from '../../../../state/entities/rating/rating.selector';
+import { canRateThunk } from '../../../../state/entities/rating/rating.thunk';
 import { useUserInfoSelector } from '../../../../state/entities/users/users.selector';
 import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
 import Button from '../../../common/button/button';
 import changeUserRole from '../../../common/modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../common/modal/modals/login-modal/login-modal';
+import rateUserModal from '../../../common/modal/modals/rate-user/rate-user';
 import UserAvatar from '../../../common/user/user-avatar/user-avatar';
 
 import css from './user-banner.module.scss';
@@ -42,8 +45,10 @@ const UserBanner = (): JSX.Element => {
     const role = useRole();
     const trans = useTrans();
     const { token } = useAuth();
-    const history = useRouter();
     const dispatch = useAppDispatch();
+
+    const history = useRouter();
+    const userId = Number(history.query.userId);
 
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
@@ -52,6 +57,12 @@ const UserBanner = (): JSX.Element => {
     const userData = token.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
 
     const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (token.accessToken && userId) {
+            dispatch(canRateThunk(userId));
+        }
+    }, [dispatch, token.accessToken, userId]);
 
     const changeUserRoleModal = (): void =>
         changeUserRole(
@@ -69,7 +80,7 @@ const UserBanner = (): JSX.Element => {
                 customer: userState.data.id,
             }),
         ).unwrap();
-        history.push(routes.chats.messages(chat.id));
+        await history.push(routes.chats.messages(chat.id));
     };
 
     return (
@@ -108,6 +119,13 @@ const UserBanner = (): JSX.Element => {
                         {ratingState.data.avg} / {ratingState.data.total}
                     </span>
                 </div>
+
+                {ratingState.canRate && (
+                    <Button secondary className={css.ratingBtn} onClick={() => rateUserModal(userData.id, true)}>
+                        <StarIcon />
+                        <span>{ratingState.isRated ? 'Редагувати оцінку' : 'Оцініть чат з користувачем'}</span>
+                    </Button>
+                )}
 
                 <p className={css.text}>Роль на сайті:</p>
                 <div className={css.role}>

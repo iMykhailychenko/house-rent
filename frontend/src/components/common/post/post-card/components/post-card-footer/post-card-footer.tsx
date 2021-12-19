@@ -20,7 +20,7 @@ import Button from '../../../../button/button';
 import changeUserRole from '../../../../modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../../modal/modals/login-modal/login-modal';
 import postConfigModal from '../../../../modal/modals/post-config/post-config';
-import sharePostModal from '../../../../modal/modals/share-post-modal/share-post-modal';
+import sharePost from '../../../../modal/modals/share-post/share-post';
 import Tooltip from '../../../../tooltip/tooltip';
 
 import css from './post-card-footer.module.scss';
@@ -71,7 +71,7 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button onClick={sharePostModal(post)}>
+                    <Button onClick={sharePost(post)}>
                         <Share />
                     </Button>
                 </Tooltip>

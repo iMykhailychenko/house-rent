@@ -31,7 +31,7 @@ interface IProps {
 const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
     const { token } = useAuth();
     const history = useRouter();
-    const chatId = +String(history.query.chatId || 0);
+    const chatId = +Number(history.query.chatId);
 
     const [drawer, setDrawer] = useState(false);
     const handleDrawerClose = (): void => setDrawer(false);
