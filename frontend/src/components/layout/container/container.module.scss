@@ -1,21 +1,25 @@
 .root {
-    padding: 0 4rem;
+    padding: 0 1rem;
+
+    @media screen and (min-width: 540px) {
+        padding: 0 4rem;
+    }
 }
 
 .lg {
-    @media (min-width: 1800px) {
+    @media screen and (min-width: 1800px) {
         padding: 0 calc((100% - 170rem) / 2);
     }
 }
 
 .md {
-    @media (min-width: 1300px) {
+    @media screen and (min-width: 1300px) {
         padding: 0 calc((100% - 120rem) / 2);
     }
 }
 
 .sm {
-    @media (min-width: 600px) {
+    @media screen and (min-width: 600px) {
         padding: 0 calc((100% - 70rem) / 2);
     }
 }

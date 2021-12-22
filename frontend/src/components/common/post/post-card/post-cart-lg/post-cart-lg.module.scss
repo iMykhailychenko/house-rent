@@ -16,14 +16,20 @@
     }
 
     .content {
-        margin-top: 2rem;
+        --img-width: 100%;
         width: 100%;
-        --img-width: 24rem;
+        margin-top: 1rem;
+
+        @media screen and (min-width: 768px) {
+            --img-width: 24rem;
+            margin-top: 2rem;
+        }
     }
 
     .flex {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     .launch {
@@ -39,6 +45,8 @@
     }
 
     .noImg {
+        --image-wrp-diameter: 12rem;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,7 +57,9 @@
         border-radius: 0.6rem;
         background: var(--primary);
 
-        --image-wrp-diameter: calc(var(--img-width) - 18rem);
+        @media screen and (min-width: 768px) {
+            --image-wrp-diameter: 6rem;
+        }
 
         p {
             margin-top: 0.5rem;
@@ -67,8 +77,12 @@
         flex-direction: column;
         justify-content: center;
         flex-wrap: wrap;
-        width: calc(100% - var(--img-width) - 2rem);
+        width: 100%;
         font-weight: 400;
+
+        @media screen and (min-width: 768px) {
+            width: calc(100% - var(--img-width) - 2rem);
+        }
 
         :global(.tooltip) {
             width: 100%;
@@ -84,9 +98,14 @@
         h3 {
             width: 100%;
             margin-left: 0.5rem;
+            margin-top: 1rem;
             font-size: 1.5rem;
             line-height: 1.2;
             color: var(--black);
+
+            @media screen and (min-width: 768px) {
+                margin-top: 0;
+            }
         }
 
         p {
@@ -105,8 +124,13 @@
         }
 
         .date {
+            margin-bottom: 1rem;
             font-size: 1.2rem;
             color: var(--gray-6);
+
+            @media screen and (min-width: 768px) {
+                margin: 0;
+            }
         }
     }
 }

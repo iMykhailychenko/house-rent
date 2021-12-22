@@ -1,34 +1,48 @@
 .root {
-    position: relative;
+    display: none;
+
+    @media screen and (min-width: 540px) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 4rem;
+        padding: 0;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--white);
+            border-radius: 0.8rem;
+            z-index: 1;
+            transition: 0.3s ease-in-out;
+            border: 0.1rem solid var(--primary);
+        }
+
+        &:hover::before {
+            box-shadow: 0 0 0 0.2rem var(--primary);
+        }
+
+        span {
+            position: relative;
+            display: block;
+            z-index: 2;
+            line-height: 1;
+            color: var(--black);
+        }
+    }
+}
+
+.mobile {
     display: flex;
     align-items: center;
-    height: 4rem;
-    padding: 0;
+    margin-left: -1rem;
 
-    &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 50%;
-        height: 100%;
-        background: var(--white);
-        border-radius: 0.8rem;
-        z-index: 1;
-        transition: 0.3s ease-in-out;
-        border: 0.1rem solid var(--primary);
-    }
-
-    &:hover::before {
-        box-shadow: 0 0 0 0.2rem var(--primary);
-    }
-
-    span {
-        position: relative;
-        display: block;
-        z-index: 2;
-        line-height: 1;
-        color: var(--black);
+    @media screen and (min-width: 540px) {
+        display: none;
     }
 }
 

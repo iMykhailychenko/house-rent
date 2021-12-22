@@ -2,9 +2,11 @@ import React from 'react';
 
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import ReadMoreOutlinedIcon from '@mui/icons-material/ReadMoreOutlined';
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Share from '@mui/icons-material/Share';
 import Visibility from '@mui/icons-material/Visibility';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import useAuth from '../../../../../../hooks/auth.hook';
@@ -64,14 +66,14 @@ const PostCardFooter = ({ size = 'md', post }: IProps): JSX.Element => {
     return (
         <div className={css.flex}>
             <div className={css.info}>
-                <Tooltip content="Додаткові дії з цим постом">
+                <Tooltip className={clsx(isSmallSize && css.smallOptions)} content="Додаткові дії з цим постом">
                     <Button className={css.options} secondary onClick={openPostConfig}>
-                        <ReadMoreOutlinedIcon />
+                        {isSmallSize ? <MoreVertOutlinedIcon /> : <SettingsOutlinedIcon />}
                     </Button>
                 </Tooltip>
 
                 <Tooltip content="share_this_post">
-                    <Button onClick={sharePost(post)}>
+                    <Button className={css.share} onClick={sharePost(post)}>
                         <Share />
                     </Button>
                 </Tooltip>

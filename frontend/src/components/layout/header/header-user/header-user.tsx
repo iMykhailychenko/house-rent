@@ -50,11 +50,11 @@ const HeaderUser = (): JSX.Element | null => {
         <div>loading...</div>
     ) : profile.data ? (
         <>
-            <Button className={css.btn} secondary onClick={createNewPost}>
+            <Button className={css.newPost} secondary onClick={createNewPost}>
                 <CreateNewFolderOutlinedIcon />
             </Button>
 
-            <Button className={css.btn} secondary onClick={toggleNotifications}>
+            <Button className={css.notification} secondary onClick={toggleNotifications}>
                 <Badge className={css.badge} number={notificationCount} />
                 <NotificationsNoneOutlinedIcon />
             </Button>

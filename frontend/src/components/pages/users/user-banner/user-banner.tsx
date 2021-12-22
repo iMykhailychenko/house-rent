@@ -55,14 +55,15 @@ const UserBanner = (): JSX.Element => {
     const ratingState = useUserRatingSelector();
     const online = profileState.data.id === userState.data.id ? 'online' : onlineStatus(userState.data.lastActivity, trans);
     const userData = token.accessToken && userState.data.id === profileState.data.id ? profileState.data : userState.data;
+    const isAuthor = profileState.data.id === userState.data.id;
 
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        if (token.accessToken && userId) {
+        if (token.accessToken && userId && !isAuthor) {
             dispatch(canRateThunk(userId));
         }
-    }, [dispatch, token.accessToken, userId]);
+    }, [dispatch, token.accessToken, userId, isAuthor]);
 
     const changeUserRoleModal = (): void =>
         changeUserRole(
@@ -120,10 +121,10 @@ const UserBanner = (): JSX.Element => {
                     </span>
                 </div>
 
-                {ratingState.canRate && (
+                {ratingState.canRate && !isAuthor && (
                     <Button secondary className={css.ratingBtn} onClick={() => rateUserModal(userData.id, true)}>
                         <StarIcon />
-                        <span>{ratingState.isRated ? 'Редагувати оцінку' : 'Оцініть чат з користувачем'}</span>
+                        <span>{ratingState.isRated ? 'Змінити оцінку' : 'Оцініть чат з користувачем'}</span>
                     </Button>
                 )}
 
@@ -143,7 +144,7 @@ const UserBanner = (): JSX.Element => {
                     )}
                 </div>
 
-                {profileState.data.id === userState.data.id ? (
+                {isAuthor ? (
                     <Button primary className={css.btn} onClick={changeUserRoleModal}>
                         Змінити роль на сайті
                     </Button>

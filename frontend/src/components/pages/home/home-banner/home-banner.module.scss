@@ -21,18 +21,28 @@
 }
 
 .section {
-    margin: 4rem 0 6rem;
+    margin: 0 0 3rem;
     min-height: unset;
+
+    @media screen and (min-width: 768px) {
+        margin: 4rem 0 6rem;
+    }
 
     .root {
         position: relative;
-        min-height: 60rem;
-        padding: 6rem;
-        border-radius: 2rem;
-        transition: 0.6s ease-in-out;
+        min-height: 45rem;
+        padding: 4rem 2rem;
+        border-radius: 1rem;
         background: var(--secondary);
         color: var(--black);
         overflow: hidden;
+        transition: 0.6s ease-in-out;
+
+        @media screen and (min-width: 768px) {
+            padding: 6rem;
+            border-radius: 2rem;
+            min-height: 60rem;
+        }
 
         .inner {
             position: relative;
@@ -40,28 +50,37 @@
         }
 
         .img {
-            position: absolute;
-            top: 50%;
-            right: 8rem;
-            z-index: 1;
-            width: auto;
-            height: auto;
-            max-height: 80%;
-            max-width: 40%;
-            opacity: 0;
-            transform: translateY(-50%);
-            transition: 0.6s ease-in-out;
+            display: none;
 
-            &:global(.enter-done) {
-                opacity: 1;
+            @media screen and (min-width: 768px) {
+                position: absolute;
+                top: 50%;
+                right: 8rem;
+                z-index: 1;
+                width: auto;
+                height: auto;
+                max-height: 80%;
+                max-width: 40%;
+                opacity: 0;
+                transform: translateY(-50%);
+                transition: 0.6s ease-in-out;
+
+                &:global(.enter-done) {
+                    opacity: 1;
+                }
             }
         }
 
         .animation {
-            margin-top: 4rem;
-            width: 45%;
-            max-width: 60rem;
+            width: 100%;
+            margin-top: 1rem;
             color: var(--black);
+
+            @media screen and (min-width: 768px) {
+                width: 45%;
+                max-width: 60rem;
+                margin-top: 4rem;
+            }
 
             :global(.appear) {
                 position: relative;
@@ -77,7 +96,11 @@
             }
 
             .button {
-                margin-top: 6rem;
+                margin-top: 2rem;
+
+                @media screen and (min-width: 768px) {
+                    margin-top: 6rem;
+                }
             }
         }
     }

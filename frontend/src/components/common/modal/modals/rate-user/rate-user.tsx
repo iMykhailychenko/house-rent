@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
-import { getRatingThunk, rateUserThunk } from '../../../../../state/entities/rating/rating.thunk';
+import { useUserRatingSelector } from '../../../../../state/entities/rating/rating.selector';
+import { editRateUserThunk, getRatingThunk, rateUserThunk } from '../../../../../state/entities/rating/rating.thunk';
 import Button from '../../../button/button';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
@@ -16,6 +17,7 @@ interface IProps {
 }
 export const RateUser = ({ userId, withUpdate }: IProps): JSX.Element => {
     const dispatch = useAppDispatch();
+    const ratingState = useUserRatingSelector();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [rating, setRating] = useState<number>(0);
@@ -32,8 +34,15 @@ export const RateUser = ({ userId, withUpdate }: IProps): JSX.Element => {
         }
 
         setLoading(true);
-        await dispatch(rateUserThunk({ userId, value: rating }));
-        if (withUpdate) await dispatch(getRatingThunk(userId));
+        if (ratingState.isRated) {
+            await dispatch(editRateUserThunk({ userId, value: rating }));
+        } else {
+            await dispatch(rateUserThunk({ userId, value: rating }));
+        }
+
+        if (withUpdate) {
+            await dispatch(getRatingThunk(userId));
+        }
         modal.close();
     };
 
@@ -46,13 +55,14 @@ export const RateUser = ({ userId, withUpdate }: IProps): JSX.Element => {
                         Скасувати
                     </Button>
                     <Button primary loading={loading} onClick={handleSubmit}>
-                        Оцінити
+                        {ratingState.isRated ? 'Змінити' : 'Оцінити'}
                     </Button>
                 </>
             }
         >
             <>
                 <p>Укажіть, чи рекомендували б ви іншим власникам здавати квартиру цьому користувачу</p>
+                {ratingState.isRated && <p>Змінити попередню оцінку</p>}
                 <Rating className={css.rating} value={rating} precision={1} onChange={handleChange} />
                 {error && <p className={css.error}>{error}</p>}
             </>

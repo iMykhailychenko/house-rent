@@ -1,9 +1,16 @@
 .title-1 {
     margin-bottom: 2rem;
-    font-size: 2.8rem;
-    line-height: 3.8rem;
+    font-size: 2rem;
+    line-height: 3rem;
     font-weight: 700;
     color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+    .title-1 {
+        font-size: 2.8rem;
+        line-height: 3.8rem;
+    }
 }
 
 .title-2 {

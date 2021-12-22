@@ -1,15 +1,23 @@
 .root {
-    margin-left: 2rem;
+    margin-left: 0.5rem;
+
+    @media screen and (min-width: 540px) {
+        margin-left: 2rem;
+    }
 }
 
 .button {
-    margin: 0 1rem 0.3rem 2rem;
+    margin: 0 1rem 0.3rem 1rem;
     color: inherit;
     font-size: 1.2rem;
     font-weight: 400;
     text-transform: uppercase;
     opacity: 0.5;
     line-height: 1;
+
+    @media screen and (min-width: 540px) {
+        margin: 0 1rem 0.3rem 2rem;
+    }
 }
 
 .active {

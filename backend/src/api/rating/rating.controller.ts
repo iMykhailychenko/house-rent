@@ -31,7 +31,7 @@ export class RatingController {
         @Param('userId', ParseIntPipe) userId: number,
         @Body(new ValidationPipe({ transform: true })) ratingDto: CrateRatingDto,
     ): Promise<void> {
-        await this.ratingService.update(reviewerId, userId);
+        await this.ratingService.update(reviewerId, userId, ratingDto);
     }
 
     @Post(':userId')

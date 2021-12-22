@@ -7,6 +7,7 @@ import useConfig from '../../../../hooks/config.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { usePostListSelector } from '../../../../state/entities/posts/posts.selector';
 import Container from '../../../layout/container/container';
+import CardSizeSwitcher from '../../card-size-switcher/card-size-switcher';
 import EmptyPostsList from '../../not-found/emprty-posts-list/emprty-posts-list';
 import Pagination from '../../pagination/pagination';
 import PostsSkeleton from '../../skeletons/posts-sleleton/posts-skeleton';
@@ -47,6 +48,8 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
         <Container size="md">
             <div className={clsx(css.root, className)}>
                 {title && <h2 className="title-2">{trans(title)}</h2>}
+
+                <CardSizeSwitcher className={css.cardSize} />
 
                 <div className={css.flex}>
                     <div className={css.wrp}>

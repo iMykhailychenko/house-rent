@@ -18,7 +18,7 @@
     padding: 0.8rem 3rem;
     border-radius: 0.8rem;
     background: var(--gray-3);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--black);
 
     &:hover {
@@ -30,4 +30,9 @@
     color: var(--true-white);
     background: var(--primary);
     pointer-events: none;
+
+    &:hover {
+        color: var(--true-white);
+        background: var(--primary);
+    }
 }

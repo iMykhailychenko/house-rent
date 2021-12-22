@@ -38,12 +38,25 @@
             }
 
             .home {
-                margin-right: 0.5rem;
-                font-size: 2rem;
-                color: var(--black);
+                display: none;
 
-                &:hover {
-                    color: var(--primary);
+                @media screen and (min-width: 540px) {
+                    display: flex;
+                    margin-right: 0.5rem;
+                    font-size: 2rem;
+                    color: var(--black);
+
+                    &:hover {
+                        color: var(--primary);
+                    }
+                }
+            }
+
+            .theme {
+                display: none;
+
+                @media screen and (min-width: 768px) {
+                    display: block;
                 }
             }
         }

@@ -49,8 +49,15 @@ export class RatingService {
         await this.ratingRepository.save(rating);
     }
 
-    async update(reviewerId: number, userId: number): Promise<void> {
-        console.log(reviewerId, userId);
+    async update(reviewerId: number, userId: number, ratingDto: CrateRatingDto): Promise<void> {
+        const rating = await this.ratingRepository.findOne({ where: { userId, reviewerId } });
+
+        if (!rating) {
+            throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        }
+
+        rating.value = ratingDto.value;
+        await this.ratingRepository.save(rating);
     }
 
     async canRate(reviewerId: number, userId: number): Promise<boolean> {

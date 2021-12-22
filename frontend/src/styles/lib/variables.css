@@ -14,4 +14,10 @@
     --filters-sidebar-width: 42rem;
 
     --chat-sidebar-width: 30rem;
+
+    --media-1: 320px;
+    --media-2: 540px;
+    --media-3: 768px;
+    --media-4: 1024px;
+    --media-5: 1200px;
 }

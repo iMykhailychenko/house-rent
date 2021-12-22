@@ -6,7 +6,11 @@ import useConfig from '../../../hooks/config.hook';
 
 import css from './card-size-switcher.module.scss';
 
-const CardSizeSwitcher = (): JSX.Element => {
+interface IProps {
+    className?: string;
+}
+
+const CardSizeSwitcher = ({ className }: IProps): JSX.Element => {
     const [config, setConfig] = useConfig();
 
     const handleSmallCard = (): void => setConfig({ ...config, cardSize: 'sm' });
@@ -14,7 +18,7 @@ const CardSizeSwitcher = (): JSX.Element => {
     const handleLargeCard = (): void => setConfig({ ...config, cardSize: 'lg' });
 
     return (
-        <>
+        <div className={className}>
             <h4 className={css.title}>Змінити розмір оголошення</h4>
             <div className={css.flex}>
                 <button
@@ -23,7 +27,7 @@ const CardSizeSwitcher = (): JSX.Element => {
                     title="large cards"
                     type="button"
                 >
-                    3x
+                    1x
                 </button>
                 <button
                     className={clsx(css.button, config.cardSize === 'md' && css.active)}
@@ -39,10 +43,10 @@ const CardSizeSwitcher = (): JSX.Element => {
                     title="small cards"
                     type="button"
                 >
-                    1x
+                    3x
                 </button>
             </div>
-        </>
+        </div>
     );
 };
 

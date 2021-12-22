@@ -50,3 +50,17 @@ export const rateUserThunk = createAsyncThunk<void, RatingPayload, AsyncThunkCon
         }
     },
 );
+
+export const editRateUserThunk = createAsyncThunk<void, RatingPayload, AsyncThunkConfig>(
+    'RATING/RATE',
+    async (payload, { rejectWithValue }) => {
+        try {
+            const { status } = await ratingService.update(payload);
+            if (status < 200 || status >= 300) throw new Error();
+            toast.success('Ви успішно змінили ваш відгук. Згодом він відобразится на сайті', toastCofig);
+        } catch (error) {
+            errorNotif(error);
+            return rejectWithValue(formatSeverError(error));
+        }
+    },
+);

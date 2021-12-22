@@ -9,9 +9,14 @@
 }
 
 .inner {
-    text-align: left;
-    font-size: 1.2rem;
-    font-weight: 400;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+        text-align: left;
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
 }
 
 .title {
@@ -22,11 +27,20 @@
     color: var(--gray-6);
 }
 
-.btn {
+.notification,
+.newPost {
     margin-left: 0.5rem;
 
     svg {
         font-size: 1.8rem;
+    }
+}
+
+.newPost {
+    display: none;
+
+    @media screen and (min-width: 540px) {
+        display: block;
     }
 }
 

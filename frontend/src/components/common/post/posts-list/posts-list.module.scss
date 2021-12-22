@@ -1,10 +1,14 @@
 .root {
     height: 100%;
     min-height: inherit;
-    padding: 8rem 0;
+    padding: 0;
+
+    @media screen and (min-width: 768px) {
+        padding: 8rem 0;
+    }
 
     h2 {
-        width: 70rem;
+        max-width: 70rem;
     }
 }
 
@@ -18,20 +22,45 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
+
+    @media screen and (min-width: 768px) {
+        margin: 2rem 0;
+    }
 
     &.sm {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+}
+
+.cardSize {
+    margin-bottom: 2rem;
+
+    @media screen and (min-width: 768px) {
+        display: none;
     }
 }
 
 .wrp {
-    width: calc(100% - var(--filters-sidebar-width));
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: calc(100% - var(--filters-sidebar-width));
+    }
 }
 
 .aside {
-    width: var(--filters-sidebar-width);
-    padding-top: 2rem;
-    padding-left: 6rem;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+        width: var(--filters-sidebar-width);
+        padding-top: 2rem;
+        padding-left: 6rem;
+    }
 }
