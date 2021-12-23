@@ -10,7 +10,7 @@ import { useMessageCountSelector } from '../../../../../state/entities/chats/cha
 import { messagesCountThunk } from '../../../../../state/entities/chats/chats.thunk';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../utils/routes';
-import SmallModalWrp from '../../components/small-modal-wrp/small-modal-wrp';
+import StickyModal from '../../components/sticky-modal/sticky-modal';
 import { modal } from '../../modal';
 
 import css from './profile-nav.module.scss';
@@ -34,7 +34,7 @@ export const ProfileNav = (): JSX.Element => {
     }, [dispatch]);
 
     return (
-        <SmallModalWrp title={`${profileState?.data?.firstName} ${profileState?.data?.lastName}`}>
+        <StickyModal title={`${profileState?.data?.firstName} ${profileState?.data?.lastName}`}>
             <ul>
                 {loading && (
                     <li className={css.li}>
@@ -73,7 +73,7 @@ export const ProfileNav = (): JSX.Element => {
                     </button>
                 </li>
             </ul>
-        </SmallModalWrp>
+        </StickyModal>
     );
 };
 

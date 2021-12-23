@@ -2,16 +2,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 3rem;
-    padding-left: 2rem;
+    margin-left: 2rem;
+    padding-left: 1rem;
     border-left: 0.1rem solid var(--black);
     color: inherit;
+
+    @media screen and (min-width: 540px) {
+        margin-left: 3rem;
+        padding-left: 2rem;
+    }
+}
+
+.join {
+    display: none;
+
+    @media screen and (min-width: 540px) {
+        display: block;
+    }
 }
 
 .button {
-    margin: 0 1rem;
+    margin: 0 0.4rem;
     font-size: 1.2rem;
     color: inherit;
+
+    @media screen and (min-width: 540px) {
+        margin: 0 1rem;
+    }
 
     &:hover,
     &:focus {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
@@ -16,9 +16,11 @@ interface IProps {
 const StickyModal = ({ title = '', footer, children }: IProps): JSX.Element => {
     const trans = useTrans();
 
-    if (window.innerWidth < 768) {
-        modal.setSticky();
-    }
+    useEffect(() => {
+        if (window.innerWidth < 768) {
+            modal.setSticky();
+        }
+    }, []);
 
     return (
         <div className={css.root}>

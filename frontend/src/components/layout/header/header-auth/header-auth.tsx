@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Person from '@mui/icons-material/Person';
+import clsx from 'clsx';
 
 import useTrans from '../../../../hooks/trans.hook';
 import joinModal from '../../../common/modal/modals/join-modal/join-modal';
@@ -17,7 +18,7 @@ const HeaderAuth = (): JSX.Element => {
             <button className={css.button} type="button" onClick={loginModal}>
                 {trans('login')}
             </button>
-            <button className={css.button} type="button" onClick={joinModal}>
+            <button className={clsx(css.button, css.join)} type="button" onClick={joinModal}>
                 {trans('join')}
             </button>
         </div>
