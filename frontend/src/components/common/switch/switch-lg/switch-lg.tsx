@@ -18,6 +18,7 @@ const SwitchLg = ({ value, onChange, labels = ['on', 'off'], className, width = 
     const handleClick = (): void => {
         if (onChange) onChange(!value);
     };
+
     return (
         <>
             <button className={clsx(css.root, !value && css.right, className)} type="button" onClick={handleClick}>

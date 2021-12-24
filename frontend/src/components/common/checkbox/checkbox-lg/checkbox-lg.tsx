@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import clsx from 'clsx';
 
@@ -19,7 +20,7 @@ const CheckboxLg = ({ className, error = false, name, title, small, value, onCha
     const handleClick = (): void => onChange(!value);
 
     return (
-        <button
+        <Button
             className={clsx(css.root, className, error && css.error, value && css.active)}
             onClick={handleClick}
             type="button"
@@ -27,11 +28,11 @@ const CheckboxLg = ({ className, error = false, name, title, small, value, onCha
             <div className={css.checkbox}>
                 <Checkbox className={css.icon} checked={value} color="primary" inputProps={{ 'aria-label': title }} name={name} />
             </div>
-            <p>
-                <span className={css.title}>{title}</span>
-                <span className={css.text}>{small}</span>
-            </p>
-        </button>
+            <div>
+                <p className={css.title}>{title}</p>
+                <p className={css.text}>{small}</p>
+            </div>
+        </Button>
     );
 };
 

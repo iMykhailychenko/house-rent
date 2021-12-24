@@ -88,7 +88,7 @@ const AppDrawerNav = ({ onClose }: IProps): JSX.Element => {
 
                 {token.accessToken ? (
                     <>
-                        <ListItemButton onClick={toggleOpen}>
+                        <ListItemButton className={css.btn} onClick={toggleOpen}>
                             <ListItemIcon>
                                 <AccountCircleOutlinedIcon />
                             </ListItemIcon>
@@ -96,18 +96,18 @@ const AppDrawerNav = ({ onClose }: IProps): JSX.Element => {
                             {open ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
 
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
+                        <Collapse className={css.collapse} in={open} timeout="auto" unmountOnExit>
+                            <List disablePadding>
                                 <ListItemButton className={css.sub} onClick={redirect(routes.private)}>
                                     <ListItemText primary="Налаштування" />
                                 </ListItemButton>
                             </List>
-                            <List component="div" disablePadding>
+                            <List disablePadding>
                                 <ListItemButton className={css.sub} onClick={redirect(routes.myPosts)}>
                                     <ListItemText primary="Мої оголошення" />
                                 </ListItemButton>
                             </List>
-                            <List component="div" disablePadding>
+                            <List disablePadding>
                                 <ListItemButton className={css.sub} onClick={redirect(routes.favorite)}>
                                     <ListItemText primary="Збережені оголошення" />
                                 </ListItemButton>

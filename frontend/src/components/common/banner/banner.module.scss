@@ -12,12 +12,22 @@
     height: 0;
     opacity: 0;
     overflow: hidden;
-    padding: 0 6rem;
+    padding: 0.5rem 1rem;
     color: var(--black);
     transition: 0.15s ease-in-out;
 
+    @media screen and (min-width: 768px) {
+        padding: 0 6rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+        color: inherit;
+    }
+
     &.open {
-        height: var(--banner-height);
+        height: auto;
+        min-height: var(--banner-height);
         opacity: 1;
         overflow: unset;
     }
@@ -43,8 +53,16 @@
     }
 
     .content {
-        width: calc(100% - 15rem);
+        width: calc(100% - 4rem);
         margin-right: 1rem;
+        text-align: left;
+
+        @media screen and (min-width: 768px) {
+            width: calc(100% - 15rem);
+        }
+    }
+
+    .cutStr {
         text-align: center;
         @include cutString;
     }

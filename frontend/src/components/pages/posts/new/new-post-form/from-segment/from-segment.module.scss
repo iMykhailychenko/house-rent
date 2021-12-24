@@ -1,18 +1,30 @@
 .root {
-    display: flex;
+    --aside: 100%;
     width: 100%;
     margin: 2rem 0;
-    --aside: 15rem;
+
+    @media screen and (min-width: 768px) {
+        --aside: 15rem;
+        display: flex;
+    }
 
     .label {
         display: block;
         width: var(--aside);
         margin: 0.5rem 0;
-        padding-right: 2rem;
+        padding-right: 0;
+
+        @media screen and (min-width: 768px) {
+            padding-right: 2rem;
+        }
     }
 
     .inner {
-        width: calc(100% - var(--aside));
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+            width: calc(100% - var(--aside));
+        }
     }
 
     .error {

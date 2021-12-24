@@ -18,14 +18,29 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 2rem 0 4rem;
+    flex-direction: column;
+    margin: 2rem 0 0;
+
+    @media screen and (min-width: 768px) {
+        margin: 2rem 0 4rem;
+        flex-direction: row;
+        align-items: center;
+    }
 
     .inner {
-        width: 30%;
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+            width: 30%;
+        }
 
         &:nth-of-type(2) {
-            text-align: right;
+            margin-top: 2rem;
+
+            @media screen and (min-width: 768px) {
+                margin-top: 0;
+                text-align: right;
+            }
         }
 
         & > ul {
@@ -50,7 +65,13 @@
 }
 
 .title {
+    margin: 0 0 2rem;
     line-height: 1.6;
+    font-size: 1.8rem;
+
+    @media screen and (min-width: 768px) {
+        margin: 2rem 0;
+    }
 }
 
 .subtitle {
@@ -73,13 +94,25 @@
 }
 
 .wrap {
-    margin: 8rem 0;
+    margin: 3rem 0;
+
+    @media screen and (min-width: 768px) {
+        margin: 8rem 0;
+    }
 }
 
 .row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin: 4rem 0 2rem;
+    flex-direction: column;
+    margin: 2rem 0 1rem;
+
+    @media screen and (min-width: 768px) {
+        align-items: unset;
+        flex-direction: row;
+        margin: 4rem 0 2rem;
+    }
 }
 
 .cell {

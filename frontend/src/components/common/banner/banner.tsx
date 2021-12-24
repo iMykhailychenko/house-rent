@@ -40,11 +40,13 @@ export const banner = new BannerManagement();
 
 interface IState {
     banners: Banner[];
+    cutStr: boolean;
 }
 
 export default class BannerComponent extends Component<unknown, IState> {
     public state: IState = {
         banners: [],
+        cutStr: true,
     };
 
     componentDidMount(): void {
@@ -59,12 +61,18 @@ export default class BannerComponent extends Component<unknown, IState> {
         this.setState({ banners });
     };
 
+    toggle = (): void => {
+        this.setState(prev => ({ cutStr: !prev.cutStr }));
+    };
+
     render(): JSX.Element {
-        const { banners } = this.state;
+        const { banners, cutStr } = this.state;
 
         return (
             <div className={clsx(css.root, banners[0] && css.open, css[banners[0]?.type])}>
-                <div className={css.content}>{banners[0]?.content}</div>
+                <button type="button" onClick={this.toggle} className={clsx(css.content, cutStr && css.cutStr)}>
+                    {banners[0]?.content}
+                </button>
 
                 <div className={css.flex}>
                     {banners.length > 1 && (

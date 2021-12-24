@@ -1,10 +1,6 @@
 :global(.black) {
     .root {
-        background: var(--gray-1);
-
-        .title {
-            background: var(--gray-1);
-        }
+        --white: var(--gray-1);
     }
 }
 
@@ -51,12 +47,19 @@
             font-size: 25px;
         }
 
+        .collapse,
+        .btn,
+        li {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         .btn:hover {
             background: var(--gray-3);
         }
 
         .sub {
-            padding: 1.2rem 0 1.2rem 7.2rem;
+            padding: 1.2rem 0 1.2rem 5.8rem;
             background: var(--gray-1);
 
             &:hover {
@@ -69,5 +72,7 @@
         font-size: 16px;
         color: var(--black);
         background: var(--white);
+        padding-left: 0;
+        padding-right: 0;
     }
 }

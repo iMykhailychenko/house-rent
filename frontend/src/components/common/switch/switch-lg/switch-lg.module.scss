@@ -40,6 +40,12 @@
     display: flex;
     align-items: center;
     margin-left: -1rem;
+    color: var(--black);
+
+    button {
+        margin-bottom: 0.3rem;
+        color: inherit;
+    }
 
     @media screen and (min-width: 540px) {
         display: none;

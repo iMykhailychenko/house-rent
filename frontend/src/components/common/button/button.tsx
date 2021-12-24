@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 
+import MUIButton from '@mui/material/Button';
 import clsx from 'clsx';
 
 import css from './button.module.scss';
@@ -25,7 +26,7 @@ const Button = ({
     secondary,
     disabled = false,
 }: IProps): JSX.Element => (
-    <button
+    <MUIButton
         className={clsx(css.button, className, {
             [css.loading]: loading,
             [css.primary]: primary && !disabled,
@@ -37,7 +38,7 @@ const Button = ({
     >
         {loading && <img className={css.spinner} src="/spinner.gif" alt="loading" />}
         <span className={css.children}>{children}</span>
-    </button>
+    </MUIButton>
 );
 
 export default Button;

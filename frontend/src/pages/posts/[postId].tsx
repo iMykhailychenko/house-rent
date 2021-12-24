@@ -42,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = wrapper.getStaticProps(store => async ({ params }) => {
     const postId = Number(params?.postId);
 
-    if (postId) {
+    if (!postId) {
         return {
             notFound: true,
         };
