@@ -2,24 +2,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
 
     &.box {
-        padding: 12rem 6rem;
-        border-radius: 2rem;
+        padding: 3rem 1.5rem;
+        border-radius: 0.5rem;
         background: var(--secondary);
+
+        @media screen and (min-width: 768px) {
+            padding: 12rem 6rem;
+            border-radius: 2rem;
+        }
+    }
+
+    .cell,
+    .ratingFlex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .cell {
-        display: flex;
         align-items: flex-start;
-        justify-content: center;
         flex-direction: column;
     }
 
     .avatar {
-        margin-right: 4rem;
+        margin-right: 0;
         font-size: 6rem;
         pointer-events: none;
+
+        @media screen and (min-width: 768px) {
+            margin-right: 4rem;
+        }
     }
 
     .offline,
@@ -80,20 +99,31 @@
     .role {
         display: flex;
         align-items: center;
-        margin-bottom: 3rem;
+
+        @media screen and (min-width: 768px) {
+            margin-bottom: 3rem;
+        }
 
         .roleItem {
             display: flex;
             align-items: center;
             margin-top: 0.2rem;
             margin-right: 1rem;
-            padding: 2rem 3rem;
+            padding: 1rem 1.5rem;
             border-radius: 0.6rem;
             color: var(--primary);
             background: var(--white);
             font-weight: 500;
             font-size: 1.2rem;
             border: 0.1rem dashed var(--primary);
+
+            @media screen and (min-width: 768px) {
+                padding: 2rem 3rem;
+            }
+
+            &:nth-last-of-type(1) {
+                margin-right: 0;
+            }
 
             svg {
                 margin-bottom: 0.2rem;

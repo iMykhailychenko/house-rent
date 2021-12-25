@@ -114,7 +114,7 @@ const FormTypeFour = ({ value }: IProps): JSX.Element => {
                         </Button>
                     )}
                     <Button type="button" secondary onClick={uploadWithoutPhoto} loading={loading}>
-                        Продовжити без фото
+                        Без фото
                     </Button>
                     <Button primary disabled={!file} onClick={uploadWithPhoto} loading={loading}>
                         Далі

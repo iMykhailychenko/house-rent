@@ -88,11 +88,11 @@ const UserBanner = (): JSX.Element => {
         <div className={clsx(css.flex, css.box)}>
             <div className={css.cell}>
                 <UserAvatar
-                    diameter={25}
-                    className={css.avatar}
                     src={userData.avatar}
+                    className={css.avatar}
                     firstName={userData.firstName}
                     lastName={userData.lastName}
+                    diameter={window?.innerWidth > 768 ? 25 : 20}
                 />
             </div>
 
@@ -108,7 +108,7 @@ const UserBanner = (): JSX.Element => {
                     Данний рейтинг будується на основі відгуків власників квартири/рієлторів після спілкування в чаті з
                     користувачем
                 </p>
-                <div className={css.flex}>
+                <div className={css.ratingFlex}>
                     <Rating
                         className={css.rating}
                         name="half-rating-read"
@@ -134,13 +134,13 @@ const UserBanner = (): JSX.Element => {
                         userData.role.includes(UserRole.REALTOR) ? (
                             <>
                                 <RoleComponent text="Шукає житло" title="Роль на сайті" />
-                                <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                                <RoleComponent text="Здає житло" title="Роль на сайті" />
                             </>
                         ) : (
                             <RoleComponent text="Шукає житло" title="Роль на сайті" />
                         )
                     ) : (
-                        <RoleComponent text="Здає житло в оренду" title="Роль на сайті" />
+                        <RoleComponent text="Здає житло" title="Роль на сайті" />
                     )}
                 </div>
 

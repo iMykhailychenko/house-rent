@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -45,14 +46,14 @@ const PrivateLayout = ({ children }: IProps): JSX.Element => {
                         </div>
                     </button>
 
-                    <Button primary onClick={redirectNewPost}>
-                        Створити оголошення
+                    <Button className={css.btn} primary onClick={redirectNewPost}>
+                        {window?.innerWidth > 768 ? 'Створити оголошення' : <CreateNewFolderOutlinedIcon />}
                     </Button>
                 </div>
             </Container>
             <Container className={css.root} size="md">
-                <nav>
-                    <ul className={css.nav}>
+                <nav className={css.nav}>
+                    <ul className={css.ul}>
                         <li>
                             <Link href={routes.private} shallow>
                                 <a className={clsx(css.link, { [css.active]: history.pathname.includes(routes.private) })}>

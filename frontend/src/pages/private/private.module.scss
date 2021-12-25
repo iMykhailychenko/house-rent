@@ -1,7 +1,8 @@
 .root {
+    --sidebar-width: 35rem;
+
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-
-    --sidebar-width: 35rem;
+    flex-wrap: wrap;
 }

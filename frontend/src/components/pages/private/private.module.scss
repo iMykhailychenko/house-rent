@@ -1,7 +1,12 @@
 .aside {
     position: relative;
-    width: var(--sidebar-width);
     height: auto;
+    width: 100%;
+    margin-bottom: 4rem;
+
+    @media screen and (min-width: 768px) {
+        width: var(--sidebar-width);
+    }
 
     .sticky {
         position: sticky;
@@ -11,5 +16,9 @@
 }
 
 .container {
-    width: calc(100% - var(--sidebar-width) - 4rem);
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: calc(100% - var(--sidebar-width) - 4rem);
+    }
 }

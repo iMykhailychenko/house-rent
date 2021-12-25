@@ -70,8 +70,8 @@ const AppDrawerNav = ({ onClose }: IProps): JSX.Element => {
             </List>
 
             <List
-                className={css.list}
                 component="nav"
+                className={css.list}
                 aria-labelledby="nested-list-subheader"
                 subheader={
                     <ListSubheader className={css.title} component="div" id="nested-list-subheader">

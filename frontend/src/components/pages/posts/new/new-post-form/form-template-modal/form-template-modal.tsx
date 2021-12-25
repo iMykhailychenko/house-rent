@@ -21,19 +21,23 @@ interface FormTemplateModalItemProps {
 }
 
 const FormTemplateModalItem = ({ onChange, index, active, text }: FormTemplateModalItemProps): JSX.Element => {
-    const handleChange = () => onChange(index);
     const [open, setOpen] = useState<boolean>(index === 0);
-    const handleOpen = (event: MouseEvent<HTMLButtonElement>): void => {
-        event.stopPropagation();
+
+    const handleChange = () => {
+        onChange(index);
         setOpen(prev => !prev);
     };
+    // const handleOpen = (event: MouseEvent<HTMLButtonElement>): void => {
+    //     event.stopPropagation();
+    //     setOpen(prev => !prev);
+    // };
 
     return (
         <Accordion onClick={handleChange} expanded={open} className={clsx(css.accordion, active === index && css.active)}>
             <AccordionSummary
                 disableRipple={false}
                 expandIcon={
-                    <IconButton className={css.arrowBtn} onClick={handleOpen}>
+                    <IconButton className={css.arrowBtn}>
                         <ExpandMoreIcon className={css.icon} />
                     </IconButton>
                 }

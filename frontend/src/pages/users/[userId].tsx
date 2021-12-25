@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
 import GetStaticProfile from '../../components/common/auth/get-static-profile/get-static-profile';
+import { modal } from '../../components/common/modal/modal';
 import PostFilters from '../../components/common/post/post-filters/post-filters';
 import PostsList from '../../components/common/post/posts-list/posts-list';
 import Container from '../../components/layout/container/container';
@@ -30,6 +31,7 @@ const UserProfilePage = (): JSX.Element => {
     const userId = Number(router.query.userId);
 
     const submit = (): void => {
+        modal.close();
         dispatch(getUserPostsListThunk(userId));
     };
 

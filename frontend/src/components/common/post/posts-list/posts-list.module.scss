@@ -9,13 +9,22 @@
 
     h2 {
         max-width: 70rem;
+        margin-bottom: 0;
+
+        @media screen and (min-width: 768px) {
+            margin-bottom: 2rem;
+        }
     }
 }
 
 .flex {
     display: flex;
     justify-content: space-between;
-    padding: 0 0 3rem;
+    padding: 0 0 10rem;
+
+    @media screen and (min-width: 768px) {
+        padding: 0 0 3rem;
+    }
 }
 
 .inner {
@@ -38,8 +47,27 @@
     }
 }
 
-.cardSize {
-    margin-bottom: 2rem;
+.filters {
+    position: sticky;
+    top: calc(var(--100vh, 100vh) - 0.6rem);
+    left: 0;
+    transform: translateY(-100%);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-radius: 0.5rem;
+    background: var(--secondary);
+    color: var(--primary);
+    border: 0.1rem solid var(--primary);
+
+    svg {
+        transform: rotate(180deg);
+        font-size: 1.8rem;
+    }
 
     @media screen and (min-width: 768px) {
         display: none;

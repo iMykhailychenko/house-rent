@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -95,7 +96,8 @@ const NotificationsList = (): JSX.Element => {
                         onClick={handleDeleteAll}
                         type="button"
                     >
-                        Видалити усі
+                        <DeleteForeverIcon />
+                        <span>Видалити усі</span>
                     </button>
                 )}
             </div>
@@ -105,7 +107,9 @@ const NotificationsList = (): JSX.Element => {
             ) : notifications.data.length ? (
                 notifications.data.map(item => (
                     <div className={css.item} key={item.id}>
-                        <Image width={25} height={30} objectFit="contain" src={iconsMap[item.type]} alt="" />
+                        {window?.innerWidth > 540 && (
+                            <Image width={25} height={30} objectFit="contain" src={iconsMap[item.type]} alt="" />
+                        )}
                         <div className={css.mid}>
                             <NotificationsTemplate value={item} />
                         </div>

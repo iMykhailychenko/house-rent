@@ -57,9 +57,6 @@ const PostFilters = ({ onSubmit }: IProps): JSX.Element => {
         dispatch(clearAllFilterAction());
         onSubmit();
     };
-    const submit = (): void => {
-        onSubmit();
-    };
 
     return (
         <>
@@ -71,7 +68,7 @@ const PostFilters = ({ onSubmit }: IProps): JSX.Element => {
                     value={filters[SEARCH_FILTERS.QUERY]}
                     placeholder="Введіть пошуковий запит"
                     onChange={handleChangeInput}
-                    onSubmit={submit}
+                    onSubmit={onSubmit}
                 />
 
                 <h4 className={css.title}>{trans('Оберіть ваше місто')}</h4>
@@ -105,7 +102,7 @@ const PostFilters = ({ onSubmit }: IProps): JSX.Element => {
                     <Button onClick={handleClearAll} secondary>
                         {trans('Очистити')}
                     </Button>
-                    <Button onClick={submit} primary>
+                    <Button onClick={onSubmit} primary>
                         {trans('Пошук')}
                     </Button>
                 </div>

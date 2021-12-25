@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
@@ -9,14 +9,21 @@ import css from './large-modal-wrp.module.scss';
 
 interface IProps {
     title?: string;
-    children: JSX.Element[] | JSX.Element | string;
+    children: ReactNode;
 }
 
 const LargeModalWrp = ({ children = '', title }: IProps): JSX.Element => {
     const trans = useTrans();
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (ref.current) {
+            ref.current.focus();
+        }
+    }, []);
 
     return (
-        <div className={css.root}>
+        <div ref={ref} tabIndex={0} className={css.root}>
             <header className={css.header}>
                 <h2 className={css.title}>{trans(title)}</h2>
                 <button className={css.btn} type="button" onClick={modal.close}>

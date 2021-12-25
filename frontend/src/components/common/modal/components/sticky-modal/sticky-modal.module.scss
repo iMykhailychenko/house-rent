@@ -61,7 +61,11 @@
 
     .inner {
         padding: 2rem;
-        max-height: calc(90vh - 13.4rem);
+        max-height: calc(90vh - 5rem);
         overflow: auto;
+
+        @media screen and (min-width: 768px) {
+            max-height: calc(90vh - 13.4rem);
+        }
     }
 }

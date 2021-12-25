@@ -2,6 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 
+import { modal } from '../components/common/modal/modal';
 import PostFilters from '../components/common/post/post-filters/post-filters';
 import PostsList from '../components/common/post/posts-list/posts-list';
 import RootLayout from '../components/layout/root-layout/root-layout';
@@ -19,6 +20,7 @@ const HomePage = (): JSX.Element => {
     const title = 'Якщо ви рієлтори чи власник квартири, то в першу чергу зверніть увагу на термінові оголошення';
 
     const submit = () => {
+        modal.close();
         dispatch(postListThunk());
     };
     const openPage = async (page: number): Promise<void> => {

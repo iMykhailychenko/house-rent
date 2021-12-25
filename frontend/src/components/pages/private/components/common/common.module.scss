@@ -1,21 +1,36 @@
 .root {
     margin-bottom: 2rem;
-    padding: 3rem 4rem 2rem;
+    padding: 2rem 1.8rem 1rem;
     border: 0.1rem solid var(--gray-3);
     border-radius: 1rem;
 
+    @media screen and (min-width: 540px) {
+        padding: 3rem 4rem 2rem;
+    }
+
     .header {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
+        flex-direction: column;
         padding-bottom: 1rem;
         margin-left: -0.5rem;
+
+        @media screen and (min-width: 540px) {
+            flex-direction: row;
+            align-items: center;
+        }
     }
 
     .link {
+        margin-top: 2rem;
         font-weight: 500;
         font-size: 1.2rem;
         color: var(--primary);
+
+        @media screen and (min-width: 540px) {
+            margin-top: 0;
+        }
 
         svg {
             margin-bottom: 0.2rem;
@@ -52,8 +67,13 @@
         .cell {
             display: flex;
             flex-direction: column;
-            width: 50%;
-            padding: 1.5rem 2.5rem 1.5rem 0;
+            width: 100%;
+            padding: 2rem 0;
+
+            @media screen and (min-width: 768px) {
+                width: 50%;
+                padding: 1.5rem 2.5rem 1.5rem 0;
+            }
 
             h5 {
                 font-size: 1.1rem;

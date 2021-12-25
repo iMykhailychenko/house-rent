@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 import Close from '@mui/icons-material/Close';
 
@@ -9,21 +9,23 @@ import css from './sticky-modal.module.scss';
 
 interface IProps {
     title?: string;
-    children: JSX.Element[] | JSX.Element | string;
-    footer?: JSX.Element[] | JSX.Element;
+    children: ReactNode;
+    footer?: ReactNode;
 }
 
 const StickyModal = ({ title = '', footer, children }: IProps): JSX.Element => {
     const trans = useTrans();
+    const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        ref.current?.focus();
         if (window.innerWidth < 768) {
             modal.setSticky();
         }
     }, []);
 
     return (
-        <div className={css.root}>
+        <div ref={ref} tabIndex={0} className={css.root}>
             <header className={css.header}>
                 <h2 className={css.title}>{trans(title)}</h2>
                 <button type="button" className={css.btn} onClick={modal.close}>

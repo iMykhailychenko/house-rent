@@ -25,7 +25,7 @@
     width: 100%;
     max-height: 80vh;
     min-height: 10rem;
-    padding: 0 2rem 2rem;
+    padding: 0 1rem 1rem;
     background: var(--white);
     border-radius: 0.6rem;
     overflow-y: auto;
@@ -36,10 +36,11 @@
         justify-content: center;
     }
 
-    @media screen and (min-width: 1300px) {
+    @media screen and (min-width: 540px) {
         right: 12rem;
         max-width: 40rem;
         min-width: 30rem;
+        padding: 0 2rem 2rem;
     }
 
     @media screen and (min-width: 1300px) {

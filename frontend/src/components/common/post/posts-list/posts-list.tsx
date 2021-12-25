@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import clsx from 'clsx';
 
 import uiConfig from '../../../../config/ui.config';
@@ -8,6 +9,8 @@ import useTrans from '../../../../hooks/trans.hook';
 import { usePostListSelector } from '../../../../state/entities/posts/posts.selector';
 import Container from '../../../layout/container/container';
 import CardSizeSwitcher from '../../card-size-switcher/card-size-switcher';
+import StickyModal from '../../modal/components/sticky-modal/sticky-modal';
+import { modal } from '../../modal/modal';
 import EmptyPostsList from '../../not-found/emprty-posts-list/emprty-posts-list';
 import Pagination from '../../pagination/pagination';
 import PostsSkeleton from '../../skeletons/posts-sleleton/posts-skeleton';
@@ -44,12 +47,19 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
         onMore && onMore(page).finally(() => setLoadingMore(false));
     };
 
+    const openFilters = (): void => {
+        modal.open(<StickyModal>{children}</StickyModal>);
+    };
+
     return (
         <Container size="md">
             <div className={clsx(css.root, className)}>
                 {title && <h2 className="title-2">{trans(title)}</h2>}
 
-                <CardSizeSwitcher className={css.cardSize} />
+                <button onClick={openFilters} className={css.filters} type="button">
+                    <span>Показати фільтри</span>
+                    <KeyboardArrowDownOutlinedIcon />
+                </button>
 
                 <div className={css.flex}>
                     <div className={css.wrp}>

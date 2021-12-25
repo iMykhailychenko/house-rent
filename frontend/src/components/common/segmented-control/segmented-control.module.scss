@@ -36,4 +36,8 @@
     background: var(--primary);
     color: var(--true-white);
     pointer-events: none;
+
+    &:hover {
+        background: var(--primary);
+    }
 }

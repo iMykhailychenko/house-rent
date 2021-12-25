@@ -14,40 +14,61 @@
     }
 
     .nav {
-        position: relative;
-        z-index: 1;
-        display: flex;
+        overflow: auto;
 
-        .link {
-            display: block;
-            padding: 1rem 1.5rem;
+        .ul {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            width: max-content;
 
-            &:hover {
-                border-bottom: 0.1rem solid var(--gray-5);
+            .link {
+                display: block;
+                padding: 1rem 1.5rem;
+
+                &:hover {
+                    border-bottom: 0.1rem solid var(--gray-5);
+                }
             }
-        }
 
-        .active {
-            color: var(--primary);
-            border-bottom: 0.1rem solid var(--primary);
-            pointer-events: none;
+            .active {
+                color: var(--primary);
+                border-bottom: 0.1rem solid var(--primary);
+                pointer-events: none;
+            }
         }
     }
 }
 
 .top {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 4rem;
+    }
 
     .flex {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        font-size: 1.6rem;
+
+        @media screen and (min-width: 768px) {
+            font-size: 1.4rem;
+        }
     }
 
     .profile {
         display: flex;
         align-items: center;
-        margin-left: 1rem;
+
+        @media screen and (min-width: 768px) {
+            margin-left: 1rem;
+        }
 
         svg {
             font-size: 2.2rem;

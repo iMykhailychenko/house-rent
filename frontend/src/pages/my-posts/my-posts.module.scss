@@ -1,5 +1,9 @@
 .control {
     ul li button {
-        min-width: 12rem;
+        min-width: 9.5rem;
+
+        @media screen and (min-width: 768px) {
+            min-width: 12rem;
+        }
     }
 }

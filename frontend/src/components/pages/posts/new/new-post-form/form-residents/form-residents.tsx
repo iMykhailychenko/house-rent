@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from '@mui/material/Button';
 import clsx from 'clsx';
 
 import useTrans from '../../../../../../hooks/trans.hook';
@@ -21,14 +22,14 @@ const FormResidents = ({ value, onChange }: IProps): JSX.Element => {
     return (
         <div className={css.root}>
             {residentsAmount.map(item => (
-                <button
+                <Button
                     key={item}
                     type="button"
                     onClick={handleChange(item)}
                     className={clsx(css.button, value === item && css.active)}
                 >
                     {trans(item)}
-                </button>
+                </Button>
             ))}
         </div>
     );

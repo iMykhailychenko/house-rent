@@ -1,5 +1,5 @@
 const uiConfig = {
-    postsPerPage: 50,
+    postsPerPage: 2,
     chatsPerPage: 40,
     messagesPerPage: 60,
     notificationsPerPage: 15,
