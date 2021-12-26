@@ -1,5 +1,9 @@
 .sidebar {
-    width: var(--chat-sidebar-width);
+    width: 100%;
     height: 100%;
     overflow: auto;
+
+    @media screen and (min-width: 768px) {
+        width: var(--chat-sidebar-width);
+    }
 }

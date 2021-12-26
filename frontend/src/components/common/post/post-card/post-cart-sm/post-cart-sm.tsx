@@ -3,11 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
-import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import FullScreenImg from '../../../full-screen-img/full-screen-img';
 import ImageWrp from '../../../image-wrp/image-wrp';
-import Tooltip from '../../../tooltip/tooltip';
 import PostCardFooter from '../components/post-card-footer/post-card-footer';
 
 import css from './post-cart-sm.module.scss';
@@ -22,10 +20,12 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
             {post.image ? (
                 <FullScreenImg className={css.img} src={post.image} />
             ) : (
-                <div className={css.noImg}>
-                    <ImageWrp name="error" />
-                    <p>Фото відсутнє</p>
-                </div>
+                <Link href={routes.posts.single(post.id)}>
+                    <a className={css.noImg}>
+                        <ImageWrp name="error" />
+                        <p>Фото відсутнє</p>
+                    </a>
+                </Link>
             )}
 
             <div className={css.content}>

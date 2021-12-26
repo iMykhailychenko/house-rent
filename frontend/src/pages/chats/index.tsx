@@ -19,7 +19,7 @@ const ChatsPage = (): JSX.Element => {
                 <RootLayout withFooter={false} className={css.root}>
                     <ChatListEffect>
                         <Container size="md" className={css.container}>
-                            <ChatLayout disabled>
+                            <ChatLayout isRootPage disabled>
                                 <ChatBanner />
                             </ChatLayout>
                         </Container>

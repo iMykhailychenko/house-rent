@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
+import clsx from 'clsx';
 import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
@@ -17,6 +18,7 @@ import Select from '../../../../../common/select/select';
 import Filters from '../filters/filters';
 import FormSeparator from '../form-separator/form-separator';
 import FormSegment from '../from-segment/from-segment';
+import { formTwoInitialState } from '../new-post-form';
 import { cities, districtKyiv, districtLviv, formatSelectValue, houseType, price, rooms } from '../new-post-form.config';
 import css from '../new-post-form.module.scss';
 import { FormTwoSchema } from '../new-post-form.validation';
@@ -40,7 +42,6 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         onSubmit: values => {
             onSubmit(values);
             dispatch(updateFormType(FORM_TYPE.THREE));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
 
@@ -63,7 +64,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
 
     const resetForm = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        formik.resetForm();
+        formik.setValues(formTwoInitialState);
     };
     const goBack = async (): Promise<void> => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -71,7 +72,8 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         dispatch(updateFormType(FORM_TYPE.ONE));
     };
     const submitForm = async (): Promise<void> => {
-        return await formik.submitForm();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        await formik.submitForm();
     };
 
     return (
@@ -129,7 +131,7 @@ const FormTypeTwo = ({ initialValues, onSubmit }: IProps): JSX.Element => {
             </FormSegment>
 
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={css.flex}>
+            <div className={clsx(css.flex, css.end)}>
                 <Button className={css.arrow} onClick={goBack} secondary>
                     <ArrowBack />
                 </Button>

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import uiConfig from '../../../../config/ui.config';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useMessageSelector } from '../../../../state/entities/chats/chats.selector';
-import { messagesListPaginationThunk, messagesListThunk } from '../../../../state/entities/chats/chats.thunk';
+import { messagesListPaginationThunk, messagesListThunk } from '../../../../state/entities/chats/thunks/messages-list.thunk';
 import { validateDate } from '../../../../utils/helpers/date.helper';
 
 import DateSeparator from './components/date-separator';

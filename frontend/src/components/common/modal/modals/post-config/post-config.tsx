@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
-import useAuth from '../../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { useRole } from '../../../../../hooks/role.hook';
 import useTrans from '../../../../../hooks/trans.hook';
-import { createChatThunk } from '../../../../../state/entities/chats/chats.thunk';
+import { createChatThunk } from '../../../../../state/entities/chats/thunks/create-chat.thunk';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { useConfigDataSelector } from '../../../../../state/entities/posts/posts.selector';
 import { getIsPostFavoriteThunk, togglePostFavoriteThunk } from '../../../../../state/entities/posts/thunks/post-favorite.thunk';

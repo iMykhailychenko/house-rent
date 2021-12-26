@@ -1,10 +1,10 @@
 :global(.black) {
-    .root {
+    .root:global(.MuiPaper-root) {
         --white: var(--gray-1);
     }
 }
 
-.root {
+.root:global(.MuiPaper-root) {
     background: var(--white);
 
     .inner {

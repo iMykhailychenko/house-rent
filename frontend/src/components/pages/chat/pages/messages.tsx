@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import { useChatSocket } from '../../../../hooks/chat.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { Message } from '../../../../state/entities/chats/chats.interface';
-import { pushMessageAction, updateMessageAction, updateMsgStatusAction } from '../../../../state/entities/chats/chats.reducer';
+import { pushMessageAction, updateMsgStatusAction } from '../../../../state/entities/chats/chats.reducer';
 import { useMessageStatusSelector } from '../../../../state/entities/chats/chats.selector';
-import { messagesListThunk, singleChatThunk } from '../../../../state/entities/chats/chats.thunk';
+import { messagesListThunk } from '../../../../state/entities/chats/thunks/messages-list.thunk';
+import { singleChatThunk } from '../../../../state/entities/chats/thunks/single-chat.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import MessagesSkeleton from '../../../common/skeletons/chat/messages/messages';
 import MessagesLayout from '../messages-layout/messages-layout';
@@ -60,17 +61,6 @@ const MessagesListEffect = (): JSX.Element => {
             };
         }
     }, [dispatch, socket, socket?.client]);
-
-    useEffect(() => {
-        if (socket?.client) {
-            const messageEdited = (msg: Message) => dispatch(updateMessageAction(msg));
-            socket.client.on('messageEdited', messageEdited);
-
-            return () => {
-                socket.client?.off('messageEdited', messageEdited);
-            };
-        }
-    }, [dispatch, socket?.client]);
 
     useEffect(() => {
         if (socket?.client) {

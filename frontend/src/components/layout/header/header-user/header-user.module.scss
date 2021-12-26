@@ -35,8 +35,8 @@
     color: var(--gray-6);
 }
 
-.notification,
-.newPost {
+:global(.MuiButton-root).notification,
+:global(.MuiButton-root).newPost {
     margin-left: 0.5rem;
 
     svg {
@@ -44,7 +44,7 @@
     }
 }
 
-.newPost {
+:global(.MuiButton-root).newPost {
     display: none;
 
     @media screen and (min-width: 540px) {

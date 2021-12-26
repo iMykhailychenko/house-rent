@@ -6,7 +6,6 @@ import Link from 'next/link';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { formatDate } from '../../../../../utils/helpers/date.helper';
-import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Button from '../../../button/button';
 import FullScreenImg from '../../../full-screen-img/full-screen-img';
@@ -35,10 +34,12 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
             {post.image ? (
                 <FullScreenImg className={css.img} src={post.image} />
             ) : (
-                <div className={css.noImg}>
-                    <ImageWrp name="error" />
-                    <p>Фото відсутнє</p>
-                </div>
+                <Link href={routes.posts.single(post.id)}>
+                    <a className={css.noImg}>
+                        <ImageWrp name="error" />
+                        <p>Фото відсутнє</p>
+                    </a>
+                </Link>
             )}
 
             <div className={css.content}>

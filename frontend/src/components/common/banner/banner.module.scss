@@ -12,13 +12,8 @@
     height: 0;
     opacity: 0;
     overflow: hidden;
-    padding: 0.5rem 1rem;
     color: var(--black);
     transition: 0.15s ease-in-out;
-
-    @media screen and (min-width: 768px) {
-        padding: 0 6rem;
-    }
 
     button {
         font-size: 1.2rem;
@@ -29,7 +24,12 @@
         height: auto;
         min-height: var(--banner-height);
         opacity: 1;
+        padding: 0.5rem 1rem;
         overflow: unset;
+
+        @media screen and (min-width: 768px) {
+            padding: 0 6rem;
+        }
     }
 
     &.warning {
@@ -63,7 +63,6 @@
     }
 
     .cutStr {
-        text-align: center;
         @include cutString;
     }
 

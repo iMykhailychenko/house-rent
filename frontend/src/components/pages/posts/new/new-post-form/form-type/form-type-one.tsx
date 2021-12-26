@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import clsx from 'clsx';
 import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
@@ -34,7 +35,6 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         onSubmit: values => {
             onSubmit(values);
             dispatch(updateFormType(FORM_TYPE.TWO));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
 
@@ -42,11 +42,14 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
         errorHandler(formik);
     }, [errorHandler, formik]);
 
-    const resetForm = () => {
+    const resetForm = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         formik.resetForm();
     };
-    const submitForm = () => formik.submitForm();
+    const submitForm = async (): Promise<void> => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        await formik.submitForm();
+    };
 
     return (
         <form action="#" method="post" className={css.form}>
@@ -96,7 +99,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
             </FormSegment>
 
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={css.flex}>
+            <div className={clsx(css.flex, css.end)}>
                 <Button onClick={resetForm} secondary>
                     Очистичи
                 </Button>

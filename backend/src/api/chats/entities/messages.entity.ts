@@ -15,7 +15,7 @@ export class MessageEntity {
     @Column({ type: 'timestamp', default: null, nullable: true })
     updatedAt: Date;
 
-    @Column({ type: 'varchar', length: 500 })
+    @Column({ type: 'varchar', length: 1500 })
     text: string;
 
     @Column({ type: 'boolean', default: true })

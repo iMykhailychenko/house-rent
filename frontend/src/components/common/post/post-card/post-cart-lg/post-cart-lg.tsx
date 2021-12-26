@@ -48,10 +48,12 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
                     {post.image ? (
                         <FullScreenImg className={css.img} src={post.image} />
                     ) : (
-                        <div className={css.noImg}>
-                            <ImageWrp name="error" />
-                            <p>Фото відсутнє</p>
-                        </div>
+                        <Link href={routes.posts.single(post.id)}>
+                            <a className={css.noImg}>
+                                <ImageWrp name="error" />
+                                <p>Фото відсутнє</p>
+                            </a>
+                        </Link>
                     )}
 
                     <Link href={routes.posts.single(post.id)}>

@@ -1,12 +1,13 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/shared/guards/auth.guards';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
 import { Pagination } from '../../shared/interfaces/interface';
 
 import { ChatResponse } from './chats.interface';
 import { ChatsService } from './chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 import { ChatEntity } from './entities/chats.entity';
 import { MessageEntity } from './entities/messages.entity';
 
@@ -36,6 +37,12 @@ export class ChatsController {
         return await this.chatsService.getSingleChat(chatId, userId);
     }
 
+    @Post('')
+    @UseGuards(AuthGuard)
+    async createChat(@User('id') userId: number, @Body() createChatDto: CreateChatDto): Promise<ChatEntity> {
+        return await this.chatsService.createChat(userId, createChatDto);
+    }
+
     @Get('messages/:chatId')
     @UseGuards(AuthGuard)
     async findAllMessages(
@@ -47,9 +54,15 @@ export class ChatsController {
         return await this.chatsService.findAllMessages({ chatId, userId, page, limit });
     }
 
-    @Post('')
+    @Put('messages')
     @UseGuards(AuthGuard)
-    async createChat(@User('id') userId: number, @Body() createChatDto: CreateChatDto): Promise<ChatEntity> {
-        return await this.chatsService.createChat(userId, createChatDto);
+    async updateMessage(@User('id') userId: number, @Body() updateMessageDto: UpdateMessageDto): Promise<MessageEntity> {
+        return await this.chatsService.updateMessage(userId, updateMessageDto);
+    }
+
+    @Delete('messages/:messageId')
+    @UseGuards(AuthGuard)
+    async deleteMessage(@User('id') userId: number, @Param('messageId', ParseIntPipe) messageId: number): Promise<void> {
+        await this.chatsService.deleteMessage(userId, messageId);
     }
 }

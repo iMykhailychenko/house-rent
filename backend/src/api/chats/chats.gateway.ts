@@ -1,13 +1,5 @@
 import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
-import {
-    OnGatewayConnection,
-    OnGatewayDisconnect,
-    OnGatewayInit,
-    SubscribeMessage,
-    WebSocketGateway,
-    WebSocketServer,
-    WsException,
-} from '@nestjs/websockets';
+import { SubscribeMessage, WebSocketGateway, WebSocketServer, WsException } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
 import { JwtService } from '../../shared/jwt/jwt.service';
@@ -15,24 +7,11 @@ import { UserEntity } from '../users/entities/users.entity';
 
 import { ChatsService } from './chats.service';
 import { MessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
 
 @WebSocketGateway(8001, { namespace: 'chat', cors: true })
-export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+export class ChatsGateway {
     @WebSocketServer() server: Server;
-    private logger: Logger = new Logger('ChatsGateway');
-
     constructor(private readonly jwtService: JwtService, private readonly chatsService: ChatsService) {}
-
-    @UsePipes(new ValidationPipe({ transform: true }))
-    @SubscribeMessage('editMessage')
-    async editMessage(client: Socket, payload: UpdateMessageDto): Promise<void> {
-        const room = this.server.adapter['rooms']?.get(String(payload.chatId));
-        if (!room || !room.has(client.id)) throw new WsException('Forbidden');
-
-        const message = await this.chatsService.updateMessage(payload);
-        this.server.to(String(payload.chatId)).emit('messageEdited', message);
-    }
 
     @UsePipes(new ValidationPipe({ transform: true }))
     @SubscribeMessage('msgToServer')
@@ -68,17 +47,5 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
         if (!isUserBelongToChat) throw new WsException('Not permitted');
 
         return user;
-    }
-
-    public afterInit(server: Server): void {
-        this.logger.log('Init chat gateway');
-    }
-
-    public handleDisconnect(client: Socket): void {
-        this.logger.log(`Client disconnected: ${client.id}`);
-    }
-
-    public handleConnection(client: Socket): void {
-        this.logger.log(`Client connected: ${client.id}`);
     }
 }

@@ -1,4 +1,4 @@
-.button {
+:global(.MuiButton-root).button {
     position: relative;
     display: flex;
     align-items: center;
@@ -20,7 +20,7 @@
     }
 }
 
-.loading {
+:global(.MuiButton-root).loading {
     cursor: unset;
     pointer-events: none;
     opacity: 0.9;
@@ -30,7 +30,7 @@
     }
 }
 
-.primary {
+:global(.MuiButton-root).primary {
     background: var(--primary);
     color: var(--true-white);
 
@@ -39,7 +39,7 @@
     }
 }
 
-.secondary {
+:global(.MuiButton-root).secondary {
     background: var(--gray-2);
     color: var(--gray-10);
 
@@ -49,7 +49,7 @@
     }
 }
 
-.disabled {
+:global(.MuiButton-root).disabled {
     background: var(--gray-1);
     color: var(--gray-4);
     cursor: not-allowed;

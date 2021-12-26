@@ -7,35 +7,40 @@
 .root {
     position: relative;
     width: 100%;
-    max-width: 40rem;
-    border-radius: 1rem;
     background: var(--white);
+    border-radius: 1rem 1rem 0 0;
 
-    @media screen and (max-width: 768px) {
-        min-height: 50vh;
-        max-width: unset;
-        border-radius: 1rem 1rem 0 0;
+    @media screen and (min-width: 768px) {
+        max-width: 40rem;
+        border-radius: 1rem;
     }
 
     .header {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0.4rem 2rem;
+        max-width: 100%;
+        padding: 0.4rem 1rem;
         background: var(--gray-3);
         border-radius: 1rem 1rem 0 0;
         border-top: 0.1rem solid var(--white);
+        user-select: none;
 
-        @media screen and (max-width: 768px) {
-            position: relative;
-            user-select: none;
+        @media screen and (min-width: 768px) {
+            position: static;
+            padding: 0.4rem 2rem;
         }
 
         .btn {
             padding: 0 1.1rem;
-            transform: translate(1.2rem, -0.1rem);
+            transform: translate(0.8rem, -0.1rem);
             font-size: 2.2rem;
             color: var(--black);
+
+            @media screen and (min-width: 768px) {
+                transform: translate(1.2rem, -0.1rem);
+            }
         }
 
         .title {
@@ -54,17 +59,26 @@
         padding: 1.5rem 2rem;
         border-top: 0.1rem solid var(--gray-3);
 
+        @media screen and (min-width: 768px) {
+            padding: 1.5rem 1rem;
+        }
+
         button {
             margin-left: 1rem;
         }
     }
 
     .inner {
-        padding: 2rem;
-        max-height: calc(90vh - 5rem);
+        padding: 1rem;
+        max-height: calc(90vh - 15rem);
         overflow: auto;
 
         @media screen and (min-width: 768px) {
+            padding: 2rem;
+            max-height: calc(90vh - 13.4rem);
+        }
+
+        &.withFooter {
             max-height: calc(90vh - 13.4rem);
         }
     }

@@ -15,8 +15,4 @@ export class UpdateMessageDto {
 
     @IsInt()
     chatId: number;
-
-    @IsNotEmpty()
-    @IsInt()
-    userId: number;
 }

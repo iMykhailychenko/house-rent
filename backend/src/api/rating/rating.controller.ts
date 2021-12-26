@@ -1,7 +1,7 @@
 import { Controller, Get, Put, Param, Post, ParseIntPipe, UseGuards, Body, ValidationPipe } from '@nestjs/common';
-import { AuthGuard } from 'src/shared/guards/auth.guards';
 
 import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
 
 import { CrateRatingDto } from './dto/crate-rating.dto';
 import { ICanRate, UserRating } from './rating.interface';

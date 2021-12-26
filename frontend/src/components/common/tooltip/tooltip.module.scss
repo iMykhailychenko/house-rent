@@ -4,15 +4,6 @@
 
     &:focus,
     &:hover {
-        z-index: 10;
-
-        :global(.tooltip) {
-            opacity: 1;
-            display: block;
-            visibility: visible;
-            z-index: 10;
-        }
-
         @media screen and (max-width: 768px) {
             :global(.tooltip) {
                 display: none;
@@ -21,7 +12,10 @@
     }
 
     &.mobile:focus,
-    &.mobile:hover {
+    &.mobile:hover,
+    &:focus,
+    &:hover {
+        display: block;
         z-index: 10;
 
         :global(.tooltip) {
@@ -29,15 +23,6 @@
             display: block;
             visibility: visible;
             z-index: 10;
-        }
-
-        @media screen and (max-width: 768px) {
-            :global(.tooltip) {
-                opacity: 1;
-                display: block;
-                visibility: visible;
-                z-index: 10;
-            }
         }
     }
 }

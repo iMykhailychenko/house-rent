@@ -1,11 +1,11 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
-import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
 import { useRouter } from 'next/router';
 
 import { useChatSocket } from '../../../../../hooks/chat.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { chunkSubstr } from '../../../../../utils/helpers/string.helper';
 import Textarea from '../../../../common/textarea/textarea';
 import Tooltip from '../../../../common/tooltip/tooltip';
 
@@ -21,12 +21,32 @@ const ChatForm = (): JSX.Element => {
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => setValue(event.target.value);
     const submit = (): void => {
-        socket?.send({
-            chatId,
-            uploads: [],
-            message: value,
-            author: profileState.data.id,
-        });
+        if (!value.length) {
+            return;
+        }
+
+        if (value.length < 500) {
+            socket?.send({
+                chatId,
+                uploads: [],
+                message: value,
+                author: profileState.data.id,
+            });
+        } else {
+            const messagesArray = chunkSubstr(value, 1500);
+
+            messagesArray.forEach((msg, index) => {
+                setTimeout(() => {
+                    socket?.send({
+                        chatId,
+                        uploads: [],
+                        message: msg,
+                        author: profileState.data.id,
+                    });
+                }, index * 50);
+            });
+        }
+
         setValue('');
     };
 
@@ -50,13 +70,10 @@ const ChatForm = (): JSX.Element => {
                 placeholder="Напишіть повідомлення"
             />
             <div className={css.inner}>
-                <p>Чтобы отправить сообщение нажмите &quot;Enter&quot;. Для переноса строки нажмите &quot;Enter + Shift&quot;</p>
+                <p className={css.text}>
+                    Чтобы отправить сообщение нажмите &quot;Enter&quot;. Для переноса строки нажмите &quot;Enter + Shift&quot;
+                </p>
                 <div className={css.flex}>
-                    <Tooltip content="Додати зображення">
-                        <button className={css.file} type="button">
-                            <AttachFileIcon />
-                        </button>
-                    </Tooltip>
                     <Tooltip content="Надіслати повідомлення">
                         <button className={css.send} type="button" onClick={submit}>
                             <SendIcon />

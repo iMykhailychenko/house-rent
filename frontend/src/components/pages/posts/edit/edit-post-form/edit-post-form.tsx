@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 
 import Sync from '@mui/icons-material/Sync';
+import clsx from 'clsx';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 
@@ -264,7 +265,7 @@ const EditPostForm = (): JSX.Element => {
                 />
             </FormSegment>
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={css.flex}>
+            <div className={clsx(css.flex, css.end)}>
                 <Button onClick={resetForm} secondary disabled={!formik.dirty}>
                     Відновити
                 </Button>

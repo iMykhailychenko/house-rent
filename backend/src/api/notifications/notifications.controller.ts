@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, Param, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/shared/guards/auth.guards';
 
 import { User } from '../../shared/decorators/users.decorator';
+import { AuthGuard } from '../../shared/guards/auth.guards';
 import { Pagination } from '../../shared/interfaces/interface';
 
 import { NotificationsEntity } from './entities/notifications.entity';

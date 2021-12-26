@@ -11,7 +11,7 @@ import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useRole } from '../../../../hooks/role.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
-import { createChatThunk } from '../../../../state/entities/chats/chats.thunk';
+import { createChatThunk } from '../../../../state/entities/chats/thunks/create-chat.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserRatingSelector } from '../../../../state/entities/rating/rating.selector';
 import { canRateThunk } from '../../../../state/entities/rating/rating.thunk';
@@ -92,7 +92,7 @@ const UserBanner = (): JSX.Element => {
                     className={css.avatar}
                     firstName={userData.firstName}
                     lastName={userData.lastName}
-                    diameter={window?.innerWidth > 768 ? 25 : 20}
+                    diameter={30}
                 />
             </div>
 

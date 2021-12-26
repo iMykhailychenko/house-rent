@@ -1,5 +1,7 @@
 import { createParamDecorator, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
 import { validate } from 'class-validator';
+
+import { SearchPostDto } from '../../api/posts/dto/search-post.dto';
 import {
     City,
     DISTRICT_FILTERS,
@@ -7,9 +9,7 @@ import {
     HOUSE_TYPE_FILTERS,
     PRICE_FILTERS,
     ROOM_FILTERS,
-} from 'src/api/posts/posts.interface';
-
-import { SearchPostDto } from '../../api/posts/dto/search-post.dto';
+} from '../../api/posts/posts.interface';
 import { AuthRequest } from '../../api/users/users.interface';
 
 export const SearchPost = createParamDecorator(async (data: unknown, ctx: ExecutionContext) => {

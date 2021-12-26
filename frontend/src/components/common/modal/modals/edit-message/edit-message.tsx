@@ -2,9 +2,9 @@ import React, { ChangeEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useChatSocket } from '../../../../../hooks/chat.hook';
+import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { Message } from '../../../../../state/entities/chats/chats.interface';
-import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
+import { updateMessageThunk } from '../../../../../state/entities/chats/thunks/update-message.thunk';
 import Button from '../../../button/button';
 import Textarea from '../../../textarea/textarea';
 import StickyModal from '../../components/sticky-modal/sticky-modal';
@@ -17,24 +17,26 @@ interface IProps {
 }
 
 const EditMessage = ({ message }: IProps): JSX.Element => {
-    const socket = useChatSocket();
-    const profile = useProfileInfoSelector();
+    const dispatch = useAppDispatch();
 
     const router = useRouter();
     const chatId = Number(router.query.chatId);
+    const [loading, setLoading] = useState(false);
 
     const [text, setText] = useState<string>(message.text);
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => setText(event.target.value);
 
-    const handleSubmit = (): void => {
+    const handleSubmit = async (): Promise<void> => {
         if (message.text.trim() !== text.trim()) {
-            socket?.update({
-                chatId,
-                id: message.id,
-                message: text,
-                uploads: [],
-                userId: profile.data.id,
-            });
+            setLoading(true);
+            await dispatch(
+                updateMessageThunk({
+                    chatId,
+                    id: message.id,
+                    message: text,
+                    uploads: [],
+                }),
+            );
         }
 
         modal.close();
@@ -45,10 +47,10 @@ const EditMessage = ({ message }: IProps): JSX.Element => {
             title="Редагувати повідомлення"
             footer={
                 <>
-                    <Button secondary onClick={modal.close}>
+                    <Button loading={loading} secondary onClick={modal.close}>
                         Скасувати
                     </Button>
-                    <Button primary onClick={handleSubmit}>
+                    <Button loading={loading} primary onClick={handleSubmit}>
                         Змінити
                     </Button>
                 </>

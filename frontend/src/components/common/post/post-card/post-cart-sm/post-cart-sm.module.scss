@@ -10,10 +10,19 @@
     width: var(--card-width);
     height: auto;
     padding: 0 0 2rem;
+    margin: 0 auto;
 
     @media screen and (min-width: 768px) {
-        --card-width: 24rem;
+        --card-width: 22rem;
         --image-wrp-diameter: 5rem;
+    }
+
+    @media screen and (min-width: 1024px) {
+        --card-width: 24rem;
+    }
+
+    @media screen and (min-width: 1200px) {
+        --card-width: 23rem;
     }
 
     .tooltip {

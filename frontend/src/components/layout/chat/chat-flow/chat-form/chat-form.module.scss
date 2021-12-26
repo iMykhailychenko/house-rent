@@ -10,13 +10,52 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
-        padding: 0 1rem;
+        width: 3.3rem;
 
-        p {
-            color: var(--gray-7);
-            font-size: 1.1rem;
-            text-align: left;
+        @media screen and (min-width: 768px) {
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .text {
+            display: none;
+
+            @media screen and (min-width: 768px) {
+                display: block;
+                color: var(--gray-7);
+                font-size: 1.1rem;
+                text-align: left;
+            }
+        }
+    }
+
+    .inputWrp {
+        width: calc(100% - 3.3rem);
+        margin: 0;
+        border: none;
+
+        @media screen and (min-width: 768px) {
+            width: 100%;
+        }
+
+        .input {
+            margin: 0;
+            padding: 1rem 1rem 0.4rem 1rem;
+            min-height: 4rem;
+            max-height: 50rem;
+            border-radius: 0;
+            border: none;
+
+            @media screen and (min-width: 768px) {
+                min-height: 5rem;
+                padding: 1.5rem 1rem 0.5rem;
+                border-bottom: 0.1rem solid var(--gray-4);
+            }
+
+            &:hover {
+                border: none;
+                border-bottom: 0.1rem solid var(--gray-4);
+            }
         }
     }
 
@@ -36,29 +75,15 @@
         }
     }
 
-    .file {
+    .send {
         svg {
-            transform: rotate(40deg);
+            margin-bottom: 0.4rem;
         }
     }
 
-    .inputWrp {
-        width: 100%;
-        margin: 0;
-
-        .input {
-            margin: 0;
-            padding: 1.5rem 1rem 0.5rem;
-            min-height: 6rem;
-            max-height: 50rem;
-            border-radius: 0;
-            border: none;
-            border-bottom: 0.1rem solid var(--gray-4);
-
-            &:hover {
-                border: none;
-                border-bottom: 0.1rem solid var(--gray-4);
-            }
+    .file {
+        svg {
+            transform: rotate(40deg);
         }
     }
 }

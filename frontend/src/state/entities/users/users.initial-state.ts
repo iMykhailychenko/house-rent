@@ -16,5 +16,6 @@ export const usersInitValue: IUser = {
 
 export const usersInitialState: IUserState = {
     status: 'idle',
+    error: null,
     data: usersInitValue,
 };

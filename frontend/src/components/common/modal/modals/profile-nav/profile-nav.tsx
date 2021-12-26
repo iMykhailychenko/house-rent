@@ -7,7 +7,7 @@ import useAuth from '../../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import useTrans from '../../../../../hooks/trans.hook';
 import { useMessageCountSelector } from '../../../../../state/entities/chats/chats.selector';
-import { messagesCountThunk } from '../../../../../state/entities/chats/chats.thunk';
+import { messagesCountThunk } from '../../../../../state/entities/chats/thunks/messages-count.thunk';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../utils/routes';
 import StickyModal from '../../components/sticky-modal/sticky-modal';

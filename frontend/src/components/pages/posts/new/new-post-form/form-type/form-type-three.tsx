@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Sync from '@mui/icons-material/Sync';
+import clsx from 'clsx';
 import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
@@ -37,13 +38,9 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
     const formik = useFormik<IStepThree>({
         initialValues,
         validationSchema: FormThreeSchema,
-        onReset: (_, { setValues }) => {
-            setValues(formThreeInitialState);
-        },
         onSubmit: values => {
             onSubmit(values);
             dispatch(updateFormType(FORM_TYPE.FOUR));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
     });
 
@@ -82,11 +79,14 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
         onSubmit(formik.values);
         dispatch(updateFormType(FORM_TYPE.TWO));
     };
-    const resetForm = () => {
+    const resetForm = (): void => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        formik.resetForm();
+        formik.setValues(formThreeInitialState);
     };
-    const submitForm = () => formik.submitForm();
+    const submitForm = async (): Promise<void> => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        await formik.submitForm();
+    };
 
     return (
         <form action="#" method="post" className={css.form}>
@@ -136,7 +136,7 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
             </FormSegment>
 
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={css.flex}>
+            <div className={clsx(css.flex, css.end)}>
                 <Button className={css.arrow} onClick={goBack} secondary>
                     <ArrowBack />
                 </Button>

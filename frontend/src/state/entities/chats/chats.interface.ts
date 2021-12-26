@@ -54,7 +54,6 @@ export interface SocketMessagesPayload {
 export interface UpdateMessagesPayload {
     id: number;
     chatId: number;
-    userId: number;
     message: string;
     uploads: string[];
 }

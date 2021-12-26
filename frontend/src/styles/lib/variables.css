@@ -13,11 +13,11 @@
     --footer-height: 50rem;
     --filters-sidebar-width: 42rem;
 
-    --chat-sidebar-width: 30rem;
+    --chat-sidebar-width: 7rem;
+}
 
-    --media-1: 320px;
-    --media-2: 540px;
-    --media-3: 768px;
-    --media-4: 1024px;
-    --media-5: 1200px;
+@media screen and (min-width: 1024px) {
+    :root {
+        --chat-sidebar-width: 30rem;
+    }
 }

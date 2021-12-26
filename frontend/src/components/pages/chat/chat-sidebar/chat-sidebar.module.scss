@@ -6,10 +6,16 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     padding: 1rem;
     border-radius: 0.8rem;
     text-align: left;
+    background: var(--gray-2);
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 1rem;
+        background: var(--white);
+    }
 
     &:hover {
         background: var(--gray-2);
@@ -24,8 +30,21 @@
         border: 0.1rem solid var(--primary);
     }
 
+    .avatar {
+        margin: 0;
+
+        @media screen and (min-width: 1024px) {
+            margin-right: 1rem;
+        }
+    }
+
     .inner {
-        width: calc(100% - var(--avatar) - 0.5rem);
+        display: none;
+
+        @media screen and (min-width: 1024px) {
+            display: block;
+            width: calc(100% - var(--avatar) - 0.5rem);
+        }
     }
 
     .title {

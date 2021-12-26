@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import clsx from 'clsx';
@@ -21,6 +21,13 @@ interface IProps {
 const PrivateLayout = ({ children }: IProps): JSX.Element => {
     const history = useRouter();
     const profileData = useProfileInfoSelector();
+    const navRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        if (navRef.current && history.pathname.includes(routes.favorite)) {
+            navRef.current.scrollTo({ left: 200, behavior: 'smooth' });
+        }
+    }, [history.pathname]);
 
     const redirectProfile = () => {
         history.push(routes.private);
@@ -52,7 +59,7 @@ const PrivateLayout = ({ children }: IProps): JSX.Element => {
                 </div>
             </Container>
             <Container className={css.root} size="md">
-                <nav className={css.nav}>
+                <nav ref={navRef} className={css.nav}>
                     <ul className={css.ul}>
                         <li>
                             <Link href={routes.private} shallow>

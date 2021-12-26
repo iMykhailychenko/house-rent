@@ -14,7 +14,7 @@ import useMinMaxPrice from '../../../../../../hooks/min-max-price.hook';
 import { useAppDispatch } from '../../../../../../hooks/redux.hook';
 import { useRole } from '../../../../../../hooks/role.hook';
 import useTrans from '../../../../../../hooks/trans.hook';
-import { createChatThunk } from '../../../../../../state/entities/chats/chats.thunk';
+import { createChatThunk } from '../../../../../../state/entities/chats/thunks/create-chat.thunk';
 import { IPost } from '../../../../../../state/entities/posts/posts.interface';
 import { useProfileInfoSelector } from '../../../../../../state/entities/profile/profile.selector';
 import routes from '../../../../../../utils/routes';

@@ -7,7 +7,7 @@ import uiConfig from '../../../../../config/ui.config';
 import { useChatSocket } from '../../../../../hooks/chat.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { useChatListSelector } from '../../../../../state/entities/chats/chats.selector';
-import { chatListPaginationThunk, chatListThunk } from '../../../../../state/entities/chats/chats.thunk';
+import { chatListPaginationThunk, chatListThunk } from '../../../../../state/entities/chats/thunks/chat-list.thunk';
 import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Badge from '../../../../common/badge/badge';
@@ -54,6 +54,7 @@ const ChatListItem = (): JSX.Element => {
                     <Badge number={data.unreadMessages} />
                     <UserAvatar
                         diameter={5}
+                        className={css.avatar}
                         src={data.user.avatar}
                         firstName={data.user.firstName}
                         lastName={data.user.lastName}
@@ -69,7 +70,7 @@ const ChatListItem = (): JSX.Element => {
 
             {!!chatListState.totalPages && chatListState.currentPage !== chatListState.totalPages && (
                 <button onClick={loadMore} className={css.more} type="button">
-                    Завантажити більше
+                    Більше
                 </button>
             )}
         </>

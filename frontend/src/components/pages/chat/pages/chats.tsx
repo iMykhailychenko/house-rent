@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useChatListSelector } from '../../../../state/entities/chats/chats.selector';
-import { chatListThunk } from '../../../../state/entities/chats/chats.thunk';
+import { chatListThunk } from '../../../../state/entities/chats/thunks/chat-list.thunk';
 
 interface IProps {
     children: ReactNode;

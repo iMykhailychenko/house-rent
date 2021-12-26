@@ -1,5 +1,5 @@
 :global(.black) {
-    .root {
+    :global(.MuiButton-root).root {
         --secondary: #13132b;
 
         :global(.MuiCheckbox-root) {
@@ -12,7 +12,7 @@
     }
 }
 
-.root {
+:global(.MuiButton-root).root {
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -53,7 +53,7 @@
     }
 }
 
-.error {
+:global(.MuiButton-root).error {
     color: var(--error);
     border-color: var(--error);
 
@@ -66,7 +66,7 @@
     }
 }
 
-.active {
+:global(.MuiButton-root).active {
     background: var(--secondary);
     border-color: var(--primary);
 

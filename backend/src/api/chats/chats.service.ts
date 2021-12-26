@@ -188,15 +188,34 @@ export class ChatsService {
         return await this.chatRepository.findOne(chatId);
     }
 
-    async updateMessage({ id, uploads, message: text, userId }: UpdateMessageDto): Promise<MessageEntity> {
+    async updateMessage(userId: number, { id, uploads, message: text }: UpdateMessageDto): Promise<MessageEntity> {
         const message = await this.messageRepository.findOne(id, { relations: ['author'] });
-        message.text = text;
-        message.isNew = false;
-        message.updatedAt = new Date();
-        if (uploads.length) message.uploads = uploads;
 
-        if (userId !== message.author.id) throw new WsException('Forbidden');
+        if (userId !== message.author.id) {
+            throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        }
+
+        message.text = text;
+        message.updatedAt = new Date();
+
+        if (uploads.length) {
+            message.uploads = uploads;
+        }
 
         return await this.messageRepository.save(message);
+    }
+
+    async deleteMessage(userId: number, messageId: number): Promise<void> {
+        const message = await this.messageRepository.findOne(messageId, { relations: ['author'] });
+
+        if (!message) {
+            throw new HttpException('Message not found', HttpStatus.NOT_FOUND);
+        }
+
+        if (userId !== message.author.id) {
+            throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        }
+
+        await this.messageRepository.delete(message.id);
     }
 }
