@@ -4,6 +4,7 @@ import GetStaticProfile from '../../components/common/auth/get-static-profile/ge
 import RootLayout from '../../components/layout/root-layout/root-layout';
 import Meta from '../../components/meta/meta';
 import NewPostContainer from '../../components/pages/posts/new/new-post-container/new-post-container';
+import routes from '../../utils/routes';
 
 const NewPostPage = (): JSX.Element => {
     useEffect(() => {
@@ -14,7 +15,7 @@ const NewPostPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout withFooter={false}>
+            <RootLayout href={routes.home} withFooter={false}>
                 <NewPostContainer />
             </RootLayout>
         </GetStaticProfile>

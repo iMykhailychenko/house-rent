@@ -15,13 +15,21 @@ interface IProps {
     withFooter?: boolean;
     withTheme?: boolean;
     className?: string;
+    href?: string;
     children: JSX.Element[] | JSX.Element;
 }
 
-const RootLayout = ({ children, className, withTheme = true, withHeader = true, withFooter = true }: IProps): JSX.Element => {
+const RootLayout = ({
+    href,
+    children,
+    className,
+    withTheme = true,
+    withHeader = true,
+    withFooter = true,
+}: IProps): JSX.Element => {
     return (
         <>
-            {withHeader && <AppHeader withTheme={withTheme} />}
+            {withHeader && <AppHeader href={href} withTheme={withTheme} />}
             <BannerComponent />
             <main className={clsx(css.root, className)}>{children}</main>
             {withFooter && <AppFooter />}

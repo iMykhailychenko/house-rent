@@ -10,6 +10,17 @@
     height: auto;
     padding: 0 0 3rem;
 
+    &:global(.appear-active) {
+        transform: translateY(5rem);
+        opacity: 0;
+    }
+
+    &:global(.enter-done) {
+        transition: 0.3s ease-in-out;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     @media screen and (min-width: 768px) {
         --card-width: 34rem;
         padding: 0 0 8rem;

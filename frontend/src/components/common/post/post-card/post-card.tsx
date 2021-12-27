@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CSSTransition } from 'react-transition-group';
+
 import useConfig from '../../../../hooks/config.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 
@@ -20,7 +22,11 @@ const PostCard = ({ post }: IProps): JSX.Element => {
         lg: <PostCardLg post={post} />,
     };
 
-    return postCardMap[config.cardSize || 'sm'];
+    return (
+        <CSSTransition in timeout={300} appear>
+            {postCardMap[config.cardSize || 'sm']}
+        </CSSTransition>
+    );
 };
 
 export default PostCard;

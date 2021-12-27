@@ -7,6 +7,17 @@
     padding: 2rem 0;
     border-top: 0.1rem solid var(--gray-5);
 
+    &:global(.appear-active) {
+        transform: translateY(5rem);
+        opacity: 0;
+    }
+
+    &:global(.enter-done) {
+        transition: 0.3s ease-in-out;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     &:nth-last-of-type(1) {
         border-bottom: 0.1rem solid var(--gray-5);
     }

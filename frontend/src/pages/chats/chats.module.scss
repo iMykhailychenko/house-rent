@@ -1,6 +1,7 @@
 .root {
-    height: calc(var(--100vh, 100vh) - var(--header-height));
+    height: calc(var(--100vh, 100vh) - var(--header-height) - var(--banner-height));
     margin: 0;
+    padding-top: 1rem;
     overflow: hidden;
 
     @media screen and (min-width: 768px) {

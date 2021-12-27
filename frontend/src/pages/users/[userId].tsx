@@ -23,6 +23,7 @@ import { getRatingThunk } from '../../state/entities/rating/rating.thunk';
 import { userInfoThunk } from '../../state/entities/users/users.thunk';
 import { wrapper } from '../../state/store';
 import api from '../../utils/interceptors';
+import routes from '../../utils/routes';
 
 const UserProfilePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ const UserProfilePage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout>
+            <RootLayout href={routes.home}>
                 <Container size="lg">
                     <UserBanner />
                 </Container>

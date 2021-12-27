@@ -8,6 +8,7 @@ import Meta from '../../components/meta/meta';
 import ChatBanner from '../../components/pages/chat/chat-banner/chat-banner';
 import ChatLayout from '../../components/pages/chat/chat-layout/chat-layout';
 import ChatListEffect from '../../components/pages/chat/pages/chats';
+import routes from '../../utils/routes';
 
 import css from './chats.module.scss';
 
@@ -16,7 +17,7 @@ const ChatsPage = (): JSX.Element => {
         <AuthRedirect>
             <GetStaticProfile>
                 <Meta />
-                <RootLayout withFooter={false} className={css.root}>
+                <RootLayout href={routes.home} withFooter={false} className={css.root}>
                     <ChatListEffect>
                         <Container size="md" className={css.container}>
                             <ChatLayout isRootPage disabled>

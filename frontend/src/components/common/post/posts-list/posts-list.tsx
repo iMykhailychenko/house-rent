@@ -3,17 +3,14 @@ import React, { useRef, useState } from 'react';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import clsx from 'clsx';
 
-import uiConfig from '../../../../config/ui.config';
 import useConfig from '../../../../hooks/config.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { usePostListSelector } from '../../../../state/entities/posts/posts.selector';
 import Container from '../../../layout/container/container';
-import CardSizeSwitcher from '../../card-size-switcher/card-size-switcher';
 import StickyModal from '../../modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../modal/modal';
 import EmptyPostsList from '../../not-found/emprty-posts-list/emprty-posts-list';
 import Pagination from '../../pagination/pagination';
-import PostsSkeleton from '../../skeletons/posts-sleleton/posts-skeleton';
 import PostCard from '../post-card/post-card';
 
 import css from './posts-list.module.scss';
@@ -64,14 +61,11 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
                 <div className={css.flex}>
                     <div className={css.wrp}>
                         <div ref={ref} className={clsx(css.inner, postsState.data.length ? css[config.cardSize] : css.lg)}>
-                            {loading ? (
-                                <PostsSkeleton amount={uiConfig.postsPerPage} />
-                            ) : postsState.data.length ? (
+                            {loading ? null : postsState.data.length ? (
                                 postsState.data.map(item => <PostCard key={item.id} post={item} />)
                             ) : (
                                 <EmptyPostsList />
                             )}
-                            {loadingMore && <PostsSkeleton amount={Math.ceil(uiConfig.postsPerPage / 2)} />}
                         </div>
                         <Pagination
                             total={postsState.totalPages}

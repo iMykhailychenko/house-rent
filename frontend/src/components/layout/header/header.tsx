@@ -20,15 +20,17 @@ import AppDrawer from '../app-drawer/app-drawer';
 import Container from '../container/container';
 
 import HeaderAuth from './header-auth/header-auth';
+import { HeaderBackBtn } from './header-back-btn/header-back-btn';
 import HeaderLanguage from './header-language/header-language';
 import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
 
 interface IProps {
     withTheme?: boolean;
+    href?: string;
 }
 
-const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
+const AppHeader = ({ withTheme = true, href }: IProps): JSX.Element => {
     const { token } = useAuth();
     const history = useRouter();
     const chatId = +Number(history.query.chatId);
@@ -84,6 +86,7 @@ const AppHeader = ({ withTheme = true }: IProps): JSX.Element => {
                     </div>
                 </Container>
             </header>
+            <HeaderBackBtn href={href} />
             <AppDrawer open={drawer} onClose={handleDrawerClose} />
         </>
     );

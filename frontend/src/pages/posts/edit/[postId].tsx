@@ -5,13 +5,14 @@ import GetStaticProfile from '../../../components/common/auth/get-static-profile
 import RootLayout from '../../../components/layout/root-layout/root-layout';
 import Meta from '../../../components/meta/meta';
 import EditPost from '../../../components/pages/posts/edit/edit-post';
+import routes from '../../../utils/routes';
 
 const EditPostPage = (): JSX.Element => {
     return (
         <AuthRedirect>
             <GetStaticProfile>
                 <Meta />
-                <RootLayout withFooter={false}>
+                <RootLayout href={routes.myPosts} withFooter={false}>
                     <EditPost />
                 </RootLayout>
             </GetStaticProfile>

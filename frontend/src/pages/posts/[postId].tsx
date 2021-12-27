@@ -15,12 +15,13 @@ import { IPost } from '../../state/entities/posts/posts.interface';
 import { singlePostThunk } from '../../state/entities/posts/thunks/single-post.thunk';
 import { wrapper } from '../../state/store';
 import api from '../../utils/interceptors';
+import routes from '../../utils/routes';
 
 const SinglePostPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout>
+            <RootLayout href={routes.home}>
                 <SinglePostComponent />
             </RootLayout>
         </GetStaticProfile>

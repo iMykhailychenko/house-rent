@@ -39,11 +39,15 @@
     }
 
     .inner {
-        display: none;
+        display: block;
+        width: calc(100% - var(--avatar) - 0.5rem);
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
 
         @media screen and (min-width: 1024px) {
             display: block;
-            width: calc(100% - var(--avatar) - 0.5rem);
         }
     }
 
