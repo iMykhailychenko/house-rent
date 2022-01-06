@@ -47,7 +47,7 @@
         padding: 0.3rem 1rem;
         border-radius: 0.6rem;
         font-size: 1.5rem;
-        background: var(--white);
+        background: var(--true-white);
         color: var(--success);
     }
 
@@ -63,7 +63,7 @@
             width: 1rem;
             border-radius: 50%;
             background: var(--success);
-            border: 0.2rem solid var(--white);
+            border: 0.2rem solid var(--true-white);
         }
     }
 
@@ -112,7 +112,7 @@
             padding: 1rem 1.5rem;
             border-radius: 0.6rem;
             color: var(--primary);
-            background: var(--white);
+            background: var(--true-white);
             font-weight: 500;
             font-size: 1.2rem;
             border: 0.1rem dashed var(--primary);

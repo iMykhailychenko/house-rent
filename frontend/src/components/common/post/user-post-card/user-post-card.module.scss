@@ -7,7 +7,17 @@
     border-radius: 0.6rem;
     border: 0.1rem solid var(--gray-3);
     box-shadow: var(--box-shadow-1);
-    transition: 0.3s ease-in-out;
+
+    &:global(.appear-active) {
+        transform: translateY(5rem);
+        opacity: 0;
+    }
+
+    &:global(.enter-done) {
+        transition: 0.3s ease-in-out;
+        transform: translateY(0);
+        opacity: 1;
+    }
 
     --card-width: 40rem;
     --image-wrp-diameter: 10rem;

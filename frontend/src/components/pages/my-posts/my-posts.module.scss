@@ -41,6 +41,18 @@
             grid-gap: 2rem;
             --card-width: 30rem;
         }
+
+        .spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 12rem;
+
+            img {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
     }
 
     .card {

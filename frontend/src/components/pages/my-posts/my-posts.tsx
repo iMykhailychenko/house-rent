@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import uiConfig from '../../../config/ui.config';
 import { useAppDispatch } from '../../../hooks/redux.hook';
 import { POST_STATUS } from '../../../state/entities/posts/posts.interface';
 import { usePostListSelector } from '../../../state/entities/posts/posts.selector';
@@ -13,7 +12,6 @@ import {
 import EmptyPostsList from '../../common/not-found/emprty-posts-list/emprty-posts-list';
 import Pagination from '../../common/pagination/pagination';
 import UserPostCard from '../../common/post/user-post-card/user-post-card';
-import PostsMdSkeleton from '../../common/skeletons/posts-sleleton/components/posts-md-skeleton';
 
 import css from './my-posts.module.scss';
 
@@ -36,7 +34,6 @@ const MyPostsList = (): JSX.Element => {
     const loadMore = (page: number): void => {
         const top = (ref.current?.offsetTop || 0) + (ref.current?.offsetHeight || 0) - 300;
         window.scrollTo({ top, behavior: 'smooth' });
-
         setLoadingMore(true);
         dispatch(personalPostsListPaginationThunk({ status, page })).finally(() => {
             setLoadingMore(false);
@@ -48,16 +45,18 @@ const MyPostsList = (): JSX.Element => {
             {!!postsState.totalItems && <h2 className={css.title}>Всього знайдено оголошень: {postsState.totalItems}</h2>}
 
             {loading ? (
-                <div className={css.inner}>
-                    <PostsMdSkeleton className={css.card} amount={uiConfig.postsPerPage} />
-                </div>
+                <div className={css.inner} />
             ) : postsState.data.length ? (
                 <div className={css.inner}>
-                    {postsState.data.map(item => (
-                        <UserPostCard key={item.id} post={item} />
+                    {postsState.data.map((item, index) => (
+                        <UserPostCard index={index} key={item.id} post={item} />
                     ))}
 
-                    {loadingMore && <PostsMdSkeleton className={css.card} amount={Math.ceil(uiConfig.postsPerPage / 2)} />}
+                    {loadingMore && (
+                        <div className={css.spinner}>
+                            <img src="/spinner.gif" alt="" />
+                        </div>
+                    )}
                 </div>
             ) : (
                 <EmptyPostsList />

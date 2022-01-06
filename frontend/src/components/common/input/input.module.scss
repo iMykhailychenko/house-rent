@@ -79,7 +79,7 @@
     padding-right: 6rem;
 }
 
-.button {
+:global(.MuiButton-root).button {
     position: absolute;
     top: 0.3rem;
     right: 0.3rem;

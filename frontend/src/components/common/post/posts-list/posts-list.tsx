@@ -61,10 +61,20 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
                 <div className={css.flex}>
                     <div className={css.wrp}>
                         <div ref={ref} className={clsx(css.inner, postsState.data.length ? css[config.cardSize] : css.lg)}>
-                            {loading ? null : postsState.data.length ? (
-                                postsState.data.map(item => <PostCard key={item.id} post={item} />)
+                            {loading ? (
+                                <div className={css.spinner}>
+                                    <img src="/spinner.gif" alt="" />
+                                </div>
+                            ) : postsState.data.length ? (
+                                postsState.data.map((item, index) => <PostCard index={index} key={item.id} post={item} />)
                             ) : (
                                 <EmptyPostsList />
+                            )}
+
+                            {loadingMore && (
+                                <div className={css.spinner}>
+                                    <img src="/spinner.gif" alt="" />
+                                </div>
                             )}
                         </div>
                         <Pagination

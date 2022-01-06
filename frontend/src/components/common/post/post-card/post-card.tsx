@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 
+import uiConfig from '../../../../config/ui.config';
 import useConfig from '../../../../hooks/config.hook';
 import { IPost } from '../../../../state/entities/posts/posts.interface';
 
@@ -11,10 +12,12 @@ import PostCardSm from './post-cart-sm/post-cart-sm';
 
 interface IProps {
     post: IPost;
+    index?: number;
 }
 
-const PostCard = ({ post }: IProps): JSX.Element => {
+const PostCard = ({ post, index = 0 }: IProps): JSX.Element => {
     const [config] = useConfig();
+    const deltaIndex = (index % uiConfig.postsPerPage) + 1;
 
     const postCardMap = {
         sm: <PostCardSm post={post} />,
@@ -23,7 +26,7 @@ const PostCard = ({ post }: IProps): JSX.Element => {
     };
 
     return (
-        <CSSTransition in timeout={300} appear>
+        <CSSTransition in timeout={100 + deltaIndex * 100} appear>
             {postCardMap[config.cardSize || 'sm']}
         </CSSTransition>
     );

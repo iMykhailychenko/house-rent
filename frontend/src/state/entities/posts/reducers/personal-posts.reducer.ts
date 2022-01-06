@@ -19,10 +19,8 @@ export const personalPostsReducer = (builder: ActionReducerMapBuilder<IPostState
     });
 
     // PERSONAL POSTS PAGINATION THUNK
-    builder.addCase(personalPostsListPaginationThunk.pending, (state: IPostState) => {
-        state.list.status = 'loading';
-    });
     builder.addCase(personalPostsListPaginationThunk.fulfilled, (state: IPostState, action: PayloadAction<Pagination<IPost>>) => {
+        console.log(action.payload);
         state.list = { ...action.payload, data: [...state.list.data, ...action.payload.data], status: 'success', error: null };
     });
     builder.addCase(personalPostsListPaginationThunk.rejected, (state: IPostState, action: PayloadAction<unknown>) => {
