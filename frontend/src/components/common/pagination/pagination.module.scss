@@ -43,7 +43,7 @@
     }
 }
 
-.more {
+:global(.MuiButton-root).more {
     display: flex;
     align-items: center;
     margin: 3rem auto 0;

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Sync from '@mui/icons-material/Sync';
-import clsx from 'clsx';
 import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
@@ -136,7 +135,7 @@ const FormTypeThree = ({ initialValues, onSubmit, allData }: IProps): JSX.Elemen
             </FormSegment>
 
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={clsx(css.flex, css.end)}>
+            <div className={css.flex}>
                 <Button className={css.arrow} onClick={goBack} secondary>
                     <ArrowBack />
                 </Button>

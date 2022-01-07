@@ -17,7 +17,7 @@
 
     &:global(.enter-done) {
         transition: 0.3s ease-in-out;
-        transform: translateY(0);
+        transform: unset;
         opacity: 1;
     }
 
@@ -63,8 +63,8 @@
 
     .img {
         display: block;
-        height: calc(var(--card-width) / 1.8);
-        min-height: calc(var(--card-width) / 1.8);
+        height: var(--card-width);
+        min-height: var(--card-width);
         width: 100%;
         object-fit: cover;
         border-radius: 0.6rem;
@@ -75,8 +75,8 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        height: calc(var(--card-width) / 1.8);
-        min-height: calc(var(--card-width) / 1.8);
+        height: var(--card-width);
+        min-height: var(--card-width);
         width: 100%;
         padding: 2rem;
         border-radius: 0.6rem;

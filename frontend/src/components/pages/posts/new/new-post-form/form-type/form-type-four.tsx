@@ -107,7 +107,7 @@ const FormTypeFour = ({ value }: IProps): JSX.Element => {
                     )
                 )}
 
-                <div className={clsx(css.flex, css.end)}>
+                <div className={css.flex}>
                     {!file && (
                         <Button className={css.arrow} onClick={goBack} secondary loading={loading}>
                             <ArrowBack />

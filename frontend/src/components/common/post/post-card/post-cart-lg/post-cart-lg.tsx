@@ -44,7 +44,7 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
             </div>
 
             <div className={css.content}>
-                <div className={css.flex}>
+                <div className={css.column}>
                     {post.image ? (
                         <FullScreenImg className={css.img} src={post.image} />
                     ) : (
@@ -58,9 +58,7 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
 
                     <Link href={routes.posts.single(post.id)}>
                         <a className={css.link}>
-                            <Tooltip className={css.tooltip} content={post.title}>
-                                <h3>{post.title}</h3>
-                            </Tooltip>
+                            <h3>{post.title}</h3>
                             <p className={css.description}>{post.description}</p>
                             <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
                         </a>

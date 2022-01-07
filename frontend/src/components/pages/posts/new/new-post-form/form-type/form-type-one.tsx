@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import clsx from 'clsx';
 import { useFormik } from 'formik';
 
 import useFormikError from '../../../../../../hooks/formik-error.hook';
@@ -99,7 +98,7 @@ const FormTypeOne = ({ initialValues, onSubmit }: IProps): JSX.Element => {
             </FormSegment>
 
             <FormSeparator>* обовязкові для заповнення поля</FormSeparator>
-            <div className={clsx(css.flex, css.end)}>
+            <div className={css.flex}>
                 <Button onClick={resetForm} secondary>
                     Очистичи
                 </Button>
