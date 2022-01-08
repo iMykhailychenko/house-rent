@@ -1,11 +1,13 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
+import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
 import SendIcon from '@mui/icons-material/Send';
 import { useRouter } from 'next/router';
 
 import { useChatSocket } from '../../../../../hooks/chat.hook';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import { chunkSubstr } from '../../../../../utils/helpers/string.helper';
+import chatFontSize from '../../../../common/modal/modals/chat-font-size/chat-font-size';
 import Textarea from '../../../../common/textarea/textarea';
 import Tooltip from '../../../../common/tooltip/tooltip';
 
@@ -74,6 +76,12 @@ const ChatForm = (): JSX.Element => {
                     Чтобы отправить сообщение нажмите &quot;Enter&quot;. Для переноса строки нажмите &quot;Enter + Shift&quot;
                 </p>
                 <div className={css.flex}>
+                    <Tooltip content="Налаштування розміру тексту">
+                        <button className={css.size} type="button" onClick={chatFontSize}>
+                            <FontDownloadOutlinedIcon />
+                        </button>
+                    </Tooltip>
+
                     <Tooltip content="Надіслати повідомлення">
                         <button className={css.send} type="button" onClick={submit}>
                             <SendIcon />

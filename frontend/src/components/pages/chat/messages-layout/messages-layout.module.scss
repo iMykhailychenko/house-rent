@@ -10,10 +10,10 @@
 .flex {
     display: flex;
     align-items: flex-start;
-    margin: 3rem 0 0rem;
+    margin: 3rem 0 0;
 
     .user {
-        margin-top: 0.7rem;
+        margin-top: 0.7em;
     }
 
     &:hover {
@@ -44,7 +44,6 @@
     .text {
         width: 100%;
         color: var(--gray-9);
-        font-size: 1.3rem;
         text-align: left;
         word-wrap: break-word;
     }
@@ -53,9 +52,8 @@
         display: flex;
         align-items: center;
         flex-direction: row-reverse;
-        margin-top: 0.2rem;
+        margin-top: 0.2em;
         color: var(--gray-6);
-        font-size: 1.1rem;
         line-height: 1;
 
         .done {

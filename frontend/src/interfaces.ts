@@ -45,6 +45,7 @@ export interface ILocales {
 
 export interface IConfig {
     cardSize: 'sm' | 'md' | 'lg';
+    chatFontSize: number;
 }
 
 export enum UserRole {

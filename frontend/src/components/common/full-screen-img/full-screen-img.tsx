@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent, useRef } from 'react';
 
-import Close from '@mui/icons-material/Close';
 import clsx from 'clsx';
 
+import FullScreenImgModal from './full-screen-img-modal';
 import css from './full-screen-img.module.scss';
 
 interface IProps {
@@ -14,27 +14,36 @@ interface IProps {
 }
 
 const FullScreenImg = ({ className, src, height, width, alt }: IProps): JSX.Element => {
+    const ref = useRef<HTMLImageElement>(null);
+
     const [fullscreen, setFullscreen] = useState(false);
     const open = (): void => setFullscreen(true);
-    const close = (): void => setFullscreen(false);
+    const close = (): void => {
+        setFullscreen(false);
+        setTimeout(() => {
+            ref.current?.focus();
+        }, 100);
+    };
+
+    const keyboard = (event: KeyboardEvent<HTMLImageElement>): void => {
+        if (event.code === 'Enter') {
+            setFullscreen(true);
+        }
+    };
+
     return (
         <>
-            {fullscreen && (
-                <div className={css.open}>
-                    <button className={css.close} type="button">
-                        <Close />
-                    </button>
-                    <img src={src} alt={alt} onClick={close} aria-hidden="true" />
-                </div>
-            )}
+            {fullscreen && <FullScreenImgModal src={src} alt={alt} onClick={close} />}
             <img
+                ref={ref}
+                tabIndex={0}
                 className={clsx(css.base, className)}
                 src={src}
                 height={height}
                 width={width}
                 alt={alt}
                 onClick={open}
-                aria-hidden="true"
+                onKeyPress={keyboard}
             />
         </>
     );

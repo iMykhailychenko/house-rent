@@ -31,14 +31,18 @@
         flex-direction: column;
     }
 
-    .avatar {
+    .avatarCell {
         margin-right: 0;
-        font-size: 6rem;
-        pointer-events: none;
 
         @media screen and (min-width: 768px) {
             margin-right: 4rem;
         }
+    }
+
+    .avatar {
+        margin-right: 0;
+        font-size: 6rem;
+        cursor: zoom-in;
     }
 
     .offline,

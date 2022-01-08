@@ -1,7 +1,5 @@
 import { AsyncThunkPayloadCreator, createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
-import toastConfig from '../../../config/toast.cofig';
 import { Pagination } from '../../../interfaces';
 import { errorNotif } from '../../../utils/helpers/error-logger.helper';
 import { paginationEmitter } from '../../../utils/helpers/pagination.helper';
@@ -54,7 +52,6 @@ export const deleteNotificationByIdThunk = createAsyncThunk<void, number, AsyncT
         try {
             const { status } = await notificationsService.deleteById(payload);
             if (status < 200 || status >= 300) throw new Error();
-            toast.success('Ви успішно видалили повідомлення', toastConfig);
         } catch (error) {
             errorNotif(error);
             return rejectWithValue(formatSeverError(error));

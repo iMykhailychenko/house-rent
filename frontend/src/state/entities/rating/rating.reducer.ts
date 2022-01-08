@@ -4,7 +4,7 @@ import { ErrorState } from '../../interfaces/common';
 
 import { ratingInitialState } from './rating.initial-state';
 import { ICanRate, IRatingState, UserRating } from './rating.interface';
-import { canRateThunk, getRatingThunk } from './rating.thunk';
+import { canRateThunk, getRatingThunk, rateUserThunk } from './rating.thunk';
 
 const ratingSlice = createSlice({
     name: 'NOTIFICATIONS',
@@ -26,6 +26,10 @@ const ratingSlice = createSlice({
         builder.addCase(canRateThunk.fulfilled, (state: IRatingState, action: PayloadAction<ICanRate>) => {
             state.canRate = action.payload.canRate;
             state.isRated = action.payload.isRated;
+        });
+
+        builder.addCase(rateUserThunk.fulfilled, (state: IRatingState) => {
+            state.isRated = true;
         });
     },
 });

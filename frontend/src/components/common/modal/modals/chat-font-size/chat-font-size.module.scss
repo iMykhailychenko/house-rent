@@ -1,0 +1,20 @@
+.text {
+    min-height: 8rem;
+    margin: 1.5rem 0;
+    background: var(--secondary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.slider {
+    margin: 1.5rem 0;
+    font-size: 2rem;
+
+    :global(.MuiSlider-valueLabel) {
+        font-size: inherit;
+    }
+
+    svg {
+        font-size: 3rem;
+    }
+}

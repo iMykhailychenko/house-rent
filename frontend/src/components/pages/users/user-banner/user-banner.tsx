@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../../../hooks/redux.hook';
 import { useRole } from '../../../../hooks/role.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { UserRole } from '../../../../interfaces';
+import { chatListPaginationThunk } from '../../../../state/entities/chats/thunks/chat-list.thunk';
 import { createChatThunk } from '../../../../state/entities/chats/thunks/create-chat.thunk';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
 import { useUserRatingSelector } from '../../../../state/entities/rating/rating.selector';
@@ -19,6 +20,7 @@ import { useUserInfoSelector } from '../../../../state/entities/users/users.sele
 import { onlineStatus } from '../../../../utils/helpers/date.helper';
 import routes from '../../../../utils/routes';
 import Button from '../../../common/button/button';
+import FullScreenImgModal from '../../../common/full-screen-img/full-screen-img-modal';
 import changeUserRole from '../../../common/modal/modals/change-user-role/change-user-role';
 import loginModal from '../../../common/modal/modals/login-modal/login-modal';
 import rateUserModal from '../../../common/modal/modals/rate-user/rate-user';
@@ -49,6 +51,10 @@ const UserBanner = (): JSX.Element => {
 
     const history = useRouter();
     const userId = Number(history.query.userId);
+
+    const [fullscreen, setFullscreen] = useState(false);
+    const open = (): void => setFullscreen(true);
+    const close = (): void => setFullscreen(false);
 
     const userState = useUserInfoSelector();
     const profileState = useProfileInfoSelector();
@@ -86,7 +92,9 @@ const UserBanner = (): JSX.Element => {
 
     return (
         <div className={clsx(css.flex, css.box)}>
-            <div className={css.cell}>
+            {fullscreen && userData.avatar && <FullScreenImgModal onClick={close} src={userData.avatar} />}
+
+            <button type="button" className={clsx(css.cell, css.avatarCell)} onClick={open}>
                 <UserAvatar
                     src={userData.avatar}
                     className={css.avatar}
@@ -94,7 +102,7 @@ const UserBanner = (): JSX.Element => {
                     lastName={userData.lastName}
                     diameter={30}
                 />
-            </div>
+            </button>
 
             <div className={css.cell}>
                 <h2 className={css.title}>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import uiConfig from '../../../../../config/ui.config';
 import { useChatSocket } from '../../../../../hooks/chat.hook';
+import useConfig from '../../../../../hooks/config.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { useChatListSelector } from '../../../../../state/entities/chats/chats.selector';
 import { chatListPaginationThunk, chatListThunk } from '../../../../../state/entities/chats/thunks/chat-list.thunk';
@@ -22,6 +23,10 @@ const ChatListItem = (): JSX.Element => {
 
     const socket = useChatSocket();
     const chatListState = useChatListSelector();
+
+    const [config] = useConfig();
+    const userFontSize = config.chatFontSize + 'rem';
+    const messageFontSize = config.chatFontSize - 0.2 + 'rem';
 
     const handleOpenChat = (id: number) => () => {
         socket?.switchChat(id);
@@ -60,10 +65,12 @@ const ChatListItem = (): JSX.Element => {
                         lastName={data.user.lastName}
                     />
                     <div className={css.inner}>
-                        <h4 className={css.title}>
+                        <h4 className={css.title} style={{ fontSize: userFontSize }}>
                             {data.user.firstName} {data.user.lastName}
                         </h4>
-                        <p className={css.text}>{data?.lastMessage?.text ? cutString(data.lastMessage.text, 60) : '...'}</p>
+                        <p style={{ fontSize: messageFontSize }} className={css.text}>
+                            {data?.lastMessage?.text ? cutString(data.lastMessage.text, 60) : '...'}
+                        </p>
                     </div>
                 </button>
             ))}

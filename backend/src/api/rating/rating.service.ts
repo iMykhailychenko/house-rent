@@ -80,7 +80,7 @@ export class RatingService {
         if (messagesOne.length < MESSAGES_LIMIT_FOR_RATE) return false;
 
         const messagesTwo = await this.messageRepository.find({
-            where: { chat: { id: chat.id }, author: chat.users[1] },
+            where: { chat: { id: chat.id } },
             take: MESSAGES_LIMIT_FOR_RATE,
         });
 

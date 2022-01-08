@@ -72,6 +72,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
