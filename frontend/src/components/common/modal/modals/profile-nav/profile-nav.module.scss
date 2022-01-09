@@ -16,7 +16,9 @@
 }
 
 .btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 1.5rem;
     font-size: 1.3rem;
@@ -32,10 +34,19 @@
         font-size: 2rem;
     }
 
-    span {
+    img {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0;
+    }
+
+    & > span {
         display: block;
         margin-left: 1rem;
-        margin-bottom: 0.2rem;
+    }
+
+    small {
+        display: block;
     }
 }
 
@@ -44,7 +55,7 @@
 }
 
 .disabled {
-    color: var(--gray-5);
+    color: var(--gray-6);
     background: var(--gray-2);
     pointer-events: none;
 }

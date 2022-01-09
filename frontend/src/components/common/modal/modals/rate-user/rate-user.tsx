@@ -70,8 +70,13 @@ export const RateUser = ({ userId, withUpdate }: IProps): JSX.Element => {
     );
 };
 
-const rateUserModal = (userId: number, withUpdate = false): void => {
-    modal.open(<RateUser userId={userId} withUpdate={withUpdate} />);
+interface Params {
+    userId: number;
+    withRatingThunkCall?: boolean;
+}
+
+const rateUserModal = ({ userId, withRatingThunkCall = false }: Params): void => {
+    modal.open(<RateUser userId={userId} withUpdate={withRatingThunkCall} />);
 };
 
 export default rateUserModal;

@@ -10,7 +10,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 6.6rem;
+        width: 6.8rem;
 
         @media screen and (min-width: 768px) {
             width: 100%;
@@ -30,7 +30,7 @@
     }
 
     .inputWrp {
-        width: calc(100% - 6.6rem);
+        width: calc(100% - 6.8rem);
         margin: 0;
         border: none;
 
@@ -63,13 +63,14 @@
         display: flex;
     }
 
-    .size,
-    .file,
-    .send {
+    .btn {
         width: 3.3rem;
         height: 3.5rem;
         font-size: 1.8rem;
-        color: var(--gray-7);
+        background: var(--gray-2);
+        color: var(--primary);
+        border: 0.1rem solid var(--white);
+        border-radius: 0.6rem;
 
         @media screen and (min-width: 768px) {
             width: 4rem;
@@ -78,18 +79,9 @@
         &:hover {
             color: var(--primary);
         }
-    }
 
-    .size,
-    .send {
         svg {
             margin-bottom: 0.4rem;
-        }
-    }
-
-    .file {
-        svg {
-            transform: rotate(40deg);
         }
     }
 }

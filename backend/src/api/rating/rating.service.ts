@@ -72,19 +72,12 @@ export class RatingService {
 
         if (!chat) return false;
 
-        const messagesOne = await this.messageRepository.find({
-            where: { chat: { id: chat.id }, author: chat.users[0] },
-            take: MESSAGES_LIMIT_FOR_RATE,
-        });
-
-        if (messagesOne.length < MESSAGES_LIMIT_FOR_RATE) return false;
-
-        const messagesTwo = await this.messageRepository.find({
+        const messages = await this.messageRepository.find({
             where: { chat: { id: chat.id } },
             take: MESSAGES_LIMIT_FOR_RATE,
         });
 
-        return messagesTwo.length >= MESSAGES_LIMIT_FOR_RATE;
+        return messages.length >= MESSAGES_LIMIT_FOR_RATE;
     }
 
     async isRated(reviewerId: number, userId: number): Promise<boolean> {

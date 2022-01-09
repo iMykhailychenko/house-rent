@@ -130,7 +130,11 @@ const UserBanner = (): JSX.Element => {
                 </div>
 
                 {ratingState.canRate && !isAuthor && (
-                    <Button secondary className={css.ratingBtn} onClick={() => rateUserModal(userData.id, true)}>
+                    <Button
+                        secondary
+                        className={css.ratingBtn}
+                        onClick={() => rateUserModal({ userId: userData.id, withRatingThunkCall: true })}
+                    >
                         <StarIcon />
                         <span>{ratingState.isRated ? 'Змінити оцінку' : 'Оцініть чат з користувачем'}</span>
                     </Button>

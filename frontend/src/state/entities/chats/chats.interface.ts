@@ -58,10 +58,15 @@ export interface UpdateMessagesPayload {
     uploads: string[];
 }
 
+export interface ISingleChatInfo {
+    realtorId: number;
+    customerId: number;
+}
+
 export interface IChatsState {
     count: number;
     active: number;
-    single: CommonState<{ realtorId: number; customerId: number }>;
+    single: CommonState<ISingleChatInfo>;
     list: ChatsList;
     messages: MessagesList;
 }
