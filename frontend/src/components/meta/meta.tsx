@@ -16,7 +16,6 @@ interface IProps {
     h1?: string;
 }
 
-const color = '#0492ff';
 const siteName = 'House Rent';
 // const host = env.host || 'http://localhost:3000';
 const host = 'http://localhost:3000';
@@ -58,41 +57,6 @@ const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): JSX
                 <meta property="twitter:description" content={description || trans('site_desc')} />
                 <meta property="twitter:image" content={icon || `${url()}/about.jpg`} />
 
-                <meta name="parsely-link" content={url(history.locale)} />
-
-                <meta name="theme-color" content={color} />
-                <link href="/manifest.json" rel="manifest" />
-                <link href={icon || `${url()}/meta/icons/mask-icon.png`} rel="icon" type="image/png" />
-                <link href="/meta/icons/icon-72.png" rel="icon" type="image/png" sizes="16x16" />
-                <link href="/meta/icons/icon-72.png" rel="icon" type="image/png" sizes="32x32" />
-                <link href="/meta/icons/icon-72.png" rel="icon" type="image/png" sizes="72x72" />
-                <link href="/meta/icons/icon-96.png" rel="icon" type="image/png" sizes="96x96" />
-                <link href="/meta/icons/icon-128.png" rel="icon" type="image/png" sizes="128x128" />
-                <link href="/meta/icons/icon-144.png" rel="icon" type="image/png" sizes="144x144" />
-                <link href="/meta/icons/icon-152.png" rel="icon" type="image/png" sizes="152x152" />
-                <link href="/meta/icons/icon-192.png" rel="icon" type="image/png" sizes="192x192" />
-                <link href="/meta/icons/icon-384.png" rel="icon" type="image/png" sizes="384x384" />
-                <link href="/meta/icons/icon-512.png" rel="icon" type="image/png" sizes="512x512" />
-
-                <link href="/meta/icons/mask-icon.png" rel="apple-touch-icon" />
-                <link href="/meta/icons/icon-72.png" rel="apple-touch-icon" type="image/png" sizes="16x16" />
-                <link href="/meta/icons/icon-72.png" rel="apple-touch-icon" type="image/png" sizes="32x32" />
-                <link href="/meta/icons/icon-72.png" rel="apple-touch-icon" type="image/png" sizes="72x72" />
-                <link href="/meta/icons/icon-96.png" rel="apple-touch-icon" type="image/png" sizes="96x96" />
-                <link href="/meta/icons/icon-128.png" rel="apple-touch-icon" type="image/png" sizes="128x128" />
-                <link href="/meta/icons/icon-144.png" rel="apple-touch-icon" type="image/png" sizes="144x144" />
-                <link href="/meta/icons/icon-152.png" rel="apple-touch-icon" type="image/png" sizes="152x152" />
-                <link href="/meta/icons/icon-192.png" rel="apple-touch-icon" type="image/png" sizes="192x192" />
-                <link href="/meta/icons/icon-384.png" rel="apple-touch-icon" type="image/png" sizes="384x384" />
-                <link href="/meta/icons/icon-512.png" rel="apple-touch-icon" type="image/png" sizes="512x512" />
-
-                <link rel="mask-icon" href="/meta/icons/mask-icon.png" color={color} />
-                <link rel="canonical" href={url(history.locale)} />
-                <link rel="alternate" hrefLang="x-default" href={url()} />
-                <link rel="alternate" hrefLang="en" href={url('pl')} />
-                <link rel="alternate" hrefLang="ru" href={url('ru')} />
-                <link rel="alternate" hrefLang="ua" href={url('ua')} />
-
                 {/* PWA */}
                 <meta name="application-name" content={siteName} />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,7 +65,6 @@ const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): JSX
                 <meta name="description" content={description || trans('site_desc')} />
                 <meta name="format-detection" content="telephone=yes" />
                 <meta name="mobile-web-app-capable" content="yes" />
-                <meta name="msapplication-TileColor" content={color} />
                 <meta name="msapplication-tap-highlight" content="yes" />
             </Head>
             <h1 className={css.title}>{h1 ? h1 + '. ' + trans('site_desc') : trans('site_desc')}</h1>

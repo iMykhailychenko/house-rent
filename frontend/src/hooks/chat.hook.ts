@@ -14,7 +14,7 @@ class ChatSocket {
         if (ChatSocket.instance) return ChatSocket.instance;
 
         ChatSocket.instance = this;
-        this.client = io('ws://localhost:8001/chat', { auth: { token } });
+        this.client = io('ws://192.168.1.53:8001/chat', { auth: { token } });
         this.chatId = chatId;
         this.subscribe();
     }

@@ -21,14 +21,28 @@ class ModalManagement extends EventEmitter {
         this.dom = dom;
 
         // styles
-        if (process.browser) {
-            this.scrollY = window.scrollY;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${this.scrollY}px`;
-        }
+        this.scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.height = window.innerHeight + 'px';
+        document.body.style.top = `-${this.scrollY}px`;
 
         // emit
-        this.emitChange();
+        this.emit('modal', this.dom);
+    };
+
+    close = (): void => {
+        if (!this.dom && !this.scrollY) return;
+        this.dom = null;
+
+        // styles
+        document.body.style.position = '';
+        document.body.style.height = '';
+        document.body.style.top = '';
+        window.scrollTo({ top: this.scrollY });
+        this.scrollY = 0;
+
+        // emit
+        this.emit('modal', this.dom);
     };
 
     setSticky(): void {
@@ -37,34 +51,6 @@ class ModalManagement extends EventEmitter {
             element.style.alignItems = 'flex-end';
         }
     }
-
-    deleteSticky(): void {
-        const element = document.getElementById('backdrop');
-        if (element) {
-            element.style.alignItems = 'center';
-        }
-    }
-
-    close = (): void => {
-        if (!this.dom && !this.scrollY) return;
-
-        this.dom = null;
-
-        // styles
-        if (process.browser) {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            window.scrollTo({ top: this.scrollY });
-            this.scrollY = 0;
-        }
-
-        // emit
-        this.emitChange();
-    };
-
-    emitChange = (): void => {
-        this.emit('modal', this.dom);
-    };
 }
 
 export const modal = new ModalManagement();

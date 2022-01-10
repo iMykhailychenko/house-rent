@@ -126,18 +126,15 @@
         }
 
         h3 {
-            padding: 0.5rem;
-            font-size: 1.2rem;
-            line-height: 2;
+            margin: 0.5rem;
             color: var(--black);
             word-break: break-all;
             transition: 0.3s ease-in-out;
 
-            @include cutString(2);
+            @include cutStringMultiLine(1.4rem, 1.4, 2);
 
             @media screen and (min-width: 768px) {
-                font-size: 1.4rem;
-                line-height: 1.7;
+                @include cutStringMultiLine(1.4rem, 1.4, 2);
             }
         }
 

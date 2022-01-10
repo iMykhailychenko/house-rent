@@ -70,16 +70,16 @@
 
     .inner {
         padding: 1rem;
-        max-height: calc(90vh - 15rem);
+        max-height: calc(var(--100vh, 100vh) - 15rem);
         overflow: auto;
 
         @media screen and (min-width: 768px) {
             padding: 2rem;
-            max-height: calc(90vh - 13.4rem);
+            max-height: calc(var(--100vh, 100vh) - 13.4rem);
         }
 
         &.withFooter {
-            max-height: calc(90vh - 13.4rem);
+            max-height: calc(var(--100vh, 100vh) - 13.4rem);
         }
     }
 }

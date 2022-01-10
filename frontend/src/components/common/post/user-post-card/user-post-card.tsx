@@ -50,9 +50,7 @@ const UserPostCard = ({ post, index = 0 }: IProps): JSX.Element => {
                 <div className={css.content}>
                     <Link href={routes.posts.single(post.id)}>
                         <a className={css.link}>
-                            <Tooltip className={css.tooltip} content={post.title}>
-                                <h3>{post.title}</h3>
-                            </Tooltip>
+                            <h3>{post.title}</h3>
                             <p className={css.description}>{post.description}</p>
                             <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
                             <span className={css[post.status]}>{post.status}</span>

@@ -1,14 +1,19 @@
-@mixin cutString($line: 1) {
+@mixin cutString {
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
-    @if $line != 1 {
-        display: -webkit-box;
-        -webkit-line-clamp: $line;
-        -webkit-box-orient: vertical;
-    } @else {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+@mixin cutStringMultiLine($font-size, $line-height, $lines-to-show) {
+    display: block;
+    display: -webkit-box;
+    font-size: $font-size;
+    line-height: $line-height;
+    height: calc($font-size * $line-height * $lines-to-show);
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 @mixin skeleton {

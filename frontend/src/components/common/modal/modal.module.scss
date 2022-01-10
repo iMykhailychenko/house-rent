@@ -28,7 +28,7 @@
     justify-content: center;
     width: 100%;
     height: auto;
-    max-height: 100vh;
+    max-height: var(--100vh, 100vh);
     overflow-y: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;

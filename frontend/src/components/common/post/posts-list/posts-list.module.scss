@@ -94,7 +94,7 @@
 
 .filters {
     position: sticky;
-    top: calc(var(--100vh, 100vh) - 0.6rem);
+    top: calc(var(--100vh, 100vh) - 2rem);
     transform: translateY(-100%);
     z-index: 100;
     display: flex;
@@ -106,9 +106,14 @@
     padding: 1rem 1.5rem;
     text-align: left;
     border-radius: 0.5rem;
-    background: var(--primary-hover);
-    color: var(--true-white);
-    border: 0.1rem solid var(--primary);
+    transition: 0.2s ease-in-out;
+    color: var(--primary);
+
+    // glass
+    background: rgba(247, 247, 247, 0.42);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12.1px);
+    border: 1px solid rgba(247, 247, 247, 0.67);
 
     svg {
         transform: rotate(180deg);

@@ -124,7 +124,7 @@
         }
 
         .description {
-            @include cutString(3);
+            @include cutStringMultiLine(1.4rem, 1.4, 3);
         }
 
         .date {

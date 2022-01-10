@@ -50,7 +50,11 @@
 
     .content {
         margin: 0;
-        padding: 2rem;
+        padding: 1rem;
+
+        @media screen and (min-width: 768px) {
+            padding: 2rem;
+        }
 
         .link {
             margin: 0;
@@ -80,8 +84,8 @@
         }
 
         .description {
-            font-size: 1.2rem;
-            @include cutString(2);
+            margin-bottom: 1rem;
+            @include cutStringMultiLine(1.2rem, 1.4, 2);
         }
     }
 

@@ -74,3 +74,15 @@
     height: 1.2rem;
     width: 1.2rem;
 }
+
+@media screen and (max-width: 480px) {
+    .Toastify__toast-container.Toastify__toast-container--bottom-right {
+        bottom: 1rem;
+    }
+
+    .Toastify__toast-container .Toastify__toast {
+        margin-bottom: 0.5rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
