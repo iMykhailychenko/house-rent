@@ -7,7 +7,6 @@ import clsx from 'clsx';
 
 import useAuth from '../../../../../hooks/auth.hook';
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
-import userId from '../../../../../pages/users/[userId]';
 import { useSingleChatInfoSelector } from '../../../../../state/entities/chats/chats.selector';
 import { useProfileInfoSelector } from '../../../../../state/entities/profile/profile.selector';
 import { useUserRatingSelector } from '../../../../../state/entities/rating/rating.selector';

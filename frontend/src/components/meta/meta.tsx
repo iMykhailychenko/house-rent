@@ -17,8 +17,7 @@ interface IProps {
 }
 
 const siteName = 'House Rent';
-// const host = env.host || 'http://localhost:3000';
-const host = 'http://localhost:3000';
+const host = env.host || 'http://localhost:3000';
 
 const Meta = ({ title, description, keywords = '', icon, h1 = '' }: IProps): JSX.Element => {
     const trans = useTrans();

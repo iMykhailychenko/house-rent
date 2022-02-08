@@ -34,7 +34,7 @@ export class UsersService {
 
         const newUser = new UserEntity();
         Object.assign(newUser, createUserDto);
-        newUser.isEmailVerified = true; // TODO
+        newUser.isEmailVerified = false;
         const savedUser = await this.userRepository.save(newUser);
         await this.securityService.sendConfirmEmail(savedUser);
 

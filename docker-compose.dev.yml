@@ -1,38 +1,6 @@
 version: '3.9'
 
 services:
-#  backend:
-#    container_name: backend
-#    build: ./backend
-#    restart: unless-stopped
-#    command: yarn start:dev
-#    env_file:
-#      - .env.dev
-#    volumes:
-#      - media_volume:/app/backend/uploads
-#      - ./backend/src:/app/backend/src
-#    depends_on:
-#      - db_dev
-#
-#  frontend:
-#    container_name: frontend
-#    build: ./frontend
-#    restart: unless-stopped
-#    command: yarn dev
-#    stdin_open: true
-#    tty: true
-#    env_file:
-#      - .env.dev
-#    volumes:
-#      - ./frontend/src:/app/frontend/src
-#      - ./frontend/public:/app/frontend/public
-
-  email_service_dev:
-    container_name: email_service
-    build: ./email_service
-    command: uvicorn main:app --root-path /email --reload --workers 1 --host 0.0.0.0 --port 4001
-    env_file: .env.dev
-
   pgadmin_dev:
     container_name: pgadmin_dev
     image: dpage/pgadmin4
@@ -54,15 +22,12 @@ services:
       - postgres_dev:/var/lib/postgresql/data
 
   nginx_dev:
-    build: ./nginx
     container_name: nginx_dev
     ports:
       - "80:80"
-#    volumes:
-#      - media_volume:/app/backend/uploads
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
-#      - frontend
-#      - backend
       - email_service_dev
       - db_dev
       - pgadmin_dev
@@ -70,4 +35,3 @@ services:
 volumes:
   postgres_dev:
   pgadmin_dev:
-#  media_volume:

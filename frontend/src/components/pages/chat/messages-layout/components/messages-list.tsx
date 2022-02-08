@@ -2,7 +2,6 @@ import React from 'react';
 
 import DoneIcon from '@mui/icons-material/Done';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { fontSize } from '@mui/system';
 import Link from 'next/link';
 
 import useConfig from '../../../../../hooks/config.hook';

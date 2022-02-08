@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import clsx from 'clsx';
 
 import { useAppDispatch } from '../../../../../hooks/redux.hook';
 import { sendRestorePasswordEmailThunk } from '../../../../../state/entities/auth/auth.thunk';

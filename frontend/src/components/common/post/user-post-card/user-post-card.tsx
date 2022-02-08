@@ -13,7 +13,6 @@ import routes from '../../../../utils/routes';
 import FullScreenImg from '../../full-screen-img/full-screen-img';
 import ImageWrp from '../../image-wrp/image-wrp';
 import userPostActions from '../../modal/modals/user-post-actions/user-post-actions';
-import Tooltip from '../../tooltip/tooltip';
 
 import css from './user-post-card.module.scss';
 

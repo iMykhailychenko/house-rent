@@ -6,7 +6,6 @@ import Link from 'next/link';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { formatDate } from '../../../../../utils/helpers/date.helper';
-import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Button from '../../../button/button';
 import FullScreenImg from '../../../full-screen-img/full-screen-img';
