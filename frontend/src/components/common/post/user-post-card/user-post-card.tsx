@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 
@@ -47,14 +46,12 @@ const UserPostCard = ({ post, index = 0 }: IProps): JSX.Element => {
                 )}
 
                 <div className={css.content}>
-                    <Link href={routes.posts.single(post.id)}>
-                        <a className={css.link}>
-                            <h3>{post.title}</h3>
-                            <p className={css.description}>{post.description}</p>
-                            <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
-                            <span className={css[post.status]}>{post.status}</span>
-                        </a>
-                    </Link>
+                    <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
+                        <h3>{post.title}</h3>
+                        <p className={css.description}>{post.description}</p>
+                        <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
+                        <span className={css[post.status]}>{post.status}</span>
+                    </a>
                 </div>
 
                 <div className={css.footer}>

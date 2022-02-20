@@ -30,7 +30,7 @@ const LargeModalWrp = ({ children = '', title }: IProps): JSX.Element => {
                     <Close />
                 </button>
             </header>
-            {children}
+            <div className={css.inner}>{children}</div>
         </div>
     );
 };

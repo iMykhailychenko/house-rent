@@ -7,7 +7,7 @@
 
     display: flex;
     flex-direction: column;
-    width: var(--card-width);
+    width: 100%;
     height: auto;
     padding: 0 0 2rem;
     margin: 0 auto;
@@ -46,7 +46,6 @@
         min-height: var(--card-width);
         width: 100%;
         object-fit: cover;
-        border-radius: 0.4rem;
     }
 
     .noImg {
@@ -58,7 +57,6 @@
         min-height: var(--card-width);
         width: 100%;
         padding: 1rem;
-        border-radius: 0.6rem;
         background: var(--primary);
 
         p {
@@ -113,7 +111,7 @@
             color: var(--black);
             word-break: break-all;
             transition: 0.3s ease-in-out;
-            @include cutStringMultiLine(1.1rem, 1.4, 2);
+            @include cutStringMultiLine(1.2rem, 1.4, 2);
 
             @media screen and (min-width: 768px) {
                 margin: 0.7rem 0.2rem;

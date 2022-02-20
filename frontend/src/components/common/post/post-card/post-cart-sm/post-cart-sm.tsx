@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import routes from '../../../../../utils/routes';
 import FullScreenImg from '../../../full-screen-img/full-screen-img';
@@ -20,20 +18,16 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
             {post.image ? (
                 <FullScreenImg className={css.img} src={post.image} />
             ) : (
-                <Link href={routes.posts.single(post.id)}>
-                    <a className={css.noImg}>
-                        <ImageWrp name="error" />
-                        <p>Фото відсутнє</p>
-                    </a>
-                </Link>
+                <a href={routes.posts.single(post.id)} className={css.noImg} target="_blank" rel="noopener noreferrer">
+                    <ImageWrp name="error" />
+                    <p>Фото відсутнє</p>
+                </a>
             )}
 
             <div className={css.content}>
-                <Link href={routes.posts.single(post.id)}>
-                    <a className={css.link}>
-                        <h3>{post.title}</h3>
-                    </a>
-                </Link>
+                <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
+                    <h3>{post.title}</h3>
+                </a>
 
                 <PostCardFooter size="sm" post={post} />
             </div>

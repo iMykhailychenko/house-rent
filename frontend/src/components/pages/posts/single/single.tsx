@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { useRecentPosts } from '../../../../hooks/recent-posts.hook';
 import { useAppDispatch } from '../../../../hooks/redux.hook';
 import useTrans from '../../../../hooks/trans.hook';
 import { POST_STATUS } from '../../../../state/entities/posts/posts.interface';
@@ -23,6 +24,14 @@ const SinglePostComponent = (): JSX.Element => {
 
     const postState = useSinglePostSelector();
     const postData = postState.data;
+
+    const storage = useRecentPosts();
+
+    useEffect(() => {
+        if (postData) {
+            storage.set(postData);
+        }
+    }, [postData, storage]);
 
     useEffect(() => {
         if (postData.status === POST_STATUS.ARCHIVE) {

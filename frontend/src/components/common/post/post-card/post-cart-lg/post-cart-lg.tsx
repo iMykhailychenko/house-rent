@@ -1,7 +1,6 @@
 import React from 'react';
 
 import LaunchIcon from '@mui/icons-material/Launch';
-import Link from 'next/link';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
@@ -47,21 +46,17 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
                     {post.image ? (
                         <FullScreenImg className={css.img} src={post.image} />
                     ) : (
-                        <Link href={routes.posts.single(post.id)}>
-                            <a className={css.noImg}>
-                                <ImageWrp name="error" />
-                                <p>Фото відсутнє</p>
-                            </a>
-                        </Link>
+                        <a href={routes.posts.single(post.id)} className={css.noImg} target="_blank" rel="noopener noreferrer">
+                            <ImageWrp name="error" />
+                            <p>Фото відсутнє</p>
+                        </a>
                     )}
 
-                    <Link href={routes.posts.single(post.id)}>
-                        <a className={css.link}>
-                            <h3>{post.title}</h3>
-                            <p className={css.description}>{post.description}</p>
-                            <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
-                        </a>
-                    </Link>
+                    <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
+                        <h3>{post.title}</h3>
+                        <p className={css.description}>{post.description}</p>
+                        <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
+                    </a>
                 </div>
 
                 <PostInfoBlock post={post} />

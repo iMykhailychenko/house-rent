@@ -6,7 +6,7 @@
 
     display: flex;
     flex-direction: column;
-    width: var(--card-width);
+    width: 100%;
     height: auto;
     padding: 0 0 3rem;
 
@@ -23,11 +23,8 @@
 
     @media screen and (min-width: 768px) {
         --card-width: 34rem;
+        width: calc(50% - 0.5rem);
         padding: 0 0 8rem;
-    }
-
-    @media screen and (min-width: 768px) {
-        --card-width: 34rem;
     }
 
     @media screen and (min-width: 1024px) {
@@ -67,7 +64,6 @@
         min-height: var(--card-width);
         width: 100%;
         object-fit: cover;
-        border-radius: 0.6rem;
     }
 
     .noImg {
@@ -79,7 +75,6 @@
         min-height: var(--card-width);
         width: 100%;
         padding: 2rem;
-        border-radius: 0.6rem;
         background: var(--primary);
 
         p {

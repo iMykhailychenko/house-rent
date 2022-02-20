@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { GetStaticPaths } from 'next';
+import dynamic from 'next/dynamic';
 
 import { ParsedUrlQuery } from 'querystring';
 
@@ -17,12 +18,15 @@ import { wrapper } from '../../state/store';
 import api from '../../utils/interceptors';
 import routes from '../../utils/routes';
 
+const RecentPosts = dynamic(() => import('../../components/common/post/recent-posts/recent-posts'), { ssr: false });
+
 const SinglePostPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
             <RootLayout href={routes.home}>
                 <SinglePostComponent />
+                <RecentPosts />
             </RootLayout>
         </GetStaticProfile>
     );

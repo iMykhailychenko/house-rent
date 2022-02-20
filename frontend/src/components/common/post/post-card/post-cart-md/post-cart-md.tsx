@@ -1,7 +1,6 @@
 import React from 'react';
 
 import LaunchIcon from '@mui/icons-material/Launch';
-import Link from 'next/link';
 
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
@@ -34,23 +33,19 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
             {post.image ? (
                 <FullScreenImg className={css.img} src={post.image} />
             ) : (
-                <Link href={routes.posts.single(post.id)}>
-                    <a className={css.noImg}>
-                        <ImageWrp name="error" />
-                        <p>Фото відсутнє</p>
-                    </a>
-                </Link>
+                <a href={routes.posts.single(post.id)} className={css.noImg} target="_blank" rel="noopener noreferrer">
+                    <ImageWrp name="error" />
+                    <p>Фото відсутнє</p>
+                </a>
             )}
 
             <div className={css.content}>
-                <Link href={routes.posts.single(post.id)}>
-                    <a className={css.link}>
-                        <Tooltip className={css.tooltip} content={post.title}>
-                            <h3>{post.title}</h3>
-                        </Tooltip>
-                        <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
-                    </a>
-                </Link>
+                <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
+                    <Tooltip className={css.tooltip} content={post.title}>
+                        <h3>{post.title}</h3>
+                    </Tooltip>
+                    <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
+                </a>
 
                 <div className={css.chips}>
                     {post.priceFilters.map(item => (

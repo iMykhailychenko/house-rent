@@ -31,4 +31,8 @@
             @include cutString;
         }
     }
+
+    .inner {
+        padding: 0 3rem;
+    }
 }

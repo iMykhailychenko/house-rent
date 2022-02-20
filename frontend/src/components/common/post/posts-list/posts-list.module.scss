@@ -47,7 +47,6 @@
 
     &.md {
         margin: 0 auto;
-        max-width: 37rem;
         width: 100%;
         min-height: 49rem;
 
@@ -57,8 +56,6 @@
         }
 
         @media screen and (min-width: 768px) {
-            max-width: 78rem;
-
             .spinner {
                 width: 48%;
             }
@@ -72,6 +69,7 @@
     &.sm {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
         min-height: 23rem;
 
         @media screen and (min-width: 540px) {
@@ -94,30 +92,30 @@
 
 .filters {
     position: sticky;
-    top: calc(var(--100vh, 100vh) - 2rem);
+    left: 0;
+    top: calc(var(--100vh, 100vh) - 0.5rem);
     transform: translateY(-100%);
     z-index: 100;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 20rem;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem;
     text-align: left;
     border-radius: 0.5rem;
     transition: 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 1.2rem;
     color: var(--primary);
 
     // glass
-    background: rgba(247, 247, 247, 0.42);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: rgba(240, 240, 240, 0.6);
     backdrop-filter: blur(12.1px);
     border: 1px solid rgba(247, 247, 247, 0.67);
 
     svg {
-        transform: rotate(180deg);
-        font-size: 1.8rem;
+        margin-right: 0.5rem;
+        font-size: 3rem;
     }
 
     @media screen and (min-width: 1200px) {

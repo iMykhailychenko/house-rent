@@ -1,0 +1,27 @@
+.root {
+    margin: 4rem 0;
+
+    @media screen and (min-width: 1024px) {
+        margin: 8rem 0;
+    }
+
+    .title {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+
+        @media screen and (min-width: 550px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    }
+}

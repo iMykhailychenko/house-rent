@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 
 import { modal } from '../components/common/modal/modal';
 import PostFilters from '../components/common/post/post-filters/post-filters';
@@ -14,6 +15,8 @@ import { postListPaginationThunk, postListThunk } from '../state/entities/posts/
 import { profileInfoThunk } from '../state/entities/profile/profile.thunk';
 import { wrapper } from '../state/store';
 import { cookieAuth } from '../utils/helpers/cookie.helper';
+
+const RecentPosts = dynamic(() => import('../components/common/post/recent-posts/recent-posts'), { ssr: false });
 
 const HomePage = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -35,6 +38,7 @@ const HomePage = (): JSX.Element => {
             <Meta />
             <RootLayout>
                 <HomeBanner />
+                <RecentPosts />
                 <Section id="home-posts">
                     <PostsList title={title} onPage={openPage} onMore={loadMore}>
                         <PostFilters onSubmit={submit} />

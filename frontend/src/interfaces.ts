@@ -14,6 +14,13 @@ export interface IUser {
     role: UserRole[];
 }
 
+export interface IRecentPost {
+    id: number;
+    title: string;
+    img: string | null;
+    date: number;
+}
+
 export interface IChips {
     name: string;
     active: boolean;
