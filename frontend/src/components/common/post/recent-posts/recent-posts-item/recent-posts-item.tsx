@@ -18,7 +18,7 @@ interface IProps {
 
 export const RecentPostsItem = ({ post, index = 1 }: IProps): JSX.Element => {
     const trans = useTrans();
-    const deltaIndex = (index % uiConfig.postsPerPage) + 1;
+    const deltaIndex = (index % 8) + 1;
 
     return (
         <CSSTransition in timeout={100 + deltaIndex * 100} appear>

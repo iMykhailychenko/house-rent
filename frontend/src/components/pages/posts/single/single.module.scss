@@ -7,16 +7,17 @@
     height: 65vh;
     min-height: 45rem;
     background: var(--gray-2);
-    border-radius: 0.5rem;
-
-    @media screen and (min-width: 768px) {
-        border-radius: 1.5rem;
-    }
 
     .imgTag {
         height: 100%;
         width: 100%;
         object-fit: contain;
+    }
+}
+
+.container {
+    @media screen and (max-width: 1024px) {
+        padding: 0;
     }
 }
 

@@ -40,10 +40,11 @@
             }
 
             svg {
-                color: var(--true-black);
                 font-size: 1.6rem;
+                color: var(--true-black);
 
                 @media screen and (min-width: 768px) {
+                    color: var(--black);
                     font-size: 2rem;
                 }
             }

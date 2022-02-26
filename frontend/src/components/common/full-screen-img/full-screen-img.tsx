@@ -34,16 +34,17 @@ const FullScreenImg = ({ className, src, height, width, alt }: IProps): JSX.Elem
     return (
         <>
             {fullscreen && <FullScreenImgModal src={src} alt={alt} onClick={close} />}
+
             <img
                 ref={ref}
-                tabIndex={0}
-                className={clsx(css.base, className)}
                 src={src}
-                height={height}
-                width={width}
                 alt={alt}
+                tabIndex={0}
                 onClick={open}
+                width={width}
+                height={height}
                 onKeyPress={keyboard}
+                className={clsx(css.base, className)}
             />
         </>
     );

@@ -1,6 +1,6 @@
-@import './lib/theme.css';
-@import './lib/variables.css';
-@import './lib/base.css';
-@import './lib/pages.css';
-@import './lib/typography.css';
-@import './lib/toast.css';
+@import 'general/theme.css';
+@import 'general/variables.css';
+@import 'general/base.css';
+@import 'general/pages.css';
+@import 'general/typography.css';
+@import 'general/toast.css';

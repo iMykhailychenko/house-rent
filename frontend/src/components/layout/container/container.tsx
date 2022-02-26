@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import clsx from 'clsx';
 
@@ -8,7 +8,7 @@ interface IProps {
     id?: string;
     className?: string;
     size?: 'sm' | 'md' | 'lg';
-    children: JSX.Element[] | JSX.Element | string;
+    children: ReactNode | string;
 }
 
 const Container = ({ id, className, size = 'lg', children }: IProps): JSX.Element => {

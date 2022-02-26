@@ -7,7 +7,6 @@ import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { formatDate } from '../../../../../utils/helpers/date.helper';
 import routes from '../../../../../utils/routes';
 import Button from '../../../button/button';
-import FullScreenImg from '../../../full-screen-img/full-screen-img';
 import ImageWrp from '../../../image-wrp/image-wrp';
 import { modal } from '../../../modal/modal';
 import Tooltip from '../../../tooltip/tooltip';
@@ -43,14 +42,16 @@ const PostCardLg = ({ post }: IProps): JSX.Element => {
 
             <div className={css.content}>
                 <div className={css.column}>
-                    {post.image ? (
-                        <FullScreenImg className={css.img} src={post.image} />
-                    ) : (
-                        <a href={routes.posts.single(post.id)} className={css.noImg} target="_blank" rel="noopener noreferrer">
-                            <ImageWrp name="error" />
-                            <p>Фото відсутнє</p>
-                        </a>
-                    )}
+                    <a href={routes.posts.single(post.id)} target="_blank" rel="noopener noreferrer">
+                        {post.image ? (
+                            <img className={css.img} src={post.image} alt={post.title} />
+                        ) : (
+                            <div className={css.noImg}>
+                                <ImageWrp name="error" />
+                                <p>Фото відсутнє</p>
+                            </div>
+                        )}
+                    </a>
 
                     <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
                         <h3>{post.title}</h3>

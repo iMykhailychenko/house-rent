@@ -36,10 +36,17 @@
 }
 
 :global(.MuiButton-root).notification,
-:global(.MuiButton-root).newPost {
+.newPost {
     margin-left: 0.5rem;
 
+    &:hover {
+        svg {
+            color: var(--primary);
+        }
+    }
+
     svg {
+        color: var(--black);
         font-size: 1.8rem;
     }
 }

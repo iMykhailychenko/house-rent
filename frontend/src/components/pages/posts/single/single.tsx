@@ -28,7 +28,7 @@ const SinglePostComponent = (): JSX.Element => {
     const storage = useRecentPosts();
 
     useEffect(() => {
-        if (postData) {
+        if (postData.id) {
             storage.set(postData);
         }
     }, [postData, storage]);
@@ -45,7 +45,7 @@ const SinglePostComponent = (): JSX.Element => {
     return (
         <NotFoundPost error={!!postState.error}>
             <>
-                <Container size="md">
+                <Container className={css.container} size="md">
                     <>
                         {postData.image && (
                             <div className={css.img}>
@@ -54,7 +54,7 @@ const SinglePostComponent = (): JSX.Element => {
                         )}
                     </>
                 </Container>
-                <Container size="sm">
+                <Container className={css.container} size="sm">
                     <>
                         <div className={css.header}>
                             <div className={css.inner}>

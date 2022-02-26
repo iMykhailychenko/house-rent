@@ -1,6 +1,11 @@
 import React from 'react';
 
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import Link from 'next/link';
+import { CSSTransition } from 'react-transition-group';
+
 import { useRecentPosts } from '../../../../hooks/recent-posts.hook';
+import routes from '../../../../utils/routes';
 import Container from '../../../layout/container/container';
 
 import { RecentPostsItem } from './recent-posts-item/recent-posts-item';
@@ -20,6 +25,17 @@ const RecentPosts = (): JSX.Element => {
                         {offers.map((item, index) => (
                             <RecentPostsItem key={item.id} post={item} index={index} />
                         ))}
+
+                        {offers.length % 4 !== 0 && (
+                            <CSSTransition in timeout={100 + (offers.length + 1) * 100} appear>
+                                <Link href={routes.posts.new}>
+                                    <a className={css.newPost}>
+                                        <p>Створити нове оголошення</p>
+                                        <ArrowForwardOutlinedIcon />
+                                    </a>
+                                </Link>
+                            </CSSTransition>
+                        )}
                     </div>
                 </Container>
             ) : null}

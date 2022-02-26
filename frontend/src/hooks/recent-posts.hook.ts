@@ -37,7 +37,7 @@ export const useRecentPosts = (): RecentPostsStore => {
                 }
 
                 return notExpiredPosts
-                    .filter(item => item.id !== postId)
+                    .filter(item => item.id !== postId && item.id)
                     .slice(0, MAX_LENGTH)
                     .sort((a, b) => b.date - a.date);
             } catch {

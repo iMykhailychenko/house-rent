@@ -23,5 +23,34 @@
         @media screen and (min-width: 768px) {
             grid-template-columns: 1fr 1fr 1fr 1fr;
         }
+
+        .newPost {
+            min-height: 25rem;
+            padding: 30px;
+            color: var(--true-white);
+            font-weight: 600;
+            font-size: 1.6rem;
+            background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
+            transform: translateY(5rem);
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+
+            @media screen and (min-width: 1024px) {
+                font-size: 2rem;
+            }
+
+            @media screen and (min-width: 1300px) {
+                font-size: 3rem;
+            }
+
+            &:global(.enter-done) {
+                transform: unset;
+                opacity: 1;
+            }
+
+            &:hover {
+                background: linear-gradient(to top, #91eae4, #86a8e7, #7f7fd5);
+            }
+        }
     }
 }

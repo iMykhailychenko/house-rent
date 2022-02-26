@@ -23,14 +23,14 @@ services:
 
   nginx_dev:
     container_name: nginx_dev
+    image: nginx:stable-alpine
+    volumes:
+      - ./nginx/ngin.dev.conf:/etc/nginx/conf.d/nginx.conf
     ports:
       - "80:80"
-    volumes:
-      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
-      - email_service_dev
-      - db_dev
       - pgadmin_dev
+      - db_dev
 
 volumes:
   postgres_dev:

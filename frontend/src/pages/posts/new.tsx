@@ -15,7 +15,7 @@ const NewPostPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout href={routes.home} withFooter={false}>
+            <RootLayout href={routes.new} withFooter={false}>
                 <NewPostContainer />
             </RootLayout>
         </GetStaticProfile>

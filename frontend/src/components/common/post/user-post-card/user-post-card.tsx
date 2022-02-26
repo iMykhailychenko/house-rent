@@ -9,7 +9,6 @@ import { IPost } from '../../../../state/entities/posts/posts.interface';
 import { formatDate } from '../../../../utils/helpers/date.helper';
 import { postActionsMap, postFunctionsMap } from '../../../../utils/post-functions';
 import routes from '../../../../utils/routes';
-import FullScreenImg from '../../full-screen-img/full-screen-img';
 import ImageWrp from '../../image-wrp/image-wrp';
 import userPostActions from '../../modal/modals/user-post-actions/user-post-actions';
 
@@ -36,14 +35,16 @@ const UserPostCard = ({ post, index = 0 }: IProps): JSX.Element => {
     return (
         <CSSTransition in timeout={100 + deltaIndex * 100} appear>
             <div className={css.root}>
-                {post.image ? (
-                    <FullScreenImg className={css.img} src={post.image} />
-                ) : (
-                    <div className={css.noImg}>
-                        <ImageWrp name="error" />
-                        <p>Фото відсутнє</p>
-                    </div>
-                )}
+                <a href={routes.posts.single(post.id)} target="_blank" rel="noopener noreferrer">
+                    {post.image ? (
+                        <img className={css.img} src={post.image} alt={post.title} />
+                    ) : (
+                        <div className={css.noImg}>
+                            <ImageWrp name="error" />
+                            <p>Фото відсутнє</p>
+                        </div>
+                    )}
+                </a>
 
                 <div className={css.content}>
                     <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">

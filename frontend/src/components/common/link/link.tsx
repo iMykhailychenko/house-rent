@@ -18,7 +18,7 @@ interface IProps {
 
 const Link = ({ type = 'link', href, className, children, loading, primary, secondary, title }: IProps): JSX.Element => {
     return (
-        <NextLink href={href} passHref>
+        <NextLink href={href}>
             <a
                 title={title}
                 className={clsx(className, type === 'link' ? css.link : css.button, {
