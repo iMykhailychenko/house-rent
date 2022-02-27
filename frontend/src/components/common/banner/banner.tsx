@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import { EventEmitter } from 'events';
 
+import Container from '../../layout/container/container';
 import showAllBanners from '../modal/modals/show-all-banners/show-all-banners';
 
 import { Banner } from './banner.interface';
@@ -69,7 +70,7 @@ export default class BannerComponent extends Component<unknown, IState> {
         const { banners, cutStr } = this.state;
 
         return (
-            <div className={clsx(css.root, banners[0] && css.open, css[banners[0]?.type])}>
+            <Container size="md" className={clsx(css.root, banners[0] && css.open, css[banners[0]?.type])}>
                 <button type="button" onClick={this.toggle} className={clsx(css.content, cutStr && css.cutStr)}>
                     {banners[0]?.content}
                 </button>
@@ -84,7 +85,7 @@ export default class BannerComponent extends Component<unknown, IState> {
                         <CloseIcon />
                     </button>
                 </div>
-            </div>
+            </Container>
         );
     }
 }

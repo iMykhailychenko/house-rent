@@ -43,7 +43,7 @@ const NewItemPage = (): JSX.Element => {
                             <CSSTransition in timeout={400} appear>
                                 <Link href={routes.posts.new}>
                                     <a className={css.link}>
-                                        <p>Я проконсультую. Юридичні питання, оцінка якості ремонту тощо</p>
+                                        <p>Я проконсультую</p>
                                         <ArrowForwardOutlinedIcon />
                                     </a>
                                 </Link>

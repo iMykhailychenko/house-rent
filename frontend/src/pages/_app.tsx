@@ -10,6 +10,7 @@ import { Router } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 
 import ModalComponent, { modal } from '../components/common/modal/modal';
+import { ScrollTop } from '../components/common/scroll-top/scroll-top';
 import AuthProvider from '../context/auth/auth';
 import ConfigProvider from '../context/config/config';
 import ThemeProvider from '../context/theme/theme';
@@ -49,6 +50,7 @@ const HouseRentApp = ({ Component, pageProps, theme, config, auth }: AppProps & 
                         <Component {...pageProps} />
                         <ToastContainer />
                         <ModalComponent />
+                        <ScrollTop />
                     </>
                 </ConfigProvider>
             </ThemeProvider>

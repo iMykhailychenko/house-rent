@@ -12,14 +12,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 104;
 }
 
 .root {
     position: fixed;
     top: calc(var(--header-height) + 2rem);
     right: 1rem;
-    z-index: 101;
+    z-index: 105;
     max-width: calc(100% - 2rem);
     min-width: 20rem;
     width: 100%;
