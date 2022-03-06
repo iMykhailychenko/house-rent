@@ -21,7 +21,7 @@ interface IProps {
 const SharePost = ({ post }: IProps): JSX.Element => {
     const [done, setDone] = useState(false);
     const [error, setError] = useState(false);
-    const url = process.env.NEXT_PUBLIC_URL + routes.posts.single(post.id);
+    const url = window.location.origin + routes.posts.single(post.id);
 
     const copy = async (): Promise<void> => {
         try {
@@ -59,11 +59,13 @@ const SharePost = ({ post }: IProps): JSX.Element => {
 };
 
 const sharePost = (post: IPost) => (): void => {
-    modal.open(
-        <StickyModal>
-            <SharePost post={post} />
-        </StickyModal>,
-    );
+    if (process.browser) {
+        modal.open(
+            <StickyModal>
+                <SharePost post={post} />
+            </StickyModal>,
+        );
+    }
 };
 
 export default sharePost;

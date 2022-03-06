@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -8,36 +8,25 @@ import toastConfig from '../../../config/toast.cofig';
 import useAuth from '../../../hooks/auth.hook';
 import { useNotificationSocket } from '../../../hooks/notifications.hook';
 import { useAppDispatch } from '../../../hooks/redux.hook';
+import useTheme from '../../../hooks/theme.hook';
+import { THEME_ENUM } from '../../../interfaces';
 import { INotification } from '../../../state/entities/notifications/notifications.interface';
 import { pushNotificationsAction } from '../../../state/entities/notifications/notifications.reducer';
 import { getNotificationsCountThunk } from '../../../state/entities/notifications/notifications.thunk';
 import routes from '../../../utils/routes';
-import Link from '../../common/link/link';
-import MenuIcon from '../../common/menu-icon/menu-icon';
 import NotificationsTemplate from '../../common/notifications/notifications-template';
-import SwitchTheme from '../../common/switch-theme/switch-theme';
-import AppDrawer from '../app-drawer/app-drawer';
 import Container from '../container/container';
 
 import HeaderAuth from './header-auth/header-auth';
-import { HeaderBackBtn } from './header-back-btn/header-back-btn';
 import HeaderLanguage from './header-language/header-language';
 import HeaderUser from './header-user/header-user';
 import css from './header.module.scss';
 
-interface IProps {
-    withTheme?: boolean;
-    href?: string;
-}
-
-const AppHeader = ({ withTheme = true, href }: IProps): JSX.Element => {
+const AppHeader = (): JSX.Element => {
     const { token } = useAuth();
     const history = useRouter();
-    const chatId = +Number(history.query.chatId);
-
-    const [drawer, setDrawer] = useState(false);
-    const handleDrawerClose = (): void => setDrawer(false);
-    const handleDrawerOpen = (): void => setDrawer(true);
+    const chatId = Number(history.query.chatId);
+    const [theme] = useTheme();
 
     const dispatch = useAppDispatch();
     const socket = useNotificationSocket();
@@ -69,26 +58,29 @@ const AppHeader = ({ withTheme = true, href }: IProps): JSX.Element => {
     }, [dispatch, socket, socket?.client, token.accessToken, chatId]);
 
     return (
-        <>
-            <header id="header" className={css.header}>
-                <Container className={css.inner} size="md">
-                    <div className={css.item}>
-                        <MenuIcon className={css.menu} onClick={handleDrawerOpen} />
-                        <HeaderLanguage />
-                    </div>
+        <header id="header" className={css.header}>
+            <Container className={css.inner} size="md">
+                <div className={css.item}>
+                    <Link href={routes.home}>
+                        <a className={css.logo}>
+                            <img src={theme === THEME_ENUM.BLACK ? '/logo-white.svg' : '/logo-black.svg'} alt="house rent" />
+                        </a>
+                    </Link>
+                    {token.accessToken && <HeaderLanguage />}
+                </div>
 
-                    <div className={css.item}>
-                        <Link className={css.home} href={routes.home} type="button" secondary>
-                            <HomeOutlinedIcon />
-                        </Link>
-                        {withTheme && <SwitchTheme className={css.theme} />}
-                        {token.accessToken ? <HeaderUser /> : <HeaderAuth />}
-                    </div>
-                </Container>
-            </header>
-            <HeaderBackBtn href={href} />
-            <AppDrawer open={drawer} onClose={handleDrawerClose} />
-        </>
+                <div className={css.item}>
+                    {token.accessToken ? (
+                        <HeaderUser />
+                    ) : (
+                        <>
+                            <HeaderLanguage />
+                            <HeaderAuth />
+                        </>
+                    )}
+                </div>
+            </Container>
+        </header>
     );
 };
 

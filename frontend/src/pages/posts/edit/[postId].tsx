@@ -12,7 +12,7 @@ const EditPostPage = (): JSX.Element => {
         <AuthRedirect>
             <GetStaticProfile>
                 <Meta />
-                <RootLayout href={routes.myPosts} withFooter={false}>
+                <RootLayout backBtnHref={routes.myPosts} backBtnTitle="Мои объявления" withFooter={false}>
                     <EditPost />
                 </RootLayout>
             </GetStaticProfile>

@@ -1,39 +1,18 @@
 import React from 'react';
 
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
-import { LANGUAGE_ENUM } from '../../../../interfaces';
+import openLangModal from '../../../common/modal/modals/languages/languages';
 
 import css from './header-language.module.scss';
 
-const locales: LANGUAGE_ENUM[] = [LANGUAGE_ENUM.UA, LANGUAGE_ENUM.RU];
-
-interface IProps {
-    language: LANGUAGE_ENUM;
-}
-
-const LanguageButton = ({ language }: IProps): JSX.Element => {
+const HeaderLanguage = (): JSX.Element => {
     const history = useRouter();
 
-    const handleClick = (): void => {
-        history.push(history.pathname, history.asPath, { locale: language || LANGUAGE_ENUM.UA, scroll: false });
-    };
-
     return (
-        <button type="button" className={clsx(css.button, history.locale === language && css.active)} onClick={handleClick}>
-            {language}
+        <button type="button" className={css.button} onClick={openLangModal}>
+            <img src={`/lang/${history.locale}.svg`} alt="language" />
         </button>
-    );
-};
-
-const HeaderLanguage = (): JSX.Element => {
-    return (
-        <div className={css.root}>
-            {locales.map(language => (
-                <LanguageButton key={language} language={language} />
-            ))}
-        </div>
     );
 };
 

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import Drawer from '@mui/material/Drawer';
-import ListSubheader from '@mui/material/ListSubheader';
 
 import useAuth from '../../../hooks/auth.hook';
 import LoginForm from '../../common/auth/login-form/login-form';
-import Button from '../../common/button/button';
 import NotificationsList from '../../common/notifications/notifications-list';
+import Container from '../container/container';
 
-import AppDrawerNav from './app-drawer-nav';
 import css from './app-drawer.module.scss';
+import AuthDrawerNav from './auth-drawer-nav';
+import NotAuthDrawerNav from './not-auth-drawer-nav';
 
 interface IProps {
     open: boolean;
@@ -20,24 +20,23 @@ interface IProps {
 const AppDrawer = ({ open, onClose }: IProps): JSX.Element => {
     const { token } = useAuth();
     return (
-        <Drawer classes={{ paper: css.root }} open={open} onClose={onClose}>
-            <div className={css.inner}>
-                <Button secondary className={css.menu} onClick={onClose}>
-                    <KeyboardDoubleArrowLeftOutlinedIcon />
-                </Button>
-                <AppDrawerNav onClose={onClose} />
-
-                {token.accessToken ? (
-                    <>
-                        <ListSubheader className={css.title} component="div">
-                            Список повідомлень
-                        </ListSubheader>
-                        <NotificationsList />
-                    </>
-                ) : (
-                    <LoginForm />
-                )}
+        <Drawer anchor="top" classes={{ paper: css.root }} open={open} onClose={onClose}>
+            <div className={css.header}>
+                <button className={css.close} type="button" onClick={onClose}>
+                    <KeyboardArrowDownOutlinedIcon />
+                </button>
             </div>
+
+            <Container size="sm" className={css.container}>
+                {token.accessToken ? <AuthDrawerNav /> : <NotAuthDrawerNav />}
+            </Container>
+
+            {token.accessToken && (
+                <Container size="sm" className={css.notifications}>
+                    <h2>Сповіщення</h2>
+                    <NotificationsList />
+                </Container>
+            )}
         </Drawer>
     );
 };

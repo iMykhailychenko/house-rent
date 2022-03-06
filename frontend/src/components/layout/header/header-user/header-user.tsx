@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { Router } from 'next/router';
 
 import { useNotificationsCountSelector } from '../../../../state/entities/notifications/notifications.selector';
 import { useProfileInfoSelector } from '../../../../state/entities/profile/profile.selector';
-import routes from '../../../../utils/routes';
 import Badge from '../../../common/badge/badge';
 import Button from '../../../common/button/button';
-import Link from '../../../common/link/link';
 import StickyModal from '../../../common/modal/components/sticky-modal/sticky-modal';
 import { modal } from '../../../common/modal/modal';
 import profileNavModal from '../../../common/modal/modals/profile-nav/profile-nav';
@@ -57,10 +54,6 @@ const HeaderUser = (): JSX.Element | null => {
         <div>loading...</div>
     ) : profile.data ? (
         <>
-            <Link href={routes.new} className={css.newPost} secondary type="button">
-                <CreateNewFolderOutlinedIcon />
-            </Link>
-
             <Button className={css.notification} secondary onClick={toggleNotifications}>
                 <Badge className={css.badge} number={notificationCount} />
                 <NotificationsNoneOutlinedIcon />

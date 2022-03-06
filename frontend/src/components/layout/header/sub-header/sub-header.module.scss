@@ -1,0 +1,47 @@
+.subHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: var(--sub-header-height);
+    background: var(--white);
+    border-top: 0.1em solid var(--gray-3);
+    border-bottom: 0.1em solid var(--gray-3);
+
+    .link {
+        margin-left: 0.2rem;
+        color: var(--primary);
+        font-size: 1.4rem;
+
+        svg {
+            margin-bottom: 0.2rem;
+        }
+    }
+
+    .inner {
+        display: flex;
+        align-items: center;
+        width: calc(100% / 3);
+    }
+
+    .center {
+        justify-content: center;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 50%;
+        background: var(--gray-2);
+        color: var(--black);
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+            background: var(--primary);
+            color: var(--true-white);
+            box-shadow: 0 0 0.2rem 1rem var(--secondary);
+        }
+    }
+}

@@ -38,8 +38,8 @@ export enum THEME_ENUM {
 }
 
 export enum LANGUAGE_ENUM {
-    RU = 'ru',
-    UA = 'ua',
+    EN = 'en',
+    UK = 'uk',
 }
 
 export interface IContent {

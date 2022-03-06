@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 
@@ -35,24 +36,27 @@ const UserPostCard = ({ post, index = 0 }: IProps): JSX.Element => {
     return (
         <CSSTransition in timeout={100 + deltaIndex * 100} appear>
             <div className={css.root}>
-                <a href={routes.posts.single(post.id)} target="_blank" rel="noopener noreferrer">
-                    {post.image ? (
-                        <img className={css.img} src={post.image} alt={post.title} />
-                    ) : (
-                        <div className={css.noImg}>
-                            <ImageWrp name="error" />
-                            <p>Фото відсутнє</p>
-                        </div>
-                    )}
-                </a>
-
-                <div className={css.content}>
-                    <a href={routes.posts.single(post.id)} className={css.link} target="_blank" rel="noopener noreferrer">
-                        <h3>{post.title}</h3>
-                        <p className={css.description}>{post.description}</p>
-                        <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
-                        <span className={css[post.status]}>{post.status}</span>
+                <Link href={routes.posts.single(post.id)}>
+                    <a>
+                        {post.image ? (
+                            <img className={css.img} src={post.image} alt={post.title} />
+                        ) : (
+                            <div className={css.noImg}>
+                                <ImageWrp name="error" />
+                                <p>Фото відсутнє</p>
+                            </div>
+                        )}
                     </a>
+                </Link>
+                <div className={css.content}>
+                    <Link href={routes.posts.single(post.id)}>
+                        <a className={css.link}>
+                            <h3>{post.title}</h3>
+                            <p className={css.description}>{post.description}</p>
+                            <p className={css.date}>Дата створення: {formatDate(post.createdAt, trans)}</p>
+                            <span className={css[post.status]}>{post.status}</span>
+                        </a>
+                    </Link>
                 </div>
 
                 <div className={css.footer}>

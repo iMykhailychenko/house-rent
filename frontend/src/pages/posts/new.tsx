@@ -15,7 +15,7 @@ const NewPostPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout href={routes.new} withFooter={false}>
+            <RootLayout backBtnHref={routes.new} backBtnTitle="Создать новое объявление" withFooter={false}>
                 <NewPostContainer />
             </RootLayout>
         </GetStaticProfile>

@@ -23,7 +23,7 @@ const AuthLayout = ({ src, children }: IProps): JSX.Element => {
     }, []);
 
     return (
-        <RootLayout className={css.main} withTheme={false} withFooter={false}>
+        <RootLayout className={css.main} withFooter={false}>
             <div className={css.root}>
                 <img className={css.img} src={`/pages/auth/${src}.jpeg`} alt="" />
                 <div className={css.wrp}>

@@ -26,7 +26,6 @@ const SinglePostComponent = (): JSX.Element => {
     const postData = postState.data;
 
     const storage = useRecentPosts();
-
     useEffect(() => {
         if (postData.id) {
             storage.set(postData);

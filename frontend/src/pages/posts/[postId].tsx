@@ -13,7 +13,9 @@ import endpoint from '../../config/endpoint.config';
 import { LANG } from '../../constant/lang.constant';
 import { Pagination } from '../../interfaces';
 import { IPost } from '../../state/entities/posts/posts.interface';
+import { useSinglePostSelector } from '../../state/entities/posts/posts.selector';
 import { singlePostThunk } from '../../state/entities/posts/thunks/single-post.thunk';
+import { useProfileInfoSelector } from '../../state/entities/profile/profile.selector';
 import { wrapper } from '../../state/store';
 import api from '../../utils/interceptors';
 import routes from '../../utils/routes';
@@ -21,10 +23,17 @@ import routes from '../../utils/routes';
 const RecentPosts = dynamic(() => import('../../components/common/post/recent-posts/recent-posts'), { ssr: false });
 
 const SinglePostPage = (): JSX.Element => {
+    const userState = useProfileInfoSelector();
+    const postState = useSinglePostSelector();
+    const isAuthor = userState.data.id === postState.data.user.id;
+
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout href={routes.home}>
+            <RootLayout
+                backBtnHref={isAuthor ? routes.myPosts : routes.home}
+                backBtnTitle={isAuthor ? 'Мои объявления' : 'На главную'}
+            >
                 <SinglePostComponent />
                 <RecentPosts />
             </RootLayout>

@@ -7,13 +7,93 @@
 .root:global(.MuiPaper-root) {
     background: var(--white);
 
-    .inner {
-        width: 100%;
-        padding: 1rem;
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 5rem;
+        border-top: 0.1rem solid var(--gray-3);
+        border-bottom: 0.1rem solid var(--gray-3);
+
+        .close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--true-white);
+            transform: rotate(180deg);
+            transition: 0.2s ease-in-out;
+
+            &:hover {
+                box-shadow: 0 0 0.2rem 1rem var(--secondary);
+            }
+        }
+    }
+
+    .notifications {
+        padding-bottom: 5rem;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
 
         @media screen and (min-width: 540px) {
-            width: 40rem;
-            padding: 2rem;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .ul {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1rem;
+            width: 100%;
+
+            .btn {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                height: 10rem;
+                width: 100%;
+                padding: 1rem;
+                color: var(--black);
+                background: var(--gray-2);
+                border-radius: var(--radius);
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    background: var(--secondary);
+
+                    svg {
+                        color: var(--primary);
+                    }
+                }
+
+                .icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    height: 5rem;
+                    padding-bottom: 1rem;
+
+                    svg {
+                        font-size: 2.5rem;
+                    }
+                }
+
+                span {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 1rem;
+                    line-height: 1.2;
+                }
+            }
         }
 
         .menu {
@@ -28,51 +108,5 @@
         form input {
             color: var(--black);
         }
-    }
-
-    .list {
-        margin-bottom: 1rem;
-
-        @media screen and (min-width: 540px) {
-            margin-bottom: 4rem;
-        }
-
-        * {
-            font-size: 16px;
-            color: var(--black);
-        }
-
-        svg {
-            margin-bottom: 4px;
-            font-size: 25px;
-        }
-
-        .collapse,
-        .btn,
-        li {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .btn:hover {
-            background: var(--gray-3);
-        }
-
-        .sub {
-            padding: 1.2rem 0 1.2rem 5.8rem;
-            background: var(--gray-1);
-
-            &:hover {
-                background: var(--gray-2);
-            }
-        }
-    }
-
-    .title {
-        font-size: 16px;
-        color: var(--black);
-        background: var(--white);
-        padding-left: 0;
-        padding-right: 0;
     }
 }

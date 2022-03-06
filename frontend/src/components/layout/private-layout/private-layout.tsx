@@ -38,7 +38,7 @@ const PrivateLayout = ({ children }: IProps): JSX.Element => {
     };
 
     return (
-        <RootLayout href={routes.home} withFooter={false}>
+        <RootLayout backBtnHref={routes.home} withFooter={false}>
             <Container className={css.top} size="md">
                 <div className={css.flex}>
                     <button className={css.profile} type="button" onClick={redirectProfile}>

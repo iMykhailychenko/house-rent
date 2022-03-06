@@ -1,7 +1,7 @@
 .root {
     padding-top: 6rem;
     padding-bottom: 6rem;
-    min-height: calc(100vh - var(--footer-height) - var(--header-height));
+    min-height: calc(100vh - var(--footer-height) - var(--header-height) - var(--sub-header-height));
 }
 
 .inner {

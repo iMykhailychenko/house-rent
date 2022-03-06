@@ -20,6 +20,14 @@
         width: 100%;
     }
 
+    .logo {
+        display: block;
+
+        img {
+            width: 7rem;
+        }
+    }
+
     .inner {
         display: flex;
         align-items: center;

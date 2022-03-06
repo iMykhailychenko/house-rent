@@ -29,7 +29,7 @@ const AuthSuccessPage = (): JSX.Element => {
     return (
         <>
             <Meta />
-            <RootLayout withTheme={false} withFooter={false}>
+            <RootLayout withFooter={false}>
                 <ConfettiWrp />
                 <SeaComponent />
                 <Container className={css.root} size="sm">

@@ -16,7 +16,7 @@ const NewItemPage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout withFooter={false} href={routes.home}>
+            <RootLayout withFooter={false} backBtnHref={routes.home}>
                 <Container size="md">
                     <ul className={css.list}>
                         <li>

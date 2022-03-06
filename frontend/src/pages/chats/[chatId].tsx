@@ -17,7 +17,7 @@ const MessagesPage = (): JSX.Element => {
         <AuthRedirect>
             <GetStaticProfile>
                 <Meta />
-                <RootLayout href={routes.chats.init} withFooter={false} className={css.root}>
+                <RootLayout backBtnHref={routes.chats.init} backBtnTitle="Все чаты" withFooter={false} className={css.root}>
                     <ChatListEffect>
                         <Container size="md" className={css.container}>
                             <ChatLayout>

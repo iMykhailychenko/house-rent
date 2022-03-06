@@ -14,8 +14,8 @@ const pwa =
 module.exports = {
     reactStrictMode: true,
     i18n: {
-        locales: ['ru', 'ua'],
-        defaultLocale: 'ua',
+        locales: ['en', 'uk'],
+        defaultLocale: 'uk',
     },
     ...pwa,
 };

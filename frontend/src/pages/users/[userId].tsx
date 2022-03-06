@@ -43,7 +43,7 @@ const UserProfilePage = (): JSX.Element => {
     return (
         <GetStaticProfile>
             <Meta />
-            <RootLayout href={routes.home}>
+            <RootLayout backBtnHref={routes.home}>
                 <Container size="lg">
                     <UserBanner />
                 </Container>

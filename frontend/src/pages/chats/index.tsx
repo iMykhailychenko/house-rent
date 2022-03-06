@@ -17,7 +17,7 @@ const ChatsPage = (): JSX.Element => {
         <AuthRedirect>
             <GetStaticProfile>
                 <Meta />
-                <RootLayout href={routes.home} withFooter={false} className={css.root}>
+                <RootLayout backBtnHref={routes.home} withFooter={false} className={css.root}>
                     <ChatListEffect>
                         <Container size="md" className={css.container}>
                             <ChatLayout isRootPage disabled>

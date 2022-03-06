@@ -8,7 +8,7 @@ type UseTransType = (value?: string) => string;
 const useTrans = (): UseTransType => {
     const router = useRouter();
     return (value?: string): string => {
-        return (locales as ILocales)[router?.locale || LANGUAGE_ENUM.UA][value || ''] || String(value || '');
+        return (locales as ILocales)[router?.locale || LANGUAGE_ENUM.UK][value || ''] || String(value || '');
     };
 };
 

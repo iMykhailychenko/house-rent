@@ -1,6 +1,6 @@
-import ru from './ru.json';
-import ua from './ua.json';
+import en from './en.json';
+import uk from './uk.json';
 
-const errorText = { ru, ua };
+const errorText = { en, uk };
 
 export default errorText;
