@@ -1,48 +1,10 @@
 .button {
-    display: flex;
-    align-items: center;
-    margin-left: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: inherit;
+    margin-left: 2rem;
 
-    @media screen and (min-width: 540px) {
-        margin-left: 2rem;
-    }
-
-    img {
-        width: 3rem;
-    }
-}
-
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.list {
-    position: fixed;
-    left: 10rem;
-    top: 6rem;
-    z-index: 1001;
-    padding: 1.5rem 0;
-    border-radius: var(--radius);
-    background: var(--white);
-
-    .lang {
-        display: flex;
-        align-items: center;
-        padding: 1rem 3rem;
-        text-transform: uppercase;
-
-        img {
-            height: 3rem;
-            width: 4rem;
-        }
+    .img {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        object-fit: cover;
     }
 }
