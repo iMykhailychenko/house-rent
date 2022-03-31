@@ -3,7 +3,6 @@ import React from 'react';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { CSSTransition } from 'react-transition-group';
 
-import uiConfig from '../../../../../config/ui.config';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IRecentPost } from '../../../../../interfaces';
 import { formatDate } from '../../../../../utils/helpers/date.helper';

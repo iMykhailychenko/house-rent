@@ -4,7 +4,6 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import Drawer from '@mui/material/Drawer';
 
 import useAuth from '../../../hooks/auth.hook';
-import LoginForm from '../../common/auth/login-form/login-form';
 import NotificationsList from '../../common/notifications/notifications-list';
 import Container from '../container/container';
 
