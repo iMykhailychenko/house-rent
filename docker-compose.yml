@@ -19,7 +19,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - backend
+      - be
 
   email_service:
     container_name: email_service
@@ -46,8 +46,8 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - frontend
-      - backend
+      - fe
+      - be
       - email_service
       - db
 
