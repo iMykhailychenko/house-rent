@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  backend:
-    container_name: backend
+  be:
+    container_name: be
     build: ./backend
     restart: unless-stopped
     command: yarn prod
@@ -11,8 +11,8 @@ services:
     depends_on:
       - db
 
-  frontend:
-    container_name: frontend
+  fe:
+    container_name: fe
     build: ./frontend
     restart: unless-stopped
     command: yarn prod
