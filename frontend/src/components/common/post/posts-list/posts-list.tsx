@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import clsx from 'clsx';
 
 import useConfig from '../../../../hooks/config.hook';
@@ -53,10 +53,12 @@ const PostsList = ({ title, className, onPage, onMore, children }: IProps): JSX.
             <div className={clsx(css.root, className)}>
                 {title && <h2 className="title-2">{trans(title)}</h2>}
 
-                <button onClick={openFilters} className={css.filters} type="button">
-                    <FilterAltOutlinedIcon />
-                    <span>Показати фільтри</span>
-                </button>
+                <div className={css.filter}>
+                    <button onClick={openFilters} className={css.filterItem} type="button">
+                        <FilterListOutlinedIcon />
+                        <span>Фільтри</span>
+                    </button>
+                </div>
 
                 <div className={css.flex}>
                     <div className={css.wrp}>

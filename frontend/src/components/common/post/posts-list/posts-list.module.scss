@@ -90,32 +90,35 @@
     }
 }
 
-.filters {
+.filter {
     position: sticky;
     left: 0;
-    top: calc(var(--100vh, 100vh) - 0.5rem);
+    top: calc(var(--100vh, 100vh) - 2rem);
     transform: translateY(-100%);
     z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1.5rem;
-    text-align: left;
-    border-radius: 0.5rem;
     transition: 0.2s ease-in-out;
-    font-weight: 500;
-    font-size: 1.2rem;
-    color: var(--primary);
 
-    // glass
-    background: rgba(240, 240, 240, 0.6);
-    backdrop-filter: blur(12.1px);
-    border: 1px solid rgba(247, 247, 247, 0.67);
+    .filterItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20rem;
+        padding: 1rem;
+        text-align: left;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: var(--white);
+        background: var(--black);
+    }
 
     svg {
         margin-right: 0.5rem;
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     @media screen and (min-width: 1200px) {

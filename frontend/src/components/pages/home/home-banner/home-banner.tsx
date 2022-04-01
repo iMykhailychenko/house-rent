@@ -31,7 +31,6 @@ const HomeBanner = (): JSX.Element => {
                         <Switch
                             size="lg"
                             width={21}
-                            className={css.switch}
                             onChange={handleChange}
                             value={userRole === 'tenant'}
                             labels={['Орендарям', 'Власникам / рієлторам']}
