@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IRecentPost } from '../../../../../interfaces';
 import { formatDate } from '../../../../../utils/helpers/date.helper';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 
 import css from './recent-posts-item.module.scss';
@@ -22,7 +23,7 @@ export const RecentPostsItem = ({ post, index = 1 }: IProps): JSX.Element => {
     return (
         <CSSTransition in timeout={100 + deltaIndex * 100} appear>
             <a href={routes.posts.single(post.id)} className={css.card} target="_blank" rel="noopener noreferrer">
-                <img className={css.img} src={post.img || '/icons/no_img.png'} alt={post.title} />
+                <img className={css.img} src={post.img || '/icons/no_img.png'} alt={cutString(post.title, 80)} />
 
                 <div className={css.container}>
                     <small className={css.date}>{formatDate(post.date, trans)}</small>

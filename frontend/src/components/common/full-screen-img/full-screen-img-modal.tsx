@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import Close from '@mui/icons-material/Close';
 import ReactDOM from 'react-dom';
 
+import { cutString } from '../../../utils/helpers/string.helper';
+
 import css from './full-screen-img.module.scss';
 
 interface IProps {
@@ -32,7 +34,7 @@ const FullScreenImgModal = ({ src, onClick, alt }: IProps): JSX.Element => {
             <button ref={ref} className={css.close} type="button">
                 <Close />
             </button>
-            <img src={src} alt={alt} onClick={onClick} aria-hidden="true" />
+            <img src={src} alt={alt ? cutString(alt, 80) : ''} onClick={onClick} aria-hidden="true" />
         </div>,
         document.body,
     );

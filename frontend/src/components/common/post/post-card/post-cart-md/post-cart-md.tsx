@@ -5,6 +5,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import useTrans from '../../../../../hooks/trans.hook';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { formatDate } from '../../../../../utils/helpers/date.helper';
+import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
 import Button from '../../../button/button';
 import ImageWrp from '../../../image-wrp/image-wrp';
@@ -31,7 +32,7 @@ const PostCardMd = ({ post }: IProps): JSX.Element => {
         <div className={css.root}>
             <a href={routes.posts.single(post.id)} target="_blank" rel="noopener noreferrer">
                 {post.image ? (
-                    <img className={css.img} src={post.image} alt={post.title} />
+                    <img className={css.img} src={post.image} alt={cutString(post.title, 80)} />
                 ) : (
                     <div className={css.noImg}>
                         <ImageWrp name="error" />

@@ -8,6 +8,6 @@
         width: 2rem;
         border-radius: 50%;
         border: 0.2rem solid var(--black);
-        object-fit: cover;
+        object-fit: cover !important;
     }
 }

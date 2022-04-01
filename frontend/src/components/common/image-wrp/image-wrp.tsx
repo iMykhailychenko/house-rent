@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cutString } from '../../../utils/helpers/string.helper';
+
 import css from './image-wrp.module.scss';
 
 interface IProps {
@@ -10,7 +12,7 @@ interface IProps {
 const ImageWrp = ({ name, alt = '' }: IProps): JSX.Element => (
     <div className={css.img}>
         <div className={css.inner}>
-            <img src={`/icons/${name}.png`} alt={alt} draggable="false" />
+            <img src={`/icons/${name}.png`} alt={alt ? cutString(alt, 80) : ''} draggable="false" />
         </div>
     </div>
 );

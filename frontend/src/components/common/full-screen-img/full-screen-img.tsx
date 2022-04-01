@@ -1,6 +1,8 @@
-import React, { useState, KeyboardEvent, useRef } from 'react';
+import React, { KeyboardEvent, useRef, useState } from 'react';
 
 import clsx from 'clsx';
+
+import { cutString } from '../../../utils/helpers/string.helper';
 
 import FullScreenImgModal from './full-screen-img-modal';
 import css from './full-screen-img.module.scss';
@@ -38,7 +40,7 @@ const FullScreenImg = ({ className, src, height, width, alt }: IProps): JSX.Elem
             <img
                 ref={ref}
                 src={src}
-                alt={alt}
+                alt={alt ? cutString(alt, 80) : ''}
                 tabIndex={0}
                 onClick={open}
                 width={width}
