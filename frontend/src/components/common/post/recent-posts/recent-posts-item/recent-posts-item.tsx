@@ -23,7 +23,7 @@ export const RecentPostsItem = ({ post, index = 1 }: IProps): JSX.Element => {
     return (
         <CSSTransition in timeout={100 + deltaIndex * 100} appear>
             <a href={routes.posts.single(post.id)} className={css.card} target="_blank" rel="noopener noreferrer">
-                <img className={css.img} src={post.img || '/icons/no_img.png'} alt={cutString(post.title, 80)} />
+                <img className={css.img} src={post.img || '/icons/empty.png'} alt={cutString(post.title, 80)} />
 
                 <div className={css.container}>
                     <small className={css.date}>{formatDate(post.date, trans)}</small>
