@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
@@ -17,6 +17,8 @@ const ONE_WEEK_IN_MS = 604_800_000;
 
 @Injectable()
 export class SecurityService {
+    private logger: Logger = new Logger('EmailService');
+
     constructor(
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
         private httpService: HttpService,
@@ -24,6 +26,7 @@ export class SecurityService {
 
     async sendConfirmEmail(user: UserEntity): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CONFIRM_EMAIL;
+        this.logger.log('Request to ', URL);
         this.httpService
             .post(URL, {
                 email: user.email,
@@ -34,10 +37,12 @@ export class SecurityService {
             .subscribe({
                 next: ({ status }) => {
                     if (status > 299) {
+                        this.logger.error('Error on ' + URL + ' | status: ' + status);
                         throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                     }
                 },
                 error: () => {
+                    this.logger.error('Error on ' + URL);
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                 },
             });
@@ -45,6 +50,7 @@ export class SecurityService {
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_EMAIL;
+        this.logger.log('Request to ', URL);
         this.httpService
             .post(URL, {
                 email: user.email,
@@ -58,10 +64,12 @@ export class SecurityService {
             .subscribe({
                 next: ({ status }) => {
                     if (status > 299) {
+                        this.logger.error('Error on ' + URL + ' | status: ' + status);
                         throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                     }
                 },
                 error: () => {
+                    this.logger.error('Error on ' + URL);
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                 },
             });
@@ -74,6 +82,7 @@ export class SecurityService {
         }
 
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_PASSWORD;
+        this.logger.log('Request to ', URL);
         this.httpService
             .post(URL, {
                 email: user.email,
@@ -85,10 +94,12 @@ export class SecurityService {
             .subscribe({
                 next: ({ status }) => {
                     if (status > 299) {
+                        this.logger.error('Error on ' + URL + ' | status: ' + status);
                         throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                     }
                 },
                 error: () => {
+                    this.logger.error('Error on ' + URL);
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
                 },
             });
