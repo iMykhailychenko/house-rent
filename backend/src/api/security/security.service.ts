@@ -26,7 +26,7 @@ export class SecurityService {
 
     async sendConfirmEmail(user: UserEntity): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CONFIRM_EMAIL;
-        this.logger.log('Request to ', URL);
+        this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
                 email: user.email,
@@ -50,7 +50,7 @@ export class SecurityService {
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_EMAIL;
-        this.logger.log('Request to ', URL);
+        this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
                 email: user.email,
@@ -82,7 +82,7 @@ export class SecurityService {
         }
 
         const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_PASSWORD;
-        this.logger.log('Request to ', URL);
+        this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
                 email: user.email,
