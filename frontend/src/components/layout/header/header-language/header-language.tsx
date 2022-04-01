@@ -11,7 +11,7 @@ const HeaderLanguage = (): JSX.Element => {
 
     return (
         <button type="button" className={css.button} onClick={openLangModal}>
-            <img className={css.img} src={`/lang/${history.locale}.svg`} alt="language" />
+            <img className={css.img} src={`/lang/${history.locale?.toUpperCase()}.svg`} alt="language" />
         </button>
     );
 };
