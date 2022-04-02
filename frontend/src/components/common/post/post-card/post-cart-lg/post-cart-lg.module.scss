@@ -47,42 +47,11 @@
         font-size: 1.6rem;
     }
 
-    .img,
-    .noImg {
-        height: 37rem;
-        width: 100%;
-
-        @media screen and (min-width: 768px) {
-            min-height: 45rem;
-            height: 50vh;
-        }
-    }
-
     .img {
         display: block;
+        height: 37rem;
+        width: 100%;
         object-fit: cover;
-    }
-
-    .noImg {
-        --image-wrp-diameter: 10rem;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding: 2rem;
-        background: var(--primary);
-
-        @media screen and (min-width: 768px) {
-            --image-wrp-diameter: 6rem;
-        }
-
-        p {
-            margin-top: 1.5rem;
-            font-weight: 400;
-            font-size: 1.6rem;
-            color: var(--true-white);
-        }
     }
 
     .link {

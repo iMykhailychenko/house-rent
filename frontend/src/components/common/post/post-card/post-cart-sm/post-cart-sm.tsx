@@ -3,7 +3,6 @@ import React from 'react';
 import { IPost } from '../../../../../state/entities/posts/posts.interface';
 import { cutString } from '../../../../../utils/helpers/string.helper';
 import routes from '../../../../../utils/routes';
-import ImageWrp from '../../../image-wrp/image-wrp';
 import PostCardFooter from '../components/post-card-footer/post-card-footer';
 
 import css from './post-cart-sm.module.scss';
@@ -16,14 +15,7 @@ const PostCardSm = ({ post }: IProps): JSX.Element => {
     return (
         <div className={css.root}>
             <a href={routes.posts.single(post.id)} target="_blank" rel="noopener noreferrer">
-                {post.image ? (
-                    <img className={css.img} src={post.image} alt={cutString(post.title, 80)} />
-                ) : (
-                    <div className={css.noImg}>
-                        <ImageWrp name="error" />
-                        <p>Фото відсутнє</p>
-                    </div>
-                )}
+                <img className={css.img} src={post.image || 'no-image.svg'} alt={cutString(post.title, 80)} />
             </a>
 
             <div className={css.content}>

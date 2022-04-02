@@ -1,5 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
+import env from '../config/env.config';
+
 import useAuth from './auth.hook';
 
 class NotificationSocket {
@@ -10,7 +12,7 @@ class NotificationSocket {
         if (NotificationSocket.instance) return NotificationSocket.instance;
 
         NotificationSocket.instance = this;
-        this.client = io('ws://localhost:8002/notifications', { auth: { token } });
+        this.client = io(env.notificationsWs, { auth: { token } });
         this.initEventsListeners();
     }
 

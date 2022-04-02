@@ -48,25 +48,6 @@
         object-fit: cover;
     }
 
-    .noImg {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: var(--card-width);
-        min-height: var(--card-width);
-        width: 100%;
-        padding: 1rem;
-        background: var(--primary);
-
-        p {
-            margin-top: 0.3rem;
-            font-weight: 400;
-            font-size: 1.2rem;
-            color: var(--true-white);
-        }
-    }
-
     .zoom {
         width: 100%;
         cursor: zoom-in;
