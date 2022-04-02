@@ -12,7 +12,7 @@ class NotificationSocket {
         if (NotificationSocket.instance) return NotificationSocket.instance;
 
         NotificationSocket.instance = this;
-        this.client = io(env.notificationsWs, { auth: { token } });
+        this.client = io(env.notificationsWs, { path: '/notifications', auth: { token } });
         this.initEventsListeners();
     }
 

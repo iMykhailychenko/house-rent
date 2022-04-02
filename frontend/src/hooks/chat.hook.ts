@@ -15,7 +15,7 @@ class ChatSocket {
         if (ChatSocket.instance) return ChatSocket.instance;
 
         ChatSocket.instance = this;
-        this.client = io(env.chatWs, { auth: { token } });
+        this.client = io(env.chatWs, { path: '/chat', auth: { token } });
         this.chatId = chatId;
         this.subscribe();
     }
