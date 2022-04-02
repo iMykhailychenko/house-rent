@@ -19,6 +19,8 @@ interface IProps {
     value: INewPostPayload;
 }
 
+const IMAGE_EXTENSION = '.apng, .avif, .jpg, .jpeg, .jfif, .pjpeg, .pjp, .gif, .png, .webp';
+
 const FormTypeFour = ({ value }: IProps): JSX.Element => {
     const ref = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -54,7 +56,7 @@ const FormTypeFour = ({ value }: IProps): JSX.Element => {
             if (!data?.id) throw new Error();
             dispatch(updateFormType(FORM_TYPE.DONE));
         } catch (error) {
-            console.log(error?.response || error);
+            console.log((error as { response?: string })?.response || error);
         }
     };
 
@@ -66,7 +68,7 @@ const FormTypeFour = ({ value }: IProps): JSX.Element => {
                 if (!data?.id) throw new Error();
                 dispatch(updateFormType(FORM_TYPE.DONE));
             } catch (error) {
-                console.log(error?.response || error);
+                console.log((error as { response?: string })?.response || error);
             }
         }
     };
@@ -88,7 +90,7 @@ const FormTypeFour = ({ value }: IProps): JSX.Element => {
                     )}
                 </div>
 
-                <input ref={ref} onChange={change} className={css.input} type="file" accept=".jpg, .jpeg, .png" />
+                <input ref={ref} onChange={change} className={css.input} type="file" accept={IMAGE_EXTENSION} />
 
                 {uploadState.status === 'loading' || uploadState.status === 'success' ? (
                     <div className={css.progress}>
