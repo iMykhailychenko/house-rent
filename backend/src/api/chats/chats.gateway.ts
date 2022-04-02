@@ -1,4 +1,4 @@
-import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
+import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { SubscribeMessage, WebSocketGateway, WebSocketServer, WsException } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
@@ -8,7 +8,7 @@ import { UserEntity } from '../users/entities/users.entity';
 import { ChatsService } from './chats.service';
 import { MessageDto } from './dto/create-message.dto';
 
-@WebSocketGateway(8001, { namespace: 'chat', cors: true })
+@WebSocketGateway(8001, { namespace: 'chat', path: '/chat', cors: true })
 export class ChatsGateway {
     @WebSocketServer() server: Server;
     constructor(private readonly jwtService: JwtService, private readonly chatsService: ChatsService) {}

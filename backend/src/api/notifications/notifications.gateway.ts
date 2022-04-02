@@ -15,7 +15,7 @@ import { UserEntity } from '../users/entities/users.entity';
 
 import { NotificationsEntity } from './entities/notifications.entity';
 
-@WebSocketGateway(8002, { namespace: 'notifications', cors: true })
+@WebSocketGateway(8002, { namespace: 'notifications', path: '/notifications', cors: true })
 export class NotificationsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Server;
     private logger: Logger = new Logger('NotificationsGateway');
