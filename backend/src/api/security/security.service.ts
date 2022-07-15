@@ -3,6 +3,7 @@ import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { catchError } from 'rxjs';
 import { Repository } from 'typeorm';
 
 import { authConfig } from '../../config/auth.config';
@@ -34,18 +35,11 @@ export class SecurityService {
                 first_name: user.firstName,
                 last_name: user.lastName,
             })
-            .subscribe({
-                next: ({ status }) => {
-                    if (status > 299) {
-                        this.logger.error('Error on ' + URL + ' | status: ' + status);
-                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                    }
-                },
-                error: () => {
-                    this.logger.error('Error on ' + URL);
+            .pipe(
+                catchError(() => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                },
-            });
+                }),
+            );
     }
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
@@ -61,18 +55,11 @@ export class SecurityService {
                     authConfig.resetPasswordSecret,
                 ),
             })
-            .subscribe({
-                next: ({ status }) => {
-                    if (status > 299) {
-                        this.logger.error('Error on ' + URL + ' | status: ' + status);
-                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                    }
-                },
-                error: () => {
-                    this.logger.error('Error on ' + URL);
+            .pipe(
+                catchError(() => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                },
-            });
+                }),
+            );
     }
 
     async sendChangePasswordEmail(restorePasswordDto: RestoreEmailDto): Promise<void> {
@@ -91,18 +78,11 @@ export class SecurityService {
                     authConfig.resetPasswordSecret,
                 ),
             })
-            .subscribe({
-                next: ({ status }) => {
-                    if (status > 299) {
-                        this.logger.error('Error on ' + URL + ' | status: ' + status);
-                        throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                    }
-                },
-                error: () => {
-                    this.logger.error('Error on ' + URL);
+            .pipe(
+                catchError(() => {
                     throw new HttpException('Email service is unavailable', HttpStatus.BAD_GATEWAY);
-                },
-            });
+                }),
+            );
     }
 
     async verifyEmail(token: string): Promise<boolean> {
