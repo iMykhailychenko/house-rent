@@ -18,4 +18,6 @@ jobs:
           script: |
             cd /home/house-rent/
             git pull
+            docker-compose stop
+            docker image prune -a -f
             ./prod.sh
