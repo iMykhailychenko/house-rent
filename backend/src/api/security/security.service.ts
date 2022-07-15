@@ -25,7 +25,7 @@ export class SecurityService {
     ) {}
 
     async sendConfirmEmail(user: UserEntity): Promise<void> {
-        const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CONFIRM_EMAIL;
+        const URL = authConfig.emailServiceHost + EmailType.CONFIRM_EMAIL;
         this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
@@ -49,7 +49,7 @@ export class SecurityService {
     }
 
     async sendChangeEmail(user: UserEntity, oldEmail: string): Promise<void> {
-        const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_EMAIL;
+        const URL = authConfig.emailServiceHost + EmailType.CHANGE_EMAIL;
         this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
@@ -81,7 +81,7 @@ export class SecurityService {
             throw new HttpException('Not found', HttpStatus.NOT_FOUND);
         }
 
-        const URL = authConfig.emailServiceHost + '/auth/' + EmailType.CHANGE_PASSWORD;
+        const URL = authConfig.emailServiceHost + EmailType.CHANGE_PASSWORD;
         this.logger.log('Request to ' + URL);
         this.httpService
             .post(URL, {
